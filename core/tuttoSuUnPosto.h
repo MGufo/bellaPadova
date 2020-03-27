@@ -1,3 +1,4 @@
+#include <QDate>
 #include <queue>
 #include <string>
 #include "container.h"
@@ -16,18 +17,15 @@ enum tipoFornitore { mercato, supermercato, azienda, altro };
 using std::priority_queue;
 using std::string;
 
-class Risorsa {
- private:
-  string nome;
-  bool disponibilita;
 
- public:
-  virtual ~Risorsa();
-};
 
 class Articolo : virtual public Risorsa {
  private:
   double prezzo;
+
+ public:
+  Articolo(string nome, bool disponibilita, double p)
+      : Risorsa(nome, disponibilita), prezzo(p){};
 };
 
 class Consumabile : virtual public Risorsa {
@@ -35,15 +33,24 @@ class Consumabile : virtual public Risorsa {
   Fornitore fornitore;
   unsigned int quantita;
   double costo;
-  // TODO: Import data library
-  // Data dataAcquisto;
+  QDate dataAcquisto;
+
+ public:
+  Consumabile() : {};
 };
 
 class Bevanda : public Articolo, public Consumabile {
  private:
   formatoBevanda formato;
+
+ public:
+  Bevanda(string nome, bool disponibilita = true, double prezzo = 4.5,
+          Fornitore fornitore, unsigned int qta, double costo = 10,
+          QDate dataAcquisto, formatoBevanda fb = formatoBevanda::bottiglia1L)
+      : Consumabile() formato(fb){};
 };
 
+Bevanda xyz (true, ....)
 class Ingrediente : public Consumabile {};
 
 class Pizza : public Articolo {
@@ -55,9 +62,11 @@ class Pizza : public Articolo {
  public:
   // Costruttore di default, costruisce una pizza a impasto normale senza
   // ingredienti
-  Pizza(formatoPizza fo = formatoPizza::normale,
+  Pizza(string nome, bool disponibilita = true, double prezzo = 0,
+        formatoPizza fo = formatoPizza::normale,
         contenitoreC<string>* ingr = nullptr, farina fa = farina::normale)
-      : tipoFormato(fo),
+      : Articolo(nome, disponibilita, prezzo),
+        tipoFormato(fo),
         ingredienti(ingr ? new contenitoreC<string>(ingr) : nullptr),
         tipoFarina(fa){};
 
@@ -74,7 +83,7 @@ class Pizza : public Articolo {
 
 class Anagrafica {
  private:
-  string indirizzo;
+  // TODO: Inserire oggetto/puntatore QPosition
   string telefono;
 };
 
@@ -86,9 +95,13 @@ class Cliente {
 
 class Fornitore {
  private:
+  tipoFornitore tipologia;
   string nome;
   Anagrafica recapito;
-  tipoFornitore tipologia;
+
+ public:
+  Fornitore(tipoFornitore tf, string n, Anagrafica an)
+      : nome(n), tipologia(tf){};
 };
 
 class Comanda {
@@ -116,4 +129,5 @@ class Pizzeria {
   string pIVA;
   contenitoreC<Risorsa*> inventario;
   Menu* menu;
+  // TODO: Oggetto/puntatore QtPosition per le coordinate della pizzeria
 };
