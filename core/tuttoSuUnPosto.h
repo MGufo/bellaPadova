@@ -1,5 +1,7 @@
 #include <queue>
 #include <string>
+#include "container.h"
+
 enum formatoPizza { normale, family, mezzo_metro, battuta };
 enum farina { normale, integrale, kamut, farro };
 enum formatoBevanda {
@@ -28,7 +30,7 @@ class Articolo : virtual public Risorsa {
   double prezzo;
 };
 
-class Attrezzatura : virtual public Risorsa {
+class Consumabile : virtual public Risorsa {
  private:
   Fornitore fornitore;
   unsigned int quantita;
@@ -37,34 +39,31 @@ class Attrezzatura : virtual public Risorsa {
   // Data dataAcquisto;
 };
 
-class Bevanda : public Articolo, public Attrezzatura {
+class Bevanda : public Articolo, public Consumabile {
  private:
   formatoBevanda formato;
 };
 
-class Ingrediente : public Attrezzatura {};
-
-class Strumentazione : public Attrezzatura {};
+class Ingrediente : public Consumabile {};
 
 class Pizza : public Articolo {
  private:
   formatoPizza tipoFormato;
-  // contenitoreC<string>* ingredienti;
+  contenitoreC<string>* ingredienti;
   farina tipoFarina;
 
  public:
   // Costruttore di default, costruisce una pizza a impasto normale senza
   // ingredienti
-  Pizza(formatoPizza fo =
-            formatoPizza::normale,  // contenitoreC<string>* ingr = nullptr,
-        farina fa = farina::normale)
+  Pizza(formatoPizza fo = formatoPizza::normale,
+        contenitoreC<string>* ingr = nullptr, farina fa = farina::normale)
       : tipoFormato(fo),
-        // ingredienti(ingr ? new //contenitoreC<string>(ingr) : nullptr),
+        ingredienti(ingr ? new contenitoreC<string>(ingr) : nullptr),
         tipoFarina(fa){};
 
   // getter
   string getTipoFormato() const;
-  // contenitoreC<string> getIngredienti() const;
+  contenitoreC<string> getIngredienti() const;
   string getTipoFarina() const;
 
   // setter
@@ -94,14 +93,9 @@ class Fornitore {
 
 class Comanda {
  private:
-  // TODO: Verificare se si possano usare le mappe STL
-  // contenitoreC<Articolo*> articoli;
-  // contenitoreC<unsigned int> quantita;
+  contenitoreC<Articolo*> articoli;
+  contenitoreC<unsigned int> quantita;
   Cliente cliente;
-  bool omaggio;
-  bool domicilio;
-  // Data data;
-  // Time orario;
 };
 
 class GestioneComande {
@@ -112,7 +106,7 @@ class GestioneComande {
 
 class Menu {
  private:
-  // contenitoreC<Articolo*> articoli;
+  contenitoreC<Articolo*> articoli;
 };
 
 class Pizzeria {
@@ -120,6 +114,6 @@ class Pizzeria {
   string nome;
   Anagrafica contatto;
   string pIVA;
-  // contenitoreC<Risorsa*> inventario;
+  contenitoreC<Risorsa*> inventario;
   Menu* menu;
 };
