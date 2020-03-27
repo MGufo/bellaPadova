@@ -37,11 +37,6 @@ class Attrezzatura : virtual public Risorsa {
   // Data dataAcquisto;
 };
 
-class Fritto : public Articolo {
- private:
-  ////contenitoreC <string> ingredienti;
-};
-
 class Bevanda : public Articolo, public Attrezzatura {
  private:
   formatoBevanda formato;
