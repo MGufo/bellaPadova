@@ -19,15 +19,6 @@ using std::string;
 
 
 
-class Articolo : virtual public Risorsa {
- private:
-  double prezzo;
-
- public:
-  Articolo(string nome, bool disponibilita, double p)
-      : Risorsa(nome, disponibilita), prezzo(p){};
-};
-
 class Consumabile : virtual public Risorsa {
  private:
   Fornitore fornitore;

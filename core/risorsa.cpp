@@ -1,7 +1,7 @@
 #include "risorsa.h"
 #include <string>
 
-Risorsa::Risorsa(string n, bool b = true) {
+Risorsa::Risorsa(string n, bool b) {
   if (n.empty()) {
     // TODO: Implementare gestione eccezioni
     // throw();
