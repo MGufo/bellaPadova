@@ -4,6 +4,5 @@ class Articolo : virtual public Risorsa {
   double prezzo;
 
  public:
-  Articolo(string nome, bool disponibilita = true, double p =)
-      : Risorsa(nome, disponibilita), prezzo(p){};
+  Articolo(string, bool, double);
 };
