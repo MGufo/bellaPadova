@@ -1,3 +1,4 @@
+#include "risorsa.h"
 
 class Consumabile : virtual public Risorsa {
  private:
@@ -6,5 +7,11 @@ class Consumabile : virtual public Risorsa {
   QDate dataAcquisto;
 
  public:
-  Consumabile() : {};
+  Consumabile(string, bool, unsigned int, double, QDate);
+  unsigned int getQuantita() const;
+  double getCosto() const;
+  const QDate& getDataAcquisto() const;
+  void setQuantita(const unsigned int);
+  void setCosto(const double);
+  void setDataAcquisto(const QDate&);
 };

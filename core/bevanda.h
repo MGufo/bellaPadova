@@ -1,5 +1,5 @@
 #include "articolo.h"
-//#include "consumabile.h"
+#include "consumabile.h"
 
 class Bevanda : public Articolo, public Consumabile {
  private:
@@ -7,6 +7,9 @@ class Bevanda : public Articolo, public Consumabile {
   capacitaBevanda capacita;
 
  public:
-  Bevanda(string, bool, double, unsigned int, double, QDate,
-          formatoBevanda, capacitaBevanda);
+  Bevanda(string nome = "acqua", bool disponibilita = true, double prezzo = 4.5,
+          unsigned int qta = 1, double costo = 10, QDate dataAcquisto = QDate::currentDate(),
+          formatoBevanda fb = formatoBevanda::bottiglia,
+          capacitaBevanda cb = capacitaBevanda::CL50);
+
 };

@@ -1,10 +1,10 @@
 #include "pizza.h"
 
 // Costruttore di default, costruisce una pizza a impasto normale senza ingredienti
-Pizza::Pizza(string nome = "focaccia", bool disponibilita = true, double prezzo = 0,
-             formatoPizza fo = formatoPizza::normale,
-             farina fa = farina::normale,
-             contenitoreC<string>* ingr = nullptr)
+Pizza::Pizza(string nome, bool disponibilita, double prezzo,
+             formatoPizza fo,
+             farina fa,
+             contenitoreC<string>* ingr)
            : Articolo(nome, disponibilita, prezzo),
              tipoFormato(fo),
              tipoFarina(fa),
@@ -12,11 +12,11 @@ Pizza::Pizza(string nome = "focaccia", bool disponibilita = true, double prezzo 
 
 // Costruttore di copia
 // TODO: Implementare copia profonda
-Pizza::Pizza(const Pizza& p){}
+//Pizza::Pizza(const Pizza& p){}
 
 // Distruttore
 //TODO: Implementare distruttore profondo
-Pizza::~Pizza();
+//Pizza::~Pizza();
 
 //non è possibile fare cast da enum a string a meno che non vengano usati
 //if-else per decidere cosa ritornare (poco elegante e mantenibile)
@@ -45,4 +45,8 @@ void Pizza::setTipoFarina(const unsigned int tf){
 
 void addIngrediente(const string& i){
     ingredienti->push_back(i);
+}
+
+Pizza* Pizza::clone() const{
+    return new Pizza(*this);
 }

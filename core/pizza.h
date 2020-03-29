@@ -25,6 +25,8 @@ class Pizza : public Articolo {
   // setter
   void setTipoFormato(const unsigned int);
   void setTipoFarina(const unsigned int);
-
   void addIngrediente(const string&);
+
+  //implementazione metodo di clonazione (classe diventa concreta)
+  Pizza* clone() const;
 };

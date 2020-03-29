@@ -3,7 +3,7 @@
 Articolo::Articolo(string nome, bool disponibilita, double p)
     : Risorsa(nome, disponibilita), prezzo(p){}
 
-double& Articolo::getPrezzo() const{
+double Articolo::getPrezzo() const{
     return prezzo;
 }
 
