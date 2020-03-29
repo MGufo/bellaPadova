@@ -1,4 +1,6 @@
 #include <string>
+#include <QDate>
+
 using std::string;
 
 enum formatoPizza { normale, family, mezzo_metro, battuta };
@@ -12,8 +14,10 @@ class Risorsa {
   bool disponibilita;
 
  public:
-  // costruttore
   Risorsa(string, bool);
-  //
-  virtual ~Risorsa();
+  virtual ~Risorsa() = default;
+  string& getNome() const;
+  bool getDisponibilita() const;
+  void setNome(const string&);
+  void setDisponibilita(bool);
 };
