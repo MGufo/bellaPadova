@@ -1,13 +1,13 @@
 #ifndef RISORSA_H
 #define RISORSA_H
 
+#include <Qdate>
 #include <string>
-#include <QDate>
 
 using std::string;
 
-//enum class permette di creare degli enum con scoping automatico
-//possiamo quindi usare l'elemento "normale" in entrambi gli enum
+// enum class permette di creare enum con scoping automatico
+// possiamo quindi usare l'elemento "normale" in entrambi gli enum
 enum class formatoPizza { normale, family, mezzo_metro, battuta };
 enum class farina { normale, integrale, kamut, farro };
 enum formatoBevanda { bottiglia, lattina };
@@ -26,7 +26,7 @@ class Risorsa {
   void setNome(const string&);
   void setDisponibilita(bool);
 
-  //metodo di clonazione virtuale puro
+  // metodo di clonazione virtuale puro
   virtual Risorsa* clone() const = 0;
 };
 
