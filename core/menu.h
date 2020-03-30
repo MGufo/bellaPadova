@@ -1,6 +1,7 @@
+#include "articolo.h"
 #include "container.h"
 
 class Menu {
  private:
-  contenitoreC<Articolo*> articoli;
+  Vettore<Articolo*> articoli;
 };
