@@ -28,5 +28,6 @@ class Pizza : public Articolo {
   void addIngrediente(const string&);
 
   //implementazione metodo di clonazione (classe diventa concreta)
+  //metodo da utilizzare per aggiungere una pizza del menu tra gli articoli di una comanda
   Pizza* clone() const;
 };

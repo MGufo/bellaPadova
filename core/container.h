@@ -1,18 +1,47 @@
 #include "risorsa.h"
 
-//esempio: Vettore<Articolo*>
-//TODO: sostituire _size con campo dati size di Vettore
-template <class T, unsigned int _size = 0>
-class Vettore {
+template <class T>
+class Lista {
+    friend class Iteratore;
 private:
-  T* ptr;
+    class Nodo{
+    public:
+        T* info;
+        Nodo* next;
+        Nodo* prev;
+        Nodo(T* i, Nodo* n, Nodo* p): info(i), next(n), prev(p){}
+    };
+
+    Nodo* ptr;
+
 public:
 
-  //da controllare
+  Lista(): ptr(nullptr) {}
+
+  Lista(const Lista& l){
+      Nodo* l1 = l.ptr;
+      ptr = new Nodo(new T(l1->info), nullptr, nullptr);
+      Nodo* l2 = ptr;
+      while(l1->next){
+          l1 = l1->next;
+          l2->next = new Nodo(new T(l1->info),l2,nullptr);
+          l2 = l2->next;
+      }
+  }
+
+  ~Lista() {
+      Nodo* p;
+      while(ptr){
+          p = ptr;
+          ptr = ptr->next;
+          delete p;
+      }
+  }
+
   class Iteratore{
-  friend class Vettore;
+  friend class Lista;
   private:
-      const T* punt;
+      Lista::Nodo* punt;
   public:
 
       Iteratore(const T* p) : punt(p){}
@@ -25,86 +54,44 @@ public:
           return punt != i.punt;
       }
 
-      Iteratore& operator++(){
-          if(punt){
-              ++punt;
-          }
-          return *this;
-      }
-
-      Iteratore& operator--(){
-          if(punt){
-              --punt;
-          }
-          return *this;
-      }
-
-      const T& operator[](unsigned int i) const {
-        return punt[i];
-      }
-
-      T& operator[](unsigned int i) {
-        return punt[i];
-      }
-
       const T& operator*() const {
-        return punt[0];
+        return *(punt->info);
       }
 
       T& operator*() {
-        return punt[0];
+        return *(punt->info);
+      }
+
+      //implemento
+
+      Iteratore& operator++(){
+      }
+
+      Iteratore operator++(int){
+      }
+
+      Iteratore& operator--(){
       }
 
   };
 
-  //TODO
-  Iteratore begin() const{
-  }
-  Iteratore end() const{
+  Lista& operator=(const Lista& v) {
   }
 
-  Vettore::Iteratore erase(Vettore::Iteratore it);
-  void clear();
+  //implemento
+
+  const T& operator*() const {}
+
+  T& operator*() {}
+
+  Iteratore begin() const{}
+
+  Iteratore end() const{}
+
+  Iteratore erase(Iteratore it){}
+
+  void clear(){}
+
   //push_back, pop_back, search
-
-  Vettore(): ptr(_size == 0 ? nullptr : new T[_size]){}
-
-  Vettore(const Vettore& v) : ptr(new T[_size]){
-    for(int i=0; i<_size; ++i){
-        ptr[i]=*(v.(ptr[i]).clone());
-    }
-  }
-
-  Vettore& operator=(const Vettore& v) {
-    if(this != &v) {
-      delete[] ptr;
-      ptr = _size == 0 ? nullptr : new T[_size];
-      for(int i=0; i<_size; ++i){
-          ptr[i]=*(v.(ptr[i]).clone());
-      }
-    }
-    return *this;
-  }
-
-  ~Vettore() {
-    delete[] ptr;
-  }
-
-  //controllo
-  const T& operator[](unsigned int i) const {
-    return ptr[i];
-  }
-
-  T& operator[](unsigned int i) {
-    return ptr[i];
-  }
-
-  const T& operator*() const {
-    return ptr[0];
-  }
-
-  T& operator*() {
-    return ptr[0];
-  }
-
+  void push_back(const T* p){}
 };
