@@ -1,5 +1,3 @@
-#include "risorsa.h"
-
 template <class T>
 class Lista {
     friend class Iteratore;
@@ -12,30 +10,36 @@ private:
         Nodo(T* i, Nodo* n, Nodo* p): info(i), next(n), prev(p){}
     };
 
+    static Nodo* copy(Nodo* l1){
+        Nodo* first = new Nodo(new T(l1->info), nullptr, nullptr);
+        Nodo* l2 = first;
+        while(l1->next){
+            l1 = l1->next;
+            l2->next = new Nodo(new T(l1->info),nullptr,l2);
+            l2 = l2->next;
+        }
+        return first;
+    }
+
+    static void destroy(Nodo* p){
+        Nodo* temp;
+        while(p){
+            temp = p;
+            p = p->next;
+            delete temp;
+        }
+    }
+
     Nodo* ptr;
 
 public:
 
   Lista(): ptr(nullptr) {}
 
-  Lista(const Lista& l){
-      Nodo* l1 = l.ptr;
-      ptr = new Nodo(new T(l1->info), nullptr, nullptr);
-      Nodo* l2 = ptr;
-      while(l1->next){
-          l1 = l1->next;
-          l2->next = new Nodo(new T(l1->info),l2,nullptr);
-          l2 = l2->next;
-      }
-  }
+  Lista(const Lista& l) : ptr(copy(l.ptr)){}
 
   ~Lista() {
-      Nodo* p;
-      while(ptr){
-          p = ptr;
-          ptr = ptr->next;
-          delete p;
-      }
+      destroy(ptr);
   }
 
   class Iteratore{
@@ -44,7 +48,7 @@ public:
       Lista::Nodo* punt;
   public:
 
-      Iteratore(const T* p) : punt(p){}
+      Iteratore(const Lista::Nodo* p) : punt(p){}
 
       bool operator==(const Iteratore& i) const{
           return punt == i.punt;
@@ -62,36 +66,56 @@ public:
         return *(punt->info);
       }
 
-      //implemento
-
       Iteratore& operator++(){
+          punt = punt->next;
       }
 
       Iteratore operator++(int){
+          Iteratore temp(*this->punt);
+          ++(*this);
+          return temp;
       }
 
       Iteratore& operator--(){
+          punt = punt->prev;
       }
 
   };
 
   Lista& operator=(const Lista& v) {
+      if(this != &v){
+          destroy(ptr);
+          ptr = copy(v.ptr);
+      }
+      return *this;
   }
 
-  //implemento
+  const T& operator*() const {
+      return *(ptr->info);
+  }
 
-  const T& operator*() const {}
+  T& operator*() {
+      return *(ptr->info);
+  }
 
-  T& operator*() {}
+  Iteratore begin() const{
+      return Iteratore(ptr);
+  }
 
-  Iteratore begin() const{}
+  Iteratore end() const{
+      for(auto it = this->begin(); ptr->next == nullptr && ptr->prev != nullptr; ++it){}
+      return it;
+  }
 
-  Iteratore end() const{}
+  void push_back(const T* p){
+      Iteratore it = --(this->end());
+      Nodo* temp = new Nodo(new T(*p), nullptr,it.punt);
+      it.punt->next = temp;
+  }
 
   Iteratore erase(Iteratore it){}
 
   void clear(){}
 
-  //push_back, pop_back, search
-  void push_back(const T* p){}
+  //pop_back, search
 };
