@@ -1,20 +1,12 @@
 #include "risorsa.h"
 
 Risorsa::Risorsa(string _nome, bool _disponibilita)
-    : nome(_nome), disponibilita(_disponibilita){}
+    : nome(_nome), disponibilita(_disponibilita) {}
 
-string& Risorsa::getNome() const{
-    return nome;
-}
+string Risorsa::getNome() const { return nome; }
 
-bool Risorsa::getDisponibilita() const{
-    return disponibilita;
-}
+bool Risorsa::getDisponibilita() const { return disponibilita; }
 
-void Risorsa::setNome(const string& n){
-    nome = n;
-}
+void Risorsa::setNome(const string& n) { nome = n; }
 
-void Risorsa::setDisponibilita(bool d){
-    disponibilita = d;
-}
+void Risorsa::setDisponibilita(bool d) { disponibilita = d; }

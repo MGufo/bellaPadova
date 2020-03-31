@@ -4,11 +4,11 @@
 Pizza::Pizza(string nome, bool disponibilita, double prezzo,
              formatoPizza fo,
              farina fa,
-             contenitoreC<string>* ingr)
+             Lista<string>* ingr)
            : Articolo(nome, disponibilita, prezzo),
              tipoFormato(fo),
              tipoFarina(fa),
-             ingredienti(ingr ? new contenitoreC<string>(ingr) : nullptr){}
+             ingredienti(ingr ? new Lista<string>(ingr) : nullptr){}
 
 // Costruttore di copia
 // TODO: Implementare copia profonda
@@ -24,7 +24,7 @@ formatoPizza Pizza::getTipoFormato() const{
     return tipoFormato;
 }
 
-const contenitoreC<string>& Pizza::getIngredienti() const{
+const Lista<string>& Pizza::getIngredienti() const{
     if(!ingredienti)    return nullptr;
     return *ingredienti;
 }

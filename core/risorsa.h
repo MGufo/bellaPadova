@@ -21,7 +21,7 @@ class Risorsa {
  public:
   Risorsa(string, bool);
   virtual ~Risorsa() = default;
-  string& getNome() const;
+  string getNome() const;
   bool getDisponibilita() const;
   void setNome(const string&);
   void setDisponibilita(bool);

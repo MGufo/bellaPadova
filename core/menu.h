@@ -3,5 +3,5 @@
 
 class Menu {
  private:
-  Vettore<Articolo*> articoli;
+  Lista<Articolo*> articoli;
 };

@@ -14,4 +14,5 @@ class Consumabile : virtual public Risorsa {
   void setQuantita(const unsigned int);
   void setCosto(const double);
   void setDataAcquisto(const QDate&);
+  virtual Consumabile* clone() const;
 };
