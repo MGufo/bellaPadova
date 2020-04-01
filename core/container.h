@@ -43,7 +43,7 @@ public:
   }
 
   class Iteratore{
-  friend class Lista;
+    friend class Lista;
   private:
       Lista::Nodo* punt;
   public:
@@ -98,24 +98,59 @@ public:
       return *(ptr->info);
   }
 
+  bool isEmpty() const{
+      return ptr == nullptr;
+  }
+
   Iteratore begin() const{
       return Iteratore(ptr);
   }
 
   Iteratore end() const{
-      for(auto it = this->begin(); ptr->next == nullptr && ptr->prev != nullptr; ++it){}
+      for(auto it = this->begin(); it.punt->next == nullptr && it.punt->prev != nullptr; ++it){}
       return it;
   }
 
-  void push_back(const T* p){
-      Iteratore it = --(this->end());
-      Nodo* temp = new Nodo(new T(*p), nullptr,it.punt);
-      it.punt->next = temp;
+  Iteratore insert(Iteratore it, const T* p){
+      //esistono sempre almeno 2 nodi (1 + past-the-end)
+      Nodo* temp = new Nodo(new T(*p), it.punt, it.punt->prev);
+      it.punt->prev->next = temp;           //collegamento tra precedente e nuovo nodo
+      it.punt->prev = temp;                 //collegamento tra il successivo e nuovo nodo
+      return Iteratore(temp);
   }
 
-  Iteratore erase(Iteratore it){}
+  Iteratore erase(Iteratore pt){
+      Iteratore temp(pt.punt->prev);
+      temp.punt->next = pt.punt->next;      //collegamento tra precedente e successivo
+      pt.punt->next->prev = temp.punt;      //collegamento inverso
+      delete pt.punt;
+      return ++temp;
+  }
 
-  void clear(){}
+  void push_back(const T* p){
+      if(isEmpty()){
+          ptr = new Nodo(new T(*p), nullptr, nullptr);
+      }
+      else{
+          insert(this->end(),p);
+      }
 
-  //pop_back, search
+  }
+
+  void pop_back(){
+      if(!isEmpty()){
+          this->erase(--this->end());
+      }
+  }
+
+
+
+  void clear(){
+      if(ptr){
+          auto it = this->begin();
+          while(it != this->end()){
+              it = this->erase(it);
+          }
+      }
+  }
 };
