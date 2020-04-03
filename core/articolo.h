@@ -1,3 +1,4 @@
+#include "container.h"
 #include "risorsa.h"
 
 class Articolo : virtual public Risorsa {
@@ -9,6 +10,7 @@ class Articolo : virtual public Risorsa {
   double getPrezzo() const;
   void setPrezzo(const double&);
 
-  //metodo di clonazione virtuale puro (uso covarianza)
+  // metodo di clonazione virtuale puro (uso covarianza)
   virtual Articolo* clone() const;
+  virtual const Lista<string>* getComposizione() const = 0;
 };
