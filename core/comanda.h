@@ -1,6 +1,10 @@
+#include "articolo.h"
+#include "cliente.h"
+#include "container.h"
+
 class Comanda {
  private:
-  contenitoreC<Articolo*> articoli;
-  contenitoreC<unsigned int> quantita;
-  Cliente cliente;
+  Lista<Articolo*> articoli;
+  Lista<unsigned int> quantita;
+  Contatto cliente;
 };

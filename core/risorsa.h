@@ -1,7 +1,5 @@
 #ifndef RISORSA_H
 #define RISORSA_H
-
-#include <Qdate>
 #include <string>
 
 using std::string;

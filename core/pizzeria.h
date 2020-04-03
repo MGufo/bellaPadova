@@ -1,8 +1,10 @@
+#include "contatto.h"
+#include "inventario.h"
+#include "menu.h"
+#include "risorsa.h"
 class Pizzeria {
  private:
-  string nome;
-  Anagrafica contatto;
-  contenitoreC<Risorsa*> inventario;
+  Contatto contatto;
+  Inventario* inventario;
   Menu* menu;
-  // TODO: Oggetto/puntatore QtPosition per le coordinate della pizzeria
 };
