@@ -1,6 +1,9 @@
 #include "articolo.h"
 #include "consumabile.h"
 
+enum formatoBevanda { bottiglia, lattina };
+enum capacitaBevanda { CL33, CL50, CL66, L1 };
+
 class Bevanda : public Articolo, public Consumabile {
  private:
   formatoBevanda formato;

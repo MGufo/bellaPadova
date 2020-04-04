@@ -3,11 +3,11 @@
 
 class Articolo : virtual public Risorsa {
  private:
-  double prezzo;
+  double prezzoBase;
 
  public:
   Articolo(string, bool, double);
-  double getPrezzo() const;
+  virtual double getPrezzo() const = 0;
   void setPrezzo(const double&);
 
   // metodo di clonazione virtuale puro (uso covarianza)
