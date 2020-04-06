@@ -1,10 +1,14 @@
 #include "contatto.h"
-#include "inventario.h"
-#include "menu.h"
+#include "gestore.h"
 #include "risorsa.h"
+#include <QDate>
+
 class Pizzeria {
  private:
-  Contatto contatto;
-  Inventario* inventario;
-  Menu* menu;
+  Contatto* contatto;
+  Gestore* gestore;
+ public:
+  Pizzeria(string, string, string);
+  double contabilizzazione(QDate, QDate) const;
+  const Lista<const string&> getContatto() const;
 };

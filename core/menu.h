@@ -1,6 +1,10 @@
 #include "articolo.h"
-#include "magazzino.h"
 
-class Menu : public Magazzino {
+
+class Menu {
  private:
+  Lista<Articolo*>* listino;
+ public:
+  Menu();
+  inserisciArticolo();
 };

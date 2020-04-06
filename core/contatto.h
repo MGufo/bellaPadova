@@ -1,4 +1,5 @@
 #include <string>
+#include "container.h"
 using std::string;
 
 class Contatto {
@@ -8,11 +9,15 @@ class Contatto {
   string telefono;
 
  public:
+  Contatto(string, string, string = "\0");
+
   void setNome(const string&);
   void setIndirizzo(const string&);
   void setTelefono(const string&);
 
-  string getNome() const;
-  string getIndirizzo() const;
-  string getTelefono() const;
+  const string getNome() const;
+  const string getIndirizzo() const;
+  const string getTelefono() const;
+
+  const Lista<const string&>& getContatto() const;
 };
