@@ -1,6 +1,5 @@
-#include <QDate>
-
 #include "risorsa.h"
+#include <QDate>
 
 class Consumabile : virtual public Risorsa {
  private:

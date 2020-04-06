@@ -1,10 +1,11 @@
 #include "articolo.h"
 
-
 class Menu {
  private:
   Lista<Articolo*>* listino;
  public:
   Menu();
-  inserisciArticolo();
+  inserisciArticolo(Articolo*);
+  modificaArticolo();
+  eliminaArticolo();
 };
