@@ -13,7 +13,11 @@ class Bevanda : public Articolo, public Consumabile {
   Bevanda(string, bool, double,
           unsigned int, double,
           QDate,
+          QDate,
           formatoBevanda,
           capacitaBevanda);
   Bevanda* clone() const;
+
+  virtual bool Scaduto() const;
 };
+
