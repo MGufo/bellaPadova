@@ -6,17 +6,20 @@ class Pizza : public Articolo {
  private:
   Lista<Ingrediente*>* ingredienti;
   static double extra;
+
  public:
-  // Costruttore non usiamo valori di default perchè vengono tutti sempre passati
-  //per costruire l'oggetto
-  Pizza(string nome, bool disponibilita, double prezzo, Lista<Ingrediente*>* ingr);
+  // Costruttore non usiamo valori di default perchè vengono tutti sempre
+  // passati
+  // per costruire l'oggetto
+  Pizza(string nome, bool disponibilita, double prezzo,
+        Lista<Ingrediente*>* ingr);
   // Costruttore di copia
   Pizza(const Pizza&);
   // Distruttore
   ~Pizza();
   // getter
   const Lista<Ingrediente*>& getIngredienti() const;
-  farina getTipoFarina() const;
+  string getTipoFarina() const;
 
   // setter
   void setTipoFarina(const string&);

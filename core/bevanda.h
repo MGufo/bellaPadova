@@ -10,14 +10,9 @@ class Bevanda : public Articolo, public Consumabile {
   capacitaBevanda capacita;
 
  public:
-  Bevanda(string, bool, double,
-          unsigned int, double,
-          QDate,
-          QDate,
-          formatoBevanda,
-          capacitaBevanda);
+  Bevanda(string, bool, double, unsigned int, double, QDate, QDate,
+          formatoBevanda, capacitaBevanda);
   Bevanda* clone() const;
-
-  virtual bool Scaduto() const;
+  double getSpesa() const;
+  double getPrezzo() const;
 };
-

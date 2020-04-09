@@ -1,11 +1,15 @@
 #include "consumabile.h"
 
-class Ingrediente : public Consumabile{
+class Ingrediente : public Consumabile {
  private:
-   bool locale;
+  bool locale;
+
  public:
-   Ingrediente(string, bool, unsigned int, double, QDate, QDate=QDate::currentDate(), bool locale=false);
-   bool isLocal();
-   Ingrediente* clone() const;
-   virtual bool Scaduto() const;
+  Ingrediente(string, bool, unsigned int, double, QDate,
+              QDate = QDate::currentDate(), bool locale = false);
+  bool isLocal();
+  Ingrediente* clone() const;
+  // se gli ingredienti sono locali si aggiunge automaticamente una costante che
+  // rappresenta un'offerta verso l'associazione "Amici dello Gnocco"
+  double getSpesa() const;
 };
