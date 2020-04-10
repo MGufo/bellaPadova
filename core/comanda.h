@@ -1,10 +1,12 @@
-#include "articolo.h"
-#include "cliente.h"
-#include "container.h"
+#include <QTime>
 
+#include "articolo.h"
+#include "container.h"
+#include "contatto.h"
 class Comanda {
  private:
   Lista<Articolo*> articoli;
   Lista<unsigned int> quantita;
   Contatto cliente;
+  QTime oraConsegna;
 };
