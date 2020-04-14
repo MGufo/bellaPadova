@@ -86,16 +86,30 @@ class Lista {
 
   Iteratore end() const {
     for (auto it = this->begin();
-         it.punt->next == nullptr && it.punt->prev != nullptr; ++it) {
-    }
+         it.punt->next == nullptr && it.punt->prev != nullptr; ++it) {}
     return it;
   }
 
   Iteratore insert(Iteratore it, const T* p) {
-    // esistono sempre almeno 2 nodi (1 + past-the-end)
-    Nodo* temp = new Nodo(new T(*p), it.punt, it.punt->prev);
-    it.punt->prev->next = temp;  // collegamento tra precedente e nuovo nodo
-    it.punt->prev = temp;        // collegamento tra il successivo e nuovo nodo
+    Nodo* temp = nullptr;
+    // controllo validita iteratore
+    if (!it.punt) {
+      // se lista e vuota inseriamo un nuovo nodo come il primo della lista 
+      // altrimenti non faccio nulla e alla fine ritorna un iteratore che punta nullptr
+      if(isEmpty()){
+        ptr = new Nodo(new T(*p), nullptr, nullptr);
+        temp = ptr;
+      }
+    }
+    // esistono sempre almeno 2 nodi (1 + past-the-end) ????????????????????????????
+    else if(it.punt->prev){
+      temp = new Nodo(new T(*p), it.punt, it.punt->prev);
+      it.punt->prev->next = temp;  // collegamento tra precedente e nuovo nodo
+      it.punt->prev = temp;        // collegamento tra il successivo e nuovo nodo
+    }
+    else{
+      
+    }
     return Iteratore(temp);
   }
 
@@ -109,11 +123,7 @@ class Lista {
   }
 
   void push_back(const T* p) {
-    if (isEmpty()) {
-      ptr = new Nodo(new T(*p), nullptr, nullptr);
-    } else {
-      insert(this->end(), p);
-    }
+    insert(this->end(), p);
   }
 
   void pop_back() {
@@ -123,6 +133,9 @@ class Lista {
   }
 
   // TODO: push_front
+  void push_front(const T* p){
+      insert(this->begin(), p);
+  }
   // TODO: pop_front
 
   void clear() {
