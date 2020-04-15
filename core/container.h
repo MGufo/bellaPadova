@@ -49,6 +49,8 @@ class Lista {
    public:
     Iteratore(const Lista::Nodo* p) : punt(p) {}
 
+    ~Iteratore(){ delete punt; }
+
     bool operator==(const Iteratore& i) const { return punt == i.punt; }
 
     bool operator!=(const Iteratore& i) const { return punt != i.punt; }
@@ -56,6 +58,10 @@ class Lista {
     const T& operator*() const { return *(punt->info); }
 
     T& operator*() { return *(punt->info); }
+     
+    const T* operator->() const { return punt->info; }
+
+    T* operator->() { return punt->info; }
 
     Iteratore& operator++() { punt = punt->next; }
 
@@ -101,49 +107,71 @@ class Lista {
         temp = ptr;
       }
     }
-    // esistono sempre almeno 2 nodi (1 + past-the-end) ????????????????????????????
+    // esistono sempre almeno 2 nodi (1 + past-the-end) perchè esiste l'iteratore che punta 
+    // ad un nodo ed esiste pure il prev d questo nodo
     else if(it.punt->prev){
       temp = new Nodo(new T(*p), it.punt, it.punt->prev);
       it.punt->prev->next = temp;  // collegamento tra precedente e nuovo nodo
       it.punt->prev = temp;        // collegamento tra il successivo e nuovo nodo
     }
     else{
-      
+      temp = new Nodo(new T(*p), it.punt, nullptr);
+      it.punt->prev = temp;
+      ptr = temp; 
     }
     return Iteratore(temp);
   }
 
-  Iteratore erase(Iteratore pt) {
-    Iteratore temp(pt.punt->prev);
-    temp.punt->next = pt.punt->next;  // collegamento tra precedente e
-                                      // successivo
-    pt.punt->next->prev = temp.punt;  // collegamento inverso
-    delete pt.punt;
-    return ++temp;
+  Iteratore erase(Iteratore it) {
+    if(it.punt){
+      Nodo* temp = nullptr;
+      if(it == begin()){
+        temp = it.punt;
+        ptr = (++it).punt;
+        delete temp;
+        return it;
+      }
+      else if(it == --end()){
+        temp = it.punt;
+        --it;
+        it.punt->next = nullptr;
+        delete temp;
+        return ++it;
+      }
+      else{
+        temp = it.punt;
+        Iteratore ritorno(it.punt->prev);
+        --it;
+        it.punt->next = ritorno.punt;
+        ritorno.punt->prev = it.punt;
+        delete temp;
+        return ritorno;
+      }
+    }
+    return Iteratore(nullptr);
   }
 
   void push_back(const T* p) {
-    insert(this->end(), p);
+    insert(end(), p);
   }
 
   void pop_back() {
-    if (!isEmpty()) {
-      this->erase(--this->end());
-    }
+    erase(--end());
   }
 
-  // TODO: push_front
   void push_front(const T* p){
-      insert(this->begin(), p);
+    insert(begin(), p);
   }
-  // TODO: pop_front
+  
+  void pop_front(){
+    erase(begin());
+  }
 
   void clear() {
     if (ptr) {
-      auto it = this->begin();
-      while (it != this->end()) {
-        it = this->erase(it);
-      }
+      auto it = begin();
+      while (it != end())
+        it = erase(it);
     }
   }
 };

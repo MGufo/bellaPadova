@@ -1,5 +1,6 @@
 #include "articolo.h"
 #include "gestore.h"
+
 class Menu {
  private:
   Lista<Articolo*>* listino;
