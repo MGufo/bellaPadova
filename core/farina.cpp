@@ -1,13 +1,13 @@
 #include "farina.h"
 
-Farina::Farina(string _nome, bool _disponibilita, unsigned int _quantita, double _costo, 
-QDate _data, bool _locale, string _tipoFarina) : Ingrediente(_nome, _disponibilita, _quantita, 
-_costo, _data, _locale), tipoFarina(_tipoFarina) {}
+Farina::Farina(double _costo, QDate _dataScadenza, string _nome,
+               bool _disponibilita, unsigned int _quantita, QDate _dataAcquisto,
+               bool _locale, string _tipoFarina)
+    : Risorsa(_nome, _disponibilita),
+      Ingrediente(_nome, _disponibilita, _quantita, _costo, _dataScadenza,
+                  _dataAcquisto, _locale),
+      tipoFarina(_tipoFarina) {}
 
-const string& Farina::getTipoFarina() const {
-    return tipoFarina;
-}
+const string& Farina::getTipoFarina() const { return tipoFarina; }
 
-void Farina::setTipoFarina(const string& f) {
-    tipoFarina = f; 
-}
+void Farina::setTipoFarina(const string& f) { tipoFarina = f; }

@@ -6,11 +6,11 @@ class Consumabile : virtual public Risorsa {
  private:
   unsigned int quantita;
   double costo;
-  QDate dataAcquisto;
   QDate dataScadenza;
+  QDate dataAcquisto;
 
  public:
-  Consumabile(string, bool, unsigned int, double, QDate, QDate);
+  Consumabile(unsigned int, double, QDate, QDate);
 
   // Getter
   unsigned int getQuantita() const;

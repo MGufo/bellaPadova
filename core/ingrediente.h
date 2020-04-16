@@ -11,5 +11,7 @@ class Ingrediente : public Consumabile {
   Ingrediente* clone() const;
   // se gli ingredienti sono locali si aggiunge automaticamente una costante che
   // rappresenta un'offerta verso l'associazione "Amici dello Gnocco"
-  double getSpesa() const;
+  double getSpesa() const {
+
+  };
 };
