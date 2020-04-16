@@ -1,13 +1,14 @@
 #include <QDate>
 
 #include "contatto.h"
-#include "gestore.h"
-#include "risorsa.h"
+#include "gestoreComande.h"
+#include "gestoreRisorse.h"
 
 class Pizzeria {
  private:
   Contatto* contatto;
-  Gestore* gestore;
+  GestoreRisorse* gestoreRisorse;
+  GestoreComande* gestoreComande;
 
  public:
   Pizzeria(string, string, string);
