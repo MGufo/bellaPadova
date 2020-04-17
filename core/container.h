@@ -91,7 +91,8 @@ class Lista {
   Iteratore begin() const { return Iteratore(ptr); }
 
   Iteratore end() const {
-    for (auto it = this->begin();
+    Lista<T>::Iteratore it;
+    for (it = this->begin();
          it.punt->next == nullptr && it.punt->prev != nullptr; ++it) {}
     return it;
   }
