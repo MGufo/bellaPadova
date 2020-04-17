@@ -11,3 +11,7 @@ Farina::Farina(double _costo, QDate _dataScadenza, string _nome,
 const string& Farina::getTipoFarina() const { return tipoFarina; }
 
 void Farina::setTipoFarina(const string& f) { tipoFarina = f; }
+
+Farina* Farina::clone() const{
+    return new Farina(*this);
+}

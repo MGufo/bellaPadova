@@ -1,7 +1,7 @@
 #include "consumabile.h"
 
-Consumabile::Consumabile(unsigned int q, double c, QDate ds, QDate da)
-    : quantita(q), costo(c), dataAcquisto(da), dataScadenza(ds) {}
+Consumabile::Consumabile(string n, bool d, unsigned int q, double c, QDate ds, QDate da)
+    : Risorsa(n,d), quantita(q), costo(c), dataAcquisto(da), dataScadenza(ds) {}
 
 unsigned int Consumabile::getQuantita() const { return quantita; }
 

@@ -10,7 +10,7 @@ class Consumabile : virtual public Risorsa {
   QDate dataAcquisto;
 
  public:
-  Consumabile(unsigned int, double, QDate, QDate);
+  Consumabile(string, bool, unsigned int, double, QDate, QDate);
 
   // Getter
   unsigned int getQuantita() const;
@@ -27,5 +27,4 @@ class Consumabile : virtual public Risorsa {
   // Metodi Propri
   // Beneficenza sul cibo locale
   virtual double getSpesa() const = 0;
-  virtual Consumabile* clone() const;
 };
