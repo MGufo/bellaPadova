@@ -10,6 +10,8 @@ class Articolo : virtual public Risorsa {
 
   // metodo di clonazione virtuale puro (uso covarianza)
   virtual Articolo* clone() const;
+  double getPrezzoBase() const;
+  void setPrezzoBase(const double&);
   virtual double getPrezzo() const = 0;
-  void setPrezzo(const double&);
+  
 };
