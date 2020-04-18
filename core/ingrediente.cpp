@@ -10,3 +10,11 @@ Ingrediente::Ingrediente(string _nome, bool _disponibilita,
 Ingrediente* Ingrediente::clone() const{
     return new Ingrediente(*this);
 }
+
+bool Ingrediente::isLocal() const {
+  return locale;
+}
+
+double Ingrediente::getSpesa() const {
+  return getQuantita() * getCosto() + 1*isLocal();
+}
