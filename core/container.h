@@ -5,18 +5,18 @@ class Lista {
  private:
   class Nodo {
    public:
-    T* info;
+    T info;
     Nodo* next;
     Nodo* prev;
-    Nodo(T* i, Nodo* n, Nodo* p) : info(i), next(n), prev(p) {}
+    Nodo(T i, Nodo* n, Nodo* p) : info(i), next(n), prev(p) {}
   };
 
   static Nodo* copy(Nodo* l1) {
-    Nodo* first = new Nodo(new T(l1->info), nullptr, nullptr);
+    Nodo* first = new Nodo(*(new T(l1->info)), nullptr, nullptr);
     Nodo* l2 = first;
     while (l1->next) {
       l1 = l1->next;
-      l2->next = new Nodo(new T(l1->info), nullptr, l2);
+      l2->next = new Nodo(*(new T(l1->info)), nullptr, l2);
       l2 = l2->next;
     }
     return first;
@@ -55,13 +55,13 @@ class Lista {
 
     bool operator!=(const Iteratore& i) const { return punt != i.punt; }
 
-    const T& operator*() const { return *(punt->info); }
+    const T& operator*() const { return punt->info; }
 
-    T& operator*() { return *(punt->info); }
+    T& operator*() { return punt->info; }
      
-    const T* operator->() const { return punt->info; }
+    const T* operator->() const { return &(punt->info); }
 
-    T* operator->() { return punt->info; }
+    T* operator->() { return &(punt->info); }
 
     Iteratore& operator++() { punt = punt->next; }
 
@@ -82,9 +82,9 @@ class Lista {
     return *this;
   }
 
-  const T& operator*() const { return *(ptr->info); }
+  const T& operator*() const { return ptr->info; }
 
-  T& operator*() { return *(ptr->info); }
+  T& operator*() { return ptr->info; }
 
   bool isEmpty() const { return ptr == nullptr; }
 
@@ -97,26 +97,26 @@ class Lista {
     return it;
   }
 
-  Iteratore insert(Iteratore it, const T* p) {
+  Iteratore insert(Iteratore it, const T& p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
     if (!it.punt) {
       // se lista e vuota inseriamo un nuovo nodo come il primo della lista 
       // altrimenti non faccio nulla e alla fine ritorna un iteratore che punta nullptr
       if(isEmpty()){
-        ptr = new Nodo(new T(*p), nullptr, nullptr);
+        ptr = new Nodo(*(new T(p)), nullptr, nullptr);
         temp = ptr;
       }
     }
     // esistono sempre almeno 2 nodi (1 + past-the-end) perchè esiste l'iteratore che punta 
     // ad un nodo ed esiste pure il prev d questo nodo
     else if(it.punt->prev){
-      temp = new Nodo(new T(*p), it.punt, it.punt->prev);
+      temp = new Nodo(*(new T(p)), it.punt, it.punt->prev);
       it.punt->prev->next = temp;  // collegamento tra precedente e nuovo nodo
       it.punt->prev = temp;        // collegamento tra il successivo e nuovo nodo
     }
     else{
-      temp = new Nodo(new T(*p), it.punt, nullptr);
+      temp = new Nodo(*(new T(p)), it.punt, nullptr);
       it.punt->prev = temp;
       ptr = temp; 
     }
@@ -152,7 +152,7 @@ class Lista {
     return Iteratore(nullptr);
   }
 
-  void push_back(const T* p) {
+  void push_back(const T& p) {
     insert(end(), p);
   }
 
@@ -160,7 +160,7 @@ class Lista {
     erase(--end());
   }
 
-  void push_front(const T* p){
+  void push_front(const T& p){
     insert(begin(), p);
   }
   
