@@ -1,3 +1,6 @@
+#ifndef CONSUMABILE
+#define CONSUMABILE
+
 #include <QDate>
 
 #include "risorsa.h"
@@ -28,3 +31,5 @@ class Consumabile : virtual public Risorsa {
   // Beneficenza sul cibo locale
   virtual double getSpesa() const = 0;
 };
+
+#endif
