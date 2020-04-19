@@ -1,3 +1,5 @@
+#ifndef PIZZA.H
+#define PIZZA.H
 #include "articolo.h"
 #include "container.h"
 #include "ingrediente.h"
@@ -6,14 +8,14 @@ class Pizza : public Articolo {
  private:
   Lista<Ingrediente*>* ingredienti;
   static double extra;
-  
+
  public:
   // Costruttore non usiamo valori di default perchè vengono tutti sempre
   // passati
   // per costruire l'oggetto
   Pizza(string nome, bool disponibilita, double prezzo,
         Lista<Ingrediente*>* ingr);
-        
+
   // Costruttore di copia,
   Pizza(const Pizza&);
 
@@ -26,7 +28,7 @@ class Pizza : public Articolo {
 
   // setter
   void setTipoFarina(const string&);
-  void addIngrediente(const string&);
+  void addIngrediente(const Ingrediente&);
 
   // implementazione metodo di clonazione (classe diventa concreta)
   // metodo da utilizzare per aggiungere una pizza del menu tra gli articoli di
@@ -34,3 +36,4 @@ class Pizza : public Articolo {
   Pizza* clone() const;
   double getPrezzo() const;
 };
+#endif
