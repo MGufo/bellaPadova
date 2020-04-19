@@ -1,3 +1,6 @@
+#ifndef LISTA_T
+#define LISTA_T
+
 template <class T>
 class Lista {
   friend class Iteratore;
@@ -47,7 +50,7 @@ class Lista {
     Lista::Nodo* punt;
 
    public:
-    Iteratore(const Lista::Nodo* p) : punt(p) {}
+    Iteratore(Lista::Nodo* p) : punt(p) {}
 
     ~Iteratore(){ delete punt; }
 
@@ -63,7 +66,10 @@ class Lista {
 
     T* operator->() { return &(punt->info); }
 
-    Iteratore& operator++() { punt = punt->next; }
+    Iteratore& operator++() {
+        punt = punt->next;
+        return *this;
+    }
 
     Iteratore operator++(int) {
       Iteratore temp(*this->punt);
@@ -91,7 +97,7 @@ class Lista {
   Iteratore begin() const { return Iteratore(ptr); }
 
   Iteratore end() const {
-    Lista<T>::Iteratore it;
+    Lista<T>::Iteratore it(nullptr);
     for (it = this->begin();
          it.punt->next == nullptr && it.punt->prev != nullptr; ++it) {}
     return it;
@@ -176,3 +182,5 @@ class Lista {
     }
   }
 };
+
+#endif

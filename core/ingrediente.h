@@ -1,3 +1,6 @@
+#ifndef INGREDIENTE
+#define INGREDIENTE
+
 #include "consumabile.h"
 
 class Ingrediente : public Consumabile {
@@ -13,3 +16,5 @@ class Ingrediente : public Consumabile {
   // rappresenta un'offerta verso l'associazione "Amici dello Gnocco"
   double getSpesa() const;
 };
+
+#endif
