@@ -13,5 +13,4 @@ class Articolo : virtual public Risorsa {
   double getPrezzoBase() const;
   void setPrezzoBase(const double&);
   virtual double getPrezzo() const = 0;
-  
 };
