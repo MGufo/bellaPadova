@@ -1,5 +1,5 @@
-#ifndef PIZZA.H
-#define PIZZA.H
+#ifndef PIZZA_H
+#define PIZZA_H
 #include "articolo.h"
 #include "container.h"
 #include "ingrediente.h"

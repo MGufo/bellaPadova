@@ -1,5 +1,9 @@
-#ifndef LISTA_T
-#define LISTA_T
+#ifndef CONTAINER_H
+#define CONTAINER_H
+
+#include <iostream>
+#include "ingrediente.h"
+#include <typeinfo>
 
 template <class T>
 class Lista {
@@ -11,15 +15,15 @@ class Lista {
     T info;
     Nodo* next;
     Nodo* prev;
-    Nodo(T i, Nodo* n, Nodo* p) : info(i), next(n), prev(p) {}
+    Nodo(const T& i, Nodo* n, Nodo* p) : info(i), next(n), prev(p) {}
   };
 
   static Nodo* copy(Nodo* l1) {
-    Nodo* first = new Nodo(*(new T(l1->info)), nullptr, nullptr);
+    Nodo* first = new Nodo(T(l1->info), nullptr, nullptr);
     Nodo* l2 = first;
     while (l1->next) {
       l1 = l1->next;
-      l2->next = new Nodo(*(new T(l1->info)), nullptr, l2);
+      l2->next = new Nodo(T(l1->info), nullptr, l2);
       l2 = l2->next;
     }
     return first;
@@ -34,9 +38,10 @@ class Lista {
     }
   }
 
-  Nodo* ptr;
+    Nodo* ptr;
 
  public:
+
   Lista() : ptr(nullptr) {}
 
   Lista(const Lista& l) : ptr(copy(l.ptr)) {}
@@ -47,16 +52,21 @@ class Lista {
     friend class Lista;
 
    private:
-    Lista::Nodo* punt;
+
+
 
    public:
-    Iteratore(Lista::Nodo* p) : punt(p) {}
 
-    ~Iteratore(){ delete punt; }
+    //puntatore al nodo interesssato
+    Lista::Nodo* punt;
+    //puntatore al nodo precedente
+    Lista::Nodo* prec;
 
-    bool operator==(const Iteratore& i) const { return punt == i.punt; }
+    Iteratore(Lista::Nodo* pu, Lista::Nodo* pr) : punt(pu), prec(pr) {}
 
-    bool operator!=(const Iteratore& i) const { return punt != i.punt; }
+    bool operator==(const Iteratore& i) const { return (punt == i.punt) && (prec == i.prec); }
+
+    bool operator!=(const Iteratore& i) const { return (punt != i.punt) || (prec != i.prec); }
 
     const T& operator*() const { return punt->info; }
 
@@ -67,17 +77,28 @@ class Lista {
     T* operator->() { return &(punt->info); }
 
     Iteratore& operator++() {
+        Nodo* temp = punt;
         punt = punt->next;
+        prec = temp;
         return *this;
     }
 
     Iteratore operator++(int) {
-      Iteratore temp(*this->punt);
+      Iteratore temp(punt, prec);
       ++(*this);
       return temp;
     }
 
-    Iteratore& operator--() { punt = punt->prev; }
+    Iteratore& operator--() {
+        punt = prec;
+        if(punt){
+            prec = punt->prev;
+        }
+        else{
+            prec = nullptr;
+        }
+        return *this;
+    }
   };
 
   Lista& operator=(const Lista& v) {
@@ -94,39 +115,45 @@ class Lista {
 
   bool isEmpty() const { return ptr == nullptr; }
 
-  Iteratore begin() const { return Iteratore(ptr); }
+  Iteratore begin() const { return Iteratore(ptr,nullptr); }
 
   Iteratore end() const {
-    Lista<T>::Iteratore it(nullptr);
-    for (it = this->begin();
-         it.punt->next == nullptr && it.punt->prev != nullptr; ++it) {}
+    Lista<T>::Iteratore it(nullptr,nullptr);
+    if(!isEmpty()){
+        it = begin();
+        while(it.punt != nullptr){
+            ++it;
+        }
+    }
     return it;
   }
 
   Iteratore insert(Iteratore it, const T& p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
-    if (!it.punt) {
+    if (!it.punt && !it.prec) {
       // se lista e vuota inseriamo un nuovo nodo come il primo della lista 
       // altrimenti non faccio nulla e alla fine ritorna un iteratore che punta nullptr
       if(isEmpty()){
-        ptr = new Nodo(*(new T(p)), nullptr, nullptr);
+        ptr = new Nodo(p, nullptr, nullptr);
+        //std::cout << ptr->info->getCosto() << std::endl;
         temp = ptr;
       }
     }
-    // esistono sempre almeno 2 nodi (1 + past-the-end) perchè esiste l'iteratore che punta 
-    // ad un nodo ed esiste pure il prev d questo nodo
-    else if(it.punt->prev){
-      temp = new Nodo(*(new T(p)), it.punt, it.punt->prev);
-      it.punt->prev->next = temp;  // collegamento tra precedente e nuovo nodo
-      it.punt->prev = temp;        // collegamento tra il successivo e nuovo nodo
+    // esistono sempre almeno 2 nodi (2 + past-the-end) perchè esiste l'iteratore che punta
+    // ad un nodo ed esiste pure il prev di questo nodo
+    else if(it.prec){
+      temp = new Nodo(p, it.punt, it.prec);
+      it.prec->next = temp;             // collegamento tra precedente e nuovo nodo
+      if(it.punt)
+        it.punt->prev = temp;           // collegamento tra il successivo e nuovo nodo
     }
     else{
-      temp = new Nodo(*(new T(p)), it.punt, nullptr);
+      temp = new Nodo(p, it.punt, nullptr);
       it.punt->prev = temp;
       ptr = temp; 
     }
-    return Iteratore(temp);
+    return Iteratore(temp, temp->prev);
   }
 
   Iteratore erase(Iteratore it) {
