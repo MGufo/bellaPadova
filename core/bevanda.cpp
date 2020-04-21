@@ -11,5 +11,5 @@ Bevanda::Bevanda(string nome, bool disponibilita, double prezzo,
 
 double Bevanda::getSpesa() const {
   return getQuantita() * getCosto();
-};
-double Bevanda::getPrezzo() const { return getCosto() * getQuantita(); };
+}
+double Bevanda::getPrezzo() const { return getCosto() * getQuantita(); }
