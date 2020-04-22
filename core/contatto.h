@@ -1,4 +1,7 @@
+#ifndef CONTATTO_H
+#define CONTATTO_H
 #include <string>
+
 #include "container.h"
 using std::string;
 
@@ -21,3 +24,5 @@ class Contatto {
 
   const Lista<const string&>& getContatto() const;
 };
+
+#endif

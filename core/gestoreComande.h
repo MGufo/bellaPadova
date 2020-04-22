@@ -1,3 +1,5 @@
+#ifndef GESTORERISORSE_H
+#define GESTORERISORSE_H
 #include <container.h>
 
 #include "comanda.h"
@@ -31,3 +33,5 @@ class GestoreComande {
   */
   void inserisciComanda(const Comanda*);
 };
+
+#endif

@@ -1,14 +1,20 @@
+#ifndef MENU_H
+#define MENU_H
+
 #include "articolo.h"
-#include "gestore.h"
+#include "gestoreRisorse.h"
+#include "qontainer.h"
 
 class Menu {
  private:
   Lista<Articolo*>* listino;
-  Gestore* gestore;
+  GestoreRisorse* gestore;
 
  public:
   Menu();
-  inserisciArticolo(Articolo*);
-  modificaArticolo();
-  eliminaArticolo();
+  void inserisciArticolo(Articolo*);
+  void modificaArticolo(Articolo*);
+  void eliminaArticolo(Articolo*);
 };
+
+#endif

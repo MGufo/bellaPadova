@@ -1,3 +1,5 @@
+#ifndef FARINA_H
+#define FARINA_H
 #include "ingrediente.h"
 
 // un'istanza di questa classe rappresenta l'ingrediente farina, il quale viene
@@ -18,3 +20,5 @@ class Farina : public Ingrediente {
   void setTipoFarina(const string&);
   Farina* clone() const;
 };
+
+#endif

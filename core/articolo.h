@@ -1,3 +1,6 @@
+#ifndef ARTICOLO_H
+#define ARTICOLO_H
+
 #include "risorsa.h"
 
 class Articolo : virtual public Risorsa {
@@ -11,3 +14,4 @@ class Articolo : virtual public Risorsa {
   void setPrezzoBase(const double&);
   virtual double getPrezzo() const = 0;
 };
+#endif

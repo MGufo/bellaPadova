@@ -1,3 +1,6 @@
+#ifndef COMANDA_H
+#define COMANDA_H
+
 #include <QTime>
 
 #include "articolo.h"
@@ -10,3 +13,5 @@ class Comanda {
   Contatto cliente;
   QTime oraConsegna;
 };
+
+#endif

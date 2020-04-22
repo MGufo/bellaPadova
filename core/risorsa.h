@@ -1,7 +1,7 @@
 #ifndef RISORSA_H
 #define RISORSA_H
-#include <string>
 #include <iostream>
+#include <string>
 
 using std::string;
 

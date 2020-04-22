@@ -1,3 +1,6 @@
+#ifndef BEVANDA_H
+#define BEVANDA_H
+
 #include "articolo.h"
 #include "consumabile.h"
 
@@ -16,3 +19,4 @@ class Bevanda : public Articolo, public Consumabile {
   double getSpesa() const;
   double getPrezzo() const;
 };
+#endif

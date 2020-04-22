@@ -1,7 +1,7 @@
 #ifndef PIZZA_H
 #define PIZZA_H
 #include "articolo.h"
-#include "container.h"
+#include "qontainer.h"
 #include "ingrediente.h"
 
 class Pizza : public Articolo {

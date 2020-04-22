@@ -1,5 +1,5 @@
-#ifndef CONSUMABILE
-#define CONSUMABILE
+#ifndef CONSUMABILE_H
+#define CONSUMABILE_H
 
 #include <QDate>
 
