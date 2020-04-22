@@ -5,7 +5,7 @@
 
 template <class T>
 class Lista {
-  friend class Iteratore;
+  friend class Iterator;
 
  private:
   class Nodo {
@@ -48,48 +48,47 @@ class Lista {
 
   ~Lista() { destroy(ptr); }
 
-  class Iteratore {
+  class Iterator{
     friend class Lista;
 
-   public:
+   private:
+
     // puntatore al nodo interesssato
     Lista::Nodo* itrCurrent;
     // puntatore al nodo precedente
     Lista::Nodo* itrPrevious;
 
-    Iteratore(Lista::Nodo* pu, Lista::Nodo* pr)
-        : itrCurrent(pu), itrPrevious(pr) {}
+   public:
+  
+    Iterator(Lista::Nodo* cu, Lista::Nodo* pr)
+        : itrCurrent(cu), itrPrevious(pr) {}
 
-    bool operator==(const Iteratore& i) const {
+    bool operator==(const Iterator& i) const {
       return (itrCurrent == i.itrCurrent) && (itrPrevious == i.itrPrevious);
     }
 
-    bool operator!=(const Iteratore& i) const {
+    bool operator!=(const Iterator& i) const {
       return (itrCurrent != i.itrCurrent) || (itrPrevious != i.itrPrevious);
     }
 
-    const T& operator*() const { return itrCurrent->info; }
-
     T& operator*() { return itrCurrent->info; }
-
-    const T* operator->() const { return &(itrCurrent->info); }
 
     T* operator->() { return &(itrCurrent->info); }
 
-    Iteratore& operator++() {
+    Iterator& operator++() {
       Nodo* temp = itrCurrent;
       itrCurrent = itrCurrent->nodoNext;
       itrPrevious = temp;
       return *this;
     }
 
-    Iteratore operator++(int) {
-      Iteratore temp(itrCurrent, itrPrevious);
+    Iterator operator++(int) {
+      Iterator temp(itrCurrent, itrPrevious);
       ++(*this);
       return temp;
     }
 
-    Iteratore& operator--() {
+    Iterator& operator--() {
       itrCurrent = itrPrevious;
       if (itrCurrent) {
         itrPrevious = itrCurrent->nodoPrev;
@@ -98,6 +97,58 @@ class Lista {
       }
       return *this;
     }
+  };
+
+  class const_Iterator {
+    friend class Lista;
+
+   private:
+
+    // puntatore al nodo interesssato
+    const Lista::Nodo* itrCurrent;
+    // puntatore al nodo precedente
+    const Lista::Nodo* itrPrevious;
+
+   public:
+
+    const_Iterator(const Lista::Nodo* cu, const Lista::Nodo* pr)
+        : itrCurrent(cu), itrPrevious(pr) {}
+
+    bool operator==(const const_Iterator& i) const {
+      return (itrCurrent == i.itrCurrent) && (itrPrevious == i.itrPrevious);
+    }
+
+    bool operator!=(const const_Iterator& i) const {
+      return (itrCurrent != i.itrCurrent) || (itrPrevious != i.itrPrevious);
+    }
+
+    const T& operator*() const { return itrCurrent->info; }
+
+    const T* operator->() const { return &(itrCurrent->info); }
+
+    const_Iterator& operator++() {
+      const Nodo* temp = itrCurrent;
+      itrCurrent = itrCurrent->nodoNext;
+      itrPrevious = temp;
+      return *this;
+    }
+
+    const_Iterator operator++(int) {
+      const_Iterator temp(itrCurrent, itrPrevious);
+      ++(*this);
+      return temp;
+    }
+
+    const_Iterator& operator--() {
+      itrCurrent = itrPrevious;
+      if (itrCurrent) {
+        itrPrevious = itrCurrent->nodoPrev;
+      } else {
+        itrPrevious = nullptr;
+      }
+      return *this;
+    }
+
   };
 
   Lista& operator=(const Lista& v) {
@@ -114,10 +165,10 @@ class Lista {
 
   bool isEmpty() const { return ptr == nullptr; }
 
-  Iteratore begin() const { return Iteratore(ptr, nullptr); }
+  Iterator begin() const { return Iterator(ptr, nullptr); }
 
-  Iteratore end() const {
-    Lista<T>::Iteratore it(nullptr, nullptr);
+  Iterator end() const {
+    Lista<T>::Iterator it(nullptr, nullptr);
     if (!isEmpty()) {
       it = begin();
       while (it.itrCurrent != nullptr) {
@@ -127,12 +178,12 @@ class Lista {
     return it;
   }
 
-  Iteratore insert(Iteratore it, const T& p) {
+  Iterator insert(Iterator it, const T& p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
     if (!it.itrCurrent && !it.itrPrevious) {
       // se lista e vuota inseriamo un nuovo nodo come il primo della lista
-      // altrimenti non faccio nulla e alla fine ritorna un iteratore che punta
+      // altrimenti non faccio nulla e alla fine ritorna un Iteratorche punta
       // nullptr
       if (isEmpty()) {
         ptr = new Nodo(p, nullptr, nullptr);
@@ -140,7 +191,7 @@ class Lista {
       }
     }
     // esistono sempre almeno 2 nodi (2 + past-the-end) perchè esiste
-    // l'iteratore che punta ad un nodo ed esiste pure il nodoPrev di questo
+    // l'Iteratorche punta ad un nodo ed esiste pure il nodoPrev di questo
     // nodo
     else if (it.itrPrevious) {
       temp = new Nodo(p, it.itrCurrent, it.itrPrevious);
@@ -154,10 +205,10 @@ class Lista {
       it.itrCurrent->nodoPrev = temp;
       ptr = temp;
     }
-    return Iteratore(temp, temp->nodoPrev);
+    return Iterator(temp, temp->nodoPrev);
   }
 
-  Iteratore erase(Iteratore it) {
+  Iterator erase(Iterator it) {
     if (it.itrCurrent) {
       Nodo* temp = nullptr;
       if (it == begin()) {
@@ -173,7 +224,7 @@ class Lista {
         return ++it;
       } else {
         temp = it.itrCurrent;
-        Iteratore ritorno(it.itrCurrent->nodoPrev);
+        Iterator ritorno(it.itrCurrent->nodoPrev);
         --it;
         it.itrCurrent->nodoNext = ritorno.itrCurrent;
         ritorno.itrCurrent->nodoPrev = it.itrCurrent;
@@ -181,7 +232,7 @@ class Lista {
         return ritorno;
       }
     }
-    return Iteratore(nullptr);
+    return Iterator(nullptr);
   }
 
   void push_back(const T& p) { insert(end(), p); }
@@ -199,5 +250,7 @@ class Lista {
     }
   }
 };
+
+//TO DO: operatore di stampa
 
 #endif

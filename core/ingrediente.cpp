@@ -7,9 +7,9 @@ Ingrediente::Ingrediente(string _nome, bool _disponibilita,
       Consumabile(_nome, _disponibilita, _quantita, _costo, _dataAcquisto, _dataScadenza),
       locale(_locale) {}
 
-Ingrediente::Ingrediente(const Ingrediente & i)
+/*Ingrediente::Ingrediente(const Ingrediente & i)
     : Risorsa(i), Consumabile(i), locale(i.locale) {}
-
+*/
 Ingrediente* Ingrediente::clone() const{
     return new Ingrediente(*this);
 }

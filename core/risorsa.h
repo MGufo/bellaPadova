@@ -12,7 +12,7 @@ class Risorsa {
 
  public:
   Risorsa(string, bool);
-  Risorsa(const Risorsa&);
+ // Risorsa(const Risorsa&);
   virtual ~Risorsa() = default;
   string getNome() const;
   bool getDisponibilita() const;

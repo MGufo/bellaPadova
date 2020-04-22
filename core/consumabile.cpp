@@ -3,9 +3,9 @@
 Consumabile::Consumabile(string n, bool d, unsigned int q, double c, QDate ds, QDate da)
     : Risorsa(n,d), quantita(q), costo(c), dataAcquisto(da), dataScadenza(ds) {}
 
-Consumabile::Consumabile(const Consumabile & c)
+/*Consumabile::Consumabile(const Consumabile & c)
     : Risorsa(c), quantita(c.quantita), costo(c.costo), dataAcquisto(c.dataAcquisto), dataScadenza(c.dataScadenza) {}
-
+*/
 unsigned int Consumabile::getQuantita() const { return quantita; }
 
 double Consumabile::getCosto() const { return costo; }

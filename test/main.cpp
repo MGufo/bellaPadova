@@ -1,7 +1,7 @@
 #include <iostream>
 #include <QDate>
-#include "../progettoP2/core/farina.h"
-#include "../progettoP2/core/pizza.h"
+#include "../core/farina.h"
+#include "../core/pizza.h"
 
 int main()
 {

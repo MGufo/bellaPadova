@@ -10,7 +10,7 @@ class Ingrediente : public Consumabile {
  public:
   Ingrediente(string, bool, unsigned int, double, QDate,
               QDate = QDate::currentDate(), bool locale = false);
-  Ingrediente(const Ingrediente&);
+  //Ingrediente(const Ingrediente&);
   bool isLocal() const;
   Ingrediente* clone() const;
   // se gli ingredienti sono locali si aggiunge automaticamente una costante che
