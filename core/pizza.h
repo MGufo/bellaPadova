@@ -3,6 +3,7 @@
 #include "articolo.h"
 #include "qontainer.h"
 #include "ingrediente.h"
+#include "farina.h"
 
 class Pizza : public Articolo {
  private:
@@ -11,8 +12,7 @@ class Pizza : public Articolo {
 
  public:
   // Costruttore non usiamo valori di default perchè vengono tutti sempre
-  // passati
-  // per costruire l'oggetto
+  // passati per costruire l'oggetto
   Pizza(string nome, bool disponibilita, double prezzo,
         Lista<Ingrediente*>* ingr);
 
@@ -24,11 +24,12 @@ class Pizza : public Articolo {
 
   // getter
   const Lista<Ingrediente*>& getIngredienti() const;
-  string getTipoFarina() const;
+  Farina* getFarina() const;
 
   // setter
-  void setTipoFarina(const string&);
-  void addIngrediente(const Ingrediente&);
+  void setFarina(Farina*);
+  void addIngrediente(Ingrediente*);
+  void removeIngrediente(Ingrediente*);
 
   // implementazione metodo di clonazione (classe diventa concreta)
   // metodo da utilizzare per aggiungere una pizza del menu tra gli articoli di

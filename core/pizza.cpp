@@ -30,28 +30,35 @@ const Lista<Ingrediente*>& Pizza::getIngredienti() const {
 /* Non si controlla che la lista di ingredienti sia vuota perchè nella
 costruzione di una nuova pizza al costruttore è garantito il passaggio di una
 lista di ingredienti non vuota */
-string Pizza::getTipoFarina() const {
-  return static_cast<Farina*>(**ingredienti)->getTipoFarina();
+Farina* Pizza::getFarina() const {
+  return static_cast<Farina*>(**ingredienti);
 }
 
 // aggiorna la tipologia di farina presente nella lista ingredienti della pizza
-void Pizza::setTipoFarina(const string& tf) {
-  static_cast<Farina*>(**ingredienti)->setTipoFarina(tf);
+void Pizza::setFarina(Farina* f) {
+  static_cast<Farina*>(**ingredienti)->setTipoFarina(f->getTipoFarina());
 }
 
-/*
-Se l'ingrediente da inserire è presente nella lista di consumabili
-di inventario ed è disponibile, ne si costruisce una copia e lo si aggiunge
-alla lista ingredienti della pizza , altrimenti si ritorna un'eccezione congrua
-al tipo di errore */
-void addIngrediente(const Ingrediente& i) {}
+
+void Pizza::addIngrediente(Ingrediente* i) {
+    ingredienti->push_back(i);
+}
+
+void Pizza::removeIngrediente(Ingrediente* i){
+    for(Lista<Ingrediente*>::Iterator it = ingredienti->begin(); it != ingredienti->end(); ++it){
+        if(*it == i){
+            ingredienti->erase(it);
+            it = --(ingredienti->end());
+        }
+    }
+}
 
 Pizza* Pizza::clone() const { return new Pizza(*this); }
 
 // Ritorna il prezzo di vendita della pizza di invocazione.
 double Pizza::getPrezzo() const {
   int somma = 0;
-  for (auto it = ingredienti->begin(); it != ingredienti->end(); ++it) {
+  for (Lista<Ingrediente*>::const_Iterator it = ingredienti->const_begin(); it != ingredienti->const_end(); ++it) {
     if ((*it)->isLocal()) somma += extra;
   }
   return getPrezzoBase() + somma;

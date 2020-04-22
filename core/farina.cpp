@@ -8,9 +8,6 @@ Farina::Farina(double _costo, QDate _dataScadenza, string _nome,
                   _dataAcquisto, _locale),
       tipoFarina(_tipoFarina) {}
 
-Farina::Farina(const Farina & f)
-    : Risorsa(f), Ingrediente(f), tipoFarina(f.tipoFarina){}
-
 const string& Farina::getTipoFarina() const { return tipoFarina; }
 
 void Farina::setTipoFarina(const string& f) { tipoFarina = f; }

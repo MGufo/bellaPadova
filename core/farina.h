@@ -15,7 +15,7 @@ class Farina : public Ingrediente {
  public:
   Farina(double, QDate, string = "farina", bool = true, unsigned int = 1,
          QDate = QDate::currentDate(), bool = false, string = "normale");
-  Farina(const Farina&);
+
   const string& getTipoFarina() const;
   void setTipoFarina(const string&);
   Farina* clone() const;

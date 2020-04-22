@@ -167,10 +167,23 @@ class Lista {
 
   Iterator begin() const { return Iterator(ptr, nullptr); }
 
+  const_Iterator const_begin() const { return const_Iterator(ptr, nullptr); }
+
   Iterator end() const {
     Lista<T>::Iterator it(nullptr, nullptr);
     if (!isEmpty()) {
       it = begin();
+      while (it.itrCurrent != nullptr) {
+        ++it;
+      }
+    }
+    return it;
+  }
+
+  const_Iterator const_end() const {
+    Lista<T>::const_Iterator it(nullptr, nullptr);
+    if (!isEmpty()) {
+      it = const_begin();
       while (it.itrCurrent != nullptr) {
         ++it;
       }
@@ -213,26 +226,34 @@ class Lista {
       Nodo* temp = nullptr;
       if (it == begin()) {
         temp = it.itrCurrent;
-        ptr = (++it).itrCurrent;
+        ++it;
+        ptr = it.itrCurrent;
         delete temp;
         return it;
-      } else if (it == --end()) {
+      }
+      else if (it == --end()) {
         temp = it.itrCurrent;
         --it;
         it.itrCurrent->nodoNext = nullptr;
         delete temp;
         return ++it;
-      } else {
+      }
+      else {
         temp = it.itrCurrent;
-        Iterator ritorno(it.itrCurrent->nodoPrev);
+        //iteratore che punta al nodo successivo a quello da eliminare
+        Iterator ritorno(it.itrCurrent->nodoNext, it.itrCurrent);
+        //iteratore che punta al nodo precedente a quello da eliminare
         --it;
         it.itrCurrent->nodoNext = ritorno.itrCurrent;
+        //aggiornamento dell'iteratore
+        ritorno.itrPrevious = it.itrCurrent;
+        //aggiornamento della lista
         ritorno.itrCurrent->nodoPrev = it.itrCurrent;
         delete temp;
         return ritorno;
       }
     }
-    return Iterator(nullptr);
+    return Iterator(nullptr, nullptr);
   }
 
   void push_back(const T& p) { insert(end(), p); }

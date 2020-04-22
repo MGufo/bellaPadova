@@ -14,7 +14,6 @@ class Consumabile : virtual public Risorsa {
 
  public:
   Consumabile(string, bool, unsigned int, double, QDate, QDate);
- // Consumabile(const Consumabile&);
 
   // Getter
   unsigned int getQuantita() const;
