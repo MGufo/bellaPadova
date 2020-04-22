@@ -51,14 +51,14 @@ class Lista {
   class Iteratore {
     friend class Lista;
 
-   private:
    public:
     // puntatore al nodo interesssato
     Lista::Nodo* itrCurrent;
     // puntatore al nodo precedente
     Lista::Nodo* itrPrevious;
 
-    Iteratore(Lista::Nodo* pu, Lista::Nodo* pr) : itrCurrent(pu), itrPrevious(pr) {}
+    Iteratore(Lista::Nodo* pu, Lista::Nodo* pr)
+        : itrCurrent(pu), itrPrevious(pr) {}
 
     bool operator==(const Iteratore& i) const {
       return (itrCurrent == i.itrCurrent) && (itrPrevious == i.itrPrevious);
@@ -136,17 +136,19 @@ class Lista {
       // nullptr
       if (isEmpty()) {
         ptr = new Nodo(p, nullptr, nullptr);
-        // std::cout << ptr->info->getCosto() << std::endl;
         temp = ptr;
       }
     }
     // esistono sempre almeno 2 nodi (2 + past-the-end) perchè esiste
-    // l'iteratore che punta ad un nodo ed esiste pure il nodoPrev di questo nodo
+    // l'iteratore che punta ad un nodo ed esiste pure il nodoPrev di questo
+    // nodo
     else if (it.itrPrevious) {
       temp = new Nodo(p, it.itrCurrent, it.itrPrevious);
-      it.itrPrevious->nodoNext = temp;  // collegamento tra precedente e nuovo nodo
+      it.itrPrevious->nodoNext =
+          temp;  // collegamento tra precedente e nuovo nodo
       if (it.itrCurrent)
-        it.itrCurrent->nodoPrev = temp;  // collegamento tra il successivo e nuovo nodo
+        it.itrCurrent->nodoPrev =
+            temp;  // collegamento tra il successivo e nuovo nodo
     } else {
       temp = new Nodo(p, it.itrCurrent, nullptr);
       it.itrCurrent->nodoPrev = temp;
