@@ -18,5 +18,7 @@ class Bevanda : public Articolo, public Consumabile {
   Bevanda* clone() const;
   double getSpesa() const;
   double getPrezzo() const;
+  string getFormatoBevanda() const;
+  string getCapacitaBevanda() const;
 };
 #endif
