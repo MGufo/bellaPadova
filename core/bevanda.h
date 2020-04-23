@@ -4,21 +4,22 @@
 #include "articolo.h"
 #include "consumabile.h"
 
-enum formatoBevanda { bottiglia, lattina };
-enum capacitaBevanda { CL33, CL50, CL66, L1 };
-
 class Bevanda : public Articolo, public Consumabile {
  private:
-  formatoBevanda formato;
-  capacitaBevanda capacita;
+  static double plasticTax;
+  double capacita;
 
  public:
-  Bevanda(string, bool, double, unsigned int, double, QDate, QDate,
-          formatoBevanda, capacitaBevanda);
-  Bevanda* clone() const;
+  Bevanda(string, bool, double, unsigned int, double, QDate, QDate, double);
+
+  // getter
   double getSpesa() const;
-  double getPrezzo() const;
-  string getFormatoBevanda() const;
-  string getCapacitaBevanda() const;
+  double getCapacitaBevanda() const;
+  double getPlasticTax() const;
+
+  // setter
+
+  void setPlasticTax(double);
+  void setCapacita(double);
 };
 #endif

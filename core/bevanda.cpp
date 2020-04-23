@@ -2,12 +2,18 @@
 
 Bevanda::Bevanda(string nome, bool disponibilita, double prezzo,
                  unsigned int qta, double costo, QDate dataAcquisto,
-                 QDate dataScadenza, formatoBevanda fb, capacitaBevanda cb)
+                 QDate dataScadenza, double capacitaBevanda)
     : Risorsa(nome, disponibilita),
       Articolo(nome, disponibilita, prezzo),
       Consumabile(nome, disponibilita, qta, costo, dataAcquisto, dataScadenza),
-      formato(fb),
-      capacita(cb) {}
+      capacita(capacitaBevanda) {}
 
 double Bevanda::getSpesa() const { return getQuantita() * getCosto(); }
-double Bevanda::getPrezzo() const { return getCosto() * getQuantita(); }
+
+double Bevanda::getCapacitaBevanda() const { return capacita; }
+
+double Bevanda::getPlasticTax() const { return plasticTax; }
+
+void Bevanda::setPlasticTax(double pt) { plasticTax = pt; }
+
+double Bevanda::plasticTax = 0.5;

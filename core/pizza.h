@@ -1,9 +1,9 @@
 #ifndef PIZZA_H
 #define PIZZA_H
 #include "articolo.h"
-#include "qontainer.h"
-#include "ingrediente.h"
 #include "farina.h"
+#include "ingrediente.h"
+#include "qontainer.h"
 
 class Pizza : public Articolo {
  private:
@@ -25,11 +25,13 @@ class Pizza : public Articolo {
   // getter
   const Lista<Ingrediente*>& getIngredienti() const;
   Farina* getFarina() const;
+  double getExtra() const;
 
   // setter
   void setFarina(Farina*);
   void addIngrediente(Ingrediente*);
   void removeIngrediente(Ingrediente*);
+  void setExtra(double);
 
   // implementazione metodo di clonazione (classe diventa concreta)
   // metodo da utilizzare per aggiungere una pizza del menu tra gli articoli di
