@@ -2,7 +2,7 @@
 #define CONTATTO_H
 #include <string>
 
-#include "container.h"
+#include "qontainer.h"
 using std::string;
 
 class Contatto {
@@ -22,7 +22,7 @@ class Contatto {
   const string getIndirizzo() const;
   const string getTelefono() const;
 
-  const Lista<const string&>& getContatto() const;
+  const Lista<const string>& getContatto() const;
 };
 
 #endif

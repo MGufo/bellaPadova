@@ -48,18 +48,16 @@ class Lista {
 
   ~Lista() { destroy(ptr); }
 
-  class Iterator{
+  class Iterator {
     friend class Lista;
 
    private:
-
     // puntatore al nodo interesssato
     Lista::Nodo* itrCurrent;
     // puntatore al nodo precedente
     Lista::Nodo* itrPrevious;
 
    public:
-  
     Iterator(Lista::Nodo* cu, Lista::Nodo* pr)
         : itrCurrent(cu), itrPrevious(pr) {}
 
@@ -103,14 +101,12 @@ class Lista {
     friend class Lista;
 
    private:
-
     // puntatore al nodo interesssato
     const Lista::Nodo* itrCurrent;
     // puntatore al nodo precedente
     const Lista::Nodo* itrPrevious;
 
    public:
-
     const_Iterator(const Lista::Nodo* cu, const Lista::Nodo* pr)
         : itrCurrent(cu), itrPrevious(pr) {}
 
@@ -148,7 +144,6 @@ class Lista {
       }
       return *this;
     }
-
   };
 
   Lista& operator=(const Lista& v) {
@@ -191,7 +186,7 @@ class Lista {
     return it;
   }
 
-  Iterator insert(Iterator it, const T& p) {
+  Iterator insert(Iterator it, const T p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
     if (!it.itrCurrent && !it.itrPrevious) {
@@ -230,24 +225,22 @@ class Lista {
         ptr = it.itrCurrent;
         delete temp;
         return it;
-      }
-      else if (it == --end()) {
+      } else if (it == --end()) {
         temp = it.itrCurrent;
         --it;
         it.itrCurrent->nodoNext = nullptr;
         delete temp;
         return ++it;
-      }
-      else {
+      } else {
         temp = it.itrCurrent;
-        //iteratore che punta al nodo successivo a quello da eliminare
+        // iteratore che punta al nodo successivo a quello da eliminare
         Iterator ritorno(it.itrCurrent->nodoNext, it.itrCurrent);
-        //iteratore che punta al nodo precedente a quello da eliminare
+        // iteratore che punta al nodo precedente a quello da eliminare
         --it;
         it.itrCurrent->nodoNext = ritorno.itrCurrent;
-        //aggiornamento dell'iteratore
+        // aggiornamento dell'iteratore
         ritorno.itrPrevious = it.itrCurrent;
-        //aggiornamento della lista
+        // aggiornamento della lista
         ritorno.itrCurrent->nodoPrev = it.itrCurrent;
         delete temp;
         return ritorno;
@@ -256,11 +249,11 @@ class Lista {
     return Iterator(nullptr, nullptr);
   }
 
-  void push_back(const T& p) { insert(end(), p); }
+  void push_back(const T p) { insert(end(), p); }
 
   void pop_back() { erase(--end()); }
 
-  void push_front(const T& p) { insert(begin(), p); }
+  void push_front(const T p) { insert(begin(), p); }
 
   void pop_front() { erase(begin()); }
 
@@ -272,6 +265,6 @@ class Lista {
   }
 };
 
-//TO DO: operatore di stampa
+// TO DO: operatore di stampa
 
 #endif
