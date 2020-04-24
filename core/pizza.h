@@ -20,7 +20,7 @@ class Pizza : public Articolo {
   Pizza(const Pizza&);
 
   // Distruttore
-  //~Pizza();
+  ~Pizza();
 
   // getter
   const Lista<Ingrediente*>& getIngredienti() const;

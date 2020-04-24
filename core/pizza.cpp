@@ -9,7 +9,7 @@ Pizza::Pizza(string nome, bool disponibilita, double prezzo,
              Lista<Ingrediente*>* ingr)
     : Risorsa(nome, disponibilita),
       Articolo(nome, disponibilita, prezzo),
-      ingredienti(new Lista<Ingrediente*>(*ingr)) {}
+      ingredienti(ingr) {}
 
 // Costruttore di copia;
 // Copia profonda implementata tramite metodo copy presente nel container
@@ -20,7 +20,8 @@ Pizza::Pizza(const Pizza& p)
 
 // Distruttore;
 // Distruzione profonda implementata tramite metodo destroy presente nel
-// container Pizza::~Pizza()
+// container
+Pizza::~Pizza() { delete ingredienti; }
 
 const Lista<Ingrediente*>& Pizza::getIngredienti() const {
   if (!ingredienti) return *(new Lista<Ingrediente*>());
