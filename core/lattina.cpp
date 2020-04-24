@@ -1,11 +1,11 @@
 #include "lattina.h"
 
 Lattina::Lattina(string nome, bool disponibilita, double prezzo,
-                 unsigned int qta, double costo, QDate dataAcquisto,
-                 QDate dataScadenza, double capacitaBevanda)
+                 unsigned int qta, double costo, QDate dataScadenza,
+                 QDate dataAcquisto, double capacitaBevanda)
     : Risorsa(nome, disponibilita),
-      Bevanda(nome, disponibilita, prezzo, qta, costo, dataAcquisto,
-              dataScadenza, capacitaBevanda) {}
+      Bevanda(nome, disponibilita, prezzo, qta, costo, dataScadenza,
+              dataAcquisto, capacitaBevanda) {}
 
 Lattina* Lattina::clone() const { return new Lattina(*this); }
 

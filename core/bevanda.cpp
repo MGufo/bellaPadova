@@ -1,11 +1,11 @@
 #include "bevanda.h"
 
 Bevanda::Bevanda(string nome, bool disponibilita, double prezzo,
-                 unsigned int qta, double costo, QDate dataAcquisto,
-                 QDate dataScadenza, double capacitaBevanda)
+                 unsigned int qta, double costo, QDate dataScadenza,
+                 QDate dataAcquisto, double capacitaBevanda)
     : Risorsa(nome, disponibilita),
       Articolo(nome, disponibilita, prezzo),
-      Consumabile(nome, disponibilita, qta, costo, dataAcquisto, dataScadenza),
+      Consumabile(nome, disponibilita, qta, costo, dataScadenza, dataAcquisto),
       capacita(capacitaBevanda) {}
 
 double Bevanda::getSpesa() const { return getQuantita() * getCosto(); }
