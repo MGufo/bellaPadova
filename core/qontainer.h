@@ -248,11 +248,11 @@ class Lista {
     }
     return Iterator(nullptr, nullptr);
   }
-
+  // la & dev'essere adiacente a p!
   void push_back(const T &p) { insert(end(), p); }
 
   void pop_back() { erase(--end()); }
-
+  // la & dev'essere adiacente a p!
   void push_front(const T &p) { insert(begin(), p); }
 
   void pop_front() { erase(begin()); }
