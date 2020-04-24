@@ -2,16 +2,25 @@
 #define COMANDA_H
 
 #include <QTime>
+#include <unordered_map>
 
 #include "articolo.h"
-#include "qontainer.h"
 #include "contatto.h"
+
+using std::unordered_map;
+
 class Comanda {
  private:
-  Lista<Articolo*> articoli;
-  Lista<unsigned int> quantita;
-  Contatto cliente;
+  std::unordered_map<Articolo*, unsigned int>* articoli;
+  Contatto* cliente;
   QTime oraConsegna;
+
+ public:
+  Comanda(unordered_map<Articolo*, unsigned int>*, Contatto*, QTime);
+  Comanda(const Comanda&);
+  ~Comanda();
+  // aggiunta-rimozione articolo
+  // modifica qta articolo
 };
 
 #endif
