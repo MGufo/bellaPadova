@@ -16,4 +16,5 @@ class GestoreRisorse {
   // (menu) e consumabili (inventario), permettendo inserimento, modifica,
   // rimozione e ricerca all'interno delle liste
 };
+
 #endif

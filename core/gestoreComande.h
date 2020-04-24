@@ -1,5 +1,5 @@
-#ifndef GESTORERISORSE_H
-#define GESTORERISORSE_H
+#ifndef GESTORECOMANDE_H
+#define GESTORECOMANDE_H
 #include <container.h>
 
 #include "comanda.h"
@@ -15,7 +15,7 @@ class GestoreComande {
   // current è l'iteratore che punta alla prima comanda del sottoinsieme di
   // comande da preparare. Tutte le comande precedenti a 'current' sono state
   // già preparate.
-  Lista<Comanda*>::Iteratore current;
+  Lista<Comanda*>::Iterator current;
 
   /*
     Funzione che inserisce una nuova comanda nella coda ('bacheca') di comande.
