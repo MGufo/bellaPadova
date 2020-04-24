@@ -21,6 +21,8 @@ class Comanda {
   ~Comanda();
   // aggiunta-rimozione articolo
   // modifica qta articolo
+
+  //getter setter
 };
 
 #endif

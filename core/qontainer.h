@@ -186,7 +186,7 @@ class Lista {
     return it;
   }
 
-  Iterator insert(Iterator it, const T p) {
+  Iterator insert(Iterator it, const T &p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
     if (!it.itrCurrent && !it.itrPrevious) {
@@ -249,11 +249,11 @@ class Lista {
     return Iterator(nullptr, nullptr);
   }
 
-  void push_back(const T p) { insert(end(), p); }
+  void push_back(const T &p) { insert(end(), p); }
 
   void pop_back() { erase(--end()); }
 
-  void push_front(const T p) { insert(begin(), p); }
+  void push_front(const T &p) { insert(begin(), p); }
 
   void pop_front() { erase(begin()); }
 
