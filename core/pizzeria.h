@@ -15,7 +15,7 @@ class Pizzeria {
  public:
   Pizzeria(string, string, string);
   double contabilizzazione(QDate, QDate) const;
-  const Lista<const string&> getContatto() const;
+  const Lista<const string> getContatto() const;
 
   // funzione che inserisce un articolo in menu, l'articolo da inserire viene
   // costruito da un'altra funzione che richiama inserisciArticoloInMenu. se
