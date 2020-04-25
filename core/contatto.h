@@ -14,15 +14,14 @@ class Contatto {
  public:
   Contatto(string, string, string = "\0");
 
-  void setNome(const string&);
-  void setIndirizzo(const string&);
-  void setTelefono(const string&);
-
   const string getNome() const;
   const string getIndirizzo() const;
   const string getTelefono() const;
-
   const Lista<const string>& getContatto() const;
+
+  void setNome(const string&);
+  void setIndirizzo(const string&);
+  void setTelefono(const string&);
 };
 
 #endif
