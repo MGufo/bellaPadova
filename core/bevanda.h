@@ -10,7 +10,7 @@ class Bevanda : public Articolo, public Consumabile {
   double capacita;
 
  public:
-  Bevanda(string, bool, double, unsigned int, double, QDate, QDate, double);
+  Bevanda(string, bool, double, unsigned int, double, QDate, double);
 
   // getter
   double getSpesa() const;

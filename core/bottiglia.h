@@ -2,7 +2,7 @@
 
 class Bottiglia : public Bevanda {
  public:
-  Bottiglia(string, bool, double, unsigned int, double, QDate, QDate, double);
+  Bottiglia(string, bool, double, unsigned int, double, QDate, double);
   Bottiglia* clone() const;
   double getPrezzo() const;
 };

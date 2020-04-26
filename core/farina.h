@@ -14,7 +14,6 @@ class Farina : public Ingrediente {
 
  public:
   Farina(string = "farina 1kg", bool = true, unsigned int = 1, double = 3,
-         QDate = (QDate::currentDate()).addMonths(1),
          QDate = QDate::currentDate(), bool = true, string = "tipo 00");
 
   const string& getTipoFarina() const;
