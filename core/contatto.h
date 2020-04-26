@@ -12,7 +12,7 @@ class Contatto {
   string telefono;
 
  public:
-  Contatto(string, string, string = "\0");
+  Contatto(string, string, string);
 
   const string getNome() const;
   const string getIndirizzo() const;
