@@ -7,14 +7,14 @@
 
 class Pizza : public Articolo {
  private:
-  Lista<Ingrediente*>* ingredienti;
+  Lista<Ingrediente*> ingredienti;
   static double extra;
 
  public:
   // Costruttore non usiamo valori di default perchè vengono tutti sempre
   // passati per costruire l'oggetto
   Pizza(string nome, bool disponibilita, double prezzo,
-        Lista<Ingrediente*>* ingr);
+        Lista<Ingrediente*> ingr);
 
   // Costruttore di copia,
   Pizza(const Pizza&);
