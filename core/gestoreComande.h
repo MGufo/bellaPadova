@@ -1,8 +1,7 @@
 #ifndef GESTORECOMANDE_H
 #define GESTORECOMANDE_H
-#include "qontainer.h"
-
 #include "comanda.h"
+#include "qontainer.h"
 /*
 Il gestore delle comande viene implementato tramite il container (già definito).
 Le comande vengono inserite in coda al container e rimosse dalla testa o da un
@@ -11,7 +10,7 @@ indice.
 
 class GestoreComande {
  private:
-  Lista<Comanda*>* bacheca;
+  Lista<Comanda*> bacheca;
   // current è l'iteratore che punta alla prima comanda del sottoinsieme di
   // comande da preparare. Tutte le comande precedenti a 'current' sono state
   // già preparate.
