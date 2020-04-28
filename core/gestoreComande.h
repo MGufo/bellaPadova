@@ -31,6 +31,16 @@ class GestoreComande {
     comande già presenti e ripete il controllo.
   */
   void inserisciComanda(const Comanda*);
+
+  // modifica comanda
+
+  // rimozione comanda dalla lista
+  void rimuoviComanda(Comanda*);
+
+  // getter comanda corrente
+  const Comanda* getComandaCorrente() const;
+  // getter tutte comande
+  Lista<Comanda*> getBacheca();
 };
 
 #endif
