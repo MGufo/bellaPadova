@@ -58,7 +58,7 @@ class Lista {
     Lista::Nodo* itrPrevious;
 
    public:
-    Iterator(Lista::Nodo* cu, Lista::Nodo* pr)
+    Iterator(Lista::Nodo* cu = nullptr, Lista::Nodo* pr = nullptr)
         : itrCurrent(cu), itrPrevious(pr) {}
 
     bool operator==(const Iterator& i) const {
@@ -69,9 +69,9 @@ class Lista {
       return (itrCurrent != i.itrCurrent) || (itrPrevious != i.itrPrevious);
     }
 
-    T& operator*() { return itrCurrent->info; }
+    T& operator*() const { return itrCurrent->info; }
 
-    T* operator->() { return &(itrCurrent->info); }
+    T* operator->() const { return &(itrCurrent->info); }
 
     Iterator& operator++() {
       Nodo* temp = itrCurrent;
@@ -107,7 +107,8 @@ class Lista {
     const Lista::Nodo* itrPrevious;
 
    public:
-    const_Iterator(const Lista::Nodo* cu, const Lista::Nodo* pr)
+    const_Iterator(const Lista::Nodo* cu = nullptr,
+                   const Lista::Nodo* pr = nullptr)
         : itrCurrent(cu), itrPrevious(pr) {}
 
     bool operator==(const const_Iterator& i) const {
@@ -156,7 +157,7 @@ class Lista {
 
   const T& operator*() const { return ptr->info; }
 
-  T& operator*() { return ptr->info; }
+  T& operator*() const { return ptr->info; }
 
   bool isEmpty() const { return ptr == nullptr; }
 
@@ -165,7 +166,7 @@ class Lista {
   const_Iterator const_begin() const { return const_Iterator(ptr, nullptr); }
 
   Iterator end() const {
-    Lista<T>::Iterator it(nullptr, nullptr);
+    Lista<T>::Iterator it;
     if (!isEmpty()) {
       it = begin();
       while (it.itrCurrent != nullptr) {
@@ -176,7 +177,7 @@ class Lista {
   }
 
   const_Iterator const_end() const {
-    Lista<T>::const_Iterator it(nullptr, nullptr);
+    Lista<T>::const_Iterator it;
     if (!isEmpty()) {
       it = const_begin();
       while (it.itrCurrent != nullptr) {
@@ -186,7 +187,7 @@ class Lista {
     return it;
   }
 
-  Iterator insert(Iterator it, const T &p) {
+  Iterator insert(Iterator it, const T& p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
     if (!it.itrCurrent && !it.itrPrevious) {
@@ -246,7 +247,7 @@ class Lista {
         return ritorno;
       }
     }
-    return Iterator(nullptr, nullptr);
+    return Iterator();
   }
   // la & dev'essere adiacente a p!
   void push_back(const T &p) { insert(end(), p); }
