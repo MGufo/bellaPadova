@@ -5,13 +5,14 @@
 */
 Comanda::Comanda(unordered_map<Articolo*, unsigned int> _ordinazione,
                  Contatto _cliente, QTime _oraConsegna)
-    : ordinazione(_ordinazione), cliente(_cliente), oraConsegna(_oraConsegna){};
+    : ordinazione(_ordinazione), cliente(_cliente), oraConsegna(_oraConsegna){}
 
 Comanda::Comanda(const Comanda& c)
     : ordinazione(c.ordinazione),
       cliente(c.cliente),
-      oraConsegna(c.oraConsegna){};
+      oraConsegna(c.oraConsegna){}
 
+// Per accedere agli elementi mappati si deve usare l'operatore 'at'
 const unordered_map<Articolo*, unsigned int>& Comanda::getOrdinazione() const {
   return ordinazione;
 }
@@ -45,20 +46,6 @@ void Comanda::rimuoviArticolo(Articolo* _daSostituire) {
   ordinazione.erase(_daSostituire);
 }
 
-// controlli su esistenza farina e TD dell'articolo fatti ad alto livello dal
-// chiamante
-void Comanda::modificaFarina(Pizza* _daModificare, Farina* _farina) {
-  _daModificare->setFarina(_farina);
-}
-
-void aggiungiIngrediente(Pizza* _daModificare, Ingrediente* _ingrediente) {
-  _daModificare->addIngrediente(_ingrediente);
-}
-
-void rimuoviIngrediente(Pizza* _daModificare, Ingrediente* _ingrediente) {
-  _daModificare->removeIngrediente(_ingrediente);
-}
-
 void Comanda::modificaContatto(string _nome, string _indirizzo, string _tel) {
   if (_nome != "") cliente.setNome(_nome);
   if (_indirizzo != "") cliente.setIndirizzo(_indirizzo);
@@ -67,4 +54,8 @@ void Comanda::modificaContatto(string _nome, string _indirizzo, string _tel) {
 
 void Comanda::modificaQuantita(Articolo* _daModificare, int _qta) {
   sostituisciArticolo(_daModificare, _qta, nullptr, 0);
+}
+
+void Comanda::setQuantita(Articolo* _daModificare, int _qta) {
+  ordinazione[_daModificare] = _qta;
 }

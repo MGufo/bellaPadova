@@ -19,7 +19,7 @@ class Comanda {
 
  public:
   Comanda(unordered_map<Articolo*, unsigned int>, Contatto, QTime);
-  Comanda(const Comanda&);  
+  Comanda(const Comanda&);
 
   const unordered_map<Articolo*, unsigned int>& getOrdinazione() const;
 
@@ -49,25 +49,14 @@ class Comanda {
   // qta) caso particolare di .2
   void rimuoviArticolo(Articolo*);
 
-  // .5 modificare la farina della pizza
-  // (param: articoloDaModificare, Farina* da modificare)
-  void modificaFarina(Pizza*, Farina*);
-
-  // .6 inserire un nuovo ingrediente nella pizza
-  // (param: articoloDaModificare, Ingrediente* da inserire)
-  // (se già presente non succede nulla e notifica l'utente)
-  void aggiungiIngrediente(Pizza*, Ingrediente*);
-
-  // .7 rimuovere un nuovo ingrediente nella pizza
-  // (param: articoloDaModificare, Ingrediente* da rimuovere)
-  // (se non presente non succede nulla e notifica l'utente)
-  void rimuoviIngrediente(Pizza*, Ingrediente*);
-
   // .8 modifica contatto
   void modificaContatto(string = "", string = "", string = "");
 
   // .10 modifica qta articolo presente in comanda
   void modificaQuantita(Articolo*, int);
+
+  // .11 set qta articolo presente in comanda
+  void setQuantita(Articolo*, int);
 };
 
 #endif
