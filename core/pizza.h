@@ -6,21 +6,21 @@
 #include "qontainer.h"
 
 class Pizza : public Articolo {
- private:
+private:
   Lista<Ingrediente*> ingredienti;
   static double extra;
 
- public:
+public:
   // Costruttore non usiamo valori di default perchè vengono tutti sempre
   // passati per costruire l'oggetto
   Pizza(string nome, bool disponibilita, double prezzo,
-        Lista<Ingrediente*> ingr);
+        Lista<Ingrediente*>& ingr);
 
   // Costruttore di copia,
   Pizza(const Pizza&);
 
   // Distruttore
-  ~Pizza();
+  // ~Pizza();
 
   // getter
   const Lista<Ingrediente*>& getIngredienti() const;

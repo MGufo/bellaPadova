@@ -6,7 +6,7 @@ double Pizza::extra = 0.50;
 // Costruttore di default, costruisce una pizza la cui lista di ingredienti
 // contiene un solo ingrediente (la farina)
 Pizza::Pizza(string nome, bool disponibilita, double prezzo,
-             Lista<Ingrediente*> ingr)
+             Lista<Ingrediente*>& ingr)
     : Risorsa(nome, disponibilita),
       Articolo(nome, disponibilita, prezzo),
       ingredienti(ingr) {}
