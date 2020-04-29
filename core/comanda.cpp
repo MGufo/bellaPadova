@@ -30,7 +30,10 @@ int Comanda::getTempoPreparazione() const {
   return somma;
 }
 // TODO
-QTime& Comanda::getOrarioInizioPreparazione() const {}
+QTime& Comanda::getOrarioInizioPreparazione() const {
+  QTime orario(getOraConsegna().addSecs(-getTempoPreparazione()));
+  return orario;
+}
 const Contatto& Comanda::getCliente() const { return cliente; }
 
 const QTime& Comanda::getOraConsegna() const { return oraConsegna; }
