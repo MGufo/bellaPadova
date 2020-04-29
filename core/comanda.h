@@ -26,6 +26,8 @@ class Comanda {
 
   int getTempoPreparazione() const;
 
+  QTime& getOrarioInizioPreparazione() const;
+
   const Contatto& getCliente() const;
 
   const QTime& getOraConsegna() const;

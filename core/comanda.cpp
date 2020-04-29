@@ -29,6 +29,8 @@ int Comanda::getTempoPreparazione() const {
   if (infornataNonPiena != 0) somma += 5;
   return somma;
 }
+// TODO
+QTime& Comanda::getOrarioInizioPreparazione() const {}
 const Contatto& Comanda::getCliente() const { return cliente; }
 
 const QTime& Comanda::getOraConsegna() const { return oraConsegna; }
