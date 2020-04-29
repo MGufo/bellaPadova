@@ -57,6 +57,20 @@ class Comanda {
 
   // .11 set qta articolo presente in comanda
   void setQuantita(Articolo*, int);
+
+  bool operator<(const Comanda&) const;
+
+  bool operator<=(const Comanda&) const;
+
+  bool operator>(const Comanda&) const;
+
+  bool operator>=(const Comanda&) const;
+
+  bool operator<(const Comanda&) const;
+
+  bool operator==(const Comanda&) const;
+
+  bool operator!=(const Comanda&) const;
 };
 
 #endif

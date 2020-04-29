@@ -5,12 +5,12 @@
 */
 Comanda::Comanda(unordered_map<Articolo*, unsigned int> _ordinazione,
                  Contatto _cliente, QTime _oraConsegna)
-    : ordinazione(_ordinazione), cliente(_cliente), oraConsegna(_oraConsegna){}
+    : ordinazione(_ordinazione), cliente(_cliente), oraConsegna(_oraConsegna) {}
 
 Comanda::Comanda(const Comanda& c)
     : ordinazione(c.ordinazione),
       cliente(c.cliente),
-      oraConsegna(c.oraConsegna){}
+      oraConsegna(c.oraConsegna) {}
 
 // Per accedere agli elementi mappati si deve usare l'operatore 'at'
 const unordered_map<Articolo*, unsigned int>& Comanda::getOrdinazione() const {
@@ -58,4 +58,28 @@ void Comanda::modificaQuantita(Articolo* _daModificare, int _qta) {
 
 void Comanda::setQuantita(Articolo* _daModificare, int _qta) {
   ordinazione[_daModificare] = _qta;
+}
+
+bool Comanda::operator<(const Comanda& c) const {
+  return getOraConsegna() < c.getOraConsegna();
+}
+
+bool Comanda::operator<=(const Comanda& c) const {
+  return getOraConsegna() <= c.getOraConsegna();
+}
+
+bool Comanda::operator>(const Comanda& c) const {
+  return getOraConsegna() > c.getOraConsegna();
+}
+
+bool Comanda::operator>=(const Comanda& c) const {
+  return getOraConsegna() >= c.getOraConsegna();
+}
+
+bool Comanda::operator==(const Comanda& c) const {
+  return getOraConsegna() == c.getOraConsegna();
+}
+
+bool Comanda::operator!=(const Comanda& c) const {
+  return getOraConsegna() != c.getOraConsegna();
 }
