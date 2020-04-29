@@ -1,5 +1,6 @@
 #include "comanda.h"
 
+unsigned short Comanda::capacitaForno = 5;
 /* Gli oggetti passati come parametri al costruttore vengono costruiti ad alto
   livello; per questo motivo non vengono costruiti di copia nel costruttore.
 */
@@ -16,7 +17,18 @@ Comanda::Comanda(const Comanda& c)
 const unordered_map<Articolo*, unsigned int>& Comanda::getOrdinazione() const {
   return ordinazione;
 }
-
+int Comanda::getTempoPreparazione() const {
+  unsigned short nPizze = 0;
+  int somma = 5;
+  for (auto it = ordinazione.begin(); it != ordinazione.end(); ++it)
+    if (dynamic_cast<Pizza*>((*it).first)) ++nPizze;
+  if (nPizze <= capacitaForno) return somma;
+  int infornataNonPiena = nPizze % 5;
+  int infornatePiene = nPizze / 5;
+  somma = 5 * infornatePiene;
+  if (infornataNonPiena != 0) somma += 5;
+  return somma;
+}
 const Contatto& Comanda::getCliente() const { return cliente; }
 
 const QTime& Comanda::getOraConsegna() const { return oraConsegna; }

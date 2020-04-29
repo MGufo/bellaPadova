@@ -16,12 +16,15 @@ class Comanda {
   unordered_map<Articolo*, unsigned int> ordinazione;
   Contatto cliente;
   QTime oraConsegna;
+  static unsigned short capacitaForno;
 
  public:
   Comanda(unordered_map<Articolo*, unsigned int>, Contatto, QTime);
   Comanda(const Comanda&);
 
   const unordered_map<Articolo*, unsigned int>& getOrdinazione() const;
+
+  int getTempoPreparazione() const;
 
   const Contatto& getCliente() const;
 
