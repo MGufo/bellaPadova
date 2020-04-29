@@ -1,5 +1,7 @@
 #include "gestoreComande.h"
 
+void GestoreComande::inserisciComanda(const Comanda* daInserire) {}
+
 void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
   Lista<Comanda*>::Iterator it;
   for (it = bacheca.begin(); it != bacheca.end() && (*it) != daRimuovere;
