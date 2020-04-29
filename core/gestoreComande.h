@@ -3,12 +3,6 @@
 #include "comanda.h"
 #include "qontainer.h"
 
-/*
-Il gestore delle comande viene implementato tramite il container (già definito).
-Le comande vengono inserite in coda al container e rimosse dalla testa o da un
-indice.
-*/
-
 class GestoreComande {
  private:
   Lista<Comanda*> bacheca;
@@ -18,6 +12,10 @@ class GestoreComande {
    */
   Lista<Comanda*>::Iterator current;
 
+  bool testInsert(const Comanda*, const Comanda*, const Comanda*);
+
+ public:
+  GestoreComande(Lista<Comanda*>, Lista<Comanda*>::Iterator);
   /**
    * @brief: Inserisce una nuova comanda nella lista di comande mantenendo
    l'ordine temporale delle comande da eseguire.
@@ -34,18 +32,19 @@ class GestoreComande {
     inserita tra le due comande, altrimenti passa alla successiva coppia di
     comande già presenti e ripete il controllo.
   */
-  void inserisciComanda(const Comanda*);
+  void inserisciComanda(Comanda*);
 
-  // modifica comanda
-
+  void modificaComanda();
   /**
-   * @brief: Rimuove dalla lista di comande la comanda passata come parametro
-   * @param: untatore alla comanda da rimuovere
+   * @brief: Rimuove dalla lista di comande la comanda passata come parametro.
+   * Se la comanda passata precede *current la rimozione non è permessa.
+   * @param: puntatore alla comanda da rimuovere
    */
   void rimuoviComanda(Comanda*);
 
   /**
-   * @brief: Ritorna un puntatore alla comanda puntata dall'iteratore 'current'
+   * @brief: Ritorna un puntatore alla comanda puntata da 'current' se la lista
+   * ha almeno 1 comanda, nullptr altrimenti.
    */
   const Comanda* getComandaCorrente() const;
 
