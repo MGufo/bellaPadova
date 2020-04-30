@@ -2,12 +2,12 @@
 #define FARINA_H
 #include "ingrediente.h"
 
-// un'istanza di questa classe rappresenta l'ingrediente farina, il quale viene
-// usato per creare una pizza base e l'abbiamo implementato come classe in modo
-// tale che sia più estensibile e gestibile nel tempo (è possibile inserire
-// farine nuove nell'inventario e usarle per creare nuove pizze e modificarne di
-// esistenti senza modificare il modello logico)
-
+/**
+ * @brief: Classe che rappresenta l'ingrediente 'farina', usato come ingrediente
+ * base di ogni pizza.
+ * @note: Modellare la farina come classe permette maggiore estensibilità
+ * (aggiunta/rimozione di farine) rispetto ad un enumerazione.
+ */
 class Farina : public Ingrediente {
  private:
   string tipoFarina;
@@ -16,8 +16,18 @@ class Farina : public Ingrediente {
   Farina(string = "farina 1kg", bool = true, unsigned int = 1, double = 3,
          QDate = QDate::currentDate(), bool = true, string = "tipo 00");
 
+  /**
+   * @brief: Ritorna il tipo di una farina (00, integrale, ecc)
+   * @return: string& (tipo di farina)
+   */
   const string& getTipoFarina() const;
+
+  /**
+   * @brief: Modifica il tipo farina ad una farina esistente
+   * @param: string& (nuovo tipo farina)
+   */
   void setTipoFarina(const string&);
+
   Farina* clone() const;
 };
 

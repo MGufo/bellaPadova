@@ -14,18 +14,42 @@ class Consumabile : virtual public Risorsa {
  public:
   Consumabile(string, bool, unsigned int, double, QDate);
 
-  // Getter
+  /**
+   * @brief: Ritorna la quantità acquistata di un consumabile.
+   * @return: unsigned int (quantità acquistata)
+   */
   unsigned int getQuantita() const;
+
+  /**
+   * @brief: Ritorna il costo d'acquisto per un'unità di un consumabile.
+   * @return: double (costo d'acquisto)
+   */
   double getCosto() const;
+
+  /**
+   * @brief: Ritorna la data in cui è stato acquistato un consumabile.
+   * @return: QDate& (data d'acquisto)
+   */
   const QDate& getDataAcquisto() const;
 
-  // Setter
+  /**
+   * @brief: Modifica la quantità acquistata di un consumabile.
+   * @param: unsigned int (quantità acquistata)
+   */
   void setQuantita(const unsigned int);
+
+  /**
+   * @brief: Modifica il costo d'acquisto di un consumabile.
+   * @param: double (costo d'acquisto)
+   */
   void setCosto(const double);
+
+  /**
+   * @brief: Modifica la data in cui è stato acquistato un consumabile.
+   * @param: QDate& (data d'acquisto)
+   */
   void setDataAcquisto(const QDate&);
 
-  // Metodi Propri
-  // Beneficenza sul cibo locale
   virtual double getSpesa() const = 0;
 };
 

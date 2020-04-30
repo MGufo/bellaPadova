@@ -4,5 +4,10 @@ class Bottiglia : public Bevanda {
  public:
   Bottiglia(string, bool, double, unsigned int, double, QDate, double);
   Bottiglia* clone() const;
+
+  /**
+   * @brief: Ritorna il costo dell'articolo comprensivo di eventuali extra.
+   * @return: double (costo)
+   */
   double getPrezzo() const;
 };
