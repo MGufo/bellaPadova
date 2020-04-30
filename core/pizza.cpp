@@ -22,7 +22,7 @@ Pizza::Pizza(const Pizza& p)
 // Pizza::~Pizza() { delete ingredienti; }
 
 const Lista<Ingrediente*>& Pizza::getIngredienti() const {
-  if (ingredienti.isEmpty()) return *(new Lista<Ingrediente*>());
+  if (ingredienti.isEmpty()) return Lista<Ingrediente*>();
   return ingredienti;
 }
 
