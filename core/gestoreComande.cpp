@@ -18,23 +18,33 @@ Algoritmo posizione di inserimento:
 bool GestoreComande::testInsert(const Comanda* precedente,
                                 const Comanda* successiva,
                                 const Comanda* daInserire) {
-  // non ci sono comande da fare
-  if (!precedente) return true;
+  if (!precedente && successiva) {
+    if (QTime::currentTime() <= daInserire->getOrarioInizioPreparazione() &&
+        daInserire->getOraConsegna <= successiva->getOrarioInizioPreparazione())
+      return true;
+    return false;
+  }
+  // non ci sono comande da fare oppure si è arrivati all'ultima comanda
+  if (!precedente || !successiva) return true;
+  // se la comanda da inserire "fitta" tra la precedente e la successiva
+  if (precedente->getOraConsegna() <=
+          daInserire->getOrarioInizioPreparazione() &&
+      daInserire->getOraConsegna <= successiva->getOrarioInizioPreparazione())
+    return true;
+  else
+    return false;
 }
 
 void GestoreComande::inserisciComanda(Comanda* daInserire) {
-  // caso D
   if (bacheca.isEmpty()) {
     bacheca.push_back(daInserire);
     current = bacheca.begin();
-  } else if {
-    
+  } else if (true) {
   } else {
     auto it = current;
     while (!testInsert(*it, *(++it), daInserire)) {
     }
     bacheca.insert(it, daInserire);
-    // lista non vuota, current a past-the-end
     if (current == bacheca.end()) {
       bacheca.push_back(daInserire);
       current = --(bacheca.end());
@@ -48,7 +58,7 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
        ++it) {
   }
   if (it != bacheca.end()) {
-    if (*it <= *current) {
+    if (*it >= *current) {
       if (it == current) ++current;
       bacheca.erase(it);
     }
@@ -58,3 +68,5 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
 const Comanda* GestoreComande::getComandaCorrente() const { return *current; }
 
 Lista<Comanda*> GestoreComande::getBacheca() { return bacheca; }
+
+void GestoreComande::eseguiComanda() { ++current; }
