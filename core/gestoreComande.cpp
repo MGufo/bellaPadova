@@ -15,8 +15,8 @@ Algoritmo posizione di inserimento:
     inserita tra le due comande, altrimenti passa alla successiva coppia di
     comande già presenti e ripete il controllo.
 */
-bool GestoreComande::testInsert(const Comanda* precedente,
-                                const Comanda* successiva,
+bool GestoreComande::testInsert(const Comanda* precedente,  //--curr
+                                const Comanda* successiva,  // curr
                                 const Comanda* daInserire) {
   if (!precedente && successiva) {
     if (QTime::currentTime() <= daInserire->getOrarioInizioPreparazione() &&
@@ -36,31 +36,39 @@ bool GestoreComande::testInsert(const Comanda* precedente,
 }
 
 void GestoreComande::inserisciComanda(Comanda* daInserire) {
-  if (bacheca.isEmpty()) {
-    bacheca.push_back(daInserire);
-    current = bacheca.begin();
-  } else if (true) {
-  } else {
-    auto it = current;
-    while (!testInsert(*it, *(++it), daInserire)) {
-    }
-    bacheca.insert(it, daInserire);
-    if (current == bacheca.end()) {
+  if (daInserire) {
+    if (bacheca.isEmpty()) {
       bacheca.push_back(daInserire);
-      current = --(bacheca.end());
+      current = bacheca.begin();
+    } else if (true) {
+    } else {
+      // esiste almeno 1 comanda
+      if (*current) {
+        auto it = current;
+        --it;
+        while (!testInsert(*it, *(++it), daInserire)) {
+        }
+        bacheca.insert(it, daInserire);
+        if (it == current) --current;
+      } else {
+        bacheca.push_back(daInserire);
+        current = --(bacheca.end());
+      }
     }
   }
 }
 
 void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
-  Lista<Comanda*>::Iterator it;
-  for (it = bacheca.begin(); it != bacheca.end() && (*it) != daRimuovere;
-       ++it) {
-  }
-  if (it != bacheca.end()) {
-    if (*it >= *current) {
-      if (it == current) ++current;
-      bacheca.erase(it);
+  if (daRimuovere) {
+    Lista<Comanda*>::Iterator it;
+    for (it = bacheca.begin(); it != bacheca.end() && (*it) != daRimuovere;
+         ++it) {
+    }
+    if (it != bacheca.end()) {
+      if (*it >= *current) {
+        if (it == current) ++current;
+        bacheca.erase(it);
+      }
     }
   }
 }
