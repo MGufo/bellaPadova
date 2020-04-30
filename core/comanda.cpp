@@ -13,21 +13,21 @@ Comanda::Comanda(const Comanda& c)
       cliente(c.cliente),
       oraConsegna(c.oraConsegna) {}
 
-// Per accedere agli elementi mappati si deve usare l'operatore 'at'
 const unordered_map<Articolo*, unsigned int>& Comanda::getOrdinazione() const {
   return ordinazione;
 }
 int Comanda::getTempoPreparazione() const {
   unsigned short nPizze = 0;
-  int somma = 5;
+  int tempoPreparazione = 5;
   for (auto it = ordinazione.begin(); it != ordinazione.end(); ++it)
     if (dynamic_cast<Pizza*>((*it).first)) ++nPizze;
-  if (nPizze <= capacitaForno) return somma;
-  int infornataNonPiena = nPizze % 5;
-  int infornatePiene = nPizze / 5;
-  somma = 5 * infornatePiene;
-  if (infornataNonPiena != 0) somma += 5;
-  return somma;
+  if (nPizze <= capacitaForno)
+    return tempoPreparazione;
+  else {
+    tempoPreparazione = 5 * (nPizze / 5);
+    if ((nPizze % 5) != 0) tempoPreparazione += 5;
+    return tempoPreparazione;
+  }
 }
 // TODO
 QTime& Comanda::getOrarioInizioPreparazione() const {
@@ -47,6 +47,7 @@ void Comanda::sostituisciArticolo(Articolo* daSostituire, int qtaDS,
       if (ordinazione[daSostituire] <= qtaDS * (-1))
         ordinazione.erase(daSostituire);
       else
+        // TODO: Check logic
         ordinazione[daSostituire] += qtaDS;
     } else
       ordinazione[daSostituire] += qtaDS;
