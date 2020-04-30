@@ -22,45 +22,86 @@ class Comanda {
   Comanda(unordered_map<Articolo*, unsigned int>, Contatto, QTime);
   Comanda(const Comanda&);
 
+  /**
+   * @brief: Ritorna l'orario di consegna di una comanda
+   * @return: unordered_map& (coppie (Articolo, quantità) )
+   * @note: Elementi accessibili tramite operatore at()
+   */
   const unordered_map<Articolo*, unsigned int>& getOrdinazione() const;
 
+  /**
+   * @brief: Ritorna il tempo di preparazione di una comanda
+   * @return: int (minuti per la preparazione)
+   */
   int getTempoPreparazione() const;
 
+  /**
+   * @brief: Ritorna l'orario stimato in cui la pizzeria deve inizare la
+   * preparazione della comanda.
+   * @return: QTime& (orario inizio preparazione)
+   */
   QTime& getOrarioInizioPreparazione() const;
 
+  /**
+   * @brief: Ritorna il cliente associato a una comanda
+   * @return: Contatto& (Cliente)
+   */
   const Contatto& getCliente() const;
 
+  /**
+   * @brief: Ritorna l'orario di consegna di una comanda
+   * @return: QTime& (orario di consegna)
+   */
   const QTime& getOraConsegna() const;
 
-  // .9 modifica ora consegna
+  /**
+   * @brief: Modifica l'orario di consegna di una comanda
+   * @param: QTime (Nuovo orario di consegna)
+   */
   void setOraConsegna(QTime);
 
-  // .1 aggiungere un nuovo articolo non presente in comanda (se già
-  // presente, incrementa la qta) (param: articoloDaInserire, qta) caso
-  // particolare di .2
+  /**
+   * @brief: Aggiunge un articolo alla comanda o aumenta la sua quantità
+   * @param: Articolo* (Articolo da aggiungere/modificare)
+   * @param: int (Quantità articolo da aggiungere/modificare)
+   */
   void inserisciArticolo(Articolo*, unsigned int);
 
-  // .2 sostituire un articolo presente in comanda con un altro
-  // articolo non presente (param: articoloDaSostituire,
-  // qtaArticoloDaSostituire, articoloDaInserire, qtaArticoloDaInserire)
+  /**
+   * @brief: Sostituisce un articolo nella comanda con un articolo non presente
+   * @param: Articolo* (Articolo da rimuovere)
+   * @param: int (Quantità articolo da rimuovere)
+   * @param: Articolo* (Articolo da inserire)
+   * @param: int (Quantità articolo da inserire)
+   */
   void sostituisciArticolo(Articolo*, int, Articolo*, unsigned int);
 
-  // .3 sostituire un articolo presente in comanda con un altro
-  // articolo non presente (param: articoloDaSostituire,
-  // articoloDaInserire, qtaArticoloDaInserire)
-  // caso particolare di .2
-
-  // .4 rimuovere un articolo presente in comanda (param: articoloDaRimuovere,
-  // qta) caso particolare di .2
+  /**
+   * @brief: Rimuove un articolo presente nella comanda
+   * @param: Articolo* (Articolo da rimuovere)
+   */
   void rimuoviArticolo(Articolo*);
 
-  // .8 modifica contatto
+  /**
+   * @brief: Modifica dati di un cliente associato a una comanda
+   * @param: string (nuovo nome)
+   * @param: string (nuovo indirizzo)
+   * @param: string (nuovo telefono)
+   */
   void modificaContatto(string = "", string = "", string = "");
 
-  // .10 modifica qta articolo presente in comanda
+  /**
+   * @brief: Aggiorna quantità di un articolo presente in comanda
+   * @param: Articolo* (Articolo da modificare)
+   * @param: int (incremento/decremento quantità attuale)
+   */
   void modificaQuantita(Articolo*, int);
 
-  // .11 set qta articolo presente in comanda
+  /**
+   * @brief: Aggiorna quantità di un articolo presente in comanda
+   * @param: Articolo* (Articolo da modificare)
+   * @param: int (nuova quantità)
+   */
   void setQuantita(Articolo*, int);
 
   bool operator<(const Comanda&) const;
