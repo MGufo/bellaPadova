@@ -15,24 +15,38 @@ Algoritmo posizione di inserimento:
     inserita tra le due comande, altrimenti passa alla successiva coppia di
     comande già presenti e ripete il controllo.
 */
-bool GestoreComande::testInsert(const Comanda* precedente,  //--curr
-                                const Comanda* successiva,  // curr
+bool GestoreComande::testInsert(const Comanda* precedente,  //--current
+                                const Comanda* successiva,  // current
                                 const Comanda* daInserire) {
-  if (!precedente && successiva) {
+  // Non ci sono comande prima di current
+  /* if (!precedente && successiva) {
+    if (QTime::currentTime() <= daInserire->getOrarioInizioPreparazione() &&
+        daInserire->getOraConsegna <= successiva->getOrarioInizioPreparazione())
+      return true;
+    return false;
+  } */
+  // non ci sono comande da fare oppure si è arrivati all'ultima comanda
+  if (!successiva) return true;  //! precedente ||
+  // se la comanda da inserire "fitta" tra la precedente e la successiva
+  if (successiva != *current) {
+    if (precedente->getOraConsegna() <=
+            daInserire->getOrarioInizioPreparazione() &&
+        daInserire->getOraConsegna <= successiva->getOrarioInizioPreparazione())
+      return true;
+    else
+      return false;
+  }
+  // precedente = ? && successiva = current
+  else {
     if (QTime::currentTime() <= daInserire->getOrarioInizioPreparazione() &&
         daInserire->getOraConsegna <= successiva->getOrarioInizioPreparazione())
       return true;
     return false;
   }
-  // non ci sono comande da fare oppure si è arrivati all'ultima comanda
-  if (!precedente || !successiva) return true;
-  // se la comanda da inserire "fitta" tra la precedente e la successiva
-  if (precedente->getOraConsegna() <=
-          daInserire->getOrarioInizioPreparazione() &&
-      daInserire->getOraConsegna <= successiva->getOrarioInizioPreparazione())
-    return true;
-  else
-    return false;
+}
+
+bool GestoreComande::testCurrent(const Lista<Comanda*>::Iterator it) const {
+  return current == it;
 }
 
 void GestoreComande::inserisciComanda(Comanda* daInserire) {
@@ -40,14 +54,19 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
     if (bacheca.isEmpty()) {
       bacheca.push_back(daInserire);
       current = bacheca.begin();
-    } else if (true) {
     } else {
       // esiste almeno 1 comanda
       if (*current) {
         auto it = current;
         --it;
+        // 1° chiamata fatta con --current e current
         while (!testInsert(*it, *(++it), daInserire)) {
         }
+        auto it2 = it;
+        --it2;
+        if (testCurrent(it2) &&
+            daInserire->getOraConsegna() < (*it2)->getOraConsegna())
+          daInserire->setOraConsegna((*it2)->getOraConsegna());
         bacheca.insert(it, daInserire);
         if (it == current) --current;
       } else {
