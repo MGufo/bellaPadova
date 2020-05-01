@@ -4,14 +4,15 @@ unsigned short Comanda::capacitaForno = 5;
 /* Gli oggetti passati come parametri al costruttore vengono costruiti ad alto
   livello; per questo motivo non vengono costruiti di copia nel costruttore.
 */
-Comanda::Comanda(unordered_map<Articolo*, unsigned int> _ordinazione,
-                 Contatto _cliente, QTime _oraConsegna)
-    : ordinazione(_ordinazione), cliente(_cliente), oraConsegna(_oraConsegna) {}
+Comanda::Comanda(Contatto _cliente, QTime _oraConsegna,
+                 unordered_map<Articolo*, unsigned int> _ordinazione)
+  : cliente(_cliente), oraConsegna(_oraConsegna), ordinazione(_ordinazione) {}
 
-Comanda::Comanda(const Comanda& c)
-    : ordinazione(c.ordinazione),
-      cliente(c.cliente),
-      oraConsegna(c.oraConsegna) {}
+//Comanda::Comanda(const Comanda& c)
+//  :
+//    cliente(c.cliente),
+//    oraConsegna(c.oraConsegna),
+//    ordinazione(c.ordinazione) {}
 
 const unordered_map<Articolo*, unsigned int>& Comanda::getOrdinazione() const {
   return ordinazione;
@@ -20,19 +21,19 @@ int Comanda::getTempoPreparazione() const {
   unsigned short nPizze = 0;
   int tempoPreparazione = 5;
   for (auto it = ordinazione.begin(); it != ordinazione.end(); ++it)
-    if (dynamic_cast<Pizza*>((*it).first)) ++nPizze;
+    if (dynamic_cast<Pizza*>((*it).first)) nPizze += (*it).second;
   if (nPizze <= capacitaForno)
     return tempoPreparazione;
   else {
-    tempoPreparazione = 5 * (nPizze / 5);
+    tempoPreparazione = 5 * (nPizze / capacitaForno);
     if ((nPizze % 5) != 0) tempoPreparazione += 5;
     return tempoPreparazione;
   }
 }
 // TODO
 QTime& Comanda::getOrarioInizioPreparazione() const {
-  QTime orario(getOraConsegna().addSecs(-getTempoPreparazione()));
-  return orario;
+  QTime* orario = new QTime(getOraConsegna().addSecs(-getTempoPreparazione()));
+  return *orario;
 }
 const Contatto& Comanda::getCliente() const { return cliente; }
 
@@ -77,6 +78,8 @@ void Comanda::modificaQuantita(Articolo* _daModificare, int _qta) {
 void Comanda::setQuantita(Articolo* _daModificare, int _qta) {
   ordinazione[_daModificare] = _qta;
 }
+
+void setCapacitaForno(unsigned short) {}
 
 bool Comanda::operator<(const Comanda& c) const {
   return getOraConsegna() < c.getOraConsegna();
