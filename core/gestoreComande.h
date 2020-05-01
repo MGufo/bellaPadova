@@ -12,10 +12,24 @@ class GestoreComande {
    */
   Lista<Comanda*>::Iterator current;
 
+  /**
+   * @brief: Controlla se sia temporalmente possibile inserire una comanda tra
+   * due comande.
+   * @param: Comanda* (Comanda all'inizio dello slot temporale)
+   * @param: Comanda* (Comanda alla fine dello slot temporale)
+   * @param: Comanda* (Comanda che si vuole inserire nello slot temporale)
+   */
   bool testInsert(const Comanda*, const Comanda*, const Comanda*);
 
+  /**
+   * @brief: Controlla se current e il parametro puntano alla stessa comanda.
+   * @param: iteratore a una comanda presente in bacheca.
+   */
+  bool testCurrent(const Lista<Comanda*>::Iterator) const;
+
  public:
-  GestoreComande(Lista<Comanda*>, Lista<Comanda*>::Iterator);
+  GestoreComande();
+
   /**
    * @brief: Inserisce una nuova comanda nella lista di comande mantenendo
    l'ordine temporale delle comande da eseguire.
@@ -35,6 +49,12 @@ class GestoreComande {
   void inserisciComanda(Comanda*);
 
   void modificaComanda();
+
+  /**
+   * @brief: "Esegue" la comanda puntata da current. Incrementa current.
+   */
+  void eseguiComanda();
+
   /**
    * @brief: Rimuove dalla lista di comande la comanda passata come parametro.
    * Se la comanda passata precede *current la rimozione non è permessa.
