@@ -7,9 +7,9 @@ template <class T>
 class Lista {
   friend class Iterator;
 
- private:
+private:
   class Nodo {
-   public:
+  public:
     // campo dati
     T info;
     // puntatore al nodo successivo
@@ -41,7 +41,7 @@ class Lista {
     }
   }
 
- public:
+public:
   Lista() : ptr(nullptr) {}
 
   Lista(const Lista& l) : ptr(copy(l.ptr)) {}
@@ -51,15 +51,15 @@ class Lista {
   class Iterator {
     friend class Lista;
 
-   private:
+  private:
     // puntatore al nodo interesssato
     Lista::Nodo* itrCurrent;
     // puntatore al nodo precedente
     Lista::Nodo* itrPrevious;
 
-   public:
+  public:
     Iterator(Lista::Nodo* cu = nullptr, Lista::Nodo* pr = nullptr)
-        : itrCurrent(cu), itrPrevious(pr) {}
+      : itrCurrent(cu), itrPrevious(pr) {}
 
     bool operator==(const Iterator& i) const {
       return (itrCurrent == i.itrCurrent) && (itrPrevious == i.itrPrevious);
@@ -100,16 +100,16 @@ class Lista {
   class const_Iterator {
     friend class Lista;
 
-   private:
+  private:
     // puntatore al nodo interesssato
     const Lista::Nodo* itrCurrent;
     // puntatore al nodo precedente
     const Lista::Nodo* itrPrevious;
 
-   public:
+  public:
     const_Iterator(const Lista::Nodo* cu = nullptr,
                    const Lista::Nodo* pr = nullptr)
-        : itrCurrent(cu), itrPrevious(pr) {}
+      : itrCurrent(cu), itrPrevious(pr) {}
 
     bool operator==(const const_Iterator& i) const {
       return (itrCurrent == i.itrCurrent) && (itrPrevious == i.itrPrevious);
@@ -155,9 +155,9 @@ class Lista {
     return *this;
   }
 
-  const T& operator*() const { return ptr->info; }
+  //const T& operator*() const { return ptr->info; }
 
-  T& operator*() const { return ptr->info; }
+  //T& operator*() const { return ptr->info; }
 
   bool isEmpty() const { return ptr == nullptr; }
 
@@ -186,8 +186,8 @@ class Lista {
     }
     return it;
   }
-
-  Iterator insert(Iterator it, const T& p) {
+  // la & dev'essere adiacente a p!
+  Iterator insert(Iterator it, const T &p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
     if (!it.itrCurrent && !it.itrPrevious) {
