@@ -13,14 +13,16 @@ using std::unordered_map;
 
 class Comanda {
  private:
-  unordered_map<Articolo*, unsigned int> ordinazione;
   Contatto cliente;
   QTime oraConsegna;
+  unordered_map<Articolo*, unsigned int> ordinazione;
   static unsigned short capacitaForno;
 
  public:
-  Comanda(unordered_map<Articolo*, unsigned int>, Contatto, QTime);
-  Comanda(const Comanda&);
+  Comanda(Contatto, QTime,
+          unordered_map<Articolo*, unsigned int> =
+              unordered_map<Articolo*, unsigned int>());
+//  Comanda(const Comanda&);
 
   /**
    * @brief: Ritorna l'orario di consegna di una comanda
@@ -59,6 +61,12 @@ class Comanda {
    * @param: QTime (Nuovo orario di consegna)
    */
   void setOraConsegna(QTime);
+
+  /**
+   * @brief: Modifica la capacità del forno
+   * @param: unsigned int (capacità)
+   */
+  void setCapacitaForno(unsigned short);
 
   /**
    * @brief: Aggiunge un articolo alla comanda o aumenta la sua quantità
@@ -111,8 +119,6 @@ class Comanda {
   bool operator>(const Comanda&) const;
 
   bool operator>=(const Comanda&) const;
-
-  bool operator<(const Comanda&) const;
 
   bool operator==(const Comanda&) const;
 
