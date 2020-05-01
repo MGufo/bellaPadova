@@ -1,8 +1,7 @@
 #include "gestoreComande.h"
 
-GestoreComande::GestoreComande(Lista<Comanda*> _bacheca,
-                               Lista<Comanda*>::Iterator _current)
-    : bacheca(_bacheca), current(_bacheca.begin()) {}
+GestoreComande::GestoreComande()
+    : bacheca(Lista<Comanda*>()), current(bacheca.begin()) {}
 
 /*
 Algoritmo posizione di inserimento:
@@ -15,18 +14,11 @@ Algoritmo posizione di inserimento:
     inserita tra le due comande, altrimenti passa alla successiva coppia di
     comande già presenti e ripete il controllo.
 */
-bool GestoreComande::testInsert(const Comanda* precedente,  //--current
-                                const Comanda* successiva,  // current
+bool GestoreComande::testInsert(const Comanda* precedente,
+                                const Comanda* successiva,
                                 const Comanda* daInserire) {
-  // Non ci sono comande prima di current
-  /* if (!precedente && successiva) {
-    if (QTime::currentTime() <= daInserire->getOrarioInizioPreparazione() &&
-        daInserire->getOraConsegna <= successiva->getOrarioInizioPreparazione())
-      return true;
-    return false;
-  } */
   // non ci sono comande da fare oppure si è arrivati all'ultima comanda
-  if (!successiva) return true;  //! precedente ||
+  if (!successiva) return true;
   // se la comanda da inserire "fitta" tra la precedente e la successiva
   if (successiva != *current) {
     if (precedente->getOraConsegna() <=
@@ -66,7 +58,8 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
         --it2;
         if (testCurrent(it2) &&
             daInserire->getOraConsegna() < (*it2)->getOraConsegna())
-          daInserire->setOraConsegna((*it2)->getOraConsegna());
+          daInserire->setOraConsegna((*it2)->getOraConsegna().addSecs(
+              daInserire->getTempoPreparazione() * 60));
         bacheca.insert(it, daInserire);
         if (it == current) --current;
       } else {
