@@ -87,11 +87,13 @@ public:
     }
 
     Iterator& operator--() {
+      Nodo* tmp = itrCurrent;
       itrCurrent = itrPrevious;
       if (itrCurrent) {
         itrPrevious = itrCurrent->nodoPrev;
       } else {
         itrPrevious = nullptr;
+        itrCurrent->nodoNext = tmp;
       }
       return *this;
     }
@@ -137,11 +139,13 @@ public:
     }
 
     const_Iterator& operator--() {
+      Nodo* tmp = itrCurrent;
       itrCurrent = itrPrevious;
       if (itrCurrent) {
         itrPrevious = itrCurrent->nodoPrev;
       } else {
         itrPrevious = nullptr;
+        itrCurrent->nodoNext = tmp;
       }
       return *this;
     }
