@@ -51,7 +51,7 @@ class GestoreComande {
   void modificaComanda();
 
   /**
-   * @brief: "Esegue" la comanda puntata da current. Incrementa current.
+   * @brief: incrementa current ( "esegue" la prima comanda non completata)
    */
   void eseguiComanda();
 
