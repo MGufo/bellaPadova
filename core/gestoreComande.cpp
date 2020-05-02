@@ -23,15 +23,19 @@ bool GestoreComande::testInsert(const Comanda* precedente,
   if (successiva != *current) {
     if (precedente->getOraConsegna() <=
             daInserire->getOrarioInizioPreparazione() &&
-        daInserire->getOraConsegna <= successiva->getOrarioInizioPreparazione())
+        daInserire->getOraConsegna() <=
+            successiva->getOrarioInizioPreparazione())
       return true;
     else
       return false;
   }
   // precedente = ? && successiva = current
   else {
+    // se precedente esiste è stata già consegnata e il suo orario di consegna
+    // era al più == currentTime
     if (QTime::currentTime() <= daInserire->getOrarioInizioPreparazione() &&
-        daInserire->getOraConsegna <= successiva->getOrarioInizioPreparazione())
+        daInserire->getOraConsegna() <=
+            successiva->getOrarioInizioPreparazione())
       return true;
     return false;
   }
@@ -50,12 +54,35 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
       // esiste almeno 1 comanda
       if (*current) {
         auto it = current;
-        --it;
-        // 1° chiamata fatta con --current e current
-        while (!testInsert(*it, *(++it), daInserire)) {
+        auto it2 = current;
+        // se non entriamo si può inserire la comanda prima di current
+        if (!testInsert(*(--it2), *current, daInserire)) {
+          it = current;
+          while (!testInsert(*it, *(++it), daInserire)) {
+          }
         }
-        auto it2 = it;
-        --it2;
+
+        // caso 1: si può inserire la comanda prima di current
+        // caso 1.1: prima di current esiste una comanda
+        // caso 1.2: prima di current non c'è niente (current è la prima comanda
+        // da svolgere della serata) si gestiscono allo stesso modo
+        bacheca.insert(current, daInserire);
+        --current;
+
+        // TODO: Controllare se serve questo if
+        if (*it2 && daInserire->getOraConsegna() < (*it2)->getOraConsegna())
+          daInserire->setOraConsegna((*it2)->getOraConsegna().addSecs(
+              daInserire->getTempoPreparazione() * 60));
+
+        // caso 2: la comanda va inserita dopo current
+        // caso 2.1: inseriamo la comanda tra due comande valide
+        // caso 2.2: inseriamo la comanda in coda (prima di end())
+        // si gestiscono allo stesso modo
+        if (daInserire->getOraConsegna() < (*(--it))->getOraConsegna())
+          daInserire->setOraConsegna((*it)->getOraConsegna().addSecs(
+              daInserire->getTempoPreparazione() * 60));
+
+        //--it2;
         if (testCurrent(it2) &&
             daInserire->getOraConsegna() < (*it2)->getOraConsegna())
           daInserire->setOraConsegna((*it2)->getOraConsegna().addSecs(
