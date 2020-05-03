@@ -5,11 +5,10 @@
 double Pizza::extra = 0.50;
 // Costruttore di default, costruisce una pizza la cui lista di ingredienti
 // contiene un solo ingrediente (la farina)
-Pizza::Pizza(string nome, bool disponibilita, double prezzo,
-             Lista<Ingrediente*>& ingr)
+Pizza::Pizza(string nome, bool disponibilita, double prezzo)
     : Risorsa(nome, disponibilita),
       Articolo(nome, disponibilita, prezzo),
-      ingredienti(ingr) {}
+      ingredienti(Lista<Ingrediente*>()) {}
 
 // Costruttore di copia;
 // Copia profonda implementata tramite metodo copy presente nel container
@@ -22,7 +21,6 @@ Pizza::Pizza(const Pizza& p)
 // Pizza::~Pizza() { delete ingredienti; }
 
 const Lista<Ingrediente*>& Pizza::getIngredienti() const {
-  if (ingredienti.isEmpty()) return Lista<Ingrediente*>();
   return ingredienti;
 }
 
@@ -40,6 +38,11 @@ void Pizza::setFarina(Farina* f) {
 }
 
 void Pizza::addIngrediente(Ingrediente* i) { ingredienti.push_back(i); }
+
+void Pizza::addIngredienti(const Lista<Ingrediente*>& ingr){
+  for(auto it = ingr.begin(); it != ingr.end(); ++it)
+    addIngrediente(*it);
+}
 
 void Pizza::removeIngrediente(Ingrediente* i) {
   for (Lista<Ingrediente*>::Iterator it = ingredienti.begin();

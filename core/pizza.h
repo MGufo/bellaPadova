@@ -13,8 +13,7 @@ private:
 public:
   // Costruttore non usiamo valori di default perchè vengono tutti sempre
   // passati per costruire l'oggetto
-  Pizza(string nome, bool disponibilita, double prezzo,
-        Lista<Ingrediente*>& ingr);
+  Pizza(string nome, bool disponibilita, double prezzo);
 
   // Costruttore di copia,
   Pizza(const Pizza&);
@@ -30,6 +29,7 @@ public:
   // setter
   void setFarina(Farina*);
   void addIngrediente(Ingrediente*);
+  void addIngredienti(const Lista<Ingrediente*>&);
   void removeIngrediente(Ingrediente*);
   void setExtra(double);
 
