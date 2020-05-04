@@ -15,7 +15,7 @@ class Contatto {
   string telefono;
 
  public:
-  Contatto(string, string, string);
+  Contatto(string ="", string ="", string ="");
 
   /**
    * @brief: Ritorna il nome del cliente
