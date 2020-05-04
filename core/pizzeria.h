@@ -8,12 +8,13 @@
 #include "qontainer.h"
 class Pizzeria {
  private:
-  Contatto* contatto;
-  GestoreRisorse* gestoreRisorse;
-  GestoreComande* gestoreComande;
+  Contatto contatto;
+  GestoreRisorse gestoreRisorse;
+  GestoreComande gestoreComande;
+  static unsigned short capacitaForno;
 
  public:
-  Pizzeria(string, string, string);
+  Pizzeria();
   double contabilizzazione(QDate, QDate) const;
   const Lista<const string> getContatto() const;
 
@@ -33,6 +34,12 @@ class Pizzeria {
   // gestoreComande.lista.*iteratore.
   // void modificaComanda(Comanda*);
 
-  
+  static unsigned short getCapacitaForno();
+
+  /**
+   * @brief: Modifica la capacità del forno
+   * @param: unsigned int (capacità)
+   */
+  static void setCapacitaForno(unsigned short);
 };
 #endif

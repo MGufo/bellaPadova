@@ -1,6 +1,6 @@
 #include "comanda.h"
+#include "pizzeria.h"
 
-unsigned short Comanda::capacitaForno = 5;
 /* Gli oggetti passati come parametri al costruttore vengono costruiti ad alto
   livello; per questo motivo non vengono costruiti di copia nel costruttore.
 */
@@ -17,20 +17,21 @@ Comanda::Comanda(Contatto _cliente, QTime _oraConsegna,
 const unordered_map<Articolo*, unsigned int>& Comanda::getOrdinazione() const {
   return ordinazione;
 }
+
 int Comanda::getTempoPreparazione() const {
   unsigned short nPizze = 0;
   int tempoPreparazione = 5;
   for (auto it = ordinazione.begin(); it != ordinazione.end(); ++it)
     if (dynamic_cast<Pizza*>((*it).first)) nPizze += (*it).second;
-  if (nPizze <= capacitaForno)
+  if (nPizze <= Pizzeria::getCapacitaForno())
     return tempoPreparazione;
   else {
-    tempoPreparazione = 5 * (nPizze / capacitaForno);
+    tempoPreparazione = 5 * (nPizze / Pizzeria::getCapacitaForno());
     if ((nPizze % 5) != 0) tempoPreparazione += 5;
     return tempoPreparazione;
   }
 }
-// TODO
+
 QTime& Comanda::getOrarioInizioPreparazione() const {
   QTime* orario = new QTime(getOraConsegna().addSecs(-getTempoPreparazione()));
   return *orario;
@@ -78,8 +79,6 @@ void Comanda::modificaQuantita(Articolo* _daModificare, int _qta) {
 void Comanda::setQuantita(Articolo* _daModificare, int _qta) {
   ordinazione[_daModificare] = _qta;
 }
-
-void setCapacitaForno(unsigned short) {}
 
 bool Comanda::operator<(const Comanda& c) const {
   return getOraConsegna() < c.getOraConsegna();

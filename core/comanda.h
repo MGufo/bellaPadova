@@ -9,6 +9,8 @@
 #include "farina.h"
 #include "pizza.h"
 
+class Pizzeria;
+
 using std::unordered_map;
 
 class Comanda {
@@ -16,7 +18,6 @@ class Comanda {
   Contatto cliente;
   QTime oraConsegna;
   unordered_map<Articolo*, unsigned int> ordinazione;
-  static unsigned short capacitaForno;
 
  public:
   Comanda(Contatto, QTime,
@@ -62,11 +63,7 @@ class Comanda {
    */
   void setOraConsegna(QTime);
 
-  /**
-   * @brief: Modifica la capacità del forno
-   * @param: unsigned int (capacità)
-   */
-  void setCapacitaForno(unsigned short);
+
 
   /**
    * @brief: Aggiunge un articolo alla comanda o aumenta la sua quantità
