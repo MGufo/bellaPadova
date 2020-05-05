@@ -33,7 +33,7 @@ int Comanda::getTempoPreparazione() const {
 }
 
 QTime& Comanda::getOrarioInizioPreparazione() const {
-  QTime* orario = new QTime(getOraConsegna().addSecs(-getTempoPreparazione()));
+  QTime* orario = new QTime(getOraConsegna().addSecs(-getTempoPreparazione()*60));
   return *orario;
 }
 const Contatto& Comanda::getCliente() const { return cliente; }
