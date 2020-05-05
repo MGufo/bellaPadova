@@ -47,15 +47,25 @@ bool GestoreComande::testCurrent(const Lista<Comanda*>::Iterator it) const {
 
 void GestoreComande::inserisciComanda(Comanda* daInserire) {
   if (daInserire) {
-    if(QTime::currentTime() > daInserire->getOrarioInizioPreparazione())
-      daInserire->setOraConsegna(QTime::currentTime().
-                                 addSecs(daInserire->getTempoPreparazione()*60));
+    if(QTime::currentTime() > daInserire->getOrarioInizioPreparazione()){
+      if(!(current.isValid()))
+        daInserire->setOraConsegna(QTime::currentTime().addSecs(daInserire->getTempoPreparazione()*60));
+      else{
+        //current esiste
+        //sottocaso prima di current
+        if(QTime::currentTime().addSecs(daInserire->getTempoPreparazione()*60) < (*current)->getOrarioInizioPreparazione())
+          daInserire->setOraConsegna(QTime::currentTime().addSecs(daInserire->getTempoPreparazione()*60));
+        else
+        //sottocaso dopo current
+        daInserire->setOraConsegna((*current)->getOraConsegna().addSecs(daInserire->getTempoPreparazione()*60));
+      }
+    }
     if (bacheca.isEmpty()) {
-        bacheca.push_back(daInserire);
-        current = bacheca.begin();
+      bacheca.push_back(daInserire);
+      current = bacheca.begin();
     } else {
       // esiste almeno 1 comanda da fare
-      if (*current) {
+      if (current.isValid()) {
         auto it = current;
         auto it2 = it;
         bool beforeCurrent = testInsert(nullptr, *current, daInserire);
@@ -83,9 +93,9 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
           // caso 2.1: inseriamo la comanda tra due comande valide
           // caso 2.2: inseriamo la comanda in coda (prima di end())
           // si gestiscono allo stesso modo
-          if (daInserire->getOrarioInizioPreparazione() < (*(--it))->getOraConsegna())
-            daInserire->setOraConsegna((*it)->getOraConsegna().addSecs(
-                daInserire->getTempoPreparazione() * 60));
+          --it;
+          if (daInserire->getOrarioInizioPreparazione() < (*(it))->getOraConsegna())
+            daInserire->setOraConsegna((*it)->getOraConsegna().addSecs(daInserire->getTempoPreparazione() * 60));
           // qui it punta alla comanda già presente (andyM), ma insert inserisce daInserire prima di andyM!
           // in teoria non possiamo fare insert(++it, daInserire) perché causerebbe SEGFAULT
           // possibile soluzione: usare push back (serve condizione per distinguere inserimento in coda da
