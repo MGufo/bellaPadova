@@ -94,6 +94,10 @@ public:
         itrPrevious = nullptr;
       return *this;
     }
+
+    bool isValid() const {
+      return (itrCurrent != nullptr);
+    }
   };
 
   class const_Iterator {
