@@ -48,7 +48,20 @@ class GestoreComande {
   */
   void inserisciComanda(Comanda*);
 
-  void modificaComanda();
+  // inserimento/modifica qta di un articolo presente nella comanda
+  // se qta == 0 si chiama la rimozione
+  void modificaComanda(Comanda*, Articolo*, int = 0);
+
+  // modifica ingredienti pizza
+  // lista #1 == ingr da aggiungere; lista #2 == ingr da rimuovere
+  void modificaComanda(Comanda*, Articolo*, const Lista<Ingrediente*>&,
+                       const Lista<Ingrediente*>&);
+
+  // modifica orario consegna comanda
+  void modificaComanda(Comanda*, const QTime&);
+
+  // modifica contatto associato a comanda
+  void modificaComanda(Comanda*, const Contatto&);
 
   /**
    * @brief: incrementa current ( "esegue" la prima comanda non completata)

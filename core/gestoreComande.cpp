@@ -47,17 +47,22 @@ bool GestoreComande::testCurrent(const Lista<Comanda*>::Iterator it) const {
 
 void GestoreComande::inserisciComanda(Comanda* daInserire) {
   if (daInserire) {
-    if(QTime::currentTime() > daInserire->getOrarioInizioPreparazione()){
-      if(!(current.isValid()))
-        daInserire->setOraConsegna(QTime::currentTime().addSecs(daInserire->getTempoPreparazione()*60));
-      else{
-        //current esiste
-        //sottocaso prima di current
-        if(QTime::currentTime().addSecs(daInserire->getTempoPreparazione()*60) < (*current)->getOrarioInizioPreparazione())
-          daInserire->setOraConsegna(QTime::currentTime().addSecs(daInserire->getTempoPreparazione()*60));
+    if (QTime::currentTime() > daInserire->getOrarioInizioPreparazione()) {
+      if (!(current.isValid()))
+        daInserire->setOraConsegna(QTime::currentTime().addSecs(
+            daInserire->getTempoPreparazione() * 60));
+      else {
+        // current esiste
+        // sottocaso prima di current
+        if (QTime::currentTime().addSecs(daInserire->getTempoPreparazione() *
+                                         60) <
+            (*current)->getOrarioInizioPreparazione())
+          daInserire->setOraConsegna(QTime::currentTime().addSecs(
+              daInserire->getTempoPreparazione() * 60));
         else
-        //sottocaso dopo current
-        daInserire->setOraConsegna((*current)->getOraConsegna().addSecs(daInserire->getTempoPreparazione()*60));
+          // sottocaso dopo current
+          daInserire->setOraConsegna((*current)->getOraConsegna().addSecs(
+              daInserire->getTempoPreparazione() * 60));
       }
     }
     if (bacheca.isEmpty()) {
@@ -71,7 +76,7 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
         bool beforeCurrent = testInsert(nullptr, *current, daInserire);
         // se non entriamo si può inserire la comanda prima di current
         if (!beforeCurrent) {
-          bool flag = false;   
+          bool flag = false;
           while (!flag) {
             ++it2;
             if (it2 != bacheca.end())
@@ -94,11 +99,14 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
           // caso 2.2: inseriamo la comanda in coda (prima di end())
           // si gestiscono allo stesso modo
           --it;
-          if (daInserire->getOrarioInizioPreparazione() < (*(it))->getOraConsegna())
-            daInserire->setOraConsegna((*it)->getOraConsegna().addSecs(daInserire->getTempoPreparazione() * 60));
-          // qui it punta alla comanda già presente (andyM), ma insert inserisce daInserire prima di andyM!
-          // in teoria non possiamo fare insert(++it, daInserire) perché causerebbe SEGFAULT
-          // possibile soluzione: usare push back (serve condizione per distinguere inserimento in coda da
+          if (daInserire->getOrarioInizioPreparazione() <
+              (*(it))->getOraConsegna())
+            daInserire->setOraConsegna((*it)->getOraConsegna().addSecs(
+                daInserire->getTempoPreparazione() * 60));
+          // qui it punta alla comanda già presente (andyM), ma insert inserisce
+          // daInserire prima di andyM! in teoria non possiamo fare insert(++it,
+          // daInserire) perché causerebbe SEGFAULT possibile soluzione: usare
+          // push back (serve condizione per distinguere inserimento in coda da
           // inserimento in mezzo
           if (it2 != bacheca.end())
             bacheca.insert(it2, daInserire);
@@ -108,8 +116,9 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
       }
       // la bacheca contiene solo comande terminate, current == end()
       else {
-        if(QTime::currentTime() > daInserire->getOrarioInizioPreparazione())
-         daInserire->setOraConsegna(QTime::currentTime().addSecs(daInserire->getTempoPreparazione()*60));
+        if (QTime::currentTime() > daInserire->getOrarioInizioPreparazione())
+          daInserire->setOraConsegna(QTime::currentTime().addSecs(
+              daInserire->getTempoPreparazione() * 60));
         bacheca.push_back(daInserire);
         current = --(bacheca.end());
       }
@@ -118,6 +127,37 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
   // TODO: Scrivere metodo controlloOrario() per fare il controllo validita
   // degli orari e rimuovere il codice ripetuto
 }
+
+void GestoreComande::modificaComanda(Comanda* daModificare, Articolo* target,
+                                     int qtaDI) {
+  if (qtaDI <= 0)
+    daModificare->rimuoviArticolo(target);
+  else
+    daModificare->inserisciArticolo(target, static_cast<unsigned int>(qtaDI));
+}
+
+void GestoreComande::modificaComanda(Comanda*, Articolo*,
+                                     const Lista<Ingrediente*>& daAggiungere,
+                                     const Lista<Ingrediente*>& daRimuovere) {}
+
+void GestoreComande::modificaComanda(Comanda* daModificare,
+                                     const QTime& newOraConsegna) {
+  if (newOraConsegna >= QTime::currentTime()) {
+    Comanda* daInserire = new Comanda(*daModificare);
+    rimuoviComanda(daModificare);
+    daInserire->setOraConsegna(newOraConsegna);
+    inserisciComanda(daInserire);
+  }
+}
+
+void GestoreComande::modificaComanda(Comanda* daModificare,
+                                     const Contatto& newCliente) {
+  daModificare->modificaContatto(newCliente.getNome(),
+                                 newCliente.getIndirizzo(),
+                                 newCliente.getTelefono());
+}
+
+void GestoreComande::eseguiComanda() { ++current; }
 
 void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
   if (daRimuovere) {
@@ -137,5 +177,3 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
 const Comanda* GestoreComande::getComandaCorrente() const { return *current; }
 
 Lista<Comanda*> GestoreComande::getBacheca() { return bacheca; }
-
-void GestoreComande::eseguiComanda() { ++current; }
