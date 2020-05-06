@@ -23,7 +23,7 @@ class Comanda {
   Comanda(Contatto, QTime,
           unordered_map<Articolo*, unsigned int> =
               unordered_map<Articolo*, unsigned int>());
-//  Comanda(const Comanda&);
+  //  Comanda(const Comanda&);
 
   /**
    * @brief: Ritorna l'orario di consegna di una comanda
@@ -63,23 +63,12 @@ class Comanda {
    */
   void setOraConsegna(QTime);
 
-
-
   /**
    * @brief: Aggiunge un articolo alla comanda o aumenta la sua quantità
    * @param: Articolo* (Articolo da aggiungere/modificare)
    * @param: int (Quantità articolo da aggiungere/modificare)
    */
   void inserisciArticolo(Articolo*, unsigned int);
-
-  /**
-   * @brief: Sostituisce un articolo nella comanda con un articolo non presente
-   * @param: Articolo* (Articolo da rimuovere)
-   * @param: int (Quantità articolo da rimuovere)
-   * @param: Articolo* (Articolo da inserire)
-   * @param: int (Quantità articolo da inserire)
-   */
-  void sostituisciArticolo(Articolo*, int, Articolo*, unsigned int);
 
   /**
    * @brief: Rimuove un articolo presente nella comanda
@@ -94,20 +83,6 @@ class Comanda {
    * @param: string (nuovo telefono)
    */
   void modificaContatto(string = "", string = "", string = "");
-
-  /**
-   * @brief: Aggiorna quantità di un articolo presente in comanda
-   * @param: Articolo* (Articolo da modificare)
-   * @param: int (incremento/decremento quantità attuale)
-   */
-  void modificaQuantita(Articolo*, int);
-
-  /**
-   * @brief: Aggiorna quantità di un articolo presente in comanda
-   * @param: Articolo* (Articolo da modificare)
-   * @param: int (nuova quantità)
-   */
-  void setQuantita(Articolo*, int);
 
   bool operator<(const Comanda&) const;
 
