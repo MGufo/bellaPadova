@@ -23,7 +23,7 @@ class GestoreComande {
 
   /**
    * @brief: Controlla se current e il parametro puntano alla stessa comanda.
-   * @param: iteratore a una comanda presente in bacheca.
+   * @param: const Iterator (iteratore a una comanda presente in bacheca).
    */
   bool testCurrent(const Lista<Comanda*>::Iterator) const;
 
@@ -34,12 +34,11 @@ class GestoreComande {
    * @brief: Inserisce una nuova comanda nella lista di comande mantenendo
    l'ordine temporale delle comande da eseguire.
 
-   @param: Puntatore alla comanda da inserire.
+   @param: Comanda* (puntatore alla comanda da inserire)
 
-   Algoritmo posizione di inserimento:
+   Algoritmo di inserimento:
     - ogni pizza ha un tempo di preparazione di 5min
-    - il tempo di preparazione di una comanda è: (n° pizze comanda) x costante
-    di preparazione
+    - il tempo di preparazione di una comanda è: (n° pizze comanda) x 5min
     - Se il tempo di preparazione dell'ordine da inserire calza
     tra l'orario di consegna dell'ordine precedente e (tempo consegna ordine
     succ - tempo preparazione ordine succ) allora la comanda da inserire verrà
@@ -48,19 +47,42 @@ class GestoreComande {
   */
   void inserisciComanda(Comanda*);
 
-  // inserimento/modifica qta di un articolo presente nella comanda
-  // se qta == 0 si chiama la rimozione
-  void modificaComanda(Comanda*, Articolo*, int = 0);
+  void modificaComanda(Comanda*, Articolo*);
 
-  // modifica ingredienti pizza
-  // lista #1 == ingr da aggiungere; lista #2 == ingr da rimuovere
-  void modificaComanda(Comanda*, Articolo*, const Lista<Ingrediente*>&,
-                       const Lista<Ingrediente*>&);
+  /**
+   * @brief: Inserimento, rimozione o modifica della quantità di un articolo
+   * nella comanda.
+   * @param: Comanda* (comanda in cui inserire/modificare/rimuovere un articolo)
+   * @param: Articolo* (articolo da inserire/modificare/rimuovere)
+   * @param: int (nuova quantità dell'articolo da inserire/modificare; se 0 si
+   * rimuove)
+   */
+  void modificaComanda(Comanda*, Articolo*, int);
 
-  // modifica orario consegna comanda
+  /**
+   * @brief: Modifica la lista di ingredienti di una pizza presente nella
+   * comanda.
+   * @param: Pizza* (Pizza da inserire/modificare)
+   * @param: const Lista& (lista di ingredienti da aggiungere alla pizza)
+   * @param: const Lista& (lista di ingredienti da rimuovere dalla pizza)
+   */
+  void modificaComanda(Pizza*, const Lista<Ingrediente*>*,
+                       const Lista<Ingrediente*>*);
+
+  /**
+   * @brief: Modifica l'orario di consegna di una comanda.
+   * @param: Comanda* (comanda da modificare)
+   * @param: const QTime& (Nuovo orario di consegna)
+   * @note: L'orario di consegna passato come parametro pùo non corrispondere
+   * all'orario associato alla comanda.
+   */
   void modificaComanda(Comanda*, const QTime&);
 
-  // modifica contatto associato a comanda
+  /**
+   * @brief: Modifica le informazioni di recapito associate a una comanda.
+   * @param: Comanda* (comanda da modificare)
+   * @param: const Contatto& (Nuovo informazioni di recapito)
+   */
   void modificaComanda(Comanda*, const Contatto&);
 
   /**

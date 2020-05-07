@@ -128,17 +128,50 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
   // degli orari e rimuovere il codice ripetuto
 }
 
+void GestoreComande::modificaComanda(Comanda* daModificare, Articolo* daRimuovere){
+  daModificare->rimuoviArticolo(daRimuovere);
+}
+
+
 void GestoreComande::modificaComanda(Comanda* daModificare, Articolo* target,
                                      int qtaDI) {
-  if (qtaDI <= 0)
-    daModificare->rimuoviArticolo(target);
-  else
+  if (qtaDI > 0)
     daModificare->inserisciArticolo(target, static_cast<unsigned int>(qtaDI));
 }
 
-void GestoreComande::modificaComanda(Comanda*, Articolo*,
-                                     const Lista<Ingrediente*>& daAggiungere,
-                                     const Lista<Ingrediente*>& daRimuovere) {}
+// TODO: le liste passate come parametri possono avere al massimo 1 oggetto di
+// tipo farina che dev'essere anche il 1° ingrediente nella lista (dev'essere la
+// classe Pizzeria a garantire ciò)
+void GestoreComande::modificaComanda(Pizza* _pizza,
+                                     const Lista<Ingrediente*>* daAggiungere,
+                                     const Lista<Ingrediente*>* daRimuovere) {
+  Lista<Ingrediente*>::const_Iterator it;
+  Lista<Ingrediente*>::const_Iterator it2;
+  if (daAggiungere) {
+    for (it = daAggiungere->const_begin(); it != daAggiungere->const_end();
+         ++it) {
+      // controllo presenza nuova farina
+      if (dynamic_cast<Farina*>(*it))
+        _pizza->setFarina(static_cast<Farina*>(*it));
+      for (it2 = _pizza->getIngredienti().const_begin();
+           it2 != _pizza->getIngredienti().const_end() && it != it2; ++it2) {
+      }
+      if (it2 == _pizza->getIngredienti().const_end())
+        _pizza->addIngrediente(*it);
+    }
+  }
+
+  if (daRimuovere) {
+    for (it = daRimuovere->const_begin(); it != daRimuovere->const_end();
+         ++it) {
+      for (it2 = _pizza->getIngredienti().const_begin();
+           it2 != _pizza->getIngredienti().const_end() && it != it2; ++it2) {
+      }
+      if (it2 == _pizza->getIngredienti().const_end())
+        _pizza->removeIngrediente(*it);
+    }
+  }
+}
 
 void GestoreComande::modificaComanda(Comanda* daModificare,
                                      const QTime& newOraConsegna) {
