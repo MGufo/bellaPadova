@@ -20,9 +20,7 @@ Pizza::Pizza(const Pizza& p)
 // container
 // Pizza::~Pizza() { delete ingredienti; }
 
-const Lista<Ingrediente*>& Pizza::getIngredienti() const {
-  return ingredienti;
-}
+const Lista<Ingrediente*>& Pizza::getIngredienti() const { return ingredienti; }
 
 /* Non si controlla che la lista di ingredienti sia vuota perchè nella
 costruzione di una nuova pizza al costruttore è garantito il passaggio di una
@@ -39,9 +37,8 @@ void Pizza::setFarina(Farina* f) {
 
 void Pizza::addIngrediente(Ingrediente* i) { ingredienti.push_back(i); }
 
-void Pizza::addIngredienti(const Lista<Ingrediente*>& ingr){
-  for(auto it = ingr.begin(); it != ingr.end(); ++it)
-    addIngrediente(*it);
+void Pizza::addIngredienti(const Lista<Ingrediente*>& ingr) {
+  for (auto it = ingr.begin(); it != ingr.end(); ++it) addIngrediente(*it);
 }
 
 void Pizza::removeIngrediente(Ingrediente* i) {
@@ -52,6 +49,15 @@ void Pizza::removeIngrediente(Ingrediente* i) {
       it = --(ingredienti.end());
     }
   }
+}
+
+bool Pizza::checkIngrediente(const Ingrediente* daCercare) const {
+  Lista<Ingrediente*>::const_Iterator it;
+  bool trovato = false;
+  for (it = ingredienti.const_begin();
+       it != ingredienti.const_end() && !trovato; ++it)
+    if (*it == daCercare) trovato = true;
+  return trovato;
 }
 
 Pizza* Pizza::clone() const { return new Pizza(*this); }
