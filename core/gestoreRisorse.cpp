@@ -3,23 +3,6 @@
 GestoreRisorse::GestoreRisorse()
     : menu(Lista<Articolo*>()), inventario(Lista<Consumabile*>()) {}
 
-template <class T>
-T getPosizione(Lista<T*> lista, T* valore) {
-  Lista<T*>::Iterator it;
-  bool trovato = false;
-  for (it = lista.begin(); it != lista.end() && !trovato; ++it)
-    if (*it == valore) trovato = true;
-  return it;
-}
-template <class T>
-T getPosizione(const Lista<T*> lista, T* valore) {
-  Lista<T*>::Iterator it;
-  bool trovato = false;
-  for (it = lista.begin(); it != lista.end() && !trovato; ++it)
-    if (*it == valore) trovato = true;
-  return it;
-}
-
 bool GestoreRisorse::controlloDisponibilita(const Articolo* _articolo) const {
   Lista<Articolo*>::const_Iterator it;
   bool trovato = false;
@@ -38,63 +21,57 @@ bool GestoreRisorse::controlloDisponibilita(
   return trovato;
 }
 
+void GestoreRisorse::inserisciArticoloInMenu(Articolo* daInserire) {
+  if (daInserire) {
+    if (dynamic_cast<Bevanda*>(daInserire))
+      inventario.push_back(dynamic_cast<Consumabile*>(daInserire));
+    menu.push_back(daInserire);
+  }
+}
+
 void GestoreRisorse::rimuoviArticoloDaMenu(Articolo* daRimuovere) {
-  Lista<Articolo*>::Iterator it = getPosizione(menu, daRimuovere);
-  // bool trovato = false;
-  if (it != menu.end())
-    // for (it = menu.begin(); it != menu.end() && !trovato; ++it)
-    //   if (*it == daRimuovere) trovato = true;
-    menu.erase(it);
+  if (daRimuovere) {
+    Lista<Articolo*>::Iterator it = getPosizione(menu, daRimuovere);
+    if (it != menu.end()) {
+      if (dynamic_cast<Bevanda*>(*it))
+        inventario.erase(
+            getPosizione(inventario, dynamic_cast<Consumabile*>(daRimuovere)));
+      menu.erase(it);
+    }
+  }
 }
 
 // TODO: Verifica tipo istanziazione container in push_back
 void GestoreRisorse::inserisciConsumabileInInventario(Consumabile* daInserire) {
-  inventario.push_back(daInserire);
+  if (daInserire) {
+    if (dynamic_cast<Bevanda*>(daInserire))
+      menu.push_back(dynamic_cast<Articolo*>(daInserire));
+    inventario.push_back(daInserire);
+  }
 }
 
 void GestoreRisorse::rimuoviConsumabileDaInventario(Consumabile* daRimuovere) {
-  if (!dynamic_cast<Pizza*>(daRimuovere)) {
-    auto it = getPosizione(inventario, daRimuovere);
-    if (it != inventario.end()) inventario.erase(it);
-  }
-  // pizza
-  else {
-    for (auto it = menu.begin(); it != menu.end(); ++it) {
-      if (dynamic_cast<Pizza*>(*it)) {
-        Pizza* temPizza = static_cast<Pizza*>(*it);
-        if (getPosizione(temPizza->getIngredienti(),
-                         static_cast<Ingrediente*>(daRimuovere)) !=
-            temPizza->getIngredienti().end())
-          temPizza->setDisponibilita(false);
+  if (daRimuovere) {
+    // bevanda
+    if (dynamic_cast<Bevanda*>(daRimuovere)) {
+      Lista<Articolo*>::Iterator it =
+          getPosizione(menu, dynamic_cast<Articolo*>(daRimuovere));
+      if (it != menu.end()) menu.erase(it);
+    } else {
+      // ingrediente
+      for (auto it = menu.begin(); it != menu.end(); ++it) {
+        Pizza* currentPizza = dynamic_cast<Pizza*>(*it);
+        if (currentPizza) {
+          if (currentPizza->checkIngrediente(
+                  static_cast<Ingrediente*>(daRimuovere)))
+            currentPizza->setDisponibilita(false);
+        }
       }
     }
+    // farina di default
+    Farina* tmp = dynamic_cast<Farina*>(daRimuovere);
+    if (!tmp || (tmp && tmp->getTipoFarina() != "tipo 00")) {
+      inventario.erase(getPosizione(inventario, daRimuovere));
+    }
   }
-
-  //   if (!dynamic_cast<Farina*>(daRimuovere)) {
-  //     Lista<Articolo*>::Iterator it;
-  //     // pizza
-  //     for (it = menu.begin(); it != menu.end(); ++it) {
-  //       if (dynamic_cast<Pizza*>(*it)) {
-  //         bool trovato = false;
-  //         Pizza* temPizza = static_cast<Pizza*>(*it);
-  //         for (auto it2 = temPizza->getIngredienti().const_begin();
-  //              it2 != temPizza->getIngredienti().const_end(); ++it)
-  //           if (*it2 == daRimuovere) trovato = true;
-  //         if (trovato) temPizza->setDisponibilita(false);
-  //       }
-  //       // bevanda
-  //       else if (dynamic_cast<Bevanda*>(*it)) {
-  //         int x;
-  //       }
-  //       // farina
-  //       else {
-  //         Lista<Consumabile*>::Iterator it;
-  //         bool trovato = false;
-  //         for (it = inventario.begin(); it != inventario.end() && !trovato;
-  //         ++it)
-  //           if (*it == daRimuovere) trovato = true;
-  //         inventario.erase(it);
-  //       }
-  //     }
-  //   }
-  // }
+}
