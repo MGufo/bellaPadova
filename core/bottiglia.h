@@ -1,3 +1,5 @@
+#ifndef BOTTIGLIA_H
+#define BOTTIGLIA_H
 #include "bevanda.h"
 
 class Bottiglia : public Bevanda {
@@ -11,3 +13,5 @@ class Bottiglia : public Bevanda {
    */
   double getPrezzo() const;
 };
+
+#endif

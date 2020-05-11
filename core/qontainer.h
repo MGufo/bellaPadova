@@ -7,9 +7,9 @@ template <class T>
 class Lista {
   friend class Iterator;
 
-private:
+ private:
   class Nodo {
-  public:
+   public:
     // campo dati
     T info;
     // puntatore al nodo successivo
@@ -41,7 +41,7 @@ private:
     }
   }
 
-public:
+ public:
   Lista() : ptr(nullptr) {}
 
   Lista(const Lista& l) : ptr(copy(l.ptr)) {}
@@ -51,15 +51,15 @@ public:
   class Iterator {
     friend class Lista;
 
-  private:
+   private:
     // puntatore al nodo interesssato
     Lista::Nodo* itrCurrent;
     // puntatore al nodo precedente
     Lista::Nodo* itrPrevious;
 
-  public:
+   public:
     Iterator(Lista::Nodo* cu = nullptr, Lista::Nodo* pr = nullptr)
-      : itrCurrent(cu), itrPrevious(pr) {}
+        : itrCurrent(cu), itrPrevious(pr) {}
 
     bool operator==(const Iterator& i) const {
       return (itrCurrent == i.itrCurrent) && (itrPrevious == i.itrPrevious);
@@ -90,29 +90,27 @@ public:
       itrCurrent = itrPrevious;
       if (itrCurrent) {
         itrPrevious = itrCurrent->nodoPrev;
-      } else 
+      } else
         itrPrevious = nullptr;
       return *this;
     }
 
-    bool isValid() const {
-      return (itrCurrent != nullptr);
-    }
+    bool isValid() const { return (itrCurrent != nullptr); }
   };
 
   class const_Iterator {
     friend class Lista;
 
-  private:
+   private:
     // puntatore al nodo interesssato
     const Lista::Nodo* itrCurrent;
     // puntatore al nodo precedente
     const Lista::Nodo* itrPrevious;
 
-  public:
+   public:
     const_Iterator(const Lista::Nodo* cu = nullptr,
                    const Lista::Nodo* pr = nullptr)
-      : itrCurrent(cu), itrPrevious(pr) {}
+        : itrCurrent(cu), itrPrevious(pr) {}
 
     bool operator==(const const_Iterator& i) const {
       return (itrCurrent == i.itrCurrent) && (itrPrevious == i.itrPrevious);
@@ -157,9 +155,9 @@ public:
     return *this;
   }
 
-  //const T& operator*() const { return ptr->info; }
+  // const T& operator*() const { return ptr->info; }
 
-  //T& operator*() const { return ptr->info; }
+  // T& operator*() const { return ptr->info; }
 
   bool isEmpty() const { return ptr == nullptr; }
 
@@ -188,7 +186,7 @@ public:
     }
     return it;
   }
-  // la & dev'essere adiacente a p!
+  //HACK: la & dev'essere adiacente a p!
   Iterator insert(Iterator it, const T &p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
@@ -251,11 +249,11 @@ public:
     }
     return Iterator();
   }
-  // la & dev'essere adiacente a p!
+  // HACK: la & dev'essere adiacente a p!
   void push_back(const T &p) { insert(end(), p); }
 
   void pop_back() { erase(--end()); }
-  // la & dev'essere adiacente a p!
+  // HACK: la & dev'essere adiacente a p!
   void push_front(const T &p) { insert(begin(), p); }
 
   void pop_front() { erase(begin()); }

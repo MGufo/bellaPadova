@@ -1,3 +1,5 @@
+#ifndef LATTINA_H
+#define LATTINA_H
 #include "bevanda.h"
 
 class Lattina : public Bevanda {
@@ -11,3 +13,4 @@ class Lattina : public Bevanda {
    */
   double getPrezzo() const;
 };
+#endif

@@ -6,11 +6,11 @@
 #include "qontainer.h"
 
 class Pizza : public Articolo {
-private:
+ private:
   Lista<Ingrediente*> ingredienti;
   static double extra;
 
-public:
+ public:
   // Costruttore non usiamo valori di default perchè vengono tutti sempre
   // passati per costruire l'oggetto
   Pizza(string nome, bool disponibilita, double prezzo);
@@ -31,6 +31,7 @@ public:
   void addIngrediente(Ingrediente*);
   void addIngredienti(const Lista<Ingrediente*>&);
   void removeIngrediente(Ingrediente*);
+  bool checkIngrediente(const Ingrediente*) const;
   void setExtra(double);
 
   // implementazione metodo di clonazione (classe diventa concreta)
