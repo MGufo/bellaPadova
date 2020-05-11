@@ -27,7 +27,7 @@ class Pizza : public Articolo {
   double getExtra() const;
 
   // setter
-  void setFarina(Farina*);
+  void setFarina(const Farina*);
   void addIngrediente(Ingrediente*);
   void addIngredienti(const Lista<Ingrediente*>&);
   void removeIngrediente(Ingrediente*);

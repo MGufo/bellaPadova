@@ -30,7 +30,7 @@ Farina* Pizza::getFarina() const {
 }
 
 // aggiorna la tipologia di farina presente nella lista ingredienti della pizza
-void Pizza::setFarina(Farina* f) {
+void Pizza::setFarina(const Farina* f) {
   static_cast<Farina*>(*(ingredienti.begin()))
       ->setTipoFarina(f->getTipoFarina());
 }
