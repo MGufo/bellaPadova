@@ -128,10 +128,10 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
   // degli orari e rimuovere il codice ripetuto
 }
 
-void GestoreComande::modificaComanda(Comanda* daModificare, Articolo* daRimuovere){
+void GestoreComande::modificaComanda(Comanda* daModificare,
+                                     Articolo* daRimuovere) {
   daModificare->rimuoviArticolo(daRimuovere);
 }
-
 
 void GestoreComande::modificaComanda(Comanda* daModificare, Articolo* target,
                                      int qtaDI) {
@@ -145,30 +145,24 @@ void GestoreComande::modificaComanda(Comanda* daModificare, Articolo* target,
 void GestoreComande::modificaComanda(Pizza* _pizza,
                                      const Lista<Ingrediente*>* daAggiungere,
                                      const Lista<Ingrediente*>* daRimuovere) {
-  Lista<Ingrediente*>::const_Iterator it;
-  Lista<Ingrediente*>::const_Iterator it2;
-  if (daAggiungere) {
-    for (it = daAggiungere->const_begin(); it != daAggiungere->const_end();
-         ++it) {
-      // controllo presenza nuova farina
-      if (dynamic_cast<Farina*>(*it))
-        _pizza->setFarina(static_cast<Farina*>(*it));
-      for (it2 = _pizza->getIngredienti().const_begin();
-           it2 != _pizza->getIngredienti().const_end() && it != it2; ++it2) {
-      }
-      if (it2 == _pizza->getIngredienti().const_end())
-        _pizza->addIngrediente(*it);
+  Lista<Ingrediente*>::const_Iterator it = daAggiungere->const_begin();
+
+  if (!daAggiungere->isEmpty()) {
+    // controllo presenza nuova farina
+    if (dynamic_cast<Farina*>(*it)) {
+      _pizza->setFarina(static_cast<Farina*>(*it));
+      ++it;
+    }
+    while (it != daAggiungere->const_end()) {
+      if (!_pizza->checkIngrediente(*it)) _pizza->addIngrediente(*it);
+      ++it;
     }
   }
-
-  if (daRimuovere) {
-    for (it = daRimuovere->const_begin(); it != daRimuovere->const_end();
-         ++it) {
-      for (it2 = _pizza->getIngredienti().const_begin();
-           it2 != _pizza->getIngredienti().const_end() && it != it2; ++it2) {
-      }
-      if (it2 == _pizza->getIngredienti().const_end())
-        _pizza->removeIngrediente(*it);
+  it = daRimuovere->const_begin();
+  if (!daRimuovere->isEmpty()) {
+    while (it != daRimuovere->const_end()) {
+      if (_pizza->checkIngrediente(*it)) _pizza->removeIngrediente(*it);
+      ++it;
     }
   }
 }
