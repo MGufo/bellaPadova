@@ -16,4 +16,6 @@ double Bevanda::getPlasticTax() const { return plasticTax; }
 
 void Bevanda::setPlasticTax(double pt) { plasticTax = pt; }
 
+void Bevanda::setCapacita(float _capacita) { capacita = _capacita; }
+
 double Bevanda::plasticTax = 0.5;

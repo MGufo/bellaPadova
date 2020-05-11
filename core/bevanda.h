@@ -7,7 +7,7 @@
 class Bevanda : public Articolo, public Consumabile {
  private:
   static double plasticTax;
-  double capacita;
+  float capacita;
 
  public:
   Bevanda(string, bool, double, unsigned int, double, QDate, double);
@@ -41,6 +41,6 @@ class Bevanda : public Articolo, public Consumabile {
    * @brief: Modifica la capacità della bevanda
    * @param: double (nuova capacità espressa in L)
    */
-  void setCapacita(double);
+  void setCapacita(float);
 };
 #endif
