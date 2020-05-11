@@ -186,7 +186,7 @@ class Lista {
     }
     return it;
   }
-  //HACK: la & dev'essere adiacente a p!
+  // HACK: la & dev'essere adiacente a p!
   Iterator insert(Iterator it, const T &p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
@@ -266,6 +266,6 @@ class Lista {
   }
 };
 
-// TO DO: operatore di stampa
+// TODO: operatore di stampa
 
 #endif
