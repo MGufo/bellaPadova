@@ -75,3 +75,54 @@ void GestoreRisorse::rimuoviConsumabileDaInventario(Consumabile* daRimuovere) {
     }
   }
 }
+
+void GestoreRisorse::modificaArticoloinMenu(Articolo* daModificare,
+                                            const std::string& _nome) {
+  daModificare->setNome(_nome);
+}
+
+void GestoreRisorse::modificaArticoloinMenu(Articolo* daModificare,
+                                            bool _disponibilita) {
+  daModificare->setDisponibilita(_disponibilita);
+}
+
+void GestoreRisorse::modificaArticoloinMenu(Articolo* daModificare,
+                                            double _prezzoBase) {
+  daModificare->setPrezzoBase(_prezzoBase);
+}
+
+void GestoreRisorse::modificaArticoloinMenu(Pizza* daModificare,
+                                            const Farina* _farina) {
+  daModificare->setFarina(_farina);
+}
+
+void GestoreRisorse::modificaArticoloinMenu(
+    Pizza* daModificare, const Lista<Ingrediente*>* daInserire,
+    const Lista<Ingrediente*>* daRimuovere) {
+  Lista<Ingrediente*>::const_Iterator it = daInserire->const_begin();
+
+  if (!daInserire->isEmpty()) {
+    // controllo presenza nuova farina
+    if (dynamic_cast<Farina*>(*it)) {
+      daModificare->setFarina(static_cast<Farina*>(*it));
+      ++it;
+    }
+    while (it != daInserire->const_end()) {
+      if (!daModificare->checkIngrediente(*it))
+        daModificare->addIngrediente(*it);
+      ++it;
+    }
+  }
+  it = daRimuovere->const_begin();
+  if (!daRimuovere->isEmpty()) {
+    while (it != daRimuovere->const_end()) {
+      if (daModificare->checkIngrediente(*it))
+        daModificare->removeIngrediente(*it);
+      ++it;
+    }
+  }
+}
+
+void GestoreRisorse::modificaArticoloInMenu(Pizza *, double){
+
+}

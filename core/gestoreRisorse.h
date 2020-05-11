@@ -82,6 +82,38 @@ class GestoreRisorse {
    * @note: La rimozione della farina di default non è consentita.
    */
   void rimuoviConsumabileDaInventario(Consumabile *);
-};
 
+  // metodo viene invocato solo se nella vista viene modificato il nome di un
+  // articolo presente nel menu
+  void modificaArticoloinMenu(Articolo *, const string &);
+  // disponibilità
+  void modificaArticoloinMenu(Articolo *, bool);
+  // prezzo base
+  void modificaArticoloinMenu(Articolo *, double);
+  // pizza->farina
+  void modificaArticoloinMenu(Pizza *, const Farina *);
+  // modifica ingredienti pizza (aggiungere, rimuovere)
+  void modificaArticoloinMenu(Pizza *, const Lista<Ingrediente *>*,
+                              const Lista<Ingrediente *>*);
+  // modifica extra
+  void modificaArticoloInMenu(Pizza *, double);
+  // modifica plastic tax bevanda
+  void modificaArticoloInMenu(Bevanda *, double);
+  // modifica capacità bevanda
+  void modificaArticoloInMenu(Bevanda *, float);
+  // modifica qta
+  void modificaConsumabileInInventario(Consumabile *, unsigned int);
+  // modifica costo
+  void modificaConsumabileInInventario(Consumabile *, double);
+  // modifica data acquisto
+  void modificaConsumabileInInventario(Consumabile *, const QDate &);
+  // modifica provenienza locale
+  void modificaConsumabileInInventario(Ingrediente *, bool);
+  // modifica tipo farina
+  void modificaConsumabileInInventario(Farina *, const string &);
+  // modifica plastic tax bevanda
+  void modificaConsumabileInInventario(Bevanda *, double);
+  // modifica capacità bevanda
+  void modificaConsumabileInInventario(Bevanda *, float);
+};
 #endif
