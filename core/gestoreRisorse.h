@@ -93,8 +93,8 @@ class GestoreRisorse {
   // pizza->farina
   void modificaArticoloinMenu(Pizza *, const Farina *);
   // modifica ingredienti pizza (aggiungere, rimuovere)
-  void modificaArticoloinMenu(Pizza *, const Lista<Ingrediente *>*,
-                              const Lista<Ingrediente *>*);
+  void modificaArticoloinMenu(Pizza *, const Lista<Ingrediente *> *,
+                              const Lista<Ingrediente *> *);
   // modifica extra
   void modificaArticoloInMenu(Pizza *, double);
   // modifica plastic tax bevanda

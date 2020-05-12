@@ -91,38 +91,79 @@ void GestoreRisorse::modificaArticoloinMenu(Articolo* daModificare,
   daModificare->setPrezzoBase(_prezzoBase);
 }
 
-void GestoreRisorse::modificaArticoloinMenu(Pizza* daModificare,
+void GestoreRisorse::modificaArticoloinMenu(Pizza* _pizza,
                                             const Farina* _farina) {
-  daModificare->setFarina(_farina);
+  _pizza->setFarina(_farina);
 }
 
 void GestoreRisorse::modificaArticoloinMenu(
-    Pizza* daModificare, const Lista<Ingrediente*>* daInserire,
+    Pizza* _pizza, const Lista<Ingrediente*>* daInserire,
     const Lista<Ingrediente*>* daRimuovere) {
   Lista<Ingrediente*>::const_Iterator it = daInserire->const_begin();
 
   if (!daInserire->isEmpty()) {
     // controllo presenza nuova farina
     if (dynamic_cast<Farina*>(*it)) {
-      daModificare->setFarina(static_cast<Farina*>(*it));
+      _pizza->setFarina(static_cast<Farina*>(*it));
       ++it;
     }
     while (it != daInserire->const_end()) {
-      if (!daModificare->checkIngrediente(*it))
-        daModificare->addIngrediente(*it);
+      if (!_pizza->checkIngrediente(*it)) _pizza->addIngrediente(*it);
       ++it;
     }
   }
   it = daRimuovere->const_begin();
   if (!daRimuovere->isEmpty()) {
     while (it != daRimuovere->const_end()) {
-      if (daModificare->checkIngrediente(*it))
-        daModificare->removeIngrediente(*it);
+      if (_pizza->checkIngrediente(*it)) _pizza->removeIngrediente(*it);
       ++it;
     }
   }
 }
 
-void GestoreRisorse::modificaArticoloInMenu(Pizza *, double){
-
+void GestoreRisorse::modificaArticoloInMenu(Pizza* _pizza, double _extra) {
+  _pizza->setExtra(_extra);
 }
+
+void GestoreRisorse::modificaArticoloInMenu(Bevanda* _bevanda, double _tax) {
+  _bevanda->setPlasticTax(_tax);
+}
+
+void GestoreRisorse::modificaArticoloInMenu(Bevanda* _bevanda,
+                                            float _capacita) {
+  _bevanda->setCapacita(_capacita);
+}
+
+void GestoreRisorse::modificaConsumabileInInventario(Consumabile* daModificare,
+                                                     unsigned int _qta) {
+  daModificare->setQuantita(_qta);
+}
+
+void GestoreRisorse::modificaConsumabileInInventario(Consumabile* daModificare,
+                                                     double _costo) {
+  daModificare->setCosto(_costo);
+}
+
+void GestoreRisorse::modificaConsumabileInInventario(Consumabile* daModificare,
+                                                     const QDate& _data) {
+  daModificare->setDataAcquisto(_data);
+}
+
+void GestoreRisorse::modificaConsumabileInInventario(Ingrediente* daModificare,
+                                                     bool _locale) {
+  daModificare->setLocal(_locale);
+}
+
+void GestoreRisorse::modificaConsumabileInInventario(Farina* daModificare,
+                                                     const std::string& _tipo) {
+  daModificare->setTipoFarina(_tipo);
+}
+
+void GestoreRisorse::modificaConsumabileInInventario(Bevanda* _bevanda,
+                                                     double _tax) {
+  _bevanda->setPlasticTax(_tax);
+}
+
+void GestoreRisorse::modificaConsumabileInInventario(Bevanda* _bevanda,
+                                                     float _capacita) {
+  _bevanda->setCapacita(_capacita);
