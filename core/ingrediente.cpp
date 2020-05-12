@@ -11,6 +11,8 @@ Ingrediente* Ingrediente::clone() const { return new Ingrediente(*this); }
 
 bool Ingrediente::isLocal() const { return locale; }
 
+void Ingrediente::setLocal(bool _locale) { locale = _locale; }
+
 double Ingrediente::getSpesa() const {
   return getQuantita() * getCosto() + 1 * isLocal();
 }

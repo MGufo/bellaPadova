@@ -12,9 +12,16 @@ class Ingrediente : public Consumabile {
               bool locale = false);
 
   /**
-   * @return: true se l'ingrediente è locale, false altrimenti
+   * @brief: Controllo provenienza ingrediente
+   * @return: TRUE se l'ingrediente è locale, FALSE altrimenti
    */
   bool isLocal() const;
+
+  /**
+   * @brief: Imposta la provenienza di un ingrediente
+   * @param: bool (TRUE se l'ingrediente è locale, FALSE altrimenti)
+   */
+  void setLocal(bool);
 
   /**
    * @brief: Ritorna la spesa sostenuta dalla pizzeria per acquistare
