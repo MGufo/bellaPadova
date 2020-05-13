@@ -16,6 +16,15 @@ class GestoreRisorse {
   Lista<Articolo *> menu;
   Lista<Consumabile *> inventario;
 
+  /**
+   * scorre una lista di consumabili
+   * ritorna TRUE se sono tutti disp
+   * ritorna FALSE se almeno uno non lo è
+   */
+  bool controlloDisponibilita(const Lista<const Consumabile *> *) const;
+  bool controlloConsumabile(const Lista<const Consumabile *> *,
+                            const Consumabile *) const;
+
  protected:
   /**
    * @brief: Controlla la disponibilità di un articolo nel menu
@@ -49,8 +58,8 @@ class GestoreRisorse {
   /**
    * @brief: Inserisce un consumabile nella lista di consumabili (inventario).
    * @param: Consumabile* (oggetto da inserire)
-   * @note: L'aggiunta di una bevanda all'inventario provoca la sua aggiunta al
-   * menu.
+   * @note: Non è possibile aggiungere un articolo se non sono presenti tutti i
+   * consumabili richiesti per la sua creazione.
    */
   void inserisciArticoloInMenu(Articolo *);
 
@@ -67,8 +76,7 @@ class GestoreRisorse {
   /**
    * @brief: Inserisce un consumabile nella lista di consumabili (inventario).
    * @param: Consumabile* (oggetto da inserire)
-   * @note: L'aggiunta di una bevanda all'inventario provoca la sua aggiunta al
-   * menu.
+   * @note: I consumabili da inserire vengono creati prima dell'inserimento.
    */
   void inserisciConsumabileInInventario(Consumabile *);
 
