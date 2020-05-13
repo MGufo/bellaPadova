@@ -10,6 +10,7 @@ class Risorsa {
   string nome;
   bool disponibilita;
 
+  // TODO: Add comments
  public:
   Risorsa(string, bool);
   virtual ~Risorsa() = default;
