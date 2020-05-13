@@ -51,15 +51,6 @@ void Pizza::removeIngrediente(Ingrediente* i) {
   }
 }
 
-bool Pizza::checkIngrediente(const Ingrediente* daCercare) const {
-  Lista<Ingrediente*>::const_Iterator it;
-  bool trovato = false;
-  for (it = ingredienti.const_begin();
-       it != ingredienti.const_end() && !trovato; ++it)
-    if (*it == daCercare) trovato = true;
-  return trovato;
-}
-
 Pizza* Pizza::clone() const { return new Pizza(*this); }
 
 // Ritorna il prezzo di vendita della pizza di invocazione.
@@ -70,4 +61,13 @@ double Pizza::getPrezzo() const {
     if ((*it)->isLocal()) somma += extra;
   }
   return getPrezzoBase() + somma;
+}
+
+const Lista<const Consumabile*>* Pizza::getComposizione() const {
+  Lista<const Consumabile*>* lista = new Lista<const Consumabile*>();
+  for (auto it = ingredienti.const_begin(); it != ingredienti.const_end();
+       ++it) {
+    lista->push_back(*it);
+  }
+  return lista;
 }

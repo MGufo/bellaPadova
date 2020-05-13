@@ -31,13 +31,21 @@ class Pizza : public Articolo {
   void addIngrediente(Ingrediente*);
   void addIngredienti(const Lista<Ingrediente*>&);
   void removeIngrediente(Ingrediente*);
-  bool checkIngrediente(const Ingrediente*) const;
+  
   void setExtra(double);
 
   // implementazione metodo di clonazione (classe diventa concreta)
   // metodo da utilizzare per aggiungere una pizza del menu tra gli articoli di
   // una comanda
   Pizza* clone() const;
-  double getPrezzo() const;
+
+  virtual double getPrezzo() const;
+
+  /**
+   * @brief: Ritorna la composizione (la lista di consumabili) di una pizza.
+   * @note: Usata nella classe GestoreRisorse per impostare correttamente la
+   * disponibilità della pizza.
+   */
+  virtual const Lista<const Consumabile*>* getComposizione() const;
 };
 #endif

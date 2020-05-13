@@ -3,6 +3,7 @@
 
 #include "articolo.h"
 #include "consumabile.h"
+#include "qontainer.h"
 
 class Bevanda : public Articolo, public Consumabile {
  private:
@@ -42,5 +43,12 @@ class Bevanda : public Articolo, public Consumabile {
    * @param: double (nuova capacità espressa in L)
    */
   void setCapacita(float);
+
+  /**
+   * @brief: Ritorna la composizione (la lista di consumabili) di una bevanda.
+   * @note: Usata nella classe GestoreRisorse per impostare correttamente la
+   * disponibilità della bevanda.
+   */
+  virtual const Lista<const Consumabile*>* getComposizione() const;
 };
 #endif

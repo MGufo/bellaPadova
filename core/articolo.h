@@ -33,5 +33,7 @@ class Articolo : virtual public Risorsa {
    * @return: double prezzo
    */
   virtual double getPrezzo() const = 0;
+
+  virtual const Lista<const Consumabile*>* getComposizione() const = 0;
 };
 #endif
