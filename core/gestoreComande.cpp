@@ -129,59 +129,11 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
 }
 
 void GestoreComande::modificaComanda(Comanda* daModificare,
-                                     Articolo* daRimuovere) {
-  daModificare->rimuoviArticolo(daRimuovere);
-}
-
-void GestoreComande::modificaComanda(Comanda* daModificare, Articolo* target,
-                                     int qtaDI) {
-  if (qtaDI > 0)
-    daModificare->inserisciArticolo(target, static_cast<unsigned int>(qtaDI));
-}
-
-// TODO: le liste passate come parametri possono avere al massimo 1 oggetto di
-// tipo farina che dev'essere anche il 1° ingrediente nella lista (dev'essere la
-// classe Pizzeria a garantire ciò)
-void GestoreComande::modificaComanda(Pizza* _pizza,
-                                     const Lista<Ingrediente*>* daAggiungere,
-                                     const Lista<Ingrediente*>* daRimuovere) {
-  Lista<Ingrediente*>::const_Iterator it = daAggiungere->const_begin();
-
-  if (!daAggiungere->isEmpty()) {
-    // controllo presenza nuova farina
-    if (dynamic_cast<Farina*>(*it)) {
-      _pizza->setFarina(static_cast<Farina*>(*it));
-      ++it;
-    }
-    while (it != daAggiungere->const_end()) {
-      if (!_pizza->checkIngrediente(*it)) _pizza->addIngrediente(*it);
-      ++it;
-    }
-  }
-  it = daRimuovere->const_begin();
-  if (!daRimuovere->isEmpty()) {
-    while (it != daRimuovere->const_end()) {
-      if (_pizza->checkIngrediente(*it)) _pizza->removeIngrediente(*it);
-      ++it;
-    }
-  }
-}
-
-void GestoreComande::modificaComanda(Comanda* daModificare,
-                                     const QTime& newOraConsegna) {
-  if (newOraConsegna >= QTime::currentTime()) {
-    Comanda* daInserire = new Comanda(*daModificare);
-    rimuoviComanda(daModificare);
-    daInserire->setOraConsegna(newOraConsegna);
-    inserisciComanda(daInserire);
-  }
-}
-
-void GestoreComande::modificaComanda(Comanda* daModificare,
-                                     const Contatto& newCliente) {
-  daModificare->modificaContatto(newCliente.getNome(),
-                                 newCliente.getIndirizzo(),
-                                 newCliente.getTelefono());
+                                     const Comanda* modificata) {
+  bool daReinserire =
+      daModificare->getOraConsegna() != modificata->getOraConsegna();
+  *daModificare = *modificata;
+  if (daReinserire) inserisciComanda(daModificare);
 }
 
 void GestoreComande::eseguiComanda() { ++current; }

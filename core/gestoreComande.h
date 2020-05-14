@@ -47,8 +47,6 @@ class GestoreComande {
   */
   void inserisciComanda(Comanda*);
 
-  void modificaComanda(Comanda*, Articolo*);
-
   /**
    * @brief: Inserimento, rimozione o modifica della quantità di un articolo
    * nella comanda.
@@ -57,33 +55,7 @@ class GestoreComande {
    * @param: int (nuova quantità dell'articolo da inserire/modificare; se 0 si
    * rimuove)
    */
-  void modificaComanda(Comanda*, Articolo*, int);
-
-  /**
-   * @brief: Modifica la lista di ingredienti di una pizza presente nella
-   * comanda.
-   * @param: Pizza* (Pizza da inserire/modificare)
-   * @param: const Lista& (lista di ingredienti da aggiungere alla pizza)
-   * @param: const Lista& (lista di ingredienti da rimuovere dalla pizza)
-   */
-  void modificaComanda(Pizza*, const Lista<Ingrediente*>*,
-                       const Lista<Ingrediente*>*);
-
-  /**
-   * @brief: Modifica l'orario di consegna di una comanda.
-   * @param: Comanda* (comanda da modificare)
-   * @param: const QTime& (Nuovo orario di consegna)
-   * @note: L'orario di consegna passato come parametro pùo non corrispondere
-   * all'orario associato alla comanda.
-   */
-  void modificaComanda(Comanda*, const QTime&);
-
-  /**
-   * @brief: Modifica le informazioni di recapito associate a una comanda.
-   * @param: Comanda* (comanda da modificare)
-   * @param: const Contatto& (Nuovo informazioni di recapito)
-   */
-  void modificaComanda(Comanda*, const Contatto&);
+  void modificaComanda(Comanda*, const Comanda*);
 
   /**
    * @brief: incrementa current ( "esegue" la prima comanda non completata)
