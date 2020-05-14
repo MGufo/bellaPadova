@@ -22,26 +22,17 @@ class GestoreRisorse {
    * ritorna FALSE se almeno uno non lo è
    */
   bool controlloDisponibilita(const Lista<const Consumabile *> *) const;
+
+  /**
+   * @brief: Scorre la lista alla ricerca di un consumabile
+   * @param: const Lista<const Consumabile *> (lista da scorrere)
+   * @param: const Consumabile* (consumabile da cercare nella lista)
+   * @returns: TRUE se il consumabile è presente nella lista, FALSE altrimenti.
+   */
   bool controlloConsumabile(const Lista<const Consumabile *> *,
                             const Consumabile *) const;
 
  protected:
-  /**
-   * @brief: Controlla la disponibilità di un articolo nel menu
-   * @param: Articolo* (articolo di cui si vuole conoscere la disponibilità)
-   * @return: TRUE se l'articolo è presente nel menu, FALSE altrimenti
-   */
-  bool controlloDisponibilita(const Articolo *) const;
-
-  /**
-   * @brief: Controlla la disponibilità di un consumabile nell'inventario
-   * @param: Consumabile* (consumabile di cui si vuole conoscere la
-   * disponibilità)
-   * @return: TRUE se il consumabile è presente nell'inventario, FALSE
-   * altrimenti
-   */
-  bool controlloDisponibilita(const Consumabile *) const;
-
   // HACK: La '&' dev'essere adiacente al nome del parametro!
   template <class T>
   typename Lista<T>::Iterator getPosizione(const Lista<T> &lista,
@@ -61,8 +52,9 @@ class GestoreRisorse {
    * @note: Non è possibile aggiungere un articolo se non sono presenti tutti i
    * consumabili richiesti per la sua creazione.
    */
-  void inserisciArticoloInMenu(Articolo *);
+  void inserisciArticolo(Articolo *);
 
+  void modificaArticolo(Articolo *, const Articolo *);
   /**
    * @brief: Rimuove un articolo dalla lista di articoli (menu).
    * @param: Articolo* (oggetto da rimuovere)
@@ -71,15 +63,19 @@ class GestoreRisorse {
    * @note: La rimozione di una bevanda provoca la sua rimozione anche
    * dall'inventario.
    */
-  void rimuoviArticoloDaMenu(Articolo *);
+  void rimuoviArticolo(Articolo *);
 
   /**
    * @brief: Inserisce un consumabile nella lista di consumabili (inventario).
    * @param: Consumabile* (oggetto da inserire)
    * @note: I consumabili da inserire vengono creati prima dell'inserimento.
    */
-  void inserisciConsumabileInInventario(Consumabile *);
+  void inserisciConsumabile(Consumabile *);
 
+  void modificaConsumabile(Consumabile *, const Consumabile *);
+
+  // FIXME: Ricordarsi di cancellare l'oggetto tramite delete dopo aver invocato
+  // il metodo.
   /**
    * @brief: Rimuove un consumabile dalla lista di consumabili (inventario).
    * @param: Consumabile* (oggetto da rimuovere)
@@ -89,39 +85,6 @@ class GestoreRisorse {
    * della stessa anche nella lista di articoli (menu).
    * @note: La rimozione della farina di default non è consentita.
    */
-  void rimuoviConsumabileDaInventario(Consumabile *);
-
-  // metodo viene invocato solo se nella vista viene modificato il nome di un
-  // articolo presente nel menu
-  void modificaArticoloinMenu(Articolo *, const string &);
-  // disponibilità
-  void modificaArticoloinMenu(Articolo *, bool);
-  // prezzo base
-  void modificaArticoloinMenu(Articolo *, double);
-  // pizza->farina
-  void modificaArticoloinMenu(Pizza *, const Farina *);
-  // modifica ingredienti pizza (aggiungere, rimuovere)
-  void modificaArticoloinMenu(Pizza *, const Lista<Ingrediente *> *,
-                              const Lista<Ingrediente *> *);
-  // modifica extra
-  void modificaArticoloInMenu(Pizza *, double);
-  // modifica plastic tax bevanda
-  void modificaArticoloInMenu(Bevanda *, double);
-  // modifica capacità bevanda
-  void modificaArticoloInMenu(Bevanda *, float);
-  // modifica qta
-  void modificaConsumabileInInventario(Consumabile *, unsigned int);
-  // modifica costo
-  void modificaConsumabileInInventario(Consumabile *, double);
-  // modifica data acquisto
-  void modificaConsumabileInInventario(Consumabile *, const QDate &);
-  // modifica provenienza locale
-  void modificaConsumabileInInventario(Ingrediente *, bool);
-  // modifica tipo farina
-  void modificaConsumabileInInventario(Farina *, const string &);
-  // modifica plastic tax bevanda
-  void modificaConsumabileInInventario(Bevanda *, double);
-  // modifica capacità bevanda
-  void modificaConsumabileInInventario(Bevanda *, float);
+  void rimuoviConsumabile(Consumabile *);
 };
 #endif
