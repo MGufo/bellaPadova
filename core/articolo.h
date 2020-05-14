@@ -1,6 +1,8 @@
 #ifndef ARTICOLO_H
 #define ARTICOLO_H
 
+#include "consumabile.h"
+#include "qontainer.h"
 #include "risorsa.h"
 
 class Articolo : virtual public Risorsa {
