@@ -3,6 +3,19 @@
 #include "farina.h"
 
 double Pizza::extra = 0.50;
+
+void Pizza::addIngrediente(Ingrediente* i) { ingredienti.push_back(i); }
+
+void Pizza::removeIngrediente(Ingrediente* i) {
+  for (Lista<Ingrediente*>::Iterator it = ingredienti.begin();
+       it != ingredienti.end(); ++it) {
+    if (*it == i) {
+      ingredienti.erase(it);
+      it = --(ingredienti.end());
+    }
+  }
+}
+
 // Costruttore di default, costruisce una pizza la cui lista di ingredienti
 // contiene un solo ingrediente (la farina)
 Pizza::Pizza(string nome, bool disponibilita, double prezzo)
@@ -20,6 +33,15 @@ Pizza::Pizza(const Pizza& p)
 // container
 // Pizza::~Pizza() { delete ingredienti; }
 
+bool Pizza::checkIngrediente(const Ingrediente* daCercare) const {
+  Lista<Ingrediente*>::const_Iterator it;
+  bool trovato = false;
+  for (it = ingredienti.const_begin();
+       it != ingredienti.const_end() && !trovato; ++it)
+    if (*it == daCercare) trovato = true;
+  return trovato;
+}
+
 const Lista<Ingrediente*>& Pizza::getIngredienti() const { return ingredienti; }
 
 /* Non si controlla che la lista di ingredienti sia vuota perchè nella
@@ -31,25 +53,35 @@ Farina* Pizza::getFarina() const {
 
 // aggiorna la tipologia di farina presente nella lista ingredienti della pizza
 void Pizza::setFarina(const Farina* f) {
-  static_cast<Farina*>(*(ingredienti.begin()))
-      ->setTipoFarina(f->getTipoFarina());
+  if (f)
+    static_cast<Farina*>(*(ingredienti.begin()))
+        ->setTipoFarina(f->getTipoFarina());
 }
 
-void Pizza::addIngrediente(Ingrediente* i) { ingredienti.push_back(i); }
+// eccezione lanciata se n° farine > 1 oppure se la farina da inserire è già
+// presente
 
-void Pizza::addIngredienti(const Lista<Ingrediente*>& ingr) {
-  for (auto it = ingr.begin(); it != ingr.end(); ++it) addIngrediente(*it);
-}
+// eccezione se ingrediente già presente
 
-void Pizza::removeIngrediente(Ingrediente* i) {
-  for (Lista<Ingrediente*>::Iterator it = ingredienti.begin();
-       it != ingredienti.end(); ++it) {
-    if (*it == i) {
-      ingredienti.erase(it);
-      it = --(ingredienti.end());
+void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
+  unsigned short nFarina = 0;
+  Lista<Ingrediente*>::const_Iterator farina;
+  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
+    if (dynamic_cast<Farina*>(*it)) {
+      farina = it;
+      ++nFarina;
     }
   }
+  if (nFarina > 1) throw;
+  if (getFarina() == (*farina)) throw;
+  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
+    if (dynamic_cast<Farina*>(*it)) setFarina(dynamic_cast<Farina*>(*it));
+    if (checkIngrediente(*it)) throw;
+    addIngrediente(*it);
+  }
 }
+
+void Pizza::rimuoviIngredienti(const Lista<Ingrediente*>&){};
 
 Pizza* Pizza::clone() const { return new Pizza(*this); }
 

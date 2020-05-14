@@ -9,6 +9,9 @@ class Pizza : public Articolo {
  private:
   Lista<Ingrediente*> ingredienti;
   static double extra;
+  bool checkIngrediente(const Ingrediente*) const;
+  void addIngrediente(Ingrediente*);
+  void removeIngrediente(Ingrediente*);
 
  public:
   // Costruttore non usiamo valori di default perchè vengono tutti sempre
@@ -26,12 +29,19 @@ class Pizza : public Articolo {
   Farina* getFarina() const;
   double getExtra() const;
 
-  // setter
+  /**
+   * @brief: Cambia la farina alla pizza di invocazione
+   * @param: const Farina* (nuova farina)
+   */
   void setFarina(const Farina*);
-  void addIngrediente(Ingrediente*);
-  void addIngredienti(const Lista<Ingrediente*>&);
-  void removeIngrediente(Ingrediente*);
-  
+
+  /**
+   * @brief: Aggiunge uno o più ingredienti alla pizza di invocazione.
+   * @param: const Lista<Ingrediente*>& (lista di ingredienti da aggiungere)
+   */
+  void aggiungiIngredienti(const Lista<Ingrediente*>&);
+  void rimuoviIngredienti(const Lista<Ingrediente*>&);
+
   void setExtra(double);
 
   // implementazione metodo di clonazione (classe diventa concreta)
