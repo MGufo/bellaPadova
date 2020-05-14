@@ -46,7 +46,12 @@ void Comanda::setOraConsegna(QTime _oraConsegna) { oraConsegna = _oraConsegna; }
 
 // sottocaso 1: aggiungere un nuovo articolo non presente in comanda
 void Comanda::inserisciArticolo(Articolo* _daInserire, unsigned int _qtaDI) {
-  if (_daInserire && _qtaDI > 0) ordinazione[_daInserire] = _qtaDI;
+  if (_daInserire) ordinazione[_daInserire] = _qtaDI;
+}
+
+void Comanda::modificaQuantitaArticolo(Articolo* daModificare,
+                                       unsigned int qta) {
+  inserisciArticolo(daModificare, qta);
 }
 
 // sottocaso 4: rimuovere un articolo presente in comanda

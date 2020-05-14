@@ -65,10 +65,18 @@ class Comanda {
 
   /**
    * @brief: Aggiunge un articolo alla comanda o aumenta la sua quantità
-   * @param: Articolo* (Articolo da aggiungere/modificare)
-   * @param: int (Quantità articolo da aggiungere/modificare)
+   * @param: Articolo* (Articolo da aggiungere)
+   * @param: unsigned int (Quantità articolo da aggiungere)
    */
-  void inserisciArticolo(Articolo*, unsigned int);
+  void inserisciArticolo(Articolo*, unsigned int = 1);
+
+  void modificaArticolo(Articolo*);
+  /**
+   * @brief: Modifica la quantità di un articolo
+   * @param: Articolo* (Articolo da modificare)
+   * @param: unsigned int (nuova quantità)
+   */
+  void modificaQuantitaArticolo(Articolo*, unsigned int);
 
   /**
    * @brief: Rimuove un articolo presente nella comanda
