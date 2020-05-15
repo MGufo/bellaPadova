@@ -48,14 +48,22 @@ const Lista<Ingrediente*>& Pizza::getIngredienti() const { return ingredienti; }
 costruzione di una nuova pizza al costruttore è garantito il passaggio di una
 lista di ingredienti non vuota */
 Farina* Pizza::getFarina() const {
-  return static_cast<Farina*>(*(ingredienti.begin()));
+  if (!ingredienti.isEmpty())
+    return static_cast<Farina*>(*(ingredienti.begin()));
+  return nullptr;
 }
 
 // aggiorna la tipologia di farina presente nella lista ingredienti della pizza
 void Pizza::setFarina(const Farina* f) {
-  if (f)
-    static_cast<Farina*>(*(ingredienti.begin()))
-        ->setTipoFarina(f->getTipoFarina());
+  if (f) {
+    if (!ingredienti.isEmpty())
+      static_cast<Farina*>(*(ingredienti.begin()))
+          ->setTipoFarina(f->getTipoFarina());
+    else
+      // FIXME: Correggere implementazione set/get Farina, causa SEGFAULT quando
+      // si usa aggiungiIngredienti() a pizza appena creata (con lista vuota)
+      ingredienti.push_back((f));
+  }
 }
 
 void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
@@ -69,7 +77,8 @@ void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
     }
   }
   if (nFarina > 1) throw;
-  if (farina.isValid() && getFarina() == (*farina)) throw;
+
+  if (!(farina.isValid()) && getFarina() == (*farina)) throw;
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
     if (dynamic_cast<Farina*>(*it)) setFarina(dynamic_cast<Farina*>(*it));
     if (checkIngrediente(*it)) throw;
