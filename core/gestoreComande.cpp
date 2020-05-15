@@ -41,10 +41,6 @@ bool GestoreComande::testInsert(const Comanda* precedente,
   }
 }
 
-bool GestoreComande::testCurrent(const Lista<Comanda*>::Iterator it) const {
-  return current == it;
-}
-
 void GestoreComande::inserisciComanda(Comanda* daInserire) {
   if (daInserire) {
     if (QTime::currentTime() > daInserire->getOrarioInizioPreparazione()) {

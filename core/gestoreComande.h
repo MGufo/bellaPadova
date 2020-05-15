@@ -21,12 +21,6 @@ class GestoreComande {
    */
   bool testInsert(const Comanda*, const Comanda*, const Comanda*);
 
-  /**
-   * @brief: Controlla se current e il parametro puntano alla stessa comanda.
-   * @param: const Iterator (iteratore a una comanda presente in bacheca).
-   */
-  bool testCurrent(const Lista<Comanda*>::Iterator) const;
-
  public:
   GestoreComande();
 
