@@ -35,7 +35,7 @@ void GestoreRisorse::inserisciArticolo(Articolo* daInserire) {
 void GestoreRisorse::rimuoviArticolo(Articolo* daRimuovere) {
   if (daRimuovere) {
     Lista<Articolo*>::Iterator it = getPosizione(menu, daRimuovere);
-    if (it != menu.end()) {
+    if (it.isValid()) {
       menu.erase(it);
     }
   }

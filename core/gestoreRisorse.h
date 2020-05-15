@@ -33,6 +33,7 @@ class GestoreRisorse {
                             const Consumabile *) const;
 
  protected:
+  // TODO: spostare la funzione nel container
   // HACK: La '&' dev'essere adiacente al nome del parametro!
   template <class T>
   typename Lista<T>::Iterator getPosizione(const Lista<T> &lista,
