@@ -2,7 +2,8 @@
 #define QONTAINER_H
 
 #include <iostream>
-
+// TODO: Aggiungere funzione di ricerca (Lista, oggetto) che ritorna T o F
+// se l'oggetto è presente o no
 template <class T>
 class Lista {
   friend class Iterator;
@@ -145,6 +146,8 @@ class Lista {
         itrPrevious = nullptr;
       return *this;
     }
+
+    bool isValid() const { return (itrCurrent != nullptr); }
   };
 
   Lista& operator=(const Lista& v) {
