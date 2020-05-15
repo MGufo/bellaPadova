@@ -59,10 +59,12 @@ void Pizza::setFarina(const Farina* f) {
     if (!ingredienti.isEmpty())
       static_cast<Farina*>(*(ingredienti.begin()))
           ->setTipoFarina(f->getTipoFarina());
-    else
+    else {
       // FIXME: Correggere implementazione set/get Farina, causa SEGFAULT quando
       // si usa aggiungiIngredienti() a pizza appena creata (con lista vuota)
-      ingredienti.push_back((f));
+      Farina* newFarina = new Farina();
+      ingredienti.push_back((newFarina));
+    }
   }
 }
 
@@ -77,12 +79,14 @@ void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
     }
   }
   if (nFarina > 1) throw;
-
-  if (!(farina.isValid()) && getFarina() == (*farina)) throw;
+  if (nFarina > 0 && !(farina.isValid()) && getFarina() == (*farina)) throw;
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
-    if (dynamic_cast<Farina*>(*it)) setFarina(dynamic_cast<Farina*>(*it));
-    if (checkIngrediente(*it)) throw;
-    addIngrediente(*it);
+    if (dynamic_cast<Farina*>(*it))
+      setFarina(dynamic_cast<Farina*>(*it));
+    else {
+      if (checkIngrediente(*it)) throw;
+      addIngrediente(*it);
+    }
   }
 }
 
