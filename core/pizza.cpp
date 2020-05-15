@@ -58,22 +58,18 @@ void Pizza::setFarina(const Farina* f) {
         ->setTipoFarina(f->getTipoFarina());
 }
 
-// eccezione lanciata se n° farine > 1 oppure se la farina da inserire è già
-// presente
-
-// eccezione se ingrediente già presente
-
 void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
   unsigned short nFarina = 0;
   Lista<Ingrediente*>::const_Iterator farina;
-  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
+  for (auto it = ingr.const_begin(); it != ingr.const_end() && nFarina <= 1;
+       ++it) {
     if (dynamic_cast<Farina*>(*it)) {
       farina = it;
       ++nFarina;
     }
   }
   if (nFarina > 1) throw;
-  if (getFarina() == (*farina)) throw;
+  if (farina.isValid() && getFarina() == (*farina)) throw;
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
     if (dynamic_cast<Farina*>(*it)) setFarina(dynamic_cast<Farina*>(*it));
     if (checkIngrediente(*it)) throw;
@@ -81,7 +77,15 @@ void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
   }
 }
 
-void Pizza::rimuoviIngredienti(const Lista<Ingrediente*>&){};
+// se l'ingr non c'è
+// se l'ingr è una farina
+void Pizza::rimuoviIngredienti(const Lista<Ingrediente*>& ingr) {
+  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
+    if (dynamic_cast<Farina*>(*it)) throw;
+    if (!checkIngrediente(*it)) throw;
+    removeIngrediente(*it);
+  }
+}
 
 Pizza* Pizza::clone() const { return new Pizza(*this); }
 
