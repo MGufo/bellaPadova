@@ -59,7 +59,10 @@ void Pizza::setFarina(Farina* f) {
   if (f) {
     if (!ingredienti.isEmpty()) {
       Lista<Ingrediente*>::Iterator it = ingredienti.find(getFarina());
-      if (it.isValid()) *it = f;
+      if (it.isValid())
+        *it = f;
+      else
+        ingredienti.push_back((f));
     } else
       ingredienti.push_back((f));
   }

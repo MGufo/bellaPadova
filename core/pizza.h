@@ -33,13 +33,17 @@ class Pizza : public Articolo {
    * @brief: Cambia la farina alla pizza di invocazione
    * @param: const Farina* (nuova farina)
    */
-  void setFarina(const Farina*);
+  void setFarina(Farina*);
 
+  // TODO: Aggiungere precondizione di aggiungiIngredienti() anche nella classe
+  // Pizzeria
   /**
    * @brief: Aggiunge uno o più ingredienti alla pizza di invocazione.
    * @param: const Lista<Ingrediente*>& (lista di ingredienti da aggiungere)
+   * @note: PRE: La lista non deve contenere oggetti con tipo 'Farina'
    */
   void aggiungiIngredienti(const Lista<Ingrediente*>&);
+
   void rimuoviIngredienti(const Lista<Ingrediente*>&);
 
   void setExtra(double);
