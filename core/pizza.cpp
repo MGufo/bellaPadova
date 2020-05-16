@@ -7,13 +7,8 @@ double Pizza::extra = 0.50;
 void Pizza::addIngrediente(Ingrediente* i) { ingredienti.push_back(i); }
 
 void Pizza::removeIngrediente(Ingrediente* i) {
-  for (Lista<Ingrediente*>::Iterator it = ingredienti.begin();
-       it != ingredienti.end(); ++it) {
-    if (*it == i) {
-      ingredienti.erase(it);
-      it = --(ingredienti.end());
-    }
-  }
+  Lista<Ingrediente*>::Iterator it = ingredienti.find(i);
+  if (it.isValid()) ingredienti.erase(it);
 }
 
 // Costruttore di default, costruisce una pizza la cui lista di ingredienti
