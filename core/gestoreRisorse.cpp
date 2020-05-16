@@ -34,7 +34,7 @@ void GestoreRisorse::inserisciArticolo(Articolo* daInserire) {
 
 void GestoreRisorse::rimuoviArticolo(Articolo* daRimuovere) {
   if (daRimuovere) {
-    Lista<Articolo*>::Iterator it = getPosizione(menu, daRimuovere);
+    Lista<Articolo*>::Iterator it = menu.find(daRimuovere);
     if (it.isValid()) {
       menu.erase(it);
     }
@@ -56,7 +56,7 @@ void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
       if (it != menu.begin()) --it;
       delete lista;
     }
-    inventario.erase(getPosizione(inventario, daRimuovere));
+    inventario.erase(inventario.find(daRimuovere));
   }
 }
 
