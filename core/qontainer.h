@@ -158,9 +158,13 @@ class Lista {
     return *this;
   }
 
-  // const T& operator*() const { return ptr->info; }
-
-  // T& operator*() const { return ptr->info; }
+  // HACK: la & dev'essere adiacente a p!
+  Lista<T>::Iterator find(const T &valore) const {
+    Lista<T>::Iterator it;
+    for (it = begin(); it != end(); ++it)
+      if (*it == valore) return it;
+    return it;
+  }
 
   bool isEmpty() const { return ptr == nullptr; }
 
