@@ -44,46 +44,30 @@ bool Pizza::checkIngrediente(const Ingrediente* daCercare) const {
 
 const Lista<Ingrediente*>& Pizza::getIngredienti() const { return ingredienti; }
 
-/* Non si controlla che la lista di ingredienti sia vuota perchè nella
-costruzione di una nuova pizza al costruttore è garantito il passaggio di una
-lista di ingredienti non vuota */
 Farina* Pizza::getFarina() const {
-  if (!ingredienti.isEmpty())
-    return static_cast<Farina*>(*(ingredienti.begin()));
+  if (!ingredienti.isEmpty()) {
+    for (auto it = ingredienti.const_begin(); it != ingredienti.const_end();
+         ++it)
+      if (dynamic_cast<Farina*>(*it)) return static_cast<Farina*>(*it);
+  }
   return nullptr;
 }
 
-// aggiorna la tipologia di farina presente nella lista ingredienti della pizza
-void Pizza::setFarina(const Farina* f) {
+// aggiorna la tipologia di farina presente nella lista ingredienti della
+// pizza
+void Pizza::setFarina(Farina* f) {
   if (f) {
-    if (!ingredienti.isEmpty())
-      static_cast<Farina*>(*(ingredienti.begin()))
-          ->setTipoFarina(f->getTipoFarina());
-    else {
-      // FIXME: Correggere implementazione set/get Farina, causa SEGFAULT quando
-      // si usa aggiungiIngredienti() a pizza appena creata (con lista vuota)
-      Farina* newFarina = new Farina();
-      ingredienti.push_back((newFarina));
-    }
+    if (!ingredienti.isEmpty()) {
+      Lista<Ingrediente*>::Iterator it = ingredienti.find(getFarina());
+      if (it.isValid()) *it = f;
+    } else
+      ingredienti.push_back((f));
   }
 }
 
 void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
-  unsigned short nFarina = 0;
-  Lista<Ingrediente*>::const_Iterator farina;
-  for (auto it = ingr.const_begin(); it != ingr.const_end() && nFarina <= 1;
-       ++it) {
-    if (dynamic_cast<Farina*>(*it)) {
-      farina = it;
-      ++nFarina;
-    }
-  }
-  if (nFarina > 1) throw;
-  if (nFarina > 0 && !(farina.isValid()) && getFarina() == (*farina)) throw;
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
-    if (dynamic_cast<Farina*>(*it))
-      setFarina(dynamic_cast<Farina*>(*it));
-    else {
+    if (!dynamic_cast<Farina*>(*it)) {
       if (checkIngrediente(*it)) throw;
       addIngrediente(*it);
     }
