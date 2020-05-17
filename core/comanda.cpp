@@ -59,10 +59,8 @@ void Comanda::rimuoviArticolo(Articolo* _daSostituire) {
   ordinazione.erase(_daSostituire);
 }
 
-void Comanda::modificaContatto(string _nome, string _indirizzo, string _tel) {
-  if (_nome != "") cliente.setNome(_nome);
-  if (_indirizzo != "") cliente.setIndirizzo(_indirizzo);
-  if (_tel != "") cliente.setTelefono(_tel);
+void Comanda::modificaContatto(const Contatto* modificato) {
+  cliente = *modificato;
 }
 
 bool Comanda::operator<(const Comanda& c) const {

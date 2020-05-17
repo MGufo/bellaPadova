@@ -90,7 +90,7 @@ class Comanda {
    * @param: string (nuovo indirizzo)
    * @param: string (nuovo telefono)
    */
-  void modificaContatto(string = "", string = "", string = "");
+  void modificaContatto(const Contatto*);
 
   bool operator<(const Comanda&) const;
 
