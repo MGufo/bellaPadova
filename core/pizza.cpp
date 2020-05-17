@@ -63,13 +63,15 @@ void Pizza::setFarina(Farina* f) {
   }
 }
 
+// TODO: Messaggio da mostrare come eccezione nel caso in cui 1+ ingredienti
+// siano già presenti o siano di tipo Farina*
+// "inseriti n-1 ingredienti, inserimento del n-esimo non consentito"
 void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
-  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
-    if (!dynamic_cast<Farina*>(*it)) {
-      if (checkIngrediente(*it)) throw;
-      addIngrediente(*it);
-    }
-  }
+  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it)
+    if (dynamic_cast<Farina*>(*it) || (checkIngrediente(*it))) throw;
+
+  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it)
+    addIngrediente(*it);
 }
 
 // se l'ingr non c'è
