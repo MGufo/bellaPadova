@@ -15,8 +15,8 @@ class Contatto {
   string telefono;
 
  public:
-  Contatto(string ="", string ="", string ="");
-
+  Contatto(string = "", string = "", string = "");
+  Contatto(const Contatto&);
   /**
    * @brief: Ritorna il nome del cliente
    * @return: string (nome)
@@ -39,7 +39,7 @@ class Contatto {
    * @brief: Ritorna tutte le informazioni del cliente come lista di stringhe
    * @return: List<const string>& (nome, indirizzo, telefono)
    */
-  const Lista<const string>& getContatto() const;
+  const Lista<string>& getContatto() const;
 
   /**
    * @brief: Modifica il nome del cliente
