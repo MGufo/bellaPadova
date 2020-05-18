@@ -2,11 +2,17 @@
 #define QONTAINER_H
 
 #include <iostream>
-// TODO: Aggiungere funzione di ricerca (Lista, oggetto) che ritorna T o F
-// se l'oggetto è presente o no
+
+template <class T>
+class Lista;
+
+template <typename T>
+std::ostream& operator<<(std::ostream&, const Lista<T>&);
+
 template <class T>
 class Lista {
   friend class Iterator;
+  friend std::ostream& operator<< <T>(std::ostream&, const Lista&);
 
  private:
   class Nodo {
@@ -273,6 +279,16 @@ class Lista {
   }
 };
 
-// TODO: operatore di stampa
+template <class T>
+std::ostream& operator<<(std::ostream& os, const Lista<T>& lista) {
+  typename Lista<T>::const_Iterator it;
+  os << "La lista contiene: ";
+  os << "[";
+  for (it = lista.const_begin(); it != lista.const_end(); ++it) {
+    os << *it << ((it == --(lista.const_end())) ? "" : ", ");
+  }
+  os << "] \n";
+  return os;
+}
 
 #endif
