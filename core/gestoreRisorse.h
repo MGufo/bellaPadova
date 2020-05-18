@@ -75,5 +75,8 @@ class GestoreRisorse {
    * @note: La rimozione della farina di default non è consentita.
    */
   void rimuoviConsumabile(Consumabile *);
+
+  // TODO: Discutere aggiunta metodi getMenu() e getInventario() per ottenere le
+  // rispettive liste
 };
 #endif
