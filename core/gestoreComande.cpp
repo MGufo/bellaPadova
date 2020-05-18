@@ -120,8 +120,6 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
       }
     }
   }
-  // TODO: Scrivere metodo controlloOrario() per fare il controllo validita
-  // degli orari e rimuovere il codice ripetuto
 }
 
 void GestoreComande::modificaComanda(Comanda* daModificare,
@@ -151,4 +149,4 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
 
 const Comanda* GestoreComande::getComandaCorrente() const { return *current; }
 
-Lista<Comanda*> GestoreComande::getBacheca() { return bacheca; }
+const Lista<Comanda*>& GestoreComande::getBacheca() const { return bacheca; }
