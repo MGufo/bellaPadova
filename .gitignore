@@ -1,7 +1,8 @@
-cmake-build-debug/
-CMakelists.txt
-.idea/
-.vscode/
 build/
 bellaPadova.pro
 bellaPadova.pro.user
+cmake-build-debug/
+CMakelists.txt
+.css/
+.idea/
+.vscode/
