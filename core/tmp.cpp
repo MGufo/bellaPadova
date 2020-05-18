@@ -2,8 +2,8 @@ class Pizzeria {
   void modifica(Articolo* toModify, Articolo* modified) {
     gestoreRisorse.modifica(Articolo * toModify, Articolo * modified);
   }
-
-} class GestoreRisorse {
+};
+class GestoreRisorse {
   List<Consumabili> consumabili;
 
   // ver 1
@@ -13,11 +13,10 @@ class Pizzeria {
   }
   else {  // replace con disp=false
   }
-
-}
-    //ver 2
-    //checkDisponibilitàConsumabili sarebbe funz privata
-    void modifica(Articolo* toModify, Articolo * modified) {
+};
+// ver 2
+// checkDisponibilitàConsumabili sarebbe funz privata
+void modifica(Articolo* toModify, Articolo* modified) {
   if (checkDisponibilitàConsumabili(modified.getConsumabili()))
   // replace e setta disp=true
 }
@@ -63,4 +62,30 @@ class Bevanda {
   }
   // ver 2
   List<Consumabili> getConsumabili() { return new List<Consumabili>(this); }
+}
+------------
+
+void GestoreComande::modificaComanda(Pizza* _pizza,
+                                     const Lista<Ingrediente*>* daAggiungere,
+                                     const Lista<Ingrediente*>* daRimuovere) {
+  Lista<Ingrediente*>::const_Iterator it = daAggiungere->const_begin();
+
+  if (!daAggiungere->isEmpty()) {
+    // controllo presenza nuova farina
+    if (dynamic_cast<Farina*>(*it)) {
+      _pizza->setFarina(static_cast<Farina*>(*it));
+      ++it;
+    }
+    while (it != daAggiungere->const_end()) {
+      if (!_pizza->checkIngrediente(*it)) _pizza->addIngrediente(*it);
+      ++it;
+    }
+  }
+  it = daRimuovere->const_begin();
+  if (!daRimuovere->isEmpty()) {
+    while (it != daRimuovere->const_end()) {
+      if (_pizza->checkIngrediente(*it)) _pizza->removeIngrediente(*it);
+      ++it;
+    }
+  }
 }

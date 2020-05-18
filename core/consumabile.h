@@ -51,6 +51,8 @@ class Consumabile : virtual public Risorsa {
   void setDataAcquisto(const QDate&);
 
   virtual double getSpesa() const = 0;
+
+  // TODO: Bisogna aggiungere l'override di clone() ?
 };
 
 #endif
