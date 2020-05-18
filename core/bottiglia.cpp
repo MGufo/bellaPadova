@@ -10,5 +10,5 @@ Bottiglia::Bottiglia(string nome, bool disponibilita, double prezzo,
 Bottiglia* Bottiglia::clone() const { return new Bottiglia(*this); }
 
 double Bottiglia::getPrezzo() const {
-  return getPrezzoBase() + getPlasticTax() * (1 / getCapacitaBevanda());
+  return getPrezzoBase() + getPlasticTax() * (1 / getCapacita());
 }
