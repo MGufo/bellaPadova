@@ -10,7 +10,7 @@ Bevanda::Bevanda(string nome, bool disponibilita, double prezzo,
 
 double Bevanda::getSpesa() const { return getQuantita() * getCosto(); }
 
-double Bevanda::getCapacitaBevanda() const { return capacita; }
+double Bevanda::getCapacita() const { return capacita; }
 
 double Bevanda::getPlasticTax() const { return plasticTax; }
 

@@ -24,7 +24,7 @@ class Bevanda : public Articolo, public Consumabile {
    * @brief: Ritorna la capacità di una bevanda
    * @return: double (capacità bevanda in L)
    */
-  double getCapacitaBevanda() const;
+  double getCapacita() const;
 
   /**
    * @brief: Ritorna la "plastic tax"
@@ -50,5 +50,7 @@ class Bevanda : public Articolo, public Consumabile {
    * disponibilità della bevanda.
    */
   virtual const Lista<const Consumabile*>* getComposizione() const;
+
+  // TODO: Aggiungere clone() ?
 };
 #endif
