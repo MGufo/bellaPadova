@@ -50,7 +50,5 @@ class Bevanda : public Articolo, public Consumabile {
    * disponibilità della bevanda.
    */
   virtual const Lista<const Consumabile*>* getComposizione() const;
-
-  // TODO: Aggiungere clone() ?
 };
 #endif

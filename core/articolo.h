@@ -37,7 +37,5 @@ class Articolo : virtual public Risorsa {
   virtual double getPrezzo() const = 0;
 
   virtual const Lista<const Consumabile*>* getComposizione() const = 0;
-
-  // TODO: Bisogna aggiungere clone() ?
 };
 #endif
