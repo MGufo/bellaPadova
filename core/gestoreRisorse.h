@@ -76,7 +76,8 @@ class GestoreRisorse {
    */
   void rimuoviConsumabile(Consumabile *);
 
-  // TODO: Discutere aggiunta metodi getMenu() e getInventario() per ottenere le
-  // rispettive liste
+  const Lista<Articolo *> &getMenu() const;
+
+  const Lista<Consumabile *> &getInventario() const;
 };
 #endif

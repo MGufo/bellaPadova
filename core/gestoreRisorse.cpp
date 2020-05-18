@@ -77,3 +77,9 @@ void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
     delete lista;
   }
 }
+
+const Lista<Articolo*>& GestoreRisorse::getMenu() const { return menu; }
+
+const Lista<Consumabile*>& GestoreRisorse::getInventario() const {
+  return inventario;
+}
