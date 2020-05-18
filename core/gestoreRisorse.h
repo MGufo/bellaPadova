@@ -32,18 +32,6 @@ class GestoreRisorse {
   bool controlloConsumabile(const Lista<const Consumabile *> *,
                             const Consumabile *) const;
 
- protected:
-  // TODO: spostare la funzione nel container
-  // HACK: La '&' dev'essere adiacente al nome del parametro!
-  /* template <class T>
-  typename Lista<T>::Iterator getPosizione(const Lista<T> &lista,
-                                           const T &valore) const {
-    typename Lista<T>::Iterator it;
-    for (it = lista.begin(); it != lista.end(); ++it)
-      if (*it == valore) return it;
-    return it;
-  } */
-
  public:
   GestoreRisorse();
 
