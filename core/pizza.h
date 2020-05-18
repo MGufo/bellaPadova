@@ -21,9 +21,6 @@ class Pizza : public Articolo {
   // Costruttore di copia,
   Pizza(const Pizza&);
 
-  // Distruttore
-  // ~Pizza();
-
   // getter
   const Lista<Ingrediente*>& getIngredienti() const;
   Farina* getFarina() const;
@@ -35,8 +32,6 @@ class Pizza : public Articolo {
    */
   void setFarina(Farina*);
 
-  // TODO: Aggiungere precondizione di aggiungiIngredienti() anche nella classe
-  // Pizzeria
   /**
    * @brief: Aggiunge uno o più ingredienti alla pizza di invocazione.
    * @param: const Lista<Ingrediente*>& (lista di ingredienti da aggiungere)
