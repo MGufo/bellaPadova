@@ -11,22 +11,15 @@ void Pizza::removeIngrediente(Ingrediente* i) {
   if (it.isValid()) ingredienti.erase(it);
 }
 
-// Costruttore di default, costruisce una pizza la cui lista di ingredienti
-// contiene un solo ingrediente (la farina)
+// costruisce una pizza la cui lista di ingredienti contiene solo la farina
 Pizza::Pizza(string nome, bool disponibilita, double prezzo)
     : Risorsa(nome, disponibilita),
       Articolo(nome, disponibilita, prezzo),
       ingredienti(Lista<Ingrediente*>()) {}
 
-// Costruttore di copia;
-// Copia profonda implementata tramite metodo copy presente nel container
+// Copia profonda implementata tramite metodo copy del container
 Pizza::Pizza(const Pizza& p)
     : Risorsa(p), Articolo(p), ingredienti(p.getIngredienti()) {}
-
-// Distruttore;
-// Distruzione profonda implementata tramite metodo destroy presente nel
-// container
-// Pizza::~Pizza() { delete ingredienti; }
 
 bool Pizza::checkIngrediente(const Ingrediente* daCercare) const {
   Lista<Ingrediente*>::const_Iterator it;
@@ -48,8 +41,6 @@ Farina* Pizza::getFarina() const {
   return nullptr;
 }
 
-// aggiorna la tipologia di farina presente nella lista ingredienti della
-// pizza
 void Pizza::setFarina(Farina* f) {
   if (f) {
     if (!ingredienti.isEmpty()) {
@@ -63,9 +54,10 @@ void Pizza::setFarina(Farina* f) {
   }
 }
 
-// TODO: Messaggio da mostrare come eccezione nel caso in cui 1+ ingredienti
-// siano già presenti o siano di tipo Farina*
-// "inseriti n-1 ingredienti, inserimento del n-esimo non consentito"
+// TODO: Messaggio da mostrare come eccezione nel caso in cui l'ingrediente sia
+// già presente o sia di tipo Farina*:
+// - "Ingrediente già presente nella lista di ingredienti"
+// - "La lista di ingredienti non deve contenere Farine"
 void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it)
     if (dynamic_cast<Farina*>(*it) || (checkIngrediente(*it))) throw;
@@ -74,8 +66,8 @@ void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
     addIngrediente(*it);
 }
 
-// se l'ingr non c'è
-// se l'ingr è una farina
+// "Ingrediente già rimosso dalla lista di ingredienti"
+// "Rimozione della farina dalla lista di ingredienti non consentita"
 void Pizza::rimuoviIngredienti(const Lista<Ingrediente*>& ingr) {
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
     if (dynamic_cast<Farina*>(*it)) throw;
