@@ -41,7 +41,6 @@ void GestoreRisorse::rimuoviArticolo(Articolo* daRimuovere) {
   }
 }
 
-// TODO: Verifica tipo istanziazione container in push_back
 void GestoreRisorse::inserisciConsumabile(Consumabile* daInserire) {
   if (daInserire) {
     inventario.push_back(daInserire);
