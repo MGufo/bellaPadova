@@ -41,6 +41,8 @@ bool GestoreComande::testInsert(const Comanda* precedente,
   }
 }
 
+// HACK: La comanda può contenere sia pizze di copia dal menù che pizze
+// "temporanee", cioè create appositamente per la comanda
 void GestoreComande::inserisciComanda(Comanda* daInserire) {
   if (daInserire) {
     if (QTime::currentTime() > daInserire->getOrarioInizioPreparazione()) {

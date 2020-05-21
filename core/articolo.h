@@ -24,6 +24,7 @@ class Articolo : virtual public Risorsa {
    */
   double getPrezzoBase() const;
 
+  //TODO: Add exception se prezzo <= 0
   /**
    * @brief: Imposta il prezzo base di un articolo
    * @param: const double& (nuovo prezzo)
