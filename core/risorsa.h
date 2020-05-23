@@ -25,6 +25,7 @@ class Risorsa {
    */
   bool getDisponibilita() const;
 
+  // TODO: Add exception se stringa vuota
   /**
    * @brief: Modifica il nome dell'oggetto
    * @param: const string& (nuovo nome)
