@@ -88,8 +88,8 @@ double Pizza::getPrezzo() const {
   return getPrezzoBase() + somma;
 }
 
-const Lista<const Consumabile*>* Pizza::getComposizione() const {
-  Lista<const Consumabile*>* lista = new Lista<const Consumabile*>();
+const Lista<Consumabile*>* Pizza::getComposizione() const {
+  Lista<Consumabile*>* lista = new Lista<Consumabile*>();
   for (auto it = ingredienti.const_begin(); it != ingredienti.const_end();
        ++it) {
     lista->push_back(*it);

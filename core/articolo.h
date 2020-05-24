@@ -24,7 +24,7 @@ class Articolo : virtual public Risorsa {
    */
   double getPrezzoBase() const;
 
-  //TODO: Add exception se prezzo <= 0
+  // TODO: Add exception se prezzo <= 0
   /**
    * @brief: Imposta il prezzo base di un articolo
    * @param: const double& (nuovo prezzo)
@@ -37,6 +37,6 @@ class Articolo : virtual public Risorsa {
    */
   virtual double getPrezzo() const = 0;
 
-  virtual const Lista<const Consumabile*>* getComposizione() const = 0;
+  virtual const Lista<Consumabile*>* getComposizione() const = 0;
 };
 #endif
