@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "pizzeria.h"
+#include "../core/pizzeria.h"
 
 class Controller : public QObject {
   Q_OBJECT
