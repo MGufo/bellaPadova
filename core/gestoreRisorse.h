@@ -21,7 +21,7 @@ class GestoreRisorse {
    * ritorna TRUE se sono tutti disp
    * ritorna FALSE se almeno uno non lo è
    */
-  bool controlloDisponibilita(const Lista<const Consumabile *> *) const;
+  bool controlloDisponibilita(const Lista<Consumabile *> *) const;
 
   /**
    * @brief: Scorre la lista alla ricerca di un consumabile
@@ -29,8 +29,7 @@ class GestoreRisorse {
    * @param: const Consumabile* (consumabile da cercare nella lista)
    * @returns: TRUE se il consumabile è presente nella lista, FALSE altrimenti.
    */
-  bool controlloConsumabile(const Lista<const Consumabile *> *,
-                            const Consumabile *) const;
+  bool controlloConsumabile(const Lista<Consumabile *> *, Consumabile *) const;
 
  public:
   GestoreRisorse();
@@ -68,8 +67,8 @@ class GestoreRisorse {
   /**
    * @brief: Rimuove un consumabile dalla lista di consumabili (inventario).
    * @param: Consumabile* (oggetto da rimuovere)
-   * @note: La rimozione di un ingrediente provoca l'aggiornamento a "non
-   * disponibile" delle pizze che contengono l'ingrediente.
+   * @note: La rimozione di un ingrediente provoca la rimozione dal menu delle
+   * pizze che contenevano l'ingrediente.
    * @note: La rimozione di una bevanda provoca la rimozione
    * della stessa anche nella lista di articoli (menu).
    * @note: La rimozione della farina di default non è consentita.

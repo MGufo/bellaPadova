@@ -4,8 +4,8 @@ GestoreRisorse::GestoreRisorse()
     : menu(Lista<Articolo*>()), inventario(Lista<Consumabile*>()) {}
 
 bool GestoreRisorse::controlloDisponibilita(
-    const Lista<const Consumabile*>* daCercare) const {
-  Lista<const Consumabile*>::const_Iterator it;
+    const Lista<Consumabile*>* daCercare) const {
+  Lista<Consumabile*>::const_Iterator it;
   bool disponibile = true;
   for (it = daCercare->const_begin();
        it != daCercare->const_end() && disponibile; ++it)
@@ -13,19 +13,17 @@ bool GestoreRisorse::controlloDisponibilita(
   return disponibile;
 }
 
-bool GestoreRisorse::controlloConsumabile(
-    const Lista<const Consumabile*>* _lista,
-    const Consumabile* daCercare) const {
-  Lista<const Consumabile*>::const_Iterator it;
-  bool trovato = false;
-  for (it = _lista->const_begin(); it != _lista->const_end() && !trovato; ++it)
-    if (*it == daCercare) trovato = true;
-  return trovato;
+bool GestoreRisorse::controlloConsumabile(const Lista<Consumabile*>* _lista,
+                                          Consumabile* daCercare) const {
+  if ((_lista->find(daCercare).isValid())) return true;
+  return false;
 }
 
 void GestoreRisorse::inserisciArticolo(Articolo* daInserire) {
   if (daInserire) {
-    const Lista<const Consumabile*>* lista = daInserire->getComposizione();
+    const Lista<Consumabile*>* lista = daInserire->getComposizione();
+    for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
+      if (!controlloConsumabile(&inventario, *it)) throw;
     daInserire->setDisponibilita(controlloDisponibilita(lista));
     menu.push_back(daInserire);
     delete lista;
@@ -50,7 +48,7 @@ void GestoreRisorse::inserisciConsumabile(Consumabile* daInserire) {
 void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
   if (daRimuovere) {
     for (auto it = menu.begin(); it != menu.end(); ++it) {
-      const Lista<const Consumabile*>* lista = (*it)->getComposizione();
+      const Lista<Consumabile*>* lista = (*it)->getComposizione();
       if (controlloConsumabile(lista, daRimuovere)) it = menu.erase(it);
       if (it != menu.begin()) --it;
       delete lista;
@@ -62,7 +60,9 @@ void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
 void GestoreRisorse::modificaArticolo(Articolo* daModificare,
                                       const Articolo* modificato) {
   *daModificare = *modificato;
-  const Lista<const Consumabile*>* lista = daModificare->getComposizione();
+  const Lista<Consumabile*>* lista = daModificare->getComposizione();
+  for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
+    if (!controlloConsumabile(&inventario, *it)) throw;
   daModificare->setDisponibilita(controlloDisponibilita(lista));
   delete lista;
 }
@@ -71,7 +71,7 @@ void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
                                          const Consumabile* modificato) {
   *daModificare = *modificato;
   for (auto it = menu.begin(); it != menu.end(); ++it) {
-    const Lista<const Consumabile*>* lista = (*it)->getComposizione();
+    const Lista<Consumabile*>* lista = (*it)->getComposizione();
     (*it)->setDisponibilita(controlloDisponibilita(lista));
     delete lista;
   }
