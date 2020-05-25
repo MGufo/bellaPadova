@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QFile>
-
+#include "GUI/menu.h"
 #include "../GUI/header.h"
 
 class MainWindow : public QWidget {

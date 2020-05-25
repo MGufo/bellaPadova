@@ -7,8 +7,11 @@ MainWindow::MainWindow(QWidget* parent): QWidget(parent){
   Header* header = new Header(this);
   //drawHeader();
   //addMenu();
+
+  Menu* menu = new Menu(this);
   setStylePizzeria();
   mainLayout->addWidget(header);
+  mainLayout->addWidget(menu);
   setLayout(mainLayout);
 }
 
@@ -17,10 +20,6 @@ MainWindow::~MainWindow() {}
 void MainWindow::setStylePizzeria() {
   setMinimumSize(QSize(1200,800));
   setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-  QFile file(":/resources/GUI/style.css");
-  file.open(QFile::ReadOnly);
-  QString style = QLatin1String(file.readAll());
-  setStyleSheet(style);
 }
 
 //void MainWindow::addMenu(){
