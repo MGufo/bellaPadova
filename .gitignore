@@ -1,6 +1,4 @@
 build/
-bellaPadova.pro
-bellaPadova.pro.user
 cmake-build-debug/
 CMakelists.txt
 css/

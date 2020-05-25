@@ -2,17 +2,19 @@
 
 MainWindow::MainWindow(QWidget* parent): QWidget(parent){
   mainLayout = new QVBoxLayout(this);
-  navBar = new QHBoxLayout(this);
+  navBar = new QHBoxLayout();
+
   addMenu();
   addNavBar();
   setStyle();
+  mainLayout->addLayout(navBar);
   setLayout(mainLayout);
 }
 
 MainWindow::~MainWindow() {}
 
 void MainWindow::setStyle() {
-  setMinimumSize(QSize(900,600));
+  setMinimumSize(QSize(1200,800));
   setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
 }
 
@@ -30,16 +32,16 @@ void MainWindow::addMenu(){
 
 void MainWindow::addNavBar(){
   QPushButton* comandeB = new QPushButton("Comande", this);
-  comandeB->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  comandeB->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
   navBar->addWidget(comandeB);
   QPushButton* menuB = new QPushButton("Menu", this);
-  menuB->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  menuB->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
   navBar->addWidget(menuB);
   QPushButton* inventarioB = new QPushButton("Inventario", this);
-  inventarioB->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  inventarioB->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
   navBar->addWidget(inventarioB);
   QPushButton* contabilizzazioneB = new QPushButton("Contabilizzazione", this);
-  contabilizzazioneB->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  contabilizzazioneB->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
   navBar->addWidget(contabilizzazioneB);
 }
 
