@@ -1,14 +1,15 @@
 #include "header.h"
+#include <iostream>
 
 Header::Header(QWidget *parent) : QWidget(parent){
   // layout dell'header
   mainHeader = new QVBoxLayout(this);
   // layout della navbar
+  drawMenuBar();
   navBarLayout = new QHBoxLayout();
   drawNavBar();
   // aggiunta sotto-layout navBar al layout header
   mainHeader->addLayout(navBarLayout);
-  drawMenuBar();
   // applicazione layout header
   setLayout(mainHeader);
 }
@@ -30,6 +31,7 @@ void Header::drawNavBar(){
 
 void Header::drawMenuBar(){
   QMenuBar* menuBar = new QMenuBar(this);
+  menuBar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
   QMenu* category_File = new QMenu("File", menuBar);
   QMenu* category_Load = new QMenu("Carica", menuBar);
   QMenu* category_Save = new QMenu("Salva", menuBar);
@@ -39,7 +41,7 @@ void Header::drawMenuBar(){
   QAction* save_Menu = new QAction("Menu", category_Save);
   QAction* save_Inventario = new QAction("Inventario", category_Save);
 
-  connect(file_Exit, SIGNAL(triggered()), this, SLOT(close()));
+  connect(file_Exit, SIGNAL(triggered()), parentWidget(), SLOT(close()));
 
   category_File->addAction(file_Exit);
   category_Load->addAction(load_Menu);
