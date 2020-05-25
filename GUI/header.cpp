@@ -3,16 +3,17 @@
 
 Header::Header(QWidget *parent) : QWidget(parent){
   // layout dell'header
-  mainHeader = new QVBoxLayout(this);
+  // mainHeader = new QVBoxLayout(this);
+
   // layout della navbar
-  navBarLayout = new QHBoxLayout();
+  navBarLayout = new QHBoxLayout(this);
   setStyleHeader();
   drawMenuBar();
   drawNavBar();
   // aggiunta sotto-layout navBar al layout header
-  mainHeader->addLayout(navBarLayout);
+  //mainHeader->addLayout(navBarLayout);
   // applicazione layout header
-  setLayout(mainHeader);
+  setLayout(navBarLayout);
 }
 
 void Header::drawNavBar(){
@@ -31,8 +32,11 @@ void Header::drawNavBar(){
 }
 
 void Header::setStyleHeader(){
-  mainHeader->setSpacing(0);
-  mainHeader->setContentsMargins(0,0,0,0);
+//  mainHeader->setSpacing(0);
+//  mainHeader->setContentsMargins(0,0,0,0);
+
+  navBarLayout->setSpacing(0);
+  navBarLayout->setContentsMargins(0,0,0,0);
 }
 
 void Header::drawMenuBar(){

@@ -14,9 +14,8 @@ public:
   explicit Header(QWidget *parent = nullptr);
 
 private:
-  QVBoxLayout* mainHeader;
+  //QVBoxLayout* mainHeader;
   QHBoxLayout* navBarLayout;
-  void drawHeader();
   void drawMenuBar();
   void drawNavBar();
   void setStyleHeader();
