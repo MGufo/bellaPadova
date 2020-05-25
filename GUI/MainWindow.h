@@ -2,10 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QMenuBar>
-#include <QPushButton>
+#include <QFile>
+
+#include "../GUI/header.h"
 
 class MainWindow : public QWidget {
   Q_OBJECT
@@ -14,13 +13,11 @@ class MainWindow : public QWidget {
   MainWindow(QWidget* parent = nullptr);
   ~MainWindow();
 
-
 private:
   QVBoxLayout *mainLayout;
-  QHBoxLayout* navBar;
-  void addNavBar();
-  void addMenu();
-  void setStyle();
+  QVBoxLayout* header;
+  //void addMenu();
+  void setStylePizzeria();
 };
 
 #endif
