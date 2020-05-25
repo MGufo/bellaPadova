@@ -22,7 +22,8 @@ SOURCES += \
     GUI/controller.cpp \
     GUI/MainWindow.cpp \
     test/main.cpp \
-    GUI/header.cpp
+    GUI/header.cpp \
+    GUI/menu.cpp
 
 HEADERS += \
     core/articolo.h \
@@ -42,7 +43,5 @@ HEADERS += \
     core/risorsa.h \
     GUI/controller.h \
     GUI/MainWindow.h \
-    GUI/header.h
-
-RESOURCES += \
-    resources.qrc
+    GUI/header.h \
+    GUI/menu.h
