@@ -19,6 +19,7 @@ private:
   void drawHeader();
   void drawMenuBar();
   void drawNavBar();
+  void setStyleHeader();
 };
 
 #endif // HEADER_H

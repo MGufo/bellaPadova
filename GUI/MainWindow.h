@@ -14,9 +14,7 @@ class MainWindow : public QWidget {
   ~MainWindow();
 
 private:
-  QVBoxLayout *mainLayout;
-  QVBoxLayout* header;
-  //void addMenu();
+  QVBoxLayout* mainLayout;
   void setStylePizzeria();
 };
 

@@ -5,8 +5,9 @@ Header::Header(QWidget *parent) : QWidget(parent){
   // layout dell'header
   mainHeader = new QVBoxLayout(this);
   // layout della navbar
-  drawMenuBar();
   navBarLayout = new QHBoxLayout();
+  setStyleHeader();
+  drawMenuBar();
   drawNavBar();
   // aggiunta sotto-layout navBar al layout header
   mainHeader->addLayout(navBarLayout);
@@ -29,9 +30,14 @@ void Header::drawNavBar(){
   navBarLayout->addWidget(contabilizzazioneB);
 }
 
+void Header::setStyleHeader(){
+  mainHeader->setSpacing(0);
+  mainHeader->setContentsMargins(0,0,0,0);
+}
+
 void Header::drawMenuBar(){
   QMenuBar* menuBar = new QMenuBar(this);
-  menuBar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+  menuBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
   QMenu* category_File = new QMenu("File", menuBar);
   QMenu* category_Load = new QMenu("Carica", menuBar);
   QMenu* category_Save = new QMenu("Salva", menuBar);
@@ -53,5 +59,5 @@ void Header::drawMenuBar(){
   menuBar->addMenu(category_Load);
   menuBar->addMenu(category_Save);
 
-  mainHeader->addWidget(menuBar);
+  //mainHeader->addWidget(menuBar);
 }
