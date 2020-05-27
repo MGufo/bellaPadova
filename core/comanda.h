@@ -15,6 +15,7 @@ using std::unordered_map;
 
 class Comanda {
  private:
+  unsigned int ID;
   Contatto cliente;
   QTime oraConsegna;
   unordered_map<Articolo*, unsigned int> ordinazione;
@@ -25,6 +26,7 @@ class Comanda {
               unordered_map<Articolo*, unsigned int>());
   //  Comanda(const Comanda&);
 
+  static unsigned int contatore;
   /**
    * @brief: Ritorna l'orario di consegna di una comanda
    * @return: unordered_map& (coppie (Articolo, quantità) )
@@ -34,9 +36,10 @@ class Comanda {
 
   /**
    * @brief: Ritorna il tempo di preparazione di una comanda
+   * @param: unsigned short (capacità del forno)
    * @return: int (minuti per la preparazione)
    */
-  int getTempoPreparazione() const;
+  int getTempoPreparazione(unsigned short) const;
 
   /**
    * @brief: Ritorna l'orario stimato in cui la pizzeria deve inizare la

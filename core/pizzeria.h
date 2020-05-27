@@ -12,7 +12,7 @@ class Pizzeria {
   Contatto contatto;
   GestoreRisorse gestoreRisorse;
   GestoreComande gestoreComande;
-  static unsigned short capacitaForno;
+  unsigned short capacitaForno;
 
   // TODO: Creare gerarchia di eccezioni appropriata ai possibili tipi di errore
   // e implementarla

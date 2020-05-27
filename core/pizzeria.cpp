@@ -1,11 +1,10 @@
 #include "pizzeria.h"
 
-unsigned short Pizzeria::capacitaForno = 5;
-
 Pizzeria::Pizzeria()
     : contatto(Contatto()),
       gestoreRisorse(GestoreRisorse()),
-      gestoreComande(GestoreComande()) {}
+      gestoreComande(GestoreComande()),
+      capacitaForno(5) {}
 
 void Pizzeria::inserisciArticolo(Articolo* daInserire) {
   gestoreRisorse.inserisciArticolo(daInserire);
@@ -38,7 +37,7 @@ void Pizzeria::rimuoviConsumabile(Consumabile* daRimuovere) {
 }
 
 void Pizzeria::inserisciComanda(Comanda* daInserire) {
-  gestoreComande.inserisciComanda(daInserire);
+  gestoreComande.inserisciComanda(daInserire, capacitaForno);
 }
 
 void Pizzeria::modificaComanda(Comanda* daModificare,

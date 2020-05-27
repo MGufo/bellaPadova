@@ -39,7 +39,7 @@ class GestoreComande {
     inserita tra le due comande, altrimenti passa alla successiva coppia di
     comande già presenti e ripete il controllo.
   */
-  void inserisciComanda(Comanda*);
+  void inserisciComanda(Comanda*, unsigned short);
 
   /**
    * @brief: Inserimento, rimozione o modifica della quantità di un articolo

@@ -19,15 +19,15 @@ const unordered_map<Articolo*, unsigned int>& Comanda::getOrdinazione() const {
   return ordinazione;
 }
 
-int Comanda::getTempoPreparazione() const {
+int Comanda::getTempoPreparazione(unsigned short capForno) const {
   unsigned short nPizze = 0;
   int tempoPreparazione = 5;
   for (auto it = ordinazione.begin(); it != ordinazione.end(); ++it)
     if (dynamic_cast<Pizza*>((*it).first)) nPizze += (*it).second;
-  if (nPizze <= Pizzeria::getCapacitaForno())
+  if (nPizze <= capForno)
     return tempoPreparazione;
   else {
-    tempoPreparazione = 5 * (nPizze / Pizzeria::getCapacitaForno());
+    tempoPreparazione = 5 * (nPizze / capForno);
     if ((nPizze % 5) != 0) tempoPreparazione += 5;
     return tempoPreparazione;
   }

@@ -43,24 +43,22 @@ bool GestoreComande::testInsert(const Comanda* precedente,
 
 // HACK: La comanda può contenere sia pizze di copia dal menù che pizze
 // "temporanee", cioè create appositamente per la comanda
-void GestoreComande::inserisciComanda(Comanda* daInserire) {
+void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capForno) {
+  int tempoPreparazione = daInserire->getTempoPreparazione(capForno)*60;
   if (daInserire) {
     if (QTime::currentTime() > daInserire->getOrarioInizioPreparazione()) {
       if (!(current.isValid()))
-        daInserire->setOraConsegna(QTime::currentTime().addSecs(
-            daInserire->getTempoPreparazione() * 60));
+        daInserire->setOraConsegna(QTime::currentTime().addSecs(tempoPreparazione));
       else {
         // current esiste
         // sottocaso prima di current
-        if (QTime::currentTime().addSecs(daInserire->getTempoPreparazione() *
-                                         60) <
+        if (QTime::currentTime().addSecs(tempoPreparazione) <
             (*current)->getOrarioInizioPreparazione())
-          daInserire->setOraConsegna(QTime::currentTime().addSecs(
-              daInserire->getTempoPreparazione() * 60));
+          daInserire->setOraConsegna(QTime::currentTime().addSecs(tempoPreparazione));
         else
           // sottocaso dopo current
           daInserire->setOraConsegna((*current)->getOraConsegna().addSecs(
-              daInserire->getTempoPreparazione() * 60));
+            tempoPreparazione));
       }
     }
     if (bacheca.isEmpty()) {
@@ -100,7 +98,7 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
           if (daInserire->getOrarioInizioPreparazione() <
               (*(it))->getOraConsegna())
             daInserire->setOraConsegna((*it)->getOraConsegna().addSecs(
-                daInserire->getTempoPreparazione() * 60));
+tempoPreparazione));
           // qui it punta alla comanda già presente (andyM), ma insert inserisce
           // daInserire prima di andyM! in teoria non possiamo fare insert(++it,
           // daInserire) perché causerebbe SEGFAULT possibile soluzione: usare
@@ -116,7 +114,7 @@ void GestoreComande::inserisciComanda(Comanda* daInserire) {
       else {
         if (QTime::currentTime() > daInserire->getOrarioInizioPreparazione())
           daInserire->setOraConsegna(QTime::currentTime().addSecs(
-              daInserire->getTempoPreparazione() * 60));
+              daInserire->tempoPreparazione));
         bacheca.push_back(daInserire);
         current = --(bacheca.end());
       }
