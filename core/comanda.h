@@ -46,7 +46,7 @@ class Comanda {
    * preparazione della comanda.
    * @return: QTime& (orario inizio preparazione)
    */
-  QTime& getOrarioInizioPreparazione() const;
+  QTime& getOrarioInizioPreparazione(unsigned short capForno) const;
 
   /**
    * @brief: Ritorna il cliente associato a una comanda

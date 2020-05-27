@@ -46,12 +46,12 @@ class Pizzeria {
 
   void setContatto(const Contatto*);
 
-  static unsigned short getCapacitaForno();
+  unsigned short getCapacitaForno();
   /**
    * @brief: Modifica la capacità del forno
    * @param: unsigned int (capacità)
    */
-  static void setCapacitaForno(unsigned short);
+  void setCapacitaForno(unsigned short);
 
   /**
    * @brief: Lettura da file

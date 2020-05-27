@@ -33,9 +33,9 @@ int Comanda::getTempoPreparazione(unsigned short capForno) const {
   }
 }
 
-QTime& Comanda::getOrarioInizioPreparazione() const {
+QTime& Comanda::getOrarioInizioPreparazione(unsigned short capForno) const {
   QTime* orario =
-      new QTime(getOraConsegna().addSecs(-getTempoPreparazione() * 60));
+      new QTime(getOraConsegna().addSecs(getTempoPreparazione(capForno) * 60));
   return *orario;
 }
 const Contatto& Comanda::getCliente() const { return cliente; }

@@ -19,7 +19,7 @@ class GestoreComande {
    * @param: Comanda* (Comanda alla fine dello slot temporale)
    * @param: Comanda* (Comanda che si vuole inserire nello slot temporale)
    */
-  bool testInsert(const Comanda*, const Comanda*, const Comanda*);
+  bool testInsert(const Comanda*, const Comanda*, const Comanda*, unsigned short);
 
  public:
   GestoreComande();
@@ -49,7 +49,7 @@ class GestoreComande {
    * @param: int (nuova quantità dell'articolo da inserire/modificare; se 0 si
    * rimuove)
    */
-  void modificaComanda(Comanda*, const Comanda*);
+  void modificaComanda(Comanda*, const Comanda*, unsigned int);
 
   /**
    * @brief: incrementa current ( "esegue" la prima comanda non completata)

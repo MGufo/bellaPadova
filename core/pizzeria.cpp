@@ -42,7 +42,7 @@ void Pizzeria::inserisciComanda(Comanda* daInserire) {
 
 void Pizzeria::modificaComanda(Comanda* daModificare,
                                const Comanda* modificata) {
-  gestoreComande.modificaComanda(daModificare, modificata);
+  gestoreComande.modificaComanda(daModificare, modificata, capacitaForno);
   delete modificata;
 }
 
