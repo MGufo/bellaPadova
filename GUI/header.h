@@ -2,10 +2,9 @@
 #define HEADER_H
 
 #include <QWidget>
-#include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QMenuBar>
-#include <QPushButton>
+#include <QLabel>
+#include "analogclock.h"
 
 class Header : public QWidget
 {
@@ -14,10 +13,7 @@ public:
   explicit Header(QWidget *parent = nullptr);
 
 private:
-  //QVBoxLayout* mainHeader;
-  QHBoxLayout* navBarLayout;
-  void drawMenuBar();
-  void drawNavBar();
+  QHBoxLayout* headerLayout;
   void setStyleHeader();
 };
 

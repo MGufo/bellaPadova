@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include <QMenuBar>
 #include <QFile>
+#include <QTabWidget>
 #include "GUI/menu.h"
 #include "../GUI/header.h"
 
@@ -16,6 +18,7 @@ class MainWindow : public QWidget {
 private:
   QVBoxLayout* mainLayout;
   void setStylePizzeria();
+  QMenuBar* drawMenubar() const;
 };
 
 #endif

@@ -11,7 +11,7 @@ class Menu : public QWidget
 
 private:
   QVBoxLayout* tmp;
-  QLabel* placeholder;
+  void setStyleMenu();
 
 public:
   explicit Menu(QWidget *parent = nullptr);
