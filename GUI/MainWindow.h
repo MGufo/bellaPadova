@@ -7,6 +7,7 @@
 #include <QTabWidget>
 #include "GUI/menu.h"
 #include "../GUI/header.h"
+#include "GUI/comande.h"
 
 class MainWindow : public QWidget {
   Q_OBJECT

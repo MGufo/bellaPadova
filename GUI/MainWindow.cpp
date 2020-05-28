@@ -3,14 +3,16 @@
 MainWindow::MainWindow(QWidget* parent): QWidget(parent){
   mainLayout = new QVBoxLayout(this);
   Header* header = new Header(this);
+  Comande* comande = new Comande(this);
   Menu* menu = new Menu();
-  Header* header2 = new Header(this);
   QTabWidget* content = new QTabWidget(this);
 
   mainLayout->setMenuBar(drawMenubar());
   mainLayout->addWidget(header);
   content->addTab(menu, "Menu");
-  content->addTab(header2, "Comande");
+  content->addTab(comande, "Comande");
+//  content->addTab(inventario, "Inventario");
+//  content->addTab(contabilizzazione, "Contabilizzazione");
 
   mainLayout->addWidget(content);
   setStylePizzeria();

@@ -24,7 +24,10 @@ SOURCES += \
     test/main.cpp \
     GUI/header.cpp \
     GUI/menu.cpp \
-    GUI/analogclock.cpp
+    GUI/analogclock.cpp \
+    GUI/comande.cpp \
+    GUI/inventario.cpp \
+    GUI/contabilizzazione.cpp
 
 HEADERS += \
     core/articolo.h \
@@ -46,4 +49,7 @@ HEADERS += \
     GUI/MainWindow.h \
     GUI/header.h \
     GUI/menu.h \
-    GUI/analogclock.h
+    GUI/analogclock.h \
+    GUI/comande.h \
+    GUI/inventario.h \
+    GUI/contabilizzazione.h

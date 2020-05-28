@@ -4,7 +4,11 @@
 Header::Header(QWidget *parent) : QWidget(parent){
   headerLayout = new QHBoxLayout(this);
   QLabel* bellaPadova = new QLabel("Pizzeria Bella Padova",this);
+  QLabel* indirizzo = new QLabel("Via Gioacchino Rossini, 20",this);
+  QLabel* telefono = new QLabel("1234567890", this);
   headerLayout->addWidget(bellaPadova);
+  headerLayout->addWidget(indirizzo);
+  headerLayout->addWidget(telefono);
   analogClock* orologio = new analogClock(this);
   headerLayout->addWidget(orologio);
   setStyleHeader();

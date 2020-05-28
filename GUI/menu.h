@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
+
 class Menu : public QWidget
 {
   Q_OBJECT
