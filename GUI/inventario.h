@@ -2,6 +2,11 @@
 #define INVENTARIO_H
 
 #include <QWidget>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QScrollArea>
+#include <QTableWidget>
+#include <QPushButton>
 
 class Inventario : public QWidget
 {
@@ -12,6 +17,10 @@ public:
 signals:
 
 public slots:
+
+private:
+  QVBoxLayout* layoutInventario;
+  void setStyleInventario();
 };
 
 #endif // INVENTARIO_H
