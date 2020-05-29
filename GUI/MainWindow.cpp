@@ -3,15 +3,16 @@
 MainWindow::MainWindow(QWidget* parent): QWidget(parent){
   mainLayout = new QVBoxLayout(this);
   Header* header = new Header(this);
-  Comande* comande = new Comande(this);
+  Comande* comande = new Comande();
   Menu* menu = new Menu();
   QTabWidget* content = new QTabWidget(this);
+  Inventario* inventario = new Inventario();
 
   mainLayout->setMenuBar(drawMenubar());
   mainLayout->addWidget(header);
   content->addTab(menu, "Menu");
   content->addTab(comande, "Comande");
-//  content->addTab(inventario, "Inventario");
+  content->addTab(inventario, "Inventario");
 //  content->addTab(contabilizzazione, "Contabilizzazione");
 
   mainLayout->addWidget(content);
