@@ -2,14 +2,9 @@
 #define CONTABILIZZAZIONE_H
 
 #include <QWidget>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QDateEdit>
-#include <QPushButton>
-#include <QPlainTextEdit>
 
-class Contabilizzazione : public QWidget{
+class Contabilizzazione : public QWidget
+{
     Q_OBJECT
 public:
     explicit Contabilizzazione(QWidget *parent = nullptr);
@@ -17,10 +12,6 @@ public:
 signals:
 
 public slots:
-
-private:
-  QVBoxLayout* layoutContabilizzazione;
-  void setStyleContabilizzazione();
 };
 
 #endif // CONTABILIZZAZIONE_H
