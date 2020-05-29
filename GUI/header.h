@@ -13,7 +13,7 @@ public:
   explicit Header(QWidget *parent = nullptr);
 
 private:
-  QHBoxLayout* headerLayout;
+  QHBoxLayout* layoutHeader;
   void setStyleHeader();
 };
 

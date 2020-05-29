@@ -1,0 +1,21 @@
+#ifndef INVENTARIO_H
+#define INVENTARIO_H
+
+#include <QWidget>
+#include <QVBoxLayout>
+
+class Inventario : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit Inventario(QWidget *parent = nullptr);
+
+signals:
+
+public slots:
+  
+private:
+  QVBoxLayout* 
+};
+
+#endif // INVENTARIO_H
