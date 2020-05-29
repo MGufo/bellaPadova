@@ -7,13 +7,14 @@ MainWindow::MainWindow(QWidget* parent): QWidget(parent){
   Menu* menu = new Menu();
   QTabWidget* content = new QTabWidget(this);
   Inventario* inventario = new Inventario();
+  Contabilizzazione* contabilizzazione = new Contabilizzazione();
 
   mainLayout->setMenuBar(drawMenubar());
   mainLayout->addWidget(header);
   content->addTab(menu, "Menu");
   content->addTab(comande, "Comande");
   content->addTab(inventario, "Inventario");
-//  content->addTab(contabilizzazione, "Contabilizzazione");
+  content->addTab(contabilizzazione, "Contabilizzazione");
 
   mainLayout->addWidget(content);
   setStylePizzeria();

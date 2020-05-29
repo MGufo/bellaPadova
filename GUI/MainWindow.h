@@ -9,6 +9,7 @@
 #include "GUI/inventario.h"
 #include "GUI/header.h"
 #include "GUI/comande.h"
+#include "GUI/contabilizzazione.h"
 
 class MainWindow : public QWidget {
   Q_OBJECT
