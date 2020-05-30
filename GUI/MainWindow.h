@@ -5,10 +5,11 @@
 #include <QMenuBar>
 #include <QFile>
 #include <QTabWidget>
+#include "GUI/comande.h"
 #include "GUI/menu.h"
 #include "GUI/inventario.h"
+#include "GUI/contabilizzazione.h"
 #include "GUI/header.h"
-#include "GUI/comande.h"
 
 class MainWindow : public QWidget {
   Q_OBJECT

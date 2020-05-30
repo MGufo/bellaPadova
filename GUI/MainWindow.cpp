@@ -5,15 +5,16 @@ MainWindow::MainWindow(QWidget* parent): QWidget(parent){
   Header* header = new Header(this);
   Comande* comande = new Comande();
   Menu* menu = new Menu();
-  QTabWidget* content = new QTabWidget(this);
   Inventario* inventario = new Inventario();
+  Contabilizzazione* contabilizzazione = new Contabilizzazione();
+  QTabWidget* content = new QTabWidget(this);
 
   mainLayout->setMenuBar(drawMenubar());
   mainLayout->addWidget(header);
   content->addTab(menu, "Menu");
   content->addTab(comande, "Comande");
   content->addTab(inventario, "Inventario");
-//  content->addTab(contabilizzazione, "Contabilizzazione");
+  content->addTab(contabilizzazione, "Contabilizzazione");
 
   mainLayout->addWidget(content);
   setStylePizzeria();
