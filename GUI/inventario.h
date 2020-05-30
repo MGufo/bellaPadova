@@ -6,7 +6,10 @@
 #include <QHBoxLayout>
 #include <QScrollArea>
 #include <QTableWidget>
+#include <QHeaderView>
 #include <QPushButton>
+#include <QLabel>
+#include <QStringList>
 
 class Inventario : public QWidget
 {
