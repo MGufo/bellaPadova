@@ -3,13 +3,16 @@
 Inventario::Inventario(QWidget *parent) : QWidget(parent){
   layoutInventario = new QVBoxLayout(this);
 
-  //QScrollArea* ingredienti = new QScrollArea(this);
-  TabellaComposita* tabIngredienti = new TabellaComposita(this, "Ingredienti");
-  //ingredienti->setWidget(tabIngredienti);
-  //QScrollArea* bevande = new QScrollArea(this);
-  TabellaComposita* tabBevande = new TabellaComposita(this, "Bevande");
-  //bevande->setWidget(tabBevande);
+  QStringList* headerLabels = new QStringList();
+  headerLabels->push_back("Nome");
+  headerLabels->push_back("Confezioni");
+  headerLabels->push_back("Costo");
+  headerLabels->push_back("Data Acquisto");
+  headerLabels->push_back("Locale");
+  TabellaComposita* tabIngredienti = new TabellaComposita(this, "Ingredienti", headerLabels);
 
+  headerLabels->push_back("Capacità");
+  TabellaComposita* tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
 
   layoutInventario->addWidget(tabIngredienti);
   layoutInventario->addWidget(tabBevande);

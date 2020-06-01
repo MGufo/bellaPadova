@@ -6,6 +6,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QScrollArea>
+#include <QStringList>
 #include "GUI/tabellacomposita.h"
 
 class Inventario : public QWidget
