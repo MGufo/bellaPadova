@@ -28,7 +28,8 @@ SOURCES += \
     GUI/comande.cpp \
     GUI/inventario.cpp \
     GUI/contabilizzazione.cpp \
-    GUI/tabellacomposita.cpp
+    GUI/tabellacomposita.cpp \
+    GUI/digitalclock.cpp
 
 HEADERS += \
     core/articolo.h \
@@ -54,4 +55,5 @@ HEADERS += \
     GUI/comande.h \
     GUI/inventario.h \
     GUI/contabilizzazione.h \
-    GUI/tabellacomposita.h
+    GUI/tabellacomposita.h \
+    GUI/digitalclock.h

@@ -9,7 +9,8 @@ Header::Header(QWidget *parent) : QWidget(parent){
   layoutHeader->addWidget(bellaPadova);
   layoutHeader->addWidget(indirizzo);
   layoutHeader->addWidget(telefono);
-  analogClock* orologio = new analogClock(this);
+  //analogClock* orologio = new analogClock(this);
+  DigitalClock* orologio = new DigitalClock(this);
   layoutHeader->addWidget(orologio);
   setStyleHeader();
   setLayout(layoutHeader);
@@ -18,7 +19,7 @@ Header::Header(QWidget *parent) : QWidget(parent){
 void Header::setStyleHeader(){
   layoutHeader->setSpacing(0);
   layoutHeader->setMargin(0);
-  setMinimumSize(QSize(900,200));
+  setMinimumSize(QSize(900,100));
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   //layoutHeader->setContentsMargins(-1,-1,-1,0);
 }
