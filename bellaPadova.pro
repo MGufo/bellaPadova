@@ -27,7 +27,10 @@ SOURCES += \
     GUI/analogclock.cpp \
     GUI/comande.cpp \
     GUI/inventario.cpp \
-    GUI/contabilizzazione.cpp
+    GUI/contabilizzazione.cpp \
+    GUI/tabellacomposita.cpp \
+    GUI/digitalclock.cpp \
+    GUI/wizardNuovoArticolo/wizardNuovoArticolo.cpp
 
 HEADERS += \
     core/articolo.h \
@@ -52,4 +55,7 @@ HEADERS += \
     GUI/analogclock.h \
     GUI/comande.h \
     GUI/inventario.h \
-    GUI/contabilizzazione.h
+    GUI/contabilizzazione.h \
+    GUI/tabellacomposita.h \
+    GUI/digitalclock.h \
+    GUI/wizardNuovoArticolo/wizardNuovoArticolo.h

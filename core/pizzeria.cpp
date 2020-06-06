@@ -6,6 +6,10 @@ Pizzeria::Pizzeria()
       gestoreComande(GestoreComande()),
       capacitaForno(5) {}
 
+double Pizzeria::contabilizzazione(const QDate &, const QDate &) const{
+  return 3.14;
+}
+
 void Pizzeria::inserisciArticolo(Articolo* daInserire) {
   gestoreRisorse.inserisciArticolo(daInserire);
 }

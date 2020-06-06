@@ -10,7 +10,9 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   QDateEdit* dataFine = new QDateEdit();
   QPushButton* calcola = new QPushButton("Calcola", this);
   QLabel* guadagno = new QLabel("Guadagno/Perdita", this);
-  QTextEdit* mostraGuadagno = new QTextEdit(this);
+  mostraGuadagno = new QLabel("ghesboro" ,this);
+  connect(calcola, SIGNAL(clicked()), this,
+          SLOT(calcoloFatturato((dataInizio->date()),(dataFine->date()))));
 
   layoutDate->addWidget(labelInizio);
   layoutDate->addWidget(dataInizio);
@@ -28,3 +30,12 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
 }
 
 void Contabilizzazione::setStyleContabilizzazione(){}
+
+// SLOTS
+void Contabilizzazione::calcoloFatturato(const QDate& inizio, const QDate& fine){
+  emit con_calcoloFatturato(inizio, fine);
+}
+
+void Contabilizzazione::visualizzaFatturato(){
+  mostraGuadagno->setNum(3);
+}

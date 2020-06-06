@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget* parent): QWidget(parent){
   content->addTab(inventario, "Inventario");
   content->addTab(contabilizzazione, "Contabilizzazione");
 
+  connect(contabilizzazione, SIGNAL(con_calcoloFatturato(const QDate&, const QDate&)), this, SLOT(win_calcoloFatturato(const QDate&, const QDate&)));
   mainLayout->addWidget(content);
   setStylePizzeria();
   setLayout(mainLayout);
@@ -55,4 +56,8 @@ QMenuBar* MainWindow::drawMenubar() const{
   menuBar->addMenu(category_Save);
 
   return menuBar;
+}
+
+void MainWindow::win_calcoloFatturato(const QDate& inizio, const QDate& fine){
+  controller->calcoloFatturato(inizio, fine);
 }

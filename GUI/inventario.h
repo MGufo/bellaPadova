@@ -4,12 +4,10 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QScrollArea>
-#include <QTableWidget>
-#include <QHeaderView>
 #include <QPushButton>
-#include <QLabel>
+#include <QScrollArea>
 #include <QStringList>
+#include "GUI/tabellacomposita.h"
 
 class Inventario : public QWidget
 {

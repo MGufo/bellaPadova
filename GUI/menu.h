@@ -3,7 +3,10 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
-#include <QLabel>
+#include <QHBoxLayout>
+#include <QPushButton>
+#include <QScrollArea>
+#include "GUI/tabellacomposita.h"
 
 
 class Menu : public QWidget
@@ -11,7 +14,7 @@ class Menu : public QWidget
   Q_OBJECT
 
 private:
-  QVBoxLayout* tmp;
+  QVBoxLayout* layoutMenu;
   void setStyleMenu();
 
 public:

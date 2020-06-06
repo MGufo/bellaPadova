@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include "analogclock.h"
+#include "GUI/digitalclock.h"
 
 class Header : public QWidget
 {
