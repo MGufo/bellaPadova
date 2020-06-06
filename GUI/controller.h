@@ -18,9 +18,7 @@ class Controller : public QObject {
   explicit Controller(Pizzeria*, QObject* parent = nullptr);
 
  public slots:
-  double calcoloFatturato(const QDate&, const QDate&);
-
-
+  void calcoloFatturato(const QDate&, const QDate&);
 };
 
 #endif

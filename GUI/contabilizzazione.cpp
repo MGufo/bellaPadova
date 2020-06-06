@@ -1,18 +1,23 @@
 #include "contabilizzazione.h"
-
+#include <iostream>
 Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   layoutContabilizzazione = new QVBoxLayout(this);
   QLabel* scegliPeriodo = new QLabel("Scegli Periodo", this);
   QHBoxLayout* layoutDate = new QHBoxLayout();
   QLabel* labelInizio = new QLabel("Data Inizio", this);
-  QDateEdit* dataInizio = new QDateEdit(this);
+  QDateEdit *dataInizio= new QDateEdit(this);
+  dataInizio->setObjectName("dataInizio");
   QLabel* labelFine = new QLabel("Data Fine", this);
-  QDateEdit* dataFine = new QDateEdit();
+  QDateEdit* dataFine = new QDateEdit(this);
+  dataFine->setObjectName("dataFine");
   QPushButton* calcola = new QPushButton("Calcola", this);
   QLabel* guadagno = new QLabel("Guadagno/Perdita", this);
-  mostraGuadagno = new QLabel("ghesboro" ,this);
-  connect(calcola, SIGNAL(clicked()), this,
-          SLOT(calcoloFatturato((dataInizio->date()),(dataFine->date()))));
+  QLabel* mostraGuadagno = new QLabel("" ,this);
+  mostraGuadagno->setObjectName("mGuadagno");
+  connect(calcola,
+          SIGNAL(clicked()),
+          this,
+          SLOT(calcoloFatturato()));
 
   layoutDate->addWidget(labelInizio);
   layoutDate->addWidget(dataInizio);
@@ -32,10 +37,10 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
 void Contabilizzazione::setStyleContabilizzazione(){}
 
 // SLOTS
-void Contabilizzazione::calcoloFatturato(const QDate& inizio, const QDate& fine){
-  emit con_calcoloFatturato(inizio, fine);
+void Contabilizzazione::calcoloFatturato(){
+  std::cout << findChild<QLabel*>("mGuadagno")->text().toStdString() << std::endl;
+  emit con_calcoloFatturato(
+        (findChild<QDateEdit*>("dataInizio")->date()),
+        (findChild<QDateEdit*>("dataFine")->date()));
 }
 
-void Contabilizzazione::visualizzaFatturato(){
-  mostraGuadagno->setNum(3);
-}

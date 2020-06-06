@@ -4,6 +4,6 @@ Controller::Controller(Pizzeria* bellaPadova, QObject* parent) :
   QObject(parent), modello(bellaPadova) {}
 
 
-double Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
-  return modello->contabilizzazione(inizio, fine);
+void Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
+  vista->aggiornaContabilizzazione(modello->contabilizzazione(inizio, fine));
 }

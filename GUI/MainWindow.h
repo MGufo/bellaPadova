@@ -18,10 +18,10 @@ class MainWindow : public QWidget {
  public:
   MainWindow(QWidget* parent = nullptr);
   ~MainWindow();
+  void aggiornaContabilizzazione(double);
 
  public slots:
-  void win_calcoloFatturato(const QDate&, const QDate&);
-
+  void calcoloFatturato(const QDate&, const QDate&);
 private:
   Controller* controller;
   QVBoxLayout* mainLayout;
