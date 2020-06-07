@@ -3,11 +3,18 @@
 
 #include <QWidget>
 #include <QWizardPage>
+#include <QVBoxLayout>
+#include <QLabel>
 
-class wizard_End : public QWizardPage{
+#include "wizardNuovoArticolo.h"
+
+class wizard_end : public QWizardPage{
   Q_OBJECT
 public:
-  wizard_End();
+  wizard_end(QWidget* parent = nullptr);
+
+private:
+  QVBoxLayout* layoutEnd;
 };
 
 #endif // WIZARD_END_H
