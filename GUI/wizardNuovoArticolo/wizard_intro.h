@@ -7,14 +7,18 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 
-class wizard_Intro : public QWizardPage{
+#include "wizardNuovoArticolo.h"
+
+class wizard_intro : public QWizardPage{
   Q_OBJECT
 public:
-  wizard_Intro(QWidget* parent = nullptr);
+  wizard_intro(QWidget* parent = nullptr);
   int nextId() const override;
 
 private:
   QVBoxLayout* layoutIntro;
+  QRadioButton* optionPizza;
+  QRadioButton* optionBevanda;
 };
 
 #endif // WIZARD_INTRO_H

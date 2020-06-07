@@ -2,11 +2,21 @@
 #define WIZARD_BEVANDA_H
 
 #include <QWidget>
+#include <QWizardPage>
+#include <QVBoxLayout>
+#include <QRadioButton>
+#include <QFormLayout>
+#include <QTextEdit>
 
-class wizard_Bevanda : public QWizardPage
-{
+#include "./GUI/wizardNuovoArticolo/wizardNuovoArticolo.h"
+
+class wizard_bevanda : public QWizardPage{
+  Q_OBJECT
 public:
-  wizard_Bevanda();
-};
+  wizard_bevanda(QWidget* parent = nullptr);
+  int nextId() const override;
 
+private:
+  QVBoxLayout* layoutBevanda;
+};
 #endif // WIZARD_BEVANDA_H
