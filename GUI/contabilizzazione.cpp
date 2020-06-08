@@ -12,7 +12,7 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   QLabel* guadagno = new QLabel("Guadagno/Perdita", this);
   mostraGuadagno = new QLabel("ghesboro" ,this);
   connect(calcola, SIGNAL(clicked()), this,
-          SLOT(calcoloFatturato((dataInizio->date()),(dataFine->date()))));
+          SLOT(calcoloFatturato(dataInizio->date(),dataFine->date()));
 
   layoutDate->addWidget(labelInizio);
   layoutDate->addWidget(dataInizio);
