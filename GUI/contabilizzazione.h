@@ -17,11 +17,9 @@ signals:
   void con_calcoloFatturato(const QDate&, const QDate&);
 // TODO: Verificare se aggiungere i const a segnali/slot
 public slots:
-  void calcoloFatturato(const QDate&, const QDate&);
-  void visualizzaFatturato();
+  void calcoloFatturato();
 private:
   QVBoxLayout* layoutContabilizzazione;
-  QLabel* mostraGuadagno;
   void setStyleContabilizzazione();
 };
 
