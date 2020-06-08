@@ -30,7 +30,12 @@ SOURCES += \
     GUI/contabilizzazione.cpp \
     GUI/tabellacomposita.cpp \
     GUI/digitalclock.cpp \
-    GUI/wizardNuovoArticolo/wizardNuovoArticolo.cpp
+    GUI/wizardNuovoArticolo/wizardNuovoArticolo.cpp \
+    GUI/wizardNuovoArticolo/wizard_intro.cpp \
+    GUI/wizardNuovoArticolo/wizard_pizza.cpp \
+    GUI/wizardNuovoArticolo/wizard_bevanda.cpp \
+    GUI/wizardNuovoArticolo/wizard_end.cpp \
+    #test/testgui.cpp
 
 HEADERS += \
     core/articolo.h \
@@ -58,4 +63,9 @@ HEADERS += \
     GUI/contabilizzazione.h \
     GUI/tabellacomposita.h \
     GUI/digitalclock.h \
-    GUI/wizardNuovoArticolo/wizardNuovoArticolo.h
+    GUI/wizardNuovoArticolo/wizardNuovoArticolo.h \
+    GUI/wizardNuovoArticolo/wizard_intro.h \
+    GUI/wizardNuovoArticolo/wizard_pizza.h \
+    GUI/wizardNuovoArticolo/wizard_bevanda.h \
+    GUI/wizardNuovoArticolo/wizard_end.h \
+    #test/testgui.h
