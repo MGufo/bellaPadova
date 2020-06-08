@@ -16,6 +16,7 @@ class Controller : public QObject {
 
  public:
   explicit Controller(Pizzeria*, QObject* parent = nullptr);
+  void setView(MainWindow*);
 
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);

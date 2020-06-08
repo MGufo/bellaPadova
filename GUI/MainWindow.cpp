@@ -1,14 +1,16 @@
 #include "MainWindow.h"
 #include <iostream>
+#include <QList>
 
-MainWindow::MainWindow(QWidget* parent): QWidget(parent){
+MainWindow::MainWindow(Controller* c, QWidget* parent): QWidget(parent), controller(c){
   mainLayout = new QVBoxLayout(this);
   Header* header = new Header(this);
-  Comande* comande = new Comande();
-  Menu* menu = new Menu();
-  Inventario* inventario = new Inventario();
-  Contabilizzazione* contabilizzazione = new Contabilizzazione();
   QTabWidget* content = new QTabWidget(this);
+  Menu* menu = new Menu(content);
+  Comande* comande = new Comande(content);
+  Inventario* inventario = new Inventario(content);
+  Contabilizzazione* contabilizzazione = new Contabilizzazione(content);
+
 
   mainLayout->setMenuBar(drawMenubar());
   mainLayout->addWidget(header);
@@ -65,7 +67,5 @@ void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void MainWindow::aggiornaContabilizzazione(double tmp){
-//  QLabel* x = findChild<QLabel*>("mGuadagno");
-//  std::cout << x->text().toStdString() << std::endl;
-//  (this->findChild<QLabel*>("mGuadagno"))->setNum(tmp);
+  findChild<QLabel*>("mGuadagno")->setNum(tmp);
 }

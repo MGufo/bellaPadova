@@ -38,7 +38,6 @@ void Contabilizzazione::setStyleContabilizzazione(){}
 
 // SLOTS
 void Contabilizzazione::calcoloFatturato(){
-  std::cout << findChild<QLabel*>("mGuadagno")->text().toStdString() << std::endl;
   emit con_calcoloFatturato(
         (findChild<QDateEdit*>("dataInizio")->date()),
         (findChild<QDateEdit*>("dataFine")->date()));

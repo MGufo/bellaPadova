@@ -24,6 +24,9 @@ private:
   QVBoxLayout* layoutInventario;
   void setStyleInventario();
   WizardNuovoArticolo* nuovoArticolo;
+
+private slots:
+  void drawWizard();
 };
 
 #endif // INVENTARIO_H

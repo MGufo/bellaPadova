@@ -20,7 +20,7 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
 
   QHBoxLayout* layoutPulsanti = new QHBoxLayout(this);
   QPushButton* newConsumabile = new QPushButton("Nuovo Consumabile", this);
-  connect(newConsumabile, SIGNAL(clicked()), nuovoArticolo, SLOT(drawWizard()));
+  connect(newConsumabile, SIGNAL(clicked()), this, SLOT(drawWizard()));
   QPushButton* modificaDati = new QPushButton("Modifica", this);
   layoutPulsanti->addWidget(newConsumabile);
   layoutPulsanti->addWidget(modificaDati);
@@ -31,3 +31,9 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
 }
 
 void Inventario::setStyleInventario(){}
+
+// SLOT
+void Inventario::drawWizard(){
+  nuovoArticolo = new WizardNuovoArticolo(this);
+  nuovoArticolo->show();
+}

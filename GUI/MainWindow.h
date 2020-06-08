@@ -16,7 +16,7 @@ class MainWindow : public QWidget {
   Q_OBJECT
 
  public:
-  MainWindow(QWidget* parent = nullptr);
+  MainWindow(Controller* c, QWidget* parent = nullptr);
   ~MainWindow();
   void aggiornaContabilizzazione(double);
 
