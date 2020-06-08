@@ -16,6 +16,7 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
 
   QHBoxLayout* layoutPulsanti = new QHBoxLayout(this);
   QPushButton* newArticolo = new QPushButton("Nuovo Articolo", this);
+  connect(newArticolo, SIGNAL(clicked()), this, SLOT(drawWizard()));
   QPushButton* modificaDati = new QPushButton("Modifica", this);
   layoutPulsanti->addWidget(newArticolo);
   layoutPulsanti->addWidget(modificaDati);
@@ -31,4 +32,10 @@ void Menu::setStyleMenu(){
   layoutMenu->setContentsMargins(-1,0,-1,-1);
   setMinimumSize(QSize(900,300));
   setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+}
+
+// SLOTS
+void Menu::drawWizard(){
+  nuovoArticolo = new WizardNuovoArticolo(this);
+  nuovoArticolo->show();
 }
