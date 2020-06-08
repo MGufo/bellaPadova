@@ -12,12 +12,18 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   dataFine->setObjectName("dataFine");
   QPushButton* calcola = new QPushButton("Calcola", this);
   QLabel* guadagno = new QLabel("Guadagno/Perdita", this);
+<<<<<<< HEAD
+  mostraGuadagno = new QLabel("ghesboro" ,this);
+  connect(calcola, SIGNAL(clicked()), this,
+          SLOT(calcoloFatturato(dataInizio->date(),dataFine->date()));
+=======
   QLabel* mostraGuadagno = new QLabel("" ,this);
   mostraGuadagno->setObjectName("mGuadagno");
   connect(calcola,
           SIGNAL(clicked()),
           this,
           SLOT(calcoloFatturato()));
+>>>>>>> ec3d9601432d582b3dc363ef1fd30ee35d0aa9a8
 
   layoutDate->addWidget(labelInizio);
   layoutDate->addWidget(dataInizio);

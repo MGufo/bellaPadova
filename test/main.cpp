@@ -11,7 +11,9 @@ int main(int argc, char* argv[]) {
 
   QApplication app(argc, argv);
   Pizzeria bellaPadova;
-  MainWindow view;
+  Controller controller(&bellaPadova);
+  MainWindow view(&controller);
+  controller.setView(&view);
   view.show();
 
   return app.exec();
