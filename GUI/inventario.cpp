@@ -18,7 +18,7 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   layoutInventario->addWidget(tabIngredienti);
   layoutInventario->addWidget(tabBevande);
 
-  QHBoxLayout* layoutPulsanti = new QHBoxLayout(this);
+  QHBoxLayout* layoutPulsanti = new QHBoxLayout();
   QPushButton* newConsumabile = new QPushButton("Nuovo Consumabile", this);
   connect(newConsumabile, SIGNAL(clicked()), this, SLOT(drawWizard()));
   QPushButton* modificaDati = new QPushButton("Modifica", this);
