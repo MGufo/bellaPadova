@@ -6,11 +6,21 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   QLabel* label_inEsecuzione = new QLabel("In Esecuzione:", this);
   label_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   QScrollArea* scroll_inEsecuzione = new QScrollArea(this);
+
   QWidget* wrapper_inEsecuzione = new QWidget(scroll_inEsecuzione);
+  wrapper_inEsecuzione->setStyleSheet("background-color: red;");
+
   Comanda_GUI* comanda1 = new Comanda_GUI(wrapper_inEsecuzione);
-  QHBoxLayout* layout_inEsecuzione = new QHBoxLayout(wrapper_inEsecuzione);
+  Comanda_GUI* comanda2 = new Comanda_GUI(wrapper_inEsecuzione);
+  Comanda_GUI* comanda3 = new Comanda_GUI(wrapper_inEsecuzione);
+  Comanda_GUI* comanda4 = new Comanda_GUI(wrapper_inEsecuzione);
+
+  QHBoxLayout* layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
   wrapper_inEsecuzione->setLayout(layout_inEsecuzione);
   layout_inEsecuzione->addWidget(comanda1);
+  layout_inEsecuzione->addWidget(comanda2);
+  layout_inEsecuzione->addWidget(comanda3);
+  layout_inEsecuzione->addWidget(comanda4);
   scroll_inEsecuzione->setWidget(wrapper_inEsecuzione);
   scroll_inEsecuzione->setMinimumSize(580, 100);
   scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);

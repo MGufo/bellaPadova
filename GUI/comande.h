@@ -7,7 +7,7 @@
 #include <QLabel>
 #include <QScrollArea>
 
-#include "comanda_GUI.h"
+#include "dettaglioComanda.h"
 class Comande : public QWidget{
   Q_OBJECT
 public:
