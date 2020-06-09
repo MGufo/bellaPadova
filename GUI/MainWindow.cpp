@@ -66,11 +66,12 @@ void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
   controller->calcoloFatturato(inizio, fine);
 }
 
-void MainWindow::aggiornaContabilizzazione(double tmp){
-  if(tmp > 0)
-    findChild<QTextEdit*>("mGuadagno")->setTextColor(Qt::darkGreen);
+void MainWindow::aggiornaContabilizzazione(double guadagno){
+  if(guadagno > 0)
+    findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkgreen;");
   else
-    findChild<QTextEdit*>("mGuadagno")->setTextColor(Qt::darkRed);
-  findChild<QTextEdit*>("mGuadagno")->setText(QString::number(tmp));
+    findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkred;");
+  findChild<QLineEdit*>("mGuadagno")->clear();
+  findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
 
 }
