@@ -9,10 +9,10 @@
 
 #include "wizardNuovoArticolo.h"
 
-class wizard_intro : public QWizardPage{
+class Wizard_intro : public QWizardPage{
   Q_OBJECT
 public:
-  wizard_intro(QWidget* parent = nullptr);
+  Wizard_intro(QWidget* parent = nullptr);
   int nextId() const override;
 
 private:
