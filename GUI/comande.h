@@ -2,18 +2,20 @@
 #define COMANDE_H
 
 #include <QWidget>
+#include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QScrollArea>
 
-class Comande : public QWidget
-{
-    Q_OBJECT
+#include "comanda_GUI.h"
+class Comande : public QWidget{
+  Q_OBJECT
 public:
-    explicit Comande(QWidget *parent = nullptr);
+  explicit Comande(QWidget *parent = nullptr);
 
 private:
-    QVBoxLayout* comandeLayout;
-    void setStyleComande();
+  QVBoxLayout* comandeLayout;
+  void setStyleComande();
 
 signals:
 
