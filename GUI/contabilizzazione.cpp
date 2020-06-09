@@ -1,8 +1,11 @@
 #include "contabilizzazione.h"
 #include <iostream>
 Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
-  layoutContabilizzazione = new QVBoxLayout(this);
+
+  // "Titolo" finestra
   QLabel* scegliPeriodo = new QLabel("Scegli Periodo", this);
+
+  // Selezione periodo e pulsante "calcola"
   QHBoxLayout* layoutDate = new QHBoxLayout();
   QLabel* labelInizio = new QLabel("Data Inizio", this);
   QDateEdit *dataInizio= new QDateEdit(this);
@@ -11,10 +14,6 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   QDateEdit* dataFine = new QDateEdit(this);
   dataFine->setObjectName("dataFine");
   QPushButton* calcola = new QPushButton("Calcola", this);
-  QLabel* guadagno = new QLabel("Guadagno/Perdita", this);
-  QLabel* mostraGuadagno = new QLabel("" ,this);
-  mostraGuadagno->setObjectName("mGuadagno");
-  connect(calcola, SIGNAL(clicked()), this, SLOT(calcoloFatturato()));
 
   layoutDate->addWidget(labelInizio);
   layoutDate->addWidget(dataInizio);
@@ -22,10 +21,24 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   layoutDate->addWidget(dataFine);
   layoutDate->addWidget(calcola);
 
+  // Label e risultato
+  QHBoxLayout* layoutRisultato = new QHBoxLayout();
+  QLabel* guadagno = new QLabel("Guadagno/Perdita", this);
+  QTextEdit* mostraGuadagno = new QTextEdit("" ,this);
+  mostraGuadagno->setObjectName("mGuadagno");
+  mostraGuadagno->setEnabled(false);
+  mostraGuadagno->setFontWeight(75);
+  connect(calcola, SIGNAL(clicked()), this, SLOT(calcoloFatturato()));
+
+  layoutRisultato->addWidget(guadagno);
+  layoutRisultato->addWidget(mostraGuadagno);
+
+  // "Assemblaggio" widget figli nel main layout
+  layoutContabilizzazione = new QVBoxLayout(this);
+
   layoutContabilizzazione->addWidget(scegliPeriodo);
   layoutContabilizzazione->addLayout(layoutDate);
-  layoutContabilizzazione->addWidget(guadagno);
-  layoutContabilizzazione->addWidget(mostraGuadagno);
+  layoutContabilizzazione->addLayout(layoutRisultato);
 
   setStyleContabilizzazione();
   setLayout(layoutContabilizzazione);

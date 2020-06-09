@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QDateEdit>
 #include <QPushButton>
+#include <QTextEdit>
 
 class Contabilizzazione : public QWidget{
   Q_OBJECT

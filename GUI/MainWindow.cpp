@@ -67,5 +67,10 @@ void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void MainWindow::aggiornaContabilizzazione(double tmp){
-  findChild<QLabel*>("mGuadagno")->setNum(tmp);
+  if(tmp > 0)
+    findChild<QTextEdit*>("mGuadagno")->setTextColor(Qt::darkGreen);
+  else
+    findChild<QTextEdit*>("mGuadagno")->setTextColor(Qt::darkRed);
+  findChild<QTextEdit*>("mGuadagno")->setText(QString::number(tmp));
+
 }
