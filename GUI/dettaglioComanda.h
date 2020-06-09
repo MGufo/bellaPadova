@@ -10,18 +10,19 @@
 #include <QStringList>
 #include <QTableWidget>
 #include <QTableWidgetItem>
+#include <QVBoxLayout>
 
-class Comanda_GUI : public QWidget{
+class dettaglioComanda: public QWidget{
   Q_OBJECT
 public:
-  explicit Comanda_GUI(QWidget *parent = nullptr);
+  explicit dettaglioComanda(QWidget *parent = nullptr);
 
 signals:
 
 public slots:
 
 private:
-  QGridLayout* layoutComanda;
+  QVBoxLayout* layoutComanda;
 
 };
 
