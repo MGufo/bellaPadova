@@ -5,9 +5,9 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QLineEdit>
 #include <QDateEdit>
 #include <QPushButton>
-#include <QTextEdit>
 
 class Contabilizzazione : public QWidget{
   Q_OBJECT
