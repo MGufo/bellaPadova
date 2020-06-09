@@ -1,6 +1,6 @@
 #include "wizard_intro.h"
 
-wizard_intro::wizard_intro(QWidget* parent): QWizardPage(parent){
+Wizard_intro::Wizard_intro(QWidget* parent): QWizardPage(parent){
   setTitle("Pizza o Bevanda?");
   setSubTitle("Seleziona la tipologia di articolo da inserire nel Menù");
 
@@ -21,7 +21,7 @@ wizard_intro::wizard_intro(QWidget* parent): QWizardPage(parent){
   setLayout(layoutIntro);
 }
 
-int wizard_intro::nextId() const{
+int Wizard_intro::nextId() const{
   if(optionPizza->isChecked())
     return WizardNuovoArticolo::PAGE_Pizza;
   else if(optionBevanda->isChecked())

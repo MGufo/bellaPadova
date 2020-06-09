@@ -7,11 +7,11 @@ wizard_bevanda::wizard_bevanda(QWidget* parent) : QWizardPage(parent){
   // Tipologia bevanda
   QWidget* tipologiaWrapper = new QWidget(this);
   QRadioButton* radioBottiglia = new QRadioButton("Bottiglia", tipologiaWrapper);
+  radioBottiglia->setChecked(true);
   QRadioButton* radioLattina = new QRadioButton("Lattina", tipologiaWrapper);
   QHBoxLayout* layoutTipologia = new  QHBoxLayout(tipologiaWrapper);
   layoutTipologia->addWidget(radioBottiglia);
   layoutTipologia->addWidget(radioLattina);
-
   // Informazioni Bevanda
   QWidget* infoWrapper = new QWidget(this);
   QFormLayout* layoutInfo = new QFormLayout(infoWrapper);

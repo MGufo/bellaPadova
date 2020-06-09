@@ -36,7 +36,8 @@ SOURCES += \
     GUI/wizardNuovoArticolo/wizard_bevanda.cpp \
     GUI/wizardNuovoArticolo/wizard_end.cpp \
     GUI/dettaglioComanda.cpp \
-    GUI/comandagui.cpp
+    GUI/comandagui.cpp \
+    GUI/wizardNuovoConsumabile/wizard_nuovoconsumabile.cpp
     #test/testgui.cpp
 
 HEADERS += \
@@ -71,5 +72,6 @@ HEADERS += \
     GUI/wizardNuovoArticolo/wizard_bevanda.h \
     GUI/wizardNuovoArticolo/wizard_end.h \
     GUI/dettaglioComanda.h \
-    GUI/comandagui.h
+    GUI/comandagui.h \
+    GUI/wizardNuovoConsumabile/wizard_nuovoconsumabile.h
     #test/testgui.h
