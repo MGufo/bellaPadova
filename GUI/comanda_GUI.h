@@ -1,17 +1,28 @@
-#ifndef COMANDA_H
-#define COMANDA_H
+#ifndef COMANDA_GUI_H
+#define COMANDA_GUI_H
 
 #include <QWidget>
+#include <QFormLayout>
+#include <QGridLayout>
+#include <QHeaderView>
+#include <QLineEdit>
+#include <QScrollArea>
+#include <QStringList>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 
-class comanda : public QWidget
-{
+class Comanda_GUI : public QWidget{
   Q_OBJECT
 public:
-  explicit comanda(QWidget *parent = nullptr);
+  explicit Comanda_GUI(QWidget *parent = nullptr);
 
 signals:
 
 public slots:
+
+private:
+  QGridLayout* layoutComanda;
+
 };
 
 #endif // COMANDA_H
