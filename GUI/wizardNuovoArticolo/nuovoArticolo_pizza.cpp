@@ -7,14 +7,14 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWizardPage(parent){
 
   // Informazioni pizza
   QWidget* wrapperInfo = new QWidget(this);
-  QLineEdit* nome = new QLineEdit(wrapperInfo);
-  registerField("nomePizza*", nome);
-  QLineEdit* prezzo = new QLineEdit(wrapperInfo);
-  registerField("prezzoPizza*", prezzo);
+  QLineEdit* nomePizza = new QLineEdit(wrapperInfo);
+  registerField("nomePizza*", nomePizza);
+  QLineEdit* prezzoPizza = new QLineEdit(wrapperInfo);
+  registerField("prezzoPizza*", prezzoPizza);
   QFormLayout* layoutInfo = new QFormLayout(wrapperInfo);
   layoutInfo->setFieldGrowthPolicy(QFormLayout::FieldsStayAtSizeHint);
-  layoutInfo->addRow("Nome pizza:", nome);
-  layoutInfo->addRow("Prezzo pizza:", prezzo);
+  layoutInfo->addRow("Nome pizza:", nomePizza);
+  layoutInfo->addRow("Prezzo pizza:", prezzoPizza);
 
   // Ingredienti base pizza
   QWidget* wrapperBasePizza = new QWidget(this);

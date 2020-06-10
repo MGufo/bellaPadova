@@ -1,5 +1,5 @@
-#ifndef NUOVOCONSUMABILE_INGREDIENTE_H
-#define NUOVOCONSUMABILE_INGREDIENTE_H
+#ifndef NUOVOCONSUMABILE_DETTAGLI_H
+#define NUOVOCONSUMABILE_DETTAGLI_H
 
 #include <QWidget>
 #include <QWizardPage>
@@ -10,14 +10,14 @@
 
 #include "wizard_nuovoconsumabile.h"
 
-class NuovoConsumabile_ingrediente : public QWizardPage{
+class NuovoConsumabile_dettagli : public QWizardPage{
   Q_OBJECT
 public:
-  NuovoConsumabile_ingrediente(QWidget* parent = nullptr);
+  NuovoConsumabile_dettagli(QWidget* parent = nullptr);
   int nextId() const override;
 
 private:
-  QFormLayout* layoutIngrediente;
+  QFormLayout* layoutDettagli;
 };
 
 #endif // NUOVOCONSUMABILE_INGREDIENTE_H

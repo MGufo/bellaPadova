@@ -2,8 +2,7 @@
 
 WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent){
   setPage(PAGE_Intro, new nuovoConsumabile_intro);
-  setPage(PAGE_Ingrediente, new NuovoConsumabile_ingrediente);
-  setPage(PAGE_Bevanda, new NuovoConsumabile_bevanda);
+  setPage(PAGE_Dettagli, new NuovoConsumabile_dettagli);
   setPage(PAGE_End, new NuovoConsumabile_end);
 
   setStartId(PAGE_Intro);
