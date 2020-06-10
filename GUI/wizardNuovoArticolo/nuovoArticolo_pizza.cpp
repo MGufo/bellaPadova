@@ -1,4 +1,4 @@
-#include "wizard_pizza.h"
+#include "nuovoArticolo_pizza.h"
 
 WizardPage_pizza::WizardPage_pizza(QWidget *parent) : QWizardPage(parent){
   setTitle("Aggiunta di una nuova pizza al Menù");

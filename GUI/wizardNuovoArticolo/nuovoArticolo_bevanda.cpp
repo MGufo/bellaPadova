@@ -1,4 +1,4 @@
-#include "wizard_bevanda.h"
+#include "nuovoArticolo_bevanda.h"
 
 WizardPage_bevanda::WizardPage_bevanda(QWidget* parent) : QWizardPage(parent){
   setTitle("Aggiunta di una nuova bevanda al Menù");

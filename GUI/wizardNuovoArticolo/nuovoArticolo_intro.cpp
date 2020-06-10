@@ -1,4 +1,4 @@
-#include "wizard_intro.h"
+#include "nuovoArticolo_intro.h"
 
 WizardPage_intro::WizardPage_intro(QWidget* parent): QWizardPage(parent){
   setTitle("Pizza o Bevanda?");

@@ -7,7 +7,7 @@
 class WizardNuovoConsumabile : public QWizard{
   Q_OBJECT
 public:
-  enum {PAGE_Intro, }
+  enum {PAGE_Intro, PAGE_Ingrediente, PAGE_Bevanda, PAGE_End};
   explicit WizardNuovoConsumabile(QWidget* parent = nullptr);
 };
 
