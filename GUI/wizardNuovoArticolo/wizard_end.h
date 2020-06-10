@@ -8,13 +8,10 @@
 
 #include "wizardNuovoArticolo.h"
 
-class wizard_end : public QWizardPage{
+class WizardPage_end : public QWizardPage{
   Q_OBJECT
 public:
-  wizard_end(QWidget* parent = nullptr);
-
-private:
-  QVBoxLayout* layoutEnd;
+  WizardPage_end(QWidget* parent = nullptr);
 };
 
 #endif // WIZARD_END_H
