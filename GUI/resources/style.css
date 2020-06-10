@@ -1,3 +1,27 @@
 * {
     background-color: #FF9900;
 }
+
+QPushButton {
+    background-color: #2b78e4;
+}
+
+QMenuBar {
+    background-color: #FFFFFF;
+}
+
+QTabWidget::pane {
+    position: absolute;
+    border: 0 solid white;
+    margin: -13px -9px -13px -9px;
+}
+
+QTabBar::tab {
+    background-color: #2b78e4;
+    border: 1 solid black;
+    min-width: 200%;
+}
+
+QTabBar::tab:selected {
+    background-color: #999999;
+}
