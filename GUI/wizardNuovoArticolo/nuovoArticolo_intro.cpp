@@ -4,15 +4,13 @@ NuovoArticolo_intro::NuovoArticolo_intro(QWidget* parent): QWizardPage(parent){
   setTitle("Pizza o Bevanda?");
   setSubTitle("Seleziona il tipo di articolo da inserire nel Menù");
 
-  layoutIntro = new QVBoxLayout(this);
-
   optionPizza = new QRadioButton("Pizza", this);
-  optionBevanda = new QRadioButton("Bevanda", this);
   optionPizza->setChecked(true);
+  optionBevanda = new QRadioButton("Bevanda", this);
 
+  layoutIntro = new QVBoxLayout(this);
   layoutIntro->addWidget(optionPizza);
   layoutIntro->addWidget(optionBevanda);
-
   setLayout(layoutIntro);
 }
 

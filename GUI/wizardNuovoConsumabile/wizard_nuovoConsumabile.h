@@ -5,14 +5,13 @@
 #include <QWizard>
 
 #include "nuovoConsumabile_intro.h"
-#include "nuovoConsumabile_ingrediente.h"
-#include "nuovoConsumabile_bevanda.h"
+#include "nuovoConsumabile_dettagli.h"
 #include "nuovoConsumabile_end.h"
 
 class WizardNuovoConsumabile : public QWizard{
   Q_OBJECT
 public:
-  enum {PAGE_Intro, PAGE_Ingrediente, PAGE_Bevanda, PAGE_End};
+  enum {PAGE_Intro, PAGE_Dettagli, PAGE_End};
   explicit WizardNuovoConsumabile(QWidget* parent = nullptr);
 };
 
