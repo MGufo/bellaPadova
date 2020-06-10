@@ -1,6 +1,6 @@
 #include "nuovoArticolo_pizza.h"
 
-WizardPage_pizza::WizardPage_pizza(QWidget *parent) : QWizardPage(parent){
+NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWizardPage(parent){
   setTitle("Aggiunta di una nuova pizza al Menù");
   setSubTitle("Fornisci un nome e un prezzo alla pizza da inserire, poi "
               "aggiungi gli ingredienti che la compongono");
@@ -41,6 +41,6 @@ WizardPage_pizza::WizardPage_pizza(QWidget *parent) : QWizardPage(parent){
   setLayout(layoutPizza);
 }
 
-int WizardPage_pizza::nextId() const{
+int NuovoArticolo_pizza::nextId() const{
     return WizardNuovoArticolo::PAGE_End;
 }

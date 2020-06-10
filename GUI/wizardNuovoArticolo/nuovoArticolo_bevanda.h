@@ -1,5 +1,5 @@
-#ifndef WIZARD_BEVANDA_H
-#define WIZARD_BEVANDA_H
+#ifndef NUOVOARTICOLO_BEVANDA_H
+#define NUOVOARTICOLO_BEVANDA_H
 
 #include <QWidget>
 #include <QWizardPage>
@@ -10,10 +10,10 @@
 
 #include "./GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h"
 
-class WizardPage_bevanda : public QWizardPage{
+class NuovoArticolo_bevanda : public QWizardPage{
   Q_OBJECT
 public:
-  WizardPage_bevanda(QWidget* parent = nullptr);
+  NuovoArticolo_bevanda(QWidget* parent = nullptr);
   int nextId() const override;
 
 private:

@@ -1,10 +1,10 @@
 #include "wizard_nuovoArticolo.h"
 
 WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
-  setPage(PAGE_Intro, new WizardPage_intro);
-  setPage(PAGE_Pizza, new WizardPage_pizza);
-  setPage(PAGE_Bevanda, new WizardPage_bevanda);
-  setPage(PAGE_End, new WizardPage_end);
+  setPage(PAGE_Intro, new NuovoArticolo_intro);
+  setPage(PAGE_Pizza, new NuovoArticolo_pizza);
+  setPage(PAGE_Bevanda, new NuovoArticolo_bevanda);
+  setPage(PAGE_End, new NuovoArticolo_end);
 
   setStartId(PAGE_Intro);
   setWindowTitle(tr("Aggiunta articolo al Menù"));

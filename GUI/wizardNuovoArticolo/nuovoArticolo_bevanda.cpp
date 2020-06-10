@@ -1,6 +1,6 @@
 #include "nuovoArticolo_bevanda.h"
 
-WizardPage_bevanda::WizardPage_bevanda(QWidget* parent) : QWizardPage(parent){
+NuovoArticolo_bevanda::NuovoArticolo_bevanda(QWidget* parent) : QWizardPage(parent){
   setTitle("Aggiunta di una nuova bevanda al Menù");
   setSubTitle("Seleziona il formato della bevanda, poi specificane nome, costo e capacità");
 
@@ -33,6 +33,6 @@ WizardPage_bevanda::WizardPage_bevanda(QWidget* parent) : QWizardPage(parent){
   setLayout(layoutBevanda);
 }
 
-int WizardPage_bevanda::nextId() const{
+int NuovoArticolo_bevanda::nextId() const{
   return WizardNuovoArticolo::PAGE_End;
 }

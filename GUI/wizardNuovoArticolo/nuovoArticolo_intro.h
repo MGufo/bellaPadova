@@ -1,5 +1,5 @@
-#ifndef WIZARD_INTRO_H
-#define WIZARD_INTRO_H
+#ifndef NUOVOARTICOLO_INTRO_H
+#define NUOVOARTICOLO_INTRO_H
 
 #include <QWidget>
 #include <QWizardPage>
@@ -9,10 +9,10 @@
 
 #include "wizard_nuovoArticolo.h"
 
-class WizardPage_intro : public QWizardPage{
+class NuovoArticolo_intro : public QWizardPage{
   Q_OBJECT
 public:
-  WizardPage_intro(QWidget* parent = nullptr);
+  NuovoArticolo_intro(QWidget* parent = nullptr);
   int nextId() const override;
 
 private:

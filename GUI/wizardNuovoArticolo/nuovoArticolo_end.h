@@ -1,5 +1,5 @@
-#ifndef WIZARD_END_H
-#define WIZARD_END_H
+#ifndef NUOVOARTICOLO_END_H
+#define NUOVOARTICOLO_END_H
 
 #include <QWidget>
 #include <QWizardPage>
@@ -8,10 +8,10 @@
 
 #include "wizard_nuovoArticolo.h"
 
-class WizardPage_end : public QWizardPage{
+class NuovoArticolo_end : public QWizardPage{
   Q_OBJECT
 public:
-  WizardPage_end(QWidget* parent = nullptr);
+  NuovoArticolo_end(QWidget* parent = nullptr);
 };
 
 #endif // WIZARD_END_H

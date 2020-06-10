@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QWizard>
 
+#include "GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.h"
+
 class WizardNuovoConsumabile : public QWizard{
   Q_OBJECT
 public:
