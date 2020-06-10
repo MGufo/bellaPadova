@@ -3,24 +3,24 @@
 
 #include <QWidget>
 #include <QWizardPage>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QFormLayout>
 #include <QCheckBox>
 #include <QLabel>
+#include <QLineEdit>
+#include <QFormLayout>
+#include <QHBoxLayout>
 #include <QScrollArea>
-#include <QTextEdit>
+#include <QVBoxLayout>
 
 #include "./GUI/wizardNuovoArticolo/wizardNuovoArticolo.h"
 
-class wizard_pizza: public QWizardPage{
+class WizardPage_pizza: public QWizardPage{
   Q_OBJECT
 public:
-  wizard_pizza(QWidget* parent = nullptr);
+  WizardPage_pizza(QWidget* parent = nullptr);
   int nextId() const override;
 
 private:
-  QVBoxLayout* layoutPizza;
+  QGridLayout* layoutPizza;
 };
 
 #endif // WIZARD_PIZZA_H
