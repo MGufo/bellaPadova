@@ -30,14 +30,14 @@ SOURCES += \
     GUI/contabilizzazione.cpp \
     GUI/tabellacomposita.cpp \
     GUI/digitalclock.cpp \
-    GUI/wizardNuovoArticolo/wizardNuovoArticolo.cpp \
-    GUI/wizardNuovoArticolo/wizard_intro.cpp \
-    GUI/wizardNuovoArticolo/wizard_pizza.cpp \
-    GUI/wizardNuovoArticolo/wizard_bevanda.cpp \
-    GUI/wizardNuovoArticolo/wizard_end.cpp \
+    GUI/wizardNuovoArticolo/wizard_nuovoArticolo.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_intro.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_pizza.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_end.cpp \
     GUI/dettaglioComanda.cpp \
     GUI/comandagui.cpp \
-    GUI/wizardNuovoConsumabile/wizard_nuovoconsumabile.cpp
+    GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.cpp
     #test/testgui.cpp
 
 HEADERS += \
@@ -66,12 +66,12 @@ HEADERS += \
     GUI/contabilizzazione.h \
     GUI/tabellacomposita.h \
     GUI/digitalclock.h \
-    GUI/wizardNuovoArticolo/wizardNuovoArticolo.h \
-    GUI/wizardNuovoArticolo/wizard_intro.h \
-    GUI/wizardNuovoArticolo/wizard_pizza.h \
-    GUI/wizardNuovoArticolo/wizard_bevanda.h \
-    GUI/wizardNuovoArticolo/wizard_end.h \
+    GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_intro.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_pizza.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_end.h \
     GUI/dettaglioComanda.h \
     GUI/comandagui.h \
-    GUI/wizardNuovoConsumabile/wizard_nuovoconsumabile.h
-    #test/testgui.h
+    GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h
+    #test/testgui.h \
