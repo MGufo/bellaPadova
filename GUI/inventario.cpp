@@ -2,7 +2,7 @@
 
 Inventario::Inventario(QWidget *parent) : QWidget(parent){
   layoutInventario = new QVBoxLayout(this);
-  nuovoArticolo = new WizardNuovoArticolo(this);
+  nuovoConsumabile = new WizardNuovoConsumabile(this);
 
   QStringList* headerLabels = new QStringList();
   headerLabels->push_back("Nome");
@@ -34,6 +34,6 @@ void Inventario::setStyleInventario(){}
 
 // SLOT
 void Inventario::drawWizard(){
-  nuovoArticolo = new WizardNuovoArticolo(this);
-  nuovoArticolo->show();
+  nuovoConsumabile = new WizardNuovoConsumabile(this);
+  nuovoConsumabile->show();
 }

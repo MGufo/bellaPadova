@@ -8,7 +8,7 @@
 #include <QScrollArea>
 #include <QStringList>
 #include "GUI/tabellacomposita.h"
-#include "wizardNuovoArticolo/wizard_nuovoArticolo.h"
+#include "wizardNuovoConsumabile/wizard_nuovoconsumabile.h"
 
 class Inventario : public QWidget
 {
@@ -23,7 +23,7 @@ public slots:
 private:
   QVBoxLayout* layoutInventario;
   void setStyleInventario();
-  WizardNuovoArticolo* nuovoArticolo;
+  WizardNuovoConsumabile* nuovoConsumabile;
 
 private slots:
   void drawWizard();
