@@ -49,7 +49,7 @@ class GestoreComande {
    * @param: int (nuova quantità dell'articolo da inserire/modificare; se 0 si
    * rimuove)
    */
-  void modificaComanda(Comanda*, const Comanda*, unsigned int);
+  void modificaComanda(Comanda*, const Comanda*, unsigned short);
 
   /**
    * @brief: incrementa current ( "esegue" la prima comanda non completata)

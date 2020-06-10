@@ -5,15 +5,13 @@
 /* Gli oggetti passati come parametri al costruttore vengono costruiti ad alto
   livello; per questo motivo non vengono costruiti di copia nel costruttore.
 */
-Comanda::Comanda(Contatto _cliente, QTime _oraConsegna,
+Comanda::Comanda(unsigned int _id, Contatto _cliente, QTime _oraConsegna, QDate _dataConsegna,
                  unordered_map<Articolo*, unsigned int> _ordinazione)
-    : cliente(_cliente), oraConsegna(_oraConsegna), ordinazione(_ordinazione) {}
+    : ID(_id), cliente(_cliente), oraConsegna(_oraConsegna), dataConsegna(_dataConsegna), ordinazione(_ordinazione) {}
 
-// Comanda::Comanda(const Comanda& c)
-//  :
-//    cliente(c.cliente),
-//    oraConsegna(c.oraConsegna),
-//    ordinazione(c.ordinazione) {}
+unsigned int Comanda::getIdComanda() const{
+    return ID;
+}
 
 const unordered_map<Articolo*, unsigned int>& Comanda::getOrdinazione() const {
   return ordinazione;
@@ -41,6 +39,8 @@ QTime& Comanda::getOrarioInizioPreparazione(unsigned short capForno) const {
 const Contatto& Comanda::getCliente() const { return cliente; }
 
 const QTime& Comanda::getOraConsegna() const { return oraConsegna; }
+
+const QDate &Comanda::getDataConsegna() const{ return dataConsegna; }
 
 void Comanda::setOraConsegna(QTime _oraConsegna) { oraConsegna = _oraConsegna; }
 

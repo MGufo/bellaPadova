@@ -123,7 +123,7 @@ tempoPreparazione));
 }
 
 void GestoreComande::modificaComanda(Comanda* daModificare,
-                                     const Comanda* modificata, unsigned int capForno) {
+                                     const Comanda* modificata, unsigned short capForno) {
   bool daReinserire =
       daModificare->getOraConsegna() != modificata->getOraConsegna();
   *daModificare = *modificata;
