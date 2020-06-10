@@ -4,7 +4,10 @@
 #include <QWidget>
 #include <QWizard>
 
-#include "GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.h"
+#include "nuovoConsumabile_intro.h"
+#include "nuovoConsumabile_ingrediente.h"
+#include "nuovoConsumabile_bevanda.h"
+#include "nuovoConsumabile_end.h"
 
 class WizardNuovoConsumabile : public QWizard{
   Q_OBJECT

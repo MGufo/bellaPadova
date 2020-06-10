@@ -2,11 +2,14 @@
 #define NUOVOCONSUMABILE_END_H
 
 #include <QWidget>
+#include <QWizardPage>
 
-class NuovoConsumabile_end : public QWizardPage
-{
+#include "wizard_nuovoconsumabile.h"
+
+class NuovoConsumabile_end : public QWizardPage{
+  Q_OBJECT
 public:
-  NuovoConsumabile_end();
+  NuovoConsumabile_end(QWidget* parent = nullptr);
 };
 
 #endif // NUOVOCONSUMABILE_END_H

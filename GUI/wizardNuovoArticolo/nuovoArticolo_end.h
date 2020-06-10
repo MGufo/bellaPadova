@@ -3,8 +3,6 @@
 
 #include <QWidget>
 #include <QWizardPage>
-#include <QVBoxLayout>
-#include <QLabel>
 
 #include "wizard_nuovoArticolo.h"
 
