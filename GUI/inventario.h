@@ -8,7 +8,7 @@
 #include <QScrollArea>
 #include <QStringList>
 #include "GUI/tabellacomposita.h"
-#include "wizardNuovoArticolo/wizardNuovoArticolo.h"
+#include "wizardNuovoArticolo/wizard_nuovoArticolo.h"
 
 class Inventario : public QWidget
 {
