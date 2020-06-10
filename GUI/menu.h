@@ -7,7 +7,7 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include "GUI/tabellacomposita.h"
-#include "wizardNuovoArticolo/wizardNuovoArticolo.h"
+#include "wizardNuovoArticolo/wizard_nuovoArticolo.h"
 
 class Menu : public QWidget
 {

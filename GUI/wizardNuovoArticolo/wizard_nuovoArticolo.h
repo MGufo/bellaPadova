@@ -6,10 +6,10 @@
 #include <QMessageBox>
 #include <QString>
 
-#include "GUI/wizardNuovoArticolo/wizard_intro.h"
-#include "GUI/wizardNuovoArticolo/wizard_pizza.h"
-#include "GUI/wizardNuovoArticolo/wizard_bevanda.h"
-#include "GUI/wizardNuovoArticolo/wizard_end.h"
+#include "GUI/wizardNuovoArticolo/nuovoArticolo_intro.h"
+#include "GUI/wizardNuovoArticolo/nuovoArticolo_pizza.h"
+#include "GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.h"
+#include "GUI/wizardNuovoArticolo/nuovoArticolo_end.h"
 
 class WizardNuovoArticolo : public QWizard{
   Q_OBJECT
