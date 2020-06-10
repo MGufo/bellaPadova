@@ -41,7 +41,7 @@ SOURCES += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.cpp \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_ingrediente.cpp \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_bevanda.cpp \
-    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
     #test/testgui.cpp
 
 HEADERS += \
@@ -81,5 +81,5 @@ HEADERS += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_ingrediente.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_bevanda.h \
-    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h \
     #test/testgui.h \
