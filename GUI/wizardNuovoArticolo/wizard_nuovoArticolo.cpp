@@ -1,4 +1,4 @@
-#include "wizardNuovoArticolo.h"
+#include "wizard_nuovoArticolo.h"
 
 WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
   setPage(PAGE_Intro, new WizardPage_intro);

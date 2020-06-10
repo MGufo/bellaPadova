@@ -8,7 +8,7 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 
-#include "./GUI/wizardNuovoArticolo/wizardNuovoArticolo.h"
+#include "./GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h"
 
 class WizardPage_bevanda : public QWizardPage{
   Q_OBJECT

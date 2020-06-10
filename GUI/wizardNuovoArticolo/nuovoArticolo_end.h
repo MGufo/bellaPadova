@@ -6,7 +6,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
-#include "wizardNuovoArticolo.h"
+#include "wizard_nuovoArticolo.h"
 
 class WizardPage_end : public QWizardPage{
   Q_OBJECT

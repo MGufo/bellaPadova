@@ -11,7 +11,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 
-#include "./GUI/wizardNuovoArticolo/wizardNuovoArticolo.h"
+#include "./GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h"
 
 class WizardPage_pizza: public QWizardPage{
   Q_OBJECT

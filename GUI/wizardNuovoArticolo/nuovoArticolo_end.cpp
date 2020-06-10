@@ -1,4 +1,4 @@
-#include "wizard_end.h"
+#include "nuovoArticolo_end.h"
 
 WizardPage_end::WizardPage_end(QWidget* parent) : QWizardPage(parent) {
 
