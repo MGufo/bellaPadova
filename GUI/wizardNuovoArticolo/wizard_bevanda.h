@@ -3,17 +3,17 @@
 
 #include <QWidget>
 #include <QWizardPage>
-#include <QVBoxLayout>
-#include <QRadioButton>
+#include <QLineEdit>
 #include <QFormLayout>
-#include <QTextEdit>
+#include <QRadioButton>
+#include <QVBoxLayout>
 
 #include "./GUI/wizardNuovoArticolo/wizardNuovoArticolo.h"
 
-class wizard_bevanda : public QWizardPage{
+class WizardPage_bevanda : public QWizardPage{
   Q_OBJECT
 public:
-  wizard_bevanda(QWidget* parent = nullptr);
+  WizardPage_bevanda(QWidget* parent = nullptr);
   int nextId() const override;
 
 private:
