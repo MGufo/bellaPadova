@@ -73,3 +73,8 @@ HEADERS += \
     GUI/dettaglioComanda.h \
     GUI/comandagui.h
     #test/testgui.h
+
+RESOURCES += \
+    GUI/resources.qrc
+
+DISTFILES +=
