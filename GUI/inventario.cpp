@@ -2,7 +2,6 @@
 
 Inventario::Inventario(QWidget *parent) : QWidget(parent){
   layoutInventario = new QVBoxLayout(this);
-  nuovoConsumabile = new WizardNuovoConsumabile(this);
 
   QStringList* headerLabels = new QStringList();
   headerLabels->push_back("Nome");

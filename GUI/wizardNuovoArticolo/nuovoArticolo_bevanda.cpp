@@ -17,15 +17,15 @@ NuovoArticolo_bevanda::NuovoArticolo_bevanda(QWidget* parent) : QWizardPage(pare
   QWidget* infoWrapper = new QWidget(this);
   QFormLayout* layoutInfo = new QFormLayout(infoWrapper);
   layoutInfo->setFieldGrowthPolicy(QFormLayout::FieldsStayAtSizeHint);
-  QLineEdit* nome = new QLineEdit(infoWrapper);
-  registerField("nomeBevanda*", nome);
-  QLineEdit* prezzo = new QLineEdit(infoWrapper);
-  registerField("prezzoBevanda*", prezzo);
-  QLineEdit* capacita = new QLineEdit(infoWrapper);
-  registerField("capacitaBevanda*", capacita);
-  layoutInfo->addRow("Nome", nome);
-  layoutInfo->addRow("Prezzo", prezzo);
-  layoutInfo->addRow("Capacità", capacita);
+  QLineEdit* nomeBevanda = new QLineEdit(infoWrapper);
+  registerField("nomeBevanda*", nomeBevanda);
+  QLineEdit* prezzoBevanda = new QLineEdit(infoWrapper);
+  registerField("prezzoBevanda*", prezzoBevanda);
+  QLineEdit* capacitaBevanda = new QLineEdit(infoWrapper);
+  registerField("capacitaBevanda*", capacitaBevanda);
+  layoutInfo->addRow("Nome", nomeBevanda);
+  layoutInfo->addRow("Prezzo", prezzoBevanda);
+  layoutInfo->addRow("Capacità", capacitaBevanda);
 
   layoutBevanda = new QVBoxLayout(this);
   layoutBevanda->addWidget(tipologiaWrapper);

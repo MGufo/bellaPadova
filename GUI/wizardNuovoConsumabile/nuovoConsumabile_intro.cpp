@@ -1,5 +1,5 @@
 #include "nuovoConsumabile_intro.h"
-
+#include <iostream>
 nuovoConsumabile_intro::nuovoConsumabile_intro(QWidget* parent):QWizardPage
                                                                 (parent){
   setTitle("Ingrediente o bevanda?");
@@ -7,16 +7,21 @@ nuovoConsumabile_intro::nuovoConsumabile_intro(QWidget* parent):QWizardPage
 
   optionIngrediente = new QRadioButton("Ingrediente", this);
   optionIngrediente->setChecked(true);
+  registerField("optionIngrediente", optionIngrediente);
   optionBevanda = new QRadioButton("Bevanda",this);
+  registerField("optionBevanda", optionBevanda);
 
   layoutIntro = new QVBoxLayout(this);
   layoutIntro->addWidget(optionIngrediente);
   layoutIntro->addWidget(optionBevanda);
   setLayout(layoutIntro);
+  bool tmp = field("optionIngrediente").toBool();
+  if (tmp)
+    std::cout << "ghesboro" << std::endl;
+  else
+    std:: cout <<"madonna luia" << std::endl;
 }
 
 int nuovoConsumabile_intro::nextId() const{
-  if(optionBevanda->isChecked())
-    return WizardNuovoConsumabile::PAGE_Bevanda;
-  return WizardNuovoConsumabile::PAGE_Ingrediente;
+  return WizardNuovoConsumabile::PAGE_Dettagli;
 }
