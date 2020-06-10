@@ -33,6 +33,12 @@ void MainWindow::setStylePizzeria() {
   mainLayout->setContentsMargins(0,-1,0,-1);
   setMinimumSize(QSize(900,600));
   setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+
+  QFile file(":/resources/style.css");
+  file.open(QFile::ReadOnly);
+  QString stylePizzeria = QLatin1String(file.readAll());
+
+  setStyleSheet(stylePizzeria);
 }
 
 QMenuBar* MainWindow::drawMenubar() const{
