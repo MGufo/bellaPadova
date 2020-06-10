@@ -76,10 +76,13 @@ HEADERS += \
     GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.h \
     GUI/wizardNuovoArticolo/nuovoArticolo_end.h \
     GUI/dettaglioComanda.h \
-    GUI/comandagui.h \
+    GUI/comandagui.h \ 
     GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_ingrediente.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_bevanda.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h \
     #test/testgui.h \
+
+RESOURCES += \
+    GUI/resources.qrc

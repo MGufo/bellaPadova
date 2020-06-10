@@ -18,6 +18,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   ComandaGUI* comanda4 = new ComandaGUI(wrapper_inEsecuzione);
   comanda4->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+
   QHBoxLayout* layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
   wrapper_inEsecuzione->setLayout(layout_inEsecuzione);
   layout_inEsecuzione->addWidget(comanda1);
