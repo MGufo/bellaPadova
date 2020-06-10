@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QWizardPage>
 
-#include "wizard_nuovoconsumabile.h"
+#include "wizard_nuovoConsumabile.h"
 
 class NuovoConsumabile_end : public QWizardPage{
   Q_OBJECT
