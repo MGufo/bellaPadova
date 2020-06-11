@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 * {
     background-color: #FF9900;
 }
@@ -17,14 +17,27 @@ QTabWidget::pane {
     margin: -13px -9px -13px -9px;
 }
 
+QTabWidget::tab-bar{
+    alignment: center;
+}
+
 QTabBar::tab {
+    margin-top: 5px;
     background-color: #2b78e4;
     border: 1 solid black;
-    min-width: 200%;
+    height: 50px;
+    width: 50ex;
+    margin-bottom: 10px;
 }
 
 QTabBar::tab:selected {
     background-color: #999999;
 }
-=======
->>>>>>> 315c013b22f55d5e1dd06c18ea82b0d96213343a
+
+QLabel {
+    qproperty-alignment: AlignCenter;
+}
+
+DigitalClock {
+    background-color: #000000;
+}
