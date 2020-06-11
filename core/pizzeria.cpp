@@ -58,6 +58,15 @@ void Pizzeria::rimuoviConsumabile(Consumabile* daRimuovere) {
 }
 
 void Pizzeria::inserisciComanda(Comanda* daInserire) {
+  if(daInserire){
+      //TODO: creo funzione GestoreRisorse::cercaInInventario che racchiuda:
+//      const Lista<Consumabile*>* lista = daInserire->getComposizione();
+//      for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
+//        if (!controlloConsumabile(&inventario, *it)) throw;
+
+      //controllo che per ogni elemento dell'ordinazione tutti gli elementi
+      //della sua composizione siano presenti nell'inventario
+  }
   gestoreComande.inserisciComanda(daInserire, capacitaForno);
 }
 
