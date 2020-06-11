@@ -7,6 +7,7 @@
 #include <QDateEdit>
 #include <QFormLayout>
 #include <QLineEdit>
+#include <QValidator>
 
 #include "wizard_nuovoconsumabile.h"
 
@@ -18,6 +19,9 @@ public:
 
 private:
   QFormLayout* layoutDettagli;
+  QWidget* campoExtra = nullptr;
+  void setPagina();
+  void initializePage() override;
 };
 
 #endif // NUOVOCONSUMABILE_INGREDIENTE_H
