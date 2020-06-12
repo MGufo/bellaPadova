@@ -16,6 +16,7 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
 
   QHBoxLayout* layoutPulsanti = new QHBoxLayout();
   QPushButton* newArticolo = new QPushButton("Nuovo Articolo", this);
+  newArticolo->setObjectName("Articolo");
   connect(newArticolo, SIGNAL(clicked()), this, SLOT(drawWizard()));
   QPushButton* modificaDati = new QPushButton("Modifica", this);
   layoutPulsanti->addWidget(newArticolo);

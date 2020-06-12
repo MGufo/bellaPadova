@@ -34,5 +34,4 @@ dettaglioComanda::dettaglioComanda(QWidget *parent) : QWidget(parent){
   wrapperComanda->setLayout(layoutWrapper);
   layoutComanda->addWidget(wrapperComanda);
   setLayout(layoutComanda);
-  wrapperComanda->setStyleSheet("background-color: darkgreen;");
 }

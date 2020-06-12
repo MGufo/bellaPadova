@@ -20,7 +20,6 @@ ComandaGUI::ComandaGUI(QWidget *parent) : QWidget(parent){
 
     layoutComanda->addWidget(wrapperComanda);
     setLayout(layoutComanda);
-    wrapperComanda->setStyleSheet("background-color: darkgreen;");
 
     rimuovi->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     completata->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);

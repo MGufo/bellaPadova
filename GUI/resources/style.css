@@ -4,11 +4,22 @@
 }
 
 QPushButton {
+    font: 20px Roboto;
     background-color: #2b78e4;
 }
 
+QPushButton#Articolo {
+    height: 100;
+    width: 100;
+    margin-left: 10;
+    margin-right: 10;
+}
 QMenuBar {
     background-color: #FFFFFF;
+}
+
+QHeaderView {
+    font: 20px Roboto;
 }
 
 QTabWidget::pane {
@@ -26,8 +37,9 @@ QTabBar::tab {
     background-color: #2b78e4;
     border: 1 solid black;
     height: 50px;
-    width: 50ex;
+    width: 40ex;
     margin-bottom: 10px;
+    font: 20px Roboto;
 }
 
 QTabBar::tab:selected {
@@ -35,7 +47,13 @@ QTabBar::tab:selected {
 }
 
 QLabel {
+    font: 20px Roboto;
     qproperty-alignment: AlignCenter;
+}
+
+QLabel#inEsecuzione {
+    margin-top: 8;
+    margin-bottom: 4;
 }
 
 DigitalClock {
