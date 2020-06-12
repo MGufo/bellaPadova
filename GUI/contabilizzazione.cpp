@@ -6,43 +6,32 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   QLabel* scegliPeriodo = new QLabel("Scegli Periodo", this);
 
   // Selezione periodo e pulsante "calcola"
-  QHBoxLayout* layoutDate = new QHBoxLayout();
-  QLabel* labelInizio = new QLabel("Data Inizio", this);
   QDateEdit *dataInizio= new QDateEdit(this);
   dataInizio->setObjectName("dataInizio");
-  QLabel* labelFine = new QLabel("Data Fine", this);
   QDateEdit* dataFine = new QDateEdit(this);
   dataFine->setObjectName("dataFine");
   QPushButton* calcola = new QPushButton("Calcola", this);
   connect(calcola, SIGNAL(clicked()), this, SLOT(calcoloFatturato()));
 
-  layoutDate->addWidget(labelInizio);
-  layoutDate->addWidget(dataInizio);
-  layoutDate->addWidget(labelFine);
-  layoutDate->addWidget(dataFine);
-  layoutDate->addWidget(calcola);
-
   // Label e risultato
-  QHBoxLayout* layoutRisultato = new QHBoxLayout();
-  QLabel* guadagno = new QLabel("Guadagno/Perdita:", this);
   QLineEdit* mostraGuadagno = new QLineEdit("" ,this);
   mostraGuadagno->setObjectName("mGuadagno");
 
-  layoutRisultato->addWidget(guadagno);
-  layoutRisultato->addWidget(mostraGuadagno);
-
   // "Assemblaggio" widget figli nel main layout
-  layoutContabilizzazione = new QVBoxLayout(this);
-
+  layoutContabilizzazione = new QFormLayout(this);
   layoutContabilizzazione->addWidget(scegliPeriodo);
-  layoutContabilizzazione->addLayout(layoutDate);
-  layoutContabilizzazione->addLayout(layoutRisultato);
+  layoutContabilizzazione->addRow("Data Inizio: ",dataInizio);
+  layoutContabilizzazione->addRow("Data Fine: ", dataFine);
+  layoutContabilizzazione->addWidget(calcola);
+  layoutContabilizzazione->addWidget(mostraGuadagno);
 
   setStyleContabilizzazione();
   setLayout(layoutContabilizzazione);
 }
 
-void Contabilizzazione::setStyleContabilizzazione(){}
+void Contabilizzazione::setStyleContabilizzazione(){
+  layoutContabilizzazione->setAlignment(layoutContabilizzazione, Qt::AlignCenter);
+}
 
 
 // SLOTS

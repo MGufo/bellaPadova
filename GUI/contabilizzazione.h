@@ -1,7 +1,7 @@
 #ifndef CONTABILIZZAZIONE_H
 #define CONTABILIZZAZIONE_H
 
-#include <QWidget>
+#include <QtWidgets>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -20,7 +20,7 @@ signals:
 public slots:
   void calcoloFatturato();
 private:
-  QVBoxLayout* layoutContabilizzazione;
+  QFormLayout* layoutContabilizzazione;
   void setStyleContabilizzazione();
 };
 

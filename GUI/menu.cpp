@@ -20,6 +20,7 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
   QPushButton* modificaDati = new QPushButton("Modifica", this);
   layoutPulsanti->addWidget(newArticolo);
   layoutPulsanti->addWidget(modificaDati);
+  layoutPulsanti->setSpacing(50);
   layoutMenu->addLayout(layoutPulsanti);
 
   setStyleMenu();
