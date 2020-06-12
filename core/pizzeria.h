@@ -34,15 +34,15 @@ class Pizzeria {
   // nell'inventario, la disponibilita dell'articolo viene messa a true;
   // altrimenti false
   void inserisciArticolo(Articolo*);
-  void modificaArticolo(Articolo*, const Articolo*);
+  void modificaArticolo(Articolo*, Articolo*);
   void rimuoviArticolo(Articolo*);
 
   void inserisciConsumabile(Consumabile*);
-  void modificaConsumabile(Consumabile*, const Consumabile*);
+  void modificaConsumabile(Consumabile*, Consumabile*);
   void rimuoviConsumabile(Consumabile*);
 
   void inserisciComanda(Comanda*);
-  void modificaComanda(Comanda*, const Comanda*);
+  void modificaComanda(Comanda*, Comanda*);
   void eseguiComanda();
   void rimuoviComanda(Comanda*);
 

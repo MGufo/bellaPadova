@@ -3,6 +3,15 @@
 GestoreRisorse::GestoreRisorse()
     : menu(Lista<Articolo*>()), inventario(Lista<Consumabile*>()) {}
 
+bool GestoreRisorse::controlloInInventario(Articolo * daControllare) const{
+    bool presente = true;
+    const Lista<Consumabile*>* consumabili = daControllare->getComposizione();
+    for(auto it = consumabili->const_begin(); (it != consumabili->const_end()) && presente; ++it){
+        presente = controlloConsumabile(&inventario, *it);
+    }
+    return presente;
+}
+
 bool GestoreRisorse::controlloDisponibilita(
     const Lista<Consumabile*>* daCercare) const {
   Lista<Consumabile*>::const_Iterator it;
