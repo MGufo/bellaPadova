@@ -34,6 +34,10 @@ class GestoreRisorse {
  public:
   GestoreRisorse();
 
+  //controlla che siano presenti tutti i consumabili della lista di composizione di un articolo
+  //nell'inventario
+  bool controlloInInventario(Articolo *) const;
+
   /**
    * @brief: Inserisce un consumabile nella lista di consumabili (inventario).
    * @param: Consumabile* (oggetto da inserire)

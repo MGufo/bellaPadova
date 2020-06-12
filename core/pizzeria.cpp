@@ -32,7 +32,7 @@ void Pizzeria::inserisciArticolo(Articolo* daInserire) {
 }
 
 void Pizzeria::modificaArticolo(Articolo* daModificare,
-                                const Articolo* modificato) {
+                                Articolo* modificato) {
   gestoreRisorse.modificaArticolo(daModificare, modificato);
   delete modificato;
 }
@@ -47,7 +47,7 @@ void Pizzeria::inserisciConsumabile(Consumabile* daInserire) {
 }
 
 void Pizzeria::modificaConsumabile(Consumabile* daModificare,
-                                   const Consumabile* modificato) {
+                                   Consumabile* modificato) {
   gestoreRisorse.modificaConsumabile(daModificare, modificato);
   delete modificato;
 }
@@ -59,21 +59,26 @@ void Pizzeria::rimuoviConsumabile(Consumabile* daRimuovere) {
 
 void Pizzeria::inserisciComanda(Comanda* daInserire) {
   if(daInserire){
-      //TODO: creo funzione GestoreRisorse::cercaInInventario che racchiuda:
-//      const Lista<Consumabile*>* lista = daInserire->getComposizione();
-//      for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
-//        if (!controlloConsumabile(&inventario, *it)) throw;
-
       //controllo che per ogni elemento dell'ordinazione tutti gli elementi
       //della sua composizione siano presenti nell'inventario
+      bool inseribile = true;
+      const unordered_map<Articolo*, unsigned int>* ordinazione = &daInserire->getOrdinazione();
+      for(auto it = ordinazione->cbegin(); (it != ordinazione->cend()) && inseribile; ++it){
+          inseribile = gestoreRisorse.controlloInInventario((*it).first);
+      }
+      if(inseribile) gestoreComande.inserisciComanda(daInserire, capacitaForno);
   }
-  gestoreComande.inserisciComanda(daInserire, capacitaForno);
 }
 
 void Pizzeria::modificaComanda(Comanda* daModificare,
-                               const Comanda* modificata) {
-  gestoreComande.modificaComanda(daModificare, modificata, capacitaForno);
-  delete modificata;
+                               Comanda* modificata) {
+    bool inseribile = true;
+    const unordered_map<Articolo*, unsigned int>* ordinazione = &modificata->getOrdinazione();
+    for(auto it = ordinazione->cbegin(); (it != ordinazione->cend()) && inseribile; ++it){
+        inseribile = gestoreRisorse.controlloInInventario((*it).first);
+    }
+    if(inseribile) gestoreComande.modificaComanda(daModificare, modificata, capacitaForno);
+    delete modificata;
 }
 
 void Pizzeria::eseguiComanda() { gestoreComande.eseguiComanda(); }
