@@ -46,18 +46,29 @@ QMenuBar* MainWindow::drawMenubar() const{
   QMenu* category_Load = new QMenu("Carica", menuBar);
   QMenu* category_Save = new QMenu("Salva", menuBar);
   QAction* file_Exit = new QAction("Esci", category_File);
-  QAction* load_Menu = new QAction("Menu", category_Load);
-  QAction* load_Inventario = new QAction("Inventario", category_Load);
-  QAction* save_Menu = new QAction("Menu", category_Save);
-  QAction* save_Inventario = new QAction("Inventario", category_Save);
+  QAction* caricaComande = new QAction("Comande", category_Load);
+  QAction* caricaMenu = new QAction("Menu", category_Load);
+  QAction* caricaInventario = new QAction("Inventario", category_Load);
+  QAction* salvaComande = new QAction("Comande", category_Save);
+  QAction* salvaMenu = new QAction("Menu", category_Save);
+  QAction* salvaInventario = new QAction("Inventario", category_Save);
+
+  connect(caricaComande, SIGNAL(triggered()), controller, SLOT(caricaComande()));
+  connect(caricaMenu, SIGNAL(triggered()), controller, SLOT(caricaMenu()));
+  connect(caricaInventario, SIGNAL(triggered()), controller, SLOT(caricaInventario()));
+  connect(salvaComande, SIGNAL(triggered()), controller, SLOT(salvaComande()));
+  connect(salvaMenu, SIGNAL(triggered()), controller, SLOT(salvaMenu()));
+  connect(salvaInventario, SIGNAL(triggered()), controller, SLOT(salvaInventario()));
 
   connect(file_Exit, SIGNAL(triggered()), this, SLOT(close()));
 
   category_File->addAction(file_Exit);
-  category_Load->addAction(load_Menu);
-  category_Load->addAction(load_Inventario);
-  category_Save->addAction(save_Menu);
-  category_Save->addAction(save_Inventario);
+  category_Load->addAction(caricaComande);
+  category_Load->addAction(caricaMenu);
+  category_Load->addAction(caricaInventario);
+  category_Save->addAction(salvaComande);
+  category_Save->addAction(salvaMenu);
+  category_Save->addAction(salvaInventario);
 
   menuBar->addMenu(category_File);
   menuBar->addMenu(category_Load);
@@ -78,5 +89,4 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkred;");
   findChild<QLineEdit*>("mGuadagno")->clear();
   findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
-
 }

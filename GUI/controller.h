@@ -20,6 +20,12 @@ class Controller : public QObject {
 
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);
+  void caricaComande();
+  void caricaMenu();
+  void caricaInventario();
+  void salvaComande() const;
+  void salvaMenu() const;
+  void salvaInventario() const;
 };
 
 #endif

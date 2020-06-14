@@ -105,3 +105,11 @@ unsigned short Pizzeria::getCapacitaForno() { return capacitaForno; }
 void Pizzeria::setCapacitaForno(unsigned short _forno) {
   capacitaForno = _forno;
 }
+
+void Pizzeria::salva(){
+
+}
+
+void Pizzeria::carica(){
+
+}
