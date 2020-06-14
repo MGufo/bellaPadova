@@ -19,6 +19,7 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
   newArticolo->setObjectName("Articolo");
   connect(newArticolo, SIGNAL(clicked()), this, SLOT(drawWizard()));
   QPushButton* modificaDati = new QPushButton("Modifica", this);
+  modificaDati->setObjectName("Modifica");
   layoutPulsanti->addWidget(newArticolo);
   layoutPulsanti->addWidget(modificaDati);
   layoutPulsanti->setSpacing(50);
