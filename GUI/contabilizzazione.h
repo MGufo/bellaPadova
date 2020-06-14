@@ -20,7 +20,8 @@ signals:
 public slots:
   void calcoloFatturato();
 private:
-  QFormLayout* layoutContabilizzazione;
+  QHBoxLayout* layoutDate;
+  QVBoxLayout* layoutContabilizzazione;
   void setStyleContabilizzazione();
 };
 

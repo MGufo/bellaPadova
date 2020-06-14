@@ -11,15 +11,45 @@ QPushButton {
 QPushButton#Articolo {
     height: 100;
     width: 100;
-    margin-left: 10;
-    margin-right: 10;
+    margin: 10 10 10 10;
 }
+
+QPushButton#Modifica {
+    height: 100;
+    width: 100;
+    margin: 10 10 10 10;
+}
+
+QPushButton#Consumabile {
+    height: 100;
+    width: 100;
+    margin: 10 10 10 10;
+}
+
+QPushButton#Calcola {
+    height: 100;
+    max-width: 2000;
+}
+
 QMenuBar {
     background-color: #FFFFFF;
 }
 
+QMenu {
+    background-color: #FFFFFF;
+}
+
+QMenu::item:selected {
+    background-color: #dddddd;
+    color: #000000;
+}
+
 QHeaderView {
-    font: 20px Roboto;
+    font: 18px Roboto;
+}
+
+QTableWidget{
+    border: 1 solid black;
 }
 
 QTabWidget::pane {
@@ -52,10 +82,49 @@ QLabel {
 }
 
 QLabel#inEsecuzione {
+    qproperty-alignment: AlignCenter;
     margin-top: 8;
     margin-bottom: 4;
+}
+
+QLabel#concluse {
+    qproperty-alignment: AlignCenter;
+    margin-top: 8;
+    margin-bottom: 4;
+}
+
+QLabel#labelsMenu {
+    qproperty-alignment: AlignCenter;
+    margin-top: 8;
+    margin-bottom: 4;
+}
+
+QLabel#scegliPeriodo {
+    qproperty-alignment: AlignCenter;
+    margin-top: 8;
+    margin-bottom: 4;
+}
+
+QLabel#guadagnoPerdita {
+    qproperty-alignment: AlignCenter;
+    margin-top: 8;
+    margin-bottom: 4;
+}
+
+QDateEdit {
+    background-color: #FFFFFF;
+}
+
+QLineEdit {
+    background-color: #FFFFFF;
+}
+
+QScrollArea {
+    border: 1 solid black;
+    margin: 2 15 2 15;
 }
 
 DigitalClock {
     background-color: #000000;
 }
+
