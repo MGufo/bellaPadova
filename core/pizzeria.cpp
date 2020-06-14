@@ -13,15 +13,17 @@ double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) con
     const Lista<Comanda*>* comande = &gestoreComande.getBacheca();
     const Lista<Consumabile*>* consumabili = &gestoreRisorse.getInventario();
 
-    for(auto it = comande->const_begin(); (it != comande->const_end()) && (inizio <= (*it)->getDataConsegna() && (*it)->getDataConsegna() <= fine); ++it){
-        ordinazione = &(*it)->getOrdinazione();
-        for(auto it2 =ordinazione->cbegin(); it2 != ordinazione->cend(); ++it2){
-            guadagni += (*it2).first->getPrezzo() * (*it2).second;
+    for(auto it = comande->const_begin(); it != comande->const_end(); ++it){
+        if(inizio <= (*it)->getDataConsegna() && (*it)->getDataConsegna() <= fine){
+            ordinazione = &(*it)->getOrdinazione();
+            for(auto it2 =ordinazione->cbegin(); it2 != ordinazione->cend(); ++it2){
+                guadagni += (*it2).first->getPrezzo() * (*it2).second;
+            }
         }
     }
     for(auto it = consumabili->const_begin(); it != consumabili->const_end(); ++it){
         if((inizio <= (*it)->getDataAcquisto()) && ((*it)->getDataAcquisto() <= fine)){
-            costi += (*it)->getSpesa() * (*it)->getQuantita();
+            costi += (*it)->getSpesa();
         }
     }
     return (guadagni - costi);
@@ -67,6 +69,7 @@ void Pizzeria::inserisciComanda(Comanda* daInserire) {
           inseribile = gestoreRisorse.controlloInInventario((*it).first);
       }
       if(inseribile) gestoreComande.inserisciComanda(daInserire, capacitaForno);
+      else  throw;
   }
 }
 
@@ -78,6 +81,7 @@ void Pizzeria::modificaComanda(Comanda* daModificare,
         inseribile = gestoreRisorse.controlloInInventario((*it).first);
     }
     if(inseribile) gestoreComande.modificaComanda(daModificare, modificata, capacitaForno);
+    else throw;
     delete modificata;
 }
 

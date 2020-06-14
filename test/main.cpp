@@ -16,8 +16,13 @@ int main(int argc, char* argv[]) {
   controller.setView(&view);
   view.show();
 
+    //string _nome, bool _disponibilita, unsigned int _quantita,
+    //double _costo, QDate _dataAcquisto, bool _locale, string _tipoFarina
     Farina* normale = new Farina();
     Farina* farro = new Farina("farina di tipo farro 1kg", true, 10, 2, QDate::currentDate(), false, "farro");
+
+    //string _nome, bool _disponibilita, unsigned int _quantita,
+    //double _costo, QDate _dataAcquisto, bool _locale
     Ingrediente* mozz = new Ingrediente("mozzarella", true, 10, 5, QDate::currentDate());
     Ingrediente* pomm = new Ingrediente("pomodoro", true, 10, 5, QDate::currentDate(), true);
     Ingrediente* wrustel = new Ingrediente("wrustel", true, 10, 5, QDate::currentDate());
@@ -37,7 +42,7 @@ int main(int argc, char* argv[]) {
 
     daRimuovere->push_back(funghi);
 
-
+    //string nome, bool disponibilita, double prezzo
     Pizza* marghe = new Pizza("margherita", true, 4);
     try{
       marghe->aggiungiIngredienti(*iniziale);
@@ -58,31 +63,38 @@ int main(int argc, char* argv[]) {
     Lattina* Fanta = new Lattina("Fanta", true, 2, 10, 6, QDate::currentDate(), 0.33);
     Bottiglia* CocaCola = new Bottiglia("Coca Cola", true, 4, 10, 8, QDate::currentDate(), 1.5);
 
-    bellaPadova.inserisciConsumabile(normale);
-    bellaPadova.inserisciConsumabile(farro);
-    bellaPadova.inserisciConsumabile(mozz);
-    bellaPadova.inserisciConsumabile(pomm);
-    bellaPadova.inserisciConsumabile(wrustel);
-    bellaPadova.inserisciConsumabile(ananas);
-    bellaPadova.inserisciConsumabile(funghi);
-    bellaPadova.inserisciArticolo(boschi);
-    bellaPadova.inserisciArticolo(mari);
-    bellaPadova.inserisciArticolo(marghe);
+//    bellaPadova.inserisciConsumabile(normale);
+//    bellaPadova.inserisciConsumabile(farro);
+//    bellaPadova.inserisciConsumabile(mozz);
+//    bellaPadova.inserisciConsumabile(pomm);
+//    bellaPadova.inserisciConsumabile(wrustel);
+//    bellaPadova.inserisciConsumabile(ananas);
+//    bellaPadova.inserisciConsumabile(funghi);
+//    bellaPadova.inserisciArticolo(boschi);
+//    bellaPadova.inserisciArticolo(mari);
+//    bellaPadova.inserisciArticolo(marghe);
+    bellaPadova.inserisciConsumabile(Fanta);
+    bellaPadova.inserisciConsumabile(CocaCola);
 
     Comanda* comanda1 = new Comanda(1, Contatto("AndyM", "Via Prova 123","123456789"), QTime(20,00), QDate(2020,06,11));
-    comanda1->inserisciArticolo(marghe,2);
-    comanda1->inserisciArticolo(mari, 1);
-    comanda1->inserisciArticolo(CocaCola, 3);
+    //comanda1->inserisciArticolo(marghe,2);
+    //comanda1->inserisciArticolo(mari, 1);
+    comanda1->inserisciArticolo(CocaCola, 1);
 
-    Comanda* comanda2 = new Comanda(2, Contatto("gBizz", "Via Stocazzo","987654321"), QTime(20,30), QDate(2000,06,11));
-    comanda2->inserisciArticolo(boschi, 5);
-    comanda2->inserisciArticolo(marghe, 1);
-    comanda2->inserisciArticolo(Fanta, 4);
+    Comanda* comanda2 = new Comanda(2, Contatto("gBizz", "Via Stocazzo","987654321"), QTime(20,30), QDate(2020,06,15));
+    //comanda2->inserisciArticolo(boschi, 5);
+    //comanda2->inserisciArticolo(marghe, 1);
+    comanda2->inserisciArticolo(Fanta, 1);
 
     //TODO: testare inserisciComanda e modificaComanda per vedere se inserisce o meno comande con articoli che hanno
-    //gli articoli della composizione non presenti nell'inventario
+    //gli elementi della loro composizione non presenti nell'inventario
     bellaPadova.inserisciComanda(comanda1);
     bellaPadova.inserisciComanda(comanda2);
+
+    QDate inizio(2020,06,10);
+    QDate fine(2020,06,16);
+    double d = bellaPadova.contabilizzazione(inizio,fine);
+    std::cout << d << std::endl;
 
   return app.exec();
 }
