@@ -3,6 +3,7 @@
 TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, const QStringList* labels) : QWidget(parent){
   // Creazione label per la tabella
   QLabel* label = new QLabel(etichetta, this);
+  label->setObjectName("labelsMenu");
   // Creazione tabella
   QTableWidget* tabella = new QTableWidget(0, (labels != nullptr ? labels->count() : 0), this);
   // Crezione e riempimento header tabella

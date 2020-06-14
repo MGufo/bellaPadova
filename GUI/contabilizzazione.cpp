@@ -4,7 +4,7 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
 
   // "Titolo" finestra
   QLabel* scegliPeriodo = new QLabel("Scegli Periodo", this);
-
+  scegliPeriodo->setObjectName("scegliPeriodo");
   // Selezione periodo e pulsante "calcola"
   QDateEdit *dataInizio= new QDateEdit(this);
   dataInizio->setObjectName("dataInizio");
