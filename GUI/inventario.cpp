@@ -19,8 +19,10 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
 
   QHBoxLayout* layoutPulsanti = new QHBoxLayout();
   QPushButton* newConsumabile = new QPushButton("Nuovo Consumabile", this);
+  newConsumabile->setObjectName("Consumabile");
   connect(newConsumabile, SIGNAL(clicked()), this, SLOT(drawWizard()));
   QPushButton* modificaDati = new QPushButton("Modifica", this);
+  modificaDati->setObjectName("Modifica");
   layoutPulsanti->addWidget(newConsumabile);
   layoutPulsanti->addWidget(modificaDati);
   layoutInventario->addLayout(layoutPulsanti);
