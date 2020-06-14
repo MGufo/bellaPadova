@@ -40,4 +40,3 @@ void Contabilizzazione::calcoloFatturato(){
         (findChild<QDateEdit*>("dataInizio")->date()),
         (findChild<QDateEdit*>("dataFine")->date()));
 }
-
