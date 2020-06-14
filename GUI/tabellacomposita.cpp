@@ -8,12 +8,6 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   QTableWidget* tabella = new QTableWidget(0, (labels != nullptr ? labels->count() : 0), this);
   // Crezione e riempimento header tabella
   QHeaderView* header = new QHeaderView(Qt::Horizontal,tabella);
-//  QStringList* headerLabels = new QStringList();
-//  headerLabels->push_back(QString("Nome"));
-//  headerLabels->push_back(QString("Confezioni"));
-//  headerLabels->push_back(QString("Costo"));
-//  headerLabels->push_back(QString("Data Acquisto"));
-//  headerLabels->push_back(QString("Locale"));
   // Aggiunta header alla tabella
   if(labels)    tabella->setHorizontalHeaderLabels(*labels);
   tabella->setHorizontalHeader(header);
