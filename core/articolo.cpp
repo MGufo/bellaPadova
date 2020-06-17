@@ -1,7 +1,7 @@
 #include "articolo.h"
 
-Articolo::Articolo(string nome, bool disponibilita, double p)
-    : Risorsa(nome, disponibilita), prezzoBase(p) {}
+Articolo::Articolo(unsigned int id, string nome, bool disponibilita, double p)
+    : Risorsa(id, nome, disponibilita), prezzoBase(p) {}
 
 double Articolo::getPrezzoBase() const { return prezzoBase; }
 

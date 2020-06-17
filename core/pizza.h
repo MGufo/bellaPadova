@@ -16,7 +16,7 @@ class Pizza : public Articolo {
  public:
   // Costruttore non usiamo valori di default perchè vengono tutti sempre
   // passati per costruire l'oggetto
-  Pizza(string nome, bool disponibilita, double prezzo);
+  Pizza(unsigned int, string nome, bool disponibilita, double prezzo);
 
   // Costruttore di copia,
   Pizza(const Pizza&);

@@ -11,7 +11,7 @@ class Bevanda : public Articolo, public Consumabile {
   float capacita;
 
  public:
-  Bevanda(string, bool, double, unsigned int, double, QDate, double);
+  Bevanda(unsigned int, string, bool, double, unsigned int, double, QDate, double);
 
   /**
    * @brief: Ritorna la spesa sostenuta dalla pizzeria per l'acquisto di una

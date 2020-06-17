@@ -13,6 +13,8 @@ class Controller : public QObject {
  private:
   Pizzeria* modello;
   MainWindow* vista;
+  unsigned int idComande;
+  unsigned int idRisorse;
 
  public:
   explicit Controller(Pizzeria*, QObject* parent = nullptr);
@@ -20,12 +22,11 @@ class Controller : public QObject {
 
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);
+
   void caricaComande();
-  void caricaMenu();
-  void caricaInventario();
+  void caricaRisorse();
   void salvaComande() const;
-  void salvaMenu() const;
-  void salvaInventario() const;
+  void salvaRisorse() const;
 };
 
 #endif

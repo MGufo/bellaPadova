@@ -2,8 +2,10 @@
 
 #include <iostream>
 
-Risorsa::Risorsa(string _nome, bool _disponibilita)
-    : nome(_nome), disponibilita(_disponibilita) {}
+Risorsa::Risorsa(unsigned int _id, string _nome, bool _disponibilita)
+    : ID(_id), nome(_nome), disponibilita(_disponibilita) {}
+
+unsigned int Risorsa::getIdRisorsa() const{ return ID;}
 
 string Risorsa::getNome() const { return nome; }
 

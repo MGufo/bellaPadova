@@ -1,7 +1,12 @@
 #include "GUI/controller.h"
 
 Controller::Controller(Pizzeria* bellaPadova, QObject* parent) :
-  QObject(parent), modello(bellaPadova) {}
+  QObject(parent), modello(bellaPadova) {
+    //load(comande);
+    //idComande = ultimaComanda->getId();
+    //load(risorse);
+    //idRisorse = ultimaRisorsaAggiunta->getId();
+}
 
 void Controller::setView(MainWindow *v){
   vista = v;
@@ -13,25 +18,10 @@ void Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 
-void Controller::caricaComande(){
-}
+void Controller::caricaComande(){}
 
-void Controller::caricaMenu(){
+void Controller::caricaRisorse(){}
 
-}
+void Controller::salvaComande() const{}
 
-void Controller::caricaInventario(){
-
-}
-
-void Controller::salvaComande() const{
-  modello->salva();
-}
-
-void Controller::salvaMenu() const{
-  modello->salva();
-}
-
-void Controller::salvaInventario() const{
-  modello->salva();
-}
+void Controller::salvaRisorse() const{}

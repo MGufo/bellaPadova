@@ -12,7 +12,7 @@ class Consumabile : virtual public Risorsa {
   QDate dataAcquisto;
 
  public:
-  Consumabile(string, bool, unsigned int, double, QDate);
+  Consumabile(unsigned int, string, bool, unsigned int, double, QDate);
 
   /**
    * @brief: Ritorna la quantità acquistata di un consumabile.

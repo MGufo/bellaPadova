@@ -1,10 +1,10 @@
 #include "bottiglia.h"
 
-Bottiglia::Bottiglia(string nome, bool disponibilita, double prezzo,
+Bottiglia::Bottiglia(unsigned int id, string nome, bool disponibilita, double prezzo,
                      unsigned int qta, double costo, QDate dataAcquisto,
                      double capacitaBevanda)
-    : Risorsa(nome, disponibilita),
-      Bevanda(nome, disponibilita, prezzo, qta, costo, dataAcquisto,
+    : Risorsa(id, nome, disponibilita),
+      Bevanda(id, nome, disponibilita, prezzo, qta, costo, dataAcquisto,
               capacitaBevanda) {}
 
 Bottiglia* Bottiglia::clone() const { return new Bottiglia(*this); }

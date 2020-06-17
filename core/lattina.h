@@ -4,7 +4,7 @@
 
 class Lattina : public Bevanda {
  public:
-  Lattina(string, bool, double, unsigned int, double, QDate, double);
+  Lattina(unsigned int, string, bool, double, unsigned int, double, QDate, double);
   Lattina* clone() const;
 
   /**

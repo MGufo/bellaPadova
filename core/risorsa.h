@@ -7,12 +7,15 @@ using std::string;
 
 class Risorsa {
  private:
+  unsigned int ID;
   string nome;
   bool disponibilita;
 
  public:
-  Risorsa(string, bool);
+  Risorsa(unsigned int, string, bool);
   virtual ~Risorsa() = default;
+
+  unsigned int getIdRisorsa() const;
   /**
    * @brief: Ritorna il nome dell'oggetto
    * @return: string (nome dell'oggetto)

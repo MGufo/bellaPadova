@@ -16,6 +16,8 @@ class WizardNuovoArticolo : public QWizard{
 public:
   enum { PAGE_Intro, PAGE_Pizza, PAGE_Bevanda, PAGE_End};
   explicit WizardNuovoArticolo(QWidget *parent = nullptr);
+
+  void accept() override;
 };
 
 #endif // WIZARDNUOVOARTICOLO_H

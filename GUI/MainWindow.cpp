@@ -47,28 +47,22 @@ QMenuBar* MainWindow::drawMenubar() const{
   QMenu* category_Save = new QMenu("Salva", menuBar);
   QAction* file_Exit = new QAction("Esci", category_File);
   QAction* caricaComande = new QAction("Comande", category_Load);
-  QAction* caricaMenu = new QAction("Menu", category_Load);
-  QAction* caricaInventario = new QAction("Inventario", category_Load);
+  QAction* caricaRisorse = new QAction("Inventario e Menu", category_Load);
   QAction* salvaComande = new QAction("Comande", category_Save);
-  QAction* salvaMenu = new QAction("Menu", category_Save);
-  QAction* salvaInventario = new QAction("Inventario", category_Save);
+  QAction* salvaRisorse = new QAction("Inventario e Menu", category_Save);
 
   connect(caricaComande, SIGNAL(triggered()), controller, SLOT(caricaComande()));
-  connect(caricaMenu, SIGNAL(triggered()), controller, SLOT(caricaMenu()));
-  connect(caricaInventario, SIGNAL(triggered()), controller, SLOT(caricaInventario()));
+  connect(caricaRisorse, SIGNAL(triggered()), controller, SLOT(caricaRisorse()));
   connect(salvaComande, SIGNAL(triggered()), controller, SLOT(salvaComande()));
-  connect(salvaMenu, SIGNAL(triggered()), controller, SLOT(salvaMenu()));
-  connect(salvaInventario, SIGNAL(triggered()), controller, SLOT(salvaInventario()));
+  connect(salvaRisorse, SIGNAL(triggered()), controller, SLOT(salvaRisorse()));
 
   connect(file_Exit, SIGNAL(triggered()), this, SLOT(close()));
 
   category_File->addAction(file_Exit);
   category_Load->addAction(caricaComande);
-  category_Load->addAction(caricaMenu);
-  category_Load->addAction(caricaInventario);
+  category_Load->addAction(caricaRisorse);
   category_Save->addAction(salvaComande);
-  category_Save->addAction(salvaMenu);
-  category_Save->addAction(salvaInventario);
+  category_Save->addAction(salvaRisorse);
 
   menuBar->addMenu(category_File);
   menuBar->addMenu(category_Load);
