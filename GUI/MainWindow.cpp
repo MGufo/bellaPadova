@@ -31,7 +31,7 @@ void MainWindow::setStylePizzeria() {
   mainLayout->setMargin(0);
   mainLayout->setContentsMargins(0,-1,0,-1);
   setMinimumSize(QSize(900,600));
-  setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
   QFile file(":/resources/style.css");
   file.open(QFile::ReadOnly);
