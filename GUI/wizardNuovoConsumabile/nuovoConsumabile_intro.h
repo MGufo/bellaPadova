@@ -19,7 +19,6 @@ private:
   QVBoxLayout* layoutIntro;
   QRadioButton* optionIngrediente;
   QRadioButton* optionBevanda;
-  void initializePage() override;
 };
 
 #endif // NUOVOCONSUMABILE_INTRO_H

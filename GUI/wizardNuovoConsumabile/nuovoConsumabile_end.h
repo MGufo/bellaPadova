@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QWizardPage>
+#include <QFormLayout>
 
 #include "wizard_nuovoConsumabile.h"
 
@@ -10,6 +11,12 @@ class NuovoConsumabile_end : public QWizardPage{
   Q_OBJECT
 public:
   NuovoConsumabile_end(QWidget* parent = nullptr);
+private:
+  QFormLayout* layoutEnd;
+  QWidget* campoExtra = nullptr;
+  void setInitialPage();
+  void setActualPage();
+  void initializePage() override;
 };
 
 #endif // NUOVOCONSUMABILE_END_H

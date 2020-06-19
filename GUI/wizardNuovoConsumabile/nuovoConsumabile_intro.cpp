@@ -19,7 +19,3 @@ nuovoConsumabile_intro::nuovoConsumabile_intro(QWidget* parent):QWizardPage
 int nuovoConsumabile_intro::nextId() const{
   return WizardNuovoConsumabile::PAGE_Dettagli;
 }
-
-void nuovoConsumabile_intro::initializePage(){
-  QWizardPage::initializePage();
-}

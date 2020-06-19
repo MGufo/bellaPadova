@@ -1,5 +1,5 @@
-#ifndef WIZARD_NUOVOCONSUMABILE_H
-#define WIZARD_NUOVOCONSUMABILE_H
+#ifndef WIZARDNUOVOCONSUMABILE_H
+#define WIZARDNUOVOCONSUMABILE_H
 
 #include <QWidget>
 #include <QWizard>
@@ -13,6 +13,8 @@ class WizardNuovoConsumabile : public QWizard{
 public:
   enum {PAGE_Intro, PAGE_Dettagli, PAGE_End};
   explicit WizardNuovoConsumabile(QWidget* parent = nullptr);
+
+  void accept() override;
 };
 
-#endif // WIZARD_NUOVOCONSUMABILE_H
+#endif // WIZARDNUOVOCONSUMABILE_H
