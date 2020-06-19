@@ -73,6 +73,8 @@ class GestoreComande {
    * @brief: Ritorna una lista contenente tutte le comande
    */
   const Lista<Comanda*>& getBacheca() const;
+
+  void salvaComande() const;
 };
 
 #endif
