@@ -22,7 +22,6 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
   modificaDati->setObjectName("Modifica");
   layoutPulsanti->addWidget(newArticolo);
   layoutPulsanti->addWidget(modificaDati);
-  layoutPulsanti->setSpacing(50);
   layoutMenu->addLayout(layoutPulsanti);
 
   setStyleMenu();
