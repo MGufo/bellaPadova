@@ -17,8 +17,9 @@ void Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
   vista->aggiornaContabilizzazione(modello->contabilizzazione(inizio, fine));
 }
 
-
-void Controller::caricaComande(){}
+void Controller::caricaComande(){
+  modello->carica();
+}
 
 void Controller::caricaRisorse(){}
 
