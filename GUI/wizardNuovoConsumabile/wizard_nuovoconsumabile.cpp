@@ -12,3 +12,7 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
   setWizardStyle(ModernStyle);
 #endif
 }
+
+void WizardNuovoConsumabile::accept(){
+    QWizard::accept();
+}

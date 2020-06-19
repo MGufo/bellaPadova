@@ -19,8 +19,13 @@ public:
 
 private:
   QFormLayout* layoutDettagli;
+  QLineEdit* nomeConsumabile = nullptr;
+  QLineEdit* quantitaConsumabile = nullptr;
+  QLineEdit* costoConsumabile = nullptr;
+  QDateEdit* dataAcquisto = nullptr;
   QWidget* campoExtra = nullptr;
-  void setPagina();
+  void fieldRegistration();
+  void setActualPage();
   void initializePage() override;
 };
 
