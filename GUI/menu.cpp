@@ -39,6 +39,11 @@ void Menu::setStyleMenu(){
 
 // SLOTS
 void Menu::drawWizard(){
+  if(nuovoArticolo) delete nuovoArticolo;
   nuovoArticolo = new WizardNuovoArticolo(this);
   nuovoArticolo->show();
+
 }
+
+void Menu::invioDatiArticolo(){}
+

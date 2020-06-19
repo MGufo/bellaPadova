@@ -20,10 +20,15 @@ private:
 
 private slots:
   void drawWizard();
+  void invioDatiArticolo();
 public:
   explicit Menu(QWidget *parent = nullptr);
 
 signals:
+  //
+  void invioDatiPizza();
+  //id della bevanda contenuta nell'inventario da inserire nel menu
+  void invioDatiBevanda(unsigned int);
 
 public slots:
 };

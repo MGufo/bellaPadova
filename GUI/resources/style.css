@@ -3,32 +3,33 @@
     background-color: #FF9900;
 }
 
+
 QPushButton {
     font: 20px Roboto;
     background-color: #2b78e4;
 }
 
 QPushButton#Articolo {
-    height: 100;
+    height: 50;
     width: 100;
     margin: 10 10 10 10;
 }
 
 QPushButton#Modifica {
-    height: 100;
+    height: 50;
     width: 100;
     margin: 10 10 10 10;
 }
 
 QPushButton#Consumabile {
-    height: 100;
+    height: 50;
     width: 100;
     margin: 10 10 10 10;
 }
 
 QPushButton#Calcola {
     height: 100;
-    max-width: 2000;
+
 }
 
 QMenuBar {
@@ -124,7 +125,13 @@ QScrollArea {
     margin: 2 15 2 15;
 }
 
-DigitalClock {
-    background-color: #000000;
+DigitalClock#orologio {
+    background-color: #FF9900;
+    border: 0;
+    color: #000000;
+    min-width: 200;
+    min-height: 200;
+    margin-top: -100;
 }
+
 

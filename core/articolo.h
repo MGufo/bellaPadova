@@ -16,7 +16,7 @@ class Articolo : virtual public Risorsa {
    * @param: bool (disponibilità dell'articolo)
    * @param: double (costo dell'articolo)
    */
-  Articolo(string, bool, double);
+  Articolo(unsigned int, string, bool, double);
 
   /**
    * @brief: Ritorna il prezzo base di un articolo

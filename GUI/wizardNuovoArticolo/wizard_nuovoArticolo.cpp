@@ -14,3 +14,8 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
   setWizardStyle(ModernStyle);
 #endif
 }
+
+void WizardNuovoArticolo::accept()
+{
+
+}
