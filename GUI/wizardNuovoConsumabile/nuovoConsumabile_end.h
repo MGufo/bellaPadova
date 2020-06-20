@@ -13,7 +13,11 @@ public:
   NuovoConsumabile_end(QWidget* parent = nullptr);
 private:
   QFormLayout* layoutEnd;
-  QWidget* campoExtra = nullptr;
+  QLabel* nomeConsumabile = nullptr;
+  QLabel* quantitaConsumabile = nullptr;
+  QLabel* costoConsumabile = nullptr;
+  QLabel* dataAcquisto = nullptr;
+  QLabel* campoExtra = nullptr;
   void setInitialPage();
   void setActualPage();
   void initializePage() override;

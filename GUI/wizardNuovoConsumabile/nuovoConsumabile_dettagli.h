@@ -24,7 +24,7 @@ private:
   QLineEdit* costoConsumabile = nullptr;
   QDateEdit* dataAcquisto = nullptr;
   QWidget* campoExtra = nullptr;
-  void fieldRegistration();
+  bool previouslyInizialized;
   void setActualPage();
   void initializePage() override;
 };

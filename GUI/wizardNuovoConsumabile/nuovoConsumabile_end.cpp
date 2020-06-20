@@ -1,8 +1,7 @@
 #include "nuovoConsumabile_end.h"
 
 NuovoConsumabile_end::NuovoConsumabile_end(QWidget *parent) : QWizardPage(parent){
-
-  setTitle("Riepilogo del nuovo consumabile.");
+  setTitle("Riepilogo");
   setSubTitle("Controlla di aver inserito i dati correttamente e premi \"Finish\" per concludere l'operazione");
   layoutEnd = new QFormLayout(this);
   setLayout(layoutEnd);
@@ -15,15 +14,20 @@ void NuovoConsumabile_end::initializePage(){
 }
 
 void NuovoConsumabile_end::setInitialPage(){
-    QLabel* nomeConsumabile = new QLabel(field("nome").toString(), this);
-    QLabel* quantitaConsumabile = new QLabel(field("quantita").toString(), this);
-    QLabel* costoConsumabile = new QLabel(field("costo").toString(), this);
-    QLabel* dataAcquistoConsumabile = new QLabel(field("dataAcquisto").toString(), this);
+    if(nomeConsumabile) layoutEnd->removeRow(nomeConsumabile);
+    if(quantitaConsumabile) layoutEnd->removeRow(quantitaConsumabile);
+    if(costoConsumabile) layoutEnd->removeRow(costoConsumabile);
+    if(dataAcquisto) layoutEnd->removeRow(dataAcquisto);
+
+    nomeConsumabile = new QLabel(field("nome").toString(), this);
+    quantitaConsumabile = new QLabel(field("quantita").toString(), this);
+    costoConsumabile = new QLabel(field("costo").toString(), this);
+    dataAcquisto = new QLabel(field("dataAcquisto").toString(), this);
 
     layoutEnd->addRow("Nome:", nomeConsumabile);
     layoutEnd->addRow("N° Confezioni:", quantitaConsumabile);
     layoutEnd->addRow("Costo:", costoConsumabile);
-    layoutEnd->addRow("Data Acquisto:", dataAcquistoConsumabile);
+    layoutEnd->addRow("Data Acquisto:", dataAcquisto);
 }
 
 void NuovoConsumabile_end::setActualPage(){
