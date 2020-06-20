@@ -7,7 +7,7 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
   setPage(PAGE_End, new NuovoArticolo_end);
   setStartId(PAGE_Intro);
   setWindowTitle(tr("Aggiunta articolo al Menù"));
-  setStyleSheet("background-color: #eeeeee");
+
   // Stile wizard (tranne MacOS)
   #ifndef Q_OS_MAC
   setWizardStyle(ModernStyle);
