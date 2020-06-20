@@ -7,10 +7,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   label_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   label_inEsecuzione->setObjectName("inEsecuzione");
   QScrollArea* scroll_inEsecuzione = new QScrollArea(this);
-
   QWidget* wrapper_inEsecuzione = new QWidget(scroll_inEsecuzione);
   wrapper_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
   dettaglioComanda* comanda1 = new dettaglioComanda(wrapper_inEsecuzione);
   dettaglioComanda* comanda2 = new dettaglioComanda(wrapper_inEsecuzione);
   ComandaGUI* comanda3 = new ComandaGUI(wrapper_inEsecuzione);
