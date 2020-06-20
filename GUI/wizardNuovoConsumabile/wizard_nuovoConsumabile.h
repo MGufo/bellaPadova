@@ -15,6 +15,8 @@ public:
   explicit WizardNuovoConsumabile(QWidget* parent = nullptr);
 
   void accept() override;
+  bool getVisited_dettagliPage() const;
+  void setVisited_dettagliPage(bool);
 };
 
 #endif // WIZARDNUOVOCONSUMABILE_H

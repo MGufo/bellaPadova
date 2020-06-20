@@ -1,5 +1,7 @@
 #include "nuovoConsumabile_dettagli.h"
-NuovoConsumabile_dettagli::NuovoConsumabile_dettagli(QWidget*parent) : QWizardPage(parent){
+#include <iostream>
+
+NuovoConsumabile_dettagli::NuovoConsumabile_dettagli(QWidget*parent) : QWizardPage(parent), previouslyInizialized(false){
   setSubTitle("Inserisci le informazioni relative all'ingrediente da inserire");
   layoutDettagli = new QFormLayout(this);
 
@@ -20,15 +22,6 @@ int NuovoConsumabile_dettagli::nextId() const{
     return WizardNuovoConsumabile::PAGE_End;
 }
 
-//TODO: fixare la registrazione dei field
-void NuovoConsumabile_dettagli::fieldRegistration(){
-    if(field("nome").isNull())  registerField("nome*", nomeConsumabile);
-    if(field("quantita").isNull())  registerField("quantita*", quantitaConsumabile);
-    if(field("costo").isNull()) registerField("costo", costoConsumabile);
-    if(field("dataAcquisto").isNull())  registerField("dataAcquisto", dataAcquisto);
-
-}
-
 void NuovoConsumabile_dettagli::setActualPage(){
   if(campoExtra) layoutDettagli->removeRow(campoExtra);
   if(field("optionIngrediente").toBool()){
@@ -42,13 +35,19 @@ void NuovoConsumabile_dettagli::setActualPage(){
     setTitle("Aggiunta di una nuova bevanda all'Inventario");
     setSubTitle("Inserisci le informazioni relative alla bevanda da inserire");
     campoExtra = new QLineEdit(this);
-    registerField("capacita", campoExtra);
+    registerField("capacita*", campoExtra);
     layoutDettagli->addRow("Capacità bevanda:", campoExtra);
   }
 }
 
 void NuovoConsumabile_dettagli::initializePage(){
   QWizardPage::initializePage();
-  fieldRegistration();
+  if(!previouslyInizialized){
+      registerField("nome*", nomeConsumabile);
+      registerField("quantita*", quantitaConsumabile);
+      registerField("costo*", costoConsumabile);
+      registerField("dataAcquisto", dataAcquisto);
+  }
   setActualPage();
+  previouslyInizialized = true;
 }
