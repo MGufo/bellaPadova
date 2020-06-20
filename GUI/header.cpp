@@ -29,5 +29,4 @@ void Header::setStyleHeader(){
   //layoutHeader->setSpacing(0);
   setMinimumSize(QSize(900,200));
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  //setContentsMargins(0,0,0,0);
 }
