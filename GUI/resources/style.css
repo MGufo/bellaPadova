@@ -3,6 +3,11 @@
 }
 
 
+QAbstractButton {
+    font: 20px Roboto;
+    color: #000000;
+}
+
 QPushButton {
     font: 20px Roboto;
     background-color: #2b78e4;
@@ -31,6 +36,18 @@ QPushButton#Calcola {
 
 }
 
+QPushButton#wrapperComanda {
+    background-color: #008000;
+}
+
+QPushButton#Rimuovi {
+    background-color: #AB0000;
+}
+
+QPushButton#Completata {
+    background-color: #2b78e4;
+}
+
 QMenuBar {
     background-color: #FFFFFF;
 }
@@ -46,10 +63,12 @@ QMenu::item:selected {
 
 QHeaderView {
     font: 18px Roboto;
+    background-color: #FFFFFF;
 }
 
 QTableWidget{
     border: 1 solid black;
+    background-color: #FFFFFF;
 }
 
 QTabWidget::pane {
@@ -111,6 +130,14 @@ QLabel#guadagnoPerdita {
     margin-bottom: 4;
 }
 
+QLabel#Orario {
+    background-color: #008000;
+}
+
+QLabel#ComandaId {
+    background-color: #008000;
+}
+
 QDateEdit {
     background-color: #FFFFFF;
 }
@@ -122,6 +149,10 @@ QLineEdit {
 QScrollArea {
     border: 1 solid black;
     margin: 2 15 2 15;
+}
+
+QWidget#checkboxWrapper {
+    background-color: #FFFFFF;
 }
 
 DigitalClock#orologio {

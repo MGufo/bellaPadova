@@ -26,7 +26,9 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWizardPage(parent){
 
   // Ingredienti
   QScrollArea* scrollArea = new QScrollArea(this);
+  scrollArea->setStyleSheet("background-color: #eeeeee");
   QWidget* checkboxWrapper = new QWidget(scrollArea);
+  checkboxWrapper->setObjectName("checkboxWrapper");
   QVBoxLayout* checkboxLayout = new QVBoxLayout(checkboxWrapper);
   for(int i=0; i<10; ++i){
     QCheckBox* checkBox = new QCheckBox(checkboxWrapper);
