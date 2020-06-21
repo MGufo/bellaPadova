@@ -32,7 +32,9 @@ void GestoreRisorse::inserisciArticolo(Articolo* daInserire) {
   if (daInserire) {
     const Lista<Consumabile*>* lista = daInserire->getComposizione();
     for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
-      if (!controlloConsumabile(&inventario, *it)) throw;
+      if (!controlloConsumabile(&inventario, *it))
+        throw new std::logic_error("Errore: Uno o più ingredienti selezionati"
+                                   "non sono disponibili.");
     daInserire->setDisponibilita(controlloDisponibilita(lista));
     menu.push_back(daInserire);
     delete lista;
@@ -71,7 +73,9 @@ void GestoreRisorse::modificaArticolo(Articolo* daModificare,
   *daModificare = *modificato;
   const Lista<Consumabile*>* lista = daModificare->getComposizione();
   for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
-    if (!controlloConsumabile(&inventario, *it)) throw;
+    if (!controlloConsumabile(&inventario, *it))
+      throw new std::logic_error("Errore: Uno o più ingredienti selezionati"
+                                 "non sono disponibili.");
   daModificare->setDisponibilita(controlloDisponibilita(lista));
   delete lista;
 }

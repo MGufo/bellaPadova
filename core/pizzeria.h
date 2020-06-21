@@ -4,6 +4,7 @@
 #include <QDate>
 #include <QJsonObject>
 
+#include <sstream>
 #include <stdexcept>
 
 #include "contatto.h"
@@ -20,12 +21,6 @@ class Pizzeria {
   //nel controller la costruzione delle comande dovrà usare idComande++ e il controller stesso dovrà incrementare idComande
   //idComande sarà ricaricato ad ogni costruzione del modello dal rispettivo file xml e salvato ad ogni salvataggio su file xml
   unsigned int idComande;
-
-  // TODO: Creare gerarchia di eccezioni appropriata ai possibili tipi di errore
-  // e implementarla
-
-  // TODO: Sostituire le 'throw' generiche presenti nel modello con i tipi di
-  // eccezione creati
   
  public:
   Pizzeria();

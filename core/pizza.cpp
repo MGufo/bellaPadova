@@ -60,7 +60,8 @@ void Pizza::setFarina(Farina* f) {
 // - "La lista di ingredienti non deve contenere Farine"
 void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it)
-    if (dynamic_cast<Farina*>(*it) || (checkIngrediente(*it))) throw;
+    if (dynamic_cast<Farina*>(*it) || (checkIngrediente(*it)))
+      throw new std::domain_error("Non è possibile aggiungere l'ingrediente selezionato");
 
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it)
     addIngrediente(*it);
@@ -70,8 +71,10 @@ void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
 // "Rimozione della farina dalla lista di ingredienti non consentita"
 void Pizza::rimuoviIngredienti(const Lista<Ingrediente*>& ingr) {
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
-    if (dynamic_cast<Farina*>(*it)) throw;
-    if (!checkIngrediente(*it)) throw;
+    if (dynamic_cast<Farina*>(*it))
+      throw new std::domain_error("Errore: Non è possibile rimuovere la farina da una pizza.");
+    if (!checkIngrediente(*it))
+      throw new std::domain_error("Errore: L'ingrediente da rimuovere non è presente nella pizza selezionata.");
     removeIngrediente(*it);
   }
 }
