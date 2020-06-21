@@ -28,5 +28,5 @@ ComandaGUI::ComandaGUI(QWidget *parent) : QWidget(parent){
     rimuovi->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     completata->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    wrapperComanda->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    wrapperComanda->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 }
