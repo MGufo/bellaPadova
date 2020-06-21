@@ -42,6 +42,7 @@ SOURCES += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.cpp \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
     #test/testgui.cpp
+    GUI/wizardNuovoArticolo/nuovoarticolo_dettagli.cpp
 
 HEADERS += \
     core/articolo.h \
@@ -81,6 +82,7 @@ HEADERS += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h \
     #test/testgui.h \
+    GUI/wizardNuovoArticolo/nuovoarticolo_dettagli.h
 
 RESOURCES += \
     GUI/resources.qrc

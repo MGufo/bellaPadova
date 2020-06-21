@@ -7,10 +7,14 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   label_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   label_inEsecuzione->setObjectName("inEsecuzione");
   QScrollArea* scroll_inEsecuzione = new QScrollArea(this);
+  scroll_inEsecuzione->setContentsMargins(0, 1, 0, 1);
+
   QWidget* wrapper_inEsecuzione = new QWidget(scroll_inEsecuzione);
   wrapper_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  dettaglioComanda* comanda1 = new dettaglioComanda(wrapper_inEsecuzione);
-  dettaglioComanda* comanda2 = new dettaglioComanda(wrapper_inEsecuzione);
+  wrapper_inEsecuzione->setObjectName("wrapperInEsecuzione");
+  wrapper_inEsecuzione->setContentsMargins(0, 1, 0, 1);
+  //dettaglioComanda* comanda1 = new dettaglioComanda(wrapper_inEsecuzione);
+  //dettaglioComanda* comanda2 = new dettaglioComanda(wrapper_inEsecuzione);
   ComandaGUI* comanda3 = new ComandaGUI(wrapper_inEsecuzione);
   comanda3->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   ComandaGUI* comanda4 = new ComandaGUI(wrapper_inEsecuzione);
@@ -19,8 +23,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
   QHBoxLayout* layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
   wrapper_inEsecuzione->setLayout(layout_inEsecuzione);
-  layout_inEsecuzione->addWidget(comanda1);
-  layout_inEsecuzione->addWidget(comanda2);
+  //layout_inEsecuzione->addWidget(comanda1);
+  //layout_inEsecuzione->addWidget(comanda2);
   layout_inEsecuzione->addWidget(comanda3);
   layout_inEsecuzione->addWidget(comanda4);
   scroll_inEsecuzione->setWidget(wrapper_inEsecuzione);
@@ -36,6 +40,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   label_concluse->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   label_concluse->setObjectName("concluse");
   QScrollArea* scroll_eseguite = new QScrollArea(this);
+  scroll_eseguite->setObjectName("scrollEseguite");
   QWidget* wrapper_eseguite = new QWidget(scroll_eseguite);
 
   //aggiungere roba al widget

@@ -22,7 +22,7 @@ void NuovoConsumabile_end::setInitialPage(){
     nomeConsumabile = new QLabel(field("nome").toString(), this);
     quantitaConsumabile = new QLabel(field("quantita").toString(), this);
     costoConsumabile = new QLabel(field("costo").toString(), this);
-    dataAcquisto = new QLabel(field("dataAcquisto").toString(), this);
+    dataAcquisto = new QLabel(field("dataAcquisto").toDate().toString("dd/MM/yyyy"), this);
 
     layoutEnd->addRow("Nome:", nomeConsumabile);
     layoutEnd->addRow("N° Confezioni:", quantitaConsumabile);
