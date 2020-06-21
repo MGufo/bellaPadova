@@ -1,6 +1,9 @@
 #ifndef PIZZERIA_H
 #define PIZZERIA_H
+
 #include <QDate>
+#include <QJsonObject>
+
 #include <stdexcept>
 
 #include "contatto.h"

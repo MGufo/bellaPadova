@@ -37,6 +37,10 @@ class Articolo : virtual public Risorsa {
    */
   virtual double getPrezzo() const = 0;
 
+//  virtual void leggi(const QJsonObject&);
+
+//  virtual void scrivi(QJsonObject&);
+
   virtual const Lista<Consumabile*>* getComposizione() const = 0;
 };
 #endif

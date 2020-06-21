@@ -1,5 +1,7 @@
 #ifndef RISORSA_H
 #define RISORSA_H
+
+#include <QJsonObject>
 #include <iostream>
 #include <string>
 
@@ -40,6 +42,20 @@ class Risorsa {
    * @param: bool (nuova disponibilità)
    */
   void setDisponibilita(bool);
+
+  /**
+   * @brief: Legge i dati di una risorsa da file JSON e li assegna ai campi
+   * dati dell'oggetto di invocazione
+   * @param: const QJsonObject& (file da cui leggere)
+   */
+//  virtual void leggi(const QJsonObject&) = 0;
+
+  /**
+   * @brief: Serializza l'oggetto di invocazione in un file JSON
+   * @param: bool (nuova disponibilità)
+   */
+//  virtual void scrivi(QJsonObject&) const = 0;
+
 
   // metodo di clonazione virtuale puro
   virtual Risorsa* clone() const = 0;
