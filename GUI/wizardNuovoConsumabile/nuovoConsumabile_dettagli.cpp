@@ -2,7 +2,6 @@
 #include <iostream>
 
 NuovoConsumabile_dettagli::NuovoConsumabile_dettagli(QWidget*parent) : QWizardPage(parent), previouslyInizialized(false){
-  setSubTitle("Inserisci le informazioni relative all'ingrediente da inserire");
   layoutDettagli = new QFormLayout(this);
 
   nomeConsumabile = new QLineEdit(this);
