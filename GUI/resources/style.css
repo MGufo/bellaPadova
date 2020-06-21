@@ -38,6 +38,7 @@ QPushButton#Calcola {
 
 QPushButton#wrapperComanda {
     background-color: #008000;
+    width: 240;
 }
 
 QPushButton#Rimuovi {
@@ -149,6 +150,14 @@ QLineEdit {
 QScrollArea {
     border: 1 solid black;
     margin: 2 15 2 15;
+}
+
+QScrollArea#scrollEseguite {
+    background-color: #FFFFFF;
+}
+
+QWidget#wrapperInEsecuzione {
+    background-color: #FFFFFF;
 }
 
 QWidget#checkboxWrapper {
