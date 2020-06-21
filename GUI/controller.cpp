@@ -18,11 +18,17 @@ void Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void Controller::caricaComande(){
-  modello->carica();
+  modello->caricaComande();
+  // TODO: Aggiornamento vista
 }
 
-void Controller::caricaRisorse(){}
+void Controller::caricaRisorse(){
+  modello->caricaRisorse();
+  // TODO: Aggiornamento vista
+}
 
-void Controller::salvaComande() const{}
+void Controller::salvaComande() const{
+
+}
 
 void Controller::salvaRisorse() const{}

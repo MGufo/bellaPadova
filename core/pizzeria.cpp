@@ -106,10 +106,18 @@ void Pizzeria::setCapacitaForno(unsigned short _forno) {
   capacitaForno = _forno;
 }
 
-void Pizzeria::salva(){
+void Pizzeria::salvaComande(){
 
 }
 
-void Pizzeria::carica(){
+void Pizzeria::salvaRisorse(){
+
+}
+
+void Pizzeria::caricaComande(){
+
+}
+
+void Pizzeria::caricaRisorse(){
 
 }

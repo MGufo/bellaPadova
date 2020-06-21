@@ -1,6 +1,9 @@
 #ifndef PIZZERIA_H
 #define PIZZERIA_H
+
 #include <QDate>
+#include <QJsonObject>
+
 #include <stdexcept>
 
 #include "contatto.h"
@@ -51,6 +54,7 @@ class Pizzeria {
   void setContatto(const Contatto*);
 
   unsigned short getCapacitaForno();
+
   /**
    * @brief: Modifica la capacità del forno
    * @param: unsigned int (capacità)
@@ -58,13 +62,26 @@ class Pizzeria {
   void setCapacitaForno(unsigned short);
 
   /**
-   * @brief: Lettura da file
+   * @brief: Serializza le comande presenti nel modello e le scrive
+   *         in un file JSON
    */
-  void salva();
+  void salvaComande();
 
   /**
-   * @brief: Scrittura su file
+   * @brief: Serializza le risorse (articoli in menù e inventario) presenti
+   *         nel modello e le scrive in un file JSON
    */
-  void carica();
+  void salvaRisorse();
+
+  /**
+   * @brief: Legge da file JSON una lista di comande e le aggiunge al modello
+   */
+  void caricaComande();
+
+  /**
+   * @brief: Legge da file JSON una lista di articoli e li aggiunge
+   *         rispettivamente a menù e inventario
+   */
+  void caricaRisorse();
 };
 #endif
