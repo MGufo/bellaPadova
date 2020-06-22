@@ -127,10 +127,10 @@ void Pizzeria::salvaComande(){
   if(!fileComande.open(QIODevice::ReadOnly | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
 
-  QJsonObject comandeJSON;
+  QJsonObject* comandeJSON = new QJsonObject();
   gestoreComande.salvaComande(comandeJSON);
-  QJsonDocument fileComandeJSON(comandeJSON);
-  fileComande.write(fileComandeJSON.toJson());
+  QJsonDocument* fileComandeJSON = new QJsonDocument(*comandeJSON);
+  fileComande.write(fileComandeJSON->toJson());
   fileComande.close();
 
 /*
