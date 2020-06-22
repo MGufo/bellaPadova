@@ -4,7 +4,9 @@ Pizzeria::Pizzeria()
   : contatto(Contatto()),
     gestoreRisorse(GestoreRisorse()),
     gestoreComande(GestoreComande()),
-    capacitaForno(5) {}
+    capacitaForno(5) {
+  caricaRisorse();
+}
 
 double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) const{
   double guadagni = 0;
@@ -72,6 +74,7 @@ void Pizzeria::inserisciComanda(Comanda* daInserire) {
     if(inseribile){
       gestoreComande.inserisciComanda(daInserire, capacitaForno);
       // TODO: Emettere segnale per la vista
+    }
     else {
       std::stringstream errorMsg;
       errorMsg << "Errore: Non è possibile inserire la comanda perché uno o più ingredienti necessari per creare l'articolo " << ((*it).first)->getNome()
@@ -81,8 +84,7 @@ void Pizzeria::inserisciComanda(Comanda* daInserire) {
   }
 }
 
-void Pizzeria::modificaComanda(Comanda* daModificare,
-                               Comanda* modificata) {
+void Pizzeria::modificaComanda(Comanda* daModificare, Comanda* modificata) {
   bool inseribile = true;
   const unordered_map<Articolo*, unsigned int>* ordinazione = &modificata->getOrdinazione();
   unordered_map<Articolo*, unsigned int>::const_iterator it;
@@ -156,5 +158,8 @@ void Pizzeria::caricaComande(){
 }
 
 void Pizzeria::caricaRisorse(){
-
+/*leggere id ultima comanda e mandarlo come signal allo slot del controller
+ *che si setta l'id corretto
+ * Poi si legge il resto del file e si caricano le robe
+*/
 }
