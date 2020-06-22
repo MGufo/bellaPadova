@@ -2,10 +2,8 @@
 
 Controller::Controller(Pizzeria* bellaPadova, QObject* parent) :
   QObject(parent), modello(bellaPadova) {
-    //load(comande);
-    //idComande = ultimaComanda->getId();
-    //load(risorse);
-    //idRisorse = ultimaRisorsaAggiunta->getId();
+    //TODO: Implementare funzione che chiede al model di leggere
+    //i currentID e ritornarli
 }
 
 void Controller::setView(MainWindow *v){
