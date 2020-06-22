@@ -69,7 +69,9 @@ void Pizzeria::inserisciComanda(Comanda* daInserire) {
     for(it = ordinazione->cbegin(); (it != ordinazione->cend()) && inseribile; ++it){
       inseribile = gestoreRisorse.controlloInInventario((*it).first);
     }
-    if(inseribile) gestoreComande.inserisciComanda(daInserire, capacitaForno);
+    if(inseribile){
+      gestoreComande.inserisciComanda(daInserire, capacitaForno);
+      // TODO: Emettere segnale per la vista
     else {
       std::stringstream errorMsg;
       errorMsg << "Errore: Non è possibile inserire la comanda perché uno o più ingredienti necessari per creare l'articolo " << ((*it).first)->getNome()
@@ -119,11 +121,34 @@ void Pizzeria::setCapacitaForno(unsigned short _forno) {
 }
 
 void Pizzeria::salvaComande(){
-  gestoreComande.salvaComande();
+  QFile fileComande(":/resources/comande.json");
+  if(!fileComande.open(QIODevice::ReadOnly | QIODevice::Text))
+    throw new std::invalid_argument("Errore: Impossibile aprire il file");
+
+  QJsonObject comandeJSON;
+  gestoreComande.salvaComande(comandeJSON);
+  QJsonDocument fileComandeJSON(comandeJSON);
+  fileComande.write(fileComandeJSON.toJson());
+  fileComande.close();
+
+/*
+1: Apro il file da disco con QFile
+2: Creare un JsonDocument che rappresenta il file json all'interno di Qt
+3: Aggiungere il contenuto del model al JsonDocument
+4: Scrivere il contenuto del JsonDocument nel QFile
+*/
 }
 
 void Pizzeria::salvaRisorse(){
+  QFile fileRisorse(":/resources/risorse.json");
+  if(!fileRisorse.open(QIODevice::ReadOnly | QIODevice::Text))
+    throw new std::invalid_argument("Errore: Impossibile aprire il file");
 
+  QJsonObject risorseJSON;
+  gestoreRisorse.salvaRisorse(risorseJSON);
+  QJsonDocument fileRisorseJSON(risorseJSON);
+  fileRisorse.write(fileRisorseJSON.toJson());
+  fileRisorse.close();
 }
 
 void Pizzeria::caricaComande(){
