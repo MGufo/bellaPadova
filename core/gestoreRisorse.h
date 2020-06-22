@@ -82,5 +82,7 @@ class GestoreRisorse {
   const Lista<Articolo *> &getMenu() const;
 
   const Lista<Consumabile *> &getInventario() const;
+
+  void salvaRisorse(QJsonObject*);
 };
 #endif

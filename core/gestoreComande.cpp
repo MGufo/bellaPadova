@@ -151,3 +151,8 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
 const Comanda* GestoreComande::getComandaCorrente() const { return *current; }
 
 const Lista<Comanda*>& GestoreComande::getBacheca() const { return bacheca; }
+
+void GestoreComande::salvaComande(QJsonObject *) const
+{
+
+}

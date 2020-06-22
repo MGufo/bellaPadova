@@ -146,10 +146,10 @@ void Pizzeria::salvaRisorse(){
   if(!fileRisorse.open(QIODevice::ReadOnly | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
 
-  QJsonObject risorseJSON;
+  QJsonObject* risorseJSON = new QJsonObject();
   gestoreRisorse.salvaRisorse(risorseJSON);
-  QJsonDocument fileRisorseJSON(risorseJSON);
-  fileRisorse.write(fileRisorseJSON.toJson());
+  QJsonDocument* fileRisorseJSON = new QJsonDocument(*risorseJSON);
+  fileRisorse.write(fileRisorseJSON->toJson());
   fileRisorse.close();
 }
 

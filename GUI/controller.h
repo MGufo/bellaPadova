@@ -21,7 +21,7 @@ class Controller : public QObject {
   void setView(MainWindow*);
 
  signals:
-  mostraErrore(const QString&);
+  void mostraErrore(const QString&) const;
 
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);
