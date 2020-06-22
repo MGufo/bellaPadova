@@ -41,8 +41,9 @@ SOURCES += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.cpp \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.cpp \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.cpp \
+    GUI/wizardNuovoArticolo/ingredientcheckbox.cpp
     #test/testgui.cpp
-    GUI/wizardNuovoArticolo/nuovoarticolo_dettagli.cpp
 
 HEADERS += \
     core/articolo.h \
@@ -81,8 +82,9 @@ HEADERS += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.h \
+    GUI/wizardNuovoArticolo/ingredientcheckbox.h
     #test/testgui.h \
-    GUI/wizardNuovoArticolo/nuovoarticolo_dettagli.h
 
 RESOURCES += \
     GUI/resources.qrc
