@@ -119,7 +119,7 @@ void Pizzeria::setCapacitaForno(unsigned short _forno) {
 }
 
 void Pizzeria::salvaComande(){
-
+  gestoreComande.salvaComande();
 }
 
 void Pizzeria::salvaRisorse(){
