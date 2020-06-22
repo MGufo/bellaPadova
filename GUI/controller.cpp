@@ -23,12 +23,20 @@ void Controller::caricaComande(){
 }
 
 void Controller::caricaRisorse(){
-  modello->caricaRisorse();
+  try{
+    modello->caricaRisorse();
+  } catch (std::invalid_argument *ecc) {
+    emit mostraErrore(QString(ecc->what()));
+  }
   // TODO: Aggiornamento vista
 }
 
 void Controller::salvaComande() const{
-
+  try{
+    modello->salvaComande();
+  } catch (std::invalid_argument *ecc) {
+    emit mostraErrore(QString(ecc->what()));
+  }
 }
 
 void Controller::salvaRisorse() const{}
