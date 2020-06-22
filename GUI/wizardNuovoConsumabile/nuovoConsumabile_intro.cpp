@@ -8,7 +8,6 @@ nuovoConsumabile_intro::nuovoConsumabile_intro(QWidget* parent):QWizardPage
   optionIngrediente->setChecked(true);
   registerField("optionIngrediente", optionIngrediente);
   optionBevanda = new QRadioButton("Bevanda");
-  registerField("optionBevanda", optionBevanda);
 
   layoutIntro = new QVBoxLayout(this);
   layoutIntro->addWidget(optionIngrediente);

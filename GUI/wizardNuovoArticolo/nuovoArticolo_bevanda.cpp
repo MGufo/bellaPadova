@@ -1,38 +1,37 @@
 #include "nuovoArticolo_bevanda.h"
 
-NuovoArticolo_bevanda::NuovoArticolo_bevanda(QWidget* parent) : QWizardPage(parent){
-  setTitle("Aggiunta di una nuova bevanda al Menù");
-  setSubTitle("Seleziona il formato della bevanda, poi specificane nome, costo e capacità");
+NuovoArticolo_bevanda::NuovoArticolo_bevanda(QWidget* parent) : QWidget(parent){
 
-  // Tipologia bevanda
-  QWidget* tipologiaWrapper = new QWidget(this);
-  QRadioButton* radioBottiglia = new QRadioButton("Bottiglia", tipologiaWrapper);
-  radioBottiglia->setChecked(true);
-  QRadioButton* radioLattina = new QRadioButton("Lattina", tipologiaWrapper);
-  QHBoxLayout* layoutTipologia = new  QHBoxLayout(tipologiaWrapper);
-  layoutTipologia->addWidget(radioBottiglia);
-  layoutTipologia->addWidget(radioLattina);
+    // Informazioni Bevanda
+    QWidget* infoWrapper = new QWidget(this);
+    QFormLayout* layoutInfo = new QFormLayout(infoWrapper);
+    layoutInfo->setFieldGrowthPolicy(QFormLayout::FieldsStayAtSizeHint);
+    nomeBevanda = new QLineEdit(infoWrapper);
+    prezzoBevanda = new QLineEdit(infoWrapper);
+    capacitaBevanda = new QLineEdit(infoWrapper);
+    layoutInfo->addRow("Nome", nomeBevanda);
+    layoutInfo->addRow("Prezzo", prezzoBevanda);
+    layoutInfo->addRow("Capacità", capacitaBevanda);
 
-  // Informazioni Bevanda
-  QWidget* infoWrapper = new QWidget(this);
-  QFormLayout* layoutInfo = new QFormLayout(infoWrapper);
-  layoutInfo->setFieldGrowthPolicy(QFormLayout::FieldsStayAtSizeHint);
-  QLineEdit* nomeBevanda = new QLineEdit(infoWrapper);
-  registerField("nomeBevanda*", nomeBevanda);
-  QLineEdit* prezzoBevanda = new QLineEdit(infoWrapper);
-  registerField("prezzoBevanda*", prezzoBevanda);
-  QLineEdit* capacitaBevanda = new QLineEdit(infoWrapper);
-  registerField("capacitaBevanda*", capacitaBevanda);
-  layoutInfo->addRow("Nome", nomeBevanda);
-  layoutInfo->addRow("Prezzo", prezzoBevanda);
-  layoutInfo->addRow("Capacità", capacitaBevanda);
+    // Tipologia bevanda
+    QWidget* tipologiaWrapper = new QWidget(this);
+    radioBottiglia = new QRadioButton("Bottiglia", tipologiaWrapper);
+    radioBottiglia->setChecked(true);
+    QRadioButton* radioLattina = new QRadioButton("Lattina", tipologiaWrapper);
+    QHBoxLayout* layoutTipologia = new  QHBoxLayout(tipologiaWrapper);
+    layoutTipologia->addWidget(radioBottiglia);
+    layoutTipologia->addWidget(radioLattina);
 
-  layoutBevanda = new QVBoxLayout(this);
-  layoutBevanda->addWidget(tipologiaWrapper);
-  layoutBevanda->addWidget(infoWrapper);
-  setLayout(layoutBevanda);
+    layoutBevanda = new QVBoxLayout(this);
+    layoutBevanda->addWidget(infoWrapper);
+    layoutBevanda->addWidget(tipologiaWrapper);
+    setLayout(layoutBevanda);
 }
 
-int NuovoArticolo_bevanda::nextId() const{
-  return WizardNuovoArticolo::PAGE_End;
-}
+QLineEdit *NuovoArticolo_bevanda::getNomeBevanda() const{   return nomeBevanda;}
+
+QLineEdit *NuovoArticolo_bevanda::getPrezzoBevanda() const{ return prezzoBevanda;}
+
+QLineEdit *NuovoArticolo_bevanda::getCapacitaBevanda() const{   return capacitaBevanda;}
+
+QRadioButton *NuovoArticolo_bevanda::getRadioBottiglia() const{ return radioBottiglia;}

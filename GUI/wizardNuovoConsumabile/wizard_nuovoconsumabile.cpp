@@ -15,4 +15,5 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
 
 void WizardNuovoConsumabile::accept(){
     QWizard::accept();
+
 }

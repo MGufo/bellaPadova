@@ -2,7 +2,6 @@
 #define NUOVOARTICOLO_PIZZA_H
 
 #include <QWidget>
-#include <QWizardPage>
 #include <QCheckBox>
 #include <QLabel>
 #include <QLineEdit>
@@ -11,16 +10,26 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 
-#include "./GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h"
+#include "ingredientcheckbox.h"
 
-class NuovoArticolo_pizza: public QWizardPage{
+class NuovoArticolo_pizza: public QWidget{
   Q_OBJECT
 public:
   NuovoArticolo_pizza(QWidget* parent = nullptr);
-  int nextId() const override;
+
+  QLineEdit* getNomePizza() const;
+  QLineEdit* getPrezzoPizza() const;
+  QCheckBox* getPomodoro() const;
+  QCheckBox* getMozzarella() const;
+  QWidget* getIngredientsCheckBoxWrapper() const;
 
 private:
   QGridLayout* layoutPizza;
+  QLineEdit* nomePizza;
+  QLineEdit* prezzoPizza;
+  QCheckBox* pomodoro;
+  QCheckBox* mozzarella;
+  QWidget* ingredientsCheckBoxWrapper;
 };
 
 #endif // WIZARD_PIZZA_H

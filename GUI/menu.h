@@ -15,7 +15,7 @@ class Menu : public QWidget
 
 private:
   QVBoxLayout* layoutMenu;
-  WizardNuovoArticolo* nuovoArticolo;
+  WizardNuovoArticolo* nuovoArticolo = nullptr;
   void setStyleMenu();
 
 private slots:
