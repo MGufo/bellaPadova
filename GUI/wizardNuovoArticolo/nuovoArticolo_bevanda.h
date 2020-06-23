@@ -8,15 +8,21 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 
-#include "./GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h"
-
-class NuovoArticolo_bevanda : public QWizardPage{
+class NuovoArticolo_bevanda : public QWidget{
   Q_OBJECT
 public:
   NuovoArticolo_bevanda(QWidget* parent = nullptr);
-  int nextId() const override;
+
+  QLineEdit* getNomeBevanda() const;
+  QLineEdit* getPrezzoBevanda() const;
+  QLineEdit* getCapacitaBevanda() const;
+  QRadioButton* getRadioBottiglia() const;
 
 private:
   QVBoxLayout* layoutBevanda;
+  QLineEdit* nomeBevanda;
+  QLineEdit* prezzoBevanda;
+  QLineEdit* capacitaBevanda;
+  QRadioButton* radioBottiglia;
 };
 #endif // WIZARD_BEVANDA_H

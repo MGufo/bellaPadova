@@ -6,6 +6,7 @@ NuovoArticolo_intro::NuovoArticolo_intro(QWidget* parent): QWizardPage(parent){
 
   optionPizza = new QRadioButton("Pizza", this);
   optionPizza->setChecked(true);
+  registerField("optionPizza", optionPizza);
   optionBevanda = new QRadioButton("Bevanda", this);
 
   layoutIntro = new QVBoxLayout(this);
@@ -15,10 +16,5 @@ NuovoArticolo_intro::NuovoArticolo_intro(QWidget* parent): QWizardPage(parent){
 }
 
 int NuovoArticolo_intro::nextId() const{
-  if(optionPizza->isChecked())
-    return WizardNuovoArticolo::PAGE_Pizza;
-  else if(optionBevanda->isChecked())
-    return WizardNuovoArticolo::PAGE_Bevanda;
-  else
-    return WizardNuovoArticolo::PAGE_Intro;
+  return WizardNuovoArticolo::PAGE_Dettagli;
 }

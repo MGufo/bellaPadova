@@ -71,7 +71,6 @@ QMenuBar* MainWindow::drawMenubar() const{
   return menuBar;
 }
 
-// SLOT
 void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
   controller->calcoloFatturato(inizio, fine);
 }
@@ -83,4 +82,9 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkred;");
   findChild<QLineEdit*>("mGuadagno")->clear();
   findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
+}
+
+void MainWindow::mostraErrore(const QString & messaggio){
+  QErrorMessage* errorDialog = new QErrorMessage(this);
+  errorDialog->showMessage(messaggio);
 }

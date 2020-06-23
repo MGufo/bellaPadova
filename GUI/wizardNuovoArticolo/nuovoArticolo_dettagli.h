@@ -7,16 +7,17 @@
 #include <QFormLayout>
 
 #include "wizard_nuovoArticolo.h"
+#include "ingredientcheckbox.h"
 
-class nuovoArticolo_dettagli : public QWizardPage{
+class NuovoArticolo_dettagli : public QWizardPage{
   Q_OBJECT
 public:
-    nuovoArticolo_dettagli(QWidget* parent = nullptr);
+    NuovoArticolo_dettagli(QWidget* parent = nullptr);
     int nextId() const override;
 
 private:
-    QLayout* layoutDettagli;
-
+    QVBoxLayout* layoutDettagli;
+    QWidget* content;
     bool previouslyInizialized;
     void setActualPage();
     void initializePage() override;

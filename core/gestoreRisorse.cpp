@@ -95,3 +95,8 @@ const Lista<Articolo*>& GestoreRisorse::getMenu() const { return menu; }
 const Lista<Consumabile*>& GestoreRisorse::getInventario() const {
   return inventario;
 }
+
+void GestoreRisorse::salvaRisorse(QJsonObject *)
+{
+
+}

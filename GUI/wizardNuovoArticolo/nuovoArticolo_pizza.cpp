@@ -1,25 +1,20 @@
 #include "nuovoArticolo_pizza.h"
 
-NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWizardPage(parent){
-  setTitle("Aggiunta di una nuova pizza al Menù");
-  setSubTitle("Fornisci un nome e un prezzo alla pizza da inserire, poi "
-              "aggiungi gli ingredienti che la compongono");
+NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
 
   // Informazioni pizza
   QWidget* wrapperInfo = new QWidget(this);
-  QLineEdit* nomePizza = new QLineEdit(wrapperInfo);
-  registerField("nomePizza*", nomePizza);
-  QLineEdit* prezzoPizza = new QLineEdit(wrapperInfo);
-  registerField("prezzoPizza*", prezzoPizza);
+  nomePizza = new QLineEdit(wrapperInfo);
+  prezzoPizza = new QLineEdit(wrapperInfo);
   QFormLayout* layoutInfo = new QFormLayout(wrapperInfo);
   layoutInfo->setFieldGrowthPolicy(QFormLayout::FieldsStayAtSizeHint);
-  layoutInfo->addRow("Nome pizza:", nomePizza);
-  layoutInfo->addRow("Prezzo pizza:", prezzoPizza);
+  layoutInfo->addRow("Nome:", nomePizza);
+  layoutInfo->addRow("Prezzo:", prezzoPizza);
 
   // Ingredienti base pizza
   QWidget* wrapperBasePizza = new QWidget(this);
-  QCheckBox* pomodoro = new QCheckBox("Pomodoro", wrapperBasePizza);
-  QCheckBox* mozzarella = new QCheckBox("Mozzarella", wrapperBasePizza);
+  pomodoro = new QCheckBox("Pomodoro", wrapperBasePizza);
+  mozzarella = new QCheckBox("Mozzarella", wrapperBasePizza);
   QVBoxLayout* layoutBase = new QVBoxLayout(wrapperBasePizza);
   layoutBase->addWidget(pomodoro);
   layoutBase->addWidget(mozzarella);
@@ -27,14 +22,19 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWizardPage(parent){
   // Ingredienti
   QScrollArea* scrollArea = new QScrollArea(this);
   scrollArea->setStyleSheet("background-color: #eeeeee");
-  QWidget* checkboxWrapper = new QWidget(scrollArea);
-  checkboxWrapper->setObjectName("checkboxWrapper");
-  QVBoxLayout* checkboxLayout = new QVBoxLayout(checkboxWrapper);
-  for(int i=0; i<10; ++i){
-    QCheckBox* checkBox = new QCheckBox(checkboxWrapper);
-    checkboxLayout->addWidget(checkBox);
-  }
-  scrollArea->setWidget(checkboxWrapper);
+
+  ingredientsCheckBoxWrapper = new QWidget(scrollArea);
+  ingredientsCheckBoxWrapper->setObjectName("ingredientsCheckBoxWrapper");
+  QVBoxLayout* ingredientsCheckboxLayout = new QVBoxLayout(ingredientsCheckBoxWrapper);
+  IngredientCheckBox* i1 = new IngredientCheckBox("ananas",1,ingredientsCheckBoxWrapper);
+  IngredientCheckBox* i2 = new IngredientCheckBox("funghi",2,ingredientsCheckBoxWrapper);
+  ingredientsCheckboxLayout->addWidget(i1);
+  ingredientsCheckboxLayout->addWidget(i2);
+//  for(int i=0; i<10; ++i){
+//    QCheckBox* checkBox = new QCheckBox(checkboxWrapper);
+//    checkboxLayout->addWidget(checkBox);
+//  }
+  scrollArea->setWidget(ingredientsCheckBoxWrapper);
 
   layoutPizza = new QGridLayout(this);
   layoutPizza->addWidget(wrapperInfo,0,0,2,4);
@@ -43,6 +43,12 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWizardPage(parent){
   setLayout(layoutPizza);
 }
 
-int NuovoArticolo_pizza::nextId() const{
-    return WizardNuovoArticolo::PAGE_End;
-}
+QLineEdit *NuovoArticolo_pizza::getNomePizza() const{   return nomePizza;}
+
+QLineEdit *NuovoArticolo_pizza::getPrezzoPizza() const{   return prezzoPizza;}
+
+QCheckBox *NuovoArticolo_pizza::getPomodoro() const{    return pomodoro;}
+
+QCheckBox *NuovoArticolo_pizza::getMozzarella() const{  return mozzarella;}
+
+QWidget *NuovoArticolo_pizza::getIngredientsCheckBoxWrapper() const{    return ingredientsCheckBoxWrapper;}

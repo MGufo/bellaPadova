@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include <QErrorMessage>
 #include <QMenuBar>
 #include <QFile>
 #include <QTabWidget>
@@ -22,11 +23,14 @@ class MainWindow : public QWidget {
 
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);
+  void mostraErrore(const QString&);
+
 private:
   Controller* controller;
   QVBoxLayout* mainLayout;
   void setStylePizzeria();
   QMenuBar* drawMenubar() const;
+
 };
 
 #endif

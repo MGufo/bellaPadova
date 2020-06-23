@@ -2,6 +2,8 @@
 #define PIZZERIA_H
 
 #include <QDate>
+#include <QFile>
+#include <QJsonDocument>
 #include <QJsonObject>
 
 #include <sstream>
