@@ -10,6 +10,10 @@ class NuovoArticolo_end : public QWizardPage{
   Q_OBJECT
 public:
   NuovoArticolo_end(QWidget* parent = nullptr);
+private:
+  QFormLayout* layoutEnd;
+  void setActualPage();
+  void initializePage() override;
 };
 
 #endif // WIZARD_END_H
