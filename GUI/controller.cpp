@@ -31,4 +31,14 @@ void Controller::salvaComande() const{
 
 }
 
-void Controller::salvaRisorse() const{}
+void Controller::salvaRisorse() const{
+
+}
+
+void Controller::modificaComande(){
+    modello->modificaComanda();
+}
+
+void Controller::modificaRisorse(){
+    modello->modificaArticolo();
+}

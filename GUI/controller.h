@@ -27,6 +27,8 @@ class Controller : public QObject {
   void caricaRisorse();
   void salvaComande() const;
   void salvaRisorse() const;
+  void modificaComande();
+  void modificaRisorse();
 };
 
 #endif
