@@ -1,7 +1,6 @@
 #include "nuovoArticolo_dettagli.h"
-#include <iostream>
 
-NuovoArticolo_dettagli::NuovoArticolo_dettagli(QWidget* parent) : QWizardPage(parent), content(nullptr), previouslyInizialized(false){
+NuovoArticolo_dettagli::NuovoArticolo_dettagli(QWidget* parent) : QWizardPage(parent), content(nullptr){
     layoutDettagli = new QVBoxLayout(this);
     setLayout(layoutDettagli);
 }
@@ -32,29 +31,25 @@ void NuovoArticolo_dettagli::setActualPage(){
 void NuovoArticolo_dettagli::initializePage(){
     QWizardPage::initializePage();
     setActualPage();
-    if(!previouslyInizialized){
-        //registerField
-        if(field("optionPizza").toBool()){
-            auto ptr = static_cast<NuovoArticolo_pizza*>(content);
-            registerField("nomePizza*", ptr->getNomePizza());
-            registerField("prezzoPizza*", ptr->getPrezzoPizza());
-            registerField("pomodoro", ptr->getPomodoro());
-            registerField("mozzarella", ptr->getMozzarella());
-            auto ingredients = ptr->getIngredientsCheckBoxWrapper()->children();
-            for(auto it = ingredients.cbegin(); it != ingredients.cend(); ++it){
-                IngredientCheckBox* tmp = static_cast<IngredientCheckBox*>(*it);
-                QString id(tmp->getId());
-                registerField(id, tmp);
-            }
+    //registerField
+    if(field("optionPizza").toBool()){
+        auto ptr = static_cast<NuovoArticolo_pizza*>(content);
+        registerField("nomePizza*", ptr->getNomePizza());
+        registerField("prezzoPizza*", ptr->getPrezzoPizza());
+        registerField("pomodoro", ptr->getPomodoro());
+        registerField("mozzarella", ptr->getMozzarella());
+        auto ingredients = ptr->getIngredientsCheckBoxWrapper()->children();
+        for(auto it = ingredients.cbegin(); it != ingredients.cend(); ++it){
+            IngredientCheckBox* tmp = static_cast<IngredientCheckBox*>(*it);
+            QString id(tmp->getId());
+            registerField(id, tmp);
         }
-        else{
-            auto ptr = static_cast<NuovoArticolo_bevanda*>(content);
-            registerField("nomeBevanda*", ptr->getNomeBevanda());
-            registerField("prezzoBevanda*", ptr->getPrezzoBevanda());
-            registerField("capacitaBevanda*", ptr->getCapacitaBevanda());
-            registerField("optionBottiglia", ptr->getRadioBottiglia());
-        }
-
     }
-    previouslyInizialized = true;
+    else{
+        auto ptr = static_cast<NuovoArticolo_bevanda*>(content);
+        registerField("nomeBevanda*", ptr->getNomeBevanda());
+        registerField("prezzoBevanda*", ptr->getPrezzoBevanda());
+        registerField("capacitaBevanda*", ptr->getCapacitaBevanda());
+        registerField("optionBottiglia", ptr->getRadioBottiglia());
+    }
 }

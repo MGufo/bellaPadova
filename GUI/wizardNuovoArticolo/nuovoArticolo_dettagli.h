@@ -18,7 +18,6 @@ public:
 private:
     QVBoxLayout* layoutDettagli;
     QWidget* content;
-    bool previouslyInizialized;
     void setActualPage();
     void initializePage() override;
 };

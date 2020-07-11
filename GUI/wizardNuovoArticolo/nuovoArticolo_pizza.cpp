@@ -23,8 +23,8 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   QScrollArea* scrollArea = new QScrollArea(this);
   scrollArea->setStyleSheet("background-color: #eeeeee");
 
-  ingredientsCheckBoxWrapper = new QWidget(scrollArea);
-  ingredientsCheckBoxWrapper->setObjectName("ingredientsCheckBoxWrapper");
+  consumabiliCheckBoxWrapper = new QWidget(scrollArea);
+  consumabiliCheckBoxWrapper->setObjectName("consumabiliCheckBoxWrapper");
   QVBoxLayout* ingredientsCheckboxLayout = new QVBoxLayout(ingredientsCheckBoxWrapper);
   IngredientCheckBox* i1 = new IngredientCheckBox("ananas",1,ingredientsCheckBoxWrapper);
   IngredientCheckBox* i2 = new IngredientCheckBox("funghi",2,ingredientsCheckBoxWrapper);
