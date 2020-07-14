@@ -25,16 +25,16 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
 
   consumabiliCheckBoxWrapper = new QWidget(scrollArea);
   consumabiliCheckBoxWrapper->setObjectName("consumabiliCheckBoxWrapper");
-  QVBoxLayout* ingredientsCheckboxLayout = new QVBoxLayout(ingredientsCheckBoxWrapper);
-  IngredientCheckBox* i1 = new IngredientCheckBox("ananas",1,ingredientsCheckBoxWrapper);
-  IngredientCheckBox* i2 = new IngredientCheckBox("funghi",2,ingredientsCheckBoxWrapper);
-  ingredientsCheckboxLayout->addWidget(i1);
-  ingredientsCheckboxLayout->addWidget(i2);
+  QVBoxLayout* consumabiliCheckboxLayout = new QVBoxLayout(consumabiliCheckBoxWrapper);
+  IngredientCheckBox* i1 = new IngredientCheckBox("ananas",1,consumabiliCheckBoxWrapper);
+  IngredientCheckBox* i2 = new IngredientCheckBox("funghi",2,consumabiliCheckBoxWrapper);
+  consumabiliCheckboxLayout->addWidget(i1);
+  consumabiliCheckboxLayout->addWidget(i2);
 //  for(int i=0; i<10; ++i){
 //    QCheckBox* checkBox = new QCheckBox(checkboxWrapper);
 //    checkboxLayout->addWidget(checkBox);
 //  }
-  scrollArea->setWidget(ingredientsCheckBoxWrapper);
+  scrollArea->setWidget(consumabiliCheckBoxWrapper);
 
   layoutPizza = new QGridLayout(this);
   layoutPizza->addWidget(wrapperInfo,0,0,2,4);
@@ -51,4 +51,4 @@ QCheckBox *NuovoArticolo_pizza::getPomodoro() const{    return pomodoro;}
 
 QCheckBox *NuovoArticolo_pizza::getMozzarella() const{  return mozzarella;}
 
-QWidget *NuovoArticolo_pizza::getIngredientsCheckBoxWrapper() const{    return ingredientsCheckBoxWrapper;}
+QWidget *NuovoArticolo_pizza::getConsumabiliCheckBoxWrapper() const{    return consumabiliCheckBoxWrapper;}
