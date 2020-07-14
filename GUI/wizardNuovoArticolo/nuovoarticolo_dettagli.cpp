@@ -41,7 +41,8 @@ void NuovoArticolo_dettagli::initializePage(){
         auto ingredients = ptr->getConsumabiliCheckBoxWrapper()->children();
         for(auto it = ingredients.cbegin(); it != ingredients.cend(); ++it){
             IngredientCheckBox* tmp = static_cast<IngredientCheckBox*>(*it);
-            QString id(tmp->getId());
+            string s = std::to_string(tmp->getId());
+            QString id(QString::fromStdString(s));
             registerField(id, tmp);
         }
     }

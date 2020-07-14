@@ -26,6 +26,7 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   consumabiliCheckBoxWrapper = new QWidget(scrollArea);
   consumabiliCheckBoxWrapper->setObjectName("consumabiliCheckBoxWrapper");
   QVBoxLayout* consumabiliCheckboxLayout = new QVBoxLayout(consumabiliCheckBoxWrapper);
+  //una funzione del controller si occuperà di prendere tutti gli ingredienti presenti nell'inventario
   IngredientCheckBox* i1 = new IngredientCheckBox("ananas",1,consumabiliCheckBoxWrapper);
   IngredientCheckBox* i2 = new IngredientCheckBox("funghi",2,consumabiliCheckBoxWrapper);
   consumabiliCheckboxLayout->addWidget(i1);

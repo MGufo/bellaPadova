@@ -5,6 +5,8 @@
 #include <QWidget>
 #include <QWizardPage>
 #include <QFormLayout>
+#include <string>
+using std::string;
 
 #include "wizard_nuovoArticolo.h"
 #include "ingredientcheckbox.h"
