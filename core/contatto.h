@@ -1,7 +1,7 @@
 #ifndef CONTATTO_H
 #define CONTATTO_H
 #include <string>
-
+#include <QJsonObject>
 #include "qontainer.h"
 using std::string;
 
@@ -58,6 +58,8 @@ class Contatto {
    * @param: string& (nuovo num. telefono)
    */
   void setTelefono(const string&);
+
+  const QJsonObject& salva() const;
 };
 
 #endif
