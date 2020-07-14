@@ -152,7 +152,10 @@ const Comanda* GestoreComande::getComandaCorrente() const { return *current; }
 
 const Lista<Comanda*>& GestoreComande::getBacheca() const { return bacheca; }
 
-void GestoreComande::salvaComande(QJsonObject *) const
-{
-
+void GestoreComande::salvaComande(QJsonObject *comandeJSON) const{
+  QJsonArray arrayComande = {};
+  for(auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it){
+    arrayComande.append((*it)->salva());
+  }
+  comandeJSON["comande"] = (*arrayComande);
 }

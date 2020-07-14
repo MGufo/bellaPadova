@@ -37,4 +37,10 @@ void Controller::salvaComande() const{
   }
 }
 
-void Controller::salvaRisorse() const{}
+void Controller::salvaRisorse() const{
+  try{
+    modello->salvaRisorse();
+  } catch (std::invalid_argument *ecc) {
+    emit mostraErrore(QString(ecc->what()));
+  }
+}

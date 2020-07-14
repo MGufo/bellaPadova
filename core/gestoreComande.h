@@ -1,8 +1,8 @@
 #ifndef GESTORECOMANDE_H
 #define GESTORECOMANDE_H
+#include <QJsonArray>
 #include "comanda.h"
 #include "qontainer.h"
-
 class GestoreComande {
  private:
   Lista<Comanda*> bacheca;
