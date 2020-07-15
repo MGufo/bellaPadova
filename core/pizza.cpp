@@ -112,7 +112,7 @@ void Pizza::salva(QJsonObject& pizzaJSON) const{
   // Disponibilita
   pizzaJSON.insert("Disponibilità", getDisponibilita());
   // Prezzo
-  pizzaJSON.insert("Nome", getPrezzo());
+  pizzaJSON.insert("Prezzo", getPrezzo());
   // Ingredienti
   QJsonArray* ingredientiJSON = new QJsonArray();
   for(auto it = ingredienti.const_begin(); it != ingredienti.const_end(); ++it){
