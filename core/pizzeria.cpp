@@ -154,12 +154,15 @@ void Pizzeria::salvaRisorse(){
 }
 
 void Pizzeria::caricaComande(){
-
+// TODO: Aggiungere gestione eccezioni JSON
 }
 
 void Pizzeria::caricaRisorse(){
-/*leggere id ultima comanda e mandarlo come signal allo slot del controller
- *che si setta l'id corretto
- * Poi si legge il resto del file e si caricano le robe
-*/
+
+  // TODO: Aggiungere gestione eccezioni JSON
+
+ /*leggere id ultima comanda e mandarlo come signal allo slot del controller
+  *che si setta l'id corretto
+  * Poi si legge il resto del file e si caricano le robe
+  */
 }

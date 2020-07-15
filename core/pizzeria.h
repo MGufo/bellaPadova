@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonParseError>
 
 #include <sstream>
 #include <stdexcept>
