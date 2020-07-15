@@ -99,3 +99,11 @@ const Lista<Consumabile*>* Pizza::getComposizione() const {
   }
   return lista;
 }
+
+void Pizza::carica(const QJsonObject &){
+
+}
+
+void Pizza::salva(QJsonObject &) const{
+
+}

@@ -25,3 +25,11 @@ const Lista<Consumabile*>* Bevanda::getComposizione() const {
   lista->push_back(const_cast<Bevanda*>(this));
   return lista;
 }
+
+void Bevanda::carica(const QJsonObject &){
+
+}
+
+void Bevanda::salva(QJsonObject &) const{
+
+}

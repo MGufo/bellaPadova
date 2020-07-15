@@ -6,11 +6,3 @@ Articolo::Articolo(unsigned int id, string nome, bool disponibilita, double p)
 double Articolo::getPrezzoBase() const { return prezzoBase; }
 
 void Articolo::setPrezzoBase(const double& p) { prezzoBase = p; }
-
-//void Articolo::leggi(const QJsonObject &){
-
-//}
-
-//void Articolo::scrivi(QJsonObject &){
-
-//}

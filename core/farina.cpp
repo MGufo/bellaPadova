@@ -13,3 +13,11 @@ const string& Farina::getTipoFarina() const { return tipoFarina; }
 void Farina::setTipoFarina(const string& f) { tipoFarina = f; }
 
 Farina* Farina::clone() const { return new Farina(*this); }
+
+void Farina::carica(const QJsonObject &){
+
+}
+
+void Farina::salva(QJsonObject &) const{
+
+}

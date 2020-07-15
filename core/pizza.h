@@ -56,5 +56,9 @@ class Pizza : public Articolo {
    * disponibilità della pizza.
    */
   virtual const Lista<Consumabile*>* getComposizione() const;
+
+  virtual void carica(const QJsonObject&);
+
+  virtual void salva(QJsonObject &) const;
 };
 #endif
