@@ -2,7 +2,6 @@
     background-color: #FF9900;
 }
 
-
 QAbstractButton {
     font: 20px Roboto;
     color: #000000;
@@ -77,6 +76,7 @@ QTabWidget::pane {
     border: 0 solid white;
     margin: -13px -9px -13px -9px;
 }
+
 
 QTabWidget::tab-bar{
     alignment: center;
@@ -168,7 +168,7 @@ DigitalClock#orologio {
     background-color: #FF9900;
     border: 0;
     color: #000000;
-    min-width: 200;
-    min-height: 200;
+    min-width: 180;
+    min-height: 180;
     margin-top: -100;
 }
