@@ -96,7 +96,19 @@ const Lista<Consumabile*>& GestoreRisorse::getInventario() const {
   return inventario;
 }
 
-void GestoreRisorse::salvaRisorse(QJsonObject *)
-{
+void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
+  QJsonObject* menuJSON = new QJsonObject();
+  for(auto it = menu.const_begin(); it != menu.const_end(); ++it)
+    menuJSON->insert(QString::fromStdString((*it)->getNome()),
+                        QJsonValue(*((*it)->salva())));
+  risorseJSON->insert("Menu", menuJSON);
+  delete menuJSON;
 
+  QJsonObject* inventarioJSON = new QJsonObject();
+  for(auto it = inventario.const_begin(); it != inventario.const_end(); ++it)
+    inventarioJSON->insert(
+          QString::fromStdString((*it)->getNome()),
+          QJsonValue(*((*it)->salva())));
+  risorseJSON->insert("Inventario", inventarioJSON);
+  delete inventarioJSON;
 }
