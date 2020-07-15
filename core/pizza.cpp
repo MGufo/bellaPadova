@@ -117,7 +117,7 @@ void Pizza::salva(QJsonObject& pizzaJSON) const{
   QJsonArray* ingredientiJSON = new QJsonArray();
   for(auto it = ingredienti.const_begin(); it != ingredienti.const_end(); ++it){
     QJsonObject* ingredienteJSON = new QJsonObject();
-    (*it)->salva(ingredienteJSON);
+    (*it)->salva(*ingredienteJSON);
     ingredientiJSON->append(*ingredienteJSON);
     delete ingredienteJSON;
   }
