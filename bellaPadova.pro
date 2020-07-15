@@ -83,7 +83,8 @@ HEADERS += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h \
     GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.h \
-    GUI/wizardNuovoArticolo/ingredientcheckbox.h
+    GUI/wizardNuovoArticolo/ingredientcheckbox.h \
+    GUI/pacchetti.h
     #test/testgui.h \
 
 RESOURCES += \
