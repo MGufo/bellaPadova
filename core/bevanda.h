@@ -50,5 +50,9 @@ class Bevanda : public Articolo, public Consumabile {
    * disponibilità della bevanda.
    */
   virtual const Lista<Consumabile*>* getComposizione() const;
+
+  virtual void carica(const QJsonObject&);
+
+  virtual void salva(QJsonObject &) const;
 };
 #endif

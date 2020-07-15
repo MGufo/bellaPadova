@@ -31,13 +31,15 @@ QPushButton#Consumabile {
 }
 
 QPushButton#Calcola {
-    height: 100;
+    height: 95;
+    width: 200;
 
 }
 
 QPushButton#wrapperComanda {
     background-color: #008000;
     width: 240;
+    height: 100;
 }
 
 QPushButton#Rimuovi {
@@ -128,7 +130,7 @@ QLabel#scegliPeriodo {
 QLabel#guadagnoPerdita {
     qproperty-alignment: AlignCenter;
     margin-top: 8;
-    margin-bottom: 4;
+    margin-bottom: 2;
 }
 
 QLabel#Orario {
@@ -147,16 +149,28 @@ QLineEdit {
     background-color: #FFFFFF;
 }
 
+QDateEdit {
+    font-size: 20px;
+    height: 50;
+    margin-bottom: 1;
+}
+
+QLineEdit#mGuadagno {
+    font-size: 40px;
+    height: 100;
+}
+
 QScrollArea {
+    background-color: #FFFFFF;
     border: 1 solid black;
     margin: 2 15 2 15;
 }
 
-QScrollArea#scrollEseguite {
+QWidget#wrapperInEsecuzione {
     background-color: #FFFFFF;
 }
 
-QWidget#wrapperInEsecuzione {
+QWidget#wrapperEseguite {
     background-color: #FFFFFF;
 }
 

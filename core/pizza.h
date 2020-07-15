@@ -1,5 +1,6 @@
 #ifndef PIZZA_H
 #define PIZZA_H
+
 #include "articolo.h"
 #include "farina.h"
 #include "ingrediente.h"
@@ -56,5 +57,9 @@ class Pizza : public Articolo {
    * disponibilità della pizza.
    */
   virtual const Lista<Consumabile*>* getComposizione() const;
+
+  virtual void carica(const QJsonObject&);
+
+  virtual void salva(QJsonObject &) const;
 };
 #endif
