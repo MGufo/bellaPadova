@@ -2,7 +2,10 @@
 
 Comande::Comande(QWidget *parent) : QWidget(parent){
 
-  // Sezione comande da eseguire
+  /////////////////////////////////
+  // Sezione comande da eseguire //
+  /////////////////////////////////
+
   QLabel* label_inEsecuzione = new QLabel("In Esecuzione:", this);
   label_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   label_inEsecuzione->setObjectName("inEsecuzione");
@@ -28,8 +31,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   layout_inEsecuzione->addWidget(comanda3);
   layout_inEsecuzione->addWidget(comanda4);
   scroll_inEsecuzione->setWidget(wrapper_inEsecuzione);
-  scroll_inEsecuzione->setMinimumSize(580, 200);
-  scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  scroll_inEsecuzione->setMinimumSize(580, 180);
+  scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   scroll_inEsecuzione->setWidgetResizable(true);
 
   //////////////////////////////
@@ -40,10 +43,12 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   label_concluse->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   label_concluse->setObjectName("concluse");
   QScrollArea* scroll_eseguite = new QScrollArea(this);
-  scroll_eseguite->setObjectName("scrollEseguite");
-  QWidget* wrapper_eseguite = new QWidget(scroll_eseguite);
+  scroll_eseguite->setContentsMargins(0, 1, 0, 1);
 
+  QWidget* wrapper_eseguite = new QWidget(scroll_eseguite);
+  wrapper_eseguite->setObjectName("wrapperEseguite");
   //aggiungere roba al widget
+
 
   QHBoxLayout* layout_eseguite = new QHBoxLayout(wrapper_eseguite);
   wrapper_eseguite->setLayout(layout_eseguite);
