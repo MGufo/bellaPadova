@@ -20,10 +20,10 @@ class MainWindow : public QWidget {
   MainWindow(Controller* c, QWidget* parent = nullptr);
   ~MainWindow();
   void aggiornaContabilizzazione(double);
+  void mostraErrore(const QString&);
 
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);
-  void mostraErrore(const QString&);
 
 private:
   Controller* controller;

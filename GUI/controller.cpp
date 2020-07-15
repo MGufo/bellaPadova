@@ -16,7 +16,11 @@ void Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void Controller::caricaComande(){
-  modello->caricaComande();
+  try{
+    modello->caricaComande();
+  } catch (std::invalid_argument *ecc) {
+    vista->mostraErrore(QString(ecc->what()));
+  }
   // TODO: Aggiornamento vista
 }
 
@@ -24,7 +28,7 @@ void Controller::caricaRisorse(){
   try{
     modello->caricaRisorse();
   } catch (std::invalid_argument *ecc) {
-    emit mostraErrore(QString(ecc->what()));
+    vista->mostraErrore(QString(ecc->what()));
   }
   // TODO: Aggiornamento vista
 }
@@ -33,7 +37,7 @@ void Controller::salvaComande() const{
   try{
     modello->salvaComande();
   } catch (std::invalid_argument *ecc) {
-    emit mostraErrore(QString(ecc->what()));
+    vista->mostraErrore(QString(ecc->what()));
   }
 }
 
@@ -41,6 +45,6 @@ void Controller::salvaRisorse() const{
   try{
     modello->salvaRisorse();
   } catch (std::invalid_argument *ecc) {
-    emit mostraErrore(QString(ecc->what()));
+    vista->mostraErrore(QString(ecc->what()));
   }
 }
