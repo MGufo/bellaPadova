@@ -5,7 +5,15 @@ Pizzeria::Pizzeria()
     gestoreRisorse(GestoreRisorse()),
     gestoreComande(GestoreComande()),
     capacitaForno(5) {
-  caricaRisorse();
+    caricaRisorse();
+}
+
+const Lista<Consumabile *> &Pizzeria::getInventario() const{
+    return gestoreRisorse.getInventario();
+}
+
+const Lista<Articolo *> &Pizzeria::getMenu() const{
+    return gestoreRisorse.getMenu();
 }
 
 double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) const{
