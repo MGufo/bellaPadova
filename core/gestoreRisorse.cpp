@@ -98,17 +98,23 @@ const Lista<Consumabile*>& GestoreRisorse::getInventario() const {
 
 void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
   QJsonObject* menuJSON = new QJsonObject();
-  for(auto it = menu.const_begin(); it != menu.const_end(); ++it)
-    menuJSON->insert(QString::fromStdString((*it)->getNome()),
-                        QJsonValue(*((*it)->salva())));
-  risorseJSON->insert("Menu", menuJSON);
+  for(auto it = menu.const_begin(); it != menu.const_end(); ++it){
+    QJsonObject* articoloJSON = new QJsonObject();
+    (*it)->salva(*articoloJSON);
+    menuJSON->insert(QString::fromStdString((*it)->getNome()), *articoloJSON);
+    delete articoloJSON;
+  }
+  risorseJSON->insert("Menu", *menuJSON);
   delete menuJSON;
 
   QJsonObject* inventarioJSON = new QJsonObject();
-  for(auto it = inventario.const_begin(); it != inventario.const_end(); ++it)
+  for(auto it = inventario.const_begin(); it != inventario.const_end(); ++it){
+    QJsonObject* consumabileJSON = new QJsonObject();
+    (*it)->salva(*consumabileJSON);
     inventarioJSON->insert(
-          QString::fromStdString((*it)->getNome()),
-          QJsonValue(*((*it)->salva())));
-  risorseJSON->insert("Inventario", inventarioJSON);
+          QString::fromStdString((*it)->getNome()), *consumabileJSON);
+    delete consumabileJSON;
+  }
+  risorseJSON->insert("Inventario", *inventarioJSON);
   delete inventarioJSON;
 }

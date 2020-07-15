@@ -104,6 +104,25 @@ void Pizza::carica(const QJsonObject &){
 
 }
 
-void Pizza::salva(QJsonObject &) const{
-
+void Pizza::salva(QJsonObject& pizzaJSON) const{
+  // ID
+  pizzaJSON.insert("ID", static_cast<int>(getIdRisorsa()));
+  // Nome
+  pizzaJSON.insert("Nome", QString::fromStdString(getNome()));
+  // Disponibilita
+  pizzaJSON.insert("Disponibilità", getDisponibilita());
+  // Prezzo
+  pizzaJSON.insert("Nome", getPrezzo());
+  // Ingredienti
+  QJsonArray* ingredientiJSON = new QJsonArray();
+  for(auto it = ingredienti.const_begin(); it != ingredienti.const_end(); ++it){
+    QJsonObject* ingredienteJSON = new QJsonObject();
+    (*it)->salva(ingredienteJSON);
+    ingredientiJSON->append(*ingredienteJSON);
+    delete ingredienteJSON;
+  }
+  pizzaJSON.insert("Ingredienti", *ingredientiJSON);
+  delete ingredientiJSON;
+  // Extra
+  pizzaJSON.insert("Extra", extra);
 }

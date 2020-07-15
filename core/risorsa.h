@@ -2,6 +2,7 @@
 #define RISORSA_H
 
 #include <QJsonObject>
+#include <QJsonArray>
 #include <iostream>
 #include <string>
 
