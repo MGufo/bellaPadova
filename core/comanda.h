@@ -103,7 +103,7 @@ class Comanda {
    * @brief: Serializza la comanda d'invocazione in JSON
    *
    */
-  QJsonObject* salva() const;
+  void salva(QJsonObject*) const;
 
   bool operator<(const Comanda&) const;
 

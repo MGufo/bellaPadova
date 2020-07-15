@@ -153,7 +153,12 @@ const Comanda* GestoreComande::getComandaCorrente() const { return *current; }
 const Lista<Comanda*>& GestoreComande::getBacheca() const { return bacheca; }
 
 void GestoreComande::salvaComande(QJsonObject *comandeJSON) const{
-  for(auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it)
-    comandeJSON->insert(QString::fromStdString(std::to_string((*it)->getIdComanda())),
-                        QJsonValue(*((*it)->salva())));
+  for(auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it){
+    QJsonObject* comandaJSON = new QJsonObject();
+    (*it)->salva(comandaJSON);
+    comandeJSON->insert(
+          QString::fromStdString(std::to_string((*it)->getIdComanda())),
+          QJsonValue(*comandaJSON));
+    delete comandaJSON;
+  }
 }

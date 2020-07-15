@@ -59,7 +59,7 @@ class Contatto {
    */
   void setTelefono(const string&);
 
-  const QJsonObject& salva() const;
+  void salva(QJsonObject*) const;
 };
 
 #endif
