@@ -64,18 +64,18 @@ void Comanda::modificaContatto(const Contatto* modificato) {
 }
 
 void Comanda::salva(QJsonObject* comandaJSON) const {
-  comandaJSON->insert("ID", QJsonValue(static_cast<int>(ID)));
+  comandaJSON->insert("ID", static_cast<int>(ID));
   QJsonObject* contattoJSON = new QJsonObject();
   cliente.salva(contattoJSON);
-  comandaJSON->insert("cliente", QJsonValue(*contattoJSON));
-  comandaJSON->insert("oraConsegna", QJsonValue(oraConsegna.toString()));
-  comandaJSON->insert("dataConsegna", QJsonValue(dataConsegna.toString()));
+  comandaJSON->insert("cliente", *contattoJSON);
+  comandaJSON->insert("oraConsegna", oraConsegna.toString());
+  comandaJSON->insert("dataConsegna", dataConsegna.toString());
   // serializzazione mappa ordine
   QJsonObject* ordinazioneJSON = new QJsonObject();
   for(auto it = ordinazione.cbegin(); it != ordinazione.cend(); ++it)
     ordinazioneJSON->insert(QString::fromStdString(((*it).first)->getNome()),
-                            QJsonValue(static_cast<int>((*it).second)));
-  comandaJSON->insert("ordinazione", QJsonValue(*ordinazioneJSON));
+                            static_cast<int>((*it).second));
+  comandaJSON->insert("ordinazione", *ordinazioneJSON);
   delete ordinazioneJSON;
   delete contattoJSON;
   delete comandaJSON;

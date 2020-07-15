@@ -20,9 +20,9 @@ void Contatto::setIndirizzo(const string& ind) {
 void Contatto::setTelefono(const string& tel) { telefono = tel; }
 
 void Contatto::salva(QJsonObject* contattoJSON) const {
-  contattoJSON->insert("nome", QJsonValue(QString::fromStdString(nome)));
-  contattoJSON->insert("indirizzo", QJsonValue(QString::fromStdString(indirizzo)));
-  contattoJSON->insert("telefono", QJsonValue(QString::fromStdString(telefono)));
+  contattoJSON->insert("nome", QString::fromStdString(nome));
+  contattoJSON->insert("indirizzo", QString::fromStdString(indirizzo));
+  contattoJSON->insert("telefono", QString::fromStdString(telefono));
 }
 
 const string Contatto::getNome() const { return nome; }

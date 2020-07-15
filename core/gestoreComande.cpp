@@ -158,7 +158,7 @@ void GestoreComande::salvaComande(QJsonObject *comandeJSON) const{
     (*it)->salva(comandaJSON);
     comandeJSON->insert(
           QString::fromStdString(std::to_string((*it)->getIdComanda())),
-          QJsonValue(*comandaJSON));
+          *comandaJSON);
     delete comandaJSON;
   }
 }
