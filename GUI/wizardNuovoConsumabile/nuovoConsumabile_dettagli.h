@@ -23,6 +23,7 @@ private:
   QLineEdit* quantitaConsumabile = nullptr;
   QLineEdit* costoConsumabile = nullptr;
   QDateEdit* dataAcquisto = nullptr;
+  // TODO: Aggiungere campo per disponibilità
   QWidget* campoExtra = nullptr;
   bool previouslyInizialized;
   void setActualPage();

@@ -14,6 +14,11 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
 }
 
 void WizardNuovoConsumabile::accept(){
-    QWizard::accept();
+  QWizard::accept();
+  if(field("optionIngrediente").toBool())
+    pacchetto_ingrediente(0, field("nome"), true, field("quantita"), field("costo"), field("dataAcquisto"), field("locale"));
+  else
+    pacchetto_bevanda(0, field("nome"), true, field("quantita"), field("costo"), field("dataAcquisto"), field("locale"));
 
+  // TODO: Cercare come collegare oggetti distinti tramite segnali e slot
 }

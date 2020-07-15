@@ -7,6 +7,7 @@
 #include "nuovoConsumabile_intro.h"
 #include "nuovoConsumabile_dettagli.h"
 #include "nuovoConsumabile_end.h"
+#include "../pacchetti.h"
 
 class WizardNuovoConsumabile : public QWizard{
   Q_OBJECT
