@@ -12,6 +12,7 @@
 #include "GUI/contabilizzazione.h"
 #include "GUI/header.h"
 #include "GUI/controller.h"
+
 class Controller;
 class MainWindow : public QWidget {
   Q_OBJECT
