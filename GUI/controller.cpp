@@ -42,21 +42,19 @@ void Controller::salvaComande() const{
 }
 
 void Controller::salvaRisorse() const{
-<<<<<<< HEAD
 
 }
 
 void Controller::modificaComande(){
-    modello->modificaComanda();
+    //modello->modificaComanda();
 }
 
 void Controller::modificaRisorse(){
-    modello->modificaArticolo();
-=======
+    //modello->modificaArticolo();
   try{
     modello->salvaRisorse();
   } catch (std::invalid_argument *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
->>>>>>> 72b0cc86aae52e534d700df05b729c8fb60631d2
+
 }

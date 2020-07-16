@@ -1,8 +1,11 @@
 #ifndef PACCHETTI_H
 #define PACCHETTI_H
-#define u_int unsigned int
+
 #include <string>
 #include <QDate>
+
+#define u_int unsigned int
+
 using std::string;
 
 struct pacchetto_ingrediente{
