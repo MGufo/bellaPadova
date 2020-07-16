@@ -12,6 +12,8 @@
 #include "GUI/contabilizzazione.h"
 #include "GUI/header.h"
 #include "GUI/controller.h"
+#include "GUI/pacchetti.h"
+
 class Controller;
 class MainWindow : public QWidget {
   Q_OBJECT
@@ -24,6 +26,7 @@ class MainWindow : public QWidget {
 
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);
+  void creaNuovoConsumabile(pacchetto*);
 
 private:
   Controller* controller;

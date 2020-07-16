@@ -16,6 +16,8 @@ public:
   explicit WizardNuovoConsumabile(QWidget* parent = nullptr);
 
   void accept() override;
+signals:
+  void nuovoConsumabile(pacchetto*);
 };
 
 #endif // WIZARDNUOVOCONSUMABILE_H

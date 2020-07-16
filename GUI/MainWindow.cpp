@@ -1,6 +1,4 @@
 #include "MainWindow.h"
-#include <iostream>
-#include <QList>
 
 MainWindow::MainWindow(Controller* c, QWidget* parent): QWidget(parent), controller(c){
   mainLayout = new QVBoxLayout(this);
@@ -73,6 +71,10 @@ QMenuBar* MainWindow::drawMenubar() const{
 
 void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
   controller->calcoloFatturato(inizio, fine);
+}
+
+void MainWindow::creaNuovoConsumabile(pacchetto* pC){
+  controller->creaNuovoConsumabile(pC);
 }
 
 void MainWindow::aggiornaContabilizzazione(double guadagno){

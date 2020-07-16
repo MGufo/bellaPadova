@@ -7,6 +7,9 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
 
   setStartId(PAGE_Intro);
   setWindowTitle(tr("Aggiunta nuovo consumabile all'Inventario"));
+  connect(this, SIGNAL(nuovoConsumabile(pacchetto*)),
+          this->parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+          SLOT(creaNuovoConsumabile(pacchetto*)));
 
 #ifndef Q_OS_MAC
   setWizardStyle(ModernStyle);
@@ -15,13 +18,18 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
 
 void WizardNuovoConsumabile::accept(){
   QWizard::accept();
+  pacchetto* p = nullptr;
   if(field("optionIngrediente").toBool())
-    pacchetto_ingrediente(0, field("nome").toString().toStdString(), true,
-                          field("quantita").toUInt(), field("costo").toDouble(),
-                          field("dataAcquisto").toDate(),
-                          field("locale").toBool());
+    p = new pacchettoIngrediente(
+          0, field("nome").toString().toStdString(), true,
+          field("quantita").toUInt(), field("costo").toDouble(),
+          field("dataAcquisto").toDate(), field("locale").toBool());
   else
-    pacchetto_bevanda(0, field("nome").toString().toStdString(), true,
-                      field("quantita").toUInt(), field("costo").toDouble(),
-                      field("dataAcquisto").toDate(),field("locale").toBool());
+    // TODO: Aggiungere field("disponiblita") e sostituirlo al "true"
+    p = new pacchettoBevandaC(
+          0, field("nome").toString().toStdString(), true,
+          field("quantita").toUInt(), field("costo").toDouble(),
+          field("dataAcquisto").toDate(), false, field("capacita").toFloat());
+          // TODO: Aggiungere field("tipologia") e sostituirlo al "false"
+  emit nuovoConsumabile(p);
 }

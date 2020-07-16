@@ -19,10 +19,10 @@ class Controller : public QObject {
  public:
   explicit Controller(Pizzeria*, QObject* parent = nullptr);
   void setView(MainWindow*);
+  void calcoloFatturato(const QDate&, const QDate&);
+  void creaNuovoConsumabile(pacchetto*);
 
  public slots:
-  void calcoloFatturato(const QDate&, const QDate&);
-
   void caricaComande();
   void caricaRisorse();
   void salvaComande() const;

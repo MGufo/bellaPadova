@@ -15,6 +15,11 @@ void Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
   vista->aggiornaContabilizzazione(modello->contabilizzazione(inizio, fine));
 }
 
+void Controller::creaNuovoConsumabile(pacchetto* pC){
+  pacchettoBevandaC* x = dynamic_cast<pacchettoBevandaC*>(pC);
+  std::cout << x->nome;
+}
+
 void Controller::caricaComande(){
   try{
     modello->caricaComande();
