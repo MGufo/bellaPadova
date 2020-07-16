@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonParseError>
 
 #include <sstream>
 #include <stdexcept>
@@ -26,6 +27,9 @@ class Pizzeria {
   
  public:
   Pizzeria();
+  const Lista<Consumabile*>& getInventario() const;
+  const Lista<Articolo*>& getMenu() const;
+
   double contabilizzazione(const QDate&, const QDate&) const;
 
   // funzione che inserisce un articolo in menu, l'articolo da inserire viene

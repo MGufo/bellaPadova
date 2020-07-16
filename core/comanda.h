@@ -99,6 +99,12 @@ class Comanda {
    */
   void modificaContatto(const Contatto*);
 
+  /**
+   * @brief: Serializza la comanda d'invocazione in JSON
+   *
+   */
+  void salva(QJsonObject*) const;
+
   bool operator<(const Comanda&) const;
 
   bool operator<=(const Comanda&) const;

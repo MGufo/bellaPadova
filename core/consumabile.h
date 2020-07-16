@@ -53,6 +53,19 @@ class Consumabile : virtual public Risorsa {
   void setDataAcquisto(const QDate&);
 
   virtual double getSpesa() const = 0;
+
+  /**
+   * @brief: Legge i dati di una risorsa da file JSON e li assegna ai campi
+   * dati dell'oggetto di invocazione
+   * @param: const QJsonObject& (file da cui leggere)
+   */
+  virtual void carica(const QJsonObject&) = 0;
+
+  /**
+   * @brief: Serializza l'oggetto di invocazione in un file JSON
+   * @param: bool (nuova disponibilità)
+   */
+  virtual void salva(QJsonObject&) const = 0;
 };
 
 #endif

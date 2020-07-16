@@ -3,7 +3,7 @@
 NuovoArticolo_end::NuovoArticolo_end(QWidget* parent) : QWizardPage(parent) {
     setTitle("Riepilogo");
     setSubTitle("Controlla di aver inserito i dati correttamente e premi \"Finish\" per concludere l'operazione");
-    layoutEnd = nullptr;
+    layoutEnd = new QFormLayout(this);
     setLayout(layoutEnd);
 }
 
@@ -17,19 +17,30 @@ void NuovoArticolo_end::setActualPage(){
         QLabel* pomodoro = new QLabel(((field("pomodoro").toBool()) ? "Si" : "No"), this);
         QLabel* mozzarella = new QLabel(((field("mozzarella").toBool()) ? "Si" : "No"), this);
 
+        QWidget* wrapper = new QWidget(this);
+        QVBoxLayout* ingredientsLayout = new QVBoxLayout(wrapper);
+
+        /*
+        //una funzione del controller si occuperà di prendere tutti gli ingredienti disponibili presenti nell'inventario
+        //TODO:
+        //-recuperare tutti gli ingredienti dall'inventario
+        //-verificare per ogni id di ingredienti se è stato checkato dall'utente e in caso farlo visualizzare inserendolo nel layout
+        */
+
+        QLabel* ing1 = new QLabel("curcuma",this);
+        QLabel* ing2 = new QLabel("porcospino",this);
+        QLabel* ing3 = new QLabel("diospino",this);
+        QLabel* ing4 = new QLabel("boiamerda",this);
+        ingredientsLayout->addWidget(ing1);
+        ingredientsLayout->addWidget(ing2);
+        ingredientsLayout->addWidget(ing3);
+        ingredientsLayout->addWidget(ing4);
+
         layoutEnd->addRow("Nome:", nomePizza);
         layoutEnd->addRow("Prezzo:", prezzoPizza);
         layoutEnd->addRow("Pomodoro:", pomodoro);
         layoutEnd->addRow("Mozzarella:", mozzarella);
-
-        /*auto ptr = static_cast<NuovoArticolo_pizza*>(content);
-        auto ingredients = ptr->getIngredientsCheckBoxWrapper()->children();
-        for(auto it = ingredients.cbegin(); it != ingredients.cend(); ++it){
-            IngredientCheckBox* tmp = static_cast<IngredientCheckBox*>(*it);
-            QString id(tmp->getId());
-            QLabel* bar = new QLabel(((field(id).toBool()) ? "Si" : "No"), this);
-            layoutEnd->addRow(tmp->text(), bar);
-        }*/
+        layoutEnd->addRow("Ingredienti:", wrapper);
     }
 }
 

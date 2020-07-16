@@ -1,4 +1,5 @@
 #include "contatto.h"
+#include <QString>
 
 Contatto::Contatto(string _nome, string _indirizzo, string _telefono)
     : nome(_nome), indirizzo(_indirizzo), telefono(_telefono) {}
@@ -17,6 +18,12 @@ void Contatto::setIndirizzo(const string& ind) {
   indirizzo = ind;
 }
 void Contatto::setTelefono(const string& tel) { telefono = tel; }
+
+void Contatto::salva(QJsonObject* contattoJSON) const {
+  contattoJSON->insert("nome", QString::fromStdString(nome));
+  contattoJSON->insert("indirizzo", QString::fromStdString(indirizzo));
+  contattoJSON->insert("telefono", QString::fromStdString(telefono));
+}
 
 const string Contatto::getNome() const { return nome; }
 const string Contatto::getIndirizzo() const { return indirizzo; }
