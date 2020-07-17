@@ -10,7 +10,6 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   headerLabels->push_back("Data Acquisto");
   headerLabels->push_back("Locale");
   TabellaComposita* tabIngredienti = new TabellaComposita(this, "Ingredienti", headerLabels);
-
   headerLabels->push_back("Capacità");
   TabellaComposita* tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
 
