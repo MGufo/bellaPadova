@@ -47,7 +47,11 @@ void Controller::salvaComande() const{
 }
 
 void Controller::salvaRisorse() const{
-
+  try{
+    modello->salvaRisorse();
+  } catch (std::invalid_argument *ecc) {
+    vista->mostraErrore(QString(ecc->what()));
+  }
 }
 
 void Controller::modificaComande(){
