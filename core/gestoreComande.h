@@ -76,6 +76,8 @@ class GestoreComande {
   const Lista<Comanda*>& getBacheca() const;
 
   void salvaComande(QJsonObject*) const;
+
+  void caricaComande(const QJsonObject&);
 };
 
 #endif

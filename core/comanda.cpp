@@ -81,6 +81,10 @@ void Comanda::salva(QJsonObject* comandaJSON) const {
   delete comandaJSON;
 }
 
+void Comanda::carica(const QJsonObject *){
+
+}
+
 bool Comanda::operator<(const Comanda& c) const {
   return getOraConsegna() < c.getOraConsegna();
 }

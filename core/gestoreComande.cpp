@@ -162,3 +162,15 @@ void GestoreComande::salvaComande(QJsonObject *comandeJSON) const{
     delete comandaJSON;
   }
 }
+
+void GestoreComande::caricaComande(const QJsonObject & comandeJSON){
+  for(auto it = comandeJSON.constBegin(); it != comandeJSON.constEnd(); ++it){
+    QJsonObject* comandaJSON = new QJsonObject(it->toObject());
+    unsigned int ID = (*(comandaJSON->find("ID"))).toInt();
+//    TODO: Verificare se ci sia un metodo alternativo a estrarre valore per
+//    valore dentro variabili locali e poi creare la comanda da inserire nella
+//    lista.
+//    Meglio ancora se si possa fare all'interno della classe Comanda usando il
+//    metodo carica()
+  }
+}

@@ -171,6 +171,15 @@ void Pizzeria::caricaComande(){
   QByteArray jsonData = fileComande.readAll();
   fileComande.close();
 
+  QJsonParseError* pE = new QJsonParseError();
+  QJsonDocument fileComandeJSON = QJsonDocument::fromJson(jsonData, pE);
+
+//  if(fileRisorseJSON.isNull())
+//    throw new std::invalid_argument(pE->errorString().toStdString());
+
+  QJsonObject comandeJSON = fileComandeJSON.object();
+  gestoreComande.caricaComande(comandeJSON);
+  delete pE;
 }
 
 void Pizzeria::caricaRisorse(){
