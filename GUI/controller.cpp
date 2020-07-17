@@ -16,8 +16,23 @@ void Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void Controller::creaNuovoConsumabile(pacchetto* pC){
-  pacchettoBevandaC* x = dynamic_cast<pacchettoBevandaC*>(pC);
-  std::cout << x->nome;
+    if(dynamic_cast<pacchettoBevanda*>(pC)){
+        pacchettoBevanda* ptr = dynamic_cast<pacchettoBevanda*>(pC);
+        if(ptr->tipo == true){
+            Lattina* pLattina = new Lattina(++idRisorse,ptr->nome,ptr->disponibilita,ptr->prezzo,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->capacita);
+        }
+        else{
+            //Bottiglia* pBottiglia = new Bottiglia();
+        }
+    }
+    else if(dynamic_cast<pacchettoFarina*>(pC)){
+        pacchettoFarina* pFarina = dynamic_cast<pacchettoFarina*>(pC);
+        //...
+    }
+    else if(dynamic_cast<pacchettoIngrediente*>(pC)){
+        pacchettoIngrediente* pIngrediente = dynamic_cast<pacchettoIngrediente*>(pC);
+        //...
+    }
 }
 
 void Controller::caricaComande(){

@@ -26,10 +26,11 @@ void WizardNuovoConsumabile::accept(){
           field("dataAcquisto").toDate(), field("locale").toBool());
   else
     // TODO: Aggiungere field("disponiblita") e sostituirlo al "true"
-    p = new pacchettoBevandaC(
-          0, field("nome").toString().toStdString(), true,
+    // TODO: Aggiungere field("prezzo") e sostituirlo al "12"
+    p = new pacchettoBevanda(
+          0, field("nome").toString().toStdString(), true, 12,
           field("quantita").toUInt(), field("costo").toDouble(),
-          field("dataAcquisto").toDate(), false, field("capacita").toFloat());
+          field("dataAcquisto").toDate(), field("capacita").toFloat(), false);
           // TODO: Aggiungere field("tipologia") e sostituirlo al "false"
   emit nuovoConsumabile(p);
 }
