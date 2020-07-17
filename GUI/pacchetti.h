@@ -17,14 +17,14 @@ struct pacchetto {
   virtual ~pacchetto() = default;
 };
 
-struct pacchettoArticolo : pacchetto {
+struct pacchettoArticolo : virtual public pacchetto {
   double prezzo;
 
   pacchettoArticolo(uint _ID, string _n, bool _d, double _p) :
     pacchetto(_ID, _n, _d), prezzo(_p) {}
 };
 
-struct pacchettoConsumabile : pacchetto {
+struct pacchettoConsumabile : virtual public pacchetto {
   uint quantita;
   double costo;
   QDate dataAcquisto;
@@ -35,40 +35,28 @@ struct pacchettoConsumabile : pacchetto {
 
 struct pacchettoIngrediente : pacchettoConsumabile {
   bool locale;
-  pacchettoIngrediente(uint _ID, string _n, bool _d, uint _q,
-                        double _c, QDate _da, bool _l) :
-    pacchettoConsumabile(_ID, _n, _d, _q, _c, _da), locale(_l) {}
+  pacchettoIngrediente(uint _ID, string _n, bool _d, uint _q, double _c, QDate _da, bool _l) : pacchetto(_ID, _n, _d), pacchettoConsumabile(_ID, _n, _d, _q, _c, _da), locale(_l) {}
 };
 
 struct pacchettoFarina : pacchettoIngrediente{
   string tipologia;
-  pacchettoFarina(uint _ID, string _n, bool _d, uint _q,
-                        double _c, QDate _da, bool _l, string _t) :
-    pacchettoIngrediente(_ID, _n, _d, _q, _c, _da, _l), tipologia(_t) {}
+  pacchettoFarina(uint _ID, string _n, bool _d, uint _q, double _c, QDate _da, bool _l, string _t) : pacchetto(_ID, _n, _d), pacchettoIngrediente(_ID, _n, _d, _q, _c, _da, _l), tipologia(_t) {}
 };
 
-struct pacchettoBevandaA : pacchettoArticolo{
+struct pacchettoBevanda : pacchettoArticolo, pacchettoConsumabile{
+
+  float capacita;
   // 0: bottiglia
   // 1: lattina
   bool tipo;
-  float capacita;
 
-  pacchettoBevandaA(uint _ID, string _n, bool _d, double _p, bool _t, float _f)
-    : pacchettoArticolo(_ID, _n, _d, _p), tipo(_t), capacita(_f) {}
-};
-
-struct pacchettoBevandaC : pacchettoConsumabile{
-  bool tipo;
-  float capacita;
-  pacchettoBevandaC(uint _ID, string _n, bool _d, uint _q, double _c,
-                    QDate _da, bool _t, float _cap) :
-    pacchettoConsumabile(_ID, _n, _d, _q, _c, _da), tipo(_t), capacita(_cap) {}
+  pacchettoBevanda(uint _ID, string _n, bool _d, double _p, uint _q, double _c, QDate _da, float _ca, bool _t)
+    : pacchetto(_ID, _n, _d), pacchettoArticolo(_ID, _n, _d, _p),  pacchettoConsumabile(_ID,_n,_d,_q,_c,_da), capacita(_ca), tipo(_t) {}
 };
 
 struct pacchettoPizza : pacchettoArticolo{
   Lista<uint> ingredienti;
-  pacchettoPizza(uint _ID, string _n, bool _d, double _p) :
-    pacchettoArticolo(_ID, _n, _d, _p), ingredienti(Lista<uint>()) {}
+  pacchettoPizza(uint _ID, string _n, bool _d, double _p) : pacchetto(_ID,_n,_d), pacchettoArticolo(_ID, _n, _d, _p), ingredienti(Lista<uint>()) {}
 };
 
 #endif // PACCHETTI_H

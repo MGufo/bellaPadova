@@ -4,7 +4,7 @@
 
 class Bottiglia : public Bevanda {
  public:
-  Bottiglia(unsigned int, string, bool, double, unsigned int, double, QDate, double);
+  Bottiglia(unsigned int, string, bool, double, unsigned int, double, QDate, float);
   Bottiglia* clone() const;
 
   /**
