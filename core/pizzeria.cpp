@@ -5,7 +5,7 @@ Pizzeria::Pizzeria()
     gestoreRisorse(GestoreRisorse()),
     gestoreComande(GestoreComande()),
     capacitaForno(5) {
-    caricaRisorse();
+    //caricaRisorse();
 }
 
 const Lista<Consumabile *> &Pizzeria::getInventario() const{
@@ -184,8 +184,8 @@ void Pizzeria::caricaRisorse(){
   QJsonParseError* pE = new QJsonParseError();
   QJsonDocument fileRisorseJSON = QJsonDocument::fromJson(jsonData, pE);
 
-  if(fileRisorseJSON.isNull())
-    throw new std::invalid_argument(pE->errorString().toStdString());
+//  if(fileRisorseJSON.isNull())
+//    throw new std::invalid_argument(pE->errorString().toStdString());
 
   QJsonObject risorseJSON = fileRisorseJSON.object();
 
