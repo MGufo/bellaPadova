@@ -12,6 +12,7 @@ int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
   Pizzeria bellaPadova;
   Controller controller(&bellaPadova);
+  controller.caricaRisorse();
   MainWindow view(&controller);
   controller.setView(&view);
   view.show();

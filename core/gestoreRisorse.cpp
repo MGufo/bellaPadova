@@ -118,3 +118,7 @@ void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
   risorseJSON->insert("Inventario", *inventarioJSON);
   delete inventarioJSON;
 }
+
+void GestoreRisorse::caricaRisorse(const QJsonObject& risorseJSON){
+
+}

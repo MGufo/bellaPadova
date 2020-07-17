@@ -6,6 +6,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   label->setObjectName("labelsMenu");
   // Creazione tabella
   QTableWidget* tabella = new QTableWidget(0, (labels != nullptr ? labels->count() : 0), this);
+  tabella->setMinimumWidth(1300);
   // Crezione e riempimento header tabella
   QHeaderView* header = new QHeaderView(Qt::Horizontal,tabella);
   header->setSectionResizeMode(header->ResizeToContents);
@@ -16,7 +17,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   layoutTabellaComposita = new QVBoxLayout(this);
   // Aggiunta widget figli al layout
   layoutTabellaComposita->addWidget(label);
-  layoutTabellaComposita->addWidget(tabella);
+  layoutTabellaComposita->addWidget(tabella, 0, Qt::AlignCenter);
   // Applicazione stile widget
   setStyleTabella();
   // Impostazione del layout

@@ -84,5 +84,7 @@ class GestoreRisorse {
   const Lista<Consumabile *> &getInventario() const;
 
   void salvaRisorse(QJsonObject*) const;
+
+  void caricaRisorse(const QJsonObject&);
 };
 #endif

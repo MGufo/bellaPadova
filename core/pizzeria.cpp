@@ -5,7 +5,7 @@ Pizzeria::Pizzeria()
     gestoreRisorse(GestoreRisorse()),
     gestoreComande(GestoreComande()),
     capacitaForno(5) {
-    caricaRisorse();
+    //caricaRisorse();
 }
 
 const Lista<Consumabile *> &Pizzeria::getInventario() const{
@@ -132,7 +132,7 @@ void Pizzeria::setCapacitaForno(unsigned short _forno) {
 
 void Pizzeria::salvaComande(){
   QFile fileComande(":/resources/comande.json");
-  if(!fileComande.open(QIODevice::ReadOnly | QIODevice::Text))
+  if(!fileComande.open(QIODevice::Append | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
 
   QJsonObject* comandeJSON = new QJsonObject();
@@ -140,6 +140,7 @@ void Pizzeria::salvaComande(){
   QJsonDocument* fileComandeJSON = new QJsonDocument(*comandeJSON);
   fileComande.write(fileComandeJSON->toJson());
   fileComande.close();
+  delete fileComandeJSON;
 
 /*
 1: Apro il file da disco con QFile
@@ -151,7 +152,7 @@ void Pizzeria::salvaComande(){
 
 void Pizzeria::salvaRisorse(){
   QFile fileRisorse(":/resources/risorse.json");
-  if(!fileRisorse.open(QIODevice::ReadOnly | QIODevice::Text))
+  if(!fileRisorse.open(QIODevice::Append | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
 
   QJsonObject* risorseJSON = new QJsonObject();
@@ -159,18 +160,46 @@ void Pizzeria::salvaRisorse(){
   QJsonDocument* fileRisorseJSON = new QJsonDocument(*risorseJSON);
   fileRisorse.write(fileRisorseJSON->toJson());
   fileRisorse.close();
+  delete fileRisorseJSON;
 }
 
 void Pizzeria::caricaComande(){
-// TODO: Aggiungere gestione eccezioni JSON
+  QFile fileComande(":/resources/comande.json");
+  if(!fileComande.open(QIODevice::ReadOnly | QIODevice::Text))
+    throw new std::invalid_argument("Errore: Impossibile aprire il file");
+
+  QByteArray jsonData = fileComande.readAll();
+  fileComande.close();
+
 }
 
 void Pizzeria::caricaRisorse(){
+  QFile fileRisorse(":/resources/risorse.json");
+  if(!fileRisorse.open(QIODevice::ReadOnly | QIODevice::Text))
+    throw new std::invalid_argument("Errore: Impossibile aprire il file");
 
-  // TODO: Aggiungere gestione eccezioni JSON
+  QByteArray jsonData = fileRisorse.readAll();
+  fileRisorse.close();
 
- /*leggere id ultima comanda e mandarlo come signal allo slot del controller
+  QJsonParseError* pE = new QJsonParseError();
+  QJsonDocument fileRisorseJSON = QJsonDocument::fromJson(jsonData, pE);
+
+//  if(fileRisorseJSON.isNull())
+//    throw new std::invalid_argument(pE->errorString().toStdString());
+
+  QJsonObject risorseJSON = fileRisorseJSON.object();
+
+  QJsonObject menuJSON = risorseJSON["menu"].toObject();
+  gestoreRisorse.caricaRisorse(menuJSON);
+
+  QJsonObject inventarioJSON = risorseJSON["inventario"].toObject();
+  gestoreRisorse.caricaRisorse(inventarioJSON);
+
+  delete pE;
+}
+
+  /*leggere id ultima comanda e mandarlo come signal allo slot del controller
   *che si setta l'id corretto
   * Poi si legge il resto del file e si caricano le robe
   */
-}
+
