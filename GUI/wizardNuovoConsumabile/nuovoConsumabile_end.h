@@ -17,7 +17,7 @@ private:
   QLabel* quantitaConsumabile = nullptr;
   QLabel* costoConsumabile = nullptr;
   QLabel* dataAcquisto = nullptr;
-  QLabel* campoExtra = nullptr;
+  QLabel* disponibilita = nullptr;
   void setInitialPage();
   void setActualPage();
   void initializePage() override;

@@ -21,14 +21,13 @@ void WizardNuovoConsumabile::accept(){
   pacchetto* p = nullptr;
   if(field("optionIngrediente").toBool())
     p = new pacchettoIngrediente(
-          0, field("nome").toString().toStdString(), true,
+          0, field("nome").toString().toStdString(), field("disponibilita").toBool(),
           field("quantita").toUInt(), field("costo").toDouble(),
           field("dataAcquisto").toDate(), field("locale").toBool());
   else
-    // TODO: Aggiungere field("disponiblita") e sostituirlo al "true"
     // TODO: Aggiungere field("prezzo") e sostituirlo al "12"
     p = new pacchettoBevanda(
-          0, field("nome").toString().toStdString(), true, 12,
+          0, field("nome").toString().toStdString(), field("disponibilita").toBool(), 12,
           field("quantita").toUInt(), field("costo").toDouble(),
           field("dataAcquisto").toDate(), field("capacita").toFloat(), false);
           // TODO: Aggiungere field("tipologia") e sostituirlo al "false"

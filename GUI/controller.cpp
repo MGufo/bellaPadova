@@ -1,9 +1,7 @@
 #include "GUI/controller.h"
 
 Controller::Controller(Pizzeria* bellaPadova, QObject* parent) :
-  QObject(parent), modello(bellaPadova) {
-    //TODO: Implementare funzione che chiede al model di leggere
-    //i currentID e ritornarli
+  QObject(parent), modello(bellaPadova), idComande(0), idRisorse(0) {
 }
 
 void Controller::setView(MainWindow *v){
@@ -16,23 +14,25 @@ void Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void Controller::creaNuovoConsumabile(pacchetto* pC){
+    Consumabile* pConsumabile = nullptr;
     if(dynamic_cast<pacchettoBevanda*>(pC)){
         pacchettoBevanda* ptr = dynamic_cast<pacchettoBevanda*>(pC);
         if(ptr->tipo == true){
-            Lattina* pLattina = new Lattina(++idRisorse,ptr->nome,ptr->disponibilita,ptr->prezzo,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->capacita);
+            pConsumabile = new Lattina(++idRisorse,ptr->nome,ptr->disponibilita,ptr->prezzo,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->capacita);
         }
         else{
-            //Bottiglia* pBottiglia = new Bottiglia();
+            pConsumabile = new Bottiglia(++idRisorse,ptr->nome,ptr->disponibilita,ptr->prezzo,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->capacita);
         }
     }
     else if(dynamic_cast<pacchettoFarina*>(pC)){
-        pacchettoFarina* pFarina = dynamic_cast<pacchettoFarina*>(pC);
-        //...
+        pacchettoFarina* ptr = dynamic_cast<pacchettoFarina*>(pC);
+        pConsumabile = new Farina(++idRisorse,ptr->nome,ptr->disponibilita,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->locale,ptr->tipologia);
     }
     else if(dynamic_cast<pacchettoIngrediente*>(pC)){
-        pacchettoIngrediente* pIngrediente = dynamic_cast<pacchettoIngrediente*>(pC);
-        //...
+        pacchettoIngrediente* ptr = dynamic_cast<pacchettoIngrediente*>(pC);
+        pConsumabile = new Ingrediente(++idRisorse,ptr->nome,ptr->disponibilita,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->locale);
     }
+    modello->inserisciConsumabile(pConsumabile);
 }
 
 void Controller::caricaComande(){
