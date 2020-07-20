@@ -5,16 +5,17 @@ NuovoConsumabile_dettagli::NuovoConsumabile_dettagli(QWidget*parent) : QWizardPa
   layoutDettagli = new QFormLayout(this);
 
   nomeConsumabile = new QLineEdit(this);
+  disponibilita = new QCheckBox(this);
+  disponibilita->setChecked(true);
   quantitaConsumabile = new QLineEdit(this);
   costoConsumabile = new QLineEdit(this);
   dataAcquisto = new QDateEdit(QDate::currentDate(), this);
-  disponibilita = new QCheckBox(this);
 
   layoutDettagli->addRow("Nome:", nomeConsumabile);
-  layoutDettagli->addRow("N° Confezioni:", quantitaConsumabile);
-  layoutDettagli->addRow("Costo:", costoConsumabile);
-  layoutDettagli->addRow("Data Acquisto:", dataAcquisto);
   layoutDettagli->addRow("Disponibile:", disponibilita);
+  layoutDettagli->addRow("N° Confezioni:", quantitaConsumabile);
+  layoutDettagli->addRow("Costo d'acquisto:", costoConsumabile);
+  layoutDettagli->addRow("Data Acquisto:", dataAcquisto);
 
   setLayout(layoutDettagli);
 }
@@ -38,13 +39,33 @@ void NuovoConsumabile_dettagli::setActualPage(){
   else{
     setTitle("Aggiunta di una nuova bevanda all'Inventario");
     setSubTitle("Inserisci le informazioni relative alla bevanda da inserire");
-    auto ptr = findChild<QLineEdit*>("capacita");
-    if(ptr) layoutDettagli->removeRow(ptr);
-    // TODO: aggiungere prezzo e tipologia bevanda
+    auto ptr1 = findChild<QLineEdit*>("capacita");
+    if(ptr1) layoutDettagli->removeRow(ptr1);
+    auto ptr2 = findChild<QLineEdit*>("prezzo");
+    if(ptr2) layoutDettagli->removeRow(ptr2);
+    auto ptr3 = findChild<QRadioButton*>("optionLattina");
+    if(ptr3) layoutDettagli->removeRow(ptr3);
+    auto ptr4 = findChild<QRadioButton*>("optionBottiglia");
+    if(ptr4) layoutDettagli->removeRow(ptr4);
+
     QLineEdit* capacita = new QLineEdit(this);
     capacita->setObjectName("capacita");
     registerField("capacita*", capacita);
     layoutDettagli->addRow("Capacità bevanda:", capacita);
+
+    QLineEdit* prezzo = new QLineEdit(this);
+    prezzo->setObjectName("prezzo");
+    registerField("prezzo*", prezzo);
+    layoutDettagli->addRow("Prezzo di vendita:", prezzo);
+
+    QRadioButton* optionLattina = new QRadioButton("Lattina",this);
+    optionLattina->setObjectName("optionLattina");
+    optionLattina->setChecked(true);
+    registerField("optionLattina", optionLattina);
+    QRadioButton* optionBottiglia = new QRadioButton("Bottiglia",this);
+    optionBottiglia->setObjectName("optionBottiglia");
+    layoutDettagli->addRow("Lattina", optionLattina);
+    layoutDettagli->addRow("Bottiglia", optionBottiglia);
   }
 }
 
@@ -52,10 +73,10 @@ void NuovoConsumabile_dettagli::initializePage(){
   QWizardPage::initializePage();
   if(!previouslyInizialized){
       registerField("nome*", nomeConsumabile);
+      registerField("disponibilita", disponibilita);
       registerField("quantita*", quantitaConsumabile);
       registerField("costo*", costoConsumabile);
       registerField("dataAcquisto", dataAcquisto);
-      registerField("disponibilita", disponibilita);
   }
   setActualPage();
   previouslyInizialized = true;

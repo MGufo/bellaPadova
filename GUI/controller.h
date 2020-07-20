@@ -5,6 +5,7 @@
 
 #include "../core/pizzeria.h"
 #include "MainWindow.h"
+#include "pacchetti.h"
 
 class MainWindow;
 class Controller : public QObject {
@@ -21,6 +22,7 @@ class Controller : public QObject {
   void setView(MainWindow*);
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
+  void getInventario() const;
 
  public slots:
   void caricaComande();

@@ -20,10 +20,10 @@ public:
 private:
   QFormLayout* layoutDettagli;
   QLineEdit* nomeConsumabile = nullptr;
+  QCheckBox* disponibilita = nullptr;
   QLineEdit* quantitaConsumabile = nullptr;
   QLineEdit* costoConsumabile = nullptr;
   QDateEdit* dataAcquisto = nullptr;
-  QCheckBox* disponibilita = nullptr;
   bool previouslyInizialized;
   void setActualPage();
   void initializePage() override;

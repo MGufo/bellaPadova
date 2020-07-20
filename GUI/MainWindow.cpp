@@ -82,8 +82,15 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkgreen;");
   else
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkred;");
-  findChild<QLineEdit*>("mGuadagno")->clear();
-  findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
+    findChild<QLineEdit*>("mGuadagno")->clear();
+    findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
+}
+
+void MainWindow::aggiornaInventario(pacchetto * p){
+    if(dynamic_cast<pacchettoBevanda*>(p)){
+        TabellaComposita* tabBevande = findChild<TabellaComposita*>("tabBevande");
+        //mando pacchetto alla giusta tabella per inserire una riga
+    }
 }
 
 void MainWindow::mostraErrore(const QString & messaggio){
