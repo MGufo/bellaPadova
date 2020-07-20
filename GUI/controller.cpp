@@ -33,6 +33,7 @@ void Controller::creaNuovoConsumabile(pacchetto* pC){
         pConsumabile = new Ingrediente(++idRisorse,ptr->nome,ptr->disponibilita,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->locale);
     }
     modello->inserisciConsumabile(pConsumabile);
+    vista->aggiornaInventario(pC);
 }
 
 void Controller::getInventario() const{

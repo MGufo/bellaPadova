@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(Controller* c, QWidget* parent): QWidget(parent), controller(c){
   mainLayout = new QVBoxLayout(this);
@@ -74,7 +75,14 @@ void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void MainWindow::creaNuovoConsumabile(pacchetto* pC){
+    std::cout << "daghe1" << std::endl;
   controller->creaNuovoConsumabile(pC);
+}
+
+
+void MainWindow::riempiInventario(){
+    std::cout << "daghe" << std::endl;
+    controller->getInventario();
 }
 
 void MainWindow::aggiornaContabilizzazione(double guadagno){
@@ -87,9 +95,14 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
 }
 
 void MainWindow::aggiornaInventario(pacchetto * p){
+    std::cout << "daghe2" << std::endl;
     if(dynamic_cast<pacchettoBevanda*>(p)){
         TabellaComposita* tabBevande = findChild<TabellaComposita*>("tabBevande");
-        //mando pacchetto alla giusta tabella per inserire una riga
+        tabBevande->inserisciElemento(p);
+    }
+    else{
+        TabellaComposita* tabIngredienti = findChild<TabellaComposita*>("tabIngredienti");
+        tabIngredienti->inserisciElemento(p);
     }
 }
 

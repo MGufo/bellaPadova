@@ -26,8 +26,10 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
 
 void TabellaComposita::inserisciElemento(pacchetto * p){
     if(objectName()=="tabBevande"){
+        std::cout << "dagh3" << std::endl;
         pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
         //creazione di una nuova riga e riempimento con i dati nel pacchetto
+        //guardo come inserire elementi in qtablewidget!
         tabella->setItem(tabella->rowCount(), 0, new QTableWidgetItem(QString::fromStdString(pB->nome)));
         tabella->setItem(tabella->rowCount(), 1, new QTableWidgetItem((pB->disponibilita? "Si" : "No")));
         tabella->setItem(tabella->rowCount(), 2, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->quantita))));
@@ -36,6 +38,9 @@ void TabellaComposita::inserisciElemento(pacchetto * p){
         tabella->setItem(tabella->rowCount(), 5, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->capacita))));
         tabella->setItem(tabella->rowCount(), 6, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->prezzo))));
         tabella->setItem(tabella->rowCount(), 7, new QTableWidgetItem((pB->tipo ? "Lattina" : "Bottiglia")));
+    }
+    else{
+
     }
 }
 

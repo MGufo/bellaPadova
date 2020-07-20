@@ -23,6 +23,7 @@ class MainWindow : public QWidget {
   ~MainWindow();
   void aggiornaContabilizzazione(double);
   void aggiornaInventario(pacchetto*);
+  void riempiInventario();
   void mostraErrore(const QString&);
 
  public slots:

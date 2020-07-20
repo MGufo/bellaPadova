@@ -19,11 +19,6 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   TabellaComposita* tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
   tabBevande->setObjectName("tabBevande");
 
-  //riempimento dell'inventario
-  //uso una funzione apposita che chiama controller->getInventario()
-  //oppure uso un segnale per triggerare controller->getInventario()?
-  //parentWidget()->parentWidget()->controller->
-
   layoutInventario->addWidget(tabIngredienti);
   layoutInventario->addWidget(tabBevande);
 

@@ -9,6 +9,7 @@
 #include <QStringList>
 #include "GUI/tabellacomposita.h"
 #include "GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h"
+#include "MainWindow.h"
 
 class Inventario : public QWidget
 {
@@ -17,8 +18,7 @@ public:
     explicit Inventario(QWidget *parent = nullptr);
 
 signals:
-
-public slots:
+  void riempiInventario();
 
 private:
   QVBoxLayout* layoutInventario;
