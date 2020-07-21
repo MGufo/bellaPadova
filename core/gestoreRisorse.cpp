@@ -120,5 +120,11 @@ void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
 }
 
 void GestoreRisorse::caricaRisorse(const QJsonObject& risorseJSON){
+/*
+ * in gestoreRisorse:
+    creiamo un ogg JSON leggendolo da file
+    fare "rtti" per capire che tipo del modello è rappresentato dall'oggetto JSON
 
+
+*/
 }

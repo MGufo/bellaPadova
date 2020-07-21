@@ -23,6 +23,7 @@ class Comanda {
   unordered_map<Articolo*, unsigned int> ordinazione;
 
  public:
+  Comanda();
   Comanda(unsigned int, Contatto, QTime, QDate,
           unordered_map<Articolo*, unsigned int> =
               unordered_map<Articolo*, unsigned int>());

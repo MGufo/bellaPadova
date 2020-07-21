@@ -4,6 +4,7 @@
 #include <QJsonValue>
 #include "comanda.h"
 #include "qontainer.h"
+
 class GestoreComande {
  private:
   Lista<Comanda*> bacheca;

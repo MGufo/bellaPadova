@@ -178,6 +178,7 @@ void Pizzeria::caricaComande(){
 //    throw new std::invalid_argument(pE->errorString().toStdString());
 
   QJsonObject comandeJSON = fileComandeJSON.object();
+
   gestoreComande.caricaComande(comandeJSON);
   delete pE;
 }
