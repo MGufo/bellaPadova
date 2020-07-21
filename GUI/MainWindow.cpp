@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(Controller* c, QWidget* parent): QWidget(parent), controller(c){
   mainLayout = new QVBoxLayout(this);
@@ -74,7 +75,14 @@ void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void MainWindow::creaNuovoConsumabile(pacchetto* pC){
+    std::cout << "daghe1" << std::endl;
   controller->creaNuovoConsumabile(pC);
+}
+
+
+void MainWindow::riempiInventario(){
+    std::cout << "daghe" << std::endl;
+    controller->getInventario();
 }
 
 void MainWindow::aggiornaContabilizzazione(double guadagno){
@@ -82,8 +90,20 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkgreen;");
   else
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkred;");
-  findChild<QLineEdit*>("mGuadagno")->clear();
-  findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
+    findChild<QLineEdit*>("mGuadagno")->clear();
+    findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
+}
+
+void MainWindow::aggiornaInventario(pacchetto * p){
+    std::cout << "daghe2" << std::endl;
+    if(dynamic_cast<pacchettoBevanda*>(p)){
+        TabellaComposita* tabBevande = findChild<TabellaComposita*>("tabBevande");
+        tabBevande->inserisciElemento(p);
+    }
+    else{
+        TabellaComposita* tabIngredienti = findChild<TabellaComposita*>("tabIngredienti");
+        tabIngredienti->inserisciElemento(p);
+    }
 }
 
 void MainWindow::mostraErrore(const QString & messaggio){

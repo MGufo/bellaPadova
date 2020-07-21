@@ -22,6 +22,8 @@ class MainWindow : public QWidget {
   MainWindow(Controller* c, QWidget* parent = nullptr);
   ~MainWindow();
   void aggiornaContabilizzazione(double);
+  void aggiornaInventario(pacchetto*);
+  void riempiInventario();
   void mostraErrore(const QString&);
 
  public slots:

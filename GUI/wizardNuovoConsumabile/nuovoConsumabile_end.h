@@ -14,10 +14,10 @@ public:
 private:
   QFormLayout* layoutEnd;
   QLabel* nomeConsumabile = nullptr;
+  QLabel* disponibilita = nullptr;
   QLabel* quantitaConsumabile = nullptr;
   QLabel* costoConsumabile = nullptr;
   QLabel* dataAcquisto = nullptr;
-  QLabel* campoExtra = nullptr;
   void setInitialPage();
   void setActualPage();
   void initializePage() override;

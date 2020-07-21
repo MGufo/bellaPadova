@@ -15,30 +15,50 @@ void NuovoConsumabile_end::initializePage(){
 
 void NuovoConsumabile_end::setInitialPage(){
     if(nomeConsumabile) layoutEnd->removeRow(nomeConsumabile);
+    if(disponibilita) layoutEnd->removeRow(disponibilita);
     if(quantitaConsumabile) layoutEnd->removeRow(quantitaConsumabile);
     if(costoConsumabile) layoutEnd->removeRow(costoConsumabile);
     if(dataAcquisto) layoutEnd->removeRow(dataAcquisto);
 
     nomeConsumabile = new QLabel(field("nome").toString(), this);
+    disponibilita = new QLabel(((field("disponibilita").toBool())? "Si" : "No"),this);
     quantitaConsumabile = new QLabel(field("quantita").toString(), this);
     costoConsumabile = new QLabel(field("costo").toString(), this);
     dataAcquisto = new QLabel(field("dataAcquisto").toDate().toString("dd/MM/yyyy"), this);
 
     layoutEnd->addRow("Nome:", nomeConsumabile);
+    layoutEnd->addRow("Disponibile:", disponibilita);
     layoutEnd->addRow("N° Confezioni:", quantitaConsumabile);
     layoutEnd->addRow("Costo:", costoConsumabile);
     layoutEnd->addRow("Data Acquisto:", dataAcquisto);
 }
 
 void NuovoConsumabile_end::setActualPage(){
-  if(campoExtra) layoutEnd->removeRow(campoExtra);
   if(field("optionIngrediente").toBool()){
-    campoExtra = new QLabel(((field("locale").toBool())? "Si" : "No"),this);
-    layoutEnd->addRow("Locale:", campoExtra);
+    auto ptr = findChild<QLabel*>("locale");
+    if(ptr) layoutEnd->removeRow(ptr);
+    QLabel* locale = new QLabel(((field("locale").toBool())? "Si" : "No"),this);
+    locale->setObjectName("locale");
+    layoutEnd->addRow("Locale:", locale);
   }
   else{
-    campoExtra = new QLabel(field("capacita").toString(), this);
-    layoutEnd->addRow("Capacità bevanda:", campoExtra);
+    auto ptr1 = findChild<QLabel*>("capacita");
+    if(ptr1) layoutEnd->removeRow(ptr1);
+    QLabel* capacita = new QLabel(field("capacita").toString(), this);
+    capacita->setObjectName("capacita");
+    layoutEnd->addRow("Capacità bevanda:", capacita);
+
+    auto ptr2 = findChild<QLabel*>("prezzo");
+    if(ptr2) layoutEnd->removeRow(ptr2);
+    QLabel* prezzo = new QLabel(field("prezzo").toString(), this);
+    prezzo->setObjectName("prezzo");
+    layoutEnd->addRow("Prezzo:", prezzo);
+
+    auto ptr3 = findChild<QLabel*>("tipologia");
+    if(ptr3) layoutEnd->removeRow(ptr3);
+    QLabel* tipologia = new QLabel((field("optionLattina").toBool() ? "Lattina" : "Bottiglia"), this);
+    capacita->setObjectName("tipologia");
+    layoutEnd->addRow("Tipologia:", tipologia);
   }
 }
 /*  messaggio da inserire nel QDialog
