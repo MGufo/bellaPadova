@@ -75,13 +75,11 @@ void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void MainWindow::creaNuovoConsumabile(pacchetto* pC){
-    std::cout << "daghe1" << std::endl;
   controller->creaNuovoConsumabile(pC);
 }
 
 
 void MainWindow::riempiInventario(){
-    std::cout << "daghe" << std::endl;
     controller->getInventario();
 }
 
@@ -95,7 +93,6 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
 }
 
 void MainWindow::aggiornaInventario(pacchetto * p){
-    std::cout << "daghe2" << std::endl;
     if(dynamic_cast<pacchettoBevanda*>(p)){
         TabellaComposita* tabBevande = findChild<TabellaComposita*>("tabBevande");
         tabBevande->inserisciElemento(p);

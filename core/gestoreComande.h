@@ -4,6 +4,11 @@
 #include <QJsonValue>
 #include "comanda.h"
 #include "qontainer.h"
+
+// TODO: sostituire la mappa di [articolo* => quantita] con una mappa
+// di [oggetto(nome,prezzo) => quantità] per evitare problemi di riferimento
+// ad articoli rimossi su comande vecchie
+
 class GestoreComande {
  private:
   Lista<Comanda*> bacheca;
