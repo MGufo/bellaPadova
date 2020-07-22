@@ -26,21 +26,34 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
 
 void TabellaComposita::inserisciElemento(pacchetto * p){
     if(objectName()=="tabBevande"){
-        std::cout << "dagh3" << std::endl;
         pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
         //creazione di una nuova riga e riempimento con i dati nel pacchetto
-        //guardo come inserire elementi in qtablewidget!
-        tabella->setItem(tabella->rowCount(), 0, new QTableWidgetItem(QString::fromStdString(pB->nome)));
-        tabella->setItem(tabella->rowCount(), 1, new QTableWidgetItem((pB->disponibilita? "Si" : "No")));
-        tabella->setItem(tabella->rowCount(), 2, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->quantita))));
-        tabella->setItem(tabella->rowCount(), 3, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->costo))));
-        tabella->setItem(tabella->rowCount(), 4, new QTableWidgetItem(pB->dataAcquisto.toString()));
-        tabella->setItem(tabella->rowCount(), 5, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->capacita))));
-        tabella->setItem(tabella->rowCount(), 6, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->prezzo))));
-        tabella->setItem(tabella->rowCount(), 7, new QTableWidgetItem((pB->tipo ? "Lattina" : "Bottiglia")));
+        tabella->insertRow(tabella->rowCount());
+        tabella->setItem(tabella->rowCount()-1, 0, new QTableWidgetItem(QString::fromStdString(pB->nome)));
+        tabella->setItem(tabella->rowCount()-1, 1, new QTableWidgetItem((pB->disponibilita? "Si" : "No")));
+        tabella->setItem(tabella->rowCount()-1, 2, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->quantita))));
+        tabella->setItem(tabella->rowCount()-1, 3, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->costo))));
+        tabella->setItem(tabella->rowCount()-1, 4, new QTableWidgetItem(pB->dataAcquisto.toString("dd/MM/yyyy")));
+        tabella->setItem(tabella->rowCount()-1, 5, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->capacita))));
+        tabella->setItem(tabella->rowCount()-1, 6, new QTableWidgetItem(QString::fromStdString(std::to_string(pB->prezzo))));
+        tabella->setItem(tabella->rowCount()-1, 7, new QTableWidgetItem((pB->tipo ? "Lattina" : "Bottiglia")));
+        //scorro righe e colonne della tabella e rendo ogni item non editabile
+        //item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+        //setEditTriggers(QAbstractItemView::NoEditTriggers);
     }
     else{
-
+        pacchettoIngrediente* pI = dynamic_cast<pacchettoIngrediente*>(p);
+        //creazione di una nuova riga e riempimento con i dati nel pacchetto
+        tabella->insertRow(tabella->rowCount());
+        tabella->setItem(tabella->rowCount()-1, 0, new QTableWidgetItem(QString::fromStdString(pI->nome)));
+        tabella->setItem(tabella->rowCount()-1, 1, new QTableWidgetItem((pI->disponibilita? "Si" : "No")));
+        tabella->setItem(tabella->rowCount()-1, 2, new QTableWidgetItem(QString::fromStdString(std::to_string(pI->quantita))));
+        tabella->setItem(tabella->rowCount()-1, 3, new QTableWidgetItem(QString::fromStdString(std::to_string(pI->costo))));
+        tabella->setItem(tabella->rowCount()-1, 4, new QTableWidgetItem(pI->dataAcquisto.toString("dd/MM/yyyy")));
+        tabella->setItem(tabella->rowCount()-1, 5, new QTableWidgetItem((pI->locale ? "Si" : "No")));
+        //scorro righe e colonne della tabella e rendo ogni item non editabile
+        //item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+        //setEditTriggers(QAbstractItemView::NoEditTriggers);
     }
 }
 
