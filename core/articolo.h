@@ -10,6 +10,7 @@ class Articolo : virtual public Risorsa {
   double prezzoBase;
 
  public:
+  Articolo();
   /**
    * @brief: Costruttore di default
    * @param: string (nome dell'articolo)

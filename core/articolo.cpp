@@ -1,5 +1,7 @@
 #include "articolo.h"
 
+Articolo::Articolo() {}
+
 Articolo::Articolo(unsigned int id, string nome, bool disponibilita, double p)
     : Risorsa(id, nome, disponibilita), prezzoBase(p) {}
 

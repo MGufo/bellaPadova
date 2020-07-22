@@ -1,5 +1,7 @@
 #include "bevanda.h"
 
+Bevanda::Bevanda() {}
+
 Bevanda::Bevanda(unsigned int id, string nome, bool disponibilita, double prezzo,
                  unsigned int qta, double costo, QDate dataAcquisto,
                  float capacitaBevanda)

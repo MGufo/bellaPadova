@@ -60,6 +60,8 @@ class Contatto {
   void setTelefono(const string&);
 
   void salva(QJsonObject*) const;
+
+  void carica(QJsonObject);
 };
 
 #endif

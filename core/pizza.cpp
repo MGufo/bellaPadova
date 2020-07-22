@@ -11,6 +11,8 @@ void Pizza::removeIngrediente(Ingrediente* i) {
   if (it.isValid()) ingredienti.erase(it);
 }
 
+Pizza::Pizza() {}
+
 // costruisce una pizza la cui lista di ingredienti contiene solo la farina
 Pizza::Pizza(unsigned int id, string nome, bool disponibilita, double prezzo)
     : Risorsa(id, nome, disponibilita),

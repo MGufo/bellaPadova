@@ -1,6 +1,7 @@
 #include "risorsa.h"
-
 #include <iostream>
+
+Risorsa::Risorsa() {}
 
 Risorsa::Risorsa(unsigned int _id, string _nome, bool _disponibilita)
     : ID(_id), nome(_nome), disponibilita(_disponibilita) {}

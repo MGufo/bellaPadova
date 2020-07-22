@@ -1,5 +1,7 @@
 #include "farina.h"
 
+Farina::Farina() {}
+
 Farina::Farina(unsigned int id, string _nome, bool _disponibilita, unsigned int _quantita,
                double _costo, QDate _dataAcquisto, bool _locale,
                string _tipoFarina)

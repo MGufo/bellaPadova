@@ -13,6 +13,7 @@ class Farina : public Ingrediente {
   string tipoFarina;
 
  public:
+  Farina();
   Farina(unsigned int, string = "farina 1kg", bool = true, unsigned int = 1, double = 3,
          QDate = QDate::currentDate(), bool = true, string = "tipo 00");
 

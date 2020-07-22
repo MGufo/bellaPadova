@@ -130,5 +130,18 @@ void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
 }
 
 void GestoreRisorse::caricaRisorse(const QJsonObject& risorseJSON){
+  string tipo;
+  for(auto it = risorseJSON.constBegin(); it != risorseJSON.constEnd(); ++it){
+    QJsonObject* risorsaJSON = new QJsonObject((*it).toObject());
+    tipo = (*(risorsaJSON->find("tipo"))).toString().toStdString();
+    Risorsa* risorsa;
 
+    if(tipo == "pizza") risorsa = new Pizza();
+    else if (tipo == "bottiglia") risorsa = new Bottiglia();
+    else if (tipo == "lattina") risorsa = new Lattina();
+    else if (tipo == "ingrediente") risorsa = new Ingrediente();
+    else if (tipo == "farina") risorsa = new Farina();
+
+    risorsa->carica(*risorsaJSON);
+  }
 }

@@ -1,10 +1,11 @@
 #include "comanda.h"
-
 #include "pizzeria.h"
 
 /* Gli oggetti passati come parametri al costruttore vengono costruiti ad alto
   livello; per questo motivo non vengono costruiti di copia nel costruttore.
 */
+Comanda::Comanda() {}
+
 Comanda::Comanda(unsigned int _id, Contatto _cliente, QTime _oraConsegna, QDate _dataConsegna,
                  unordered_map<Articolo*, unsigned int> _ordinazione)
     : ID(_id), cliente(_cliente), oraConsegna(_oraConsegna), dataConsegna(_dataConsegna), ordinazione(_ordinazione) {}
@@ -70,19 +71,27 @@ void Comanda::salva(QJsonObject* comandaJSON) const {
   comandaJSON->insert("cliente", *contattoJSON);
   comandaJSON->insert("oraConsegna", oraConsegna.toString());
   comandaJSON->insert("dataConsegna", dataConsegna.toString());
-  // serializzazione mappa ordine
   QJsonObject* ordinazioneJSON = new QJsonObject();
   for(auto it = ordinazione.cbegin(); it != ordinazione.cend(); ++it)
-    ordinazioneJSON->insert(QString::fromStdString(((*it).first)->getNome()),
-                            static_cast<int>((*it).second));
+    ordinazioneJSON->insert(
+          QString::fromStdString(std::to_string((*it).first->getIdRisorsa())),
+          static_cast<int>((*it).second));
   comandaJSON->insert("ordinazione", *ordinazioneJSON);
   delete ordinazioneJSON;
   delete contattoJSON;
   delete comandaJSON;
 }
 
-void Comanda::carica(const QJsonObject *){
-
+void Comanda::carica(const QJsonObject* comandaJSON){
+  ID = (*(comandaJSON->find("ID"))).toInt();
+  cliente.carica((*(comandaJSON->find("cliente"))).toObject());
+  oraConsegna =
+      QTime::fromString((*(comandaJSON->find("oraConsegna"))).toString());
+  QJsonObject* ordinazioneJSON =
+      new QJsonObject((*(comandaJSON->find("ordinazione"))).toObject());
+  for(auto it = ordinazioneJSON->constBegin();
+      it != ordinazioneJSON->constEnd(); ++it){
+  }
 }
 
 bool Comanda::operator<(const Comanda& c) const {

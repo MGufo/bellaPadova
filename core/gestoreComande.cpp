@@ -162,15 +162,17 @@ void GestoreComande::salvaComande(QJsonObject *comandeJSON) const{
     delete comandaJSON;
   }
 }
-
-void GestoreComande::caricaComande(const QJsonObject & comandeJSON){
+/*
+Problema: per creare correttamente ogni comanda servono i puntatori agli Articoli
+che compongono la comanda.
+Questi puntatori sono ottenibili solo tramite l'inventario (quindi gestoreRisorse)
+MA per ottenerli servono informazioni presenti in comandeJSON (che viene passato
+a gestioneComande).
+*/
+void GestoreComande::caricaComande(const QJsonObject& comandeJSON){
   for(auto it = comandeJSON.constBegin(); it != comandeJSON.constEnd(); ++it){
     QJsonObject* comandaJSON = new QJsonObject(it->toObject());
-    unsigned int ID = (*(comandaJSON->find("ID"))).toInt();
-//    TODO: Verificare se ci sia un metodo alternativo a estrarre valore per
-//    valore dentro variabili locali e poi creare la comanda da inserire nella
-//    lista.
-//    Meglio ancora se si possa fare all'interno della classe Comanda usando il
-//    metodo carica()
+    Comanda* c = new Comanda();
+    c->carica(comandaJSON);
   }
 }

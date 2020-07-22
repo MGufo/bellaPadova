@@ -4,13 +4,16 @@
 #include "articolo.h"
 #include "consumabile.h"
 #include "qontainer.h"
-
+// 0 bottiglia
+// 1 lattina
 class Bevanda : public Articolo, public Consumabile {
  private:
   static double plasticTax;
   float capacita;
 
  public:
+  Bevanda();
+
   Bevanda(unsigned int, string, bool, double, unsigned int, double, QDate, float);
 
   /**

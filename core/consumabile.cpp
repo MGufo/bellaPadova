@@ -1,5 +1,7 @@
 #include "consumabile.h"
 
+Consumabile::Consumabile() {}
+
 Consumabile::Consumabile(unsigned int id, string n, bool d, unsigned int q, double c, QDate da)
     : Risorsa(id, n, d), quantita(q), costo(c), dataAcquisto(da) {}
 
