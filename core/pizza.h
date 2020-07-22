@@ -15,8 +15,8 @@ class Pizza : public Articolo {
   void removeIngrediente(Ingrediente*);
 
  public:
-  // Costruttore non usiamo valori di default perchè vengono tutti sempre
-  // passati per costruire l'oggetto
+  Pizza();
+
   Pizza(unsigned int, string nome, bool disponibilita, double prezzo);
 
   // Costruttore di copia,

@@ -198,12 +198,10 @@ void Pizzeria::caricaRisorse(){
 //    throw new std::invalid_argument(pE->errorString().toStdString());
 
   QJsonObject risorseJSON = fileRisorseJSON.object();
+  gestoreRisorse.caricaRisorse(risorseJSON);
 
-  QJsonObject menuJSON = risorseJSON["menu"].toObject();
-  gestoreRisorse.caricaRisorse(menuJSON);
-
-  QJsonObject inventarioJSON = risorseJSON["inventario"].toObject();
-  gestoreRisorse.caricaRisorse(inventarioJSON);
+//  QJsonObject inventarioJSON = risorseJSON["inventario"].toObject();
+//  gestoreRisorse.caricaRisorse(inventarioJSON);
 
   delete pE;
 }

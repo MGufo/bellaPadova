@@ -12,6 +12,7 @@ class Consumabile : virtual public Risorsa {
   QDate dataAcquisto;
 
  public:
+  Consumabile();
   Consumabile(unsigned int, string, bool, unsigned int, double, QDate);
 
   /**

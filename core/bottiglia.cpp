@@ -1,5 +1,6 @@
 #include "bottiglia.h"
 
+Bottiglia::Bottiglia () {}
 Bottiglia::Bottiglia(unsigned int id, string nome, bool disponibilita, double prezzo,
                      unsigned int qta, double costo, QDate dataAcquisto,
                      float capacitaBevanda)

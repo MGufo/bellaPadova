@@ -15,6 +15,7 @@ class Risorsa {
   bool disponibilita;
 
  public:
+  Risorsa();
   Risorsa(unsigned int, string, bool);
   virtual ~Risorsa() = default;
 

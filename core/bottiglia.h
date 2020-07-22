@@ -4,6 +4,7 @@
 
 class Bottiglia : public Bevanda {
  public:
+  Bottiglia ();
   Bottiglia(unsigned int, string, bool, double, unsigned int, double, QDate, float);
   Bottiglia* clone() const;
 

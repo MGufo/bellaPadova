@@ -8,6 +8,7 @@ class Ingrediente : public Consumabile {
   bool locale;
 
  public:
+  Ingrediente();
   Ingrediente(unsigned int, string, bool, unsigned int, double, QDate = QDate::currentDate(),
               bool locale = false);
 
