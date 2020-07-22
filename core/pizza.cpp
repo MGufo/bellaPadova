@@ -102,8 +102,18 @@ const Lista<Consumabile*>* Pizza::getComposizione() const {
   return lista;
 }
 
-void Pizza::carica(const QJsonObject &){
-
+void Pizza::carica(const QJsonObject& pizzaJSON) {
+  setID((*(pizzaJSON.find("ID"))).toInt());
+  setNome((*(pizzaJSON.find("Nome"))).toString().toStdString());
+  setDisponibilita((*(pizzaJSON.find("Disponibilita"))).toBool());
+  setPrezzoBase((*(pizzaJSON.find("Prezzo"))).toDouble());
+  QJsonArray* ingredientiJSON =
+      new QJsonArray((*(pizzaJSON.find("Ingredienti"))).toArray());
+  for(auto it = ingredientiJSON->constBegin();
+      it != ingredientiJSON->constEnd(); ++it){
+    //riempimento lista ingredienti
+  }
+  delete ingredientiJSON;
 }
 
 void Pizza::salva(QJsonObject& pizzaJSON) const{
@@ -112,9 +122,9 @@ void Pizza::salva(QJsonObject& pizzaJSON) const{
   // Nome
   pizzaJSON.insert("Nome", QString::fromStdString(getNome()));
   // Disponibilita
-  pizzaJSON.insert("Disponibilità", getDisponibilita());
+  pizzaJSON.insert("Disponibilita", getDisponibilita());
   // Prezzo
-  pizzaJSON.insert("Prezzo", getPrezzo());
+  pizzaJSON.insert("Prezzo", getPrezzoBase());
   // Ingredienti
   QJsonArray* ingredientiJSON = new QJsonArray();
   for(auto it = ingredienti.const_begin(); it != ingredienti.const_end(); ++it){
