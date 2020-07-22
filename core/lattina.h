@@ -13,5 +13,7 @@ class Lattina : public Bevanda {
    * @return: double (costo)
    */
   double getPrezzo() const;
+
+  virtual void salva(QJsonObject &) const;
 };
 #endif

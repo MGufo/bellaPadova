@@ -12,3 +12,8 @@ Lattina::Lattina(unsigned int id, string nome, bool disponibilita, double prezzo
 Lattina* Lattina::clone() const { return new Lattina(*this); }
 
 double Lattina::getPrezzo() const { return getPrezzoBase(); }
+
+void Lattina::salva(QJsonObject& bevandaJSON) const{
+  bevandaJSON.insert("tipo", "lattina");
+  Bevanda::salva(bevandaJSON);
+}

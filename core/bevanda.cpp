@@ -28,8 +28,16 @@ const Lista<Consumabile*>* Bevanda::getComposizione() const {
   return lista;
 }
 
-void Bevanda::carica(const QJsonObject &){
-
+void Bevanda::carica(const QJsonObject& bevandaJSON){
+  setID((*(bevandaJSON.find("ID"))).toInt());
+  setNome((*(bevandaJSON.find("Nome"))).toString().toStdString());
+  setDisponibilita((*(bevandaJSON.find("Disponibilita"))).toBool());
+  setPrezzoBase((*(bevandaJSON.find("Prezzo"))).toDouble());
+  setQuantita((*(bevandaJSON.find("Quantita"))).toInt());
+  setCosto((*(bevandaJSON.find("Costo"))).toDouble());
+  setDataAcquisto(
+        QDate::fromString((*(bevandaJSON.find("Data Acquisto"))).toString()));
+  setCapacita((*(bevandaJSON.find("Capacita"))).toDouble());
 }
 
 void Bevanda::salva(QJsonObject & bevandaJSON) const{
@@ -48,5 +56,5 @@ void Bevanda::salva(QJsonObject & bevandaJSON) const{
   // Data Acquisto
   bevandaJSON.insert("Data Acquisto", getDataAcquisto().toString());
   // Capacità
-  bevandaJSON.insert("Capacità", capacita);
+  bevandaJSON.insert("Capacita", capacita);
 }
