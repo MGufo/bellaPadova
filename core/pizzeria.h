@@ -24,6 +24,8 @@ class Pizzeria {
   //nel controller la costruzione delle comande dovrà usare idComande++ e il controller stesso dovrà incrementare idComande
   //idComande sarà ricaricato ad ogni costruzione del modello dal rispettivo file xml e salvato ad ogni salvataggio su file xml
   unsigned int idComande;
+
+  void getPuntatori(const QJsonObject&, std::unordered_map<uint, Risorsa*>* );
   
  public:
   Pizzeria();

@@ -8,6 +8,18 @@ Pizzeria::Pizzeria()
     //caricaRisorse();
 }
 
+void Pizzeria::getPuntatori(const QJsonObject & JSON,
+                            std::unordered_map<uint, Risorsa *>* keymap) {
+  for(auto it = JSON.constBegin(); it != JSON.constEnd(); ++it){
+    QJsonObject* ordine =
+        new QJsonObject((*(((*it).toObject()).find("ordinazione"))).toObject());
+    for(auto it2 = ordine->begin(); it != ordine->end(); ++it){
+      (*keymap)[(*(((*it2).toObject()).find("ID"))).toInt()] =
+          trovaRisorsa((*(((*it2).toObject()).find("ID"))).toInt());
+    }
+  }
+}
+
 const Lista<Consumabile *> &Pizzeria::getInventario() const{
     return gestoreRisorse.getInventario();
 }
@@ -182,8 +194,11 @@ void Pizzeria::caricaComande(){
 //    throw new std::invalid_argument(pE->errorString().toStdString());
 
   QJsonObject comandeJSON = fileComandeJSON.object();
-
+  std::unordered_map<uint, Risorsa*>* keymap =
+      new std::unordered_map<uint, Risorsa*>;
+  getPuntatori(comandeJSON, keymap);
   gestoreComande.caricaComande(comandeJSON);
+  delete keymap;
   delete pE;
 }
 
