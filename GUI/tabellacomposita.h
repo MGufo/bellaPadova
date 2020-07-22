@@ -18,8 +18,10 @@ public:
   void inserisciElemento(pacchetto*);
 
 signals:
+  void sendPacketToModel(pacchetto*);
 
-public slots:
+private slots:
+  void emitDataOnCellChanged(int,int);
 
 private:
   QHeaderView* header = nullptr;

@@ -75,7 +75,11 @@ void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
 }
 
 void MainWindow::creaNuovoConsumabile(pacchetto* pC){
-  controller->creaNuovoConsumabile(pC);
+    controller->creaNuovoConsumabile(pC);
+}
+
+void MainWindow::modificaConsumabile(pacchetto* pC){
+    controller->modificaConsumabile(pC);
 }
 
 

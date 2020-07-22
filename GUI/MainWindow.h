@@ -29,6 +29,7 @@ class MainWindow : public QWidget {
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
+  void modificaConsumabile(pacchetto*);
 
 private:
   Controller* controller;

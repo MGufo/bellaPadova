@@ -39,6 +39,10 @@ double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) con
   return (guadagni - costi);
 }
 
+Risorsa *Pizzeria::trovaRisorsa(unsigned int ID) const{
+  return gestoreRisorse.trovaRisorsa(ID);
+}
+
 void Pizzeria::inserisciArticolo(Articolo* daInserire) {
   gestoreRisorse.inserisciArticolo(daInserire);
 }

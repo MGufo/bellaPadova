@@ -22,6 +22,7 @@ class Controller : public QObject {
   void setView(MainWindow*);
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
+  void modificaConsumabile(pacchetto*);
   void getInventario() const;
 
  public slots:
