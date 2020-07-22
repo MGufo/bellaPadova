@@ -129,7 +129,9 @@ void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
   delete inventarioJSON;
 }
 
-void GestoreRisorse::caricaRisorse(const QJsonObject& risorseJSON){
+void GestoreRisorse::caricaRisorse (const QJsonObject& risorseJSON,
+                                    const std::unordered_map<uint, Risorsa*>*
+                                    keymap){
   string tipo;
   for(auto it = risorseJSON.constBegin(); it != risorseJSON.constEnd(); ++it){
     QJsonObject* risorsaJSON = new QJsonObject((*it).toObject());

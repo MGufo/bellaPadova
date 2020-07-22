@@ -46,6 +46,11 @@ class Risorsa {
   void setDisponibilita(bool);
 
   /**
+   * @brief: Modifica l'ID dell'oggetto
+   * @param: unsigned int (nuovo ID)
+  */
+  void setID(unsigned int);
+  /**
    * @brief: Legge i dati di una risorsa da file JSON e li assegna ai campi
    * dati dell'oggetto di invocazione
    * @param: const QJsonObject& (file da cui leggere)

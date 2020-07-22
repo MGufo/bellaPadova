@@ -15,3 +15,5 @@ bool Risorsa::getDisponibilita() const { return disponibilita; }
 void Risorsa::setNome(const string& n) { nome = n; }
 
 void Risorsa::setDisponibilita(bool d) { disponibilita = d; }
+
+void Risorsa::setID(unsigned int _id){ ID = _id; }

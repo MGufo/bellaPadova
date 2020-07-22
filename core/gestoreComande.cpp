@@ -169,7 +169,9 @@ Questi puntatori sono ottenibili solo tramite l'inventario (quindi gestoreRisors
 MA per ottenerli servono informazioni presenti in comandeJSON (che viene passato
 a gestioneComande).
 */
-void GestoreComande::caricaComande(const QJsonObject& comandeJSON){
+void GestoreComande::caricaComande(const QJsonObject& comandeJSON,
+                                   const std::unordered_map<uint, Risorsa*>*
+                                   keymap){
   for(auto it = comandeJSON.constBegin(); it != comandeJSON.constEnd(); ++it){
     QJsonObject* comandaJSON = new QJsonObject(it->toObject());
     Comanda* c = new Comanda();

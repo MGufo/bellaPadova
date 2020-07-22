@@ -6,6 +6,7 @@
 #include "lattina.h"
 #include "pizza.h"
 #include "qontainer.h"
+#include <unordered_map>
 
 // Idea da implementare: la classe gestore deve gestire le liste di Articoli
 // (menu) e consumabili (inventario), permettendo inserimento, modifica,
@@ -87,6 +88,7 @@ class GestoreRisorse {
 
   void salvaRisorse(QJsonObject*) const;
 
-  void caricaRisorse(const QJsonObject&);
+  void caricaRisorse(const QJsonObject&,
+                     const std::unordered_map<uint, Risorsa*>* = nullptr);
 };
 #endif

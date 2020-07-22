@@ -13,3 +13,8 @@ Bottiglia* Bottiglia::clone() const { return new Bottiglia(*this); }
 double Bottiglia::getPrezzo() const {
   return getPrezzoBase() + getPlasticTax() * (1 / getCapacita());
 }
+
+void Bottiglia::salva(QJsonObject& bevandaJSON) const{
+  bevandaJSON.insert("tipo", "bottiglia");
+  Bevanda::salva(bevandaJSON);
+}
