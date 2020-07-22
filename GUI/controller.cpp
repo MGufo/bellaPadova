@@ -56,8 +56,9 @@ void Controller::modificaConsumabile(pacchetto * pC){
         pacchettoIngrediente* ptr = dynamic_cast<pacchettoIngrediente*>(pC);
         pConsumabile = new Ingrediente(ptr->ID,ptr->nome,ptr->disponibilita,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->locale);
     }
-    //Risorsa* vecchioConsumabile = modello->getConsumabile(pC->ID);
-    //modello->modificaConsumabile();
+    Risorsa* temp = modello->trovaRisorsa(pC->ID);
+    Consumabile* vecchioConsumabile = dynamic_cast<Consumabile*>(temp);
+    modello->modificaConsumabile(vecchioConsumabile,pConsumabile);
 }
 
 void Controller::getInventario() const{
