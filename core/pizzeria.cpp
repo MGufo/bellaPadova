@@ -8,7 +8,9 @@ Pizzeria::Pizzeria()
     //caricaRisorse();
 }
 
-void Pizzeria::getPuntatori(const QJsonObject & JSON,
+// TODO: Realizzare la funzione che parsi l'oggetto JSON contenente comande/risorse
+// JSON e per ogni ID invochi trovaRisorsa() per cercare il puntatore corrispondente
+void Pizzeria::getPtrComande(const QJsonObject & JSON,
                             std::unordered_map<uint, Risorsa *>* keymap) {
   for(auto it = JSON.constBegin(); it != JSON.constEnd(); ++it){
     QJsonObject* ordine =
@@ -17,6 +19,23 @@ void Pizzeria::getPuntatori(const QJsonObject & JSON,
       (*keymap)[(*(((*it2).toObject()).find("ID"))).toInt()] =
           trovaRisorsa((*(((*it2).toObject()).find("ID"))).toInt());
     }
+    delete ordine;
+  }
+}
+
+void Pizzeria::getPtrRisorse(const QJsonObject & JSON,
+                             std::unordered_map<uint, Risorsa *>* keymap) {
+  for(auto it = JSON.constBegin(); it != JSON.constEnd(); ++it){
+    QJsonObject* obj = new QJsonObject((*it).toObject());
+    if((*(obj->find("tipo"))).toString() == "pizza"){
+      QJsonArray* ingr =
+          new QJsonArray((*(obj->find("ingredienti"))).toArray());
+      for(auto it2 = ingr->constBegin(); it2 !=  ingr->constEnd(); ++it2)
+        (*keymap)[(*(((*it2).toObject()).find("ID"))).toInt()] =
+            trovaRisorsa((*(((*it2).toObject()).find("ID"))).toInt());
+      delete ingr;
+    }
+    delete obj;
   }
 }
 
@@ -34,7 +53,6 @@ double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) con
   const unordered_map<Articolo*, unsigned int>* ordinazione = nullptr;
   const Lista<Comanda*>* comande = &gestoreComande.getBacheca();
   const Lista<Consumabile*>* consumabili = &gestoreRisorse.getInventario();
-
   for(auto it = comande->const_begin(); it != comande->const_end(); ++it){
     if(inizio <= (*it)->getDataConsegna() && (*it)->getDataConsegna() <= fine){
       ordinazione = &(*it)->getOrdinazione();
@@ -196,8 +214,8 @@ void Pizzeria::caricaComande(){
   QJsonObject comandeJSON = fileComandeJSON.object();
   std::unordered_map<uint, Risorsa*>* keymap =
       new std::unordered_map<uint, Risorsa*>;
-  getPuntatori(comandeJSON, keymap);
-  gestoreComande.caricaComande(comandeJSON);
+  getPtrComande(comandeJSON, keymap);
+  gestoreComande.caricaComande(comandeJSON, keymap);
   delete keymap;
   delete pE;
 }
@@ -217,11 +235,15 @@ void Pizzeria::caricaRisorse(){
 //    throw new std::invalid_argument(pE->errorString().toStdString());
 
   QJsonObject risorseJSON = fileRisorseJSON.object();
-  gestoreRisorse.caricaRisorse(risorseJSON);
+  std::unordered_map<uint, Risorsa*>* keymap =
+      new std::unordered_map<uint, Risorsa*>;
+  getPtrRisorse((*risorseJSON.find("menu")).toObject(), keymap);
+  gestoreRisorse.caricaRisorse(risorseJSON, keymap);
 
-//  QJsonObject inventarioJSON = risorseJSON["inventario"].toObject();
-//  gestoreRisorse.caricaRisorse(inventarioJSON);
+  QJsonObject inventarioJSON = risorseJSON["inventario"].toObject();
+  gestoreRisorse.caricaRisorse(inventarioJSON);
 
+  delete keymap;
   delete pE;
 }
 
