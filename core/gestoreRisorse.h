@@ -38,6 +38,8 @@ class GestoreRisorse {
   //nell'inventario
   bool controlloInInventario(Articolo *) const;
 
+  Risorsa* trovaRisorsa(unsigned int ID) const;
+
   /**
    * @brief: Inserisce un consumabile nella lista di consumabili (inventario).
    * @param: Consumabile* (oggetto da inserire)

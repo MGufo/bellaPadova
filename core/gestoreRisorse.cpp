@@ -12,6 +12,16 @@ bool GestoreRisorse::controlloInInventario(Articolo * daControllare) const{
     return presente;
 }
 
+Risorsa *GestoreRisorse::trovaRisorsa(unsigned int ID) const{
+  for(auto it = menu.const_begin(); it != menu.const_end(); ++it){
+      if((*it)->getIdRisorsa()==ID) return *it;
+  }
+  for(auto it = inventario.const_begin(); it != inventario.const_end(); ++it){
+      if((*it)->getIdRisorsa()==ID) return *it;
+  }
+  return nullptr;
+}
+
 bool GestoreRisorse::controlloDisponibilita(
     const Lista<Consumabile*>* daCercare) const {
   Lista<Consumabile*>::const_Iterator it;
