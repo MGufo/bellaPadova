@@ -16,7 +16,8 @@ void Farina::setTipoFarina(const string& f) { tipoFarina = f; }
 
 Farina* Farina::clone() const { return new Farina(*this); }
 
-void Farina::carica(const QJsonObject &){
+void Farina::carica(const QJsonObject & farinaJSON,
+                    const std::unordered_map<uint, Risorsa*>* keymap){
 
 }
 

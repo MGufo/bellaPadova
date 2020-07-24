@@ -54,7 +54,8 @@ class Bevanda : public Articolo, public Consumabile {
    */
   virtual const Lista<Consumabile*>* getComposizione() const;
 
-  virtual void carica(const QJsonObject&);
+  virtual void carica(const QJsonObject&,
+                      const std::unordered_map<uint, Risorsa*>*);
 
   virtual void salva(QJsonObject &) const;
 };

@@ -60,7 +60,8 @@ class Consumabile : virtual public Risorsa {
    * dati dell'oggetto di invocazione
    * @param: const QJsonObject& (file da cui leggere)
    */
-  virtual void carica(const QJsonObject&) = 0;
+  virtual void carica(const QJsonObject&,
+                      const std::unordered_map<uint, Risorsa*>*) = 0;
 
   /**
    * @brief: Serializza l'oggetto di invocazione in un file JSON

@@ -28,7 +28,8 @@ const Lista<Consumabile*>* Bevanda::getComposizione() const {
   return lista;
 }
 
-void Bevanda::carica(const QJsonObject& bevandaJSON){
+void Bevanda::carica(const QJsonObject& bevandaJSON,
+                     const std::unordered_map<uint, Risorsa*>* keymap){
   setID((*(bevandaJSON.find("ID"))).toInt());
   setNome((*(bevandaJSON.find("Nome"))).toString().toStdString());
   setDisponibilita((*(bevandaJSON.find("Disponibilita"))).toBool());

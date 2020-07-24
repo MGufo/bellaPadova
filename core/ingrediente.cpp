@@ -20,7 +20,8 @@ double Ingrediente::getSpesa() const {
   return getQuantita() * getCosto() + 1 * isLocal();
 }
 
-void Ingrediente::carica(const QJsonObject &){
+void Ingrediente::carica(const QJsonObject & ingredienteJSON,
+                         const std::unordered_map<uint, Risorsa*>* keymap){
 
 }
 

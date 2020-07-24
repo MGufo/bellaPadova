@@ -9,8 +9,8 @@ class Ingrediente : public Consumabile {
 
  public:
   Ingrediente();
-  Ingrediente(unsigned int, string, bool, unsigned int, double, QDate = QDate::currentDate(),
-              bool locale = false);
+  Ingrediente(unsigned int, string, bool, unsigned int, double,
+              QDate = QDate::currentDate(), bool locale = false);
 
   /**
    * @brief: Controllo provenienza ingrediente
@@ -35,7 +35,8 @@ class Ingrediente : public Consumabile {
 
   Ingrediente* clone() const;
 
-  virtual void carica(const QJsonObject&);
+  virtual void carica(const QJsonObject&,
+                      const std::unordered_map<uint, Risorsa*>*);
 
   virtual void salva(QJsonObject &) const;
 };

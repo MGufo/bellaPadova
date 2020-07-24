@@ -32,7 +32,8 @@ class Farina : public Ingrediente {
 
   Farina* clone() const;
 
-  virtual void carica(const QJsonObject&);
+  virtual void carica(const QJsonObject&,
+                      const std::unordered_map<uint, Risorsa*>*);
 
   virtual void salva(QJsonObject &) const;
 };
