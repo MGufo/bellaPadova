@@ -237,11 +237,10 @@ void Pizzeria::caricaRisorse(){
   QJsonObject risorseJSON = fileRisorseJSON.object();
   std::unordered_map<uint, Risorsa*>* keymap =
       new std::unordered_map<uint, Risorsa*>;
-  getPtrRisorse((*risorseJSON.find("menu")).toObject(), keymap);
-  gestoreRisorse.caricaRisorse(risorseJSON, keymap);
 
-  QJsonObject inventarioJSON = risorseJSON["inventario"].toObject();
-  gestoreRisorse.caricaRisorse(inventarioJSON);
+  gestoreRisorse.caricaInventario((*risorseJSON.find("inventario")).toObject(),
+                               keymap);
+  gestoreRisorse.caricaMenu((*risorseJSON.find("menu")).toObject(), keymap);
 
   delete keymap;
   delete pE;
