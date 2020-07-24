@@ -1,7 +1,8 @@
 #include "GUI/controller.h"
 
+//TODO: settare idComande e idRisorse a zero!
 Controller::Controller(Pizzeria* bellaPadova, QObject* parent) :
-  QObject(parent), modello(bellaPadova), idComande(0), idRisorse(0) {
+  QObject(parent), modello(bellaPadova), idComande(2), idRisorse(12) {
 }
 
 void Controller::setView(MainWindow *v){

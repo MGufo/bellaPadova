@@ -25,6 +25,7 @@ private slots:
   void emitDataOnCellChanged(int,int);
 
 private:
+  bool editabile;
   QHeaderView* header = nullptr;
   QTableWidget* tabella = nullptr;
   QVBoxLayout* layoutTabellaComposita;

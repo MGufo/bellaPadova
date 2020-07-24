@@ -16,7 +16,6 @@ class Inventario : public QWidget
     Q_OBJECT
 public:
     explicit Inventario(QWidget *parent = nullptr);
-
 signals:
 
 private:
