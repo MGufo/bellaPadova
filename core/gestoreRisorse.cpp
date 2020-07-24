@@ -129,11 +129,11 @@ void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
   delete inventarioJSON;
 }
 
-void GestoreRisorse::caricaRisorse (const QJsonObject& risorseJSON,
+void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON,
                                     const std::unordered_map<uint, Risorsa*>*
                                     keymap){
   string tipo;
-  for(auto it = risorseJSON.constBegin(); it != risorseJSON.constEnd(); ++it){
+  for(auto it = menuJSON.constBegin(); it != menuJSON.constEnd(); ++it){
     QJsonObject* risorsaJSON = new QJsonObject((*it).toObject());
     tipo = (*(risorsaJSON->find("tipo"))).toString().toStdString();
     Risorsa* risorsa;
@@ -144,6 +144,24 @@ void GestoreRisorse::caricaRisorse (const QJsonObject& risorseJSON,
     else if (tipo == "ingrediente") risorsa = new Ingrediente();
     else if (tipo == "farina") risorsa = new Farina();
 
-    risorsa->carica(*risorsaJSON);
+    risorsa->carica(*risorsaJSON, keymap);
   }
 }
+
+void GestoreRisorse::caricaInventario(const QJsonObject & risorseJSON, std::unordered_map<uint, Risorsa *>* keymap){
+  string tipo;
+  for(auto it = risorseJSON.constBegin(); it != risorseJSON.constEnd(); ++it){
+    QJsonObject* risorsaJSON = new QJsonObject((*it).toObject());
+    tipo = (*(risorsaJSON->find("tipo"))).toString().toStdString();
+    Risorsa* risorsa;
+
+    if (tipo == "bottiglia") risorsa = new Bottiglia();
+    else if (tipo == "lattina") risorsa = new Lattina();
+    else if (tipo == "ingrediente") risorsa = new Ingrediente();
+    else if (tipo == "farina") risorsa = new Farina();
+
+    risorsa->carica(*risorsaJSON, nullptr);
+    (*keymap)[risorsa->getIdRisorsa()] = risorsa;
+  }
+}
+
