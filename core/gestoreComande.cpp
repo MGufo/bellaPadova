@@ -176,5 +176,6 @@ void GestoreComande::caricaComande(const QJsonObject& comandeJSON,
     QJsonObject* comandaJSON = new QJsonObject(it->toObject());
     Comanda* c = new Comanda();
     c->carica(comandaJSON);
+    bacheca.push_back(c);
   }
 }
