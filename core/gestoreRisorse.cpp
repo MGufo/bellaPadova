@@ -131,9 +131,7 @@ void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
   delete inventarioJSON;
 }
 
-void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON,
-                                    const std::unordered_map<uint, Risorsa*>*
-                                    keymap){
+void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){
   string tipo;
   for(auto it = menuJSON.constBegin(); it != menuJSON.constEnd(); ++it){
     QJsonObject* risorsaJSON = new QJsonObject((*it).toObject());
@@ -146,11 +144,27 @@ void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON,
     else if (tipo == "ingrediente") risorsa = new Ingrediente();
     else if (tipo == "farina") risorsa = new Farina();
 
+    std::unordered_map<uint, Risorsa*>* keymap =
+        new std::unordered_map<uint, Risorsa*>;
+    if(tipo == "pizza"){
+      QJsonArray* ingrJSON =
+          new QJsonArray((*(risorsaJSON->find("Ingredienti"))).toArray());
+      for(auto it = ingrJSON->constBegin(); it!=ingrJSON->constEnd(); ++it)
+        (*keymap)[(*((*it).toObject()).find("ID")).toInt()] =
+              trovaRisorsa((*((*it).toObject()).find("ID")).toInt());
+    }
+      /**
+      TODO: Discutere cosa fare nel caso in cui un ingrediente di una pizza
+      non venga mappato a un puntatore valido ma a un nullptr.
+      */
     risorsa->carica(*risorsaJSON, keymap);
+    menu.push_back(dynamic_cast<Articolo*>(risorsa));
+    delete keymap;
+    delete risorsaJSON;
   }
 }
 
-void GestoreRisorse::caricaInventario(const QJsonObject & risorseJSON, std::unordered_map<uint, Risorsa *>* keymap){
+void GestoreRisorse::caricaInventario(const QJsonObject & risorseJSON){
   string tipo;
   for(auto it = risorseJSON.constBegin(); it != risorseJSON.constEnd(); ++it){
     QJsonObject* risorsaJSON = new QJsonObject((*it).toObject());
@@ -163,7 +177,8 @@ void GestoreRisorse::caricaInventario(const QJsonObject & risorseJSON, std::unor
     else if (tipo == "farina") risorsa = new Farina();
 
     risorsa->carica(*risorsaJSON, nullptr);
-    (*keymap)[risorsa->getIdRisorsa()] = risorsa;
+    inventario.push_back(dynamic_cast<Consumabile*>(risorsa));
+    delete risorsaJSON;
   }
 }
 

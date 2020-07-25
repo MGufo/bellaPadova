@@ -88,9 +88,7 @@ class GestoreRisorse {
 
   void salvaRisorse(QJsonObject*) const;
 
-  void caricaMenu(const QJsonObject&,
-                     const std::unordered_map<uint, Risorsa*>* = nullptr);
-  void caricaInventario(const QJsonObject&,
-                     std::unordered_map<uint, Risorsa*>* = nullptr);
+  void caricaMenu(const QJsonObject&);
+  void caricaInventario(const QJsonObject&);
 };
 #endif
