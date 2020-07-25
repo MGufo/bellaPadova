@@ -16,17 +16,20 @@ class Inventario : public QWidget
     Q_OBJECT
 public:
     explicit Inventario(QWidget *parent = nullptr);
-
 signals:
-  void riempiInventario();
 
 private:
+  QPushButton* newConsumabile;
+  QPushButton* modificaDati;
+  TabellaComposita* tabIngredienti;
+  TabellaComposita* tabBevande;
   QVBoxLayout* layoutInventario;
   void setStyleInventario();
   WizardNuovoConsumabile* nuovoConsumabile;
 
 private slots:
   void drawWizard();
+  void modificaTabelle();
 };
 
 #endif // INVENTARIO_H

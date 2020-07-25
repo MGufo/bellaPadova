@@ -1,7 +1,8 @@
 #include "GUI/controller.h"
 
+//TODO: settare idComande e idRisorse a zero!
 Controller::Controller(Pizzeria* bellaPadova, QObject* parent) :
-  QObject(parent), modello(bellaPadova), idComande(0), idRisorse(0) {
+  QObject(parent), modello(bellaPadova), idComande(2), idRisorse(12) {
 }
 
 void Controller::setView(MainWindow *v){
@@ -56,8 +57,9 @@ void Controller::modificaConsumabile(pacchetto * pC){
         pacchettoIngrediente* ptr = dynamic_cast<pacchettoIngrediente*>(pC);
         pConsumabile = new Ingrediente(ptr->ID,ptr->nome,ptr->disponibilita,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->locale);
     }
-    //Risorsa* vecchioConsumabile = modello->getConsumabile(pC->ID);
-    //modello->modificaConsumabile();
+    Risorsa* temp = modello->trovaRisorsa(pC->ID);
+    Consumabile* vecchioConsumabile = dynamic_cast<Consumabile*>(temp);
+    modello->modificaConsumabile(vecchioConsumabile,pConsumabile);
 }
 
 void Controller::getInventario() const{

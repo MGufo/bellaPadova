@@ -19,6 +19,7 @@ class Risorsa {
   Risorsa();
   Risorsa(unsigned int, string, bool);
   virtual ~Risorsa() = default;
+  virtual Risorsa& operator=(const Risorsa&) = default;
 
   unsigned int getIdRisorsa() const;
   /**

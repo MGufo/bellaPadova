@@ -1,15 +1,24 @@
 #include "tabellacomposita.h"
+#include <iostream>
 
-TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, const QStringList* labels) : QWidget(parent){
+TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, const QStringList* labels) : QWidget(parent), editabile(false){
   // Creazione label per la tabella
   QLabel* label = new QLabel(etichetta, this);
   label->setObjectName("labelsMenu");
   // Creazione tabella
   tabella = new QTableWidget(0, (labels != nullptr ? labels->count() : 0), this);
-  tabella->setMinimumWidth(1300);
+  tabella->setMinimumWidth(850);
+  tabella->setMaximumWidth(2100);
+  //tabella->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+  sizePolicy.setHorizontalStretch(0);
+  sizePolicy.setVerticalStretch(0);
+  sizePolicy.setHeightForWidth(tabella->sizePolicy().hasHeightForWidth());
+  tabella->setSizePolicy(sizePolicy);
   // Crezione e riempimento header tabella
   header = new QHeaderView(Qt::Horizontal,tabella);
-  header->setSectionResizeMode(header->ResizeToContents);
+  //header->setSectionResizeMode(header->ResizeToContents);
+  header->setSectionResizeMode(QHeaderView::Stretch);
   // Aggiunta header alla tabella
   if(labels)    tabella->setHorizontalHeaderLabels(*labels);
   tabella->setHorizontalHeader(header);
@@ -17,9 +26,10 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   layoutTabellaComposita = new QVBoxLayout(this);
   // Aggiunta widget figli al layout
   layoutTabellaComposita->addWidget(label);
-  layoutTabellaComposita->addWidget(tabella, 0, Qt::AlignCenter);
+  layoutTabellaComposita->addWidget(tabella);
+  //tabella->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-  //connect(tabella,SIGNAL(cellChanged(int,int)));
+  connect(tabella,SIGNAL(cellChanged(int,int)),this,SLOT(emitDataOnCellChanged(int,int)));
   connect(this,SIGNAL(sendPacketToModel(pacchetto*)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaConsumabile(pacchetto*)));
 
   // Applicazione stile widget
@@ -60,7 +70,7 @@ void TabellaComposita::inserisciElemento(pacchetto * p){
 
         int i = tabella->rowCount()-1;
         for(int j=0 ; j<9 ; j++){
-            QTableWidgetItem* item = tabella->itemAt(i,j);
+            QTableWidgetItem* item = tabella->item(i,j);
             item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         }
     }
@@ -87,53 +97,78 @@ void TabellaComposita::inserisciElemento(pacchetto * p){
 
         int i = tabella->rowCount()-1;
         for(int j=0 ; j<7 ; j++){
-            QTableWidgetItem* item = tabella->itemAt(i,j);
+            QTableWidgetItem* item = tabella->item(i,j);
             item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         }
     }
-    tabella->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+}
+
+void TabellaComposita::rendiEditabile(bool b){
+    if(b){
+        //tabella->setEditTriggers(QAbstractItemView::AllEditTriggers);
+        for(int i=0; i < tabella->rowCount(); i++){
+            for(int j=1 ; j<tabella->columnCount() ; j++){
+                QTableWidgetItem* item = tabella->item(i,j);
+                item->setFlags(item->flags() | Qt::ItemIsEditable);
+            }
+        }
+        editabile = true;
+    }
+    else{
+        editabile = false;
+        //tabella->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        for(int i=0; i < tabella->rowCount(); i++){
+            for(int j=1 ; j<tabella->columnCount() ; j++){
+                QTableWidgetItem* item = tabella->item(i,j);
+                item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+            }
+        }
+    }
 }
 
 void TabellaComposita::emitDataOnCellChanged(int x, int y){
-    //TODO: inputcheck
-    pacchetto* p = nullptr;
-    if(QObject::sender()->objectName()=="tabBevande"){
-        uint _ID = tabella->itemAt(x,0)->text().toInt();
-        string _n = tabella->itemAt(x,1)->text().toStdString();
-        bool _d = (tabella->itemAt(x,2)->text() == "Si" ? true : false);
-        uint _q = tabella->itemAt(x,3)->text().toInt();
-        double _c = tabella->itemAt(x,4)->text().toDouble();
-        //dataAcquisto
-        //recupero giorno, mese e anno tra i separatori
-        string da = tabella->itemAt(x,5)->text().toStdString();
-        int d = std::stoi(da.substr(0,1));
-        int m = std::stoi(da.substr(3,4));
-        int y = std::stoi(da.substr(6,7));
-        QDate _da(y,m,d);
-        float _cap = tabella->itemAt(x,6)->text().toFloat();
-        double _p = tabella->itemAt(x,7)->text().toDouble();
-        bool _t = (tabella->itemAt(x,8)->text() == "Lattina" ? true : false);
+    if(editabile){
+        //TODO: inputcheck
+        pacchetto* p = nullptr;
+        if(QObject::sender()->objectName()=="tabBevande"){
+            uint _ID = tabella->item(x,0)->text().toInt();
+            string _n = tabella->item(x,1)->text().toStdString();
+            bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+            uint _q = tabella->item(x,3)->text().toInt();
+            double _c = tabella->item(x,4)->text().toDouble();
+            //dataAcquisto
+            //recupero giorno, mese e anno tra i separatori
+            string da = tabella->item(x,5)->text().toStdString();
+            int d = std::stoi(da.substr(0,1));
+            int m = std::stoi(da.substr(3,4));
+            int y = std::stoi(da.substr(6,9));
+            QDate _da(y,m,d);
+            float _cap = tabella->item(x,6)->text().toFloat();
+            double _p = tabella->item(x,7)->text().toDouble();
+            bool _t = (tabella->item(x,8)->text() == "Lattina" ? true : false);
 
-        p = new pacchettoBevanda(_ID,_n,_d,_p,_q,_c,_da,_cap,_t);
-    }
-    else{
-        uint _ID = tabella->itemAt(x,0)->text().toInt();
-        string _n = tabella->itemAt(x,1)->text().toStdString();
-        bool _d = (tabella->itemAt(x,2)->text() == "Si" ? true : false);
-        uint _q = tabella->itemAt(x,3)->text().toInt();
-        double _c = tabella->itemAt(x,4)->text().toDouble();
-        //dataAcquisto
-        //recupero giorno, mese e anno tra i separatori
-        string da = tabella->itemAt(x,5)->text().toStdString();
-        int d = std::stoi(da.substr(0,1));
-        int m = std::stoi(da.substr(3,4));
-        int y = std::stoi(da.substr(6,7));
-        QDate _da(y,m,d);
-        bool _l = (tabella->itemAt(x,6)->text() == "Si" ? true : false);
+            p = new pacchettoBevanda(_ID,_n,_d,_p,_q,_c,_da,_cap,_t);
+        }
+        else{
+            uint _ID = tabella->item(x,0)->text().toInt();
+            string _n = tabella->item(x,1)->text().toStdString();
+            bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+            uint _q = tabella->item(x,3)->text().toInt();
+            double _c = tabella->item(x,4)->text().toDouble();
+            //dataAcquisto
+            //recupero giorno, mese e anno tra i separatori
+            string da = tabella->item(x,5)->text().toStdString();
+            int d = std::stoi(da.substr(0,1));
+            int m = std::stoi(da.substr(3,4));
+            int y = std::stoi(da.substr(6,9));
+            QDate _da(y,m,d);
+            bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
 
-        p = new pacchettoIngrediente(_ID,_n,_d,_q,_c,_da,_l);
+            p = new pacchettoIngrediente(_ID,_n,_d,_q,_c,_da,_l);
+        }
+        emit sendPacketToModel(p);
     }
-    emit sendPacketToModel(p);
 }
 
 void TabellaComposita::setStyleTabella(){

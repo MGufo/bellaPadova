@@ -11,24 +11,26 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   headerLabels->push_back("Costo d'acquisto");
   headerLabels->push_back("Data Acquisto");
   headerLabels->push_back("Locale");
-  TabellaComposita* tabIngredienti = new TabellaComposita(this, "Ingredienti", headerLabels);
+  tabIngredienti = new TabellaComposita(this, "Ingredienti", headerLabels);
   tabIngredienti->setObjectName("tabIngredienti");
   headerLabels->pop_back();
   headerLabels->push_back("Capacità");
   headerLabels->push_back("Prezzo di vendita");
   headerLabels->push_back("Tipologia");
-  TabellaComposita* tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
+  tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
   tabBevande->setObjectName("tabBevande");
 
   layoutInventario->addWidget(tabIngredienti);
   layoutInventario->addWidget(tabBevande);
 
   QHBoxLayout* layoutPulsanti = new QHBoxLayout();
-  QPushButton* newConsumabile = new QPushButton("Nuovo Consumabile", this);
+  newConsumabile = new QPushButton("Nuovo Consumabile", this);
   newConsumabile->setObjectName("Consumabile");
   connect(newConsumabile, SIGNAL(clicked()), this, SLOT(drawWizard()));
-  QPushButton* modificaDati = new QPushButton("Modifica", this);
+  modificaDati = new QPushButton("Modifica", this);
   modificaDati->setObjectName("Modifica");
+  connect(modificaDati,SIGNAL(clicked(bool)),this,SLOT(modificaTabelle()));
+
   layoutPulsanti->addWidget(newConsumabile);
   layoutPulsanti->addWidget(modificaDati);
   layoutInventario->addLayout(layoutPulsanti);
@@ -43,4 +45,21 @@ void Inventario::setStyleInventario(){}
 void Inventario::drawWizard(){
   nuovoConsumabile = new WizardNuovoConsumabile(this);
   nuovoConsumabile->show();
+}
+
+void Inventario::modificaTabelle(){
+    if(modificaDati->objectName()=="Modifica"){
+        newConsumabile->setVisible(false);
+        tabIngredienti->rendiEditabile();
+        tabBevande->rendiEditabile();
+        modificaDati->setText("Finisci di Modificare");
+        modificaDati->setObjectName("FineModifica");
+    }
+    else{
+        newConsumabile->setVisible(true);
+        tabIngredienti->rendiEditabile(false);
+        tabBevande->rendiEditabile(false);
+        modificaDati->setText("Modifica");
+        modificaDati->setObjectName("Modifica");
+    }
 }

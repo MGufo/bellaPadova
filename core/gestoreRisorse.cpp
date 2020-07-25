@@ -92,6 +92,8 @@ void GestoreRisorse::modificaArticolo(Articolo* daModificare,
 
 void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
                                          const Consumabile* modificato) {
+  //TODO: operator= non copia tutti i campi dati
+  //sistemo in qualche modo (override dell'operator in tutta la gerarchia?)
   *daModificare = *modificato;
   for (auto it = menu.begin(); it != menu.end(); ++it) {
     const Lista<Consumabile*>* lista = (*it)->getComposizione();

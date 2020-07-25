@@ -28,6 +28,7 @@ Header::Header(QWidget *parent) : QWidget(parent){
 
 void Header::setStyleHeader(){
   layoutHeader->setSpacing(0);
-  setMinimumSize(QSize(900,100));
-  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  setMinimumWidth(900);
+  setMaximumHeight(105);
+  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 }
