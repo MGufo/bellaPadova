@@ -23,6 +23,7 @@ double Ingrediente::getSpesa() const {
 void Ingrediente::carica(const QJsonObject & ingredienteJSON,
                          const std::unordered_map<uint, Risorsa*>* keymap){
 
+
 }
 
 void Ingrediente::salva(QJsonObject& ingredienteJSON) const{

@@ -57,7 +57,7 @@ class Risorsa {
    * @param: const QJsonObject& (file da cui leggere)
    */
   virtual void carica(const QJsonObject&,
-                      const std::unordered_map<uint, Risorsa*>*) = 0;
+                      const std::unordered_map<uint, Risorsa*>* = nullptr) = 0;
 
   /**
    * @brief: Serializza l'oggetto di invocazione in un file JSON

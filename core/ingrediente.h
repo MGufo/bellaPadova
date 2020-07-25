@@ -36,7 +36,7 @@ class Ingrediente : public Consumabile {
   Ingrediente* clone() const;
 
   virtual void carica(const QJsonObject&,
-                      const std::unordered_map<uint, Risorsa*>*);
+                      const std::unordered_map<uint, Risorsa*>* = nullptr);
 
   virtual void salva(QJsonObject &) const;
 };
