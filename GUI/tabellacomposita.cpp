@@ -7,10 +7,18 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   label->setObjectName("labelsMenu");
   // Creazione tabella
   tabella = new QTableWidget(0, (labels != nullptr ? labels->count() : 0), this);
-  tabella->setMinimumWidth(1300);
+  tabella->setMinimumWidth(850);
+  tabella->setMaximumWidth(2100);
+  //tabella->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+  sizePolicy.setHorizontalStretch(0);
+  sizePolicy.setVerticalStretch(0);
+  sizePolicy.setHeightForWidth(tabella->sizePolicy().hasHeightForWidth());
+  tabella->setSizePolicy(sizePolicy);
   // Crezione e riempimento header tabella
   header = new QHeaderView(Qt::Horizontal,tabella);
-  header->setSectionResizeMode(header->ResizeToContents);
+  //header->setSectionResizeMode(header->ResizeToContents);
+  header->setSectionResizeMode(QHeaderView::Stretch);
   // Aggiunta header alla tabella
   if(labels)    tabella->setHorizontalHeaderLabels(*labels);
   tabella->setHorizontalHeader(header);
@@ -18,8 +26,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   layoutTabellaComposita = new QVBoxLayout(this);
   // Aggiunta widget figli al layout
   layoutTabellaComposita->addWidget(label);
-  layoutTabellaComposita->addWidget(tabella, 0, Qt::AlignCenter);
-
+  layoutTabellaComposita->addWidget(tabella);
   //tabella->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   connect(tabella,SIGNAL(cellChanged(int,int)),this,SLOT(emitDataOnCellChanged(int,int)));

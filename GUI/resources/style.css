@@ -71,12 +71,12 @@ QHeaderView {
 QTableWidget{
     border: 1 solid black;
     background-color: #FFFFFF;
+    margin: 0 20%;
 }
 
 QTabWidget::pane {
     position: absolute;
     border: 0 solid white;
-    margin: -13px -9px -13px -9px;
 }
 
 
