@@ -25,12 +25,6 @@ class Pizzeria {
   //idComande sarà ricaricato ad ogni costruzione del modello dal rispettivo file xml e salvato ad ogni salvataggio su file xml
   unsigned int idComande;
 
-  void getPtrComande(const QJsonObject&,
-                           std::unordered_map<uint, Risorsa*>* );
-
-  void getPtrRisorse(const QJsonObject&,
-                           std::unordered_map<uint, Risorsa*>* );
-  
  public:
   Pizzeria();
   const Lista<Consumabile*>& getInventario() const;
