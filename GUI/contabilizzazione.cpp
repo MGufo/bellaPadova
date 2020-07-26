@@ -32,8 +32,8 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   layoutContabilizzazione = new QVBoxLayout(this);
   layoutDate = new QHBoxLayout(wrapper_Date);
   layoutContabilizzazione->addWidget(scegliPeriodo);
-  layoutDate->addWidget(labelInizio, 0, Qt::AlignLeft);
-  layoutDate->addWidget(dataInizio, 0, Qt::AlignLeft);
+  layoutDate->addWidget(labelInizio, 0, Qt::AlignCenter);
+  layoutDate->addWidget(dataInizio, 0, Qt::AlignCenter);
   layoutDate->addWidget(labelFine);
   layoutDate->addWidget(dataFine);
   layoutContabilizzazione->addWidget(wrapper_Date);
