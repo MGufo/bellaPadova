@@ -92,9 +92,14 @@ void GestoreRisorse::modificaArticolo(Articolo* daModificare,
 
 void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
                                          const Consumabile* modificato) {
-  //TODO: operator= non copia tutti i campi dati
-  //sistemo in qualche modo (override dell'operator in tutta la gerarchia?)
-  *daModificare = *modificato;
+  //TODO: implemento modificaComposizione() come funzione virtuale pura in articolo
+    for (auto it = menu.begin(); it != menu.end(); ++it) {
+      const Lista<Consumabile*>* lista = (*it)->getComposizione();
+      //se daModificare è presente in lista
+      //*it->modificaComposizione(daModificare, modificato);
+      delete lista;
+    }
+
   for (auto it = menu.begin(); it != menu.end(); ++it) {
     const Lista<Consumabile*>* lista = (*it)->getComposizione();
     (*it)->setDisponibilita(controlloDisponibilita(lista));
