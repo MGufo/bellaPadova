@@ -124,7 +124,8 @@ tempoPreparazione));
 }
 
 void GestoreComande::modificaComanda(Comanda* daModificare,
-                                     const Comanda* modificata, unsigned short capForno) {
+                                     const Comanda* modificata,
+                                     unsigned short capForno) {
   bool daReinserire =
       daModificare->getOraConsegna() != modificata->getOraConsegna();
   *daModificare = *modificata;
@@ -163,19 +164,15 @@ void GestoreComande::salvaComande(QJsonObject *comandeJSON) const{
   }
 }
 /*
-Problema: per creare correttamente ogni comanda servono i puntatori agli Articoli
-che compongono la comanda.
-Questi puntatori sono ottenibili solo tramite l'inventario (quindi gestoreRisorse)
-MA per ottenerli servono informazioni presenti in comandeJSON (che viene passato
-a gestioneComande).
+  Non viene più salvata la mappa con il contenuto dell'ordinazione perché nella
+  pagina comande vengono visualizzate solo le comande della serata corrente e
+  per effettuare la contabilizzazione è sufficiente avere il campo dati 'totale'
+  di ogni comanda
 */
-void GestoreComande::caricaComande(const QJsonObject& comandeJSON,
-                                   const std::unordered_map<uint, Risorsa*>*
-                                   keymap){
+void GestoreComande::caricaComande(const QJsonObject& comandeJSON){
   for(auto it = comandeJSON.constBegin(); it != comandeJSON.constEnd(); ++it){
     QJsonObject* comandaJSON = new QJsonObject(it->toObject());
     Comanda* c = new Comanda();
     c->carica(comandaJSON);
-    bacheca.push_back(c);
   }
 }

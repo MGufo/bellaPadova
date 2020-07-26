@@ -82,8 +82,7 @@ class GestoreComande {
 
   void salvaComande(QJsonObject*) const;
 
-  void caricaComande(const QJsonObject&,
-                     const std::unordered_map<uint, Risorsa*>* = nullptr);
+  void caricaComande(const QJsonObject&);
 };
 
 #endif
