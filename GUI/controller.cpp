@@ -1,6 +1,6 @@
 #include "GUI/controller.h"
 
-//TODO: settare idComande e idRisorse a zero!
+//TODO: settare idComande e idRisorse a zero dopo aver implementato correttamente I/O da file
 Controller::Controller(Pizzeria* bellaPadova, QObject* parent) :
   QObject(parent), modello(bellaPadova), idComande(2), idRisorse(12) {
 }
