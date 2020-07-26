@@ -100,11 +100,14 @@ void Comanda::carica(const QJsonObject* comandaJSON){
   cliente.carica((*(comandaJSON->find("cliente"))).toObject());
   oraConsegna =
       QTime::fromString((*(comandaJSON->find("oraConsegna"))).toString());
-  QJsonObject* ordinazioneJSON =
-      new QJsonObject((*(comandaJSON->find("ordinazione"))).toObject());
-  for(auto it = ordinazioneJSON->constBegin();
-      it != ordinazioneJSON->constEnd(); ++it){
-  }
+  dataConsegna =
+      QDate::fromString((*(comandaJSON->find("dataConsegna"))).toString());
+  totale = (*(comandaJSON->find("totale"))).toDouble();
+//  QJsonObject* ordinazioneJSON =
+//      new QJsonObject((*(comandaJSON->find("ordinazione"))).toObject());
+//  for(auto it = ordinazioneJSON->constBegin();
+//      it != ordinazioneJSON->constEnd(); ++it){
+//  }
 }
 
 bool Comanda::operator<(const Comanda& c) const {
