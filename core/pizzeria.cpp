@@ -20,6 +20,10 @@ double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) con
   double guadagni = 0;
   double costi = 0;
   const unordered_map<Articolo*, unsigned int>* ordinazione = nullptr;
+  /*
+    TODO: Creare nuova struttura dati nella classe Comanda per memorizzare le
+    comande "vecchie", che servono per la contabilizzazione
+  */
   const Lista<Comanda*>* comande = &gestoreComande.getBacheca();
   const Lista<Consumabile*>* consumabili = &gestoreRisorse.getInventario();
   for(auto it = comande->const_begin(); it != comande->const_end(); ++it){
@@ -144,13 +148,6 @@ void Pizzeria::salvaComande(){
   fileComande.write(fileComandeJSON->toJson());
   fileComande.close();
   delete fileComandeJSON;
-
-/*
-1: Apro il file da disco con QFile
-2: Creare un JsonDocument che rappresenta il file json all'interno di Qt
-3: Aggiungere il contenuto del model al JsonDocument
-4: Scrivere il contenuto del JsonDocument nel QFile
-*/
 }
 
 void Pizzeria::salvaRisorse(){
