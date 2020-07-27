@@ -45,12 +45,10 @@ QMenuBar* MainWindow::drawMenubar() const{
   QMenu* category_Load = new QMenu("Carica", menuBar);
   QMenu* category_Save = new QMenu("Salva", menuBar);
   QAction* file_Exit = new QAction("Esci", category_File);
-  QAction* caricaComande = new QAction("Comande", category_Load);
   QAction* caricaRisorse = new QAction("Inventario e Menu", category_Load);
   QAction* salvaComande = new QAction("Comande", category_Save);
   QAction* salvaRisorse = new QAction("Inventario e Menu", category_Save);
 
-  connect(caricaComande, SIGNAL(triggered()), controller, SLOT(caricaComande()));
   connect(caricaRisorse, SIGNAL(triggered()), controller, SLOT(caricaRisorse()));
   connect(salvaComande, SIGNAL(triggered()), controller, SLOT(salvaComande()));
   connect(salvaRisorse, SIGNAL(triggered()), controller, SLOT(salvaRisorse()));
@@ -58,7 +56,6 @@ QMenuBar* MainWindow::drawMenubar() const{
   connect(file_Exit, SIGNAL(triggered()), this, SLOT(close()));
 
   category_File->addAction(file_Exit);
-  category_Load->addAction(caricaComande);
   category_Load->addAction(caricaRisorse);
   category_Save->addAction(salvaComande);
   category_Save->addAction(salvaRisorse);
