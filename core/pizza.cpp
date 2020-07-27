@@ -56,15 +56,15 @@ void Pizza::setFarina(Farina* f) {
   }
 }
 
-// TODO: Messaggio da mostrare come eccezione nel caso in cui l'ingrediente sia
-// già presente o sia di tipo Farina*:
-// - "Ingrediente già presente nella lista di ingredienti"
-// - "La lista di ingredienti non deve contenere Farine"
 void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
-  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it)
-    if (dynamic_cast<Farina*>(*it) || (checkIngrediente(*it)))
-      throw new std::domain_error("Non è possibile aggiungere l'ingrediente selezionato");
-
+  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
+    if (dynamic_cast<Farina*>(*it))
+      throw new std::domain_error("Errore: La lista di ingredienti non può"
+                                  "contenere farine.");
+    if(checkIngrediente(*it))
+      throw new std::domain_error("Errore: L'ingrediente " + (*it)->getNome() +
+                                  " è già presente nella lista di ingredienti.");
+}
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it)
     addIngrediente(*it);
 }
