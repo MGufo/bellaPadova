@@ -69,8 +69,6 @@ void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
     addIngrediente(*it);
 }
 
-// "Ingrediente già rimosso dalla lista di ingredienti"
-// "Rimozione della farina dalla lista di ingredienti non consentita"
 void Pizza::rimuoviIngredienti(const Lista<Ingrediente*>& ingr) {
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
     if (dynamic_cast<Farina*>(*it))
