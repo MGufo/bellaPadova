@@ -179,9 +179,9 @@ const QJsonObject& Pizzeria::caricaComande() const{
 //  if(fileRisorseJSON.isNull())
 //    throw new std::invalid_argument(pE->errorString().toStdString());
 
-  QJsonObject comandeJSON = fileComandeJSON.object();
-  gestoreComande.caricaComande(comandeJSON);
   delete pE;
+  const QJsonObject& comandeJSON = fileComandeJSON.object();
+  return comandeJSON;
 }
 
 void Pizzeria::caricaRisorse(){
