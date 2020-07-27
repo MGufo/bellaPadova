@@ -67,7 +67,7 @@ class GestoreRisorse {
    */
   void inserisciConsumabile(Consumabile *);
 
-  void modificaConsumabile(Consumabile *, const Consumabile *);
+  void modificaConsumabile(Consumabile *, Consumabile *);
 
   // FIXME: Ricordarsi di cancellare l'oggetto tramite delete dopo aver invocato
   // il metodo.

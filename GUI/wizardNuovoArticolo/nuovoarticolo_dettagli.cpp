@@ -10,6 +10,8 @@ int NuovoArticolo_dettagli::nextId() const{
 }
 
 void NuovoArticolo_dettagli::setActualPage(){
+    //TODO: implemento pagine del wizard come wizardNuovoConsumabile, spostando e modificando il codice
+    //presente nei widget per l'inserimento di una pizza e di una bevanda
     if(content){
         layoutDettagli->removeWidget(content);
         delete content;
@@ -22,7 +24,7 @@ void NuovoArticolo_dettagli::setActualPage(){
     }
     else{   //costruzione wizard bevanda
         setTitle("Aggiunta di una nuova bevanda al Menù");
-        setSubTitle("Seleziona il formato della bevanda, poi specificane nome, costo e capacità");
+        setSubTitle("Seleziona una bevanda presente nell'inventario per inserirla nel menù");
         content = new NuovoArticolo_bevanda(this);
     }
     layoutDettagli->addWidget(content);

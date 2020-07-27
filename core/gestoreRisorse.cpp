@@ -91,14 +91,10 @@ void GestoreRisorse::modificaArticolo(Articolo* daModificare,
 }
 
 void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
-                                         const Consumabile* modificato) {
-  //TODO: implemento modificaComposizione() come funzione virtuale pura in articolo
-    for (auto it = menu.begin(); it != menu.end(); ++it) {
-      const Lista<Consumabile*>* lista = (*it)->getComposizione();
-      //se daModificare è presente in lista
-      //*it->modificaComposizione(daModificare, modificato);
-      delete lista;
-    }
+                                         Consumabile* modificato) {
+  //TODO: implemento modifica() come funzione virtuale pura in consumabile
+  auto it = inventario.find(daModificare);
+  if(it.isValid())  (*it)->modifica(modificato);
 
   for (auto it = menu.begin(); it != menu.end(); ++it) {
     const Lista<Consumabile*>* lista = (*it)->getComposizione();

@@ -17,7 +17,16 @@ bool Ingrediente::isLocal() const { return locale; }
 void Ingrediente::setLocal(bool _locale) { locale = _locale; }
 
 double Ingrediente::getSpesa() const {
-  return getQuantita() * getCosto() + 1 * isLocal();
+    return getQuantita() * getCosto() + 1 * isLocal();
+}
+
+void Ingrediente::modifica(Consumabile* modificato){
+  setNome(modificato->getNome());
+  setDisponibilita(modificato->getDisponibilita());
+  setQuantita(modificato->getQuantita());
+  setCosto(modificato->getCosto());
+  setDataAcquisto(modificato->getDataAcquisto());
+  setLocal(dynamic_cast<Ingrediente*>(modificato)->isLocal());
 }
 
 void Ingrediente::carica(const QJsonObject & ingredienteJSON,

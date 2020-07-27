@@ -28,6 +28,16 @@ const Lista<Consumabile*>* Bevanda::getComposizione() const {
   return lista;
 }
 
+void Bevanda::modifica(Consumabile* modificato){
+  setNome(modificato->getNome());
+  setDisponibilita(modificato->getDisponibilita());
+  setPrezzoBase(dynamic_cast<Articolo*>(modificato)->getPrezzoBase());
+  setQuantita(modificato->getQuantita());
+  setCosto(modificato->getCosto());
+  setDataAcquisto(modificato->getDataAcquisto());
+  setCapacita(dynamic_cast<Bevanda*>(modificato)->getCapacita());
+}
+
 void Bevanda::carica(const QJsonObject& bevandaJSON,
                      const std::unordered_map<uint, Risorsa*>* keymap){
   setID((*(bevandaJSON.find("ID"))).toInt());
