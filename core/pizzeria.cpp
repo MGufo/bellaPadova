@@ -2,7 +2,14 @@
 
 double Pizzeria::calcoloGuadagno(const QJsonObject & comandeJSON,
                                  const QDate& inizio, const QDate& fine) const {
-
+  double guadagno = 0;
+  for(auto it = comandeJSON.constBegin(); it != comandeJSON.constEnd(); ++it){
+    QDate dataConsegna =
+        QDate::fromString((*(*it).toObject().constFind("dataConsegna")).toString());
+    if(inizio <= dataConsegna && dataConsegna <= fine)
+      guadagno += (*(*it).toObject().constFind("totale")).toDouble();
+  }
+  return guadagno;
 }
 
 Pizzeria::Pizzeria()
@@ -180,8 +187,8 @@ const QJsonObject& Pizzeria::caricaComande() const{
 //    throw new std::invalid_argument(pE->errorString().toStdString());
 
   delete pE;
-  const QJsonObject& comandeJSON = fileComandeJSON.object();
-  return comandeJSON;
+  const QJsonObject* comandeJSON = new QJsonObject(fileComandeJSON.object());
+  return *comandeJSON;
 }
 
 void Pizzeria::caricaRisorse(){

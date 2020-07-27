@@ -104,17 +104,18 @@ const Lista<Consumabile*>* Pizza::getComposizione() const {
 
 void Pizza::carica(const QJsonObject& pizzaJSON,
                    const std::unordered_map<uint, Risorsa*>* keymap) {
-  setID((*(pizzaJSON.find("ID"))).toInt());
-  setNome((*(pizzaJSON.find("Nome"))).toString().toStdString());
-  setDisponibilita((*(pizzaJSON.find("Disponibilita"))).toBool());
-  setPrezzoBase((*(pizzaJSON.find("Prezzo"))).toDouble());
+  setID((*(pizzaJSON.constFind("ID"))).toInt());
+  setNome((*(pizzaJSON.constFind("Nome"))).toString().toStdString());
+  setDisponibilita((*(pizzaJSON.constFind("Disponibilita"))).toBool());
+  setPrezzoBase((*(pizzaJSON.constFind("Prezzo"))).toDouble());
   QJsonArray* ingredientiJSON =
-      new QJsonArray((*(pizzaJSON.find("Ingredienti"))).toArray());
+      new QJsonArray((*(pizzaJSON.constFind("Ingredienti"))).toArray());
   for(auto it = ingredientiJSON->constBegin();
       it != ingredientiJSON->constEnd(); ++it){
       ingredienti.push_back(
             dynamic_cast<Ingrediente*>(keymap->at
-                                       ((*((*it).toObject().find("ID"))).toInt())));
+                                       ((*((*it).toObject().constFind("ID"))).
+                                        toInt())));
   }
   delete ingredientiJSON;
 }
