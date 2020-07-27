@@ -26,9 +26,9 @@ void Contatto::salva(QJsonObject* contattoJSON) const {
 }
 
 void Contatto::carica(QJsonObject contattoJSON){
-  setNome((*(contattoJSON.constFind("nome"))).toString());
-  setIndirizzo((*(contattoJSON.constFind("indirizzo"))).toString());
-  setTelefono((*(contattoJSON.constFind("telefono"))).toString());
+  setNome((*(contattoJSON.constFind("nome"))).toString().toStdString());
+  setIndirizzo((*(contattoJSON.constFind("indirizzo"))).toString().toStdString());
+  setTelefono((*(contattoJSON.constFind("telefono"))).toString().toStdString());
 }
 
 const string Contatto::getNome() const { return nome; }
