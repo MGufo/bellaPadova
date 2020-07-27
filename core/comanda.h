@@ -112,8 +112,6 @@ class Comanda {
    */
   void salva(QJsonObject*) const;
 
-  void carica(const QJsonObject*);
-
   bool operator<(const Comanda&) const;
 
   bool operator<=(const Comanda&) const;

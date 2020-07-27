@@ -24,7 +24,7 @@ class Pizzeria {
   //nel controller la costruzione delle comande dovrà usare idComande++ e il controller stesso dovrà incrementare idComande
   //idComande sarà ricaricato ad ogni costruzione del modello dal rispettivo file xml e salvato ad ogni salvataggio su file xml
   unsigned int idComande;
-
+  double calcoloGuadagno(const QJsonObject&, const QDate&, const QDate&) const;
  public:
   Pizzeria();
   const Lista<Consumabile*>& getInventario() const;
@@ -67,18 +67,19 @@ class Pizzeria {
    * @brief: Serializza le comande presenti nel modello e le scrive
    *         in un file JSON
    */
-  void salvaComande();
+  void salvaComande() const;
 
   /**
    * @brief: Serializza le risorse (articoli in menù e inventario) presenti
    *         nel modello e le scrive in un file JSON
    */
-  void salvaRisorse();
+  void salvaRisorse() const;
 
   /**
    * @brief: Legge da file JSON una lista di comande e le aggiunge al modello
+   * @returns:
    */
-  void caricaComande();
+  const QJsonObject& caricaComande() const;
 
   /**
    * @brief: Legge da file JSON una lista di articoli e li aggiunge

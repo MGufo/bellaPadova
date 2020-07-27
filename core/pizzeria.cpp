@@ -1,5 +1,17 @@
 #include "pizzeria.h"
 
+double Pizzeria::calcoloGuadagno(const QJsonObject & comandeJSON,
+                                 const QDate& inizio, const QDate& fine) const {
+  double guadagno = 0;
+  for(auto it = comandeJSON.constBegin(); it != comandeJSON.constEnd(); ++it){
+    QDate dataConsegna =
+        QDate::fromString((*(*it).toObject().constFind("dataConsegna")).toString());
+    if(inizio <= dataConsegna && dataConsegna <= fine)
+      guadagno += (*(*it).toObject().constFind("totale")).toDouble();
+  }
+  return guadagno;
+}
+
 Pizzeria::Pizzeria()
   : contatto(Contatto()),
     gestoreRisorse(GestoreRisorse()),
@@ -17,23 +29,9 @@ const Lista<Articolo *> &Pizzeria::getMenu() const{
 }
 
 double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) const{
-  double guadagni = 0;
+  double guadagni = calcoloGuadagno(caricaComande(), inizio, fine);;
   double costi = 0;
-  const unordered_map<Articolo*, unsigned int>* ordinazione = nullptr;
-  /*
-    TODO: Creare nuova struttura dati nella classe Comanda per memorizzare le
-    comande "vecchie", che servono per la contabilizzazione
-  */
-  const Lista<Comanda*>* comande = &gestoreComande.getBacheca();
   const Lista<Consumabile*>* consumabili = &gestoreRisorse.getInventario();
-  for(auto it = comande->const_begin(); it != comande->const_end(); ++it){
-    if(inizio <= (*it)->getDataConsegna() && (*it)->getDataConsegna() <= fine){
-      ordinazione = &(*it)->getOrdinazione();
-      for(auto it2 =ordinazione->cbegin(); it2 != ordinazione->cend(); ++it2){
-        guadagni += (*it2).first->getPrezzo() * (*it2).second;
-      }
-    }
-  }
   for(auto it = consumabili->const_begin(); it != consumabili->const_end(); ++it){
     if((inizio <= (*it)->getDataAcquisto()) && ((*it)->getDataAcquisto() <= fine)){
       costi += (*it)->getSpesa();
@@ -137,7 +135,7 @@ void Pizzeria::setCapacitaForno(unsigned short _forno) {
   capacitaForno = _forno;
 }
 
-void Pizzeria::salvaComande(){
+void Pizzeria::salvaComande() const{
   QFile fileComande(":/resources/comande.json");
   if(!fileComande.open(QIODevice::Append | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
@@ -150,7 +148,7 @@ void Pizzeria::salvaComande(){
   delete fileComandeJSON;
 }
 
-void Pizzeria::salvaRisorse(){
+void Pizzeria::salvaRisorse() const{
   QFile fileRisorse(":/resources/risorse.json");
   if(!fileRisorse.open(QIODevice::Append | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
@@ -163,7 +161,7 @@ void Pizzeria::salvaRisorse(){
   delete fileRisorseJSON;
 }
 
-void Pizzeria::caricaComande(){
+const QJsonObject& Pizzeria::caricaComande() const{
   QFile fileComande(":/resources/comande.json");
   if(!fileComande.open(QIODevice::ReadOnly | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
@@ -177,9 +175,9 @@ void Pizzeria::caricaComande(){
 //  if(fileRisorseJSON.isNull())
 //    throw new std::invalid_argument(pE->errorString().toStdString());
 
-  QJsonObject comandeJSON = fileComandeJSON.object();
-  gestoreComande.caricaComande(comandeJSON);
   delete pE;
+  const QJsonObject* comandeJSON = new QJsonObject(fileComandeJSON.object());
+  return *comandeJSON;
 }
 
 void Pizzeria::caricaRisorse(){

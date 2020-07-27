@@ -163,16 +163,3 @@ void GestoreComande::salvaComande(QJsonObject *comandeJSON) const{
     delete comandaJSON;
   }
 }
-/*
-  Non viene più salvata la mappa con il contenuto dell'ordinazione perché nella
-  pagina comande vengono visualizzate solo le comande della serata corrente e
-  per effettuare la contabilizzazione è sufficiente avere il campo dati 'totale'
-  di ogni comanda
-*/
-void GestoreComande::caricaComande(const QJsonObject& comandeJSON){
-  for(auto it = comandeJSON.constBegin(); it != comandeJSON.constEnd(); ++it){
-    QJsonObject* comandaJSON = new QJsonObject(it->toObject());
-    Comanda* c = new Comanda();
-    c->carica(comandaJSON);
-  }
-}
