@@ -22,8 +22,14 @@ double Ingrediente::getSpesa() const {
 
 void Ingrediente::carica(const QJsonObject & ingredienteJSON,
                          const std::unordered_map<uint, Risorsa*>* keymap){
-
-
+  setID((*(ingredienteJSON.constFind("ID"))).toInt());
+  setNome((*(ingredienteJSON.constFind("Nome"))).toString().toStdString());
+  setDisponibilita((*(ingredienteJSON.constFind("Disponibilita"))).toBool());
+  setQuantita((*(ingredienteJSON.constFind("Quantita"))).toInt());
+  setCosto((*(ingredienteJSON.constFind("Costo"))).toDouble());
+  setDataAcquisto(QDate::fromString(
+                    (*(ingredienteJSON.constFind("dataAcquisto"))).toString()));
+  setLocal((*(ingredienteJSON.constFind("Locale"))).toBool());
 }
 
 void Ingrediente::salva(QJsonObject& ingredienteJSON) const{
@@ -32,9 +38,9 @@ void Ingrediente::salva(QJsonObject& ingredienteJSON) const{
   // Nome
   ingredienteJSON.insert("Nome", QString::fromStdString(getNome()));
   // Disponibilita
-  ingredienteJSON.insert("Disponibilità", getDisponibilita());
+  ingredienteJSON.insert("Disponibilita", getDisponibilita());
   // Quantita
-  ingredienteJSON.insert("Quantità", static_cast<int>(getQuantita()));
+  ingredienteJSON.insert("Quantita", static_cast<int>(getQuantita()));
   // Costo
   ingredienteJSON.insert("Costo", getCosto());
   // Data Acquisto
