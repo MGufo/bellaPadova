@@ -29,20 +29,9 @@ const Lista<Articolo *> &Pizzeria::getMenu() const{
 }
 
 double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) const{
-  double guadagni = 0;
+  double guadagni = calcoloGuadagno(caricaComande(), inizio, fine);;
   double costi = 0;
-  const unordered_map<Articolo*, unsigned int>* ordinazione = nullptr;
-  //double guadagno = calcoloGuadagno(caricaComande(), QDate inizio, QDate fine)
-  const Lista<Comanda*>* comande = &gestoreComande.getBacheca();
   const Lista<Consumabile*>* consumabili = &gestoreRisorse.getInventario();
-  for(auto it = comande->const_begin(); it != comande->const_end(); ++it){
-    if(inizio <= (*it)->getDataConsegna() && (*it)->getDataConsegna() <= fine){
-      ordinazione = &(*it)->getOrdinazione();
-      for(auto it2 =ordinazione->cbegin(); it2 != ordinazione->cend(); ++it2){
-        guadagni += (*it2).first->getPrezzo() * (*it2).second;
-      }
-    }
-  }
   for(auto it = consumabili->const_begin(); it != consumabili->const_end(); ++it){
     if((inizio <= (*it)->getDataAcquisto()) && ((*it)->getDataAcquisto() <= fine)){
       costi += (*it)->getSpesa();
