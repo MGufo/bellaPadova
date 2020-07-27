@@ -24,7 +24,7 @@ class Pizzeria {
   //nel controller la costruzione delle comande dovrà usare idComande++ e il controller stesso dovrà incrementare idComande
   //idComande sarà ricaricato ad ogni costruzione del modello dal rispettivo file xml e salvato ad ogni salvataggio su file xml
   unsigned int idComande;
-
+  double calcoloGuadagno(const QJsonObject&, const QDate&, const QDate&) const;
  public:
   Pizzeria();
   const Lista<Consumabile*>& getInventario() const;

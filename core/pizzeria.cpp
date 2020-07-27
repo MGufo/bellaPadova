@@ -1,5 +1,10 @@
 #include "pizzeria.h"
 
+double Pizzeria::calcoloGuadagno(const QJsonObject & comandeJSON,
+                                 const QDate& inizio, const QDate& fine) const {
+
+}
+
 Pizzeria::Pizzeria()
   : contatto(Contatto()),
     gestoreRisorse(GestoreRisorse()),
@@ -20,10 +25,7 @@ double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) con
   double guadagni = 0;
   double costi = 0;
   const unordered_map<Articolo*, unsigned int>* ordinazione = nullptr;
-  /*
-    TODO: Creare nuova struttura dati nella classe Comanda per memorizzare le
-    comande "vecchie", che servono per la contabilizzazione
-  */
+  //double guadagno = calcoloGuadagno(caricaComande(), QDate inizio, QDate fine)
   const Lista<Comanda*>* comande = &gestoreComande.getBacheca();
   const Lista<Consumabile*>* consumabili = &gestoreRisorse.getInventario();
   for(auto it = comande->const_begin(); it != comande->const_end(); ++it){
