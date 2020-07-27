@@ -139,7 +139,7 @@ void Pizzeria::setCapacitaForno(unsigned short _forno) {
   capacitaForno = _forno;
 }
 
-void Pizzeria::salvaComande(){
+void Pizzeria::salvaComande() const{
   QFile fileComande(":/resources/comande.json");
   if(!fileComande.open(QIODevice::Append | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
@@ -152,7 +152,7 @@ void Pizzeria::salvaComande(){
   delete fileComandeJSON;
 }
 
-void Pizzeria::salvaRisorse(){
+void Pizzeria::salvaRisorse() const{
   QFile fileRisorse(":/resources/risorse.json");
   if(!fileRisorse.open(QIODevice::Append | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
@@ -165,7 +165,7 @@ void Pizzeria::salvaRisorse(){
   delete fileRisorseJSON;
 }
 
-void Pizzeria::caricaComande(){
+const QJsonObject& Pizzeria::caricaComande() const{
   QFile fileComande(":/resources/comande.json");
   if(!fileComande.open(QIODevice::ReadOnly | QIODevice::Text))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");

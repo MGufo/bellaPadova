@@ -67,18 +67,19 @@ class Pizzeria {
    * @brief: Serializza le comande presenti nel modello e le scrive
    *         in un file JSON
    */
-  void salvaComande();
+  void salvaComande() const;
 
   /**
    * @brief: Serializza le risorse (articoli in menù e inventario) presenti
    *         nel modello e le scrive in un file JSON
    */
-  void salvaRisorse();
+  void salvaRisorse() const;
 
   /**
    * @brief: Legge da file JSON una lista di comande e le aggiunge al modello
+   * @returns:
    */
-  void caricaComande();
+  const QJsonObject& caricaComande() const;
 
   /**
    * @brief: Legge da file JSON una lista di articoli e li aggiunge
