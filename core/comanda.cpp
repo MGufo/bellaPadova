@@ -95,21 +95,6 @@ void Comanda::salva(QJsonObject* comandaJSON) const {
   delete comandaJSON;
 }
 
-void Comanda::carica(const QJsonObject* comandaJSON){
-  ID = (*(comandaJSON->find("ID"))).toInt();
-  cliente.carica((*(comandaJSON->find("cliente"))).toObject());
-  oraConsegna =
-      QTime::fromString((*(comandaJSON->find("oraConsegna"))).toString());
-  dataConsegna =
-      QDate::fromString((*(comandaJSON->find("dataConsegna"))).toString());
-  totale = (*(comandaJSON->find("totale"))).toDouble();
-//  QJsonObject* ordinazioneJSON =
-//      new QJsonObject((*(comandaJSON->find("ordinazione"))).toObject());
-//  for(auto it = ordinazioneJSON->constBegin();
-//      it != ordinazioneJSON->constEnd(); ++it){
-//  }
-}
-
 bool Comanda::operator<(const Comanda& c) const {
   return getOraConsegna() < c.getOraConsegna();
 }
