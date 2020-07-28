@@ -23,19 +23,19 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   QScrollArea* scrollArea = new QScrollArea(this);
   scrollArea->setStyleSheet("background-color: #eeeeee");
 
-  consumabiliCheckBoxWrapper = new QWidget(scrollArea);
-  consumabiliCheckBoxWrapper->setObjectName("consumabiliCheckBoxWrapper");
-  QVBoxLayout* consumabiliCheckboxLayout = new QVBoxLayout(consumabiliCheckBoxWrapper);
+  ingredientiCheckBoxWrapper = new QWidget(scrollArea);
+  ingredientiCheckBoxWrapper->setObjectName("ingredientiCheckBoxWrapper");
+  QVBoxLayout* ingredientiCheckboxLayout = new QVBoxLayout(ingredientiCheckBoxWrapper);
   //una funzione del controller si occuperà di prendere tutti gli ingredienti presenti nell'inventario
-  IngredientCheckBox* i1 = new IngredientCheckBox("ananas",1,consumabiliCheckBoxWrapper);
-  IngredientCheckBox* i2 = new IngredientCheckBox("funghi",2,consumabiliCheckBoxWrapper);
-  consumabiliCheckboxLayout->addWidget(i1);
-  consumabiliCheckboxLayout->addWidget(i2);
+  //IngredientCheckBox* i1 = new IngredientCheckBox("ananas",1,ingredientiCheckBoxWrapper);
+  //IngredientCheckBox* i2 = new IngredientCheckBox("funghi",2,ingredientiCheckBoxWrapper);
+  //ingredientiCheckboxLayout->addWidget(i1);
+  //ingredientiCheckboxLayout->addWidget(i2);
 //  for(int i=0; i<10; ++i){
 //    QCheckBox* checkBox = new QCheckBox(checkboxWrapper);
 //    checkboxLayout->addWidget(checkBox);
 //  }
-  scrollArea->setWidget(consumabiliCheckBoxWrapper);
+  scrollArea->setWidget(ingredientiCheckBoxWrapper);
 
   layoutPizza = new QGridLayout(this);
   layoutPizza->addWidget(wrapperInfo,0,0,2,4);
@@ -52,4 +52,4 @@ QCheckBox *NuovoArticolo_pizza::getPomodoro() const{    return pomodoro;}
 
 QCheckBox *NuovoArticolo_pizza::getMozzarella() const{  return mozzarella;}
 
-QWidget *NuovoArticolo_pizza::getConsumabiliCheckBoxWrapper() const{    return consumabiliCheckBoxWrapper;}
+QWidget *NuovoArticolo_pizza::getIngredientiCheckBoxWrapper() const{    return ingredientiCheckBoxWrapper;}

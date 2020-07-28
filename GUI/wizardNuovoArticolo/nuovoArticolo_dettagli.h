@@ -22,6 +22,9 @@ private:
     QWidget* content;
     void setActualPage();
     void initializePage() override;
+
+signals:
+    void riempiWizardConIngredienti();
 };
 
 #endif // NUOVOARTICOLO_DETTAGLI_H

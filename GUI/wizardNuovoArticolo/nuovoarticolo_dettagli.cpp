@@ -2,6 +2,7 @@
 
 NuovoArticolo_dettagli::NuovoArticolo_dettagli(QWidget* parent) : QWizardPage(parent), content(nullptr){
     layoutDettagli = new QVBoxLayout(this);
+    connect(this,SIGNAL(riempiWizardConIngredienti()),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaIngredientiInWizard()));
     setLayout(layoutDettagli);
 }
 
@@ -10,8 +11,7 @@ int NuovoArticolo_dettagli::nextId() const{
 }
 
 void NuovoArticolo_dettagli::setActualPage(){
-    //TODO: implemento pagine del wizard come wizardNuovoConsumabile, spostando e modificando il codice
-    //presente nei widget per l'inserimento di una pizza e di una bevanda
+    //TODO: implemento pagine del wizard come wizardNuovoConsumabile
     if(content){
         layoutDettagli->removeWidget(content);
         delete content;
@@ -21,6 +21,7 @@ void NuovoArticolo_dettagli::setActualPage(){
         setSubTitle("Fornisci un nome e un prezzo alla pizza da inserire, poi "
                     "aggiungi gli ingredienti che la compongono");
         content = new NuovoArticolo_pizza(this);
+        emit riempiWizardConIngredienti();
     }
     else{   //costruzione wizard bevanda
         setTitle("Aggiunta di una nuova bevanda al Menù");
@@ -40,9 +41,9 @@ void NuovoArticolo_dettagli::initializePage(){
         registerField("prezzoPizza*", ptr->getPrezzoPizza());
         registerField("pomodoro", ptr->getPomodoro());
         registerField("mozzarella", ptr->getMozzarella());
-        auto ingredients = ptr->getConsumabiliCheckBoxWrapper()->children();
-        for(auto it = ingredients.cbegin(); it != ingredients.cend(); ++it){
-            IngredientCheckBox* tmp = static_cast<IngredientCheckBox*>(*it);
+        auto ingredients = ptr->getIngredientiCheckBoxWrapper()->children();
+        for(auto it = ++(ingredients.cbegin()); it != ingredients.cend(); ++it){
+            IngredientCheckBox* tmp = dynamic_cast<IngredientCheckBox*>(*it);
             string s = std::to_string(tmp->getId());
             QString id(QString::fromStdString(s));
             registerField(id, tmp);

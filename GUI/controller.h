@@ -2,6 +2,7 @@
 #define CONTROLLER_H
 
 #include <QObject>
+#include <QList>
 
 #include "../core/pizzeria.h"
 #include "MainWindow.h"
@@ -23,7 +24,7 @@ class Controller : public QObject {
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
-  void getInventario() const;
+  QList<pacchetto*>* recuperaInventario() const;
 
  public slots:
   void caricaComande();

@@ -79,9 +79,27 @@ void MainWindow::modificaConsumabile(pacchetto* pC){
     controller->modificaConsumabile(pC);
 }
 
+void MainWindow::visualizzaIngredientiInWizard() const{
+    QList<pacchetto*>* inventario = controller->recuperaInventario();
+    //TODO: sistemo il recupero del puntatore al wrapper delle checkbox
+    QWidget* wrapper = findChild<QWidget*>("ingredientiCheckBoxWrapper");
+    for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
+        if(dynamic_cast<pacchettoIngrediente*>(*it)){
+            IngredientCheckBox* i = new IngredientCheckBox(QString::fromStdString((*it)->nome),(*it)->ID,wrapper);
+            std::cout << (*it)->nome << (*it)->ID << std::endl;
+            wrapper->layout()->addWidget(i);
+            wrapper->layout()->addWidget(new QLabel("daghe"));
+        }
+    }
+    delete inventario;
+}
 
-void MainWindow::riempiInventario(){
-    controller->getInventario();
+void MainWindow::visualizzaInventario(){
+    QList<pacchetto*>* inventario = controller->recuperaInventario();
+    for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
+        aggiornaInventario(*it);
+    }
+    delete inventario;
 }
 
 void MainWindow::aggiornaContabilizzazione(double guadagno){
