@@ -14,6 +14,16 @@ const string& Farina::getTipoFarina() const { return tipoFarina; }
 
 void Farina::setTipoFarina(const string& f) { tipoFarina = f; }
 
+void Farina::modifica(Consumabile* modificato){
+  setNome(modificato->getNome());
+  setDisponibilita(modificato->getDisponibilita());
+  setQuantita(modificato->getQuantita());
+  setCosto(modificato->getCosto());
+  setDataAcquisto(modificato->getDataAcquisto());
+  setLocal(dynamic_cast<Ingrediente*>(modificato)->isLocal());
+  setTipoFarina(dynamic_cast<Farina*>(modificato)->getTipoFarina());
+}
+
 Farina* Farina::clone() const { return new Farina(*this); }
 
 void Farina::carica(const QJsonObject & farinaJSON,

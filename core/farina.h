@@ -30,6 +30,8 @@ class Farina : public Ingrediente {
    */
   void setTipoFarina(const string&);
 
+  virtual void modifica(Consumabile*);
+
   Farina* clone() const;
 
   virtual void carica(const QJsonObject&,

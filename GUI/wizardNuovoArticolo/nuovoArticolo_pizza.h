@@ -21,7 +21,7 @@ public:
   QLineEdit* getPrezzoPizza() const;
   QCheckBox* getPomodoro() const;
   QCheckBox* getMozzarella() const;
-  QWidget* getConsumabiliCheckBoxWrapper() const;
+  QWidget* getIngredientiCheckBoxWrapper() const;
 
 private:
   QGridLayout* layoutPizza;
@@ -29,7 +29,7 @@ private:
   QLineEdit* prezzoPizza;
   QCheckBox* pomodoro;
   QCheckBox* mozzarella;
-  QWidget* consumabiliCheckBoxWrapper;
+  QWidget* ingredientiCheckBoxWrapper;
 };
 
 #endif // WIZARD_PIZZA_H

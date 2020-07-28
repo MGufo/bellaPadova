@@ -33,6 +33,8 @@ class Ingrediente : public Consumabile {
    */
   double getSpesa() const;
 
+  virtual void modifica(Consumabile*);
+
   Ingrediente* clone() const;
 
   virtual void carica(const QJsonObject&,

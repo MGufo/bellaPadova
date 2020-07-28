@@ -25,20 +25,8 @@ int NuovoConsumabile_dettagli::nextId() const{
 }
 
 void NuovoConsumabile_dettagli::setActualPage(){
-  //if(campoExtra) layoutDettagli->removeRow(campoExtra);
-  if(field("optionIngrediente").toBool()){
     auto ptr = findChild<QCheckBox*>("locale");
     if(ptr) layoutDettagli->removeRow(ptr);
-    setTitle("Aggiunta di un nuovo ingrediente all'Inventario");
-    setSubTitle("Inserisci le informazioni relative all'ingrediente da inserire");
-    QCheckBox* locale = new QCheckBox(this);
-    locale->setObjectName("locale");
-    registerField("locale", locale);
-    layoutDettagli->addRow("Locale:", locale);
-  }
-  else{
-    setTitle("Aggiunta di una nuova bevanda all'Inventario");
-    setSubTitle("Inserisci le informazioni relative alla bevanda da inserire");
     auto ptr1 = findChild<QLineEdit*>("capacita");
     if(ptr1) layoutDettagli->removeRow(ptr1);
     auto ptr2 = findChild<QLineEdit*>("prezzo");
@@ -47,6 +35,19 @@ void NuovoConsumabile_dettagli::setActualPage(){
     if(ptr3) layoutDettagli->removeRow(ptr3);
     auto ptr4 = findChild<QRadioButton*>("optionBottiglia");
     if(ptr4) layoutDettagli->removeRow(ptr4);
+
+  if(field("optionIngrediente").toBool()){
+    setTitle("Aggiunta di un nuovo ingrediente all'Inventario");
+    setSubTitle("Inserisci le informazioni relative all'ingrediente da inserire");
+
+    QCheckBox* locale = new QCheckBox(this);
+    locale->setObjectName("locale");
+    registerField("locale", locale);
+    layoutDettagli->addRow("Locale:", locale);
+  }
+  else{
+    setTitle("Aggiunta di una nuova bevanda all'Inventario");
+    setSubTitle("Inserisci le informazioni relative alla bevanda da inserire");
 
     QLineEdit* capacita = new QLineEdit(this);
     capacita->setObjectName("capacita");

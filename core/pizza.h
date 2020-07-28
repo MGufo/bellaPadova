@@ -58,6 +58,8 @@ class Pizza : public Articolo {
    */
   virtual const Lista<Consumabile*>* getComposizione() const;
 
+  virtual void modificaComposizione(Consumabile*, Consumabile*);
+
   virtual void carica(const QJsonObject&,
                       const std::unordered_map<uint, Risorsa*>*);
 

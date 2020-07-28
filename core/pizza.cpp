@@ -102,6 +102,18 @@ const Lista<Consumabile*>* Pizza::getComposizione() const {
   return lista;
 }
 
+void Pizza::modificaComposizione(Consumabile* daModificare, Consumabile* modificato){
+    auto it = ingredienti.find(dynamic_cast<Ingrediente*>(daModificare));
+    if(it.isValid()){
+        (*it)->setNome(modificato->getNome());
+        (*it)->setDisponibilita(modificato->getDisponibilita());
+        (*it)->setQuantita(modificato->getQuantita());
+        (*it)->setCosto(modificato->getCosto());
+        (*it)->setDataAcquisto(modificato->getDataAcquisto());
+        (*it)->setLocal(dynamic_cast<Ingrediente*>(modificato)->isLocal());
+    }
+}
+
 void Pizza::carica(const QJsonObject& pizzaJSON,
                    const std::unordered_map<uint, Risorsa*>* keymap) {
   setID((*(pizzaJSON.constFind("ID"))).toInt());
