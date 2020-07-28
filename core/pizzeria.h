@@ -33,7 +33,9 @@ class Pizzeria {
    * @throws: std::invalid_argument
    *
    */
-  QFile* apriFile(const string&) const;
+  QFile* openFile(const string&) const;
+
+  QJsonObject* parseFile(QFile*) const;
 
  public:
   Pizzeria();
