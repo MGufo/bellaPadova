@@ -23,6 +23,8 @@ class GestoreComande {
    */
   bool testInsert(const Comanda*, const Comanda*, const Comanda*, unsigned short);
 
+  unsigned int getMaxId() const;
+
  public:
   GestoreComande();
 
@@ -77,6 +79,8 @@ class GestoreComande {
   const Lista<Comanda*>& getBacheca() const;
 
   void salvaComande(QJsonObject*) const;
+
+  void salvaIdComande(QJsonObject*) const;
 };
 
 #endif
