@@ -157,7 +157,7 @@ void Pizzeria::salvaComande() const{
   QFile* fileComande = openFile(":/resources/comande.json");
   QJsonObject* comandeJSON = new QJsonObject();
   gestoreComande.salvaComande(comandeJSON);
-  //gestoreComande.salvaIdComande(comandeJSON);
+  gestoreComande.salvaIdComande(comandeJSON);
   QJsonDocument* fileComandeJSON = new QJsonDocument(*comandeJSON);
   fileComande->write(fileComandeJSON->toJson());
   fileComande->close();
@@ -168,7 +168,7 @@ void Pizzeria::salvaRisorse() const{
   QFile* fileRisorse = openFile(":/resources/risorse.json");
   QJsonObject* risorseJSON = new QJsonObject();
   gestoreRisorse.salvaRisorse(risorseJSON);
-  //gestoreRisorse.salvaIdRisorse(risorseJSON);
+  gestoreRisorse.salvaIdRisorse(risorseJSON);
   QJsonDocument* fileRisorseJSON = new QJsonDocument(*risorseJSON);
   fileRisorse->write(fileRisorseJSON->toJson());
   fileRisorse->close();
@@ -194,14 +194,20 @@ void Pizzeria::caricaRisorse(){
 
 unsigned int Pizzeria::getIdComande() const{
   QFile* fileComande = openFile(":/resources/comande.json");
+  QJsonObject* idComandeJSON = new QJsonObject(
+        (*(parseFile(fileComande)->constFind("idComande"))).toObject());
+  uint idComande = (*idComandeJSON->constFind("idComande")).toInt();
+  delete fileComande;
+  delete idComandeJSON;
+  return idComande;
 }
 
 unsigned int Pizzeria::getIdRisorse() const{
   QFile* fileRisorse = openFile(":/resources/risorse.json");
+  QJsonObject* idRisorseJSON = new QJsonObject(
+        (*(parseFile(fileRisorse)->constFind("idRisorse"))).toObject());
+  uint idRisorse = (*idRisorseJSON->constFind("idRisorse")).toInt();
+  delete fileRisorse;
+  delete idRisorseJSON;
+  return idRisorse;
 }
-
-  /*leggere id ultima comanda e mandarlo come signal allo slot del controller
-  *che si setta l'id corretto
-  * Poi si legge il resto del file e si caricano le robe
-  */
-
