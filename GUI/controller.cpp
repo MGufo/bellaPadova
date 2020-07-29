@@ -1,8 +1,9 @@
 #include "GUI/controller.h"
 
 //TODO: settare idComande e idRisorse a zero dopo aver implementato correttamente I/O da file
-Controller::Controller(Pizzeria* bellaPadova, QObject* parent) :
-  QObject(parent), modello(bellaPadova), idComande(2), idRisorse(12) {
+Controller::Controller(Pizzeria* bellaPadova, uint idC, uint idR,
+                       QObject* parent) :
+  QObject(parent), modello(bellaPadova), idComande(idC), idRisorse(idR) {
 }
 
 void Controller::setView(MainWindow *v){
@@ -91,7 +92,7 @@ QList<pacchetto*>* Controller::recuperaInventario() const{
 void Controller::caricaComande(){
   try{
     modello->caricaComande();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
   // TODO: Aggiornamento vista
@@ -100,7 +101,7 @@ void Controller::caricaComande(){
 void Controller::caricaRisorse(){
   try{
     modello->caricaRisorse();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
   // TODO: Aggiornamento vista
@@ -109,7 +110,7 @@ void Controller::caricaRisorse(){
 void Controller::salvaComande() const{
   try{
     modello->salvaComande();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
 }
@@ -117,7 +118,7 @@ void Controller::salvaComande() const{
 void Controller::salvaRisorse() const{
   try{
     modello->salvaRisorse();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
 }
@@ -130,7 +131,7 @@ void Controller::modificaRisorse(){
     //modello->modificaArticolo();
   try{
     modello->salvaRisorse();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
 

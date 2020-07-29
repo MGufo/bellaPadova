@@ -19,7 +19,7 @@ class Controller : public QObject {
   unsigned int idRisorse;
 
  public:
-  explicit Controller(Pizzeria*, QObject* parent = nullptr);
+  explicit Controller(Pizzeria*,  uint, uint, QObject* parent = nullptr);
   void setView(MainWindow*);
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);

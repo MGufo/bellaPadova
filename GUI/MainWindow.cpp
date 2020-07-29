@@ -42,26 +42,21 @@ void MainWindow::setStylePizzeria() {
 QMenuBar* MainWindow::drawMenubar() const{
   QMenuBar* menuBar = new QMenuBar();
   QMenu* category_File = new QMenu("File", menuBar);
-  QMenu* category_Load = new QMenu("Carica", menuBar);
   QMenu* category_Save = new QMenu("Salva", menuBar);
   QAction* file_Exit = new QAction("Esci", category_File);
-  QAction* caricaRisorse = new QAction("Inventario e Menu", category_Load);
   QAction* salvaComande = new QAction("Comande", category_Save);
   QAction* salvaRisorse = new QAction("Inventario e Menu", category_Save);
 
-  connect(caricaRisorse, SIGNAL(triggered()), controller, SLOT(caricaRisorse()));
   connect(salvaComande, SIGNAL(triggered()), controller, SLOT(salvaComande()));
   connect(salvaRisorse, SIGNAL(triggered()), controller, SLOT(salvaRisorse()));
 
   connect(file_Exit, SIGNAL(triggered()), this, SLOT(close()));
 
   category_File->addAction(file_Exit);
-  category_Load->addAction(caricaRisorse);
   category_Save->addAction(salvaComande);
   category_Save->addAction(salvaRisorse);
 
   menuBar->addMenu(category_File);
-  menuBar->addMenu(category_Load);
   menuBar->addMenu(category_Save);
 
   return menuBar;
@@ -120,6 +115,9 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
     else{
 
     }
+	
+void MainWindow::closeEvent(QCloseEvent *event){
+
 }
 
 void MainWindow::visualizzaInventario(){

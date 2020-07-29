@@ -38,6 +38,17 @@ bool GestoreRisorse::controlloConsumabile(const Lista<Consumabile*>* _lista,
   return false;
 }
 
+unsigned int GestoreRisorse::getMaxId() const{
+  unsigned int maxID = 0;
+  for(auto it = menu.const_begin(); it != menu.const_end(); ++it)
+    if((*it)->getIdRisorsa() > maxID) maxID = (*it)->getIdRisorsa();
+
+  for(auto it = inventario.const_begin(); it != inventario.const_end(); ++it)
+    if((*it)->getIdRisorsa() > maxID) maxID = (*it)->getIdRisorsa();
+
+  return maxID;
+}
+
 void GestoreRisorse::inserisciArticolo(Articolo* daInserire) {
   if (daInserire) {
     const Lista<Consumabile*>* lista = daInserire->getComposizione();
@@ -130,6 +141,10 @@ void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
   }
   risorseJSON->insert("Inventario", *inventarioJSON);
   delete inventarioJSON;
+}
+
+void GestoreRisorse::salvaIdRisorse(QJsonObject* idRisorseJSON) const{
+  idRisorseJSON->insert("ID", static_cast<int>(getMaxId()));
 }
 
 void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){

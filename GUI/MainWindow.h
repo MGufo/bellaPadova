@@ -38,6 +38,8 @@ class MainWindow : public QWidget {
   void visualizzaElementiInWizard(bool) const;
   void visualizzaElementiCheckatiInWizard(bool) const;
 
+protected:
+  void closeEvent(QCloseEvent *event);
 private:
   Controller* controller;
   QVBoxLayout* mainLayout;
