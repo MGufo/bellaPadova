@@ -22,8 +22,7 @@ class Pizzeria {
   GestoreRisorse gestoreRisorse;
   GestoreComande gestoreComande;
   unsigned short capacitaForno;
-  //nel controller la costruzione delle comande dovrà usare idComande++ e il controller stesso dovrà incrementare idComande
-  unsigned int idComande;
+
   double calcoloGuadagno(const QJsonObject&, const QDate&, const QDate&) const;
 
   /**
