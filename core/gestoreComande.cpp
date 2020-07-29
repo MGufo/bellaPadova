@@ -156,5 +156,5 @@ void GestoreComande::salvaComande(QJsonObject *fileComandeJSON) const{
 }
 
 void GestoreComande::salvaIdComande(QJsonObject* fileComandeJSON) const{
-  fileComandeJSON->insert("ID", getMaxId());
+  fileComandeJSON->insert("ID", static_cast<int>(getMaxId()));
 }
