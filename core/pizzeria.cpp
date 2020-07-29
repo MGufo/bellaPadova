@@ -14,11 +14,9 @@ double Pizzeria::calcoloGuadagno(const QJsonObject & comandeJSON,
 
 QFile *Pizzeria::openFile(const string& path, char mode) const{
   QFile* file = new QFile(QString::fromStdString(path));
-  if(mode == 'w')
-    if(!file->open(QIODevice::Append | QIODevice::Text))
-      throw new std::invalid_argument("Errore: Impossibile aprire il file");
-  if(mode == 'r')
-    if(!file->open(QIODevice::ReadOnly | QIODevice::Text))
+  if(mode == 'w' && !file->open(QIODevice::Append | QIODevice::Text)
+      ||
+     mode == 'r' && (!file->open(QIODevice::ReadOnly | QIODevice::Text)))
       throw new std::invalid_argument("Errore: Impossibile aprire il file");
   return file;
 }
