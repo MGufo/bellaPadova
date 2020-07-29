@@ -21,20 +21,12 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
 
   // Ingredienti
   QScrollArea* scrollArea = new QScrollArea(this);
+  scrollArea->setWidgetResizable(true);
   scrollArea->setStyleSheet("background-color: #eeeeee");
-
   ingredientiCheckBoxWrapper = new QWidget(scrollArea);
   ingredientiCheckBoxWrapper->setObjectName("ingredientiCheckBoxWrapper");
   QVBoxLayout* ingredientiCheckboxLayout = new QVBoxLayout(ingredientiCheckBoxWrapper);
-  //una funzione del controller si occuperà di prendere tutti gli ingredienti presenti nell'inventario
-  //IngredientCheckBox* i1 = new IngredientCheckBox("ananas",1,ingredientiCheckBoxWrapper);
-  //IngredientCheckBox* i2 = new IngredientCheckBox("funghi",2,ingredientiCheckBoxWrapper);
-  //ingredientiCheckboxLayout->addWidget(i1);
-  //ingredientiCheckboxLayout->addWidget(i2);
-//  for(int i=0; i<10; ++i){
-//    QCheckBox* checkBox = new QCheckBox(checkboxWrapper);
-//    checkboxLayout->addWidget(checkBox);
-//  }
+  ingredientiCheckBoxWrapper->setLayout(ingredientiCheckboxLayout);
   scrollArea->setWidget(ingredientiCheckBoxWrapper);
 
   layoutPizza = new QGridLayout(this);

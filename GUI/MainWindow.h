@@ -15,7 +15,7 @@
 #include "GUI/header.h"
 #include "GUI/controller.h"
 #include "GUI/pacchetti.h"
-#include "GUI/wizardNuovoArticolo/ingredientcheckbox.h"
+#include "GUI/wizardNuovoArticolo/consumabilicheckbox.h"
 
 class Controller;
 class MainWindow : public QWidget {
@@ -33,7 +33,10 @@ class MainWindow : public QWidget {
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
-  void visualizzaIngredientiInWizard() const;
+  //true = pizza
+  //false = bevanda
+  void visualizzaElementiInWizard(bool) const;
+  void visualizzaElementiCheckatiInWizard(bool) const;
 
 private:
   Controller* controller;

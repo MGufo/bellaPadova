@@ -9,7 +9,7 @@
 using std::string;
 
 #include "wizard_nuovoArticolo.h"
-#include "ingredientcheckbox.h"
+#include "consumabilicheckbox.h"
 
 class NuovoArticolo_dettagli : public QWizardPage{
   Q_OBJECT
@@ -24,7 +24,9 @@ private:
     void initializePage() override;
 
 signals:
-    void riempiWizardConIngredienti();
+    //true = pizza
+    //false = bevanda
+    void riempiWizardConElementi(bool);
 };
 
 #endif // NUOVOARTICOLO_DETTAGLI_H

@@ -10,7 +10,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 
-#include "ingredientcheckbox.h"
+#include "consumabilicheckbox.h"
 
 class NuovoArticolo_pizza: public QWidget{
   Q_OBJECT

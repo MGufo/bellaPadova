@@ -14,6 +14,10 @@ private:
   QFormLayout* layoutEnd;
   void setActualPage();
   void initializePage() override;
+signals:
+  //true = pizza
+  //false = bevanda
+  riempiWizardConElementiCheckati(bool);
 };
 
 #endif // WIZARD_END_H

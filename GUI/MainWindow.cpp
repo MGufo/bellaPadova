@@ -79,19 +79,47 @@ void MainWindow::modificaConsumabile(pacchetto* pC){
     controller->modificaConsumabile(pC);
 }
 
-void MainWindow::visualizzaIngredientiInWizard() const{
+void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
     QList<pacchetto*>* inventario = controller->recuperaInventario();
-    //TODO: sistemo il recupero del puntatore al wrapper delle checkbox
-    QWidget* wrapper = findChild<QWidget*>("ingredientiCheckBoxWrapper");
-    for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
-        if(dynamic_cast<pacchettoIngrediente*>(*it)){
-            IngredientCheckBox* i = new IngredientCheckBox(QString::fromStdString((*it)->nome),(*it)->ID,wrapper);
-            std::cout << (*it)->nome << (*it)->ID << std::endl;
-            wrapper->layout()->addWidget(i);
-            wrapper->layout()->addWidget(new QLabel("daghe"));
+    if(option_pizza){
+        QWidget* wrapper = findChild<QWidget*>("ingredientiCheckBoxWrapper");
+        for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
+            if(dynamic_cast<pacchettoIngrediente*>(*it) && !dynamic_cast<pacchettoFarina*>(*it)){
+                QWidget* i = new ConsumabiliCheckBox(QString::fromStdString((*it)->nome),(*it)->ID,wrapper);
+                dynamic_cast<QVBoxLayout*>(wrapper->layout())->addWidget(i);
+            }
         }
     }
+    else{
+
+    }
     delete inventario;
+}
+
+void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
+    if(option_pizza){
+        QWidget* checkboxWrapper = findChild<QWidget*>("ingredientiCheckBoxWrapper");
+        auto checkBox = checkboxWrapper->children();
+
+        QWidget* visualizationWrapper = findChild<QWidget*>("ingredientiVisualizationWrapper");
+        //eliminazione dei vecchi ingredienti se presenti nel layout
+        QLayoutItem* item = nullptr;
+        while((item = visualizationWrapper->layout()->takeAt(0)) != NULL){
+                delete item->widget();
+                delete item;
+        }
+        //riempimento del layout con gli ingredienti aggiornati
+        for(auto it = ++(checkBox.cbegin()); it != checkBox.cend(); ++it){
+            ConsumabiliCheckBox* elemento = dynamic_cast<ConsumabiliCheckBox*>(*it);
+            if(elemento->isChecked()){
+                QWidget* i = new QLabel(elemento->text(),visualizationWrapper);
+                visualizationWrapper->layout()->addWidget(i);
+            }
+        }
+    }
+    else{
+
+    }
 }
 
 void MainWindow::visualizzaInventario(){
