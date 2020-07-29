@@ -109,5 +109,7 @@ class Pizzeria {
   unsigned int getIdComande() const;
 
   unsigned int getIdRisorse() const;
+
+  bool getDaSalvare() const;
 };
 #endif

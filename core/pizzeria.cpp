@@ -14,9 +14,9 @@ double Pizzeria::calcoloGuadagno(const QJsonObject & comandeJSON,
 
 QFile *Pizzeria::openFile(const string& path, char mode) const{
   QFile* file = new QFile(QString::fromStdString(path));
-  if(mode == 'w' && !file->open(QIODevice::Append | QIODevice::Text)
+  if((mode == 'w' && !file->open(QIODevice::Append | QIODevice::Text))
       ||
-     mode == 'r' && (!file->open(QIODevice::ReadOnly | QIODevice::Text)))
+     (mode == 'r' && !file->open(QIODevice::ReadOnly | QIODevice::Text)))
       throw new std::invalid_argument("Errore: Impossibile aprire il file");
   return file;
 }
@@ -164,6 +164,7 @@ void Pizzeria::salvaComande() const{
   fileComande->write(fileComandeJSON->toJson());
   fileComande->close();
   delete fileComandeJSON;
+  daSalvare = false;
 }
 
 void Pizzeria::salvaRisorse() const{
@@ -195,7 +196,7 @@ void Pizzeria::caricaRisorse(){
 }
 
 unsigned int Pizzeria::getIdComande() const{
-  QFile* fileComande = openFile(":/resources/comande.json");
+  QFile* fileComande = openFile(":/resources/comande.json", 'r');
   QJsonObject* idComandeJSON = new QJsonObject(
         (*(parseFile(fileComande)->constFind("idComande"))).toObject());
   uint idComande = (*idComandeJSON->constFind("idComande")).toInt();
@@ -205,11 +206,15 @@ unsigned int Pizzeria::getIdComande() const{
 }
 
 unsigned int Pizzeria::getIdRisorse() const{
-  QFile* fileRisorse = openFile(":/resources/risorse.json");
+  QFile* fileRisorse = openFile(":/resources/risorse.json", 'r');
   QJsonObject* idRisorseJSON = new QJsonObject(
         (*(parseFile(fileRisorse)->constFind("idRisorse"))).toObject());
   uint idRisorse = (*idRisorseJSON->constFind("idRisorse")).toInt();
   delete fileRisorse;
   delete idRisorseJSON;
   return idRisorse;
+}
+
+bool Pizzeria::getDaSalvare() const{
+  return daSalvare;
 }
