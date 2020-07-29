@@ -14,6 +14,8 @@ double Pizzeria::calcoloGuadagno(const QJsonObject & comandeJSON,
 
 QFile *Pizzeria::openFile(const string& path, char mode) const{
   QFile* file = new QFile(QString::fromStdString(path));
+  if(!file->exists())
+    throw new std::domain_error("Errore: File Inesistente");
   if((mode == 'w' && !file->open(QIODevice::Append | QIODevice::Text))
       ||
      (mode == 'r' && !file->open(QIODevice::ReadOnly | QIODevice::Text)))
@@ -24,7 +26,6 @@ QFile *Pizzeria::openFile(const string& path, char mode) const{
 QJsonObject *Pizzeria::parseFile(QFile* file) const{
   QByteArray jsonData = file->readAll();
   file->close();
-
   QJsonParseError* pE = new QJsonParseError();
   QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonData, pE);
 
@@ -164,7 +165,8 @@ void Pizzeria::salvaComande() const{
   fileComande->write(fileComandeJSON->toJson());
   fileComande->close();
   delete fileComandeJSON;
-  daSalvare = false;
+  delete fileComande;
+  //daSalvare = false;
 }
 
 void Pizzeria::salvaRisorse() const{
@@ -176,6 +178,7 @@ void Pizzeria::salvaRisorse() const{
   fileRisorse->write(fileRisorseJSON->toJson());
   fileRisorse->close();
   delete fileRisorseJSON;
+  delete fileRisorse;
 }
 
 const QJsonObject& Pizzeria::caricaComande() const{
