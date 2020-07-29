@@ -12,10 +12,14 @@ double Pizzeria::calcoloGuadagno(const QJsonObject & comandeJSON,
   return guadagno;
 }
 
-QFile *Pizzeria::openFile(const string& path) const{
+QFile *Pizzeria::openFile(const string& path, char mode) const{
   QFile* file = new QFile(QString::fromStdString(path));
-  if(!file->open(QIODevice::Append | QIODevice::Text))
-    throw new std::invalid_argument("Errore: Impossibile aprire il file");
+  if(mode == 'w')
+    if(!file->open(QIODevice::Append | QIODevice::Text))
+      throw new std::invalid_argument("Errore: Impossibile aprire il file");
+  if(mode == 'r')
+    if(!file->open(QIODevice::ReadOnly | QIODevice::Text))
+      throw new std::invalid_argument("Errore: Impossibile aprire il file");
   return file;
 }
 
@@ -154,7 +158,7 @@ void Pizzeria::setCapacitaForno(unsigned short _forno) {
 }
 
 void Pizzeria::salvaComande() const{
-  QFile* fileComande = openFile(":/resources/comande.json");
+  QFile* fileComande = openFile(":/resources/comande.json", 'w');
   QJsonObject* comandeJSON = new QJsonObject();
   gestoreComande.salvaComande(comandeJSON);
   gestoreComande.salvaIdComande(comandeJSON);
@@ -165,7 +169,7 @@ void Pizzeria::salvaComande() const{
 }
 
 void Pizzeria::salvaRisorse() const{
-  QFile* fileRisorse = openFile(":/resources/risorse.json");
+  QFile* fileRisorse = openFile(":/resources/risorse.json", 'w');
   QJsonObject* risorseJSON = new QJsonObject();
   gestoreRisorse.salvaRisorse(risorseJSON);
   gestoreRisorse.salvaIdRisorse(risorseJSON);
@@ -176,7 +180,7 @@ void Pizzeria::salvaRisorse() const{
 }
 
 const QJsonObject& Pizzeria::caricaComande() const{
-  QFile* fileComande = openFile(":/resources/comande.json");
+  QFile* fileComande = openFile(":/resources/comande.json", 'r');
   const QJsonObject* comandeJSON = new QJsonObject(
         (*(parseFile(fileComande)->constFind("Comande"))).toObject());
   delete fileComande;
@@ -184,7 +188,7 @@ const QJsonObject& Pizzeria::caricaComande() const{
 }
 
 void Pizzeria::caricaRisorse(){
-  QFile* fileRisorse = openFile(":/resources/risorse.json");
+  QFile* fileRisorse = openFile(":/resources/risorse.json", 'r');
   QJsonObject* risorseJSON = parseFile(fileRisorse);
   gestoreRisorse.caricaInventario((*risorseJSON->constFind("inventario")).toObject());
   gestoreRisorse.caricaMenu((*risorseJSON->constFind("menu")).toObject());

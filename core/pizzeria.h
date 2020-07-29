@@ -22,18 +22,26 @@ class Pizzeria {
   GestoreRisorse gestoreRisorse;
   GestoreComande gestoreComande;
   unsigned short capacitaForno;
+  bool daSalvare;
 
   double calcoloGuadagno(const QJsonObject&, const QDate&, const QDate&) const;
 
   /**
    * @brief: Se esiste apre il file al percorso specificato, altrimenti lancia
    * un'eccezione
+   * @param: stringa rappresentante il percorso su disco al file da aprire
+   * * @param: char rappresentante la modalità di apertura (r = read, w = write)
    * @returns: Puntatore a QFile rappresentante il file aperto
    * @throws: std::invalid_argument
-   *
    */
-  QFile* openFile(const string&) const;
+  QFile* openFile(const string&, char) const;
 
+  /**
+   * @brief: Se esiste apre il file al percorso specificato, altrimenti lancia
+   * un'eccezione
+   * @returns: Puntatore a QFile rappresentante il file aperto
+   * @throws: std::invalid_argument (errore di parsing del file)
+   */
   QJsonObject* parseFile(QFile*) const;
 
  public:
