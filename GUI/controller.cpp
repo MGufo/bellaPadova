@@ -92,7 +92,7 @@ QList<pacchetto*>* Controller::recuperaInventario() const{
 void Controller::caricaComande(){
   try{
     modello->caricaComande();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
   // TODO: Aggiornamento vista
@@ -101,7 +101,7 @@ void Controller::caricaComande(){
 void Controller::caricaRisorse(){
   try{
     modello->caricaRisorse();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
   // TODO: Aggiornamento vista
@@ -110,7 +110,7 @@ void Controller::caricaRisorse(){
 void Controller::salvaComande() const{
   try{
     modello->salvaComande();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
 }
@@ -118,7 +118,7 @@ void Controller::salvaComande() const{
 void Controller::salvaRisorse() const{
   try{
     modello->salvaRisorse();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
 }
@@ -131,7 +131,7 @@ void Controller::modificaRisorse(){
     //modello->modificaArticolo();
   try{
     modello->salvaRisorse();
-  } catch (std::invalid_argument *ecc) {
+  } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
 
