@@ -35,6 +35,8 @@ class MainWindow : public QWidget {
   void modificaConsumabile(pacchetto*);
   void visualizzaIngredientiInWizard() const;
 
+protected:
+  void closeEvent(QCloseEvent *event);
 private:
   Controller* controller;
   QVBoxLayout* mainLayout;
