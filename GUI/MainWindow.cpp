@@ -86,7 +86,14 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
         }
     }
     else{
-
+        QWidget* wrapper = findChild<QWidget*>("bevandeRadioButtonWrapper");
+        for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
+            pacchettoBevanda* b = dynamic_cast<pacchettoBevanda*>(*it);
+            if(b){
+                //QWidget* p = new BevandaRadioButton((b->ID,QString::fromStdString(b->nome),b->prezzo,b->capacita,(b->tipo? "Lattina" : "Bottiglia"),wrapper);
+                //dynamic_cast<QVBoxLayout*>(wrapper->layout())->addWidget(b);
+            }
+        }
     }
     delete inventario;
 }
@@ -97,24 +104,29 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
         auto checkBox = checkboxWrapper->children();
 
         QWidget* visualizationWrapper = findChild<QWidget*>("ingredientiVisualizationWrapper");
+
         //eliminazione dei vecchi ingredienti se presenti nel layout
         QLayoutItem* item = nullptr;
-        while((item = visualizationWrapper->layout()->takeAt(0)) != NULL){
+        while((item = visualizationWrapper->layout()->takeAt(1)) != NULL){
+                ConsumabiliCheckBox* p = dynamic_cast<ConsumabiliCheckBox*>(item->widget());
+                std::cout << p->text().toStdString() << " " << p->isChecked() << std::endl;
                 delete item->widget();
                 delete item;
         }
+
         //riempimento del layout con gli ingredienti aggiornati
         for(auto it = ++(checkBox.cbegin()); it != checkBox.cend(); ++it){
             ConsumabiliCheckBox* elemento = dynamic_cast<ConsumabiliCheckBox*>(*it);
             if(elemento->isChecked()){
-                QWidget* i = new QLabel(elemento->text(),visualizationWrapper);
-                visualizationWrapper->layout()->addWidget(i);
+                QLabel* i = new QLabel(elemento->text(),visualizationWrapper);
+                dynamic_cast<QVBoxLayout*>(visualizationWrapper->layout())->addWidget(i);
             }
         }
     }
     else{
 
     }
+}
 	
 void MainWindow::closeEvent(QCloseEvent *event){
 

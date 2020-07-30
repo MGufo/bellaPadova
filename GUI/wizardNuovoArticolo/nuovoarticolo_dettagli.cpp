@@ -21,7 +21,6 @@ void NuovoArticolo_dettagli::setActualPage(){
         setSubTitle("Fornisci un nome e un prezzo alla pizza da inserire, poi "
                     "aggiungi gli ingredienti che la compongono");
         content = new NuovoArticolo_pizza(this);
-        //content->setObjectName("NuovoArticolo_pizza");
         emit riempiWizardConElementi(true);
     }
     else{   //costruzione wizard bevanda
