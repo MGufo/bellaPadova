@@ -10,7 +10,7 @@ using std::string;
 int main(int argc, char* argv[]) {
 
   QApplication app(argc, argv);
-  Pizzeria bellaPadova;
+  Pizzeria bellaPadova("../progettoP2/comande.json", "../progettoP2/risorse.json");
   Controller controller(&bellaPadova,
                         bellaPadova.getIdComande(),
                         bellaPadova.getIdRisorse());
