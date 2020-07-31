@@ -22,7 +22,7 @@ class Pizzeria {
   GestoreRisorse gestoreRisorse;
   GestoreComande gestoreComande;
   unsigned short capacitaForno;
-  bool daSalvare;
+  bool salvaComande, salvaRisorse;
   const string pathComande;
   const string pathRisorse;
 
@@ -113,5 +113,7 @@ class Pizzeria {
   unsigned int getIdRisorse() const;
 
   bool getDaSalvare() const;
+  string getPathComande() const;
+  string getPathRisorse() const;
 };
 #endif

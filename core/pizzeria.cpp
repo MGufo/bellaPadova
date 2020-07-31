@@ -1,5 +1,9 @@
 #include "pizzeria.h"
 
+string Pizzeria::getPathComande() const { return pathComande; }
+
+string Pizzeria::getPathRisorse() const { return pathRisorse; }
+
 double Pizzeria::calcoloGuadagno(const QJsonObject & comandeJSON,
                                  const QDate& inizio, const QDate& fine) const {
   double guadagno = 0;
@@ -169,13 +173,11 @@ void Pizzeria::salvaComande() const{
   fileComande->close();
   delete fileComandeJSON;
   delete fileComande;
-  //daSalvare = false;
+  salvaComande = false;
 }
 
 void Pizzeria::salvaRisorse() const{
   QFile* fileRisorse = openFile(pathRisorse, 'w');
-//  QString path("../progettoP2/risorse.json");
-//  QFile fileRisorse(path);
   QJsonObject* risorseJSON = new QJsonObject();
   gestoreRisorse.salvaRisorse(risorseJSON);
   gestoreRisorse.salvaIdRisorse(risorseJSON);
@@ -184,6 +186,7 @@ void Pizzeria::salvaRisorse() const{
   fileRisorse->close();
   delete fileRisorseJSON;
   delete fileRisorse;
+  salvaRisorse = false;
 }
 
 const QJsonObject& Pizzeria::caricaComande() const{
@@ -221,8 +224,4 @@ unsigned int Pizzeria::getIdRisorse() const{
   delete fileRisorse;
   delete idRisorseJSON;
   return idRisorse;
-}
-
-bool Pizzeria::getDaSalvare() const{
-  return daSalvare;
 }
