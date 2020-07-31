@@ -92,5 +92,8 @@ int main(int argc, char* argv[]) {
     bellaPadova.inserisciComanda(comanda1);
     bellaPadova.inserisciComanda(comanda2);
 
+    bellaPadova.eseguiComanda();
+    bellaPadova.eseguiComanda();
+
   return app.exec();
 }
