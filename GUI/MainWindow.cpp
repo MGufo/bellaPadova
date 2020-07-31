@@ -80,7 +80,7 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
         QWidget* wrapper = findChild<QWidget*>("ingredientiCheckBoxWrapper");
         for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
             if(dynamic_cast<pacchettoIngrediente*>(*it) && !dynamic_cast<pacchettoFarina*>(*it)){
-                QWidget* i = new ConsumabiliCheckBox(QString::fromStdString((*it)->nome),(*it)->ID,wrapper);
+                QWidget* i = new IngredienteCheckBox(QString::fromStdString((*it)->nome),(*it)->ID,wrapper);
                 dynamic_cast<QVBoxLayout*>(wrapper->layout())->addWidget(i);
             }
         }
@@ -90,8 +90,21 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
         for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
             pacchettoBevanda* b = dynamic_cast<pacchettoBevanda*>(*it);
             if(b){
-                //QWidget* p = new BevandaRadioButton((b->ID,QString::fromStdString(b->nome),b->prezzo,b->capacita,(b->tipo? "Lattina" : "Bottiglia"),wrapper);
-                //dynamic_cast<QVBoxLayout*>(wrapper->layout())->addWidget(b);
+                QWidget* completeRadio = new QWidget(wrapper);
+                QHBoxLayout* completeRadioLayout = new QHBoxLayout(completeRadio);
+                QWidget* bb = new BevandaRadioButton(b->ID,QString::fromStdString(b->nome),b->prezzo,b->capacita,(b->tipo? "Lattina" : "Bottiglia"),completeRadio);
+                QLabel* id = new QLabel(QString::fromStdString(std::to_string(b->ID)));
+                QLabel* prezzo = new QLabel(QString::fromStdString(to_string_with_precision(b->prezzo)));
+                QLabel* capacit = new QLabel(QString::fromStdString(to_string_with_precision(b->capacita)));
+                QLabel* tipologia = new QLabel((b->tipo? "Lattina" : "Bottiglia"));
+
+                completeRadioLayout->addWidget(bb);
+                completeRadioLayout->addWidget(id);
+                completeRadioLayout->addWidget(prezzo);
+                completeRadioLayout->addWidget(capacit);
+                completeRadioLayout->addWidget(tipologia);
+
+                dynamic_cast<QVBoxLayout*>(wrapper->layout())->addWidget(completeRadio);
             }
         }
     }
@@ -108,15 +121,15 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
         //eliminazione dei vecchi ingredienti se presenti nel layout
         QLayoutItem* item = nullptr;
         while((item = visualizationWrapper->layout()->takeAt(1)) != NULL){
-                ConsumabiliCheckBox* p = dynamic_cast<ConsumabiliCheckBox*>(item->widget());
-                std::cout << p->text().toStdString() << " " << p->isChecked() << std::endl;
+                //IngredienteCheckBox* p = dynamic_cast<IngredienteCheckBox*>(item->widget());
+                //std::cout << p->text().toStdString() << " " << p->isChecked() << std::endl;
                 delete item->widget();
                 delete item;
         }
 
         //riempimento del layout con gli ingredienti aggiornati
         for(auto it = ++(checkBox.cbegin()); it != checkBox.cend(); ++it){
-            ConsumabiliCheckBox* elemento = dynamic_cast<ConsumabiliCheckBox*>(*it);
+            IngredienteCheckBox* elemento = dynamic_cast<IngredienteCheckBox*>(*it);
             if(elemento->isChecked()){
                 QLabel* i = new QLabel(elemento->text(),visualizationWrapper);
                 dynamic_cast<QVBoxLayout*>(visualizationWrapper->layout())->addWidget(i);

@@ -40,8 +40,6 @@ void NuovoArticolo_dettagli::initializePage(){
         auto ptr = static_cast<NuovoArticolo_pizza*>(content);
         registerField("nomePizza*", ptr->getNomePizza());
         registerField("prezzoPizza*", ptr->getPrezzoPizza());
-        registerField("pomodoro", ptr->getPomodoro());
-        registerField("mozzarella", ptr->getMozzarella());
         /*
         auto ingredients = ptr->getIngredientiCheckBoxWrapper()->children();
         for(auto it = ++(ingredients.cbegin()); it != ingredients.cend(); ++it){

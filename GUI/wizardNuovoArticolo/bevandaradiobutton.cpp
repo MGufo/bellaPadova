@@ -1,6 +1,8 @@
 #include "bevandaradiobutton.h"
 
-BevandaRadioButton::BevandaRadioButton(uint idBevanda, QString nomeBevanda, double prezzoBevanda, double capacitaBevanda, QString formatoBevanda, QWidget* parent) : QRadioButton(parent), id(idBevanda), nome(nomeBevanda), prezzo(prezzoBevanda), capacita(capacitaBevanda), formato(formatoBevanda){}
+BevandaRadioButton::BevandaRadioButton(uint idBevanda, QString nomeBevanda, double prezzoBevanda, double capacitaBevanda, QString formatoBevanda, QWidget* parent) : QRadioButton(parent), id(idBevanda), nome(nomeBevanda), prezzo(prezzoBevanda), capacita(capacitaBevanda), formato(formatoBevanda){
+    setText(nomeBevanda);
+}
 
 uint BevandaRadioButton::getId() const{ return id;}
 

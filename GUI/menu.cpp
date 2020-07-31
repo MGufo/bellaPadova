@@ -4,11 +4,15 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
   layoutMenu = new QVBoxLayout(this);
 
   QStringList* headerLabels = new QStringList();
+  headerLabels->push_back("ID");
   headerLabels->push_back("Nome");
-  headerLabels->push_back("Ingredienti");
+  headerLabels->push_back("Disponibilità");
   headerLabels->push_back("Prezzo");
+  headerLabels->push_back("Ingredienti");
   TabellaComposita* tabPizze = new TabellaComposita(this, "Pizze", headerLabels);
-  headerLabels->erase(++(headerLabels->begin()));
+  headerLabels->erase(--(headerLabels->end()));
+  headerLabels->push_back("Capacità");
+  headerLabels->push_back("Tipologia");
   TabellaComposita* tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
 
   layoutMenu->addWidget(tabPizze);
