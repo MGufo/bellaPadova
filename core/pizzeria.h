@@ -22,7 +22,6 @@ class Pizzeria {
   GestoreRisorse gestoreRisorse;
   GestoreComande gestoreComande;
   unsigned short capacitaForno;
-  bool salvaComande, salvaRisorse;
   const string pathComande;
   const string pathRisorse;
 

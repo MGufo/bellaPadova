@@ -173,7 +173,6 @@ void Pizzeria::salvaComande() const{
   fileComande->close();
   delete fileComandeJSON;
   delete fileComande;
-  salvaComande = false;
 }
 
 void Pizzeria::salvaRisorse() const{
@@ -186,7 +185,6 @@ void Pizzeria::salvaRisorse() const{
   fileRisorse->close();
   delete fileRisorseJSON;
   delete fileRisorse;
-  salvaRisorse = false;
 }
 
 const QJsonObject& Pizzeria::caricaComande() const{
