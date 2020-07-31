@@ -23,6 +23,8 @@ class Pizzeria {
   GestoreComande gestoreComande;
   unsigned short capacitaForno;
   bool daSalvare;
+  const string pathComande;
+  const string pathRisorse;
 
   double calcoloGuadagno(const QJsonObject&, const QDate&, const QDate&) const;
 
@@ -45,7 +47,7 @@ class Pizzeria {
   QJsonObject* parseFile(QFile*) const;
 
  public:
-  Pizzeria();
+  Pizzeria(const string, const string);
   const Lista<Consumabile*>& getInventario() const;
   const Lista<Articolo*>& getMenu() const;
 
