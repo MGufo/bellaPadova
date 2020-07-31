@@ -111,7 +111,7 @@ void Controller::caricaRisorse(){
   // TODO: Aggiornamento vista
 }
 
-void Controller::salvaComande() const{
+void Controller::salvaComande(){
   try{
     modello->salvaComande();
   } catch (std::logic_error *ecc) {
@@ -120,7 +120,7 @@ void Controller::salvaComande() const{
   comandeSalvate = true;
 }
 
-void Controller::salvaRisorse() const{
+void Controller::salvaRisorse(){
   try{
     modello->salvaRisorse();
   } catch (std::logic_error *ecc) {

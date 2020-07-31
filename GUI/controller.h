@@ -31,8 +31,8 @@ class Controller : public QObject {
  public slots:
   void caricaComande();
   void caricaRisorse();
-  void salvaComande() const;
-  void salvaRisorse() const;
+  void salvaComande();
+  void salvaRisorse();
   void modificaComande();
   void modificaRisorse();
   void saveAndExit();
