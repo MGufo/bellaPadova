@@ -92,7 +92,6 @@ void Comanda::salva(QJsonObject* comandaJSON) const {
 //  delete ordinazioneJSON;
   comandaJSON->insert("totale", totale);
   delete contattoJSON;
-  delete comandaJSON;
 }
 
 bool Comanda::operator<(const Comanda& c) const {
