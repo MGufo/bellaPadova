@@ -149,9 +149,30 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
 }
 	
 void MainWindow::closeEvent(QCloseEvent *event){
-  if(!controller->canQuit())
-    emit saveAndExit();
-  event->accept();
+  if(!controller->canQuit()){
+    QMessageBox* savePrompt = new QMessageBox(this);
+    savePrompt->setText("The document has been modified.");
+    savePrompt->setInformativeText("Do you want to save your changes?");
+    savePrompt->setStandardButtons(
+          QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    savePrompt->setDefaultButton(QMessageBox::Save);
+    int res = savePrompt->exec();
+    switch (res){
+      case QMessageBox::Save: {
+        emit saveAndExit();
+        event->accept();
+        break;
+      }
+      case QMessageBox::Discard: {
+        event->accept();
+        break;
+      }
+      case QMessageBox::Cancel:{
+        event->ignore();
+        break;
+      }
+    }
+  }
 }
 
 void MainWindow::visualizzaInventario(){
