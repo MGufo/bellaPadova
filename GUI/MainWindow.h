@@ -31,6 +31,9 @@ class MainWindow : public QWidget {
   void visualizzaInventario();
   void mostraErrore(const QString&);
 
+signals:
+  void saveAndExit();
+
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
