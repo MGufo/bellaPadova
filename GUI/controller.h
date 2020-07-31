@@ -17,6 +17,7 @@ class Controller : public QObject {
   MainWindow* vista;
   unsigned int idComande;
   unsigned int idRisorse;
+  bool comandeSalvate = true, risorseSalvate = true;
 
  public:
   explicit Controller(Pizzeria*,  uint, uint, QObject* parent = nullptr);
@@ -25,6 +26,7 @@ class Controller : public QObject {
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
   QList<pacchetto*>* recuperaInventario() const;
+  bool canQuit() const;
 
  public slots:
   void caricaComande();
@@ -33,6 +35,7 @@ class Controller : public QObject {
   void salvaRisorse() const;
   void modificaComande();
   void modificaRisorse();
+  void saveAndExit();
 };
 
 #endif

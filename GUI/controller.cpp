@@ -36,6 +36,7 @@ void Controller::creaNuovoConsumabile(pacchetto* pC){
         pConsumabile = new Ingrediente(ptr->ID,ptr->nome,ptr->disponibilita,ptr->quantita,ptr->costo,ptr->dataAcquisto,ptr->locale);
     }
     modello->inserisciConsumabile(pConsumabile);
+    risorseSalvate = false;
     vista->aggiornaInventario(pC);
 }
 
@@ -61,6 +62,7 @@ void Controller::modificaConsumabile(pacchetto * pC){
     Risorsa* temp = modello->trovaRisorsa(pC->ID);
     Consumabile* vecchioConsumabile = dynamic_cast<Consumabile*>(temp);
     modello->modificaConsumabile(vecchioConsumabile,pConsumabile);
+    risorseSalvate = false;
 }
 
 QList<pacchetto*>* Controller::recuperaInventario() const{
@@ -89,6 +91,8 @@ QList<pacchetto*>* Controller::recuperaInventario() const{
     return pacchetti;
 }
 
+bool Controller::canQuit() const { return (comandeSalvate && risorseSalvate); }
+
 void Controller::caricaComande(){
   try{
     modello->caricaComande();
@@ -113,6 +117,7 @@ void Controller::salvaComande() const{
   } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
+  comandeSalvate = true;
 }
 
 void Controller::salvaRisorse() const{
@@ -121,10 +126,12 @@ void Controller::salvaRisorse() const{
   } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
+  risorseSalvate = true;
 }
 
 void Controller::modificaComande(){
     //modello->modificaComanda();
+  comandeSalvate = false;
 }
 
 void Controller::modificaRisorse(){
@@ -134,5 +141,10 @@ void Controller::modificaRisorse(){
   } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
+  risorseSalvate = false;
+}
 
+void Controller::saveAndExit(){
+  if(!comandeSalvate) modello->salvaComande();
+  if(!risorseSalvate) modello->salvaRisorse();
 }
