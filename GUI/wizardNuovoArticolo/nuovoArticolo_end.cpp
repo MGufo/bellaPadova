@@ -16,10 +16,6 @@ void NuovoArticolo_end::setActualPage(){
     if(ptr) layoutEnd->removeRow(ptr);
     ptr = findChild<QLabel*>("prezzoPizza");
     if(ptr) layoutEnd->removeRow(ptr);
-    ptr = findChild<QLabel*>("pomodoro");
-    if(ptr) layoutEnd->removeRow(ptr);
-    ptr = findChild<QLabel*>("mozzarella");
-    if(ptr) layoutEnd->removeRow(ptr);
     QWidget* ptr1 = findChild<QWidget*>("ingredientiVisualizationWrapper");
     if(ptr1) layoutEnd->removeRow(ptr1);
 
@@ -32,14 +28,6 @@ void NuovoArticolo_end::setActualPage(){
         QLabel* prezzoPizza = new QLabel(field("prezzoPizza").toString(), this);
         prezzoPizza->setObjectName("prezzoPizza");
         layoutEnd->addRow("Prezzo:", prezzoPizza);
-
-        QLabel* pomodoro = new QLabel(((field("pomodoro").toBool()) ? "Si" : "No"), this);
-        pomodoro->setObjectName("pomodoro");
-        layoutEnd->addRow("Pomodoro:", pomodoro);
-
-        QLabel* mozzarella = new QLabel(((field("mozzarella").toBool()) ? "Si" : "No"), this);
-        mozzarella->setObjectName("mozzarella");
-        layoutEnd->addRow("Mozzarella:", mozzarella);
 
         QWidget* wrapper = new QWidget(this);
         wrapper->setObjectName("ingredientiVisualizationWrapper");

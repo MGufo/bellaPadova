@@ -20,12 +20,14 @@ public:
   QLineEdit* getNomePizza() const;
   QLineEdit* getPrezzoPizza() const;
   QWidget* getIngredientiCheckBoxWrapper() const;
+  QWidget* getFarineRadioButtonWrapper() const;
 
 private:
   QGridLayout* layoutPizza;
   QLineEdit* nomePizza;
   QLineEdit* prezzoPizza;
   QWidget* ingredientiCheckBoxWrapper;
+  QWidget* farineRadioButtonWrapper;
 };
 
 #endif // WIZARD_PIZZA_H

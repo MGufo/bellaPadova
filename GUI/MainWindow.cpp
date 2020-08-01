@@ -79,13 +79,23 @@ void MainWindow::modificaConsumabile(pacchetto* pC){
 void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
   QList<pacchetto*>* inventario = controller->recuperaInventario();
   if(option_pizza){
-    QWidget* wrapper = findChild<QWidget*>("ingredientiCheckBoxWrapper");
+
+      QWidget* wrapperFarine = findChild<QWidget*>("farineRadioButtonWrapper");
+      for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
+        if(dynamic_cast<pacchettoFarina*>(*it)){
+          QWidget* i = new IngredienteCheckBox
+              (QString::fromStdString((*it)->nome),(*it)->ID,wrapperFarine);
+          dynamic_cast<QVBoxLayout*>(wrapperFarine->layout())->addWidget(i);
+        }
+      }
+
+    QWidget* wrapperIngredienti = findChild<QWidget*>("ingredientiCheckBoxWrapper");
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
       if(dynamic_cast<pacchettoIngrediente*>(*it) &&
          !dynamic_cast<pacchettoFarina*>(*it)){
         QWidget* i = new IngredienteCheckBox
-            (QString::fromStdString((*it)->nome),(*it)->ID,wrapper);
-        dynamic_cast<QVBoxLayout*>(wrapper->layout())->addWidget(i);
+            (QString::fromStdString((*it)->nome),(*it)->ID,wrapperIngredienti);
+        dynamic_cast<QVBoxLayout*>(wrapperIngredienti->layout())->addWidget(i);
       }
     }
   }
@@ -102,14 +112,14 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
         QLabel* id = new QLabel(QString::fromStdString(std::to_string(b->ID)));
         QLabel* prezzo = new QLabel(
               QString::fromStdString(to_string_with_precision(b->prezzo)));
-        QLabel* capacit = new QLabel(
+        QLabel* capacita = new QLabel(
               QString::fromStdString(to_string_with_precision(b->capacita)));
         QLabel* tipologia = new QLabel((b->tipo? "Lattina" : "Bottiglia"));
 
         completeRadioLayout->addWidget(bb);
         completeRadioLayout->addWidget(id);
         completeRadioLayout->addWidget(prezzo);
-        completeRadioLayout->addWidget(capacit);
+        completeRadioLayout->addWidget(capacita);
         completeRadioLayout->addWidget(tipologia);
 
         dynamic_cast<QVBoxLayout*>(wrapper->layout())->addWidget(completeRadio);

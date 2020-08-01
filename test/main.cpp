@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
   controller.setView(&view);
   view.show();
 
+    /*
     //string _nome, bool _disponibilita, unsigned int _quantita,
     //double _costo, QDate _dataAcquisto, bool _locale, string _tipoFarina
     Farina* normale = new Farina(1);
@@ -92,8 +93,12 @@ int main(int argc, char* argv[]) {
     bellaPadova.inserisciComanda(comanda1);
     bellaPadova.inserisciComanda(comanda2);
 
+
+
     bellaPadova.eseguiComanda();
     bellaPadova.eseguiComanda();
+    */
+
 
   return app.exec();
 }

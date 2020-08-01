@@ -198,8 +198,8 @@ const QJsonObject& Pizzeria::caricaComande() const{
 void Pizzeria::caricaRisorse(){
   QFile* fileRisorse = openFile(pathRisorse, 'r');
   QJsonObject* risorseJSON = parseFile(fileRisorse);
-  gestoreRisorse.caricaInventario((*risorseJSON->constFind("inventario")).toObject());
-  gestoreRisorse.caricaMenu((*risorseJSON->constFind("menu")).toObject());
+  gestoreRisorse.caricaInventario((*risorseJSON->constFind("Inventario")).toObject());
+  gestoreRisorse.caricaMenu((*risorseJSON->constFind("Menu")).toObject());
   delete risorseJSON;
   delete fileRisorse;
 }
@@ -207,8 +207,8 @@ void Pizzeria::caricaRisorse(){
 unsigned int Pizzeria::getIdComande() const{
   QFile* fileComande = openFile(pathComande, 'r');
   QJsonObject* idComandeJSON = new QJsonObject(
-        (*(parseFile(fileComande)->constFind("idComande"))).toObject());
-  uint idComande = (*idComandeJSON->constFind("idComande")).toInt();
+        (*(parseFile(fileComande)->constFind("IdComande"))).toObject());
+  uint idComande = (*idComandeJSON->constFind("IdComande")).toInt();
   delete fileComande;
   delete idComandeJSON;
   return idComande;
@@ -217,8 +217,8 @@ unsigned int Pizzeria::getIdComande() const{
 unsigned int Pizzeria::getIdRisorse() const{
   QFile* fileRisorse = openFile(pathRisorse, 'r');
   QJsonObject* idRisorseJSON = new QJsonObject(
-        (*(parseFile(fileRisorse)->constFind("idRisorse"))).toObject());
-  uint idRisorse = (*idRisorseJSON->constFind("idRisorse")).toInt();
+        (*(parseFile(fileRisorse)->constFind("IdRisorse"))).toObject());
+  uint idRisorse = (*idRisorseJSON->constFind("IdRisorse")).toInt();
   delete fileRisorse;
   delete idRisorseJSON;
   return idRisorse;
