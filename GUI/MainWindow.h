@@ -6,6 +6,8 @@
 #include <QMenuBar>
 #include <QFile>
 #include <QTabWidget>
+#include <QList>
+
 #include "GUI/comande.h"
 #include "GUI/menu.h"
 #include "GUI/inventario.h"
@@ -13,6 +15,9 @@
 #include "GUI/header.h"
 #include "GUI/controller.h"
 #include "GUI/pacchetti.h"
+#include "GUI/wizardNuovoArticolo/ingredientecheckbox.h"
+#include "GUI/wizardNuovoArticolo/bevandaradiobutton.h"
+
 
 class Controller;
 class MainWindow : public QWidget {
@@ -23,14 +28,23 @@ class MainWindow : public QWidget {
   ~MainWindow();
   void aggiornaContabilizzazione(double);
   void aggiornaInventario(pacchetto*);
-  void riempiInventario();
+  void visualizzaInventario();
   void mostraErrore(const QString&);
+
+signals:
+  void saveAndExit();
 
  public slots:
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
+  //true = pizza
+  //false = bevanda
+  void visualizzaElementiInWizard(bool) const;
+  void visualizzaElementiCheckatiInWizard(bool) const;
 
+protected:
+  void closeEvent(QCloseEvent *event);
 private:
   Controller* controller;
   QVBoxLayout* mainLayout;

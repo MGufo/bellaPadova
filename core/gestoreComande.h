@@ -5,10 +5,6 @@
 #include "comanda.h"
 #include "qontainer.h"
 
-// TODO: sostituire la mappa di [articolo* => quantita] con una mappa
-// di [oggetto(nome,prezzo) => quantità] per evitare problemi di riferimento
-// ad articoli rimossi su comande vecchie
-
 class GestoreComande {
  private:
   Lista<Comanda*> bacheca;
@@ -26,6 +22,8 @@ class GestoreComande {
    * @param: Comanda* (Comanda che si vuole inserire nello slot temporale)
    */
   bool testInsert(const Comanda*, const Comanda*, const Comanda*, unsigned short);
+
+  unsigned int getMaxId() const;
 
  public:
   GestoreComande();
@@ -82,8 +80,7 @@ class GestoreComande {
 
   void salvaComande(QJsonObject*) const;
 
-  void caricaComande(const QJsonObject&,
-                     const std::unordered_map<uint, Risorsa*>* = nullptr);
+  void salvaIdComande(QJsonObject*) const;
 };
 
 #endif

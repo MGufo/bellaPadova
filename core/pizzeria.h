@@ -9,6 +9,7 @@
 
 #include <sstream>
 #include <stdexcept>
+#include <string>
 
 #include "contatto.h"
 #include "gestoreComande.h"
@@ -21,12 +22,31 @@ class Pizzeria {
   GestoreRisorse gestoreRisorse;
   GestoreComande gestoreComande;
   unsigned short capacitaForno;
-  //nel controller la costruzione delle comande dovrà usare idComande++ e il controller stesso dovrà incrementare idComande
-  //idComande sarà ricaricato ad ogni costruzione del modello dal rispettivo file xml e salvato ad ogni salvataggio su file xml
-  unsigned int idComande;
+  const string pathComande;
+  const string pathRisorse;
+
+  double calcoloGuadagno(const QJsonObject&, const QDate&, const QDate&) const;
+
+  /**
+   * @brief: Se esiste apre il file al percorso specificato, altrimenti lancia
+   * un'eccezione
+   * @param: stringa rappresentante il percorso su disco al file da aprire
+   * * @param: char rappresentante la modalità di apertura (r = read, w = write)
+   * @returns: Puntatore a QFile rappresentante il file aperto
+   * @throws: std::invalid_argument
+   */
+  QFile* openFile(const string&, char) const;
+
+  /**
+   * @brief: Se esiste apre il file al percorso specificato, altrimenti lancia
+   * un'eccezione
+   * @returns: Puntatore a QFile rappresentante il file aperto
+   * @throws: std::invalid_argument (errore di parsing del file)
+   */
+  QJsonObject* parseFile(QFile*) const;
 
  public:
-  Pizzeria();
+  Pizzeria(const string, const string);
   const Lista<Consumabile*>& getInventario() const;
   const Lista<Articolo*>& getMenu() const;
 
@@ -67,18 +87,19 @@ class Pizzeria {
    * @brief: Serializza le comande presenti nel modello e le scrive
    *         in un file JSON
    */
-  void salvaComande();
+  void salvaComande() const;
 
   /**
    * @brief: Serializza le risorse (articoli in menù e inventario) presenti
    *         nel modello e le scrive in un file JSON
    */
-  void salvaRisorse();
+  void salvaRisorse() const;
 
   /**
    * @brief: Legge da file JSON una lista di comande e le aggiunge al modello
+   * @returns:
    */
-  void caricaComande();
+  const QJsonObject& caricaComande() const;
 
   /**
    * @brief: Legge da file JSON una lista di articoli e li aggiunge
@@ -86,6 +107,12 @@ class Pizzeria {
    */
   void caricaRisorse();
 
+  unsigned int getIdComande() const;
 
+  unsigned int getIdRisorse() const;
+
+  bool getDaSalvare() const;
+  string getPathComande() const;
+  string getPathRisorse() const;
 };
 #endif

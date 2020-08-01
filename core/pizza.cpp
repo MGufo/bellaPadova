@@ -56,27 +56,27 @@ void Pizza::setFarina(Farina* f) {
   }
 }
 
-// TODO: Messaggio da mostrare come eccezione nel caso in cui l'ingrediente sia
-// già presente o sia di tipo Farina*:
-// - "Ingrediente già presente nella lista di ingredienti"
-// - "La lista di ingredienti non deve contenere Farine"
 void Pizza::aggiungiIngredienti(const Lista<Ingrediente*>& ingr) {
-  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it)
-    if (dynamic_cast<Farina*>(*it) || (checkIngrediente(*it)))
-      throw new std::domain_error("Non è possibile aggiungere l'ingrediente selezionato");
-
+  for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
+    if (dynamic_cast<Farina*>(*it))
+      throw new std::domain_error("Errore: La lista di ingredienti non può"
+                                  "contenere farine.");
+    if(checkIngrediente(*it))
+      throw new std::domain_error("Errore: L'ingrediente " + (*it)->getNome() +
+                                  " è già presente nella lista di ingredienti.");
+}
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it)
     addIngrediente(*it);
 }
 
-// "Ingrediente già rimosso dalla lista di ingredienti"
-// "Rimozione della farina dalla lista di ingredienti non consentita"
 void Pizza::rimuoviIngredienti(const Lista<Ingrediente*>& ingr) {
   for (auto it = ingr.const_begin(); it != ingr.const_end(); ++it) {
     if (dynamic_cast<Farina*>(*it))
-      throw new std::domain_error("Errore: Non è possibile rimuovere la farina da una pizza.");
+      throw new std::domain_error("Errore: Non è possibile rimuovere la farina"
+                                  "da una pizza.");
     if (!checkIngrediente(*it))
-      throw new std::domain_error("Errore: L'ingrediente da rimuovere non è presente nella pizza selezionata.");
+      throw new std::domain_error("Errore: L'ingrediente da rimuovere non è"
+                                  "presente nella pizza selezionata.");
     removeIngrediente(*it);
   }
 }
@@ -102,19 +102,32 @@ const Lista<Consumabile*>* Pizza::getComposizione() const {
   return lista;
 }
 
+void Pizza::modificaComposizione(Consumabile* daModificare, Consumabile* modificato){
+    auto it = ingredienti.find(dynamic_cast<Ingrediente*>(daModificare));
+    if(it.isValid()){
+        (*it)->setNome(modificato->getNome());
+        (*it)->setDisponibilita(modificato->getDisponibilita());
+        (*it)->setQuantita(modificato->getQuantita());
+        (*it)->setCosto(modificato->getCosto());
+        (*it)->setDataAcquisto(modificato->getDataAcquisto());
+        (*it)->setLocal(dynamic_cast<Ingrediente*>(modificato)->isLocal());
+    }
+}
+
 void Pizza::carica(const QJsonObject& pizzaJSON,
                    const std::unordered_map<uint, Risorsa*>* keymap) {
-  setID((*(pizzaJSON.find("ID"))).toInt());
-  setNome((*(pizzaJSON.find("Nome"))).toString().toStdString());
-  setDisponibilita((*(pizzaJSON.find("Disponibilita"))).toBool());
-  setPrezzoBase((*(pizzaJSON.find("Prezzo"))).toDouble());
+  setID((*(pizzaJSON.constFind("ID"))).toInt());
+  setNome((*(pizzaJSON.constFind("Nome"))).toString().toStdString());
+  setDisponibilita((*(pizzaJSON.constFind("Disponibilita"))).toBool());
+  setPrezzoBase((*(pizzaJSON.constFind("Prezzo"))).toDouble());
   QJsonArray* ingredientiJSON =
-      new QJsonArray((*(pizzaJSON.find("Ingredienti"))).toArray());
+      new QJsonArray((*(pizzaJSON.constFind("Ingredienti"))).toArray());
   for(auto it = ingredientiJSON->constBegin();
       it != ingredientiJSON->constEnd(); ++it){
       ingredienti.push_back(
             dynamic_cast<Ingrediente*>(keymap->at
-                                       ((*((*it).toObject().find("ID"))).toInt())));
+                                       ((*((*it).toObject().constFind("ID"))).
+                                        toInt())));
   }
   delete ingredientiJSON;
 }

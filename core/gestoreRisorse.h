@@ -32,6 +32,8 @@ class GestoreRisorse {
    */
   bool controlloConsumabile(const Lista<Consumabile *> *, Consumabile *) const;
 
+  unsigned int getMaxId() const;
+
  public:
   GestoreRisorse();
 
@@ -67,7 +69,7 @@ class GestoreRisorse {
    */
   void inserisciConsumabile(Consumabile *);
 
-  void modificaConsumabile(Consumabile *, const Consumabile *);
+  void modificaConsumabile(Consumabile *, Consumabile *);
 
   // FIXME: Ricordarsi di cancellare l'oggetto tramite delete dopo aver invocato
   // il metodo.
@@ -87,6 +89,8 @@ class GestoreRisorse {
   const Lista<Consumabile *> &getInventario() const;
 
   void salvaRisorse(QJsonObject*) const;
+
+  void salvaIdRisorse(QJsonObject*) const;
 
   void caricaMenu(const QJsonObject&);
   void caricaInventario(const QJsonObject&);

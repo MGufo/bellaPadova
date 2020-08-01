@@ -8,6 +8,7 @@
 #include <QScrollArea>
 #include "GUI/tabellacomposita.h"
 #include "wizardNuovoArticolo/wizard_nuovoArticolo.h"
+class WizardNuovoArticolo;
 
 class Menu : public QWidget
 {

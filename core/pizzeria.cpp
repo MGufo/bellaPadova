@@ -1,12 +1,52 @@
 #include "pizzeria.h"
 
-Pizzeria::Pizzeria()
-  : contatto(Contatto()),
-    gestoreRisorse(GestoreRisorse()),
-    gestoreComande(GestoreComande()),
-    capacitaForno(5) {
-    //caricaRisorse();
+string Pizzeria::getPathComande() const { return pathComande; }
+
+string Pizzeria::getPathRisorse() const { return pathRisorse; }
+
+double Pizzeria::calcoloGuadagno(const QJsonObject & comandeJSON,
+                                 const QDate& inizio, const QDate& fine) const {
+  double guadagno = 0;
+  for(auto it = comandeJSON.constBegin(); it != comandeJSON.constEnd(); ++it){
+    QDate dataConsegna =
+        QDate::fromString((*(*it).toObject().constFind("dataConsegna")).toString());
+    if(inizio <= dataConsegna && dataConsegna <= fine)
+      guadagno += (*(*it).toObject().constFind("totale")).toDouble();
+  }
+  return guadagno;
 }
+
+QFile *Pizzeria::openFile(const string& path, char mode) const{
+  QFile* file = new QFile(QString::fromStdString(path));
+  if(!file->exists())
+    throw new std::domain_error("Errore: File Inesistente");
+  if((mode == 'w' && !file->open(QIODevice::WriteOnly | QIODevice::Text))
+      ||
+     (mode == 'r' && !file->open(QIODevice::ReadOnly | QIODevice::Text)))
+      throw new std::invalid_argument("Errore: Impossibile aprire il file");
+  return file;
+}
+
+QJsonObject *Pizzeria::parseFile(QFile* file) const{
+  QByteArray jsonData = file->readAll();
+  file->close();
+  QJsonParseError* pE = new QJsonParseError();
+  QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonData, pE);
+
+//  if(fileRisorseJSON.isNull())
+//    throw new std::invalid_argument(pE->errorString().toStdString());
+  delete pE;
+  QJsonObject* jsonContent = new QJsonObject(jsonDocument.object());
+  return jsonContent;
+}
+
+Pizzeria::Pizzeria(const string pathComande, const string pathRisorse) :
+  contatto(Contatto()),
+  gestoreRisorse(GestoreRisorse()),
+  gestoreComande(GestoreComande()),
+  capacitaForno(5),
+  pathComande(pathComande),
+  pathRisorse(pathRisorse) {}
 
 const Lista<Consumabile *> &Pizzeria::getInventario() const{
     return gestoreRisorse.getInventario();
@@ -17,19 +57,9 @@ const Lista<Articolo *> &Pizzeria::getMenu() const{
 }
 
 double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) const{
-  double guadagni = 0;
+  double guadagni = calcoloGuadagno(caricaComande(), inizio, fine);;
   double costi = 0;
-  const unordered_map<Articolo*, unsigned int>* ordinazione = nullptr;
-  const Lista<Comanda*>* comande = &gestoreComande.getBacheca();
   const Lista<Consumabile*>* consumabili = &gestoreRisorse.getInventario();
-  for(auto it = comande->const_begin(); it != comande->const_end(); ++it){
-    if(inizio <= (*it)->getDataConsegna() && (*it)->getDataConsegna() <= fine){
-      ordinazione = &(*it)->getOrdinazione();
-      for(auto it2 =ordinazione->cbegin(); it2 != ordinazione->cend(); ++it2){
-        guadagni += (*it2).first->getPrezzo() * (*it2).second;
-      }
-    }
-  }
   for(auto it = consumabili->const_begin(); it != consumabili->const_end(); ++it){
     if((inizio <= (*it)->getDataAcquisto()) && ((*it)->getDataAcquisto() <= fine)){
       costi += (*it)->getSpesa();
@@ -133,80 +163,63 @@ void Pizzeria::setCapacitaForno(unsigned short _forno) {
   capacitaForno = _forno;
 }
 
-void Pizzeria::salvaComande(){
-  QFile fileComande(":/resources/comande.json");
-  if(!fileComande.open(QIODevice::Append | QIODevice::Text))
-    throw new std::invalid_argument("Errore: Impossibile aprire il file");
-
+void Pizzeria::salvaComande() const{
+  QFile* fileComande = openFile(pathComande, 'w');
   QJsonObject* comandeJSON = new QJsonObject();
   gestoreComande.salvaComande(comandeJSON);
+  gestoreComande.salvaIdComande(comandeJSON);
   QJsonDocument* fileComandeJSON = new QJsonDocument(*comandeJSON);
-  fileComande.write(fileComandeJSON->toJson());
-  fileComande.close();
+  fileComande->write(fileComandeJSON->toJson());
+  fileComande->close();
   delete fileComandeJSON;
-
-/*
-1: Apro il file da disco con QFile
-2: Creare un JsonDocument che rappresenta il file json all'interno di Qt
-3: Aggiungere il contenuto del model al JsonDocument
-4: Scrivere il contenuto del JsonDocument nel QFile
-*/
+  delete fileComande;
 }
 
-void Pizzeria::salvaRisorse(){
-  QFile fileRisorse(":/resources/risorse.json");
-  if(!fileRisorse.open(QIODevice::Append | QIODevice::Text))
-    throw new std::invalid_argument("Errore: Impossibile aprire il file");
-
+void Pizzeria::salvaRisorse() const{
+  QFile* fileRisorse = openFile(pathRisorse, 'w');
   QJsonObject* risorseJSON = new QJsonObject();
   gestoreRisorse.salvaRisorse(risorseJSON);
+  gestoreRisorse.salvaIdRisorse(risorseJSON);
   QJsonDocument* fileRisorseJSON = new QJsonDocument(*risorseJSON);
-  fileRisorse.write(fileRisorseJSON->toJson());
-  fileRisorse.close();
+  fileRisorse->write(fileRisorseJSON->toJson());
+  fileRisorse->close();
   delete fileRisorseJSON;
+  delete fileRisorse;
 }
 
-void Pizzeria::caricaComande(){
-  QFile fileComande(":/resources/comande.json");
-  if(!fileComande.open(QIODevice::ReadOnly | QIODevice::Text))
-    throw new std::invalid_argument("Errore: Impossibile aprire il file");
-
-  QByteArray jsonData = fileComande.readAll();
-  fileComande.close();
-
-  QJsonParseError* pE = new QJsonParseError();
-  QJsonDocument fileComandeJSON = QJsonDocument::fromJson(jsonData, pE);
-
-//  if(fileRisorseJSON.isNull())
-//    throw new std::invalid_argument(pE->errorString().toStdString());
-
-  QJsonObject comandeJSON = fileComandeJSON.object();
-  gestoreComande.caricaComande(comandeJSON);
-  delete pE;
+const QJsonObject& Pizzeria::caricaComande() const{
+  QFile* fileComande = openFile(pathComande, 'r');
+  const QJsonObject* comandeJSON = new QJsonObject(
+        (*(parseFile(fileComande)->constFind("Comande"))).toObject());
+  delete fileComande;
+  return *comandeJSON;
 }
 
 void Pizzeria::caricaRisorse(){
-  QFile fileRisorse(":/resources/risorse.json");
-  if(!fileRisorse.open(QIODevice::ReadOnly | QIODevice::Text))
-    throw new std::invalid_argument("Errore: Impossibile aprire il file");
-
-  QByteArray jsonData = fileRisorse.readAll();
-  fileRisorse.close();
-
-  QJsonParseError* pE = new QJsonParseError();
-  QJsonDocument fileRisorseJSON = QJsonDocument::fromJson(jsonData, pE);
-
-//  if(fileRisorseJSON.isNull())
-//    throw new std::invalid_argument(pE->errorString().toStdString());
-
-  QJsonObject risorseJSON = fileRisorseJSON.object();
-  gestoreRisorse.caricaInventario((*risorseJSON.find("inventario")).toObject());
-  gestoreRisorse.caricaMenu((*risorseJSON.find("menu")).toObject());
-  delete pE;
+  QFile* fileRisorse = openFile(pathRisorse, 'r');
+  QJsonObject* risorseJSON = parseFile(fileRisorse);
+  gestoreRisorse.caricaInventario((*risorseJSON->constFind("inventario")).toObject());
+  gestoreRisorse.caricaMenu((*risorseJSON->constFind("menu")).toObject());
+  delete risorseJSON;
+  delete fileRisorse;
 }
 
-  /*leggere id ultima comanda e mandarlo come signal allo slot del controller
-  *che si setta l'id corretto
-  * Poi si legge il resto del file e si caricano le robe
-  */
+unsigned int Pizzeria::getIdComande() const{
+  QFile* fileComande = openFile(pathComande, 'r');
+  QJsonObject* idComandeJSON = new QJsonObject(
+        (*(parseFile(fileComande)->constFind("idComande"))).toObject());
+  uint idComande = (*idComandeJSON->constFind("idComande")).toInt();
+  delete fileComande;
+  delete idComandeJSON;
+  return idComande;
+}
 
+unsigned int Pizzeria::getIdRisorse() const{
+  QFile* fileRisorse = openFile(pathRisorse, 'r');
+  QJsonObject* idRisorseJSON = new QJsonObject(
+        (*(parseFile(fileRisorse)->constFind("idRisorse"))).toObject());
+  uint idRisorse = (*idRisorseJSON->constFind("idRisorse")).toInt();
+  delete fileRisorse;
+  delete idRisorseJSON;
+  return idRisorse;
+}

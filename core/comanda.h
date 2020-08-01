@@ -25,12 +25,13 @@ class Comanda {
   QTime oraConsegna;
   QDate dataConsegna;
   unordered_map<Articolo*, unsigned int> ordinazione;
+  double totale;
 
  public:
   Comanda();
   Comanda(unsigned int, Contatto, QTime, QDate,
           unordered_map<Articolo*, unsigned int> =
-              unordered_map<Articolo*, unsigned int>());
+              unordered_map<Articolo*, unsigned int>(), double = 0);
 
   unsigned int getIdComanda() const;
 
@@ -69,6 +70,7 @@ class Comanda {
 
   const QDate& getDataConsegna() const;
 
+  double getTotale() const;
   /**
    * @brief: Modifica l'orario di consegna di una comanda
    * @param: QTime (Nuovo orario di consegna)
@@ -109,8 +111,6 @@ class Comanda {
    *
    */
   void salva(QJsonObject*) const;
-
-  void carica(const QJsonObject*);
 
   bool operator<(const Comanda&) const;
 

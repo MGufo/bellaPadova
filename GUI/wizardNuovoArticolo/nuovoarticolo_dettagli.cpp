@@ -2,6 +2,7 @@
 
 NuovoArticolo_dettagli::NuovoArticolo_dettagli(QWidget* parent) : QWizardPage(parent), content(nullptr){
     layoutDettagli = new QVBoxLayout(this);
+    connect(this,SIGNAL(riempiWizardConElementi(bool)),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiInWizard(bool)));
     setLayout(layoutDettagli);
 }
 
@@ -10,6 +11,7 @@ int NuovoArticolo_dettagli::nextId() const{
 }
 
 void NuovoArticolo_dettagli::setActualPage(){
+    //TODO: implemento pagine del wizard come wizardNuovoConsumabile
     if(content){
         layoutDettagli->removeWidget(content);
         delete content;
@@ -19,11 +21,13 @@ void NuovoArticolo_dettagli::setActualPage(){
         setSubTitle("Fornisci un nome e un prezzo alla pizza da inserire, poi "
                     "aggiungi gli ingredienti che la compongono");
         content = new NuovoArticolo_pizza(this);
+        emit riempiWizardConElementi(true);
     }
     else{   //costruzione wizard bevanda
         setTitle("Aggiunta di una nuova bevanda al Menù");
-        setSubTitle("Seleziona il formato della bevanda, poi specificane nome, costo e capacità");
+        setSubTitle("Seleziona una bevanda presente nell'inventario per inserirla nel menù");
         content = new NuovoArticolo_bevanda(this);
+        emit riempiWizardConElementi(false);
     }
     layoutDettagli->addWidget(content);
 }
@@ -36,21 +40,25 @@ void NuovoArticolo_dettagli::initializePage(){
         auto ptr = static_cast<NuovoArticolo_pizza*>(content);
         registerField("nomePizza*", ptr->getNomePizza());
         registerField("prezzoPizza*", ptr->getPrezzoPizza());
-        registerField("pomodoro", ptr->getPomodoro());
-        registerField("mozzarella", ptr->getMozzarella());
-        auto ingredients = ptr->getConsumabiliCheckBoxWrapper()->children();
-        for(auto it = ingredients.cbegin(); it != ingredients.cend(); ++it){
-            IngredientCheckBox* tmp = static_cast<IngredientCheckBox*>(*it);
-            string s = std::to_string(tmp->getId());
-            QString id(QString::fromStdString(s));
-            registerField(id, tmp);
+        /*
+        auto ingredients = ptr->getIngredientiCheckBoxWrapper()->children();
+        for(auto it = ++(ingredients.cbegin()); it != ingredients.cend(); ++it){
+            if(dynamic_cast<ConsumabiliCheckBox*>(*it)){
+                ConsumabiliCheckBox* tmp = dynamic_cast<ConsumabiliCheckBox*>(*it);
+                string s = std::to_string(tmp->getId());
+                QString id(QString::fromStdString(s));
+                registerField(id, tmp);
+            }
         }
+        */
     }
     else{
+        /*
         auto ptr = static_cast<NuovoArticolo_bevanda*>(content);
         registerField("nomeBevanda*", ptr->getNomeBevanda());
         registerField("prezzoBevanda*", ptr->getPrezzoBevanda());
         registerField("capacitaBevanda*", ptr->getCapacitaBevanda());
         registerField("optionBottiglia", ptr->getRadioBottiglia());
+        */
     }
 }

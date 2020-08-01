@@ -10,7 +10,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 
-#include "ingredientcheckbox.h"
+#include "ingredientecheckbox.h"
 
 class NuovoArticolo_pizza: public QWidget{
   Q_OBJECT
@@ -19,17 +19,13 @@ public:
 
   QLineEdit* getNomePizza() const;
   QLineEdit* getPrezzoPizza() const;
-  QCheckBox* getPomodoro() const;
-  QCheckBox* getMozzarella() const;
-  QWidget* getConsumabiliCheckBoxWrapper() const;
+  QWidget* getIngredientiCheckBoxWrapper() const;
 
 private:
   QGridLayout* layoutPizza;
   QLineEdit* nomePizza;
   QLineEdit* prezzoPizza;
-  QCheckBox* pomodoro;
-  QCheckBox* mozzarella;
-  QWidget* consumabiliCheckBoxWrapper;
+  QWidget* ingredientiCheckBoxWrapper;
 };
 
 #endif // WIZARD_PIZZA_H

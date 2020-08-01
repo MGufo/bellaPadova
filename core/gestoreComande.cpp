@@ -42,6 +42,13 @@ bool GestoreComande::testInsert(const Comanda* precedente,
   }
 }
 
+unsigned int GestoreComande::getMaxId() const {
+  unsigned int maxID = 0;
+  for(auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it)
+    if((*it)->getIdComanda() > maxID) maxID = (*it)->getIdComanda();
+  return maxID;
+}
+
 
 // HACK: La comanda può contenere sia pizze di copia dal menù che pizze
 // "temporanee", cioè create appositamente per la comanda
@@ -52,13 +59,10 @@ void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capFor
       if (!(current.isValid()))
         daInserire->setOraConsegna(QTime::currentTime().addSecs(tempoPreparazione));
       else {
-        // current esiste
-        // sottocaso prima di current
         if (QTime::currentTime().addSecs(tempoPreparazione) <
             (*current)->getOrarioInizioPreparazione(capForno))
           daInserire->setOraConsegna(QTime::currentTime().addSecs(tempoPreparazione));
         else
-          // sottocaso dopo current
           daInserire->setOraConsegna((*current)->getOraConsegna().addSecs(
             tempoPreparazione));
       }
@@ -67,12 +71,10 @@ void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capFor
       bacheca.push_back(daInserire);
       current = bacheca.begin();
     } else {
-      // esiste almeno 1 comanda da fare
       if (current.isValid()) {
         auto it = current;
         auto it2 = it;
         bool beforeCurrent = testInsert(nullptr, *current, daInserire, capForno);
-        // se non entriamo si può inserire la comanda prima di current
         if (!beforeCurrent) {
           bool flag = false;
           while (!flag) {
@@ -85,34 +87,20 @@ void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capFor
           }
         }
         if (beforeCurrent) {
-          // caso 1: si può inserire la comanda prima di current
-          // caso 1.1: prima di current esiste una comanda
-          // caso 1.2: prima di current non c'è niente (current è la prima
-          // comanda da svolgere della serata) si gestiscono allo stesso modo
           bacheca.insert(current, daInserire);
           --current;
         } else {
-          // caso 2: la comanda va inserita dopo current
-          // caso 2.1: inseriamo la comanda tra due comande valide
-          // caso 2.2: inseriamo la comanda in coda (prima di end())
-          // si gestiscono allo stesso modo
           --it;
           if (daInserire->getOrarioInizioPreparazione(capForno) <
               (*(it))->getOraConsegna())
             daInserire->setOraConsegna((*it)->getOraConsegna().addSecs(
 tempoPreparazione));
-          // qui it punta alla comanda già presente (andyM), ma insert inserisce
-          // daInserire prima di andyM! in teoria non possiamo fare insert(++it,
-          // daInserire) perché causerebbe SEGFAULT possibile soluzione: usare
-          // push back (serve condizione per distinguere inserimento in coda da
-          // inserimento in mezzo
           if (it2 != bacheca.end())
             bacheca.insert(it2, daInserire);
           else
             bacheca.push_back(daInserire);
         }
       }
-      // la bacheca contiene solo comande terminate, current == end()
       else {
         if (QTime::currentTime() > daInserire->getOrarioInizioPreparazione(capForno))
           daInserire->setOraConsegna(QTime::currentTime().addSecs(tempoPreparazione));
@@ -124,7 +112,8 @@ tempoPreparazione));
 }
 
 void GestoreComande::modificaComanda(Comanda* daModificare,
-                                     const Comanda* modificata, unsigned short capForno) {
+                                     const Comanda* modificata,
+                                     unsigned short capForno) {
   bool daReinserire =
       daModificare->getOraConsegna() != modificata->getOraConsegna();
   *daModificare = *modificata;
@@ -152,8 +141,9 @@ const Comanda* GestoreComande::getComandaCorrente() const { return *current; }
 
 const Lista<Comanda*>& GestoreComande::getBacheca() const { return bacheca; }
 
-void GestoreComande::salvaComande(QJsonObject *comandeJSON) const{
-  for(auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it){
+void GestoreComande::salvaComande(QJsonObject *fileComandeJSON) const{
+  QJsonObject* comandeJSON = new QJsonObject();
+  for(auto it = bacheca.begin(); it != current; ++it){
     QJsonObject* comandaJSON = new QJsonObject();
     (*it)->salva(comandaJSON);
     comandeJSON->insert(
@@ -161,21 +151,10 @@ void GestoreComande::salvaComande(QJsonObject *comandeJSON) const{
           *comandaJSON);
     delete comandaJSON;
   }
+  fileComandeJSON->insert("Comande", *comandeJSON);
+  delete comandeJSON;
 }
-/*
-Problema: per creare correttamente ogni comanda servono i puntatori agli Articoli
-che compongono la comanda.
-Questi puntatori sono ottenibili solo tramite l'inventario (quindi gestoreRisorse)
-MA per ottenerli servono informazioni presenti in comandeJSON (che viene passato
-a gestioneComande).
-*/
-void GestoreComande::caricaComande(const QJsonObject& comandeJSON,
-                                   const std::unordered_map<uint, Risorsa*>*
-                                   keymap){
-  for(auto it = comandeJSON.constBegin(); it != comandeJSON.constEnd(); ++it){
-    QJsonObject* comandaJSON = new QJsonObject(it->toObject());
-    Comanda* c = new Comanda();
-    c->carica(comandaJSON);
-    bacheca.push_back(c);
-  }
+
+void GestoreComande::salvaIdComande(QJsonObject* fileComandeJSON) const{
+  fileComandeJSON->insert("ID", static_cast<int>(getMaxId()));
 }

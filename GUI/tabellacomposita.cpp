@@ -17,8 +17,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   tabella->setSizePolicy(sizePolicy);
   // Crezione e riempimento header tabella
   header = new QHeaderView(Qt::Horizontal,tabella);
-  //header->setSectionResizeMode(header->ResizeToContents);
-  header->setSectionResizeMode(QHeaderView::Stretch);
+  header->setSectionResizeMode(header->ResizeToContents);
   // Aggiunta header alla tabella
   if(labels)    tabella->setHorizontalHeaderLabels(*labels);
   tabella->setHorizontalHeader(header);
@@ -57,13 +56,13 @@ void TabellaComposita::inserisciElemento(pacchetto * p){
         tabella->setItem(tabella->rowCount()-1, 2, item);
         item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->quantita)));
         tabella->setItem(tabella->rowCount()-1, 3, item);
-        item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->costo)));
+        item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pB->costo)));
         tabella->setItem(tabella->rowCount()-1, 4, item);
         item = new QTableWidgetItem(pB->dataAcquisto.toString("dd/MM/yyyy"));
         tabella->setItem(tabella->rowCount()-1, 5, item);
-        item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->capacita)));
+        item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pB->capacita)));
         tabella->setItem(tabella->rowCount()-1, 6, item);
-        item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->prezzo)));
+        item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pB->prezzo)));
         tabella->setItem(tabella->rowCount()-1, 7, item);
         item = new QTableWidgetItem((pB->tipo ? "Lattina" : "Bottiglia"));
         tabella->setItem(tabella->rowCount()-1, 8, item);
@@ -88,7 +87,7 @@ void TabellaComposita::inserisciElemento(pacchetto * p){
         tabella->setItem(tabella->rowCount()-1, 2, item);
         item = new QTableWidgetItem(QString::fromStdString(std::to_string(pI->quantita)));
         tabella->setItem(tabella->rowCount()-1, 3, item);
-        item = new QTableWidgetItem(QString::fromStdString(std::to_string(pI->costo)));
+        item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pI->costo)));
         tabella->setItem(tabella->rowCount()-1, 4, item);
         item = new QTableWidgetItem(pI->dataAcquisto.toString("dd/MM/yyyy"));
         tabella->setItem(tabella->rowCount()-1, 5, item);

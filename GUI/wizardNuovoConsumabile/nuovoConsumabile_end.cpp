@@ -34,30 +34,32 @@ void NuovoConsumabile_end::setInitialPage(){
 }
 
 void NuovoConsumabile_end::setActualPage(){
+  QLabel* ptr = nullptr;
+  ptr = findChild<QLabel*>("locale");
+  if(ptr) layoutEnd->removeRow(ptr);
+  ptr = findChild<QLabel*>("capacita");
+  if(ptr) layoutEnd->removeRow(ptr);
+  ptr = findChild<QLabel*>("prezzo");
+  if(ptr) layoutEnd->removeRow(ptr);
+  ptr = findChild<QLabel*>("tipologia");
+  if(ptr) layoutEnd->removeRow(ptr);
+
   if(field("optionIngrediente").toBool()){
-    auto ptr = findChild<QLabel*>("locale");
-    if(ptr) layoutEnd->removeRow(ptr);
     QLabel* locale = new QLabel(((field("locale").toBool())? "Si" : "No"),this);
     locale->setObjectName("locale");
     layoutEnd->addRow("Locale:", locale);
   }
   else{
-    auto ptr1 = findChild<QLabel*>("capacita");
-    if(ptr1) layoutEnd->removeRow(ptr1);
     QLabel* capacita = new QLabel(field("capacita").toString(), this);
     capacita->setObjectName("capacita");
     layoutEnd->addRow("Capacità bevanda:", capacita);
 
-    auto ptr2 = findChild<QLabel*>("prezzo");
-    if(ptr2) layoutEnd->removeRow(ptr2);
     QLabel* prezzo = new QLabel(field("prezzo").toString(), this);
     prezzo->setObjectName("prezzo");
     layoutEnd->addRow("Prezzo:", prezzo);
 
-    auto ptr3 = findChild<QLabel*>("tipologia");
-    if(ptr3) layoutEnd->removeRow(ptr3);
     QLabel* tipologia = new QLabel((field("optionLattina").toBool() ? "Lattina" : "Bottiglia"), this);
-    capacita->setObjectName("tipologia");
+    tipologia->setObjectName("tipologia");
     layoutEnd->addRow("Tipologia:", tipologia);
   }
 }

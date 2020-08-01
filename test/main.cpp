@@ -10,8 +10,10 @@ using std::string;
 int main(int argc, char* argv[]) {
 
   QApplication app(argc, argv);
-  Pizzeria bellaPadova;
-  Controller controller(&bellaPadova);
+  Pizzeria bellaPadova("../progettoP2/comande.json", "../progettoP2/risorse.json");
+  Controller controller(&bellaPadova,
+                        bellaPadova.getIdComande(),
+                        bellaPadova.getIdRisorse());
   controller.caricaRisorse();
   MainWindow view(&controller);
   controller.setView(&view);
@@ -89,6 +91,9 @@ int main(int argc, char* argv[]) {
 
     bellaPadova.inserisciComanda(comanda1);
     bellaPadova.inserisciComanda(comanda2);
+
+    bellaPadova.eseguiComanda();
+    bellaPadova.eseguiComanda();
 
   return app.exec();
 }

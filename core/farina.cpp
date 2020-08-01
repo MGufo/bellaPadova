@@ -14,28 +14,40 @@ const string& Farina::getTipoFarina() const { return tipoFarina; }
 
 void Farina::setTipoFarina(const string& f) { tipoFarina = f; }
 
+void Farina::modifica(Consumabile* modificato){
+  setNome(modificato->getNome());
+  setDisponibilita(modificato->getDisponibilita());
+  setQuantita(modificato->getQuantita());
+  setCosto(modificato->getCosto());
+  setDataAcquisto(modificato->getDataAcquisto());
+  setLocal(dynamic_cast<Ingrediente*>(modificato)->isLocal());
+  setTipoFarina(dynamic_cast<Farina*>(modificato)->getTipoFarina());
+}
+
 Farina* Farina::clone() const { return new Farina(*this); }
 
 void Farina::carica(const QJsonObject & farinaJSON,
                     const std::unordered_map<uint, Risorsa*>* keymap){
-
+  Ingrediente::carica(farinaJSON);
+  setTipoFarina((*(farinaJSON.constFind("tFarina"))).toString().toStdString());
 }
 
-void Farina::salva(QJsonObject & farinaJSON) const{
+void Farina::salva(QJsonObject& farinaJSON) const{
+  Ingrediente::salva(farinaJSON);
   // ID
-  farinaJSON.insert("ID", static_cast<int>(getIdRisorsa()));
+  //farinaJSON.insert("ID", static_cast<int>(getIdRisorsa()));
   // Nome
-  farinaJSON.insert("Nome", QString::fromStdString(getNome()));
+  //farinaJSON.insert("Nome", QString::fromStdString(getNome()));
   // Disponibilita
-  farinaJSON.insert("Disponibilità", getDisponibilita());
+  //farinaJSON.insert("Disponibilità", getDisponibilita());
   // Quantita
-  farinaJSON.insert("Quantità", static_cast<int>(getQuantita()));
+  //farinaJSON.insert("Quantità", static_cast<int>(getQuantita()));
   // Costo
-  farinaJSON.insert("Costo", getCosto());
+  //farinaJSON.insert("Costo", getCosto());
   // Data Acquisto
-  farinaJSON.insert("dataAcquisto", getDataAcquisto().toString());
+  //farinaJSON.insert("dataAcquisto", getDataAcquisto().toString());
   // Locale
-  farinaJSON.insert("Locale", isLocal());
+  //farinaJSON.insert("Locale", isLocal());
   // Tipo
-  farinaJSON.insert("Locale", QString::fromStdString(tipoFarina));
+  farinaJSON.insert("tFarina", QString::fromStdString(tipoFarina));
 }

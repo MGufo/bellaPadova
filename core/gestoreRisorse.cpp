@@ -38,13 +38,27 @@ bool GestoreRisorse::controlloConsumabile(const Lista<Consumabile*>* _lista,
   return false;
 }
 
+unsigned int GestoreRisorse::getMaxId() const{
+  unsigned int maxID = 0;
+  for(auto it = menu.const_begin(); it != menu.const_end(); ++it)
+    if((*it)->getIdRisorsa() > maxID) maxID = (*it)->getIdRisorsa();
+
+  for(auto it = inventario.const_begin(); it != inventario.const_end(); ++it)
+    if((*it)->getIdRisorsa() > maxID) maxID = (*it)->getIdRisorsa();
+
+  return maxID;
+}
+
+//TODO:
+//ATTENZIONE all'inserimento di un articolo gia presente nel menu!
+//implementare funzione privata che controlla campo dati per campo dati
+//se daInserire == articoloGiaPresenteNelMenu
 void GestoreRisorse::inserisciArticolo(Articolo* daInserire) {
   if (daInserire) {
     const Lista<Consumabile*>* lista = daInserire->getComposizione();
     for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
       if (!controlloConsumabile(&inventario, *it))
-        throw new std::logic_error("Errore: Uno o più ingredienti selezionati"
-                                   "non sono disponibili.");
+        throw new std::logic_error("Errore: Uno o più elementi della composizione di questo articolo non sono attualmente disponibili.");
     daInserire->setDisponibilita(controlloDisponibilita(lista));
     menu.push_back(daInserire);
     delete lista;
@@ -60,6 +74,10 @@ void GestoreRisorse::rimuoviArticolo(Articolo* daRimuovere) {
   }
 }
 
+//TODO:
+//ATTENZIONE all'inserimento di un consumabile gia presente nell'inventario!
+//implementare funzione privata che controlla campo dati per campo dati
+//se daInserire == consumabileGiaPresenteNellInventario
 void GestoreRisorse::inserisciConsumabile(Consumabile* daInserire) {
   if (daInserire) {
     inventario.push_back(daInserire);
@@ -91,10 +109,11 @@ void GestoreRisorse::modificaArticolo(Articolo* daModificare,
 }
 
 void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
-                                         const Consumabile* modificato) {
-  //TODO: operator= non copia tutti i campi dati
-  //sistemo in qualche modo (override dell'operator in tutta la gerarchia?)
-  *daModificare = *modificato;
+                                         Consumabile* modificato) {
+  //TODO: implemento modifica() come funzione virtuale pura in consumabile
+  auto it = inventario.find(daModificare);
+  if(it.isValid())  (*it)->modifica(modificato);
+
   for (auto it = menu.begin(); it != menu.end(); ++it) {
     const Lista<Consumabile*>* lista = (*it)->getComposizione();
     (*it)->setDisponibilita(controlloDisponibilita(lista));
@@ -129,6 +148,10 @@ void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
   }
   risorseJSON->insert("Inventario", *inventarioJSON);
   delete inventarioJSON;
+}
+
+void GestoreRisorse::salvaIdRisorse(QJsonObject* idRisorseJSON) const{
+  idRisorseJSON->insert("ID", static_cast<int>(getMaxId()));
 }
 
 void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){

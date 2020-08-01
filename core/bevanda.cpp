@@ -28,17 +28,27 @@ const Lista<Consumabile*>* Bevanda::getComposizione() const {
   return lista;
 }
 
+void Bevanda::modifica(Consumabile* modificato){
+  setNome(modificato->getNome());
+  setDisponibilita(modificato->getDisponibilita());
+  setPrezzoBase(dynamic_cast<Articolo*>(modificato)->getPrezzoBase());
+  setQuantita(modificato->getQuantita());
+  setCosto(modificato->getCosto());
+  setDataAcquisto(modificato->getDataAcquisto());
+  setCapacita(dynamic_cast<Bevanda*>(modificato)->getCapacita());
+}
+
 void Bevanda::carica(const QJsonObject& bevandaJSON,
                      const std::unordered_map<uint, Risorsa*>* keymap){
-  setID((*(bevandaJSON.find("ID"))).toInt());
-  setNome((*(bevandaJSON.find("Nome"))).toString().toStdString());
-  setDisponibilita((*(bevandaJSON.find("Disponibilita"))).toBool());
-  setPrezzoBase((*(bevandaJSON.find("Prezzo"))).toDouble());
-  setQuantita((*(bevandaJSON.find("Quantita"))).toInt());
-  setCosto((*(bevandaJSON.find("Costo"))).toDouble());
+  setID((*(bevandaJSON.constFind("ID"))).toInt());
+  setNome((*(bevandaJSON.constFind("Nome"))).toString().toStdString());
+  setDisponibilita((*(bevandaJSON.constFind("Disponibilita"))).toBool());
+  setPrezzoBase((*(bevandaJSON.constFind("Prezzo"))).toDouble());
+  setQuantita((*(bevandaJSON.constFind("Quantita"))).toInt());
+  setCosto((*(bevandaJSON.constFind("Costo"))).toDouble());
   setDataAcquisto(
-        QDate::fromString((*(bevandaJSON.find("Data Acquisto"))).toString()));
-  setCapacita((*(bevandaJSON.find("Capacita"))).toDouble());
+        QDate::fromString((*(bevandaJSON.constFind("Data Acquisto"))).toString()));
+  setCapacita((*(bevandaJSON.constFind("Capacita"))).toDouble());
 }
 
 void Bevanda::salva(QJsonObject & bevandaJSON) const{

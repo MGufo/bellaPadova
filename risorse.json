@@ -1,0 +1,214 @@
+{
+    "ID": 12,
+    "Inventario": {
+        "Coca Cola": {
+            "Capacita": 1.5,
+            "Costo": 8,
+            "Data Acquisto": "ven lug 31 2020",
+            "Disponibilità": true,
+            "ID": 12,
+            "Nome": "Coca Cola",
+            "Prezzo": 4.333333333333333,
+            "Quantita": 10,
+            "tipo": "bottiglia"
+        },
+        "Fanta": {
+            "Capacita": 0.33000001311302185,
+            "Costo": 6,
+            "Data Acquisto": "ven lug 31 2020",
+            "Disponibilità": true,
+            "ID": 11,
+            "Nome": "Fanta",
+            "Prezzo": 2,
+            "Quantita": 10,
+            "tipo": "lattina"
+        },
+        "ananas": {
+            "Costo": 5,
+            "Disponibilita": true,
+            "ID": 7,
+            "Locale": true,
+            "Nome": "ananas",
+            "Quantita": 10,
+            "dataAcquisto": "ven lug 31 2020"
+        },
+        "farina 1kg": {
+            "Costo": 3,
+            "Disponibilita": true,
+            "ID": 1,
+            "Locale": true,
+            "Nome": "farina 1kg",
+            "Quantita": 1,
+            "dataAcquisto": "ven lug 31 2020",
+            "tFarina": "tipo 00"
+        },
+        "farina di tipo farro 1kg": {
+            "Costo": 2,
+            "Disponibilita": true,
+            "ID": 2,
+            "Locale": false,
+            "Nome": "farina di tipo farro 1kg",
+            "Quantita": 10,
+            "dataAcquisto": "ven lug 31 2020",
+            "tFarina": "farro"
+        },
+        "funghi": {
+            "Costo": 5,
+            "Disponibilita": true,
+            "ID": 6,
+            "Locale": true,
+            "Nome": "funghi",
+            "Quantita": 10,
+            "dataAcquisto": "ven lug 31 2020"
+        },
+        "mozzarella": {
+            "Costo": 5,
+            "Disponibilita": true,
+            "ID": 3,
+            "Locale": false,
+            "Nome": "mozzarella",
+            "Quantita": 10,
+            "dataAcquisto": "ven lug 31 2020"
+        },
+        "pomodoro": {
+            "Costo": 5,
+            "Disponibilita": true,
+            "ID": 4,
+            "Locale": true,
+            "Nome": "pomodoro",
+            "Quantita": 10,
+            "dataAcquisto": "ven lug 31 2020"
+        },
+        "wrustel": {
+            "Costo": 5,
+            "Disponibilita": true,
+            "ID": 5,
+            "Locale": false,
+            "Nome": "wrustel",
+            "Quantita": 10,
+            "dataAcquisto": "ven lug 31 2020"
+        }
+    },
+    "Menu": {
+        "boscaiola": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 10,
+            "Ingredienti": [
+                {
+                    "Costo": 5,
+                    "Disponibilita": true,
+                    "ID": 5,
+                    "Locale": false,
+                    "Nome": "wrustel",
+                    "Quantita": 10,
+                    "dataAcquisto": "ven lug 31 2020"
+                },
+                {
+                    "Costo": 5,
+                    "Disponibilita": true,
+                    "ID": 7,
+                    "Locale": true,
+                    "Nome": "ananas",
+                    "Quantita": 10,
+                    "dataAcquisto": "ven lug 31 2020"
+                },
+                {
+                    "Costo": 5,
+                    "Disponibilita": true,
+                    "ID": 6,
+                    "Locale": true,
+                    "Nome": "funghi",
+                    "Quantita": 10,
+                    "dataAcquisto": "ven lug 31 2020"
+                },
+                {
+                    "Costo": 3,
+                    "Disponibilita": true,
+                    "ID": 1,
+                    "Locale": true,
+                    "Nome": "farina 1kg",
+                    "Quantita": 1,
+                    "dataAcquisto": "ven lug 31 2020",
+                    "tFarina": "tipo 00"
+                }
+            ],
+            "Nome": "boscaiola",
+            "Prezzo": 4
+        },
+        "margherita": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 8,
+            "Ingredienti": [
+                {
+                    "Costo": 5,
+                    "Disponibilita": true,
+                    "ID": 3,
+                    "Locale": false,
+                    "Nome": "mozzarella",
+                    "Quantita": 10,
+                    "dataAcquisto": "ven lug 31 2020"
+                },
+                {
+                    "Costo": 5,
+                    "Disponibilita": true,
+                    "ID": 4,
+                    "Locale": true,
+                    "Nome": "pomodoro",
+                    "Quantita": 10,
+                    "dataAcquisto": "ven lug 31 2020"
+                },
+                {
+                    "Costo": 3,
+                    "Disponibilita": true,
+                    "ID": 1,
+                    "Locale": true,
+                    "Nome": "farina 1kg",
+                    "Quantita": 1,
+                    "dataAcquisto": "ven lug 31 2020",
+                    "tFarina": "tipo 00"
+                }
+            ],
+            "Nome": "margherita",
+            "Prezzo": 4
+        },
+        "marinara": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 9,
+            "Ingredienti": [
+                {
+                    "Costo": 5,
+                    "Disponibilita": true,
+                    "ID": 3,
+                    "Locale": false,
+                    "Nome": "mozzarella",
+                    "Quantita": 10,
+                    "dataAcquisto": "ven lug 31 2020"
+                },
+                {
+                    "Costo": 5,
+                    "Disponibilita": true,
+                    "ID": 4,
+                    "Locale": true,
+                    "Nome": "pomodoro",
+                    "Quantita": 10,
+                    "dataAcquisto": "ven lug 31 2020"
+                },
+                {
+                    "Costo": 2,
+                    "Disponibilita": true,
+                    "ID": 2,
+                    "Locale": false,
+                    "Nome": "farina di tipo farro 1kg",
+                    "Quantita": 10,
+                    "dataAcquisto": "ven lug 31 2020",
+                    "tFarina": "farro"
+                }
+            ],
+            "Nome": "marinara",
+            "Prezzo": 4
+        }
+    }
+}
