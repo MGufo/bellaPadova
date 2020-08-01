@@ -18,7 +18,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   // Crezione e riempimento header tabella
   header = new QHeaderView(Qt::Horizontal,tabella);
   //header->setSectionResizeMode(header->ResizeToContents);
-  header->setSectionResizeMode(header->ResizeToContents, QHeaderView::Stretch);
+  header->setSectionResizeMode(QHeaderView::Stretch);
   // Aggiunta header alla tabella
   if(labels)    tabella->setHorizontalHeaderLabels(*labels);
   tabella->setHorizontalHeader(header);
