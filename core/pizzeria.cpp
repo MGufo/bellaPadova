@@ -204,6 +204,7 @@ void Pizzeria::caricaRisorse(){
   delete fileRisorse;
 }
 
+//TODO: fix (bisogna parsare idComandeJSON e non il QFile
 unsigned int Pizzeria::getIdComande() const{
   QFile* fileComande = openFile(pathComande, 'r');
   QJsonObject* idComandeJSON = new QJsonObject(
@@ -213,7 +214,7 @@ unsigned int Pizzeria::getIdComande() const{
   delete idComandeJSON;
   return idComande;
 }
-
+//TODO: fix (bisogna parsare idRisorseJSON e non il QFile
 unsigned int Pizzeria::getIdRisorse() const{
   QFile* fileRisorse = openFile(pathRisorse, 'r');
   QJsonObject* idRisorseJSON = new QJsonObject(
