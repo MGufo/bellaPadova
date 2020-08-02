@@ -56,6 +56,4 @@ void Ingrediente::salva(QJsonObject& ingredienteJSON) const{
   ingredienteJSON.insert("dataAcquisto", getDataAcquisto().toString());
   // Locale
   ingredienteJSON.insert("Locale", locale);
-  // Tipo
-  ingredienteJSON.insert("tipo", "ingrediente");
 }
