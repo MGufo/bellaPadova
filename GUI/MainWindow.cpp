@@ -161,8 +161,8 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
 void MainWindow::closeEvent(QCloseEvent *event){
   if(!controller->canQuit()){
     QMessageBox* savePrompt = new QMessageBox(this);
-    savePrompt->setText("The document has been modified.");
-    savePrompt->setInformativeText("Do you want to save your changes?");
+    savePrompt->setText("Sono presenti modifiche non salvate.");
+    savePrompt->setInformativeText("Vuoi salvare le modifiche?");
     savePrompt->setStandardButtons(
           QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
     savePrompt->setDefaultButton(QMessageBox::Save);
