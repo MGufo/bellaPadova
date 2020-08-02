@@ -208,18 +208,22 @@ void Pizzeria::caricaRisorse(){
 unsigned int Pizzeria::getIdComande() const{
   QFile* fileComande = openFile(pathComande, 'r');
   QJsonObject* idComandeJSON = new QJsonObject(
-        (*(parseFile(fileComande)->constFind("idComande"))).toObject());
-  uint idComande = (*idComandeJSON->constFind("idComande")).toInt();
+        (*(parseFile(fileComande)->constFind("ID"))).toObject());
+  uint idComande = (*idComandeJSON->constFind("ID")).toInt();
   delete fileComande;
   delete idComandeJSON;
   return idComande;
 }
-//TODO: fix (bisogna parsare idRisorseJSON e non il QFile
+/*
+ * TODO: l'ID viene salvato come valore JSON, non come oggetto.
+ * Bisogna creare l'oggetto temporaneo parsando il file
+*/
 unsigned int Pizzeria::getIdRisorse() const{
   QFile* fileRisorse = openFile(pathRisorse, 'r');
-  QJsonObject* idRisorseJSON = new QJsonObject(
-        (*(parseFile(fileRisorse)->constFind("idRisorse"))).toObject());
-  uint idRisorse = (*idRisorseJSON->constFind("idRisorse")).toInt();
+//  QJsonObject* idRisorseJSON = new QJsonObject(
+//        (*(parseFile(fileRisorse)->constFind("idRisorse"))).toObject());
+//  uint idRisorse = (*idRisorseJSON->constFind("idRisorse")).toInt();
+  uint idRisorse = (*(parseFile(fileRisorse)->constFind("ID"))).toInt();
   delete fileRisorse;
   delete idRisorseJSON;
   return idRisorse;
