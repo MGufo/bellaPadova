@@ -198,8 +198,8 @@ const QJsonObject& Pizzeria::caricaComande() const{
 void Pizzeria::caricaRisorse(){
   QFile* fileRisorse = openFile(pathRisorse, 'r');
   QJsonObject* risorseJSON = parseFile(fileRisorse);
-  gestoreRisorse.caricaInventario((*risorseJSON->constFind("inventario")).toObject());
-  gestoreRisorse.caricaMenu((*risorseJSON->constFind("menu")).toObject());
+  gestoreRisorse.caricaInventario((*risorseJSON->constFind("Inventario")).toObject());
+  gestoreRisorse.caricaMenu((*risorseJSON->constFind("Menu")).toObject());
   delete risorseJSON;
   delete fileRisorse;
 }
