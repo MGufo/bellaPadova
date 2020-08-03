@@ -158,6 +158,13 @@ void TabellaComposita::rendiEditabile(bool b){
     }
 }
 
+void TabellaComposita::cambiaColoreBordoCella(bool b){
+    if(b)
+        tabella->setStyleSheet("gridline-color: red");
+    else
+        tabella->setStyleSheet("gridline-color: #E5E5E5");
+}
+
 void TabellaComposita::emitDataOnCellChanged(int x, int y){
     if(editabile){
         //TODO: inputcheck

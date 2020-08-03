@@ -164,8 +164,6 @@ void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){
     if(tipo == "pizza") risorsa = new Pizza();
     else if (tipo == "bottiglia") risorsa = new Bottiglia();
     else if (tipo == "lattina") risorsa = new Lattina();
-    else if (tipo == "ingrediente") risorsa = new Ingrediente();
-    else if (tipo == "farina") risorsa = new Farina();
 
     std::unordered_map<uint, Risorsa*>* keymap =
         new std::unordered_map<uint, Risorsa*>;
@@ -173,8 +171,8 @@ void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){
       QJsonArray* ingrJSON =
           new QJsonArray((*(risorsaJSON->find("Ingredienti"))).toArray());
       for(auto it = ingrJSON->constBegin(); it!=ingrJSON->constEnd(); ++it)
-        (*keymap)[(*((*it).toObject()).find("ID")).toInt()] =
-              trovaRisorsa((*((*it).toObject()).find("ID")).toInt());
+        (*keymap)[(*it).toInt()] =
+              trovaRisorsa((*it).toInt());
     }
       /**
       TODO: Discutere cosa fare nel caso in cui un ingrediente di una pizza

@@ -17,6 +17,7 @@ public:
   explicit TabellaComposita(QWidget *parent = nullptr, const QString& etichetta="", const QStringList* = nullptr);
   void inserisciElemento(pacchetto*);
   void rendiEditabile(bool = true);
+  void cambiaColoreBordoCella(bool = true);
 
 signals:
   void sendPacketToModel(pacchetto*);

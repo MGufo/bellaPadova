@@ -124,7 +124,6 @@ void Controller::caricaComande(){
   } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
-  // TODO: Aggiornamento vista
 }
 
 void Controller::caricaRisorse(){
@@ -133,7 +132,7 @@ void Controller::caricaRisorse(){
   } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
-  // TODO: Aggiornamento vista
+  vista->visualizzaInventario();
 }
 
 void Controller::salvaComande(){

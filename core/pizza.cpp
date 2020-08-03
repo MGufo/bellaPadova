@@ -124,10 +124,8 @@ void Pizza::carica(const QJsonObject& pizzaJSON,
       new QJsonArray((*(pizzaJSON.constFind("Ingredienti"))).toArray());
   for(auto it = ingredientiJSON->constBegin();
       it != ingredientiJSON->constEnd(); ++it){
-      ingredienti.push_back(
-            dynamic_cast<Ingrediente*>(keymap->at
-                                       ((*((*it).toObject().constFind("ID"))).
-                                        toInt())));
+      ingredienti.push_back(dynamic_cast<Ingrediente*>(
+                              keymap->at((*it).toInt())));
   }
   delete ingredientiJSON;
 }
@@ -143,14 +141,12 @@ void Pizza::salva(QJsonObject& pizzaJSON) const{
   pizzaJSON.insert("Prezzo", getPrezzoBase());
   // Ingredienti
   QJsonArray* ingredientiJSON = new QJsonArray();
-  for(auto it = ingredienti.const_begin(); it != ingredienti.const_end(); ++it){
-    QJsonObject* ingredienteJSON = new QJsonObject();
-    (*it)->salva(*ingredienteJSON);
-    ingredientiJSON->append(*ingredienteJSON);
-    delete ingredienteJSON;
-  }
+  for(auto it = ingredienti.const_begin(); it != ingredienti.const_end(); ++it)
+    ingredientiJSON->append(static_cast<double>((*it)->getIdRisorsa()));
   pizzaJSON.insert("Ingredienti", *ingredientiJSON);
   delete ingredientiJSON;
   // Extra
   pizzaJSON.insert("Extra", extra);
+  //
+  pizzaJSON.insert("tipo", "pizza");
 }
