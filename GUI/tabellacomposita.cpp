@@ -126,6 +126,22 @@ void TabellaComposita::rendiEditabile(bool b){
     }
 }
 
+void TabellaComposita::cambiaColoreBordoCella(bool b){
+    if(b){
+        tabella->setStyleSheet("gridline-color: red");
+        /*
+        for(int i=0; i < tabella->rowCount(); i++){
+            for(int j=1; j < tabella->columnCount(); j++){
+                // QTableWidgetItem* item = tabella->item(i,j);
+
+            }
+        }*/
+    }
+    else{
+        tabella->setStyleSheet("gridline-color: #E5E5E5");
+    }
+}
+
 void TabellaComposita::emitDataOnCellChanged(int x, int y){
     if(editabile){
         //TODO: inputcheck

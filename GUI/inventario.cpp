@@ -52,11 +52,17 @@ void Inventario::modificaTabelle(){
         newConsumabile->setVisible(false);
         tabIngredienti->rendiEditabile();
         tabBevande->rendiEditabile();
+        // cambia colore bordo cella
+        tabIngredienti->cambiaColoreBordoCella();
+        tabBevande->cambiaColoreBordoCella();
         modificaDati->setText("Finisci di Modificare");
         modificaDati->setObjectName("FineModifica");
     }
     else{
         newConsumabile->setVisible(true);
+        // reimposta colore bordo cella
+        tabIngredienti->cambiaColoreBordoCella(false);
+        tabBevande->cambiaColoreBordoCella(false);
         tabIngredienti->rendiEditabile(false);
         tabBevande->rendiEditabile(false);
         modificaDati->setText("Modifica");
