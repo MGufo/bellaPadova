@@ -48,6 +48,8 @@ void Farina::salva(QJsonObject& farinaJSON) const{
   //farinaJSON.insert("dataAcquisto", getDataAcquisto().toString());
   // Locale
   //farinaJSON.insert("Locale", isLocal());
-  // Tipo
+  // Tipo farina
   farinaJSON.insert("tFarina", QString::fromStdString(tipoFarina));
+  // Tipo
+  farinaJSON.insert("tipo", "farina");
 }
