@@ -38,10 +38,10 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   setLayout(layoutPizza);
 }
 
-QLineEdit *NuovoArticolo_pizza::getNomePizza() const{   return nomePizza;}
+QLineEdit *NuovoArticolo_pizza::getNomePizza() const{ return nomePizza;}
 
-QLineEdit *NuovoArticolo_pizza::getPrezzoPizza() const{   return prezzoPizza;}
+QLineEdit *NuovoArticolo_pizza::getPrezzoPizza() const{ return prezzoPizza;}
 
-QWidget *NuovoArticolo_pizza::getIngredientiCheckBoxWrapper() const{    return ingredientiCheckBoxWrapper;}
+QWidget *NuovoArticolo_pizza::getIngredientiCheckBoxWrapper() const{ return ingredientiCheckBoxWrapper;}
 
 QWidget *NuovoArticolo_pizza::getFarineRadioButtonWrapper() const{ return farineRadioButtonWrapper;}

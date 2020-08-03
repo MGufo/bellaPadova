@@ -8,6 +8,7 @@ NuovoArticolo_intro::NuovoArticolo_intro(QWidget* parent): QWizardPage(parent){
   optionPizza->setChecked(true);
   registerField("optionPizza", optionPizza);
   optionBevanda = new QRadioButton("Bevanda", this);
+  registerField("optionBevanda", optionBevanda);
 
   layoutIntro = new QVBoxLayout(this);
   layoutIntro->addWidget(optionPizza);

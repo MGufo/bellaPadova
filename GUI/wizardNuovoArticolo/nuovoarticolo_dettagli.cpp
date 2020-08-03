@@ -1,6 +1,7 @@
 #include "nuovoArticolo_dettagli.h"
 
-NuovoArticolo_dettagli::NuovoArticolo_dettagli(QWidget* parent) : QWizardPage(parent), content(nullptr){
+NuovoArticolo_dettagli::NuovoArticolo_dettagli(QWidget* parent) :
+  QWizardPage(parent), content(nullptr){
     layoutDettagli = new QVBoxLayout(this);
     connect(this,SIGNAL(riempiWizardConElementi(bool)),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiInWizard(bool)));
     setLayout(layoutDettagli);
@@ -53,12 +54,10 @@ void NuovoArticolo_dettagli::initializePage(){
         */
     }
     else{
-        /*
-        auto ptr = static_cast<NuovoArticolo_bevanda*>(content);
-        registerField("nomeBevanda*", ptr->getNomeBevanda());
-        registerField("prezzoBevanda*", ptr->getPrezzoBevanda());
-        registerField("capacitaBevanda*", ptr->getCapacitaBevanda());
-        registerField("optionBottiglia", ptr->getRadioBottiglia());
-        */
+//        auto ptr = static_cast<NuovoArticolo_bevanda*>(content);
+//        registerField("nomeBevanda*", ptr->getNomeBevanda());
+//        registerField("prezzoBevanda*", ptr->getPrezzoBevanda());
+//        registerField("capacitaBevanda*", ptr->getCapacitaBevanda());
+//        registerField("optionBottiglia", ptr->getRadioBottiglia());
     }
 }
