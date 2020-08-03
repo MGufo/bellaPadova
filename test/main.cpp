@@ -14,10 +14,10 @@ int main(int argc, char* argv[]) {
   Controller controller(&bellaPadova,
                         bellaPadova.getIdComande(),
                         bellaPadova.getIdRisorse());
-  controller.caricaRisorse();
   MainWindow view(&controller);
   controller.setView(&view);
   view.show();
+  controller.caricaRisorse();
 
     /*
     //string _nome, bool _disponibilita, unsigned int _quantita,
