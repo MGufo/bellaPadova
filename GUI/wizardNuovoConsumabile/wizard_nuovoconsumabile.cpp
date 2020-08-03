@@ -24,10 +24,16 @@ void WizardNuovoConsumabile::accept(){
           0, field("nome").toString().toStdString(), field("disponibilita").toBool(),
           field("quantita").toUInt(), field("costo").toDouble(),
           field("dataAcquisto").toDate(), field("locale").toBool());
-  else
+  else if(field("optionFarina").toBool()){
+    p = new pacchettoFarina(0, field("nome").toString().toStdString(), field("disponibilita").toBool(),
+                            field("quantita").toUInt(), field("costo").toDouble(),
+                            field("dataAcquisto").toDate(), field("locale").toBool(),field("tipoFarina").toString().toStdString());
+  }
+  else if(field("optionBevanda").toBool()){
     p = new pacchettoBevanda(
           0, field("nome").toString().toStdString(), field("disponibilita").toBool(), field("prezzo").toDouble(),
           field("quantita").toUInt(), field("costo").toDouble(),
           field("dataAcquisto").toDate(), field("capacita").toFloat(), field("optionLattina").toBool());
+  }
   emit nuovoConsumabile(p);
 }

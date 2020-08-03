@@ -37,6 +37,8 @@ void NuovoConsumabile_end::setActualPage(){
   QLabel* ptr = nullptr;
   ptr = findChild<QLabel*>("locale");
   if(ptr) layoutEnd->removeRow(ptr);
+  ptr = findChild<QLabel*>("tipoFarina");
+  if(ptr) layoutEnd->removeRow(ptr);
   ptr = findChild<QLabel*>("capacita");
   if(ptr) layoutEnd->removeRow(ptr);
   ptr = findChild<QLabel*>("prezzo");
@@ -49,7 +51,16 @@ void NuovoConsumabile_end::setActualPage(){
     locale->setObjectName("locale");
     layoutEnd->addRow("Locale:", locale);
   }
-  else{
+  else if(field("optionFarina").toBool()){
+      QLabel* locale = new QLabel(((field("locale").toBool())? "Si" : "No"),this);
+      locale->setObjectName("locale");
+      layoutEnd->addRow("Locale:", locale);
+
+      QLabel* tipoFarina = new QLabel(field("tipoFarina").toString(), this);
+      tipoFarina->setObjectName("tipoFarina");
+      layoutEnd->addRow("Tipologia della Farina:", tipoFarina);
+  }
+  else if(field("optionBevanda").toBool()){
     QLabel* capacita = new QLabel(field("capacita").toString(), this);
     capacita->setObjectName("capacita");
     layoutEnd->addRow("Capacità bevanda:", capacita);

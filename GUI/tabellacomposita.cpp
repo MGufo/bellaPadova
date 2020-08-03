@@ -74,31 +74,63 @@ void TabellaComposita::inserisciElemento(pacchetto * p){
         }
     }
     else{
-        pacchettoIngrediente* pI = dynamic_cast<pacchettoIngrediente*>(p);
-        //creazione di una nuova riga e riempimento con i dati nel pacchetto
-        tabella->insertRow(tabella->rowCount());
-        QTableWidgetItem* item = nullptr;
+        pacchettoFarina* pF = dynamic_cast<pacchettoFarina*>(p);
+        if(pF){
+            //creazione di una nuova riga e riempimento con i dati nel pacchetto
+            tabella->insertRow(tabella->rowCount());
+            QTableWidgetItem* item = nullptr;
 
-        item = new QTableWidgetItem(QString::fromStdString(std::to_string(pI->ID)));
-        tabella->setItem(tabella->rowCount()-1, 0, item);
-        item = new QTableWidgetItem(QString::fromStdString(pI->nome));
-        tabella->setItem(tabella->rowCount()-1, 1, item);
-        item = new QTableWidgetItem((pI->disponibilita? "Si" : "No"));
-        tabella->setItem(tabella->rowCount()-1, 2, item);
-        item = new QTableWidgetItem(QString::fromStdString(std::to_string(pI->quantita)));
-        tabella->setItem(tabella->rowCount()-1, 3, item);
-        item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pI->costo)));
-        tabella->setItem(tabella->rowCount()-1, 4, item);
-        item = new QTableWidgetItem(pI->dataAcquisto.toString("dd/MM/yyyy"));
-        tabella->setItem(tabella->rowCount()-1, 5, item);
-        item = new QTableWidgetItem((pI->locale ? "Si" : "No"));
-        tabella->setItem(tabella->rowCount()-1, 6, item);
+            item = new QTableWidgetItem(QString::fromStdString(std::to_string(pF->ID)));
+            tabella->setItem(tabella->rowCount()-1, 0, item);
+            item = new QTableWidgetItem(QString::fromStdString(pF->nome));
+            tabella->setItem(tabella->rowCount()-1, 1, item);
+            item = new QTableWidgetItem((pF->disponibilita? "Si" : "No"));
+            tabella->setItem(tabella->rowCount()-1, 2, item);
+            item = new QTableWidgetItem(QString::fromStdString(std::to_string(pF->quantita)));
+            tabella->setItem(tabella->rowCount()-1, 3, item);
+            item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pF->costo)));
+            tabella->setItem(tabella->rowCount()-1, 4, item);
+            item = new QTableWidgetItem(pF->dataAcquisto.toString("dd/MM/yyyy"));
+            tabella->setItem(tabella->rowCount()-1, 5, item);
+            item = new QTableWidgetItem((pF->locale ? "Si" : "No"));
+            tabella->setItem(tabella->rowCount()-1, 6, item);
+            item = new QTableWidgetItem(QString::fromStdString(pF->tipologia));
+            tabella->setItem(tabella->rowCount()-1, 7, item);
 
-        int i = tabella->rowCount()-1;
-        for(int j=0 ; j<7 ; j++){
-            QTableWidgetItem* item = tabella->item(i,j);
-            item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+            int i = tabella->rowCount()-1;
+            for(int j=0 ; j<8 ; j++){
+                QTableWidgetItem* item = tabella->item(i,j);
+                item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+            }
         }
+        else{
+            pacchettoIngrediente* pI = dynamic_cast<pacchettoIngrediente*>(p);
+            //creazione di una nuova riga e riempimento con i dati nel pacchetto
+            tabella->insertRow(tabella->rowCount());
+            QTableWidgetItem* item = nullptr;
+
+            item = new QTableWidgetItem(QString::fromStdString(std::to_string(pI->ID)));
+            tabella->setItem(tabella->rowCount()-1, 0, item);
+            item = new QTableWidgetItem(QString::fromStdString(pI->nome));
+            tabella->setItem(tabella->rowCount()-1, 1, item);
+            item = new QTableWidgetItem((pI->disponibilita? "Si" : "No"));
+            tabella->setItem(tabella->rowCount()-1, 2, item);
+            item = new QTableWidgetItem(QString::fromStdString(std::to_string(pI->quantita)));
+            tabella->setItem(tabella->rowCount()-1, 3, item);
+            item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pI->costo)));
+            tabella->setItem(tabella->rowCount()-1, 4, item);
+            item = new QTableWidgetItem(pI->dataAcquisto.toString("dd/MM/yyyy"));
+            tabella->setItem(tabella->rowCount()-1, 5, item);
+            item = new QTableWidgetItem((pI->locale ? "Si" : "No"));
+            tabella->setItem(tabella->rowCount()-1, 6, item);
+
+            int i = tabella->rowCount()-1;
+            for(int j=0 ; j<7 ; j++){
+                QTableWidgetItem* item = tabella->item(i,j);
+                item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+            }
+        }
+
     }
 
 }

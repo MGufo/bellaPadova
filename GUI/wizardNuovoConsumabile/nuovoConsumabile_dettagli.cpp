@@ -27,6 +27,8 @@ int NuovoConsumabile_dettagli::nextId() const{
 void NuovoConsumabile_dettagli::setActualPage(){
     auto ptr = findChild<QCheckBox*>("locale");
     if(ptr) layoutDettagli->removeRow(ptr);
+    auto ptr5 = findChild<QLineEdit*>("tipoFarina");
+    if(ptr5) layoutDettagli->removeRow(ptr5);
     auto ptr1 = findChild<QLineEdit*>("capacita");
     if(ptr1) layoutDettagli->removeRow(ptr1);
     auto ptr2 = findChild<QLineEdit*>("prezzo");
@@ -37,7 +39,7 @@ void NuovoConsumabile_dettagli::setActualPage(){
     if(ptr4) layoutDettagli->removeRow(ptr4);
 
   if(field("optionIngrediente").toBool()){
-    setTitle("Aggiunta di un nuovo ingrediente all'Inventario");
+    setTitle("Aggiunta di un nuovo ingrediente all'inventario");
     setSubTitle("Inserisci le informazioni relative all'ingrediente da inserire");
 
     QCheckBox* locale = new QCheckBox(this);
@@ -45,8 +47,21 @@ void NuovoConsumabile_dettagli::setActualPage(){
     registerField("locale", locale);
     layoutDettagli->addRow("Locale:", locale);
   }
-  else{
-    setTitle("Aggiunta di una nuova bevanda all'Inventario");
+  else if(field("optionFarina").toBool()){
+      setTitle("Aggiunta di una nuova farina all'inventario");
+      setSubTitle("Inserisci le informazioni relative alla farina da inserire");
+      QCheckBox* locale = new QCheckBox(this);
+      locale->setObjectName("locale");
+      registerField("locale", locale);
+      layoutDettagli->addRow("Locale:", locale);
+
+      QLineEdit* tipoFarina = new QLineEdit(this);
+      tipoFarina->setObjectName("tipoFarina");
+      registerField("tipoFarina*", tipoFarina);
+      layoutDettagli->addRow("Tipologia della Farina:", tipoFarina);
+  }
+  else if(field("optionBevanda").toBool()){
+    setTitle("Aggiunta di una nuova bevanda all'inventario");
     setSubTitle("Inserisci le informazioni relative alla bevanda da inserire");
 
     QLineEdit* capacita = new QLineEdit(this);

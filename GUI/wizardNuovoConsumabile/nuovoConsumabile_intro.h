@@ -17,8 +17,9 @@ public:
 
 private:
   QVBoxLayout* layoutIntro;
-  QRadioButton* optionIngrediente;
   QRadioButton* optionBevanda;
+  QRadioButton* optionIngrediente;
+  QRadioButton* optionFarina;
 };
 
 #endif // NUOVOCONSUMABILE_INTRO_H
