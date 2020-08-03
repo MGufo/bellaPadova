@@ -81,10 +81,23 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
   if(option_pizza){
 
       QWidget* wrapperFarine = findChild<QWidget*>("farineRadioButtonWrapper");
+      QButtonGroup* gruppoDiBottoni = new QButtonGroup(wrapperFarine);
       for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
         if(dynamic_cast<pacchettoFarina*>(*it)){
-          QWidget* i = new IngredienteCheckBox
-              (QString::fromStdString((*it)->nome),(*it)->ID,wrapperFarine);
+          QWidget* i = new QWidget(wrapperFarine);
+          QHBoxLayout* iLayout = new QHBoxLayout(i);
+          QRadioButton* pulsante = new QRadioButton(i);
+          gruppoDiBottoni->addButton(pulsante);
+          QLabel* id = new QLabel(QString::fromStdString(std::to_string((*it)->ID)),i);
+          QLabel* nome = new QLabel(QString::fromStdString((*it)->nome),i);
+          QLabel* locale = new QLabel((dynamic_cast<pacchettoFarina*>(*it)->locale? "Locale" : "Non Locale"),i);
+          QLabel* tipologia = new QLabel(QString::fromStdString(dynamic_cast<pacchettoFarina*>(*it)->tipologia),i);
+          i->setLayout(iLayout);
+          iLayout->addWidget(pulsante);
+          iLayout->addWidget(id);
+          iLayout->addWidget(nome);
+          iLayout->addWidget(locale);
+          iLayout->addWidget(tipologia);
           dynamic_cast<QVBoxLayout*>(wrapperFarine->layout())->addWidget(i);
         }
       }
