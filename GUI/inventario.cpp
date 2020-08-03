@@ -11,7 +11,7 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   headerLabels->push_back("Costo d'acquisto");
   headerLabels->push_back("Data Acquisto");
   headerLabels->push_back("Locale");
-  tabIngredienti = new TabellaComposita(this, "Ingredienti", headerLabels);
+  tabIngredienti = new TabellaComposita(this, "Ingredienti e Farine", headerLabels);
   tabIngredienti->setObjectName("tabIngredienti");
   headerLabels->pop_back();
   headerLabels->push_back("Capacità");
@@ -52,7 +52,6 @@ void Inventario::modificaTabelle(){
         newConsumabile->setVisible(false);
         tabIngredienti->rendiEditabile();
         tabBevande->rendiEditabile();
-        // cambia colore bordo cella
         tabIngredienti->cambiaColoreBordoCella();
         tabBevande->cambiaColoreBordoCella();
         modificaDati->setText("Finisci di Modificare");
@@ -60,7 +59,6 @@ void Inventario::modificaTabelle(){
     }
     else{
         newConsumabile->setVisible(true);
-        // reimposta colore bordo cella
         tabIngredienti->cambiaColoreBordoCella(false);
         tabBevande->cambiaColoreBordoCella(false);
         tabIngredienti->rendiEditabile(false);
