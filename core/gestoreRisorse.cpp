@@ -151,7 +151,7 @@ void GestoreRisorse::salvaRisorse(QJsonObject *risorseJSON) const{
 }
 
 void GestoreRisorse::salvaIdRisorse(QJsonObject* idRisorseJSON) const{
-  idRisorseJSON->insert("ID", static_cast<int>(getMaxId()));
+  idRisorseJSON->insert("ID", static_cast<double>(getMaxId()));
 }
 
 void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){
