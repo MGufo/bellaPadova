@@ -11,7 +11,7 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   headerLabels->push_back("Costo d'acquisto");
   headerLabels->push_back("Data Acquisto");
   headerLabels->push_back("Locale");
-  tabIngredienti = new TabellaComposita(this, "Ingredienti e Farine", headerLabels);
+  tabIngredienti = new TabellaComposita(this, "Ingredienti", headerLabels);
   tabIngredienti->setObjectName("tabIngredienti");
   headerLabels->pop_back();
   headerLabels->push_back("Capacità");
