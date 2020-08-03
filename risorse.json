@@ -4,7 +4,7 @@
         "Coca Cola": {
             "Capacita": 1.5,
             "Costo": 8,
-            "Data Acquisto": "sab ago 1 2020",
+            "Data Acquisto": "lun ago 3 2020",
             "Disponibilità": true,
             "ID": 12,
             "Nome": "Coca Cola",
@@ -15,7 +15,7 @@
         "Fanta": {
             "Capacita": 0.33000001311302185,
             "Costo": 6,
-            "Data Acquisto": "sab ago 1 2020",
+            "Data Acquisto": "lun ago 3 2020",
             "Disponibilità": true,
             "ID": 11,
             "Nome": "Fanta",
@@ -30,7 +30,8 @@
             "Locale": true,
             "Nome": "ananas",
             "Quantita": 10,
-            "dataAcquisto": "sab ago 1 2020"
+            "dataAcquisto": "lun ago 3 2020",
+            "tipo": "ingrediente"
         },
         "farina 1kg": {
             "Costo": 3,
@@ -39,8 +40,9 @@
             "Locale": true,
             "Nome": "farina 1kg",
             "Quantita": 1,
-            "dataAcquisto": "sab ago 1 2020",
-            "tFarina": "tipo 00"
+            "dataAcquisto": "lun ago 3 2020",
+            "tFarina": "tipo 00",
+            "tipo": "farina"
         },
         "farina di tipo farro 1kg": {
             "Costo": 2,
@@ -49,8 +51,9 @@
             "Locale": false,
             "Nome": "farina di tipo farro 1kg",
             "Quantita": 10,
-            "dataAcquisto": "sab ago 1 2020",
-            "tFarina": "farro"
+            "dataAcquisto": "lun ago 3 2020",
+            "tFarina": "farro",
+            "tipo": "farina"
         },
         "funghi": {
             "Costo": 5,
@@ -59,7 +62,8 @@
             "Locale": true,
             "Nome": "funghi",
             "Quantita": 10,
-            "dataAcquisto": "sab ago 1 2020"
+            "dataAcquisto": "lun ago 3 2020",
+            "tipo": "ingrediente"
         },
         "mozzarella": {
             "Costo": 5,
@@ -68,7 +72,8 @@
             "Locale": false,
             "Nome": "mozzarella",
             "Quantita": 10,
-            "dataAcquisto": "sab ago 1 2020"
+            "dataAcquisto": "lun ago 3 2020",
+            "tipo": "ingrediente"
         },
         "pomodoro": {
             "Costo": 5,
@@ -77,7 +82,8 @@
             "Locale": true,
             "Nome": "pomodoro",
             "Quantita": 10,
-            "dataAcquisto": "sab ago 1 2020"
+            "dataAcquisto": "lun ago 3 2020",
+            "tipo": "ingrediente"
         },
         "wrustel": {
             "Costo": 5,
@@ -86,7 +92,8 @@
             "Locale": false,
             "Nome": "wrustel",
             "Quantita": 10,
-            "dataAcquisto": "sab ago 1 2020"
+            "dataAcquisto": "lun ago 3 2020",
+            "tipo": "ingrediente"
         }
     },
     "Menu": {
@@ -95,120 +102,40 @@
             "Extra": 0.5,
             "ID": 10,
             "Ingredienti": [
-                {
-                    "Costo": 5,
-                    "Disponibilita": true,
-                    "ID": 5,
-                    "Locale": false,
-                    "Nome": "wrustel",
-                    "Quantita": 10,
-                    "dataAcquisto": "sab ago 1 2020"
-                },
-                {
-                    "Costo": 5,
-                    "Disponibilita": true,
-                    "ID": 7,
-                    "Locale": true,
-                    "Nome": "ananas",
-                    "Quantita": 10,
-                    "dataAcquisto": "sab ago 1 2020"
-                },
-                {
-                    "Costo": 5,
-                    "Disponibilita": true,
-                    "ID": 6,
-                    "Locale": true,
-                    "Nome": "funghi",
-                    "Quantita": 10,
-                    "dataAcquisto": "sab ago 1 2020"
-                },
-                {
-                    "Costo": 3,
-                    "Disponibilita": true,
-                    "ID": 1,
-                    "Locale": true,
-                    "Nome": "farina 1kg",
-                    "Quantita": 1,
-                    "dataAcquisto": "sab ago 1 2020",
-                    "tFarina": "tipo 00"
-                }
+                5,
+                7,
+                6,
+                1
             ],
             "Nome": "boscaiola",
-            "Prezzo": 4
+            "Prezzo": 4,
+            "tipo": "pizza"
         },
         "margherita": {
             "Disponibilita": true,
             "Extra": 0.5,
             "ID": 8,
             "Ingredienti": [
-                {
-                    "Costo": 5,
-                    "Disponibilita": true,
-                    "ID": 3,
-                    "Locale": false,
-                    "Nome": "mozzarella",
-                    "Quantita": 10,
-                    "dataAcquisto": "sab ago 1 2020"
-                },
-                {
-                    "Costo": 5,
-                    "Disponibilita": true,
-                    "ID": 4,
-                    "Locale": true,
-                    "Nome": "pomodoro",
-                    "Quantita": 10,
-                    "dataAcquisto": "sab ago 1 2020"
-                },
-                {
-                    "Costo": 3,
-                    "Disponibilita": true,
-                    "ID": 1,
-                    "Locale": true,
-                    "Nome": "farina 1kg",
-                    "Quantita": 1,
-                    "dataAcquisto": "sab ago 1 2020",
-                    "tFarina": "tipo 00"
-                }
+                3,
+                4,
+                1
             ],
             "Nome": "margherita",
-            "Prezzo": 4
+            "Prezzo": 4,
+            "tipo": "pizza"
         },
         "marinara": {
             "Disponibilita": true,
             "Extra": 0.5,
             "ID": 9,
             "Ingredienti": [
-                {
-                    "Costo": 5,
-                    "Disponibilita": true,
-                    "ID": 3,
-                    "Locale": false,
-                    "Nome": "mozzarella",
-                    "Quantita": 10,
-                    "dataAcquisto": "sab ago 1 2020"
-                },
-                {
-                    "Costo": 5,
-                    "Disponibilita": true,
-                    "ID": 4,
-                    "Locale": true,
-                    "Nome": "pomodoro",
-                    "Quantita": 10,
-                    "dataAcquisto": "sab ago 1 2020"
-                },
-                {
-                    "Costo": 2,
-                    "Disponibilita": true,
-                    "ID": 2,
-                    "Locale": false,
-                    "Nome": "farina di tipo farro 1kg",
-                    "Quantita": 10,
-                    "dataAcquisto": "sab ago 1 2020",
-                    "tFarina": "farro"
-                }
+                3,
+                4,
+                2
             ],
             "Nome": "marinara",
-            "Prezzo": 4
+            "Prezzo": 4,
+            "tipo": "pizza"
         }
     }
 }
