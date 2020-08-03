@@ -123,9 +123,11 @@ void TabellaComposita::inserisciElemento(pacchetto * p){
             tabella->setItem(tabella->rowCount()-1, 5, item);
             item = new QTableWidgetItem((pI->locale ? "Si" : "No"));
             tabella->setItem(tabella->rowCount()-1, 6, item);
+            item = new QTableWidgetItem(QString(""));
+            tabella->setItem(tabella->rowCount()-1, 7, item);
 
             int i = tabella->rowCount()-1;
-            for(int j=0 ; j<7 ; j++){
+            for(int j=0 ; j<8 ; j++){
                 QTableWidgetItem* item = tabella->item(i,j);
                 item->setFlags(item->flags() ^ Qt::ItemIsEditable);
             }
@@ -141,6 +143,10 @@ void TabellaComposita::rendiEditabile(bool b){
         for(int i=0; i < tabella->rowCount(); i++){
             for(int j=1 ; j<tabella->columnCount() ; j++){
                 QTableWidgetItem* item = tabella->item(i,j);
+                //se item appartiene all'ultima riga di un elemento nel tabIngredienti
+                //e l'elemento non è una Farina lo salta
+                if(j==7 && objectName()=="tabIngredienti" && item->text()=="")
+                    continue;
                 item->setFlags(item->flags() | Qt::ItemIsEditable);
             }
         }
@@ -152,6 +158,10 @@ void TabellaComposita::rendiEditabile(bool b){
         for(int i=0; i < tabella->rowCount(); i++){
             for(int j=1 ; j<tabella->columnCount() ; j++){
                 QTableWidgetItem* item = tabella->item(i,j);
+                //se item appartiene all'ultima riga di un elemento nel tabIngredienti
+                //e l'elemento non è una Farina lo salta
+                if(j==7 && objectName()=="tabIngredienti" && item->text()=="")
+                    continue;
                 item->setFlags(item->flags() ^ Qt::ItemIsEditable);
             }
         }
