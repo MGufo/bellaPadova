@@ -7,8 +7,9 @@
 #include <QLineEdit>
 #include <QFormLayout>
 #include <QHBoxLayout>
-#include <QScrollArea>
 #include <QVBoxLayout>
+#include <QTableWidget>
+#include <QHeaderView>
 
 #include "ingredientecheckbox.h"
 
@@ -19,15 +20,15 @@ public:
 
   QLineEdit* getNomePizza() const;
   QLineEdit* getPrezzoPizza() const;
-  QWidget* getIngredientiCheckBoxWrapper() const;
-  QWidget* getFarineRadioButtonWrapper() const;
+  QTableWidget* getIngredientiWrapper() const;
+  QTableWidget* getFarineWrapper() const;
 
 private:
-  QGridLayout* layoutPizza;
+  QVBoxLayout* layoutPizza;
   QLineEdit* nomePizza;
   QLineEdit* prezzoPizza;
-  QWidget* ingredientiCheckBoxWrapper;
-  QWidget* farineRadioButtonWrapper;
+  QTableWidget* ingredientiWrapper;
+  QTableWidget* farineWrapper;
 };
 
 #endif // WIZARD_PIZZA_H

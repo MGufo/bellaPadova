@@ -4,17 +4,17 @@
 #include <QWidget>
 #include <QWizardPage>
 #include <QVBoxLayout>
-#include <QScrollArea>
+#include <QTableWidget>
+#include <QHeaderView>
 
 
 class NuovoArticolo_bevanda : public QWidget{
   Q_OBJECT
 public:
   NuovoArticolo_bevanda(QWidget* parent = nullptr);
-  QWidget* getBevandeRadioButtonWrapper() const;
 
 private:
   QVBoxLayout* layoutBevanda;
-  QWidget* bevandeRadioButtonWrapper;
+  QTableWidget* bevandeWrapper;
 };
 #endif // WIZARD_BEVANDA_H

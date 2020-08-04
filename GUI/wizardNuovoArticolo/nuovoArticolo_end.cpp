@@ -10,7 +10,7 @@ NuovoArticolo_end::NuovoArticolo_end(QWidget* parent) : QWizardPage(parent) {
 }
 
 void NuovoArticolo_end::setActualPage(){
-    //eliminazione dei campi precedenti se esistevano
+    //eliminazione dei campi precedenti se esistono
     QLabel* ptr = nullptr;
     ptr = findChild<QLabel*>("nomePizza");
     if(ptr) layoutEnd->removeRow(ptr);
