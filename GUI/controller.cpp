@@ -116,6 +116,40 @@ QList<pacchetto*>* Controller::recuperaInventario() const{
   return pacchetti;
 }
 
+QList<pacchetto *>* Controller::recuperaMenu() const{
+  auto menu = modello->getMenu();
+  pacchetto* p = nullptr;
+  QList<pacchetto*>* pacchetti = new QList<pacchetto*>();
+  for(auto it = menu.const_begin(); it != menu.const_end(); ++it){
+    if(dynamic_cast<Lattina*>(*it)){
+      Lattina* pL = dynamic_cast<Lattina*>(*it);
+      p = new pacchettoBevanda(pL->getIdRisorsa(),pL->getNome(),
+                               pL->getDisponibilita(),pL->getPrezzoBase(),
+                               pL->getQuantita(),pL->getCosto(),
+                               pL->getDataAcquisto(),pL->getCapacita(),true);
+    }
+    if(dynamic_cast<Bottiglia*>(*it)){
+    Bottiglia* pB = dynamic_cast<Bottiglia*>(*it);
+    p = new pacchettoBevanda(pB->getIdRisorsa(),pB->getNome(),
+                             pB->getDisponibilita(),pB->getPrezzoBase(),
+                             pB->getQuantita(),pB->getCosto(),
+                             pB->getDataAcquisto(),pB->getCapacita(),false);
+    }
+    else if(dynamic_cast<Pizza*>(*it)){
+    Pizza* pF = dynamic_cast<Pizza*>(*it);
+    p = new pacchettoPizza(pF->getIdRisorsa(), pF->getNome(),
+                           pF->getDisponibilita(), pF->getPrezzo());
+    auto listaIngr = pF->getComposizione();
+    for(auto it = listaIngr->const_begin(); it != listaIngr->const_end(); ++it){
+      (dynamic_cast<pacchettoPizza*>(p))->ingredienti.push_back(
+            (*it)->getIdRisorsa());
+    }
+    }
+    pacchetti->push_back(p);
+  }
+  return pacchetti;
+}
+
 bool Controller::canQuit() const { return (comandeSalvate && risorseSalvate); }
 
 void Controller::caricaComande(){
