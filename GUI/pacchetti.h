@@ -11,10 +11,10 @@
 template <typename T>
 std::string to_string_with_precision(const T a_value, const int n = 2)
 {
-    std::ostringstream out;
-    out.precision(n);
-    out << std::fixed << a_value;
-    return out.str();
+  std::ostringstream out;
+  out.precision(n);
+  out << std::fixed << a_value;
+  return out.str();
 }
 
 using std::string;
@@ -67,8 +67,10 @@ struct pacchettoBevanda : pacchettoArticolo, pacchettoConsumabile{
 };
 
 struct pacchettoPizza : pacchettoArticolo{
-  Lista<uint> ingredienti;
-  pacchettoPizza(uint _ID, string _n, bool _d, double _p) : pacchetto(_ID,_n,_d), pacchettoArticolo(_ID, _n, _d, _p), ingredienti(Lista<uint>()) {}
+  Lista<pacchettoIngrediente*> ingredienti;
+  pacchettoPizza(uint _ID, string _n, bool _d, double _p) :
+    pacchetto(_ID,_n,_d), pacchettoArticolo(_ID, _n, _d, _p),
+    ingredienti(Lista<pacchettoIngrediente*>()) {}
 };
 
 #endif // PACCHETTI_H
