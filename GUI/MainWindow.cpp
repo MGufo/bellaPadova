@@ -80,27 +80,27 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
   QList<pacchetto*>* inventario = controller->recuperaInventario();
   if(option_pizza){
 
-      QWidget* wrapperFarine = findChild<QWidget*>("farineRadioButtonWrapper");
-      QButtonGroup* gruppoDiBottoni = new QButtonGroup(wrapperFarine);
-      for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
-        if(dynamic_cast<pacchettoFarina*>(*it)){
-          QWidget* i = new QWidget(wrapperFarine);
-          QHBoxLayout* iLayout = new QHBoxLayout(i);
-          QRadioButton* pulsante = new QRadioButton(i);
-          gruppoDiBottoni->addButton(pulsante);
-          QLabel* id = new QLabel(QString::fromStdString(std::to_string((*it)->ID)),i);
-          QLabel* nome = new QLabel(QString::fromStdString((*it)->nome),i);
-          QLabel* locale = new QLabel((dynamic_cast<pacchettoFarina*>(*it)->locale? "Locale" : "Non Locale"),i);
-          QLabel* tipologia = new QLabel(QString::fromStdString(dynamic_cast<pacchettoFarina*>(*it)->tipologia),i);
-          i->setLayout(iLayout);
-          iLayout->addWidget(pulsante);
-          iLayout->addWidget(id);
-          iLayout->addWidget(nome);
-          iLayout->addWidget(locale);
-          iLayout->addWidget(tipologia);
-          dynamic_cast<QVBoxLayout*>(wrapperFarine->layout())->addWidget(i);
-        }
+    QWidget* wrapperFarine = findChild<QWidget*>("farineRadioButtonWrapper");
+    QButtonGroup* gruppoDiBottoni = new QButtonGroup(wrapperFarine);
+    for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
+      if(dynamic_cast<pacchettoFarina*>(*it)){
+        QWidget* i = new QWidget(wrapperFarine);
+        QHBoxLayout* iLayout = new QHBoxLayout(i);
+        QRadioButton* pulsante = new QRadioButton(i);
+        gruppoDiBottoni->addButton(pulsante);
+        QLabel* id = new QLabel(QString::fromStdString(std::to_string((*it)->ID)),i);
+        QLabel* nome = new QLabel(QString::fromStdString((*it)->nome),i);
+        QLabel* locale = new QLabel((dynamic_cast<pacchettoFarina*>(*it)->locale? "Locale" : "Non Locale"),i);
+        QLabel* tipologia = new QLabel(QString::fromStdString(dynamic_cast<pacchettoFarina*>(*it)->tipologia),i);
+        i->setLayout(iLayout);
+        iLayout->addWidget(pulsante);
+        iLayout->addWidget(id);
+        iLayout->addWidget(nome);
+        iLayout->addWidget(locale);
+        iLayout->addWidget(tipologia);
+        dynamic_cast<QVBoxLayout*>(wrapperFarine->layout())->addWidget(i);
       }
+    }
 
     QWidget* wrapperIngredienti = findChild<QWidget*>("ingredientiCheckBoxWrapper");
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
@@ -170,7 +170,7 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
   else{
   }
 }
-	
+
 void MainWindow::closeEvent(QCloseEvent *event){
   if(!controller->canQuit()){
     QMessageBox* savePrompt = new QMessageBox(this);
@@ -182,28 +182,35 @@ void MainWindow::closeEvent(QCloseEvent *event){
     int res = savePrompt->exec();
     switch (res){
       case QMessageBox::Save: {
-        emit saveAndExit();
-        event->accept();
-        break;
-      }
+          emit saveAndExit();
+          event->accept();
+          break;
+        }
       case QMessageBox::Discard: {
-        event->accept();
-        break;
-      }
+          event->accept();
+          break;
+        }
       case QMessageBox::Cancel:{
-        event->ignore();
-        break;
-      }
+          event->ignore();
+          break;
+        }
     }
   }
 }
 
 void MainWindow::visualizzaInventario(){
-    QList<pacchetto*>* inventario = controller->recuperaInventario();
-    for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
-        aggiornaInventario(*it);
-    }
-    delete inventario;
+  QList<pacchetto*>* inventario = controller->recuperaInventario();
+  for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
+    aggiornaInventario(*it);
+  }
+  delete inventario;
+}
+
+void MainWindow::visualizzaMenu(){
+  QList<pacchetto*>* menu = controller->recuperaMenu();
+  for(auto it = menu->constBegin(); it != menu->constEnd(); ++it)
+    aggiornaMenu(*it);
+  delete menu;
 }
 
 void MainWindow::aggiornaContabilizzazione(double guadagno){
@@ -211,8 +218,8 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkgreen;");
   else
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkred;");
-    findChild<QLineEdit*>("mGuadagno")->clear();
-    findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
+  findChild<QLineEdit*>("mGuadagno")->clear();
+  findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
 }
 
 void MainWindow::aggiornaInventario(pacchetto * p){
@@ -225,6 +232,13 @@ void MainWindow::aggiornaInventario(pacchetto * p){
         findChild<TabellaComposita*>("tabIngredienti");
     tabIngredienti->inserisciElemento(p);
   }
+}
+
+void MainWindow::aggiornaMenu(pacchetto* p){
+  if(dynamic_cast<pacchettoPizza*>(p))
+    (findChild<TabellaComposita*>("tabPizze"))->inserisciElemento(p);
+  else
+    (findChild<TabellaComposita*>("tabBevande"))->inserisciElemento(p);
 }
 
 void MainWindow::mostraErrore(const QString & messaggio){
