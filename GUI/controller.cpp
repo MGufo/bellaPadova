@@ -91,25 +91,25 @@ QList<pacchetto*>* Controller::recuperaInventario() const{
                                pL->getDataAcquisto(),pL->getCapacita(),true);
     }
     if(dynamic_cast<Bottiglia*>(*it)){
-    Bottiglia* pB = dynamic_cast<Bottiglia*>(*it);
-    p = new pacchettoBevanda(pB->getIdRisorsa(),pB->getNome(),
-                             pB->getDisponibilita(),pB->getPrezzoBase(),
-                             pB->getQuantita(),pB->getCosto(),
-                             pB->getDataAcquisto(),pB->getCapacita(),false);
+      Bottiglia* pB = dynamic_cast<Bottiglia*>(*it);
+      p = new pacchettoBevanda(pB->getIdRisorsa(),pB->getNome(),
+                               pB->getDisponibilita(),pB->getPrezzoBase(),
+                               pB->getQuantita(),pB->getCosto(),
+                               pB->getDataAcquisto(),pB->getCapacita(),false);
     }
     else if(dynamic_cast<Farina*>(*it)){
-    Farina* pF = dynamic_cast<Farina*>(*it);
-    p = new pacchettoFarina(pF->getIdRisorsa(),pF->getNome(),
-                            pF->getDisponibilita(),pF->getQuantita(),
-                            pF->getCosto(),pF->getDataAcquisto(),pF->isLocal(),
-                            pF->getTipoFarina());
+      Farina* pF = dynamic_cast<Farina*>(*it);
+      p = new pacchettoFarina(pF->getIdRisorsa(),pF->getNome(),
+                              pF->getDisponibilita(),pF->getQuantita(),
+                              pF->getCosto(),pF->getDataAcquisto(),pF->isLocal(),
+                              pF->getTipoFarina());
     }
     else if(dynamic_cast<Ingrediente*>(*it)){
       Ingrediente* pI = dynamic_cast<Ingrediente*>(*it);
       p = new pacchettoIngrediente(pI->getIdRisorsa(),pI->getNome(),
-                                 pI->getDisponibilita(),pI->getQuantita(),
-                                 pI->getCosto(),pI->getDataAcquisto(),
-                                 pI->isLocal());
+                                   pI->getDisponibilita(),pI->getQuantita(),
+                                   pI->getCosto(),pI->getDataAcquisto(),
+                                   pI->isLocal());
     }
     pacchetti->push_back(p);
   }
@@ -129,21 +129,27 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
                                pL->getDataAcquisto(),pL->getCapacita(),true);
     }
     if(dynamic_cast<Bottiglia*>(*it)){
-    Bottiglia* pB = dynamic_cast<Bottiglia*>(*it);
-    p = new pacchettoBevanda(pB->getIdRisorsa(),pB->getNome(),
-                             pB->getDisponibilita(),pB->getPrezzoBase(),
-                             pB->getQuantita(),pB->getCosto(),
-                             pB->getDataAcquisto(),pB->getCapacita(),false);
+      Bottiglia* pB = dynamic_cast<Bottiglia*>(*it);
+      p = new pacchettoBevanda(pB->getIdRisorsa(),pB->getNome(),
+                               pB->getDisponibilita(),pB->getPrezzoBase(),
+                               pB->getQuantita(),pB->getCosto(),
+                               pB->getDataAcquisto(),pB->getCapacita(),false);
     }
     else if(dynamic_cast<Pizza*>(*it)){
-    Pizza* pF = dynamic_cast<Pizza*>(*it);
-    p = new pacchettoPizza(pF->getIdRisorsa(), pF->getNome(),
-                           pF->getDisponibilita(), pF->getPrezzo());
-    auto listaIngr = pF->getComposizione();
-    for(auto it = listaIngr->const_begin(); it != listaIngr->const_end(); ++it){
-      (dynamic_cast<pacchettoPizza*>(p))->ingredienti.push_back(
-            (*it)->getIdRisorsa());
-    }
+      Pizza* pF = dynamic_cast<Pizza*>(*it);
+      p = new pacchettoPizza(pF->getIdRisorsa(), pF->getNome(),
+                             pF->getDisponibilita(), pF->getPrezzo());
+      auto listaIngr = pF->getComposizione();
+      for(auto it = listaIngr->const_begin(); it != listaIngr->const_end();
+          ++it){
+        Ingrediente* i = dynamic_cast<Ingrediente*>(*it);
+        pacchettoIngrediente* pI =
+            new pacchettoIngrediente(i->getIdRisorsa(),i->getNome(),
+                                     i->getDisponibilita(),i->getQuantita(),
+                                     i->getCosto(),i->getDataAcquisto(),
+                                     i->isLocal());
+        (dynamic_cast<pacchettoPizza*>(p))->ingredienti.push_back(pI);
+      }
     }
     pacchetti->push_back(p);
   }
@@ -188,12 +194,12 @@ void Controller::salvaRisorse(){
 }
 
 void Controller::modificaComande(){
-    //modello->modificaComanda();
+  //modello->modificaComanda();
   comandeSalvate = false;
 }
 
 void Controller::modificaRisorse(){
-    //modello->modificaArticolo();
+  //modello->modificaArticolo();
   try{
     modello->salvaRisorse();
   } catch (std::logic_error *ecc) {
