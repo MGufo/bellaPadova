@@ -37,7 +37,7 @@ void MainWindow::setStylePizzeria() {
   QFile file(":/resources/style.css");
   file.open(QFile::ReadOnly);
   QString stylePizzeria = QLatin1String(file.readAll());
-
+  file.close();
   setStyleSheet(stylePizzeria);
 }
 
