@@ -19,8 +19,9 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   header = new QHeaderView(Qt::Horizontal,tabella);
   header->setSectionResizeMode(header->ResizeToContents);
   // Aggiunta header alla tabella
-  if(labels)    tabella->setHorizontalHeaderLabels(*labels);
+  if(labels)  tabella->setHorizontalHeaderLabels(*labels);
   tabella->setHorizontalHeader(header);
+  tabella->verticalHeader()->setVisible(false);
   // Crezione layout widget
   layoutTabellaComposita = new QVBoxLayout(this);
   // Aggiunta widget figli al layout
