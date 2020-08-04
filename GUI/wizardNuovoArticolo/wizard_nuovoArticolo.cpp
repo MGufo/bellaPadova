@@ -15,5 +15,4 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
 
 void WizardNuovoArticolo::accept(){
     QWizard::accept();
-
 }
