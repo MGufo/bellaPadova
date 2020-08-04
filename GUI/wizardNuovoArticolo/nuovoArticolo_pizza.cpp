@@ -12,29 +12,50 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   layoutInfo->addRow("Prezzo:", prezzoPizza);
 
   // Farina
-  QScrollArea* scrollAreaF = new QScrollArea(this);
-  scrollAreaF->setWidgetResizable(true);
-  scrollAreaF->setStyleSheet("background-color: #eeeeee");
-  farineRadioButtonWrapper = new QWidget(scrollAreaF);
-  farineRadioButtonWrapper->setObjectName("farineRadioButtonWrapper");
-  QVBoxLayout* farineRadioButtonLayout = new QVBoxLayout(farineRadioButtonWrapper);
-  farineRadioButtonWrapper->setLayout(farineRadioButtonLayout);
-  scrollAreaF->setWidget(farineRadioButtonWrapper);
+  QStringList* labelsFarine = new QStringList();
+  labelsFarine->push_back("ID");
+  labelsFarine->push_back("");
+  labelsFarine->push_back("Nome");
+  labelsFarine->push_back("Locale");
+  labelsFarine->push_back("Tipo Farina");
+  farineWrapper = new QTableWidget(0,5,this);
+  farineWrapper->setObjectName("farineWrapper");
+  farineWrapper->setMinimumWidth(520);
+  // farineWrapper->setMaximumWidth(2100);
+  QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+  sizePolicy.setHorizontalStretch(0);
+  sizePolicy.setVerticalStretch(0);
+  sizePolicy.setHeightForWidth(farineWrapper->sizePolicy().hasHeightForWidth());
+  farineWrapper->setSizePolicy(sizePolicy);
+  QHeaderView* headerFarine = new QHeaderView(Qt::Horizontal,farineWrapper);
+  headerFarine->setSectionResizeMode(headerFarine->ResizeToContents);
+  farineWrapper->setHorizontalHeaderLabels(*labelsFarine);
+  farineWrapper->setHorizontalHeader(headerFarine);
 
   // Ingredienti
-  QScrollArea* scrollAreaI = new QScrollArea(this);
-  scrollAreaI->setWidgetResizable(true);
-  scrollAreaI->setStyleSheet("background-color: #eeeeee");
-  ingredientiCheckBoxWrapper = new QWidget(scrollAreaI);
-  ingredientiCheckBoxWrapper->setObjectName("ingredientiCheckBoxWrapper");
-  QVBoxLayout* ingredientiCheckboxLayout = new QVBoxLayout(ingredientiCheckBoxWrapper);
-  ingredientiCheckBoxWrapper->setLayout(ingredientiCheckboxLayout);
-  scrollAreaI->setWidget(ingredientiCheckBoxWrapper);
+  QStringList* labelsIngredienti = new QStringList();
+  labelsIngredienti->push_back("ID");
+  labelsIngredienti->push_back("");
+  labelsIngredienti->push_back("Nome");
+  labelsIngredienti->push_back("Locale");
+  ingredientiWrapper = new QTableWidget(0,4,this);
+  ingredientiWrapper->setObjectName("ingredientiWrapper");
+  ingredientiWrapper->setMinimumWidth(350);
+  // ingredientiWrapper->setMaximumWidth(2100);
+  QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+  sizePolicy2.setHorizontalStretch(0);
+  sizePolicy2.setVerticalStretch(0);
+  sizePolicy2.setHeightForWidth(ingredientiWrapper->sizePolicy().hasHeightForWidth());
+  ingredientiWrapper->setSizePolicy(sizePolicy2);
+  QHeaderView* headerIngredienti = new QHeaderView(Qt::Horizontal,ingredientiWrapper);
+  headerIngredienti->setSectionResizeMode(headerIngredienti->ResizeToContents);
+  ingredientiWrapper->setHorizontalHeaderLabels(*labelsIngredienti);
+  ingredientiWrapper->setHorizontalHeader(headerIngredienti);
 
-  layoutPizza = new QGridLayout(this);
-  layoutPizza->addWidget(wrapperInfo,0,0,2,6,Qt::AlignHCenter);
-  layoutPizza->addWidget(scrollAreaF, 3, 0, 6, 6);
-  layoutPizza->addWidget(scrollAreaI, 7, 0, 10, 6);
+  layoutPizza = new QVBoxLayout(this);
+  layoutPizza->addWidget(wrapperInfo,0,Qt::AlignHCenter);
+  layoutPizza->addWidget(farineWrapper);
+  layoutPizza->addWidget(ingredientiWrapper);
   setLayout(layoutPizza);
 }
 
@@ -42,6 +63,6 @@ QLineEdit *NuovoArticolo_pizza::getNomePizza() const{ return nomePizza;}
 
 QLineEdit *NuovoArticolo_pizza::getPrezzoPizza() const{ return prezzoPizza;}
 
-QWidget *NuovoArticolo_pizza::getIngredientiCheckBoxWrapper() const{ return ingredientiCheckBoxWrapper;}
+QTableWidget *NuovoArticolo_pizza::getIngredientiWrapper() const{   return ingredientiWrapper;}
 
-QWidget *NuovoArticolo_pizza::getFarineRadioButtonWrapper() const{ return farineRadioButtonWrapper;}
+QTableWidget *NuovoArticolo_pizza::getFarineWrapper() const{   return farineWrapper;}

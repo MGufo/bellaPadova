@@ -2,21 +2,29 @@
 
 NuovoArticolo_bevanda::NuovoArticolo_bevanda(QWidget* parent) : QWidget(parent){
 
-    // elenco di bevande tra cui scegliere da inserire nel menù
-    QScrollArea* scrollArea = new QScrollArea(this);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setStyleSheet("background-color: #eeeeee");
-    bevandeRadioButtonWrapper = new QWidget(scrollArea);
-    bevandeRadioButtonWrapper->setObjectName("bevandeRadioButtonWrapper");
-    QVBoxLayout* bevandeRadioButtonLayout = new QVBoxLayout(bevandeRadioButtonWrapper);
-    bevandeRadioButtonWrapper->setLayout(bevandeRadioButtonLayout);
-    scrollArea->setWidget(bevandeRadioButtonWrapper);
+    //Elenco di bevande tra cui scegliere da inserire nel menù
+    QStringList* labelsBevande = new QStringList();
+    labelsBevande->push_back("ID");
+    labelsBevande->push_back("");
+    labelsBevande->push_back("Nome");
+    labelsBevande->push_back("Prezzo");
+    labelsBevande->push_back("Capacità");
+    labelsBevande->push_back("Tipologia");
+    bevandeWrapper = new QTableWidget(0,6,this);
+    bevandeWrapper->setObjectName("bevandeWrapper");
+    bevandeWrapper->setMinimumWidth(500);
+    // bevandeWrapper->setMaximumWidth(2100);
+    QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    sizePolicy.setHorizontalStretch(0);
+    sizePolicy.setVerticalStretch(0);
+    sizePolicy.setHeightForWidth(bevandeWrapper->sizePolicy().hasHeightForWidth());
+    bevandeWrapper->setSizePolicy(sizePolicy);
+    QHeaderView* headerBevande = new QHeaderView(Qt::Horizontal,bevandeWrapper);
+    headerBevande->setSectionResizeMode(headerBevande->ResizeToContents);
+    bevandeWrapper->setHorizontalHeaderLabels(*labelsBevande);
+    bevandeWrapper->setHorizontalHeader(headerBevande);
 
     layoutBevanda = new QVBoxLayout(this);
-    layoutBevanda->addWidget(scrollArea);
+    layoutBevanda->addWidget(bevandeWrapper);
     setLayout(layoutBevanda);
-}
-
-QWidget *NuovoArticolo_bevanda::getBevandeRadioButtonWrapper() const{
-    return bevandeRadioButtonWrapper;
 }

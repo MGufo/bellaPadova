@@ -39,7 +39,7 @@ QPushButton#Calcola {
 QPushButton#wrapperComanda {
     background-color: #008000;
     width: 240;
-    height: 100;
+    height: 200;
 }
 
 QPushButton#Rimuovi {
@@ -105,20 +105,20 @@ QLabel {
 
 QLabel#inEsecuzione {
     qproperty-alignment: AlignCenter;
-    margin-top: 8;
-    margin-bottom: 4;
+    margin-top: 2;
+    margin-bottom: 2;
 }
 
 QLabel#concluse {
     qproperty-alignment: AlignCenter;
-    margin-top: 8;
-    margin-bottom: 4;
+    margin-top: 2;
+    margin-bottom: 2;
 }
 
 QLabel#labelsMenu {
     qproperty-alignment: AlignCenter;
     margin-top: 8;
-    margin-bottom: 4;
+    margin-bottom: 10;
 }
 
 QLabel#scegliPeriodo {
@@ -160,7 +160,7 @@ QLineEdit#mGuadagno {
 QScrollArea {
     background-color: #FFFFFF;
     border: 1 solid black;
-    margin: 2 15 2 15;
+    margin: 2 10 2 10;
 }
 
 QWidget#wrapperInEsecuzione {
