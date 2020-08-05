@@ -126,27 +126,6 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
       pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(*it);
       if(pB){
-          /*
-        QWidget* completeRadio = new QWidget(wrapper);
-        QHBoxLayout* completeRadioLayout = new QHBoxLayout(completeRadio);
-        QWidget* bb = new BevandaRadioButton(
-              b->ID,QString::fromStdString(b->nome),b->prezzo,b->capacita,
-              (b->tipo? "Lattina" : "Bottiglia"),completeRadio);
-        QLabel* id = new QLabel(QString::fromStdString(std::to_string(b->ID)));
-        QLabel* prezzo = new QLabel(
-              QString::fromStdString(to_string_with_precision(b->prezzo)));
-        QLabel* capacita = new QLabel(
-              QString::fromStdString(to_string_with_precision(b->capacita)));
-        QLabel* tipologia = new QLabel((b->tipo? "Lattina" : "Bottiglia"));
-
-        completeRadioLayout->addWidget(bb);
-        completeRadioLayout->addWidget(id);
-        completeRadioLayout->addWidget(prezzo);
-        completeRadioLayout->addWidget(capacita);
-        completeRadioLayout->addWidget(tipologia);
-
-        dynamic_cast<QVBoxLayout*>(wrapper->layout())->addWidget(completeRadio);
-        */
         wrapperBevande->insertRow(wrapperBevande->rowCount());
         QTableWidgetItem* item = nullptr;
 
@@ -169,33 +148,47 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
 }
 
 void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
-//  if(option_pizza){
-//    //TODO: reupero informazioni contenute nei qtablewidget per mostrarle in nuovoArticolo_end
-//    QTableWidget* ingredientiWrapper = findChild<QTableWidget*>("ingredientiWrapper");
-//    auto checkBox = ingredientiWrapper->findChild<QTableModel*>();
 
-//    QWidget* visualizationWrapper =
-//        findChild<QWidget*>("ingredientiVisualizationWrapper");
+  /*if(option_pizza){
+    //TODO: reupero informazioni contenute nei qtablewidget per mostrarle in nuovoArticolo_end
 
-//    //eliminazione dei vecchi ingredienti se presenti nel layout
-//    QLayoutItem* item = nullptr;
-//    while((item = visualizationWrapper->layout()->takeAt(1)) != NULL){
-//      //IngredienteCheckBox* p = dynamic_cast<IngredienteCheckBox*>(item->widget());
-//      //std::cout << p->text().toStdString() << " " << p->isChecked() << std::endl;
-//      delete item->widget();
-//      delete item;
-//    }
-//    //riempimento del layout con gli ingredienti aggiornati
-//    for(auto it = ++(checkBox.cbegin()); it != checkBox.cend(); ++it){
-//      IngredienteCheckBox* elemento = dynamic_cast<IngredienteCheckBox*>(*it);
-//      if(elemento->isChecked()){
-//        QLabel* i = new QLabel(elemento->text(),visualizationWrapper);
-//        dynamic_cast<QVBoxLayout*>(visualizationWrapper->layout())->addWidget(i);
-//      }
-//    }
-//  }
-//  else{
-//  }
+    //inserisco la farina
+    QTableWidget* farineTabellaWrapper = findChild<QTableWidget*>("farineWrapper");
+    for(int i=0; i<farineTabellaWrapper->rowCount() ; i++){
+        QRadioButton* radioFarina = dynamic_cast<QRadioButton*>(farineTabellaWrapper->cellWidget(i,1));
+        if(radioFarina->isChecked()){
+            QWidget* farineVisualWrapper = findChild<QWidget*>("farineVisualizationWrapper");
+            QLabel* label = new QLabel((farineTabellaWrapper->item(i,2))->text());
+            dynamic_cast<QVBoxLayout*>(farineVisualWrapper->layout())->addWidget(label);
+        }
+    }
+    /*
+    QTableWidget* ingredientiWrapper = findChild<QTableWidget*>("ingredientiWrapper");
+
+
+    QWidget* visualizationWrapper =
+        findChild<QWidget*>("ingredientiVisualizationWrapper");
+
+    //eliminazione dei vecchi ingredienti se presenti nel layout
+    QLayoutItem* item = nullptr;
+    while((item = visualizationWrapper->layout()->takeAt(1)) != NULL){
+      //IngredienteCheckBox* p = dynamic_cast<IngredienteCheckBox*>(item->widget());
+      //std::cout << p->text().toStdString() << " " << p->isChecked() << std::endl;
+      delete item->widget();
+      delete item;
+    }
+    //riempimento del layout con gli ingredienti aggiornati
+    for(auto it = ++(checkBox.cbegin()); it != checkBox.cend(); ++it){
+      IngredienteCheckBox* elemento = dynamic_cast<IngredienteCheckBox*>(*it);
+      if(elemento->isChecked()){
+        QLabel* i = new QLabel(elemento->text(),visualizationWrapper);
+        dynamic_cast<QVBoxLayout*>(visualizationWrapper->layout())->addWidget(i);
+      }
+    }
+
+  }
+  else{
+  }*/
 }
 	
 void MainWindow::closeEvent(QCloseEvent *event){

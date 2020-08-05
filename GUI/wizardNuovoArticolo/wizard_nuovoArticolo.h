@@ -19,6 +19,8 @@ public:
   explicit WizardNuovoArticolo(QWidget *parent = nullptr);
 
   void accept() override;
+public slots:
+  void assegnaBottoni(int);
 };
 
 #endif // WIZARDNUOVOARTICOLO_H

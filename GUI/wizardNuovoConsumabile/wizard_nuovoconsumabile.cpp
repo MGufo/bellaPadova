@@ -10,6 +10,7 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
   connect(this, SIGNAL(nuovoConsumabile(pacchetto*)),
           this->parentWidget()->parentWidget()->parentWidget()->parentWidget(),
           SLOT(creaNuovoConsumabile(pacchetto*)));
+  connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
 
 #ifndef Q_OS_MAC
   setWizardStyle(ModernStyle);
@@ -36,4 +37,9 @@ void WizardNuovoConsumabile::accept(){
           field("dataAcquisto").toDate(), field("capacita").toFloat(), field("optionLattina").toBool());
   }
   emit nuovoConsumabile(p);
+}
+
+void WizardNuovoConsumabile::assegnaBottoni(int id){
+    if(id == WizardNuovoConsumabile::PAGE_Intro)
+        button(QWizard::BackButton)->hide();
 }
