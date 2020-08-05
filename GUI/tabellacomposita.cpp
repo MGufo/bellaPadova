@@ -43,7 +43,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
   //item->setFlags(item->flags() ^ Qt::ItemIsEditable);
   //setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-  if(objectName()=="tabBevande"){
+  if(objectName()=="tabBevandeInventario"){
     pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
     //creazione di una nuova riga e riempimento con i dati nel pacchetto
     tabella->insertRow(tabella->rowCount());
@@ -78,7 +78,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item->setFlags(item->flags() ^ Qt::ItemIsEditable);
     }
   }
-  else if(objectName()=="tabIngredienti"){
+  else if(objectName()=="tabIngredientiInventario"){
     pacchettoFarina* pF = dynamic_cast<pacchettoFarina*>(p);
     if(pF){
       //creazione di una nuova riga e riempimento con i dati nel pacchetto
@@ -142,7 +142,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       }
     }
   }
-  else if(objectName()=="tabPizze"){
+  else if(objectName()=="tabPizzeMenu"){
     pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
     if(pP){
       //creazione di una nuova riga e riempimento con i dati nel pacchetto
@@ -157,16 +157,14 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       tabella->setItem(tabella->rowCount()-1, 2, item);
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(
-                                    to_string_with_precision(pP->costo)));
+                                    to_string_with_precision(pP->prezzo)));
       tabella->setItem(tabella->rowCount()-1, 4, item);
-      item = new QTableWidgetItem(QString::fromStdString(pP->tipologia));
-      tabella->setItem(tabella->rowCount()-1, 7, item);
 
-      int i = tabella->rowCount()-1;
-      for(int j=0 ; j<8 ; j++){
-        QTableWidgetItem* item = tabella->item(i,j);
-        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-      }
+//      int i = tabella->rowCount()-1;
+//      for(int j=0 ; j<8 ; j++){
+//        QTableWidgetItem* item = tabella->item(i,j);
+//        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+//      }
     }
   }
 }
