@@ -7,7 +7,6 @@
 #include <QFile>
 #include <QTabWidget>
 #include <QList>
-#include <QButtonGroup>
 
 #include "GUI/comande.h"
 #include "GUI/menu.h"
@@ -29,9 +28,7 @@ class MainWindow : public QWidget {
   ~MainWindow();
   void aggiornaContabilizzazione(double);
   void aggiornaInventario(pacchetto*);
-  void aggiornaMenu(pacchetto*);
   void visualizzaInventario();
-  void visualizzaMenu();
   void mostraErrore(const QString&);
 
 signals:
