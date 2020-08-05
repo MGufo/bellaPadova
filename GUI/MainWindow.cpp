@@ -31,7 +31,7 @@ void MainWindow::setStylePizzeria() {
   mainLayout->setSpacing(0);
   mainLayout->setMargin(0);
   mainLayout->setContentsMargins(0,-1,0,-1);
-  setMinimumSize(QSize(900,600));
+  setMinimumSize(QSize(1025,700));
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
   QFile file(":/resources/style.css");
@@ -169,33 +169,33 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
 }
 
 void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
-  if(option_pizza){
-    //TODO: reupero informazioni contenute nei qtablewidget per mostrarle in nuovoArticolo_end
-    QTableWidget* ingredientiWrapper = findChild<QTableWidget*>("ingredientiWrapper");
-    auto checkBox = ingredientiWrapper->findChild<QTableModel*>();
+//  if(option_pizza){
+//    //TODO: reupero informazioni contenute nei qtablewidget per mostrarle in nuovoArticolo_end
+//    QTableWidget* ingredientiWrapper = findChild<QTableWidget*>("ingredientiWrapper");
+//    auto checkBox = ingredientiWrapper->findChild<QTableModel*>();
 
-    QWidget* visualizationWrapper =
-        findChild<QWidget*>("ingredientiVisualizationWrapper");
+//    QWidget* visualizationWrapper =
+//        findChild<QWidget*>("ingredientiVisualizationWrapper");
 
-    //eliminazione dei vecchi ingredienti se presenti nel layout
-    QLayoutItem* item = nullptr;
-    while((item = visualizationWrapper->layout()->takeAt(1)) != NULL){
-      //IngredienteCheckBox* p = dynamic_cast<IngredienteCheckBox*>(item->widget());
-      //std::cout << p->text().toStdString() << " " << p->isChecked() << std::endl;
-      delete item->widget();
-      delete item;
-    }
-    //riempimento del layout con gli ingredienti aggiornati
-    for(auto it = ++(checkBox.cbegin()); it != checkBox.cend(); ++it){
-      IngredienteCheckBox* elemento = dynamic_cast<IngredienteCheckBox*>(*it);
-      if(elemento->isChecked()){
-        QLabel* i = new QLabel(elemento->text(),visualizationWrapper);
-        dynamic_cast<QVBoxLayout*>(visualizationWrapper->layout())->addWidget(i);
-      }
-    }
-  }
-  else{
-  }
+//    //eliminazione dei vecchi ingredienti se presenti nel layout
+//    QLayoutItem* item = nullptr;
+//    while((item = visualizationWrapper->layout()->takeAt(1)) != NULL){
+//      //IngredienteCheckBox* p = dynamic_cast<IngredienteCheckBox*>(item->widget());
+//      //std::cout << p->text().toStdString() << " " << p->isChecked() << std::endl;
+//      delete item->widget();
+//      delete item;
+//    }
+//    //riempimento del layout con gli ingredienti aggiornati
+//    for(auto it = ++(checkBox.cbegin()); it != checkBox.cend(); ++it){
+//      IngredienteCheckBox* elemento = dynamic_cast<IngredienteCheckBox*>(*it);
+//      if(elemento->isChecked()){
+//        QLabel* i = new QLabel(elemento->text(),visualizationWrapper);
+//        dynamic_cast<QVBoxLayout*>(visualizationWrapper->layout())->addWidget(i);
+//      }
+//    }
+//  }
+//  else{
+//  }
 }
 	
 void MainWindow::closeEvent(QCloseEvent *event){
@@ -225,14 +225,6 @@ void MainWindow::closeEvent(QCloseEvent *event){
   }
 }
 
-void MainWindow::visualizzaInventario(){
-    QList<pacchetto*>* inventario = controller->recuperaInventario();
-    for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
-        aggiornaInventario(*it);
-    }
-    delete inventario;
-}
-
 void MainWindow::aggiornaContabilizzazione(double guadagno){
   if(guadagno > 0)
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkgreen;");
@@ -252,6 +244,32 @@ void MainWindow::aggiornaInventario(pacchetto * p){
         findChild<TabellaComposita*>("tabIngredienti");
     tabIngredienti->inserisciElemento(p);
   }
+}
+
+void MainWindow::visualizzaInventario(){
+    QList<pacchetto*>* inventario = controller->recuperaInventario();
+    for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
+        aggiornaInventario(*it);
+    }
+    delete inventario;
+}
+
+void MainWindow::aggiornaMenu(pacchetto* p){
+  TabellaComposita* tab;
+  if(dynamic_cast<pacchettoPizza*>(p))
+    tab = findChild<TabellaComposita*>("tabPizze");
+  else
+    tab = findChild<TabellaComposita*>("tabBevande");
+
+  tab->inserisciElemento(p);
+}
+
+void MainWindow::visualizzaMenu(){
+  QList<pacchetto*>* menu = controller->recuperaMenu();
+  for(auto it = menu->constBegin(); it != menu->constEnd(); ++it){
+      aggiornaMenu(*it);
+  }
+  delete menu;
 }
 
 void MainWindow::mostraErrore(const QString & messaggio){

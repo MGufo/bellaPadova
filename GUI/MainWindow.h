@@ -29,6 +29,8 @@ class MainWindow : public QWidget {
   void aggiornaContabilizzazione(double);
   void aggiornaInventario(pacchetto*);
   void visualizzaInventario();
+  void aggiornaMenu(pacchetto*);
+  void visualizzaMenu();
   void mostraErrore(const QString&);
 
 signals:
