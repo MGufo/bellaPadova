@@ -173,6 +173,7 @@ void Controller::caricaRisorse(){
     vista->mostraErrore(QString(ecc->what()));
   }
   vista->visualizzaInventario();
+  vista->visualizzaMenu();
 }
 
 void Controller::salvaComande(){
