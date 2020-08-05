@@ -159,7 +159,7 @@ void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){
   for(auto it = menuJSON.constBegin(); it != menuJSON.constEnd(); ++it){
     QJsonObject* risorsaJSON = new QJsonObject((*it).toObject());
     tipo = (*(risorsaJSON->find("tipo"))).toString().toStdString();
-    Risorsa* risorsa;
+    Risorsa* risorsa = nullptr;
 
     if(tipo == "pizza") risorsa = new Pizza();
     else if (tipo == "bottiglia") risorsa = new Bottiglia();
@@ -190,7 +190,7 @@ void GestoreRisorse::caricaInventario(const QJsonObject & risorseJSON){
   for(auto it = risorseJSON.constBegin(); it != risorseJSON.constEnd(); ++it){
     QJsonObject* risorsaJSON = new QJsonObject((*it).toObject());
     tipo = (*(risorsaJSON->find("tipo"))).toString().toStdString();
-    Risorsa* risorsa;
+    Risorsa* risorsa = nullptr;
 
     if (tipo == "bottiglia") risorsa = new Bottiglia();
     else if (tipo == "lattina") risorsa = new Lattina();
