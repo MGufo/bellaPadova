@@ -16,8 +16,11 @@ public:
   explicit WizardNuovoConsumabile(QWidget* parent = nullptr);
 
   void accept() override;
+
 signals:
   void nuovoConsumabile(pacchetto*);
+public slots:
+  void assegnaBottoni(int);
 };
 
 #endif // WIZARDNUOVOCONSUMABILE_H

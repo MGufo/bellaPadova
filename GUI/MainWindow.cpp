@@ -169,7 +169,7 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
 }
 
 void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
-  if(option_pizza){
+  /*if(option_pizza){
     //TODO: reupero informazioni contenute nei qtablewidget per mostrarle in nuovoArticolo_end
     QTableWidget* ingredientiWrapper = findChild<QTableWidget*>("ingredientiWrapper");
     auto checkBox = ingredientiWrapper->findChild<QTableModel*>();
@@ -195,7 +195,7 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
     }
   }
   else{
-  }
+  }*/
 }
 	
 void MainWindow::closeEvent(QCloseEvent *event){
