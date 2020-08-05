@@ -236,12 +236,13 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
 
 void MainWindow::aggiornaInventario(pacchetto * p){
   if(dynamic_cast<pacchettoBevanda*>(p)){
-    TabellaComposita* tabBevande = findChild<TabellaComposita*>("tabBevande");
+    TabellaComposita* tabBevande =
+        findChild<TabellaComposita*>("tabBevandeInventario");
     tabBevande->inserisciElemento(p);
   }
   else{
     TabellaComposita* tabIngredienti =
-        findChild<TabellaComposita*>("tabIngredienti");
+        findChild<TabellaComposita*>("tabIngredientiInventario");
     tabIngredienti->inserisciElemento(p);
   }
 }
@@ -257,9 +258,9 @@ void MainWindow::visualizzaInventario(){
 void MainWindow::aggiornaMenu(pacchetto* p){
   TabellaComposita* tab;
   if(dynamic_cast<pacchettoPizza*>(p))
-    tab = findChild<TabellaComposita*>("tabPizze");
+    tab = findChild<TabellaComposita*>("tabPizzeMenu");
   else
-    tab = findChild<TabellaComposita*>("tabBevande");
+    tab = findChild<TabellaComposita*>("tabBevandeMenu");
 
   tab->inserisciElemento(p);
 }

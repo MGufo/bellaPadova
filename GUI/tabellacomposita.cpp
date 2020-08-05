@@ -38,7 +38,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   setLayout(layoutTabellaComposita);
 }
 
-void TabellaComposita::inserisciElemento(pacchetto * p){
+void TabellaComposita::inserisciElemento(pacchetto* p){
   //scorro righe e colonne della tabella e rendo ogni item non editabile
   //item->setFlags(item->flags() ^ Qt::ItemIsEditable);
   //setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -78,7 +78,7 @@ void TabellaComposita::inserisciElemento(pacchetto * p){
       item->setFlags(item->flags() ^ Qt::ItemIsEditable);
     }
   }
-  else{
+  else if(objectName()=="tabIngredienti"){
     pacchettoFarina* pF = dynamic_cast<pacchettoFarina*>(p);
     if(pF){
       //creazione di una nuova riga e riempimento con i dati nel pacchetto
@@ -142,6 +142,33 @@ void TabellaComposita::inserisciElemento(pacchetto * p){
       }
     }
   }
+  else if(objectName()=="tabPizze"){
+    pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
+    if(pP){
+      //creazione di una nuova riga e riempimento con i dati nel pacchetto
+      tabella->insertRow(tabella->rowCount());
+      QTableWidgetItem* item = nullptr;
+
+      item = new QTableWidgetItem(QString::fromStdString(std::to_string(pP->ID)));
+      tabella->setItem(tabella->rowCount()-1, 0, item);
+      item = new QTableWidgetItem(QString::fromStdString(pP->nome));
+      tabella->setItem(tabella->rowCount()-1, 1, item);
+      item = new QTableWidgetItem((pP->disponibilita? "Si" : "No"));
+      tabella->setItem(tabella->rowCount()-1, 2, item);
+      tabella->setItem(tabella->rowCount()-1, 3, item);
+      item = new QTableWidgetItem(QString::fromStdString(
+                                    to_string_with_precision(pP->costo)));
+      tabella->setItem(tabella->rowCount()-1, 4, item);
+      item = new QTableWidgetItem(QString::fromStdString(pP->tipologia));
+      tabella->setItem(tabella->rowCount()-1, 7, item);
+
+      int i = tabella->rowCount()-1;
+      for(int j=0 ; j<8 ; j++){
+        QTableWidgetItem* item = tabella->item(i,j);
+        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+      }
+    }
+  }
 }
 
 void TabellaComposita::rendiEditabile(bool b){
@@ -152,7 +179,7 @@ void TabellaComposita::rendiEditabile(bool b){
         QTableWidgetItem* item = tabella->item(i,j);
         //se item appartiene all'ultima riga di un elemento nel tabIngredienti
         //e l'elemento non è una Farina lo salta
-        if(j==7 && objectName()=="tabIngredienti" && item->text()=="")
+        if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
           continue;
         item->setFlags(item->flags() | Qt::ItemIsEditable);
       }
@@ -167,7 +194,7 @@ void TabellaComposita::rendiEditabile(bool b){
         QTableWidgetItem* item = tabella->item(i,j);
         //se item appartiene all'ultima riga di un elemento nel tabIngredienti
         //e l'elemento non è una Farina lo salta
-        if(j==7 && objectName()=="tabIngredienti" && item->text()=="")
+        if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
           continue;
         item->setFlags(item->flags() ^ Qt::ItemIsEditable);
       }
@@ -186,7 +213,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
   if(editabile){
     //TODO: inputcheck
     pacchetto* p = nullptr;
-    if(QObject::sender()->objectName()=="tabBevande"){
+    if(QObject::sender()->objectName()=="tabBevandeInventario"){
       uint _ID = tabella->item(x,0)->text().toInt();
       string _n = tabella->item(x,1)->text().toStdString();
       bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
