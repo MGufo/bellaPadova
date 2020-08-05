@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QTabWidget>
 #include <QList>
+#include <QButtonGroup>
 
 #include "GUI/comande.h"
 #include "GUI/menu.h"

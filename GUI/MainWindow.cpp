@@ -79,53 +79,44 @@ void MainWindow::modificaConsumabile(pacchetto* pC){
 void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
   QList<pacchetto*>* inventario = controller->recuperaInventario();
   if(option_pizza){
-    QTableWidget* wrapperFarine = findChild<QTableWidget*>("farineWrapper");
+
+    QWidget* wrapperFarine = findChild<QWidget*>("farineRadioButtonWrapper");
+    QButtonGroup* gruppoDiBottoni = new QButtonGroup(wrapperFarine);
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
       if(dynamic_cast<pacchettoFarina*>(*it)){
-        pacchettoFarina* pF = dynamic_cast<pacchettoFarina*>(*it);
-        wrapperFarine->insertRow(wrapperFarine->rowCount());
-        QTableWidgetItem* item = nullptr;
-
-        item = new QTableWidgetItem(QString::fromStdString(std::to_string(pF->ID)));
-        wrapperFarine->setItem(wrapperFarine->rowCount()-1, 0, item);
-        QRadioButton* r = new QRadioButton(wrapperFarine);
-        wrapperFarine->setCellWidget(wrapperFarine->rowCount()-1, 1, r);
-        item = new QTableWidgetItem(QString::fromStdString(pF->nome));
-        wrapperFarine->setItem(wrapperFarine->rowCount()-1, 2, item);
-        item = new QTableWidgetItem((pF->locale ? "Si" : "No"));
-        wrapperFarine->setItem(wrapperFarine->rowCount()-1, 3, item);
-        item = new QTableWidgetItem(QString::fromStdString(pF->tipologia));
-        wrapperFarine->setItem(wrapperFarine->rowCount()-1, 4, item);
+        QWidget* i = new QWidget(wrapperFarine);
+        QHBoxLayout* iLayout = new QHBoxLayout(i);
+        QRadioButton* pulsante = new QRadioButton(i);
+        gruppoDiBottoni->addButton(pulsante);
+        QLabel* id = new QLabel(QString::fromStdString(std::to_string((*it)->ID)),i);
+        QLabel* nome = new QLabel(QString::fromStdString((*it)->nome),i);
+        QLabel* locale = new QLabel((dynamic_cast<pacchettoFarina*>(*it)->locale? "Locale" : "Non Locale"),i);
+        QLabel* tipologia = new QLabel(QString::fromStdString(dynamic_cast<pacchettoFarina*>(*it)->tipologia),i);
+        i->setLayout(iLayout);
+        iLayout->addWidget(pulsante);
+        iLayout->addWidget(id);
+        iLayout->addWidget(nome);
+        iLayout->addWidget(locale);
+        iLayout->addWidget(tipologia);
+        dynamic_cast<QVBoxLayout*>(wrapperFarine->layout())->addWidget(i);
       }
     }
-    dynamic_cast<QRadioButton*>(wrapperFarine->cellWidget(0,1))->setChecked(true);
 
-    QTableWidget* wrapperIngredienti = findChild<QTableWidget*>("ingredientiWrapper");
+    QWidget* wrapperIngredienti = findChild<QWidget*>("ingredientiCheckBoxWrapper");
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
       if(dynamic_cast<pacchettoIngrediente*>(*it) &&
          !dynamic_cast<pacchettoFarina*>(*it)){
-        pacchettoIngrediente* pI = dynamic_cast<pacchettoIngrediente*>(*it);
-        wrapperIngredienti->insertRow(wrapperIngredienti->rowCount());
-        QTableWidgetItem* item = nullptr;
-
-        item = new QTableWidgetItem(QString::fromStdString(std::to_string(pI->ID)));
-        wrapperIngredienti->setItem(wrapperIngredienti->rowCount()-1, 0, item);
-        QCheckBox* c = new QCheckBox(wrapperIngredienti);
-        wrapperIngredienti->setCellWidget(wrapperIngredienti->rowCount()-1, 1, c);
-        item = new QTableWidgetItem(QString::fromStdString(pI->nome));
-        wrapperIngredienti->setItem(wrapperIngredienti->rowCount()-1, 2, item);
-        item = new QTableWidgetItem((pI->locale ? "Si" : "No"));
-        wrapperIngredienti->setItem(wrapperIngredienti->rowCount()-1, 3, item);
+        QWidget* i = new IngredienteCheckBox
+            (QString::fromStdString((*it)->nome),(*it)->ID,wrapperIngredienti);
+        dynamic_cast<QVBoxLayout*>(wrapperIngredienti->layout())->addWidget(i);
       }
     }
-    wrapperIngredienti->setEditTriggers(QAbstractItemView::NoEditTriggers);
   }
   else{
-    QTableWidget* wrapperBevande = findChild<QTableWidget*>("bevandeWrapper");
+    QWidget* wrapper = findChild<QWidget*>("bevandeRadioButtonWrapper");
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
-      pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(*it);
-      if(pB){
-          /*
+      pacchettoBevanda* b = dynamic_cast<pacchettoBevanda*>(*it);
+      if(b){
         QWidget* completeRadio = new QWidget(wrapper);
         QHBoxLayout* completeRadioLayout = new QHBoxLayout(completeRadio);
         QWidget* bb = new BevandaRadioButton(
@@ -145,22 +136,6 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
         completeRadioLayout->addWidget(tipologia);
 
         dynamic_cast<QVBoxLayout*>(wrapper->layout())->addWidget(completeRadio);
-        */
-        wrapperBevande->insertRow(wrapperBevande->rowCount());
-        QTableWidgetItem* item = nullptr;
-
-        item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->ID)));
-        wrapperBevande->setItem(wrapperBevande->rowCount()-1, 0, item);
-        QCheckBox* c = new QCheckBox(wrapperBevande);
-        wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 1, c);
-        item = new QTableWidgetItem(QString::fromStdString(pB->nome));
-        wrapperBevande->setItem(wrapperBevande->rowCount()-1, 2, item);
-        item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pB->prezzo)));
-        wrapperBevande->setItem(wrapperBevande->rowCount()-1, 3, item);
-        item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pB->capacita)));
-        wrapperBevande->setItem(wrapperBevande->rowCount()-1, 4, item);
-        item = new QTableWidgetItem((pB->tipo ? "Lattina" : "Bottiglia"));
-        wrapperBevande->setItem(wrapperBevande->rowCount()-1, 5, item);
       }
     }
   }
@@ -169,9 +144,8 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
 
 void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
   if(option_pizza){
-    //TODO: reupero informazioni contenute nei qtablewidget per mostrarle in nuovoArticolo_end
-    QTableWidget* ingredientiWrapper = findChild<QTableWidget*>("ingredientiWrapper");
-    auto checkBox = ingredientiWrapper->findChild<QTableModel*>();
+    QWidget* checkboxWrapper = findChild<QWidget*>("ingredientiCheckBoxWrapper");
+    auto checkBox = checkboxWrapper->children();
 
     QWidget* visualizationWrapper =
         findChild<QWidget*>("ingredientiVisualizationWrapper");
