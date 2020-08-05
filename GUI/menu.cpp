@@ -10,11 +10,12 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
   headerLabels->push_back("Prezzo");
   headerLabels->push_back("Ingredienti");
   TabellaComposita* tabPizze = new TabellaComposita(this, "Pizze", headerLabels);
+  tabPizze->setObjectName("tabPizze");
   headerLabels->erase(--(headerLabels->end()));
   headerLabels->push_back("Capacità");
   headerLabels->push_back("Tipologia");
   TabellaComposita* tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
-
+  tabBevande->setObjectName("tabBevande");
   layoutMenu->addWidget(tabPizze);
   layoutMenu->addWidget(tabBevande);
 
