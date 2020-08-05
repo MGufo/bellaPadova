@@ -148,7 +148,7 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
 }
 
 void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
-  if(option_pizza){
+  /*if(option_pizza){
     //TODO: reupero informazioni contenute nei qtablewidget per mostrarle in nuovoArticolo_end
 
     //inserisco la farina
@@ -187,7 +187,7 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
     */
   }
   else{
-  }
+  }*/
 }
 	
 void MainWindow::closeEvent(QCloseEvent *event){

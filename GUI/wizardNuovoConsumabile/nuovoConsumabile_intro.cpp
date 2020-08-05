@@ -17,6 +17,7 @@ nuovoConsumabile_intro::nuovoConsumabile_intro(QWidget* parent):QWizardPage
   layoutIntro->addWidget(optionIngrediente);
   layoutIntro->addWidget(optionFarina);
   setLayout(layoutIntro);
+
 }
 
 int nuovoConsumabile_intro::nextId() const{
