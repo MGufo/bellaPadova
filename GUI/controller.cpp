@@ -152,7 +152,7 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
                                      i->getDisponibilita(),i->getQuantita(),
                                      i->getCosto(),i->getDataAcquisto(),
                                      i->isLocal());
-        (dynamic_cast<pacchettoPizza*>(p))->ingredienti.push_back(pI);
+        (dynamic_cast<pacchettoPizza*>(p))->ingredienti[pI->ID] = pI->nome;
       }
     }
     pacchetti->push_back(p);
