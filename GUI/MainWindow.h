@@ -15,9 +15,6 @@
 #include "GUI/header.h"
 #include "GUI/controller.h"
 #include "GUI/pacchetti.h"
-#include "GUI/wizardNuovoArticolo/ingredientecheckbox.h"
-#include "GUI/wizardNuovoArticolo/bevandaradiobutton.h"
-
 
 class Controller;
 class MainWindow : public QWidget {

@@ -22,6 +22,7 @@ public:
   void accept() override;
 public slots:
   void assegnaBottoni(int);
+  void handlerBottoni();
 };
 
 #endif // WIZARDNUOVOARTICOLO_H
