@@ -21,6 +21,7 @@ signals:
   void nuovoConsumabile(pacchetto*);
 public slots:
   void assegnaBottoni(int);
+  void handlerBottoni();
 };
 
 #endif // WIZARDNUOVOCONSUMABILE_H
