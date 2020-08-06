@@ -4,7 +4,7 @@
 #include <string>
 #include <QDate>
 #include <sstream>
-#include "../core/qontainer.h"
+#include <unordered_map>
 
 //TODO: dividere in file header e cpp
 
@@ -67,10 +67,11 @@ struct pacchettoBevanda : pacchettoArticolo, pacchettoConsumabile{
 };
 
 struct pacchettoPizza : pacchettoArticolo{
-  Lista<pacchettoIngrediente*> ingredienti;
+  //uint = idIngrediente, string = nomeIngrediente
+  std::unordered_map<uint,string> ingredienti;
   pacchettoPizza(uint _ID, string _n, bool _d, double _p) :
     pacchetto(_ID,_n,_d), pacchettoArticolo(_ID, _n, _d, _p),
-    ingredienti(Lista<pacchettoIngrediente*>()) {}
+    ingredienti(std::unordered_map<uint, string>()) {}
 };
 
 #endif // PACCHETTI_H

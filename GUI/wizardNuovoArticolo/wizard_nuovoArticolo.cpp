@@ -20,16 +20,18 @@ void WizardNuovoArticolo::accept(){
     if(field("optionPizza").toBool()){
         p = new pacchettoPizza(0,field("nomePizza").toString().toStdString(),true,field("prezzoPizza").toDouble());
         pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
-        pacchettoIngrediente* pI = nullptr;
 
         //recupero la farina
         QTableWidget* farineTabellaWrapper = findChild<QTableWidget*>("farineWrapper");
         for(int i=0; i<farineTabellaWrapper->rowCount() ; i++){
             QRadioButton* radioFarina = dynamic_cast<QRadioButton*>(farineTabellaWrapper->cellWidget(i,1));
             if(radioFarina->isChecked()){
-                //pI = new pacchettoFarina()
+                uint ID = std::stoi(farineTabellaWrapper->item(i,0)->text().toStdString());
+                string nome = farineTabellaWrapper->item(i,2)->text().toStdString();
+                pP->ingredienti[ID] = nome;
             }
         }
+        //recupero gli ingredienti
     }
 }
 
