@@ -12,6 +12,7 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
           SLOT(creaNuovoConsumabile(pacchetto*)));
   connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
   connect(page(PAGE_Dettagli), SIGNAL(completeChanged()), this, SLOT(handlerBottoni()));
+
 #ifndef Q_OS_MAC
   setWizardStyle(ModernStyle);
 #endif

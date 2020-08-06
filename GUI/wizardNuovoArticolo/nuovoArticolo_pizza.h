@@ -11,7 +11,6 @@
 #include <QTableWidget>
 #include <QHeaderView>
 
-#include "ingredientecheckbox.h"
 
 class NuovoArticolo_pizza: public QWidget{
   Q_OBJECT

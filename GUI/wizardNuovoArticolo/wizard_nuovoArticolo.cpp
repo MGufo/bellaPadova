@@ -7,6 +7,7 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
   setStartId(PAGE_Intro);
   setWindowTitle(tr("Aggiunta articolo al Menù"));
   connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
+  connect(page(PAGE_Dettagli), SIGNAL(completeChanged()), this, SLOT(handlerBottoni()));
 
   // Stile wizard (tranne MacOS)
   #ifndef Q_OS_MAC
@@ -37,5 +38,13 @@ void WizardNuovoArticolo::accept(){
 
 void WizardNuovoArticolo::assegnaBottoni(int id){
     if(id == WizardNuovoArticolo::PAGE_Intro)
-        button(QWizard::BackButton)->hide();
+       button(QWizard::BackButton)->hide();
+    if(button(QWizard::NextButton)->isEnabled())
+       button(QWizard::NextButton)->setStyleSheet("background-color: #2b78e4;");
+    else
+       button(QWizard::NextButton)->setStyleSheet("background-color: #999999;");
+}
+
+void WizardNuovoArticolo::handlerBottoni(){
+    assegnaBottoni(nextId()-1);
 }
