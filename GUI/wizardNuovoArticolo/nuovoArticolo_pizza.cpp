@@ -62,7 +62,3 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
 QLineEdit *NuovoArticolo_pizza::getNomePizza() const{ return nomePizza;}
 
 QLineEdit *NuovoArticolo_pizza::getPrezzoPizza() const{ return prezzoPizza;}
-
-QTableWidget *NuovoArticolo_pizza::getIngredientiWrapper() const{   return ingredientiWrapper;}
-
-QTableWidget *NuovoArticolo_pizza::getFarineWrapper() const{   return farineWrapper;}

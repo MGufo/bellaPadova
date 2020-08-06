@@ -51,15 +51,18 @@ unsigned int GestoreRisorse::getMaxId() const{
 
 //TODO:
 //ATTENZIONE all'inserimento di un articolo gia presente nel menu!
-//implementare funzione privata che controlla campo dati per campo dati
-//se daInserire == articoloGiaPresenteNelMenu
+//implementare un controllo
 void GestoreRisorse::inserisciArticolo(Articolo* daInserire) {
   if (daInserire) {
     const Lista<Consumabile*>* lista = daInserire->getComposizione();
     for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
       if (!controlloConsumabile(&inventario, *it))
-        throw new std::logic_error("Errore: Uno o più elementi della composizione di questo articolo non sono attualmente disponibili.");
+        throw new std::logic_error("Errore: uno o più elementi della composizione di questo articolo non sono attualmente disponibili.");
     daInserire->setDisponibilita(controlloDisponibilita(lista));
+    for (auto it = menu.const_begin(); it != menu.const_end(); ++it){
+      if(daInserire->getIdRisorsa() == (*it)->getIdRisorsa())
+        throw new std::domain_error("Errore: l'articolo è già presente nel menù.");
+    }
     menu.push_back(daInserire);
     delete lista;
   }

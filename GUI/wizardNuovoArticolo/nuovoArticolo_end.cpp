@@ -18,7 +18,9 @@ void NuovoArticolo_end::setActualPage(){
     if(ptr) layoutEnd->removeRow(ptr);
     QWidget* ptr1 = findChild<QWidget*>("ingredientiVisualizationWrapper");
     if(ptr1) layoutEnd->removeRow(ptr1);
-    ptr1 = findChild<QWidget*>("farineVisualizationWrapper");
+    ptr1 = findChild<QWidget*>("farinaVisualizationWrapper");
+    if(ptr1) layoutEnd->removeRow(ptr1);
+    ptr1 = findChild<QWidget*>("bevandeVisualizationWrapper");
     if(ptr1) layoutEnd->removeRow(ptr1);
 
 
@@ -31,22 +33,28 @@ void NuovoArticolo_end::setActualPage(){
         prezzoPizza->setObjectName("prezzoPizza");
         layoutEnd->addRow("Prezzo:", prezzoPizza);
 
-        QWidget* wrapperFarine = new QWidget(this);
-        wrapperFarine->setObjectName("farineVisualizationWrapper");
-        QVBoxLayout* farineLayout = new QVBoxLayout(wrapperFarine);
-        wrapperFarine->setLayout(farineLayout);
-        layoutEnd->addRow("Farine:", wrapperFarine);
+        QWidget* wrapperFarina = new QWidget(this);
+        wrapperFarina->setObjectName("farinaVisualizationWrapper");
+        QVBoxLayout* farinaLayout = new QVBoxLayout(wrapperFarina);
+        wrapperFarina->setLayout(farinaLayout);
+        layoutEnd->addRow("Farina:", wrapperFarina);
 
-        QWidget* wrapper = new QWidget(this);
-        wrapper->setObjectName("ingredientiVisualizationWrapper");
-        QVBoxLayout* ingredientsLayout = new QVBoxLayout(wrapper);
-        wrapper->setLayout(ingredientsLayout);
-        layoutEnd->addRow("Ingredienti:", wrapper);
+        QWidget* wrapperIngredienti = new QWidget(this);
+        wrapperIngredienti->setObjectName("ingredientiVisualizationWrapper");
+        QVBoxLayout* ingredientsLayout = new QVBoxLayout(wrapperIngredienti);
+        wrapperIngredienti->setLayout(ingredientsLayout);
+        layoutEnd->addRow("Ingredienti:", wrapperIngredienti);
 
         emit riempiWizardConElementiCheckati(true);
     }
     else{
+        QWidget* wrapperBevande = new QWidget(this);
+        wrapperBevande->setObjectName("bevandeVisualizationWrapper");
+        QVBoxLayout* bevandeLayout = new QVBoxLayout(wrapperBevande);
+        wrapperBevande->setLayout(bevandeLayout);
+        layoutEnd->addRow("Bevande:", wrapperBevande);
 
+        emit riempiWizardConElementiCheckati(false);
     }
 }
 

@@ -16,6 +16,21 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
 
 void WizardNuovoArticolo::accept(){
     QWizard::accept();
+    pacchetto* p = nullptr;
+    if(field("optionPizza").toBool()){
+        p = new pacchettoPizza(0,field("nomePizza").toString().toStdString(),true,field("prezzoPizza").toDouble());
+        pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
+        pacchettoIngrediente* pI = nullptr;
+
+        //recupero la farina
+        QTableWidget* farineTabellaWrapper = findChild<QTableWidget*>("farineWrapper");
+        for(int i=0; i<farineTabellaWrapper->rowCount() ; i++){
+            QRadioButton* radioFarina = dynamic_cast<QRadioButton*>(farineTabellaWrapper->cellWidget(i,1));
+            if(radioFarina->isChecked()){
+                //pI = new pacchettoFarina()
+            }
+        }
+    }
 }
 
 void WizardNuovoArticolo::assegnaBottoni(int id){
