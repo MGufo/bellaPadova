@@ -155,16 +155,23 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       tabella->setItem(tabella->rowCount()-1, 1, item);
       item = new QTableWidgetItem((pP->disponibilita? "Si" : "No"));
       tabella->setItem(tabella->rowCount()-1, 2, item);
-      tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pP->prezzo)));
+      tabella->setItem(tabella->rowCount()-1, 3, item);
+      std::stringstream ingr;
+      auto pIngr = pP->ingredienti;
+      for(auto it = pIngr.const_begin(); it != pIngr.const_end(); ++it){
+        ingr << (*it)->nome;
+        if(it != --(pIngr.const_end())) ingr << ", ";
+      }
+      item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
       tabella->setItem(tabella->rowCount()-1, 4, item);
 
-//      int i = tabella->rowCount()-1;
-//      for(int j=0 ; j<8 ; j++){
-//        QTableWidgetItem* item = tabella->item(i,j);
-//        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-//      }
+      int i = tabella->rowCount()-1;
+      for(int j=0 ; j<4 ; j++){
+        QTableWidgetItem* item = tabella->item(i,j);
+        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+      }
     }
   }
 }
