@@ -116,6 +116,10 @@ QList<pacchetto*>* Controller::recuperaInventario() const{
   return pacchetti;
 }
 
+void Controller::creaNuovoArticolo(pacchetto *){
+    //TODO: chiamare modello->inserisciArticolo() dentro a un blocco try-catch
+}
+
 QList<pacchetto *>* Controller::recuperaMenu() const{
   auto menu = modello->getMenu();
   pacchetto* p = nullptr;

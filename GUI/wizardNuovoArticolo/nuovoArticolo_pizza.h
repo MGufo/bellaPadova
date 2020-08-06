@@ -17,11 +17,8 @@ class NuovoArticolo_pizza: public QWidget{
   Q_OBJECT
 public:
   NuovoArticolo_pizza(QWidget* parent = nullptr);
-
   QLineEdit* getNomePizza() const;
   QLineEdit* getPrezzoPizza() const;
-  QTableWidget* getIngredientiWrapper() const;
-  QTableWidget* getFarineWrapper() const;
 
 private:
   QVBoxLayout* layoutPizza;

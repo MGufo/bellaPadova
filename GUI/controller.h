@@ -26,6 +26,7 @@ class Controller : public QObject {
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
   QList<pacchetto*>* recuperaInventario() const;
+  void creaNuovoArticolo(pacchetto*);
   QList<pacchetto*>* recuperaMenu() const;
   bool canQuit() const;
 

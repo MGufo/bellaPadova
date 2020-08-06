@@ -11,6 +11,7 @@
 #include "GUI/wizardNuovoArticolo/nuovoArticolo_pizza.h"
 #include "GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.h"
 #include "GUI/wizardNuovoArticolo/nuovoArticolo_end.h"
+#include "../pacchetti.h"
 
 class WizardNuovoArticolo : public QWizard{
   Q_OBJECT

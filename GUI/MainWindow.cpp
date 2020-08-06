@@ -149,46 +149,41 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
 
 void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
 
-  /*if(option_pizza){
-    //TODO: reupero informazioni contenute nei qtablewidget per mostrarle in nuovoArticolo_end
-
-    //inserisco la farina
+  if(option_pizza){
+    //inserisco la farina selezionata nella pagina finale del wizard
     QTableWidget* farineTabellaWrapper = findChild<QTableWidget*>("farineWrapper");
     for(int i=0; i<farineTabellaWrapper->rowCount() ; i++){
         QRadioButton* radioFarina = dynamic_cast<QRadioButton*>(farineTabellaWrapper->cellWidget(i,1));
         if(radioFarina->isChecked()){
-            QWidget* farineVisualWrapper = findChild<QWidget*>("farineVisualizationWrapper");
+            QWidget* farineVisualWrapper = findChild<QWidget*>("farinaVisualizationWrapper");
             QLabel* label = new QLabel((farineTabellaWrapper->item(i,2))->text());
             dynamic_cast<QVBoxLayout*>(farineVisualWrapper->layout())->addWidget(label);
         }
     }
-    /*
-    QTableWidget* ingredientiWrapper = findChild<QTableWidget*>("ingredientiWrapper");
 
-
-    QWidget* visualizationWrapper =
-        findChild<QWidget*>("ingredientiVisualizationWrapper");
-
-    //eliminazione dei vecchi ingredienti se presenti nel layout
-    QLayoutItem* item = nullptr;
-    while((item = visualizationWrapper->layout()->takeAt(1)) != NULL){
-      //IngredienteCheckBox* p = dynamic_cast<IngredienteCheckBox*>(item->widget());
-      //std::cout << p->text().toStdString() << " " << p->isChecked() << std::endl;
-      delete item->widget();
-      delete item;
+    //inserisco gli ingredienti selezionati nella pagina finale del wizard
+    QTableWidget* ingredientiTabellaWrapper = findChild<QTableWidget*>("ingredientiWrapper");
+    for(int i=0; i<ingredientiTabellaWrapper->rowCount() ; i++){
+        QCheckBox* checkIngrediente = dynamic_cast<QCheckBox*>(ingredientiTabellaWrapper->cellWidget(i,1));
+        if(checkIngrediente->isChecked()){
+            QWidget* ingredientiVisualWrapper = findChild<QWidget*>("ingredientiVisualizationWrapper");
+            QLabel* label = new QLabel(ingredientiTabellaWrapper->item(i,2)->text());
+            dynamic_cast<QVBoxLayout*>(ingredientiVisualWrapper->layout())->addWidget(label);
+        }
     }
-    //riempimento del layout con gli ingredienti aggiornati
-    for(auto it = ++(checkBox.cbegin()); it != checkBox.cend(); ++it){
-      IngredienteCheckBox* elemento = dynamic_cast<IngredienteCheckBox*>(*it);
-      if(elemento->isChecked()){
-        QLabel* i = new QLabel(elemento->text(),visualizationWrapper);
-        dynamic_cast<QVBoxLayout*>(visualizationWrapper->layout())->addWidget(i);
-      }
-    }
-
   }
   else{
-  }*/
+    //inserisco le bevande selezionate nella pagina finale del wizard
+      QTableWidget* bevandeTabellaWrapper = findChild<QTableWidget*>("bevandeWrapper");
+      for(int i=0; i<bevandeTabellaWrapper->rowCount() ; i++){
+          QCheckBox* checkBevande = dynamic_cast<QCheckBox*>(bevandeTabellaWrapper->cellWidget(i,1));
+          if(checkBevande->isChecked()){
+              QWidget* bevandeVisualWrapper = findChild<QWidget*>("bevandeVisualizationWrapper");
+              QLabel* label = new QLabel(bevandeTabellaWrapper->item(i,2)->text());
+              dynamic_cast<QVBoxLayout*>(bevandeVisualWrapper->layout())->addWidget(label);
+          }
+      }
+  }
 }
 	
 void MainWindow::closeEvent(QCloseEvent *event){
