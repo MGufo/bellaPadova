@@ -160,9 +160,9 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       tabella->setItem(tabella->rowCount()-1, 3, item);
       std::stringstream ingr;
       auto pIngr = pP->ingredienti;
-      for(auto it = pIngr.const_begin(); it != pIngr.const_end(); ++it){
-        ingr << (*it)->nome;
-        if(it != --(pIngr.const_end())) ingr << ", ";
+      for(auto it = pIngr.cbegin(); it != pIngr.cend(); ++it){
+        ingr << (*it).second;
+        //if(it != --(pIngr.cend())) ingr << ", ";
       }
       item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
       tabella->setItem(tabella->rowCount()-1, 4, item);
