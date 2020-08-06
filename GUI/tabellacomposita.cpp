@@ -168,7 +168,35 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       tabella->setItem(tabella->rowCount()-1, 4, item);
 
       int i = tabella->rowCount()-1;
-      for(int j=0 ; j<4 ; j++){
+      for(int j=0 ; j<5 ; j++){
+        QTableWidgetItem* item = tabella->item(i,j);
+        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+      }
+    }
+  }
+  else if(objectName() == "tabBevandeMenu"){
+    pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
+    if(pB){
+      //creazione di una nuova riga e riempimento con i dati nel pacchetto
+      tabella->insertRow(tabella->rowCount());
+      QTableWidgetItem* item = nullptr;
+
+      item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->ID)));
+      tabella->setItem(tabella->rowCount()-1, 0, item);
+      item = new QTableWidgetItem(QString::fromStdString(pB->nome));
+      tabella->setItem(tabella->rowCount()-1, 1, item);
+      item = new QTableWidgetItem((pB->disponibilita? "Si" : "No"));
+      tabella->setItem(tabella->rowCount()-1, 2, item);
+      item = new QTableWidgetItem(QString::fromStdString(
+                                    to_string_with_precision(pB->prezzo)));
+      tabella->setItem(tabella->rowCount()-1, 3, item);
+      item = new QTableWidgetItem((pB->capacita));
+      tabella->setItem(tabella->rowCount()-1, 4, item);
+      item = new QTableWidgetItem((pB->tipo? "Lattina" : "Bottiglia"));
+      tabella->setItem(tabella->rowCount()-1, 5, item);
+
+      int i = tabella->rowCount()-1;
+      for(int j=0 ; j<6 ; j++){
         QTableWidgetItem* item = tabella->item(i,j);
         item->setFlags(item->flags() ^ Qt::ItemIsEditable);
       }
