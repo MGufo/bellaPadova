@@ -49,6 +49,4 @@ void WizardNuovoConsumabile::assegnaBottoni(int id){
        button(QWizard::NextButton)->setStyleSheet("background-color: #999999;");*/
 }
 
-void WizardNuovoConsumabile::handlerBottoni(){
-    assegnaBottoni(nextId()-1);
-}
+void WizardNuovoConsumabile::handlerBottoni(){  assegnaBottoni(nextId()-1);}
