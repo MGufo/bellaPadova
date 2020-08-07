@@ -9,28 +9,51 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
   headerLabels->push_back("Disponibilità");
   headerLabels->push_back("Prezzo");
   headerLabels->push_back("Ingredienti");
-  TabellaComposita* tabPizze = new TabellaComposita(this, "Pizze", headerLabels);
+  tabPizze = new TabellaComposita(this, "Pizze", headerLabels);
   tabPizze->setObjectName("tabPizzeMenu");
   headerLabels->erase(--(headerLabels->end()));
   headerLabels->push_back("Capacità");
   headerLabels->push_back("Tipologia");
-  TabellaComposita* tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
+  tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
   tabBevande->setObjectName("tabBevandeMenu");
   layoutMenu->addWidget(tabPizze);
   layoutMenu->addWidget(tabBevande);
 
   QHBoxLayout* layoutPulsanti = new QHBoxLayout();
-  QPushButton* newArticolo = new QPushButton("Nuovo Articolo", this);
+  newArticolo = new QPushButton("Nuovo Articolo", this);
   newArticolo->setObjectName("Articolo");
   connect(newArticolo, SIGNAL(clicked()), this, SLOT(drawWizard()));
-  QPushButton* modificaDati = new QPushButton("Modifica", this);
+  modificaDati = new QPushButton("Modifica", this);
   modificaDati->setObjectName("Modifica");
+  connect(modificaDati, SIGNAL(clicked(bool)), this, SLOT(modificaTabelle()));
+
   layoutPulsanti->addWidget(newArticolo);
   layoutPulsanti->addWidget(modificaDati);
   layoutMenu->addLayout(layoutPulsanti);
 
   setStyleMenu();
   setLayout(layoutMenu);
+}
+
+void Menu::modificaTabelle(){
+  if(modificaDati->objectName()=="Modifica"){
+    newArticolo->setVisible(false);
+    tabPizze->rendiEditabile();
+    tabBevande->rendiEditabile();
+    tabPizze->cambiaColoreBordoCella();
+    tabBevande->cambiaColoreBordoCella();
+    modificaDati->setText("Finisci di Modificare");
+    modificaDati->setObjectName("FineModifica");
+  }
+  else{
+    newArticolo->setVisible(true);
+    tabPizze->cambiaColoreBordoCella(false);
+    tabBevande->cambiaColoreBordoCella(false);
+    tabPizze->rendiEditabile(false);
+    tabBevande->rendiEditabile(false);
+    modificaDati->setText("Modifica");
+    modificaDati->setObjectName("Modifica");
+  }
 }
 
 void Menu::setStyleMenu(){

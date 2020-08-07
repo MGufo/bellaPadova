@@ -50,22 +50,22 @@ void Inventario::drawWizard(){
 }
 
 void Inventario::modificaTabelle(){
-    if(modificaDati->objectName()=="Modifica"){
-        newConsumabile->setVisible(false);
-        tabIngredienti->rendiEditabile();
-        tabBevande->rendiEditabile();
-        tabIngredienti->cambiaColoreBordoCella();
-        tabBevande->cambiaColoreBordoCella();
-        modificaDati->setText("Finisci di Modificare");
-        modificaDati->setObjectName("FineModifica");
-    }
-    else{
-        newConsumabile->setVisible(true);
-        tabIngredienti->cambiaColoreBordoCella(false);
-        tabBevande->cambiaColoreBordoCella(false);
-        tabIngredienti->rendiEditabile(false);
-        tabBevande->rendiEditabile(false);
-        modificaDati->setText("Modifica");
-        modificaDati->setObjectName("Modifica");
-    }
+  if(modificaDati->objectName()=="Modifica"){
+    newConsumabile->setVisible(false);
+    tabIngredienti->rendiEditabile();
+    tabBevande->rendiEditabile();
+    tabIngredienti->cambiaColoreBordoCella();
+    tabBevande->cambiaColoreBordoCella();
+    modificaDati->setText("Finisci di Modificare");
+    modificaDati->setObjectName("FineModifica");
+  }
+  else{
+    newConsumabile->setVisible(true);
+    tabIngredienti->cambiaColoreBordoCella(false);
+    tabBevande->cambiaColoreBordoCella(false);
+    tabIngredienti->rendiEditabile(false);
+    tabBevande->rendiEditabile(false);
+    modificaDati->setText("Modifica");
+    modificaDati->setObjectName("Modifica");
+  }
 }
