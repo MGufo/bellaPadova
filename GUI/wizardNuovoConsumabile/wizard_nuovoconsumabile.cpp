@@ -1,7 +1,7 @@
 #include "wizard_nuovoConsumabile.h"
 
 WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent){
-  setPage(PAGE_Intro, new nuovoConsumabile_intro);
+  setPage(PAGE_Intro, new NuovoConsumabile_intro);
   setPage(PAGE_Dettagli, new NuovoConsumabile_dettagli);
   setPage(PAGE_End, new NuovoConsumabile_end);
 

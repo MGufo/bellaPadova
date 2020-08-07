@@ -9,10 +9,10 @@
 
 #include "wizard_nuovoconsumabile.h"
 
-class nuovoConsumabile_intro : public QWizardPage{
+class NuovoConsumabile_intro : public QWizardPage{
   Q_OBJECT
 public:
-  nuovoConsumabile_intro(QWidget* parent = nullptr);
+  NuovoConsumabile_intro(QWidget* parent = nullptr);
   int nextId() const override;
 
 private:

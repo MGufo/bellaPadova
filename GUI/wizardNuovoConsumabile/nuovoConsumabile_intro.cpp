@@ -1,5 +1,5 @@
 #include "nuovoConsumabile_intro.h"
-nuovoConsumabile_intro::nuovoConsumabile_intro(QWidget* parent):QWizardPage
+NuovoConsumabile_intro::NuovoConsumabile_intro(QWidget* parent):QWizardPage
                                                                 (parent){
   setTitle("Bevanda, Ingrediente o Farina?");
   setSubTitle("Seleziona il tipo di elemento che vuoi inserire nell'inventario");
@@ -20,6 +20,6 @@ nuovoConsumabile_intro::nuovoConsumabile_intro(QWidget* parent):QWizardPage
 
 }
 
-int nuovoConsumabile_intro::nextId() const{
+int NuovoConsumabile_intro::nextId() const{
   return WizardNuovoConsumabile::PAGE_Dettagli;
 }
