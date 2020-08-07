@@ -1,38 +1,38 @@
-* {
-    background-color: #FF9900;
-}
-
 QAbstractButton {
     font: 20px Roboto;
     color: #000000;
 }
 
-QPushButton {
+/*QPushButton {
     font: 20px Roboto;
     background-color: #2b78e4;
-}
+}*/
 
 QPushButton#Articolo {
     height: 50;
     width: 100;
     margin: 10 10 10 10;
+    background-color: #2b78e4;
 }
 
 QPushButton#Modifica {
     height: 50;
     width: 100;
     margin: 10 10 10 10;
+    background-color: #2b78e4;
 }
 
 QPushButton#Consumabile {
     height: 50;
     width: 100;
     margin: 10 10 10 10;
+    background-color: #2b78e4;
 }
 
 QPushButton#Calcola {
     height: 95;
     width: 200;
+    background-color: #2b78e4;
 
 }
 
@@ -40,6 +40,7 @@ QPushButton#wrapperComanda {
     background-color: #008000;
     width: 240;
     height: 200;
+    background-color: #2b78e4;
 }
 
 QPushButton#Rimuovi {
@@ -173,6 +174,10 @@ QWidget#wrapperEseguite {
 
 QWidget#checkboxWrapper {
     background-color: #FFFFFF;
+}
+
+QWidget#Pizzeria {
+    background-color: #FF9900;
 }
 
 DigitalClock#orologio {
