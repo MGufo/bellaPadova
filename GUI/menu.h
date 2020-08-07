@@ -15,6 +15,10 @@ class Menu : public QWidget
   Q_OBJECT
 
 private:
+  TabellaComposita* tabPizze;
+  TabellaComposita* tabBevande;
+  QPushButton* newArticolo;
+  QPushButton* modificaDati;
   QVBoxLayout* layoutMenu;
   WizardNuovoArticolo* nuovoArticolo = nullptr;
   void setStyleMenu();
@@ -31,7 +35,8 @@ signals:
   //id della bevanda contenuta nell'inventario da inserire nel menu
   void invioDatiBevanda(unsigned int);
 
-public slots:
+private slots:
+  void modificaTabelle();
 };
 
 #endif // MENU_H
