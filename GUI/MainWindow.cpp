@@ -33,6 +33,7 @@ void MainWindow::setStylePizzeria() {
   mainLayout->setContentsMargins(0,-1,0,-1);
   setMinimumSize(QSize(1025,700));
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  setObjectName("Pizzeria");
 
   QFile file(":/resources/style.css");
   file.open(QFile::ReadOnly);
