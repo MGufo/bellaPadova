@@ -43,10 +43,10 @@ void WizardNuovoConsumabile::accept(){
 void WizardNuovoConsumabile::assegnaBottoni(int id){
     if(id == WizardNuovoConsumabile::PAGE_Intro)
        button(QWizard::BackButton)->hide();
-    if(button(QWizard::NextButton)->isEnabled())
+    /*if(button(QWizard::NextButton)->isEnabled())
        button(QWizard::NextButton)->setStyleSheet("background-color: #2b78e4;");
     else
-       button(QWizard::NextButton)->setStyleSheet("background-color: #999999;");
+       button(QWizard::NextButton)->setStyleSheet("background-color: #999999;");*/
 }
 
 void WizardNuovoConsumabile::handlerBottoni(){
