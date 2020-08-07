@@ -162,7 +162,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       auto pIngr = pP->ingredienti;
       for(auto it = pIngr.cbegin(); it != pIngr.cend(); ++it){
         ingr << (*it).second;
-        //if(it != --(pIngr.cend())) ingr << ", ";
+        if(it != (pIngr.cend())) ingr << ", ";
       }
       item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
       tabella->setItem(tabella->rowCount()-1, 4, item);
