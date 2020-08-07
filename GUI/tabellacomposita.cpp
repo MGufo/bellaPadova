@@ -163,14 +163,11 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       auto it2 = pIngr.cbegin();
       for(auto it = pIngr.cbegin(); it != pIngr.cend(); ++it){
         ingr << (*it).second;
-
-        if(it != (pIngr.cend())){
+        it2 = it;
+        if(++it2 != pIngr.cend()){
           ingr << ", ";
-          it2 = it;
         }
-
       }
-      ingr << (*it2).second;
       item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
       tabella->setItem(tabella->rowCount()-1, 4, item);
 
