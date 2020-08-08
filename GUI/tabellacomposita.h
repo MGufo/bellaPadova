@@ -8,6 +8,7 @@
 #include <QStringList>
 #include <QTableWidget>
 #include <QVBoxLayout>
+#include <QPushButton>
 #include "pacchetti.h"
 
 class TabellaComposita : public QWidget
@@ -21,9 +22,11 @@ public:
 
 signals:
   void sendPacketToModel(pacchetto*);
+  void sendIdToModel(int);
 
 private slots:
   void emitDataOnCellChanged(int,int);
+  void emitIdOnButtonClicked(int);
 
 private:
   bool editabile;

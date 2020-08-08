@@ -74,7 +74,11 @@ void MainWindow::creaNuovoConsumabile(pacchetto* pC){
 }
 
 void MainWindow::modificaConsumabile(pacchetto* pC){
-  controller->modificaConsumabile(pC);
+    controller->modificaConsumabile(pC);
+}
+
+void MainWindow::eliminaConsumabile(int){
+
 }
 
 void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{

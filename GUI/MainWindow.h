@@ -37,6 +37,7 @@ signals:
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
+  void eliminaConsumabile(int);
   //true = pizza
   //false = bevanda
   void visualizzaElementiInWizard(bool) const;
