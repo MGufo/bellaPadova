@@ -4,7 +4,7 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
   setPage(PAGE_Intro, new NuovoConsumabile_intro);
   setPage(PAGE_Dettagli, new NuovoConsumabile_dettagli);
   setPage(PAGE_End, new NuovoConsumabile_end);
-
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
   setStartId(PAGE_Intro);
   setWindowTitle(tr("Aggiunta nuovo consumabile all'Inventario"));
   connect(this, SIGNAL(nuovoConsumabile(pacchetto*)),

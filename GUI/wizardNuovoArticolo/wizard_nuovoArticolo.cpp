@@ -5,6 +5,7 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
   setPage(PAGE_Dettagli, new NuovoArticolo_dettagli(this));
   setPage(PAGE_End, new NuovoArticolo_end(this));
   setStartId(PAGE_Intro);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
   setWindowTitle(tr("Aggiunta articolo al Menù"));
   connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
   connect(page(PAGE_Dettagli), SIGNAL(completeChanged()), this, SLOT(handlerBottoni()));
