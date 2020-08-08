@@ -4,7 +4,7 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
   setPage(PAGE_Intro, new NuovoConsumabile_intro);
   setPage(PAGE_Dettagli, new NuovoConsumabile_dettagli);
   setPage(PAGE_End, new NuovoConsumabile_end);
-
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
   setStartId(PAGE_Intro);
   setWindowTitle(tr("Aggiunta nuovo consumabile all'Inventario"));
   connect(this, SIGNAL(nuovoConsumabile(pacchetto*)),
@@ -43,10 +43,6 @@ void WizardNuovoConsumabile::accept(){
 void WizardNuovoConsumabile::assegnaBottoni(int id){
     if(id == WizardNuovoConsumabile::PAGE_Intro)
        button(QWizard::BackButton)->hide();
-    /*if(button(QWizard::NextButton)->isEnabled())
-       button(QWizard::NextButton)->setStyleSheet("background-color: #2b78e4;");
-    else
-       button(QWizard::NextButton)->setStyleSheet("background-color: #999999;");*/
 }
 
 void WizardNuovoConsumabile::handlerBottoni(){  assegnaBottoni(nextId()-1);}

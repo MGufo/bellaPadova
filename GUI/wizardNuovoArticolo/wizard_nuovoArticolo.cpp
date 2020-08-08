@@ -5,6 +5,7 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
   setPage(PAGE_Dettagli, new NuovoArticolo_dettagli(this));
   setPage(PAGE_End, new NuovoArticolo_end(this));
   setStartId(PAGE_Intro);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
   setWindowTitle(tr("Aggiunta articolo al Menù"));
   connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
   connect(page(PAGE_Dettagli), SIGNAL(completeChanged()), this, SLOT(handlerBottoni()));
@@ -39,10 +40,6 @@ void WizardNuovoArticolo::accept(){
 void WizardNuovoArticolo::assegnaBottoni(int id){
     if(id == WizardNuovoArticolo::PAGE_Intro)
        button(QWizard::BackButton)->hide();
-    /*if(button(QWizard::NextButton)->isEnabled())
-       button(QWizard::NextButton)->setStyleSheet("background-color: #2b78e4;");
-    else
-       button(QWizard::NextButton)->setStyleSheet("background-color: #999999;");*/
 }
 
 void WizardNuovoArticolo::handlerBottoni(){
