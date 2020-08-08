@@ -246,6 +246,19 @@ void TabellaComposita::cambiaColoreBordoCella(bool b){
     tabella->setStyleSheet("gridline-color: #E5E5E5");
 }
 
+void TabellaComposita::setHeaderDimension(tipoTabella t){
+  if(t == tipoTabella::pizze)
+    header->setSectionResizeMode((header->count())-1, QHeaderView::Stretch);
+  else if(t == tipoTabella::bevandeM)
+    header->setSectionResizeMode(header->Stretch);
+  else if(t == tipoTabella::inventario){
+    header->setSectionResizeMode(1, QHeaderView::Stretch);
+    header->setSectionResizeMode(7, QHeaderView::Stretch);
+  }
+  else if(t == tipoTabella::bevandeI)
+    header->setSectionResizeMode(1, QHeaderView::Stretch);
+}
+
 void TabellaComposita::emitDataOnCellChanged(int x, int y){
   if(editabile){
     //TODO: inputcheck
