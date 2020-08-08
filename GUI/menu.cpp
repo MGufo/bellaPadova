@@ -10,15 +10,16 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
   headerLabels->push_back("Prezzo");
   headerLabels->push_back("Ingredienti");
   tabPizze = new TabellaComposita(this, "Pizze", headerLabels);
+  tabPizze->setHeaderDimension(TabellaComposita::pizze);
   tabPizze->setObjectName("tabPizzeMenu");
   headerLabels->erase(--(headerLabels->end()));
   headerLabels->push_back("Capacità");
   headerLabels->push_back("Tipologia");
   tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
   tabBevande->setObjectName("tabBevandeMenu");
+  tabBevande->setHeaderDimension(TabellaComposita::bevandeM);
   layoutMenu->addWidget(tabPizze);
   layoutMenu->addWidget(tabBevande);
-
   QHBoxLayout* layoutPulsanti = new QHBoxLayout();
   newArticolo = new QPushButton("Nuovo Articolo", this);
   newArticolo->setObjectName("Articolo");
