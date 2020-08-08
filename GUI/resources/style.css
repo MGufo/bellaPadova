@@ -1,28 +1,95 @@
+DigitalClock#orologio {
+    background-color: #FF9900;
+    border: 0;
+    color: #000000;
+    min-width: 180;
+    min-height: 180;
+    margin-top: -100;
+}
+
 QAbstractButton {
     font: 20px Roboto;
     color: #000000;
 }
 
-/*QPushButton {
+QDateEdit {
+    background-color: #FFFFFF;
+    font-size: 20px;
+    height: 50;
+    margin-bottom: 1;
+}
+
+QHeaderView {
+    font: 18px Roboto;
+    background-color: #FFFFFF;
+}
+
+QLabel {
     font: 20px Roboto;
-    background-color: #2b78e4;
-}*/
+    qproperty-alignment: AlignCenter;
+}
+
+QLabel#ComandaId {
+    background-color: #008000;
+}
+
+QLabel#concluse {
+    qproperty-alignment: AlignCenter;
+    margin-top: 2;
+    margin-bottom: 2;
+}
+
+QLabel#guadagnoPerdita {
+    qproperty-alignment: AlignCenter;
+    margin-top: 8;
+    margin-bottom: 2;
+}
+
+QLabel#inEsecuzione {
+    qproperty-alignment: AlignCenter;
+    margin-top: 2;
+    margin-bottom: 2;
+}
+
+QLabel#labelsMenu {
+    qproperty-alignment: AlignCenter;
+    margin-top: 8;
+    margin-bottom: 10;
+}
+
+QLabel#Orario {
+    background-color: #008000;
+}
+
+QLabel#scegliPeriodo {
+    qproperty-alignment: AlignCenter;
+    margin-top: 8;
+    margin-bottom: 4;
+}
+
+QLineEdit {
+    background-color: #FFFFFF;
+}
+
+QLineEdit#mGuadagno {
+    font-size: 40px;
+    height: 55;
+}
+
+QMenu {
+    background-color: #FFFFFF;
+}
+
+QMenu::item:selected {
+    background-color: #dddddd;
+    color: #000000;
+}
+
+QMenuBar {
+    background-color: #FFFFFF;
+}
 
 QPushButton#Articolo {
-    height: 50;
-    width: 100;
-    margin: 10 10 10 10;
-    background-color: #2b78e4;
-}
-
-QPushButton#Modifica {
-    height: 50;
-    width: 100;
-    margin: 10 10 10 10;
-    background-color: #2b78e4;
-}
-
-QPushButton#Consumabile {
     height: 50;
     width: 100;
     margin: 10 10 10 10;
@@ -36,6 +103,28 @@ QPushButton#Calcola {
 
 }
 
+QPushButton#Completata {
+    background-color: #2b78e4;
+}
+
+QPushButton#Consumabile {
+    height: 50;
+    width: 100;
+    margin: 10 10 10 10;
+    background-color: #2b78e4;
+}
+
+QPushButton#Modifica {
+    height: 50;
+    width: 100;
+    margin: 10 10 10 10;
+    background-color: #2b78e4;
+}
+
+QPushButton#Rimuovi {
+    background-color: #AB0000;
+}
+
 QPushButton#wrapperComanda {
     background-color: #008000;
     width: 240;
@@ -43,46 +132,16 @@ QPushButton#wrapperComanda {
 
 }
 
-QPushButton#Rimuovi {
-    background-color: #AB0000;
-}
-
-QPushButton#Completata {
-    background-color: #2b78e4;
-}
-
-QMenuBar {
+QScrollArea {
     background-color: #FFFFFF;
-}
-
-QMenu {
-    background-color: #FFFFFF;
-}
-
-QMenu::item:selected {
-    background-color: #dddddd;
-    color: #000000;
-}
-
-QHeaderView {
-    font: 18px Roboto;
-    background-color: #FFFFFF;
+    border: 1 solid black;
+    margin: 2 10 2 10;
 }
 
 QTableWidget{
     border: 1 solid black;
     background-color: #FFFFFF;
     margin: 0 20%;
-}
-
-QTabWidget::pane {
-    position: absolute;
-    border: 0 solid white;
-}
-
-
-QTabWidget::tab-bar{
-    alignment: center;
 }
 
 QTabBar::tab {
@@ -99,77 +158,13 @@ QTabBar::tab:selected {
     background-color: #999999;
 }
 
-QLabel {
-    font: 20px Roboto;
-    qproperty-alignment: AlignCenter;
+QTabWidget::pane {
+    position: absolute;
+    border: 0 solid white;
 }
 
-QLabel#inEsecuzione {
-    qproperty-alignment: AlignCenter;
-    margin-top: 2;
-    margin-bottom: 2;
-}
-
-QLabel#concluse {
-    qproperty-alignment: AlignCenter;
-    margin-top: 2;
-    margin-bottom: 2;
-}
-
-QLabel#labelsMenu {
-    qproperty-alignment: AlignCenter;
-    margin-top: 8;
-    margin-bottom: 10;
-}
-
-QLabel#scegliPeriodo {
-    qproperty-alignment: AlignCenter;
-    margin-top: 8;
-    margin-bottom: 4;
-}
-
-QLabel#guadagnoPerdita {
-    qproperty-alignment: AlignCenter;
-    margin-top: 8;
-    margin-bottom: 2;
-}
-
-QLabel#Orario {
-    background-color: #008000;
-}
-
-QLabel#ComandaId {
-    background-color: #008000;
-}
-
-QDateEdit {
-    background-color: #FFFFFF;
-    font-size: 20px;
-    height: 50;
-    margin-bottom: 1;
-}
-
-QLineEdit {
-    background-color: #FFFFFF;
-}
-
-QLineEdit#mGuadagno {
-    font-size: 40px;
-    height: 55;
-}
-
-QScrollArea {
-    background-color: #FFFFFF;
-    border: 1 solid black;
-    margin: 2 10 2 10;
-}
-
-QWidget#wrapperInEsecuzione {
-    background-color: #FFFFFF;
-}
-
-QWidget#wrapperEseguite {
-    background-color: #FFFFFF;
+QTabWidget::tab-bar{
+    alignment: center;
 }
 
 QWidget#checkboxWrapper {
@@ -180,11 +175,10 @@ QWidget#Pizzeria {
     background-color: #FF9900;
 }
 
-DigitalClock#orologio {
-    background-color: #FF9900;
-    border: 0;
-    color: #000000;
-    min-width: 180;
-    min-height: 180;
-    margin-top: -100;
+QWidget#wrapperEseguite {
+    background-color: #FFFFFF;
+}
+
+QWidget#wrapperInEsecuzione {
+    background-color: #FFFFFF;
 }

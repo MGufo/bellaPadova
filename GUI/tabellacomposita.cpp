@@ -31,6 +31,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
 
   connect(tabella,SIGNAL(cellChanged(int,int)),this,SLOT(emitDataOnCellChanged(int,int)));
   connect(this,SIGNAL(sendPacketToModel(pacchetto*)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaConsumabile(pacchetto*)));
+  connect(this,SIGNAL(sendIdToModel(int)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(int)));
 
   // Applicazione stile widget
   setStyleTabella();
@@ -210,6 +211,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
 
 void TabellaComposita::rendiEditabile(bool b){
   if(b){
+    //rendo editabile ogni riga
     //tabella->setEditTriggers(QAbstractItemView::AllEditTriggers);
     for(int i=0; i < tabella->rowCount(); i++){
       for(int j=1 ; j<tabella->columnCount() ; j++){
@@ -221,6 +223,15 @@ void TabellaComposita::rendiEditabile(bool b){
         item->setFlags(item->flags() | Qt::ItemIsEditable);
       }
     }
+    //aggiungo colonna con pulsanti per eliminare un elemento
+    tabella->insertColumn(tabella->columnCount());
+    for(int i=0; i < tabella->rowCount(); i++){
+        QPushButton* elimina = new QPushButton(tabella);
+        tabella->setCellWidget(i, tabella->columnCount()-1, elimina);
+        int id = std::stoi(tabella->item(i,0)->text().toStdString());
+        //mantengo questa info nel pushbutton in qualche modo
+    }
+
     editabile = true;
   }
   else{
@@ -301,6 +312,12 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
     }
     emit sendPacketToModel(p);
   }
+}
+
+void TabellaComposita::emitIdOnButtonClicked(int){
+    //pescare l'id dell'elemento da eliminare nella tabella
+    //trovo un modo di mantenere l'info di un id dentro al pushbutton
+    //emit sendIdToModel(id);
 }
 
 void TabellaComposita::setStyleTabella(){
