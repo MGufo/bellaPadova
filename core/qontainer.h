@@ -236,6 +236,9 @@ class Lista {
       if (it == begin()) {
         temp = it.itrCurrent;
         ++it;
+        //aggiusto puntatori ai nodi precedenti
+        it.itrPrevious = nullptr;
+        if(it.itrCurrent)   it.itrCurrent->nodoPrev = nullptr;
         ptr = it.itrCurrent;
         delete temp;
         return it;

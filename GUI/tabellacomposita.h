@@ -9,7 +9,9 @@
 #include <QTableWidget>
 #include <QVBoxLayout>
 #include <QPushButton>
+
 #include "pacchetti.h"
+#include "pushbuttonwithid.h"
 
 class TabellaComposita : public QWidget {
   Q_OBJECT
@@ -17,6 +19,7 @@ public:
   explicit TabellaComposita(QWidget *parent = nullptr,
                             const QString& etichetta="",
                             const QStringList* = nullptr);
+  void pulisciTabella();
   void inserisciElemento(pacchetto*);
   void rendiEditabile(bool = true);
   void cambiaColoreBordoCella(bool = true);
@@ -25,11 +28,11 @@ public:
 
 signals:
   void sendPacketToModel(pacchetto*);
-  void sendIdToModel(int);
+  void sendIdToModel(uint);
 
 private slots:
   void emitDataOnCellChanged(int,int);
-  void emitIdOnButtonClicked(int);
+  void eliminaElemento(uint);
 
 private:
   bool editabile;

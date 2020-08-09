@@ -40,7 +40,8 @@ SOURCES += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.cpp \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.cpp \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
-    GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.cpp
+    GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.cpp \
+    GUI/pushbuttonwithid.cpp
     #test/testgui.cpp
 
 HEADERS += \
@@ -80,7 +81,8 @@ HEADERS += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h \
     GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.h \
-    GUI/pacchetti.h
+    GUI/pacchetti.h \
+    GUI/pushbuttonwithid.h
     #test/testgui.h \
 
 RESOURCES += \

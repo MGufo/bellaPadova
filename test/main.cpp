@@ -42,7 +42,6 @@ int main(int argc, char* argv[]) {
 
     daAggiungere->push_back(wrustel);
     daAggiungere->push_back(ananas);
-    daAggiungere->push_back(funghi);
 
     daRimuovere->push_back(funghi);
 
@@ -57,7 +56,7 @@ int main(int argc, char* argv[]) {
 
     Pizza* mari = new Pizza(9, "marinara", true, 4);
     Pizza* boschi = new Pizza(10, "boscaiola", true, 4);
-    mari->aggiungiIngredienti(*iniziale);
+    mari->aggiungiIngredienti(*daRimuovere);
     mari->setFarina(farro);
     boschi->aggiungiIngredienti(*daAggiungere);
     boschi->setFarina(normale);
@@ -97,8 +96,10 @@ int main(int argc, char* argv[]) {
 
     bellaPadova.eseguiComanda();
     bellaPadova.eseguiComanda();
-    */
 
+    Risorsa* r = bellaPadova.trovaRisorsa(6);
+    bellaPadova.rimuoviConsumabile(dynamic_cast<Consumabile*>(r));
+    */
 
   return app.exec();
 }

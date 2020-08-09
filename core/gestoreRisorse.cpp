@@ -89,11 +89,25 @@ void GestoreRisorse::inserisciConsumabile(Consumabile* daInserire) {
 
 void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
   if (daRimuovere) {
-    for (auto it = menu.begin(); it != menu.end(); ++it) {
+      auto it = menu.begin();
+    bool controlloPrimoElemento = false;
+    while(it != menu.end()) {
+      controlloPrimoElemento = false;
       const Lista<Consumabile*>* lista = (*it)->getComposizione();
-      if (controlloConsumabile(lista, daRimuovere)) it = menu.erase(it);
-      if (it != menu.begin()) --it;
+      if (controlloConsumabile(lista, daRimuovere)){
+          it = menu.erase(it);
+          if (it != menu.begin()){
+              --it;
+          }
+          else{
+              //caso in cui non vogliamo incrementare it perchè corrisponde al begin e deve essere ancora controllato
+              controlloPrimoElemento = true;
+          }
+      }
       delete lista;
+      if(!controlloPrimoElemento){
+          ++it;
+      }
     }
     inventario.erase(inventario.find(daRimuovere));
   }

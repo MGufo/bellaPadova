@@ -24,6 +24,7 @@ class MainWindow : public QWidget {
   MainWindow(Controller* c, QWidget* parent = nullptr);
   ~MainWindow();
   void aggiornaContabilizzazione(double);
+  void pulisciInventario();
   void aggiornaInventario(pacchetto*);
   void visualizzaInventario();
   void aggiornaMenu(pacchetto*);
@@ -37,7 +38,7 @@ signals:
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
-  void eliminaConsumabile(int);
+  void eliminaConsumabile(uint);
   //true = pizza
   //false = bevanda
   void visualizzaElementiInWizard(bool) const;

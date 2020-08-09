@@ -76,6 +76,16 @@ void Controller::modificaConsumabile(pacchetto * pC){
   Consumabile* vecchioConsumabile = dynamic_cast<Consumabile*>(temp);
   modello->modificaConsumabile(vecchioConsumabile,pConsumabile);
   risorseSalvate = false;
+  //non serve aggiornamento della vista
+  //vista->visualizzaInventario();
+}
+
+void Controller::eliminaConsumabile(uint id){
+  Risorsa* daEliminare = modello->trovaRisorsa(id);
+  modello->rimuoviConsumabile(dynamic_cast<Consumabile*>(daEliminare));
+  risorseSalvate = false;
+  //non serve aggiornamento della vista (effettuato dallo slot di tabellaComposita)
+  //vista->visualizzaInventario();
 }
 
 QList<pacchetto*>* Controller::recuperaInventario() const{

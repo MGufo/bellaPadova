@@ -27,11 +27,11 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   // Aggiunta widget figli al layout
   layoutTabellaComposita->addWidget(label);
   layoutTabellaComposita->addWidget(tabella);
-  //tabella->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   connect(tabella,SIGNAL(cellChanged(int,int)),this,SLOT(emitDataOnCellChanged(int,int)));
   connect(this,SIGNAL(sendPacketToModel(pacchetto*)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaConsumabile(pacchetto*)));
-  connect(this,SIGNAL(sendIdToModel(int)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(int)));
+  connect(this,SIGNAL(sendIdToModel(uint)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(uint)));
+  connect(this,SIGNAL(sendIdToModel(uint)),this,SLOT(eliminaElemento(uint)));
 
   // Applicazione stile widget
   setStyleTabella();
@@ -39,11 +39,20 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   setLayout(layoutTabellaComposita);
 }
 
+void TabellaComposita::pulisciTabella(){
+    bool statoPrecedenteEditabile = editabile;
+    editabile = false;
+    tabella->clearContents();
+    tabella->setRowCount(0);
+    editabile = statoPrecedenteEditabile;
+}
+
 void TabellaComposita::inserisciElemento(pacchetto* p){
   //scorro righe e colonne della tabella e rendo ogni item non editabile
   //item->setFlags(item->flags() ^ Qt::ItemIsEditable);
   //setEditTriggers(QAbstractItemView::NoEditTriggers);
-
+  bool statoPrecedenteEditabile = editabile;
+  editabile = false;
   if(objectName()=="tabBevandeInventario"){
     pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
     //creazione di una nuova riga e riempimento con i dati nel pacchetto
@@ -103,6 +112,8 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem((pF->locale ? "Si" : "No"));
       tabella->setItem(tabella->rowCount()-1, 6, item);
       item = new QTableWidgetItem(QString::fromStdString(pF->tipologia));
+      //info aggiuntiva dell'item per capire se è una farina o un ingrediente
+      item->setData(Qt::UserRole, QString("farina"));
       tabella->setItem(tabella->rowCount()-1, 7, item);
 
       int i = tabella->rowCount()-1;
@@ -134,6 +145,8 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem((pI->locale ? "Si" : "No"));
       tabella->setItem(tabella->rowCount()-1, 6, item);
       item = new QTableWidgetItem(QString(""));
+      //info aggiuntiva dell'item per capire se è una farina o un ingrediente
+      item->setData(Qt::UserRole, QString("ingrediente"));
       tabella->setItem(tabella->rowCount()-1, 7, item);
 
       int i = tabella->rowCount()-1;
@@ -207,12 +220,12 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       }
     }
   }
+  editabile = statoPrecedenteEditabile;
 }
 
 void TabellaComposita::rendiEditabile(bool b){
   if(b){
-    //rendo editabile ogni riga
-    //tabella->setEditTriggers(QAbstractItemView::AllEditTriggers);
+    //rendo editabile ogni riga tranne la colonna contenente gli ID
     for(int i=0; i < tabella->rowCount(); i++){
       for(int j=1 ; j<tabella->columnCount() ; j++){
         QTableWidgetItem* item = tabella->item(i,j);
@@ -225,20 +238,24 @@ void TabellaComposita::rendiEditabile(bool b){
     }
     //aggiungo colonna con pulsanti per eliminare un elemento
     tabella->insertColumn(tabella->columnCount());
+    QTableWidgetItem* headerLabel = new QTableWidgetItem();
+    headerLabel->setText("");
+    tabella->setHorizontalHeaderItem(1,headerLabel);
     for(int i=0; i < tabella->rowCount(); i++){
-        QPushButton* elimina = new QPushButton(tabella);
+        uint id = static_cast<uint>(std::stoi(tabella->item(i,0)->text().toStdString()));
+        PushButtonWithId* elimina = new PushButtonWithId(id,tabella);
+        connect(elimina,SIGNAL(sendId(uint)),this,SIGNAL(sendIdToModel(uint)));
+        elimina->setText("Elimina");
         tabella->setCellWidget(i, tabella->columnCount()-1, elimina);
-        int id = std::stoi(tabella->item(i,0)->text().toStdString());
-        //mantengo questa info nel pushbutton in qualche modo
     }
 
     editabile = true;
   }
   else{
     editabile = false;
-    //tabella->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //rendo non editabile ogni riga
     for(int i=0; i < tabella->rowCount(); i++){
-      for(int j=1 ; j<tabella->columnCount() ; j++){
+      for(int j=1 ; j<tabella->columnCount()-1 ; j++){
         QTableWidgetItem* item = tabella->item(i,j);
         //se item appartiene all'ultima riga di un elemento nel tabIngredienti
         //e l'elemento non è una Farina lo salta
@@ -247,6 +264,8 @@ void TabellaComposita::rendiEditabile(bool b){
         item->setFlags(item->flags() ^ Qt::ItemIsEditable);
       }
     }
+    //rimuovo colonna con pulsanti per eliminare un elemento
+    tabella->removeColumn(tabella->columnCount()-1);
   }
 }
 
@@ -271,6 +290,8 @@ void TabellaComposita::setHeaderDimension(tipoTabella t){
 }
 
 void TabellaComposita::emitDataOnCellChanged(int x, int y){
+  //TODO: sistemare bool editabile nelle funzioni che lo usano
+  //problema: risulta false quando modifico la tabella e provo a mandare il pacchetto dell'elemento modificato
   if(editabile){
     //TODO: inputcheck
     pacchetto* p = nullptr;
@@ -293,31 +314,55 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
 
       p = new pacchettoBevanda(_ID,_n,_d,_p,_q,_c,_da,_cap,_t);
     }
-    else{
-      uint _ID = tabella->item(x,0)->text().toInt();
-      string _n = tabella->item(x,1)->text().toStdString();
-      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
-      uint _q = tabella->item(x,3)->text().toInt();
-      double _c = tabella->item(x,4)->text().toDouble();
-      //dataAcquisto
-      //recupero giorno, mese e anno tra i separatori
-      string da = tabella->item(x,5)->text().toStdString();
-      int d = std::stoi(da.substr(0,1));
-      int m = std::stoi(da.substr(3,4));
-      int y = std::stoi(da.substr(6,9));
-      QDate _da(y,m,d);
-      bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
+    else if(QObject::sender()->objectName()=="tabIngredientiInventario"){
+      string tipologiaElemento = tabella->item(x,7)->data(Qt::UserRole).toString().toStdString();
+      if(tipologiaElemento == "ingrediente"){
+          uint _ID = tabella->item(x,0)->text().toInt();
+          string _n = tabella->item(x,1)->text().toStdString();
+          bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+          uint _q = tabella->item(x,3)->text().toInt();
+          double _c = tabella->item(x,4)->text().toDouble();
+          //dataAcquisto
+          //recupero giorno, mese e anno tra i separatori
+          string da = tabella->item(x,5)->text().toStdString();
+          int d = std::stoi(da.substr(0,1));
+          int m = std::stoi(da.substr(3,4));
+          int y = std::stoi(da.substr(6,9));
+          QDate _da(y,m,d);
+          bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
 
-      p = new pacchettoIngrediente(_ID,_n,_d,_q,_c,_da,_l);
+          p = new pacchettoIngrediente(_ID,_n,_d,_q,_c,_da,_l);
+      }
+      else{
+          uint _ID = tabella->item(x,0)->text().toInt();
+          string _n = tabella->item(x,1)->text().toStdString();
+          bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+          uint _q = tabella->item(x,3)->text().toInt();
+          double _c = tabella->item(x,4)->text().toDouble();
+          //dataAcquisto
+          //recupero giorno, mese e anno tra i separatori
+          string da = tabella->item(x,5)->text().toStdString();
+          int d = std::stoi(da.substr(0,1));
+          int m = std::stoi(da.substr(3,4));
+          int y = std::stoi(da.substr(6,9));
+          QDate _da(y,m,d);
+          bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
+          string _t = tabella->item(x,7)->text().toStdString();
+
+          p = new pacchettoFarina(_ID,_n,_d,_q,_c,_da,_l,_t);
+      }
     }
     emit sendPacketToModel(p);
   }
 }
 
-void TabellaComposita::emitIdOnButtonClicked(int){
-    //pescare l'id dell'elemento da eliminare nella tabella
-    //trovo un modo di mantenere l'info di un id dentro al pushbutton
-    //emit sendIdToModel(id);
+void TabellaComposita::eliminaElemento(uint id){
+    editabile = false;
+    for(int i=0 ; i<tabella->rowCount() ; i++){
+        uint currentId = static_cast<uint>(std::stoi(tabella->item(i,0)->text().toStdString()));
+        if(currentId == id) tabella->removeRow(i);
+    }
+    editabile = true;
 }
 
 void TabellaComposita::setStyleTabella(){

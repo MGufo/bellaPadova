@@ -77,8 +77,8 @@ void MainWindow::modificaConsumabile(pacchetto* pC){
     controller->modificaConsumabile(pC);
 }
 
-void MainWindow::eliminaConsumabile(int){
-
+void MainWindow::eliminaConsumabile(uint id){
+    controller->eliminaConsumabile(id);
 }
 
 void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
@@ -227,6 +227,13 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
     findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
 }
 
+void MainWindow::pulisciInventario(){
+    TabellaComposita* tabBevande = findChild<TabellaComposita*>("tabBevandeInventario");
+    tabBevande->pulisciTabella();
+    TabellaComposita* tabIngredienti = findChild<TabellaComposita*>("tabIngredientiInventario");
+    tabIngredienti->pulisciTabella();
+}
+
 void MainWindow::aggiornaInventario(pacchetto * p){
   if(dynamic_cast<pacchettoBevanda*>(p)){
     TabellaComposita* tabBevande =
@@ -241,6 +248,7 @@ void MainWindow::aggiornaInventario(pacchetto * p){
 }
 
 void MainWindow::visualizzaInventario(){
+    pulisciInventario();
     QList<pacchetto*>* inventario = controller->recuperaInventario();
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
         aggiornaInventario(*it);
