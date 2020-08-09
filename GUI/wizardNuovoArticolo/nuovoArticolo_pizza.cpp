@@ -20,6 +20,7 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   labelsFarine->push_back("Tipo Farina");
   farineWrapper = new QTableWidget(0,5,this);
   farineWrapper->setObjectName("farineWrapper");
+  farineWrapper->verticalHeader()->setVisible(false);
   farineWrapper->setMinimumWidth(520);
   // farineWrapper->setMaximumWidth(2100);
   QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
@@ -28,9 +29,10 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   sizePolicy.setHeightForWidth(farineWrapper->sizePolicy().hasHeightForWidth());
   farineWrapper->setSizePolicy(sizePolicy);
   QHeaderView* headerFarine = new QHeaderView(Qt::Horizontal,farineWrapper);
-  headerFarine->setSectionResizeMode(headerFarine->ResizeToContents);
   farineWrapper->setHorizontalHeaderLabels(*labelsFarine);
   farineWrapper->setHorizontalHeader(headerFarine);
+  headerFarine->setSectionResizeMode(headerFarine->ResizeToContents);
+  headerFarine->setSectionResizeMode(2, headerFarine->Stretch);
 
   // Ingredienti
   QStringList* labelsIngredienti = new QStringList();
@@ -40,6 +42,7 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   labelsIngredienti->push_back("Locale");
   ingredientiWrapper = new QTableWidget(0,4,this);
   ingredientiWrapper->setObjectName("ingredientiWrapper");
+  ingredientiWrapper->verticalHeader()->setVisible(false);
   ingredientiWrapper->setMinimumWidth(350);
   // ingredientiWrapper->setMaximumWidth(2100);
   QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
@@ -48,9 +51,10 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   sizePolicy2.setHeightForWidth(ingredientiWrapper->sizePolicy().hasHeightForWidth());
   ingredientiWrapper->setSizePolicy(sizePolicy2);
   QHeaderView* headerIngredienti = new QHeaderView(Qt::Horizontal,ingredientiWrapper);
-  headerIngredienti->setSectionResizeMode(headerIngredienti->ResizeToContents);
   ingredientiWrapper->setHorizontalHeaderLabels(*labelsIngredienti);
   ingredientiWrapper->setHorizontalHeader(headerIngredienti);
+  headerIngredienti->setSectionResizeMode(headerIngredienti->ResizeToContents);
+  headerIngredienti->setSectionResizeMode(2, headerIngredienti->Stretch);
 
   layoutPizza = new QVBoxLayout(this);
   layoutPizza->addWidget(wrapperInfo,0,Qt::AlignHCenter);

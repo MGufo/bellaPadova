@@ -12,6 +12,7 @@ NuovoArticolo_bevanda::NuovoArticolo_bevanda(QWidget* parent) : QWidget(parent){
     labelsBevande->push_back("Tipologia");
     bevandeWrapper = new QTableWidget(0,6,this);
     bevandeWrapper->setObjectName("bevandeWrapper");
+    bevandeWrapper->verticalHeader()->setVisible(false);
     bevandeWrapper->setMinimumWidth(500);
     // bevandeWrapper->setMaximumWidth(2100);
     QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
@@ -20,9 +21,10 @@ NuovoArticolo_bevanda::NuovoArticolo_bevanda(QWidget* parent) : QWidget(parent){
     sizePolicy.setHeightForWidth(bevandeWrapper->sizePolicy().hasHeightForWidth());
     bevandeWrapper->setSizePolicy(sizePolicy);
     QHeaderView* headerBevande = new QHeaderView(Qt::Horizontal,bevandeWrapper);
-    headerBevande->setSectionResizeMode(headerBevande->ResizeToContents);
     bevandeWrapper->setHorizontalHeaderLabels(*labelsBevande);
     bevandeWrapper->setHorizontalHeader(headerBevande);
+    headerBevande->setSectionResizeMode(headerBevande->ResizeToContents);
+    headerBevande->setSectionResizeMode(2, headerBevande->Stretch);
 
     layoutBevanda = new QVBoxLayout(this);
     layoutBevanda->addWidget(bevandeWrapper);
