@@ -98,6 +98,45 @@ void Controller::eliminaConsumabile(uint id){
   //vista->visualizzaInventario();
 }
 
+void Controller::creaNuovoArticolo(pacchetto* pA){
+    //TODO: gestire eccezioni con un blocco try-catch
+    Articolo* pArticolo = nullptr;
+    if(dynamic_cast<pacchettoBevanda*>(pA)){
+      //recupero la bevanda che voglio inserire nel menu dall'inventario
+      Risorsa* r = modello->trovaRisorsa(pA->ID);
+      pArticolo = dynamic_cast<Articolo*>(r);
+      //creo pacchetto per aggiornare la vista
+      Bevanda* pBevanda = dynamic_cast<Bevanda*>(r);
+      pA->nome = pBevanda->getNome();
+      pA->disponibilita = pBevanda->getDisponibilita();
+      dynamic_cast<pacchettoBevanda*>(pA)->prezzo = pBevanda->getPrezzoBase();
+      dynamic_cast<pacchettoBevanda*>(pA)->quantita = pBevanda->getQuantita();
+      dynamic_cast<pacchettoBevanda*>(pA)->costo = pBevanda->getCosto();
+      dynamic_cast<pacchettoBevanda*>(pA)->dataAcquisto = pBevanda->getDataAcquisto();
+      dynamic_cast<pacchettoBevanda*>(pA)->capacita = pBevanda->getCapacita();
+      dynamic_cast<pacchettoBevanda*>(pA)->tipo = (dynamic_cast<Lattina*>(pBevanda) ? true : false);
+    }
+    else if(dynamic_cast<pacchettoPizza*>(pA)){
+      pA->ID = ++idRisorse;
+      pacchettoPizza* ptr = dynamic_cast<pacchettoPizza*>(pA);
+      pArticolo = new Pizza(ptr->ID,ptr->nome,ptr->disponibilita,ptr->prezzo);
+      //inserisco gli ingredienti e setto la farina
+      Pizza* pPizza = dynamic_cast<Pizza*>(pArticolo);
+      Lista<Ingrediente*> ingrePizza;
+      for(auto it = ptr->ingredienti.cbegin() ; it != ptr->ingredienti.cend() ; ++it){
+          Risorsa* r = modello->trovaRisorsa((*it).first);
+          if(dynamic_cast<Farina*>(r))
+              pPizza->setFarina(dynamic_cast<Farina*>(r));
+          else
+              ingrePizza.push_back(dynamic_cast<Ingrediente*>(r));
+      }
+      pPizza->aggiungiIngredienti(ingrePizza);
+    }
+    modello->inserisciArticolo(pArticolo);
+    risorseSalvate = false;
+    vista->aggiornaMenu(pA);
+}
+
 QList<pacchetto*>* Controller::recuperaInventario() const{
   auto inventario = modello->getInventario();
   pacchetto* p = nullptr;
@@ -134,10 +173,6 @@ QList<pacchetto*>* Controller::recuperaInventario() const{
     pacchetti->push_back(p);
   }
   return pacchetti;
-}
-
-void Controller::creaNuovoArticolo(pacchetto *){
-    //TODO: chiamare modello->inserisciArticolo() dentro a un blocco try-catch
 }
 
 QList<pacchetto *>* Controller::recuperaMenu() const{
