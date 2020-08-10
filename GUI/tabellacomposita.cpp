@@ -290,12 +290,10 @@ void TabellaComposita::setHeaderDimension(tipoTabella t){
 }
 
 void TabellaComposita::emitDataOnCellChanged(int x, int y){
-  //TODO: sistemare bool editabile nelle funzioni che lo usano
-  //problema: risulta false quando modifico la tabella e provo a mandare il pacchetto dell'elemento modificato
   if(editabile){
     //TODO: inputcheck
     pacchetto* p = nullptr;
-    if(QObject::sender()->objectName()=="tabBevandeInventario"){
+    if(objectName()=="tabBevandeInventario"){
       uint _ID = tabella->item(x,0)->text().toInt();
       string _n = tabella->item(x,1)->text().toStdString();
       bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
@@ -314,7 +312,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
 
       p = new pacchettoBevanda(_ID,_n,_d,_p,_q,_c,_da,_cap,_t);
     }
-    else if(QObject::sender()->objectName()=="tabIngredientiInventario"){
+    else if(objectName()=="tabIngredientiInventario"){
       string tipologiaElemento = tabella->item(x,7)->data(Qt::UserRole).toString().toStdString();
       if(tipologiaElemento == "ingrediente"){
           uint _ID = tabella->item(x,0)->text().toInt();
