@@ -127,7 +127,6 @@ void GestoreRisorse::modificaArticolo(Articolo* daModificare,
 
 void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
                                          Consumabile* modificato) {
-  //TODO: implemento modifica() come funzione virtuale pura in consumabile
   auto it = inventario.find(daModificare);
   if(it.isValid())  (*it)->modifica(modificato);
 
