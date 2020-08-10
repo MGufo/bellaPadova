@@ -28,7 +28,11 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   layoutTabellaComposita->addWidget(label);
   layoutTabellaComposita->addWidget(tabella);
 
-  connect(tabella,SIGNAL(cellChanged(int,int)),this,SLOT(emitDataOnCellChanged(int,int)));
+  connect(tabella,SIGNAL(cellChanged(int,int)),
+          this,SLOT(emitDataOnCellChanged(int,int)));
+  connect(this,SIGNAL(validationError(const QString)),
+          parentWidget()->parentWidget()->parentWidget(),
+          SLOT(mostraErrore(const QString)));
   connect(this,SIGNAL(sendPacketToModel(pacchetto*)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaConsumabile(pacchetto*)));
   connect(this,SIGNAL(sendIdToModel(uint)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(uint)));
   connect(this,SIGNAL(sendIdToModel(uint)),this,SLOT(eliminaElemento(uint)));
@@ -291,7 +295,14 @@ void TabellaComposita::setHeaderDimension(tipoTabella t){
 
 void TabellaComposita::emitDataOnCellChanged(int x, int y){
   if(editabile){
-    //TODO: inputcheck
+    try{
+      validateInput(x, y);
+    }
+    catch (std::exception* e){
+      emit validationError(QString::fromStdString(e->what()));
+      setDefaultValue(x, y); // valore default
+      return;
+    }
     pacchetto* p = nullptr;
     if(objectName()=="tabBevandeInventario"){
       uint _ID = tabella->item(x,0)->text().toInt();
@@ -367,4 +378,16 @@ void TabellaComposita::setStyleTabella(){
   layoutTabellaComposita->setSpacing(0);
   layoutTabellaComposita->setMargin(0);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+}
+
+void TabellaComposita::validateInput(int row, int col){
+  auto value = dynamic_cast<QTableWidgetItem*>(tabella->item(row, col));
+  if(value){
+    InputValidator* validator = new InputValidator();
+    validator->validate(value->text(),value->data(Qt::UserRole));
+  }
+}
+
+void TabellaComposita::setDefaultValue(int row, int col){
+  tabella->item(row, col)->setText("");
 }

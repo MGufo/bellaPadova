@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
+#include "inputValidator.h"
 #include "pacchetti.h"
 #include "pushbuttonwithid.h"
 
@@ -24,11 +25,13 @@ public:
   void rendiEditabile(bool = true);
   void cambiaColoreBordoCella(bool = true);
   enum tipoTabella {bevandeM, bevandeI, inventario, pizze};
+  enum dataType {_int, _double, _string, _data};
   void setHeaderDimension(tipoTabella);
 
 signals:
   void sendPacketToModel(pacchetto*);
   void sendIdToModel(uint);
+  void validationError(const QString);
 
 private slots:
   void emitDataOnCellChanged(int,int);
@@ -40,6 +43,8 @@ private:
   QTableWidget* tabella = nullptr;
   QVBoxLayout* layoutTabellaComposita;
   void setStyleTabella();
+  void validateInput(int, int);
+  void setDefaultValue(int, int);
 };
 
 #endif // TABELLACOMPOSITA_H
