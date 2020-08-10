@@ -14,12 +14,12 @@ const string& Farina::getTipoFarina() const { return tipoFarina; }
 
 void Farina::setTipoFarina(const string& f) { tipoFarina = f; }
 
-void Farina::modifica(Consumabile* modificato){
+void Farina::modifica(Risorsa* modificato){
   setNome(modificato->getNome());
   setDisponibilita(modificato->getDisponibilita());
-  setQuantita(modificato->getQuantita());
-  setCosto(modificato->getCosto());
-  setDataAcquisto(modificato->getDataAcquisto());
+  setQuantita(dynamic_cast<Consumabile*>(modificato)->getQuantita());
+  setCosto(dynamic_cast<Consumabile*>(modificato)->getCosto());
+  setDataAcquisto(dynamic_cast<Consumabile*>(modificato)->getDataAcquisto());
   setLocal(dynamic_cast<Ingrediente*>(modificato)->isLocal());
   setTipoFarina(dynamic_cast<Farina*>(modificato)->getTipoFarina());
 }

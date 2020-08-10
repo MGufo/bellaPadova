@@ -28,13 +28,13 @@ const Lista<Consumabile*>* Bevanda::getComposizione() const {
   return lista;
 }
 
-void Bevanda::modifica(Consumabile* modificato){
+void Bevanda::modifica(Risorsa* modificato){
   setNome(modificato->getNome());
   setDisponibilita(modificato->getDisponibilita());
   setPrezzoBase(dynamic_cast<Articolo*>(modificato)->getPrezzoBase());
-  setQuantita(modificato->getQuantita());
-  setCosto(modificato->getCosto());
-  setDataAcquisto(modificato->getDataAcquisto());
+  setQuantita(dynamic_cast<Consumabile*>(modificato)->getQuantita());
+  setCosto(dynamic_cast<Consumabile*>(modificato)->getCosto());
+  setDataAcquisto(dynamic_cast<Consumabile*>(modificato)->getDataAcquisto());
   setCapacita(dynamic_cast<Bevanda*>(modificato)->getCapacita());
 }
 

@@ -7,6 +7,9 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
   setStartId(PAGE_Intro);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
   setWindowTitle(tr("Aggiunta articolo al Menù"));
+  connect(this, SIGNAL(nuovoArticolo(pacchetto*)),
+          this->parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+          SLOT(creaNuovoArticolo(pacchetto*)));
   connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
   connect(page(PAGE_Dettagli), SIGNAL(completeChanged()), this, SLOT(handlerBottoni()));
 
@@ -34,7 +37,28 @@ void WizardNuovoArticolo::accept(){
             }
         }
         //recupero gli ingredienti
+        QTableWidget* ingredientiTabellaWrapper = findChild<QTableWidget*>("ingredientiWrapper");
+        for(int i=0; i<ingredientiTabellaWrapper->rowCount() ; i++){
+            QCheckBox* checkIngr = dynamic_cast<QCheckBox*>(ingredientiTabellaWrapper->cellWidget(i,1));
+            if(checkIngr->isChecked()){
+                uint ID = std::stoi(ingredientiTabellaWrapper->item(i,0)->text().toStdString());
+                string nome = ingredientiTabellaWrapper->item(i,2)->text().toStdString();
+                pP->ingredienti[ID] = nome;
+            }
+        }
     }
+    else if(field("optionBevanda").toBool()){
+        QTableWidget* bevandeTabellaWrapper = findChild<QTableWidget*>("bevandeWrapper");
+        for(int i=0; i<bevandeTabellaWrapper->rowCount() ; i++){
+            QRadioButton* radioBevanda = dynamic_cast<QRadioButton*>(bevandeTabellaWrapper->cellWidget(i,1));
+            if(radioBevanda->isChecked()){
+                uint ID = std::stoi(bevandeTabellaWrapper->item(i,0)->text().toStdString());
+                //creo pacchetto fittizzio di cui mi interessa solo l'ID
+                p = new pacchettoBevanda(ID,"",true,0,0,0,QDate(),0,true);
+            }
+        }
+    }
+    emit nuovoArticolo(p);
 }
 
 void WizardNuovoArticolo::assegnaBottoni(int id){

@@ -55,9 +55,6 @@ class Consumabile : virtual public Risorsa {
 
   virtual double getSpesa() const = 0;
 
-  //metodo che consente la modifica dei consumabili in modo polimorfo
-  virtual void modifica(Consumabile*) = 0;
-
   /**
    * @brief: Legge i dati di una risorsa da file JSON e li assegna ai campi
    * dati dell'oggetto di invocazione

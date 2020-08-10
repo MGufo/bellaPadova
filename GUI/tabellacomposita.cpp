@@ -212,7 +212,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pB->prezzo)));
       tabella->setItem(tabella->rowCount()-1, 3, item);
-      item = new QTableWidgetItem((pB->capacita));
+      item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pB->capacita)));
       tabella->setItem(tabella->rowCount()-1, 4, item);
       item = new QTableWidgetItem((pB->tipo? "Lattina" : "Bottiglia"));
       tabella->setItem(tabella->rowCount()-1, 5, item);

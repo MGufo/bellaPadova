@@ -81,6 +81,10 @@ void MainWindow::eliminaConsumabile(uint id){
     controller->eliminaConsumabile(id);
 }
 
+void MainWindow::creaNuovoArticolo(pacchetto* p){
+    controller->creaNuovoArticolo(p);
+}
+
 void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
   QList<pacchetto*>* inventario = controller->recuperaInventario();
   if(option_pizza){
@@ -136,8 +140,8 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
 
         item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->ID)));
         wrapperBevande->setItem(wrapperBevande->rowCount()-1, 0, item);
-        QCheckBox* c = new QCheckBox(wrapperBevande);
-        wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 1, c);
+        QRadioButton* r = new QRadioButton(wrapperBevande);
+        wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 1, r);
         item = new QTableWidgetItem(QString::fromStdString(pB->nome));
         wrapperBevande->setItem(wrapperBevande->rowCount()-1, 2, item);
         item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pB->prezzo)));
@@ -148,6 +152,7 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
         wrapperBevande->setItem(wrapperBevande->rowCount()-1, 5, item);
       }
     }
+    dynamic_cast<QRadioButton*>(wrapperBevande->cellWidget(0,1))->setChecked(true);
   }
   delete inventario;
 }
@@ -181,8 +186,8 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
     //inserisco le bevande selezionate nella pagina finale del wizard
       QTableWidget* bevandeTabellaWrapper = findChild<QTableWidget*>("bevandeWrapper");
       for(int i=0; i<bevandeTabellaWrapper->rowCount() ; i++){
-          QCheckBox* checkBevande = dynamic_cast<QCheckBox*>(bevandeTabellaWrapper->cellWidget(i,1));
-          if(checkBevande->isChecked()){
+          QRadioButton* radioBevanda = dynamic_cast<QRadioButton*>(bevandeTabellaWrapper->cellWidget(i,1));
+          if(radioBevanda->isChecked()){
               QWidget* bevandeVisualWrapper = findChild<QWidget*>("bevandeVisualizationWrapper");
               QLabel* label = new QLabel(bevandeTabellaWrapper->item(i,2)->text());
               dynamic_cast<QVBoxLayout*>(bevandeVisualWrapper->layout())->addWidget(label);

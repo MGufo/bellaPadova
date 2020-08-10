@@ -40,6 +40,7 @@ signals:
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
   void eliminaConsumabile(uint);
+  void creaNuovoArticolo(pacchetto*);
   //true = pizza
   //false = bevanda
   void visualizzaElementiInWizard(bool) const;

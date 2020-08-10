@@ -20,12 +20,12 @@ double Ingrediente::getSpesa() const {
     return getQuantita() * getCosto() + 1 * isLocal();
 }
 
-void Ingrediente::modifica(Consumabile* modificato){
+void Ingrediente::modifica(Risorsa* modificato){
   setNome(modificato->getNome());
   setDisponibilita(modificato->getDisponibilita());
-  setQuantita(modificato->getQuantita());
-  setCosto(modificato->getCosto());
-  setDataAcquisto(modificato->getDataAcquisto());
+  setQuantita(dynamic_cast<Consumabile*>(modificato)->getQuantita());
+  setCosto(dynamic_cast<Consumabile*>(modificato)->getCosto());
+  setDataAcquisto(dynamic_cast<Consumabile*>(modificato)->getDataAcquisto());
   setLocal(dynamic_cast<Ingrediente*>(modificato)->isLocal());
 }
 

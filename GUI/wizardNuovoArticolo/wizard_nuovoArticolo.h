@@ -20,6 +20,8 @@ public:
   explicit WizardNuovoArticolo(QWidget *parent = nullptr);
 
   void accept() override;
+signals:
+  void nuovoArticolo(pacchetto*);
 public slots:
   void assegnaBottoni(int);
   void handlerBottoni();

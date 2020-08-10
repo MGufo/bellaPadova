@@ -25,6 +25,7 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
 
   // Label e risultato
   QLineEdit* mostraGuadagno = new QLineEdit("" ,this);
+  mostraGuadagno->setEnabled(false);
   mostraGuadagno->setObjectName("mGuadagno");
   mostraGuadagno->setFixedWidth(500);
   mostraGuadagno->setAlignment(Qt::AlignCenter);
