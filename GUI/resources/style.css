@@ -115,7 +115,6 @@ QPushButton#Consumabile {
 QPushButton#FineModifica {
     height: 75;
     margin: 10 10 10 10;
-    max-width: 300;
     background-color: #2b78e4;
 }
 
