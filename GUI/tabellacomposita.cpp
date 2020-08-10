@@ -240,7 +240,7 @@ void TabellaComposita::rendiEditabile(bool b){
     tabella->insertColumn(tabella->columnCount());
     QTableWidgetItem* headerLabel = new QTableWidgetItem();
     headerLabel->setText("");
-    tabella->setHorizontalHeaderItem(1,headerLabel);
+    tabella->setHorizontalHeaderItem(tabella->columnCount()-1,headerLabel);
     for(int i=0; i < tabella->rowCount(); i++){
         uint id = static_cast<uint>(std::stoi(tabella->item(i,0)->text().toStdString()));
         PushButtonWithId* elimina = new PushButtonWithId(id,tabella);
