@@ -215,6 +215,21 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
   return pacchetti;
 }
 
+QList<pacchetto *> *Controller::recuperaComande() const{
+  QList<pacchettoComanda*>* pacchetti = new QList<pacchettoComanda*>();
+  auto comande = modello->getComande();
+  for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
+    Comanda* c = *it;
+    pacchettoComanda* pC =
+        new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
+                             c->getCliente().getIndirizzo(),
+                             c->getCliente().getTelefono(),
+                             c->getOraConsegna().toString().toStdString());
+    // TODO : Riempire mappa ordinazione del pacchetto
+    pacchetti->push_back(pC);
+  }
+}
+
 bool Controller::canQuit() const { return (comandeSalvate && risorseSalvate); }
 
 void Controller::caricaComande(){
@@ -223,6 +238,7 @@ void Controller::caricaComande(){
   } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
+  vista->visualizzaComande();
 }
 
 void Controller::caricaRisorse(){

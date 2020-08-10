@@ -53,7 +53,11 @@ const Lista<Consumabile *> &Pizzeria::getInventario() const{
 }
 
 const Lista<Articolo *> &Pizzeria::getMenu() const{
-    return gestoreRisorse.getMenu();
+  return gestoreRisorse.getMenu();
+}
+
+const Lista<Comanda *> &Pizzeria::getComande() const {
+  return gestoreComande.getBacheca();
 }
 
 double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) const{

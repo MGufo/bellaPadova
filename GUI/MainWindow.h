@@ -29,6 +29,7 @@ class MainWindow : public QWidget {
   void visualizzaInventario();
   void aggiornaMenu(pacchetto*);
   void visualizzaMenu();
+  void visualizzaComande();
   void mostraErrore(const QString&);
 
 signals:

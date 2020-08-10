@@ -49,6 +49,7 @@ class Pizzeria {
   Pizzeria(const string, const string);
   const Lista<Consumabile*>& getInventario() const;
   const Lista<Articolo*>& getMenu() const;
+  const Lista<Comanda*>& getComande() const;
 
   double contabilizzazione(const QDate&, const QDate&) const;
   Risorsa* trovaRisorsa(unsigned int ID) const;
