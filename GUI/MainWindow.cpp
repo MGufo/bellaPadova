@@ -279,7 +279,7 @@ void MainWindow::visualizzaComande(){
   for(auto it = comande->constBegin(); it != comande->constEnd(); ++it){
     (*it);
   }
-  delete inventario;
+  delete comande;
 }
 
 void MainWindow::mostraErrore(const QString & messaggio){
