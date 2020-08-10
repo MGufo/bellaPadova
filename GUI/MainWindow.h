@@ -30,12 +30,12 @@ class MainWindow : public QWidget {
   void aggiornaMenu(pacchetto*);
   void visualizzaMenu();
   void visualizzaComande();
-  void mostraErrore(const QString&);
 
 signals:
   void saveAndExit();
 
  public slots:
+  void mostraErrore(const QString&);
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
