@@ -274,6 +274,14 @@ void MainWindow::visualizzaMenu(){
   delete menu;
 }
 
+void MainWindow::visualizzaComande(){
+  QList<pacchetto*>* comande = controller->recuperaComande();
+  for(auto it = comande->constBegin(); it != comande->constEnd(); ++it){
+    (*it);
+  }
+  delete inventario;
+}
+
 void MainWindow::mostraErrore(const QString & messaggio){
   QErrorMessage* errorDialog = new QErrorMessage(this);
   errorDialog->showMessage(messaggio);
