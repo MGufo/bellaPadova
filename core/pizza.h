@@ -13,6 +13,7 @@ class Pizza : public Articolo {
   bool checkIngrediente(const Ingrediente*) const;
   void addIngrediente(Ingrediente*);
   void removeIngrediente(Ingrediente*);
+  void modificaComposizione(Consumabile*, Consumabile*);
 
  public:
   Pizza();
@@ -58,7 +59,7 @@ class Pizza : public Articolo {
    */
   virtual const Lista<Consumabile*>* getComposizione() const;
 
-  virtual void modificaComposizione(Consumabile*, Consumabile*);
+  virtual void modifica(Risorsa*);
 
   virtual void carica(const QJsonObject&,
                       const std::unordered_map<uint, Risorsa*>*);

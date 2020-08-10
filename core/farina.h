@@ -30,7 +30,7 @@ class Farina : public Ingrediente {
    */
   void setTipoFarina(const string&);
 
-  virtual void modifica(Consumabile*);
+  virtual void modifica(Risorsa*);
 
   Farina* clone() const;
 

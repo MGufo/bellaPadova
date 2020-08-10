@@ -19,7 +19,6 @@ class Risorsa {
   Risorsa();
   Risorsa(unsigned int, string, bool);
   virtual ~Risorsa() = default;
-  virtual Risorsa& operator=(const Risorsa&) = default;
 
   unsigned int getIdRisorsa() const;
   /**
@@ -66,9 +65,12 @@ class Risorsa {
    */
   virtual void salva(QJsonObject&) const = 0;
 
-
+  //TODO: verificare dove ha senso usare questo metodo tra il codice e usarlo
   // metodo di clonazione virtuale puro
   virtual Risorsa* clone() const = 0;
+
+  //metodo che consente la modifica delle risorse in modo polimorfo
+  virtual void modifica(Risorsa*) = 0;
 };
 
 #endif

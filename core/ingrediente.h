@@ -33,7 +33,7 @@ class Ingrediente : public Consumabile {
    */
   double getSpesa() const;
 
-  virtual void modifica(Consumabile*);
+  virtual void modifica(Risorsa*);
 
   Ingrediente* clone() const;
 
