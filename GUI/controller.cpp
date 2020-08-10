@@ -74,7 +74,17 @@ void Controller::modificaConsumabile(pacchetto * pC){
   }
   Risorsa* temp = modello->trovaRisorsa(pC->ID);
   Consumabile* vecchioConsumabile = dynamic_cast<Consumabile*>(temp);
-  modello->modificaConsumabile(vecchioConsumabile,pConsumabile);
+
+  //casi in cui voglio trasformare Lattina in Bottiglia o viceversa
+  bool lattToBott = dynamic_cast<Lattina*>(temp) && !dynamic_cast<pacchettoBevanda*>(pC)->tipo;
+  bool bottToLatt = dynamic_cast<Bottiglia*>(temp) && dynamic_cast<pacchettoBevanda*>(pC)->tipo;
+  if(lattToBott || bottToLatt){
+      modello->rimuoviConsumabile(vecchioConsumabile);
+      modello->inserisciConsumabile(pConsumabile);
+  }
+  else{
+      modello->modificaConsumabile(vecchioConsumabile,pConsumabile);
+  }
   risorseSalvate = false;
   //non serve aggiornamento della vista
   //vista->visualizzaInventario();
