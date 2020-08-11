@@ -38,7 +38,7 @@ signals:
   void mostraErrore(const QString&);
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
-  void modificaConsumabile(pacchetto*, bool);
+  void modificaRisorsa(pacchetto*, bool);
   void eliminaConsumabile(uint);
   void creaNuovoArticolo(pacchetto*);
   void eliminaArticolo(uint);

@@ -35,7 +35,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
           SLOT(mostraErrore(const QString)));
   //todo: aggiungere un bool a sendPacketToModel() per indicare il tipo di pacchetto (consumabile/articolo).
   // aggiungere un "ricevitore universale" al posto di modificaConsumabile() che ricea un pacchetto e in base al valore del bool lo inoltri alla funzione corretta del controller
-  connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaConsumabile(pacchetto*, bool)));
+  connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaRisorsa(pacchetto*, bool)));
   connect(this,SIGNAL(sendIdToModel(uint)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(uint)));
   connect(this,SIGNAL(sendIdToModel(uint)),this,SLOT(eliminaElemento(uint)));
 
@@ -190,7 +190,6 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(QString::fromStdString(
                                     std::to_string(pI->quantita)));
       item->setData(Qt::UserRole, _double);
-      std::cout << item->text().toStdString() << " " << item->data(Qt::UserRole).toInt() << std::endl;
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pI->costo)));
@@ -246,9 +245,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
                                     to_string_with_precision(pP->prezzo)));
       item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
-      //TODO: modifico visualizzazione degli ingredienti
-      //inserisco ogni ingrediente in un item a se stante, in modo tale che
-      //gli posso associare l'ID con item->setData()
+      //non è possibile modificare la lista di ingredienti
       std::stringstream ingr;
       auto pIngr = pP->ingredienti;
       auto it2 = pIngr.cbegin();
@@ -259,7 +256,14 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
           ingr << ", ";
         }
       }
+      std::cout << Qt::UserRole << std::endl;
       item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
+      item->setData(1001,pIngr.size());
+      uint var = 1;
+      for(auto it = pIngr.cbegin(); it != pIngr.cend(); ++it){
+        item->setData(1001+var,(*it).first);
+        var++;
+      }
       tabella->setItem(tabella->rowCount()-1, 4, item);
 
       int i = tabella->rowCount()-1;
@@ -341,7 +345,7 @@ void TabellaComposita::rendiEditabile(bool b){
             QTableWidgetItem* item = tabella->item(i,j);
             //se item appartiene all'ultima riga di un elemento nel tabIngredienti
             //e l'elemento non è una Farina lo salta
-            if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
+            if((j==7 && objectName()=="tabIngredientiInventario" && item->text()=="") || (j == 4 && objectName()=="tabPizzeMenu"))
               continue;
             item->setFlags(item->flags() | Qt::ItemIsEditable);
         }
@@ -385,7 +389,7 @@ void TabellaComposita::rendiEditabile(bool b){
               QTableWidgetItem* item = tabella->item(i,j);
               //se item appartiene all'ultima riga di un elemento nel tabIngredienti
               //e l'elemento non è una Farina lo salta
-              if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
+              if((j==7 && objectName()=="tabIngredientiInventario" && item->text()=="") || (j == 4 && objectName()=="tabPizzeMenu"))
                 continue;
               item->setFlags(item->flags() ^ Qt::ItemIsEditable);
           }
@@ -488,21 +492,24 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
       }
     }
     else if(objectName() == "tabPizzeMenu"){
-//      uint _ID = tabella->item(x,0)->text().toInt();
-//      string _n = tabella->item(x,1)->text().toStdString();
-//      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
-//      double _p = tabella->item(x,3)->text().toDouble();
-//      // TODO: Ragionare su come fare gli ingredienti della pizza
-//      p = new pacchettoPizza(_ID,_n,_d,_p,_q,_c,_da,_cap,_t);
-
+      uint _ID = tabella->item(x,0)->text().toInt();
+      string _n = tabella->item(x,1)->text().toStdString();
+      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+      double _p = tabella->item(x,3)->text().toDouble();
+      p = new pacchettoPizza(_ID,_n,_d,_p);
+      QTableWidgetItem* tmp = tabella->item(x,y);
+      for(int i = 1; i<=tmp->data(1001).toInt(); ++i){
+        (dynamic_cast<pacchettoPizza*>(p))->
+            ingredienti[tmp->data(1001+i).toInt()]="";
+      }
     }
     else if(objectName() == "tabBevandeMenu"){
       uint _ID = tabella->item(x,0)->text().toInt();
       string _n = tabella->item(x,1)->text().toStdString();
       bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
       double _p = tabella->item(x,3)->text().toDouble();
-      float _cap = tabella->item(x,6)->text().toFloat();
-      bool _t = (tabella->item(x,8)->text() == "Lattina" ? true : false);
+      float _cap = tabella->item(x,4)->text().toFloat();
+      bool _t = (tabella->item(x,5)->text() == "Lattina" ? true : false);
 
       p = new pacchettoBevanda(_ID,_n,_d,_p,0,0,QDate(),_cap,_t);
     }
