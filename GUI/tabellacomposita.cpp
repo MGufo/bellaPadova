@@ -79,6 +79,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
     toggle->setProperty("column",2);
     connect(toggle, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
     toggle->setChecked(pB->disponibilita);
+
     tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
 
     item = new QTableWidgetItem(QString::fromStdString(
