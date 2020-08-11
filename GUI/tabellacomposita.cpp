@@ -64,26 +64,34 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
     QTableWidgetItem* item = nullptr;
 
     item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->ID)));
+    item->setData(Qt::UserRole, _int);
     tabella->setItem(tabella->rowCount()-1, 0, item);
     item = new QTableWidgetItem(QString::fromStdString(pB->nome));
+    item->setData(Qt::UserRole, _string);
     tabella->setItem(tabella->rowCount()-1, 1, item);
     item = new QTableWidgetItem((pB->disponibilita? "Si" : "No"));
     tabella->setItem(tabella->rowCount()-1, 2, item);
     item = new QTableWidgetItem(QString::fromStdString(
                                   std::to_string(pB->quantita)));
+    item->setData(Qt::UserRole, _double);
     tabella->setItem(tabella->rowCount()-1, 3, item);
     item = new QTableWidgetItem(QString::fromStdString(
                                   to_string_with_precision(pB->costo)));
+    item->setData(Qt::UserRole, _double);
     tabella->setItem(tabella->rowCount()-1, 4, item);
     item = new QTableWidgetItem(pB->dataAcquisto.toString("dd/MM/yyyy"));
+    item->setData(Qt::UserRole, _data);
     tabella->setItem(tabella->rowCount()-1, 5, item);
     item = new QTableWidgetItem(QString::fromStdString(
                                   to_string_with_precision(pB->capacita)));
+    item->setData(Qt::UserRole, _double);
     tabella->setItem(tabella->rowCount()-1, 6, item);
     item = new QTableWidgetItem(QString::fromStdString(
                                   to_string_with_precision(pB->prezzo)));
+    item->setData(Qt::UserRole, _double);
     tabella->setItem(tabella->rowCount()-1, 7, item);
     item = new QTableWidgetItem((pB->tipo ? "Lattina" : "Bottiglia"));
+    item->setData(Qt::UserRole, _string);
     tabella->setItem(tabella->rowCount()-1, 8, item);
 
     int i = tabella->rowCount()-1;
@@ -100,18 +108,23 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       QTableWidgetItem* item = nullptr;
 
       item = new QTableWidgetItem(QString::fromStdString(std::to_string(pF->ID)));
+      item->setData(Qt::UserRole, _int);
       tabella->setItem(tabella->rowCount()-1, 0, item);
       item = new QTableWidgetItem(QString::fromStdString(pF->nome));
+      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
       item = new QTableWidgetItem((pF->disponibilita? "Si" : "No"));
       tabella->setItem(tabella->rowCount()-1, 2, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     std::to_string(pF->quantita)));
+      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pF->costo)));
+      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 4, item);
       item = new QTableWidgetItem(pF->dataAcquisto.toString("dd/MM/yyyy"));
+      item->setData(Qt::UserRole, _data);
       tabella->setItem(tabella->rowCount()-1, 5, item);
       item = new QTableWidgetItem((pF->locale ? "Si" : "No"));
       tabella->setItem(tabella->rowCount()-1, 6, item);
@@ -133,18 +146,23 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       QTableWidgetItem* item = nullptr;
 
       item = new QTableWidgetItem(QString::fromStdString(std::to_string(pI->ID)));
+      item->setData(Qt::UserRole, _int);
       tabella->setItem(tabella->rowCount()-1, 0, item);
       item = new QTableWidgetItem(QString::fromStdString(pI->nome));
+      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
       item = new QTableWidgetItem((pI->disponibilita? "Si" : "No"));
       tabella->setItem(tabella->rowCount()-1, 2, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     std::to_string(pI->quantita)));
+      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pI->costo)));
+      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 4, item);
       item = new QTableWidgetItem(pI->dataAcquisto.toString("dd/MM/yyyy"));
+      item->setData(Qt::UserRole, _data);
       tabella->setItem(tabella->rowCount()-1, 5, item);
       item = new QTableWidgetItem((pI->locale ? "Si" : "No"));
       tabella->setItem(tabella->rowCount()-1, 6, item);
@@ -168,13 +186,16 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       QTableWidgetItem* item = nullptr;
 
       item = new QTableWidgetItem(QString::fromStdString(std::to_string(pP->ID)));
+      item->setData(Qt::UserRole, _int);
       tabella->setItem(tabella->rowCount()-1, 0, item);
       item = new QTableWidgetItem(QString::fromStdString(pP->nome));
+      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
       item = new QTableWidgetItem((pP->disponibilita? "Si" : "No"));
       tabella->setItem(tabella->rowCount()-1, 2, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pP->prezzo)));
+      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
       std::stringstream ingr;
       auto pIngr = pP->ingredienti;
@@ -204,17 +225,22 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       QTableWidgetItem* item = nullptr;
 
       item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->ID)));
+      item->setData(Qt::UserRole, _int);
       tabella->setItem(tabella->rowCount()-1, 0, item);
       item = new QTableWidgetItem(QString::fromStdString(pB->nome));
+      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
       item = new QTableWidgetItem((pB->disponibilita? "Si" : "No"));
       tabella->setItem(tabella->rowCount()-1, 2, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pB->prezzo)));
+      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pB->capacita)));
+      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 4, item);
       item = new QTableWidgetItem((pB->tipo? "Lattina" : "Bottiglia"));
+      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 5, item);
 
       int i = tabella->rowCount()-1;

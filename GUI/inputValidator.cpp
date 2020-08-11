@@ -13,25 +13,30 @@ void InputValidator::validate(QString value, QVariant valueType){
         if(intV->validate(value, i) == QValidator::Invalid)
           throw new std::domain_error("Errore: Il numero inserito"
                                       " non può essere negativo");
+        break;
       }
     case _double: {
         if(doubleV->validate(value, i) == QValidator::Invalid)
           throw new std::domain_error("Errore: Il numero inserito"
                                     " non può essere negativo");
+        break;
       }
     case _string:{
         if(value.isEmpty())
           throw new std::domain_error("Errore: La stringa non può"
                                       " essere nulla");
+        break;
         if(stringV->validate(value, i) == QValidator::Invalid)
           throw new std::domain_error("Errore: La stringa può contenere solo "
                                       "caratteri alfanumerici.");
+        break;
       }
     case _data: {
-        if(!(QDate::fromString(valueType.toString()).isValid()))
+        if(!(QDate::fromString(value,"dd/MM/yyyy").isValid()))
           throw new std::invalid_argument("Errore: La data inserita non"
                                           " rispetta il formato gg/mm/aaaa.");
+        break;
       }
-    default:{}
+    default:{ break; }
   }
 }
