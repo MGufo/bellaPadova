@@ -33,7 +33,9 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   connect(this,SIGNAL(validationError(const QString)),
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(mostraErrore(const QString)));
-  connect(this,SIGNAL(sendPacketToModel(pacchetto*)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaConsumabile(pacchetto*)));
+  //todo: aggiungere un bool a sendPacketToModel() per indicare il tipo di pacchetto (consumabile/articolo).
+  // aggiungere un "ricevitore universale" al posto di modificaConsumabile() che ricea un pacchetto e in base al valore del bool lo inoltri alla funzione corretta del controller
+  connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaConsumabile(pacchetto*, bool)));
   connect(this,SIGNAL(sendIdToModel(uint)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(uint)));
   connect(this,SIGNAL(sendIdToModel(uint)),this,SLOT(eliminaElemento(uint)));
 
@@ -156,6 +158,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(QString::fromStdString(
                                     std::to_string(pI->quantita)));
       item->setData(Qt::UserRole, _double);
+      std::cout << item->text().toStdString() << " " << item->data(Qt::UserRole).toInt() << std::endl;
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pI->costo)));
@@ -320,6 +323,7 @@ void TabellaComposita::setHeaderDimension(tipoTabella t){
 }
 
 void TabellaComposita::emitDataOnCellChanged(int x, int y){
+  bool type = false;
   if(editabile){
     try{
       validateInput(x, y);
@@ -348,49 +352,70 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
       bool _t = (tabella->item(x,8)->text() == "Lattina" ? true : false);
 
       p = new pacchettoBevanda(_ID,_n,_d,_p,_q,_c,_da,_cap,_t);
+      type = true;
     }
     else if(objectName()=="tabIngredientiInventario"){
-      string tipologiaElemento = tabella->item(x,7)->data(Qt::UserRole).toString().toStdString();
+      string tipologiaElemento =
+          tabella->item(x,7)->data(Qt::UserRole).toString().toStdString();
       if(tipologiaElemento == "ingrediente"){
-          uint _ID = tabella->item(x,0)->text().toInt();
-          string _n = tabella->item(x,1)->text().toStdString();
-          bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
-          uint _q = tabella->item(x,3)->text().toInt();
-          double _c = tabella->item(x,4)->text().toDouble();
-          //dataAcquisto
-          //recupero giorno, mese e anno tra i separatori
-          string da = tabella->item(x,5)->text().toStdString();
-          int d = std::stoi(da.substr(0,1));
-          int m = std::stoi(da.substr(3,4));
-          int y = std::stoi(da.substr(6,9));
-          QDate _da(y,m,d);
-          bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
+        uint _ID = tabella->item(x,0)->text().toInt();
+        string _n = tabella->item(x,1)->text().toStdString();
+        bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+        uint _q = tabella->item(x,3)->text().toInt();
+        double _c = tabella->item(x,4)->text().toDouble();
+        //dataAcquisto
+        //recupero giorno, mese e anno tra i separatori
+        string da = tabella->item(x,5)->text().toStdString();
+        int d = std::stoi(da.substr(0,1));
+        int m = std::stoi(da.substr(3,4));
+        int y = std::stoi(da.substr(6,9));
+        QDate _da(y,m,d);
+        bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
 
-          p = new pacchettoIngrediente(_ID,_n,_d,_q,_c,_da,_l);
+        p = new pacchettoIngrediente(_ID,_n,_d,_q,_c,_da,_l);
+        type = true;
       }
       else{
-          uint _ID = tabella->item(x,0)->text().toInt();
-          string _n = tabella->item(x,1)->text().toStdString();
-          bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
-          uint _q = tabella->item(x,3)->text().toInt();
-          double _c = tabella->item(x,4)->text().toDouble();
-          //dataAcquisto
-          //recupero giorno, mese e anno tra i separatori
-          string da = tabella->item(x,5)->text().toStdString();
-          int d = std::stoi(da.substr(0,1));
-          int m = std::stoi(da.substr(3,4));
-          int y = std::stoi(da.substr(6,9));
-          QDate _da(y,m,d);
-          bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
-          string _t = tabella->item(x,7)->text().toStdString();
+        uint _ID = tabella->item(x,0)->text().toInt();
+        string _n = tabella->item(x,1)->text().toStdString();
+        bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+        uint _q = tabella->item(x,3)->text().toInt();
+        double _c = tabella->item(x,4)->text().toDouble();
+        //dataAcquisto
+        //recupero giorno, mese e anno tra i separatori
+        string da = tabella->item(x,5)->text().toStdString();
+        int d = std::stoi(da.substr(0,1));
+        int m = std::stoi(da.substr(3,4));
+        int y = std::stoi(da.substr(6,9));
+        QDate _da(y,m,d);
+        bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
+        string _t = tabella->item(x,7)->text().toStdString();
 
-          p = new pacchettoFarina(_ID,_n,_d,_q,_c,_da,_l,_t);
+        p = new pacchettoFarina(_ID,_n,_d,_q,_c,_da,_l,_t);
       }
     }
-    emit sendPacketToModel(p);
+    else if(objectName() == "tabPizzeMenu"){
+//      uint _ID = tabella->item(x,0)->text().toInt();
+//      string _n = tabella->item(x,1)->text().toStdString();
+//      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+//      double _p = tabella->item(x,3)->text().toDouble();
+//      // TODO: Ragionare su come fare gli ingredienti della pizza
+//      p = new pacchettoPizza(_ID,_n,_d,_p,_q,_c,_da,_cap,_t);
+
+    }
+    else if(objectName() == "tabBevandeMenu"){
+      uint _ID = tabella->item(x,0)->text().toInt();
+      string _n = tabella->item(x,1)->text().toStdString();
+      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+      double _p = tabella->item(x,3)->text().toDouble();
+      float _cap = tabella->item(x,6)->text().toFloat();
+      bool _t = (tabella->item(x,8)->text() == "Lattina" ? true : false);
+
+      p = new pacchettoBevanda(_ID,_n,_d,_p,0,0,QDate(),_cap,_t);
+    }
+    emit sendPacketToModel(p, type);
   }
 }
-
 void TabellaComposita::eliminaElemento(uint id){
     editabile = false;
     for(int i=0 ; i<tabella->rowCount() ; i++){
@@ -415,5 +440,7 @@ void TabellaComposita::validateInput(int row, int col){
 }
 
 void TabellaComposita::setDefaultValue(int row, int col){
+  editabile = false;
   tabella->item(row, col)->setText("");
+  editabile = true;
 }

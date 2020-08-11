@@ -29,7 +29,8 @@ public:
   void setHeaderDimension(tipoTabella);
 
 signals:
-  void sendPacketToModel(pacchetto*);
+  //0: articolo; 1:consumabile
+  void sendPacketToModel(pacchetto*, bool);
   void sendIdToModel(uint);
   void validationError(const QString);
 

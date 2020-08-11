@@ -38,9 +38,10 @@ signals:
   void mostraErrore(const QString&);
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
-  void modificaConsumabile(pacchetto*);
+  void modificaConsumabile(pacchetto*, bool);
   void eliminaConsumabile(uint);
   void creaNuovoArticolo(pacchetto*);
+  void eliminaArticolo(uint);
   //true = pizza
   //false = bevanda
   void visualizzaElementiInWizard(bool) const;
