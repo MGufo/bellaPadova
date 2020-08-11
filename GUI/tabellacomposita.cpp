@@ -35,7 +35,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
           SLOT(mostraErrore(const QString)));
   //todo: aggiungere un bool a sendPacketToModel() per indicare il tipo di pacchetto (consumabile/articolo).
   // aggiungere un "ricevitore universale" al posto di modificaConsumabile() che ricea un pacchetto e in base al valore del bool lo inoltri alla funzione corretta del controller
-  connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaConsumabile(pacchetto*, bool)));
+  connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaRisorsa(pacchetto*, bool)));
   connect(this,SIGNAL(sendIdToModel(uint)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(uint)));
   connect(this,SIGNAL(sendIdToModel(uint)),this,SLOT(eliminaElemento(uint)));
 
@@ -189,7 +189,6 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(QString::fromStdString(
                                     std::to_string(pI->quantita)));
       item->setData(Qt::UserRole, _double);
-      std::cout << item->text().toStdString() << " " << item->data(Qt::UserRole).toInt() << std::endl;
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pI->costo)));

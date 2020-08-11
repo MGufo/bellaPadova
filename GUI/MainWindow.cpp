@@ -73,7 +73,7 @@ void MainWindow::creaNuovoConsumabile(pacchetto* pC){
   controller->creaNuovoConsumabile(pC);
 }
 
-void MainWindow::modificaConsumabile(pacchetto* p, bool b){
+void MainWindow::modificaRisorsa(pacchetto* p, bool b){
   if(b) controller->modificaConsumabile(p);
   else  controller->modificaArticolo(p);
 }
