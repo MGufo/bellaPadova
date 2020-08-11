@@ -497,7 +497,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
       double _p = tabella->item(x,3)->text().toDouble();
       p = new pacchettoPizza(_ID,_n,_d,_p);
       QTableWidgetItem* tmp = tabella->item(x,y);
-      for(int i = 1; i< tmp->data(1001).toInt(); ++i){
+      for(int i = 1; i<=tmp->data(1001).toInt(); ++i){
         (dynamic_cast<pacchettoPizza*>(p))->
             ingredienti[tmp->data(1001+i).toInt()]="";
       }
