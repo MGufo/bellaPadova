@@ -91,18 +91,22 @@ void Controller::modificaConsumabile(pacchetto * pC){
 }
 
 void Controller::modificaArticolo(pacchetto* p){
-//  Articolo* art = nullptr;
-//  if(dynamic_cast<pacchettoPizza*>(p)){
-//    pacchettoPizza pA = dynamic_cast<pacchettoPizza*>(p);
-//    art = new Pizza();
-//  }
-//  else {
-//    pacchettoBevanda pB = dynamic_cast<pacchettoBevanda*>(p);
-//    if(pB->tipo == true)
-//      art = new Lattina();
-//    else
-//      art = new Bottiglia();
-//  }
+  Articolo* art = nullptr;
+  if(dynamic_cast<pacchettoPizza*>(p)){
+    pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
+    art = new Pizza(pP->ID, pP->nome, pP->disponibilita, pP->prezzo);
+    auto ingr = pP->ingredienti;
+    for(auto it = ingr.cbegin(); it != ingr.cend(); ++it){
+      Risorsa* temp = modello->trovaRisorsa(pP->ID);
+    }
+  }
+  else {
+    pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
+    if(pB->tipo == true)
+      art = new Lattina();
+    else
+      art = new Bottiglia();
+  }
 }
 
 void Controller::eliminaConsumabile(uint id){
