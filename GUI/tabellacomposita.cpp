@@ -242,9 +242,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
                                     to_string_with_precision(pP->prezzo)));
       item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
-      //TODO: modifico visualizzazione degli ingredienti
-      //inserisco ogni ingrediente in un item a se stante, in modo tale che
-      //gli posso associare l'ID con item->setData()
+      //non è possibile modificare la lista di ingredienti
       std::stringstream ingr;
       auto pIngr = pP->ingredienti;
       auto it2 = pIngr.cbegin();
@@ -255,7 +253,14 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
           ingr << ", ";
         }
       }
+      std::cout << Qt::UserRole << std::endl;
       item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
+      item->setData(1001,pIngr.size());
+      uint var = 1;
+      for(auto it = pIngr.cbegin(); it != pIngr.cend(); ++it){
+        item->setData(1001+var,(*it).first);
+        var++;
+      }
       tabella->setItem(tabella->rowCount()-1, 4, item);
 
       int i = tabella->rowCount()-1;
@@ -337,7 +342,7 @@ void TabellaComposita::rendiEditabile(bool b){
             QTableWidgetItem* item = tabella->item(i,j);
             //se item appartiene all'ultima riga di un elemento nel tabIngredienti
             //e l'elemento non è una Farina lo salta
-            if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
+            if((j==7 && objectName()=="tabIngredientiInventario" && item->text()=="") || (j == 4 && objectName()=="tabPizzeMenu"))
               continue;
             item->setFlags(item->flags() | Qt::ItemIsEditable);
         }
@@ -381,7 +386,7 @@ void TabellaComposita::rendiEditabile(bool b){
               QTableWidgetItem* item = tabella->item(i,j);
               //se item appartiene all'ultima riga di un elemento nel tabIngredienti
               //e l'elemento non è una Farina lo salta
-              if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
+              if((j==7 && objectName()=="tabIngredientiInventario" && item->text()=="") || (j == 4 && objectName()=="tabPizzeMenu"))
                 continue;
               item->setFlags(item->flags() ^ Qt::ItemIsEditable);
           }
