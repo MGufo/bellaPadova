@@ -69,8 +69,16 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
     item = new QTableWidgetItem(QString::fromStdString(pB->nome));
     item->setData(Qt::UserRole, _string);
     tabella->setItem(tabella->rowCount()-1, 1, item);
-    item = new QTableWidgetItem((pB->disponibilita? "Si" : "No"));
-    tabella->setItem(tabella->rowCount()-1, 2, item);
+
+    QCheckBox* toggle = new QCheckBox(tabella);
+    //assegno alla checkbox le proprietà di riga e colonna rispetto alla tabella
+    //in cui è inserita (necessarie per emettere il segnale cellChanged)
+    toggle->setProperty("row",tabella->rowCount()-1);
+    toggle->setProperty("column",2);
+    connect(toggle, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+    toggle->setChecked(pB->disponibilita);
+    tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
+
     item = new QTableWidgetItem(QString::fromStdString(
                                   std::to_string(pB->quantita)));
     item->setData(Qt::UserRole, _double);
@@ -96,8 +104,12 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
 
     int i = tabella->rowCount()-1;
     for(int j=0 ; j<9 ; j++){
-      QTableWidgetItem* item = tabella->item(i,j);
-      item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+        if(j==2)
+            dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+        else{
+            QTableWidgetItem* item = tabella->item(i,j);
+            item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+        }
     }
   }
   else if(objectName()=="tabIngredientiInventario"){
@@ -113,8 +125,13 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(QString::fromStdString(pF->nome));
       item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
-      item = new QTableWidgetItem((pF->disponibilita? "Si" : "No"));
-      tabella->setItem(tabella->rowCount()-1, 2, item);
+
+      QCheckBox* toggle = new QCheckBox(tabella);
+      toggle->setProperty("row",tabella->rowCount()-1);
+      toggle->setProperty("column",2);
+      connect(toggle, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+      toggle->setChecked(pF->disponibilita);
+      tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
       item = new QTableWidgetItem(QString::fromStdString(
                                     std::to_string(pF->quantita)));
       item->setData(Qt::UserRole, _double);
@@ -126,8 +143,13 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(pF->dataAcquisto.toString("dd/MM/yyyy"));
       item->setData(Qt::UserRole, _data);
       tabella->setItem(tabella->rowCount()-1, 5, item);
-      item = new QTableWidgetItem((pF->locale ? "Si" : "No"));
-      tabella->setItem(tabella->rowCount()-1, 6, item);
+
+      toggle = new QCheckBox(tabella);
+      toggle->setProperty("row",tabella->rowCount()-1);
+      toggle->setProperty("column",6);
+      connect(toggle, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+      toggle->setChecked(pF->locale);
+      tabella->setCellWidget(tabella->rowCount()-1, 6, toggle);
       item = new QTableWidgetItem(QString::fromStdString(pF->tipologia));
       //info aggiuntiva dell'item per capire se è una farina o un ingrediente
       item->setData(Qt::UserRole, QString("farina"));
@@ -135,8 +157,12 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
 
       int i = tabella->rowCount()-1;
       for(int j=0 ; j<8 ; j++){
-        QTableWidgetItem* item = tabella->item(i,j);
-        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          if(j==2 || j==6)
+              dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+          else{
+              QTableWidgetItem* item = tabella->item(i,j);
+              item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          }
       }
     }
     else{
@@ -151,8 +177,13 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(QString::fromStdString(pI->nome));
       item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
-      item = new QTableWidgetItem((pI->disponibilita? "Si" : "No"));
-      tabella->setItem(tabella->rowCount()-1, 2, item);
+
+      QCheckBox* toggle = new QCheckBox(tabella);
+      toggle->setProperty("row",tabella->rowCount()-1);
+      toggle->setProperty("column",2);
+      connect(toggle, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+      toggle->setChecked(pI->disponibilita);
+      tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
       item = new QTableWidgetItem(QString::fromStdString(
                                     std::to_string(pI->quantita)));
       item->setData(Qt::UserRole, _double);
@@ -164,8 +195,13 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(pI->dataAcquisto.toString("dd/MM/yyyy"));
       item->setData(Qt::UserRole, _data);
       tabella->setItem(tabella->rowCount()-1, 5, item);
-      item = new QTableWidgetItem((pI->locale ? "Si" : "No"));
-      tabella->setItem(tabella->rowCount()-1, 6, item);
+
+      toggle = new QCheckBox(tabella);
+      toggle->setProperty("row",tabella->rowCount()-1);
+      toggle->setProperty("column",6);
+      connect(toggle, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+      toggle->setChecked(pI->locale);
+      tabella->setCellWidget(tabella->rowCount()-1, 6, toggle);
       item = new QTableWidgetItem(QString(""));
       //info aggiuntiva dell'item per capire se è una farina o un ingrediente
       item->setData(Qt::UserRole, QString("ingrediente"));
@@ -173,8 +209,12 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
 
       int i = tabella->rowCount()-1;
       for(int j=0 ; j<8 ; j++){
-        QTableWidgetItem* item = tabella->item(i,j);
-        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          if(j==2 || j==6)
+              dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+          else{
+              QTableWidgetItem* item = tabella->item(i,j);
+              item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          }
       }
     }
   }
@@ -191,12 +231,20 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(QString::fromStdString(pP->nome));
       item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
-      item = new QTableWidgetItem((pP->disponibilita? "Si" : "No"));
-      tabella->setItem(tabella->rowCount()-1, 2, item);
+
+      QCheckBox* toggle = new QCheckBox(tabella);
+      toggle->setProperty("row",tabella->rowCount()-1);
+      toggle->setProperty("column",2);
+      connect(toggle, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+      toggle->setChecked(pP->disponibilita);
+      tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pP->prezzo)));
       item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
+      //TODO: modifico visualizzazione degli ingredienti
+      //inserisco ogni ingrediente in un item a se stante, in modo tale che
+      //gli posso associare l'ID con item->setData()
       std::stringstream ingr;
       auto pIngr = pP->ingredienti;
       auto it2 = pIngr.cbegin();
@@ -212,8 +260,12 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
 
       int i = tabella->rowCount()-1;
       for(int j=0 ; j<5 ; j++){
-        QTableWidgetItem* item = tabella->item(i,j);
-        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          if(j==2)
+              dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+          else{
+              QTableWidgetItem* item = tabella->item(i,j);
+              item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          }
       }
     }
   }
@@ -230,8 +282,13 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
       item = new QTableWidgetItem(QString::fromStdString(pB->nome));
       item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
-      item = new QTableWidgetItem((pB->disponibilita? "Si" : "No"));
-      tabella->setItem(tabella->rowCount()-1, 2, item);
+
+      QCheckBox* toggle = new QCheckBox(tabella);
+      toggle->setProperty("row",tabella->rowCount()-1);
+      toggle->setProperty("column",2);
+      connect(toggle, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+      toggle->setChecked(pB->disponibilita);
+      tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pB->prezzo)));
       item->setData(Qt::UserRole, _double);
@@ -245,8 +302,12 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
 
       int i = tabella->rowCount()-1;
       for(int j=0 ; j<6 ; j++){
-        QTableWidgetItem* item = tabella->item(i,j);
-        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          if(j==2)
+              dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+          else{
+              QTableWidgetItem* item = tabella->item(i,j);
+              item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          }
       }
     }
   }
@@ -258,12 +319,28 @@ void TabellaComposita::rendiEditabile(bool b){
     //rendo editabile ogni riga tranne la colonna contenente gli ID
     for(int i=0; i < tabella->rowCount(); i++){
       for(int j=1 ; j<tabella->columnCount() ; j++){
-        QTableWidgetItem* item = tabella->item(i,j);
-        //se item appartiene all'ultima riga di un elemento nel tabIngredienti
-        //e l'elemento non è una Farina lo salta
-        if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
-          continue;
-        item->setFlags(item->flags() | Qt::ItemIsEditable);
+        //casi in cui ci sono dei widget nelle celle
+        if((objectName() == "tabBevandeInventario") && (j == 2)){
+            dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(true);
+        }
+        else if((objectName() == "tabIngredientiInventario") && ((j == 2)||(j == 6))){
+            dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(true);
+        }
+        else if((objectName() == "tabPizzeMenu") && (j == 2)){
+            dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(true);
+        }
+        else if((objectName() == "tabBevandeMenu") && (j == 2)){
+            dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(true);
+        }
+        else{
+            //casi in cui ci sono item nelle celle
+            QTableWidgetItem* item = tabella->item(i,j);
+            //se item appartiene all'ultima riga di un elemento nel tabIngredienti
+            //e l'elemento non è una Farina lo salta
+            if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
+              continue;
+            item->setFlags(item->flags() | Qt::ItemIsEditable);
+        }
       }
     }
     //aggiungo colonna con pulsanti per eliminare un elemento
@@ -286,12 +363,28 @@ void TabellaComposita::rendiEditabile(bool b){
     //rendo non editabile ogni riga
     for(int i=0; i < tabella->rowCount(); i++){
       for(int j=1 ; j<tabella->columnCount()-1 ; j++){
-        QTableWidgetItem* item = tabella->item(i,j);
-        //se item appartiene all'ultima riga di un elemento nel tabIngredienti
-        //e l'elemento non è una Farina lo salta
-        if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
-          continue;
-        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          //casi in cui ci sono dei widget nelle celle
+          if((objectName() == "tabBevandeInventario") && (j == 2)){
+              dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+          }
+          else if((objectName() == "tabIngredientiInventario") && ((j == 2)||(j == 6))){
+              dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+          }
+          else if((objectName() == "tabPizzeMenu") && (j == 2)){
+              dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+          }
+          else if((objectName() == "tabBevandeMenu") && (j == 2)){
+              dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+          }
+          else{
+              //casi in cui ci sono item nelle celle
+              QTableWidgetItem* item = tabella->item(i,j);
+              //se item appartiene all'ultima riga di un elemento nel tabIngredienti
+              //e l'elemento non è una Farina lo salta
+              if(j==7 && objectName()=="tabIngredientiInventario" && item->text()=="")
+                continue;
+              item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          }
       }
     }
     //rimuovo colonna con pulsanti per eliminare un elemento
@@ -333,7 +426,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
     if(objectName()=="tabBevandeInventario"){
       uint _ID = tabella->item(x,0)->text().toInt();
       string _n = tabella->item(x,1)->text().toStdString();
-      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+      bool _d = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,2))->isChecked() ? true : false);
       uint _q = tabella->item(x,3)->text().toInt();
       double _c = tabella->item(x,4)->text().toDouble();
       //dataAcquisto
@@ -354,7 +447,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
       if(tipologiaElemento == "ingrediente"){
           uint _ID = tabella->item(x,0)->text().toInt();
           string _n = tabella->item(x,1)->text().toStdString();
-          bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+          bool _d = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,2))->isChecked() ? true : false);
           uint _q = tabella->item(x,3)->text().toInt();
           double _c = tabella->item(x,4)->text().toDouble();
           //dataAcquisto
@@ -364,14 +457,14 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
           int m = std::stoi(da.substr(3,4));
           int y = std::stoi(da.substr(6,9));
           QDate _da(y,m,d);
-          bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
+          bool _l = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,6))->isChecked() ? true : false);
 
           p = new pacchettoIngrediente(_ID,_n,_d,_q,_c,_da,_l);
       }
       else{
           uint _ID = tabella->item(x,0)->text().toInt();
           string _n = tabella->item(x,1)->text().toStdString();
-          bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+          bool _d = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,2))->isChecked() ? true : false);
           uint _q = tabella->item(x,3)->text().toInt();
           double _c = tabella->item(x,4)->text().toDouble();
           //dataAcquisto
@@ -381,7 +474,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
           int m = std::stoi(da.substr(3,4));
           int y = std::stoi(da.substr(6,9));
           QDate _da(y,m,d);
-          bool _l = (tabella->item(x,6)->text() == "Si" ? true : false);
+          bool _l = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,6))->isChecked() ? true : false);
           string _t = tabella->item(x,7)->text().toStdString();
 
           p = new pacchettoFarina(_ID,_n,_d,_q,_c,_da,_l,_t);
@@ -398,6 +491,14 @@ void TabellaComposita::eliminaElemento(uint id){
         if(currentId == id) tabella->removeRow(i);
     }
     editabile = true;
+}
+
+void TabellaComposita::checkBoxToggled(bool){
+    QObject *cb = sender();
+    int row = cb->property("row").toInt();
+    int column = cb->property("column").toInt();
+
+    emit tabella->cellChanged(row,column);
 }
 
 void TabellaComposita::setStyleTabella(){
