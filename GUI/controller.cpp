@@ -90,6 +90,21 @@ void Controller::modificaConsumabile(pacchetto * pC){
   //vista->visualizzaInventario();
 }
 
+void Controller::modificaArticolo(pacchetto* p){
+//  Articolo* art = nullptr;
+//  if(dynamic_cast<pacchettoPizza*>(p)){
+//    pacchettoPizza pA = dynamic_cast<pacchettoPizza*>(p);
+//    art = new Pizza();
+//  }
+//  else {
+//    pacchettoBevanda pB = dynamic_cast<pacchettoBevanda*>(p);
+//    if(pB->tipo == true)
+//      art = new Lattina();
+//    else
+//      art = new Bottiglia();
+//  }
+}
+
 void Controller::eliminaConsumabile(uint id){
   Risorsa* daEliminare = modello->trovaRisorsa(id);
   modello->rimuoviConsumabile(dynamic_cast<Consumabile*>(daEliminare));
