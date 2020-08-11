@@ -11,14 +11,14 @@ void InputValidator::validate(QString value, QVariant valueType){
   switch(valueType.toInt()){
     case _int:{
         if(intV->validate(value, i) == QValidator::Invalid)
-          throw new std::domain_error("Errore: Il numero inserito"
-                                      " non può essere negativo");
+          throw new std::domain_error("Errore: Il numero inserito dev'essere "
+                                      " un intero positivo");
         break;
       }
     case _double: {
         if(doubleV->validate(value, i) == QValidator::Invalid)
-          throw new std::domain_error("Errore: Il numero inserito"
-                                    " non può essere negativo");
+          throw new std::domain_error("Errore: Il numero inserito dev'essere "
+                                    " un decimale positivo");
         break;
       }
     case _string:{
