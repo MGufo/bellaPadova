@@ -89,12 +89,13 @@ void Controller::modificaConsumabile(pacchetto * pC){
   //non serve aggiornamento della vista
   //vista->visualizzaInventario();
 }
-
+// TODO: Terminare
 void Controller::modificaArticolo(pacchetto* p){
-  Articolo* art = nullptr;
+  Articolo* nuovoArticolo = nullptr;
   if(dynamic_cast<pacchettoPizza*>(p)){
     pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
-    art = new Pizza(pP->ID, pP->nome, pP->disponibilita, pP->prezzo);
+    nuovoArticolo =
+        new Pizza(++idRisorse, pP->nome, pP->disponibilita, pP->prezzo);
     auto ingr = pP->ingredienti;
     for(auto it = ingr.cbegin(); it != ingr.cend(); ++it){
       Risorsa* temp = modello->trovaRisorsa(pP->ID);
@@ -103,9 +104,9 @@ void Controller::modificaArticolo(pacchetto* p){
   else {
     pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
     if(pB->tipo == true)
-      art = new Lattina();
+      nuovoArticolo = new Lattina();
     else
-      art = new Bottiglia();
+      nuovoArticolo = new Bottiglia();
   }
 }
 
