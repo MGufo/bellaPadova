@@ -486,21 +486,24 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
       }
     }
     else if(objectName() == "tabPizzeMenu"){
-//      uint _ID = tabella->item(x,0)->text().toInt();
-//      string _n = tabella->item(x,1)->text().toStdString();
-//      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
-//      double _p = tabella->item(x,3)->text().toDouble();
-//      // TODO: Ragionare su come fare gli ingredienti della pizza
-//      p = new pacchettoPizza(_ID,_n,_d,_p,_q,_c,_da,_cap,_t);
-
+      uint _ID = tabella->item(x,0)->text().toInt();
+      string _n = tabella->item(x,1)->text().toStdString();
+      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+      double _p = tabella->item(x,3)->text().toDouble();
+      p = new pacchettoPizza(_ID,_n,_d,_p);
+      QTableWidgetItem* tmp = tabella->item(x,y);
+      for(int i = 1; i< tmp->data(1001).toInt(); ++i){
+        (dynamic_cast<pacchettoPizza*>(p))->
+            ingredienti[tmp->data(1001+i).toInt()]="";
+      }
     }
     else if(objectName() == "tabBevandeMenu"){
       uint _ID = tabella->item(x,0)->text().toInt();
       string _n = tabella->item(x,1)->text().toStdString();
       bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
       double _p = tabella->item(x,3)->text().toDouble();
-      float _cap = tabella->item(x,6)->text().toFloat();
-      bool _t = (tabella->item(x,8)->text() == "Lattina" ? true : false);
+      float _cap = tabella->item(x,4)->text().toFloat();
+      bool _t = (tabella->item(x,5)->text() == "Lattina" ? true : false);
 
       p = new pacchettoBevanda(_ID,_n,_d,_p,0,0,QDate(),_cap,_t);
     }
