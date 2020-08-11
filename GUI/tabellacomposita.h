@@ -9,6 +9,7 @@
 #include <QTableWidget>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QCheckBox>
 
 #include "inputValidator.h"
 #include "pacchetti.h"
@@ -37,6 +38,7 @@ signals:
 private slots:
   void emitDataOnCellChanged(int,int);
   void eliminaElemento(uint);
+  void checkBoxToggled(bool);
 
 private:
   bool editabile;

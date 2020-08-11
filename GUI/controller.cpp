@@ -147,9 +147,13 @@ void Controller::creaNuovoArticolo(pacchetto* pA){
       }
       pPizza->aggiungiIngredienti(ingrePizza);
     }
-    modello->inserisciArticolo(pArticolo);
-    risorseSalvate = false;
-    vista->aggiornaMenu(pA);
+    try{
+        modello->inserisciArticolo(pArticolo);
+        risorseSalvate = false;
+        vista->aggiornaMenu(pA);
+    } catch (std::domain_error* ecc){
+        vista->mostraErrore(ecc->what());
+    }
 }
 
 QList<pacchetto*>* Controller::recuperaInventario() const{
