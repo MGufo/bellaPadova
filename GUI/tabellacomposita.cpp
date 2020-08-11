@@ -256,7 +256,6 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
           ingr << ", ";
         }
       }
-      std::cout << Qt::UserRole << std::endl;
       item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
       item->setData(1001,pIngr.size());
       uint var = 1;
@@ -492,7 +491,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
       }
     }
     else if(objectName() == "tabPizzeMenu"){
-      uint _ID = tabella->item(x,0)->text().toInt();
+      uint _ID = 0;
       string _n = tabella->item(x,1)->text().toStdString();
       bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
       double _p = tabella->item(x,3)->text().toDouble();
