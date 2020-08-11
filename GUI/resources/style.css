@@ -12,10 +12,6 @@ QAbstractButton {
     color: #000000;
 }
 
-QCheckBox::indicator:disabled {
-    color: black;
-}
-
 QDateEdit {
     background-color: #FFFFFF;
     font-size: 20px;

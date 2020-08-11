@@ -493,7 +493,9 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
     else if(objectName() == "tabPizzeMenu"){
       uint _ID = 0;
       string _n = tabella->item(x,1)->text().toStdString();
-      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+
+      //TODO : se unchecko la checkbox il programma crasha -> risolvere
+      bool _d = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,2))->isChecked() ? true : false);
       double _p = tabella->item(x,3)->text().toDouble();
       p = new pacchettoPizza(_ID,_n,_d,_p);
       QTableWidgetItem* tmp = tabella->item(x,y);
