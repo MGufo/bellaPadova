@@ -29,4 +29,12 @@ ComandaGUI::ComandaGUI(QWidget *parent) : QWidget(parent){
     completata->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     wrapperComanda->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    connect(wrapperComanda, SIGNAL(pressed()), this, SLOT(showDetails()));
+}
+
+ComandaGUI::showDetails(){
+  if(dettagli)
+    delete dettagli;
+  dettagli = new paginaComanda();
+  dettagli->show;
 }

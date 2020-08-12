@@ -7,6 +7,8 @@
 #include <QLabel>
 #include <QHBoxLayout>
 
+#include "paginaComanda.h"
+
 class ComandaGUI : public QWidget{
   Q_OBJECT
 public:
@@ -15,9 +17,11 @@ public:
 signals:
 
 public slots:
+  showDetails();
 
 private:
     QVBoxLayout* layoutComanda;
+    paginaComanda* dettagli;
 };
 
 #endif // COMANDAGUI_H
