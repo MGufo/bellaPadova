@@ -13,25 +13,25 @@
 class PaginaComanda : public QWidget {
   Q_OBJECT
 
-  public:
-    PaginaComanda(QWidget* parent = nullptr);
-    ~PaginaComanda();
+public:
+  PaginaComanda(QWidget* parent = nullptr);
+  ~PaginaComanda();
 
-  private:
-    QVBoxLayout* layoutPaginaComande;
-    QHBoxLayout* layoutContenuto;
-    QHBoxLayout* layoutPulsanti;
-    TabellaComposita* Pizze;
-    TabellaComposita* Bevande;
-    QWidget* wrapperInfo;
-    QWidget* wrapperContenuto;
-    QWidget* wrapperPulsanti;
-    QPushButton* newArticolo;
-    QPushButton* modificaDati;
+private:
+  QVBoxLayout* layoutPaginaComande;
+  QHBoxLayout* layoutContenuto;
+  QHBoxLayout* layoutPulsanti;
+  TabellaComposita* Pizze;
+  TabellaComposita* Bevande;
+  QWidget* wrapperInfo;
+  QWidget* wrapperContenuto;
+  QWidget* wrapperPulsanti;
+  QPushButton* newArticolo;
+  QPushButton* modificaDati;
 
-    void inizializzaPizze(QWidget*);
-    void inizializzaBevande(QWidget*);
-    void inizializzaWrapperInfo(QWidget*);
+  void inizializzaPizze(QWidget*);
+  void inizializzaBevande(QWidget*);
+  void inizializzaWrapperInfo(QWidget*);
 };
 
 #endif // PAGINACOMANDA_H
