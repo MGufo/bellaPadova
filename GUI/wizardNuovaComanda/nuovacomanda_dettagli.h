@@ -7,7 +7,7 @@
 class NuovaComanda_dettagli : public QWizardPage
 {
 public:
-    nuovaComanda_dettagli();
+    NuovaComanda_dettagli();
 };
 
 #endif // NUOVACOMANDA_DETTAGLI_H
