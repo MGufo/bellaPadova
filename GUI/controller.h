@@ -25,10 +25,10 @@ class Controller : public QObject {
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
   void modificaConsumabile(pacchetto*);
-  void modificaArticolo(pacchetto*);
   void eliminaConsumabile(uint);
-  void eliminaArticolo(uint);
   void creaNuovoArticolo(pacchetto*);
+  void modificaArticolo(pacchetto*);
+  void eliminaArticolo(uint);
   QList<pacchetto*>* recuperaInventario() const;
   QList<pacchetto*>* recuperaMenu() const;
   QList<pacchetto*>* recuperaComande() const;
