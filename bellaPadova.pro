@@ -42,7 +42,81 @@ SOURCES += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
     GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.cpp \
     GUI/pushbuttonwithid.cpp \
-    GUI/inputValidator.cpp
+    GUI/inputValidator.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.cpp \
+    GUI/wizardNuovoArticolo/nuovoarticolo_dettagli.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_end.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_intro.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_pizza.cpp \
+    GUI/wizardNuovoArticolo/wizard_nuovoArticolo.cpp \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.cpp \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.cpp \
+    GUI/wizardNuovoConsumabile/wizard_nuovoconsumabile.cpp \
+    GUI/analogclock.cpp \
+    GUI/comandagui.cpp \
+    GUI/comande.cpp \
+    GUI/contabilizzazione.cpp \
+    GUI/controller.cpp \
+    GUI/dettaglioComanda.cpp \
+    GUI/digitalclock.cpp \
+    GUI/header.cpp \
+    GUI/inputValidator.cpp \
+    GUI/inventario.cpp \
+    GUI/MainWindow.cpp \
+    GUI/menu.cpp \
+    GUI/pushbuttonwithid.cpp \
+    GUI/tabellacomposita.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.cpp \
+    GUI/wizardNuovoArticolo/nuovoarticolo_dettagli.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_end.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_intro.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_pizza.cpp \
+    GUI/wizardNuovoArticolo/wizard_nuovoArticolo.cpp \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.cpp \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.cpp \
+    GUI/wizardNuovoConsumabile/wizard_nuovoconsumabile.cpp \
+    GUI/analogclock.cpp \
+    GUI/comandagui.cpp \
+    GUI/comande.cpp \
+    GUI/contabilizzazione.cpp \
+    GUI/controller.cpp \
+    GUI/dettaglioComanda.cpp \
+    GUI/digitalclock.cpp \
+    GUI/header.cpp \
+    GUI/inputValidator.cpp \
+    GUI/inventario.cpp \
+    GUI/MainWindow.cpp \
+    GUI/menu.cpp \
+    GUI/pushbuttonwithid.cpp \
+    GUI/tabellacomposita.cpp \
+    GUI/wizardNuovaComanda/wizard_nuovaComanda.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.cpp \
+    GUI/wizardNuovoArticolo/nuovoarticolo_dettagli.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_end.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_intro.cpp \
+    GUI/wizardNuovoArticolo/nuovoArticolo_pizza.cpp \
+    GUI/wizardNuovoArticolo/wizard_nuovoArticolo.cpp \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.cpp \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.cpp \
+    GUI/wizardNuovoConsumabile/wizard_nuovoconsumabile.cpp \
+    GUI/analogclock.cpp \
+    GUI/comandagui.cpp \
+    GUI/comande.cpp \
+    GUI/contabilizzazione.cpp \
+    GUI/controller.cpp \
+    GUI/dettaglioComanda.cpp \
+    GUI/digitalclock.cpp \
+    GUI/header.cpp \
+    GUI/inputValidator.cpp \
+    GUI/inventario.cpp \
+    GUI/MainWindow.cpp \
+    GUI/menu.cpp \
+    GUI/pushbuttonwithid.cpp \
+    GUI/tabellacomposita.cpp \
+    GUI/wizardNuovaComanda/nuovacomanda_dettagli.cpp
     #test/testgui.cpp
 
 HEADERS += \
@@ -84,7 +158,81 @@ HEADERS += \
     GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.h \
     GUI/pacchetti.h \
     GUI/pushbuttonwithid.h \
-    GUI/inputValidator.h
+    GUI/inputValidator.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_end.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_intro.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_pizza.h \
+    GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.h \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.h \
+    GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h \
+    GUI/comandagui.h \
+    GUI/comande.h \
+    GUI/contabilizzazione.h \
+    GUI/controller.h \
+    GUI/dettaglioComanda.h \
+    GUI/digitalclock.h \
+    GUI/header.h \
+    GUI/inputValidator.h \
+    GUI/inventario.h \
+    GUI/MainWindow.h \
+    GUI/menu.h \
+    GUI/pacchetti.h \
+    GUI/pushbuttonwithid.h \
+    GUI/tabellacomposita.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_end.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_intro.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_pizza.h \
+    GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.h \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.h \
+    GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h \
+    GUI/comandagui.h \
+    GUI/comande.h \
+    GUI/contabilizzazione.h \
+    GUI/controller.h \
+    GUI/dettaglioComanda.h \
+    GUI/digitalclock.h \
+    GUI/header.h \
+    GUI/inputValidator.h \
+    GUI/inventario.h \
+    GUI/MainWindow.h \
+    GUI/menu.h \
+    GUI/pacchetti.h \
+    GUI/pushbuttonwithid.h \
+    GUI/tabellacomposita.h \
+    GUI/wizardNuovaComanda/wizard_nuovaComanda.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_end.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_intro.h \
+    GUI/wizardNuovoArticolo/nuovoArticolo_pizza.h \
+    GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.h \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_end.h \
+    GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.h \
+    GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h \
+    GUI/comandagui.h \
+    GUI/comande.h \
+    GUI/contabilizzazione.h \
+    GUI/controller.h \
+    GUI/dettaglioComanda.h \
+    GUI/digitalclock.h \
+    GUI/header.h \
+    GUI/inputValidator.h \
+    GUI/inventario.h \
+    GUI/MainWindow.h \
+    GUI/menu.h \
+    GUI/pacchetti.h \
+    GUI/pushbuttonwithid.h \
+    GUI/tabellacomposita.h \
+    GUI/wizardNuovaComanda/nuovacomanda_dettagli.h
     #test/testgui.h \
 
 RESOURCES += \

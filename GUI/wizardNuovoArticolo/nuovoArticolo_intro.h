@@ -21,4 +21,4 @@ private:
   QRadioButton* optionBevanda;
 };
 
-#endif // WIZARD_INTRO_H
+#endif // NUOVOARTICOLO_INTRO_H
