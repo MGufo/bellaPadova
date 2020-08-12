@@ -119,7 +119,9 @@ void Controller::eliminaConsumabile(uint id){
 }
 
 void Controller::eliminaArticolo(uint){
-
+  Risorsa* daEliminare = modello->trovaRisorsa(id);
+  modello->rimuoviArticolo(dynamic_cast<Consumabile*>(daEliminare));
+  risorseSalvate = false;
 }
 
 void Controller::creaNuovoArticolo(pacchetto* pA){
