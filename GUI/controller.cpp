@@ -118,7 +118,7 @@ void Controller::eliminaConsumabile(uint id){
   //vista->visualizzaInventario();
 }
 
-void Controller::eliminaArticolo(uint){
+void Controller::eliminaArticolo(uint id){
   Risorsa* daEliminare = modello->trovaRisorsa(id);
   modello->rimuoviArticolo(dynamic_cast<Articolo*>(daEliminare));
   risorseSalvate = false;
