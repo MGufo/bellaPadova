@@ -33,8 +33,6 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   connect(this,SIGNAL(validationError(const QString)),
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(mostraErrore(const QString)));
-  //todo: aggiungere un bool a sendPacketToModel() per indicare il tipo di pacchetto (consumabile/articolo).
-  // aggiungere un "ricevitore universale" al posto di modificaConsumabile() che ricea un pacchetto e in base al valore del bool lo inoltri alla funzione corretta del controller
   connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaRisorsa(pacchetto*, bool)));
   connect(this,SIGNAL(sendIdToModel(uint)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(uint)));
   connect(this,SIGNAL(sendIdToModel(uint)),this,SLOT(eliminaElemento(uint)));
