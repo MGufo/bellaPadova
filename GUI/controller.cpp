@@ -45,6 +45,8 @@ void Controller::creaNuovoConsumabile(pacchetto* pC){
   vista->aggiornaInventario(pC);
 }
 
+
+
 void Controller::modificaConsumabile(pacchetto * pC){
   Consumabile* pConsumabile = nullptr;
   if(dynamic_cast<pacchettoBevanda*>(pC)){
@@ -115,6 +117,18 @@ void Controller::eliminaArticolo(uint id){
   Risorsa* daEliminare = modello->trovaRisorsa(id);
   modello->rimuoviArticolo(dynamic_cast<Articolo*>(daEliminare));
   risorseSalvate = false;
+}
+
+void Controller::creaNuovaComanda(pacchetto *pCom){
+
+}
+
+void Controller::modificaComanda(pacchetto *pCom){
+
+}
+
+void Controller::eliminaComanda(uint id){
+
 }
 
 void Controller::creaNuovoArticolo(pacchetto* pA){
