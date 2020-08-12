@@ -86,8 +86,9 @@ void MainWindow::creaNuovoArticolo(pacchetto* p){
   controller->creaNuovoArticolo(p);
 }
 
-void MainWindow::eliminaArticolo(uint id){
-  //controller->eliminaArticolo(id);
+void MainWindow::eliminaRisorsa(uint id, bool b){
+  if(b) controller->eliminaConsumabile(id);
+  else controller->eliminaArticolo(id);
 }
 
 void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
