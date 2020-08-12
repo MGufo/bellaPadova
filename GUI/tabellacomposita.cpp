@@ -33,9 +33,14 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   connect(this,SIGNAL(validationError(const QString)),
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(mostraErrore(const QString)));
-  connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaRisorsa(pacchetto*, bool)));
-  connect(this,SIGNAL(sendIdToModel(uint, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaRisorsa(uint, bool)));
-  connect(this,SIGNAL(sendIdToModel(uint, bool)),this,SLOT(eliminaElemento(uint, bool)));
+  connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),
+          parentWidget()->parentWidget()->parentWidget(),
+          SLOT(modificaRisorsa(pacchetto*, bool)));
+  connect(this,SIGNAL(sendIdToModel(uint, bool)),
+          parentWidget()->parentWidget()->parentWidget(),
+          SLOT(eliminaRisorsa(uint, bool)));
+  connect(this,SIGNAL(sendIdToModel(uint, bool)),
+          this,SLOT(eliminaElemento(uint, bool)));
 
   // Applicazione stile widget
   setStyleTabella();
@@ -491,7 +496,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
       }
     }
     else if(objectName() == "tabPizzeMenu"){
-      uint _ID = 0;
+      uint _ID = tabella->item(x,0)->text().toInt();
       string _n = tabella->item(x,1)->text().toStdString();
 
       //TODO : se unchecko la checkbox il programma crasha -> risolvere

@@ -91,23 +91,15 @@ void Controller::modificaConsumabile(pacchetto * pC){
 }
 // TODO: Terminare
 void Controller::modificaArticolo(pacchetto* p){
-//  Articolo* nuovoArticolo = nullptr;
-//  if(dynamic_cast<pacchettoPizza*>(p)){
-//    pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
-//    nuovoArticolo =
-//        new Pizza(++idRisorse, pP->nome, pP->disponibilita, pP->prezzo);
-//    auto ingr = pP->ingredienti;
-//    for(auto it = ingr.cbegin(); it != ingr.cend(); ++it){
-//    }
-//  }
-//  else {
-//    pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
-//    if(pB->tipo == true)
-//      nuovoArticolo = new Lattina(++idRisorse, pB->nome, pB->);
-//    else
-//      nuovoArticolo = new Bottiglia();
-//  }
-//  Risorsa* tmp = modello->trovaRisorsa(p->ID);
+  Articolo* modificato= nullptr;
+  if(dynamic_cast<pacchettoPizza*>(p)){
+    pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
+    modificato = new Pizza(pP->ID, pP->nome, pP->disponibilita, pP->prezzo);
+  }
+  // le bevande sono modificabili solo nell'inventario
+  Articolo* daModificare = dynamic_cast<Articolo*>(modello->trovaRisorsa(p->ID));
+  modello->modificaArticolo(daModificare, modificato);
+  risorseSalvate = false;
 }
 
 void Controller::eliminaConsumabile(uint id){

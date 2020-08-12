@@ -114,8 +114,10 @@ void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
 }
 
 void GestoreRisorse::modificaArticolo(Articolo* daModificare,
-                                      const Articolo* modificato) {
-  *daModificare = *modificato;
+                                      Articolo* modificato) {
+  auto it = menu.find(daModificare);
+  if(it.isValid()) (*it)->modifica(modificato);
+  //*daModificare = *modificato;
   const Lista<Consumabile*>* lista = daModificare->getComposizione();
   for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
     if (!controlloConsumabile(&inventario, *it))

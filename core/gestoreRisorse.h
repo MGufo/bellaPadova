@@ -51,7 +51,7 @@ class GestoreRisorse {
    */
   void inserisciArticolo(Articolo *);
 
-  void modificaArticolo(Articolo *, const Articolo *);
+  void modificaArticolo(Articolo *, Articolo *);
   /**
    * @brief: Rimuove un articolo dalla lista di articoli (menu).
    * @param: Articolo* (oggetto da rimuovere)

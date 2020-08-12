@@ -5,10 +5,10 @@
             "Capacita": 1.5,
             "Costo": 8,
             "Data Acquisto": "lun ago 3 2020",
-            "Disponibilità": true,
+            "Disponibilità": false,
             "ID": 12,
             "Nome": "Coca Cola",
-            "Prezzo": 4.333333333333333,
+            "Prezzo": 4.666666666666666,
             "Quantita": 10,
             "tipo": "bottiglia"
         },
@@ -16,7 +16,7 @@
             "Capacita": 0.33000001311302185,
             "Costo": 6,
             "Data Acquisto": "lun ago 3 2020",
-            "Disponibilità": true,
+            "Disponibilità": false,
             "ID": 11,
             "Nome": "Fanta",
             "Prezzo": 2,
@@ -97,7 +97,7 @@
         }
     },
     "Menu": {
-        "boscaiola": {
+        "Boscaiola": {
             "Disponibilita": true,
             "Extra": 0.5,
             "ID": 10,
@@ -107,11 +107,11 @@
                 6,
                 1
             ],
-            "Nome": "boscaiola",
+            "Nome": "Boscaiola",
             "Prezzo": 4,
             "tipo": "pizza"
         },
-        "margherita": {
+        "Margherita": {
             "Disponibilita": true,
             "Extra": 0.5,
             "ID": 8,
@@ -120,11 +120,11 @@
                 4,
                 1
             ],
-            "Nome": "margherita",
+            "Nome": "Margherita",
             "Prezzo": 4,
             "tipo": "pizza"
         },
-        "marinara": {
+        "Marinara": {
             "Disponibilita": true,
             "Extra": 0.5,
             "ID": 9,
@@ -133,7 +133,7 @@
                 4,
                 2
             ],
-            "Nome": "marinara",
+            "Nome": "Marinara",
             "Prezzo": 4,
             "tipo": "pizza"
         }
