@@ -32,12 +32,13 @@ public:
 signals:
   //0: articolo; 1:consumabile
   void sendPacketToModel(pacchetto*, bool);
-  void sendIdToModel(uint);
+   //0: articolo; 1:consumabile
+  void sendIdToModel(uint, bool);
   void validationError(const QString);
 
 private slots:
   void emitDataOnCellChanged(int,int);
-  void eliminaElemento(uint);
+  void eliminaElemento(uint, bool);
   void checkBoxToggled(bool);
 
 private:

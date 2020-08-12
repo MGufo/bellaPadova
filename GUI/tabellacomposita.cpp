@@ -34,8 +34,8 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(mostraErrore(const QString)));
   connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaRisorsa(pacchetto*, bool)));
-  connect(this,SIGNAL(sendIdToModel(uint)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(uint)));
-  connect(this,SIGNAL(sendIdToModel(uint)),this,SLOT(eliminaElemento(uint)));
+  connect(this,SIGNAL(sendIdToModel(uint, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaRisorsa(uint)));
+  connect(this,SIGNAL(sendIdToModel(uint, bool)),this,SLOT(eliminaElemento(uint, bool)));
 
   // Applicazione stile widget
   setStyleTabella();
@@ -77,6 +77,7 @@ void TabellaComposita::inserisciElemento(pacchetto* p){
     toggle->setProperty("column",2);
     connect(toggle, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
     toggle->setChecked(pB->disponibilita);
+
     tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
 
     item = new QTableWidgetItem(QString::fromStdString(
@@ -333,8 +334,10 @@ void TabellaComposita::rendiEditabile(bool b){
         else if((objectName() == "tabPizzeMenu") && (j == 2)){
             dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(true);
         }
-        else if((objectName() == "tabBevandeMenu") && (j == 2)){
-            dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(true);
+        else if(objectName() == "tabBevandeMenu"){
+            //diamo solo la possibilità di eliminare le bevande dal menu, la modifica delle caratteristiche della bevanda
+            //avviene nell'inventario
+            continue;
         }
         else{
             //casi in cui ci sono item nelle celle
@@ -490,7 +493,9 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
     else if(objectName() == "tabPizzeMenu"){
       uint _ID = 0;
       string _n = tabella->item(x,1)->text().toStdString();
-      bool _d = (tabella->item(x,2)->text() == "Si" ? true : false);
+
+      //TODO : se unchecko la checkbox il programma crasha -> risolvere
+      bool _d = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,2))->isChecked() ? true : false);
       double _p = tabella->item(x,3)->text().toDouble();
       p = new pacchettoPizza(_ID,_n,_d,_p);
       QTableWidgetItem* tmp = tabella->item(x,y);
@@ -512,7 +517,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
     emit sendPacketToModel(p, type);
   }
 }
-void TabellaComposita::eliminaElemento(uint id){
+void TabellaComposita::eliminaElemento(uint id, bool b){
     editabile = false;
     for(int i=0 ; i<tabella->rowCount() ; i++){
         uint currentId = static_cast<uint>(std::stoi(tabella->item(i,0)->text().toStdString()));
