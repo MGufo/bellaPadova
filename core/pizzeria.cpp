@@ -88,7 +88,8 @@ void Pizzeria::modificaArticolo(Articolo* daModificare,
 
 void Pizzeria::rimuoviArticolo(Articolo* daRimuovere) {
   gestoreRisorse.rimuoviArticolo(daRimuovere);
-  delete daRimuovere;
+  if(!dynamic_cast<Bevanda*>(daRimuovere))
+    delete daRimuovere;
 }
 
 void Pizzeria::inserisciConsumabile(Consumabile* daInserire) {
