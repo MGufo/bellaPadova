@@ -39,9 +39,8 @@ signals:
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoConsumabile(pacchetto*);
   void modificaRisorsa(pacchetto*, bool);
-  void eliminaConsumabile(uint);
+  void eliminaRisorsa(uint, bool);
   void creaNuovoArticolo(pacchetto*);
-  void eliminaArticolo(uint);
   //true = pizza
   //false = bevanda
   void visualizzaElementiInWizard(bool) const;
