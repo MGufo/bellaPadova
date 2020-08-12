@@ -42,7 +42,8 @@ SOURCES += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
     GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.cpp \
     GUI/pushbuttonwithid.cpp \
-    GUI/inputValidator.cpp
+    GUI/inputValidator.cpp \
+    GUI/paginaComanda.cpp
     #test/testgui.cpp
 
 HEADERS += \
@@ -84,7 +85,8 @@ HEADERS += \
     GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.h \
     GUI/pacchetti.h \
     GUI/pushbuttonwithid.h \
-    GUI/inputValidator.h
+    GUI/inputValidator.h \
+    GUI/paginaComanda.h
     #test/testgui.h \
 
 RESOURCES += \
