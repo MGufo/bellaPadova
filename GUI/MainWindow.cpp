@@ -78,10 +78,6 @@ void MainWindow::modificaRisorsa(pacchetto* p, bool b){
   else  controller->modificaArticolo(p);
 }
 
-void MainWindow::eliminaConsumabile(uint id){
-    controller->eliminaConsumabile(id);
-}
-
 void MainWindow::creaNuovoArticolo(pacchetto* p){
   controller->creaNuovoArticolo(p);
 }
