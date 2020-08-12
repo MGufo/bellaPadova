@@ -40,6 +40,7 @@ private slots:
   void emitDataOnCellChanged(int,int);
   void eliminaElemento(uint, bool);
   void checkBoxToggled(bool);
+  void forwardIdToModel(uint);
 
 private:
   bool editabile;

@@ -358,7 +358,7 @@ void TabellaComposita::rendiEditabile(bool b){
     for(int i=0; i < tabella->rowCount(); i++){
         uint id = static_cast<uint>(std::stoi(tabella->item(i,0)->text().toStdString()));
         PushButtonWithId* elimina = new PushButtonWithId(id,tabella);
-        connect(elimina,SIGNAL(sendId(uint)),this,SIGNAL(sendIdToModel(uint)));
+        connect(elimina,SIGNAL(sendId(uint)),this,SLOT(forwardIdToModel(uint)));
         elimina->setText("Elimina");
         tabella->setCellWidget(i, tabella->columnCount()-1, elimina);
     }
@@ -532,6 +532,14 @@ void TabellaComposita::checkBoxToggled(bool){
     int column = cb->property("column").toInt();
 
     emit tabella->cellChanged(row,column);
+}
+
+void TabellaComposita::forwardIdToModel(uint id){
+    if(tabella->objectName()=="tabIngredientiInventario" ||
+            tabella->objectName()=="tabBevandeInventario")
+        emit sendIdToModel(id,true);
+    else
+        emit sendIdToModel(id,false);
 }
 
 void TabellaComposita::setStyleTabella(){

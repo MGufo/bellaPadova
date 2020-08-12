@@ -118,14 +118,6 @@ void Pizza::modifica(Risorsa* modificato){
     setNome(modificato->getNome());
     setDisponibilita(modificato->getDisponibilita());
     setPrezzoBase(dynamic_cast<Articolo*>(modificato)->getPrezzoBase());
-    //TODO: modifica degli ingredienti
-    // controllo solo gli ID, ossia inserisco solo gli ID che sono presenti in modificato
-    /*
-    Pizza* pizzaModificata = dynamic_cast<Pizza*>(modificato);
-    for(auto it = pizzaModificata->getIngredienti().const_begin() ; it != pizzaModificata->getIngredienti().const_end() ; ++it){
-        ingredienti.fi
-    }
-    */
 }
 
 void Pizza::carica(const QJsonObject& pizzaJSON,
