@@ -17,11 +17,11 @@ public:
 signals:
 
 public slots:
-  showDetails();
+  void showDetails();
 
 private:
     QVBoxLayout* layoutComanda;
-    paginaComanda* dettagli;
+    PaginaComanda* dettagli;
 };
 
 #endif // COMANDAGUI_H

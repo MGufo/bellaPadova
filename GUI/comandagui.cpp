@@ -32,9 +32,8 @@ ComandaGUI::ComandaGUI(QWidget *parent) : QWidget(parent){
     connect(wrapperComanda, SIGNAL(pressed()), this, SLOT(showDetails()));
 }
 
-ComandaGUI::showDetails(){
-  if(dettagli)
-    delete dettagli;
-  dettagli = new paginaComanda();
-  dettagli->show;
+void ComandaGUI::showDetails(){
+  dettagli = new PaginaComanda(this);
+  dettagli->setWindowFlags(Qt::Window);
+  dettagli->show();
 }
