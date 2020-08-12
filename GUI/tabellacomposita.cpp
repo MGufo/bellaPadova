@@ -33,11 +33,9 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   connect(this,SIGNAL(validationError(const QString)),
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(mostraErrore(const QString)));
-  //todo: aggiungere un bool a sendPacketToModel() per indicare il tipo di pacchetto (consumabile/articolo).
-  // aggiungere un "ricevitore universale" al posto di modificaConsumabile() che ricea un pacchetto e in base al valore del bool lo inoltri alla funzione corretta del controller
   connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaRisorsa(pacchetto*, bool)));
-  connect(this,SIGNAL(sendIdToModel(uint)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaConsumabile(uint)));
-  connect(this,SIGNAL(sendIdToModel(uint)),this,SLOT(eliminaElemento(uint)));
+  connect(this,SIGNAL(sendIdToModel(uint, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaRisorsa(uint)));
+  connect(this,SIGNAL(sendIdToModel(uint, bool)),this,SLOT(eliminaElemento(uint, bool)));
 
   // Applicazione stile widget
   setStyleTabella();
@@ -336,8 +334,10 @@ void TabellaComposita::rendiEditabile(bool b){
         else if((objectName() == "tabPizzeMenu") && (j == 2)){
             dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(true);
         }
-        else if((objectName() == "tabBevandeMenu") && (j == 2)){
-            dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(true);
+        else if(objectName() == "tabBevandeMenu"){
+            //diamo solo la possibilità di eliminare le bevande dal menu, la modifica delle caratteristiche della bevanda
+            //avviene nell'inventario
+            continue;
         }
         else{
             //casi in cui ci sono item nelle celle
@@ -517,7 +517,7 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
     emit sendPacketToModel(p, type);
   }
 }
-void TabellaComposita::eliminaElemento(uint id){
+void TabellaComposita::eliminaElemento(uint id, bool b){
     editabile = false;
     for(int i=0 ; i<tabella->rowCount() ; i++){
         uint currentId = static_cast<uint>(std::stoi(tabella->item(i,0)->text().toStdString()));
