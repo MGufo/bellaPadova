@@ -34,7 +34,7 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(mostraErrore(const QString)));
   connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(modificaRisorsa(pacchetto*, bool)));
-  connect(this,SIGNAL(sendIdToModel(uint, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaRisorsa(uint)));
+  connect(this,SIGNAL(sendIdToModel(uint, bool)),parentWidget()->parentWidget()->parentWidget(),SLOT(eliminaRisorsa(uint, bool)));
   connect(this,SIGNAL(sendIdToModel(uint, bool)),this,SLOT(eliminaElemento(uint, bool)));
 
   // Applicazione stile widget
