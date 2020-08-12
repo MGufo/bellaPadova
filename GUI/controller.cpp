@@ -91,23 +91,23 @@ void Controller::modificaConsumabile(pacchetto * pC){
 }
 // TODO: Terminare
 void Controller::modificaArticolo(pacchetto* p){
-  Articolo* nuovoArticolo = nullptr;
-  if(dynamic_cast<pacchettoPizza*>(p)){
-    pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
-    nuovoArticolo =
-        new Pizza(++idRisorse, pP->nome, pP->disponibilita, pP->prezzo);
-    auto ingr = pP->ingredienti;
-    for(auto it = ingr.cbegin(); it != ingr.cend(); ++it){
-      Risorsa* temp = modello->trovaRisorsa(pP->ID);
-    }
-  }
-  else {
-    pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
-    if(pB->tipo == true)
-      nuovoArticolo = new Lattina();
-    else
-      nuovoArticolo = new Bottiglia();
-  }
+//  Articolo* nuovoArticolo = nullptr;
+//  if(dynamic_cast<pacchettoPizza*>(p)){
+//    pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
+//    nuovoArticolo =
+//        new Pizza(++idRisorse, pP->nome, pP->disponibilita, pP->prezzo);
+//    auto ingr = pP->ingredienti;
+//    for(auto it = ingr.cbegin(); it != ingr.cend(); ++it){
+//    }
+//  }
+//  else {
+//    pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
+//    if(pB->tipo == true)
+//      nuovoArticolo = new Lattina(++idRisorse, pB->nome, pB->);
+//    else
+//      nuovoArticolo = new Bottiglia();
+//  }
+//  Risorsa* tmp = modello->trovaRisorsa(p->ID);
 }
 
 void Controller::eliminaConsumabile(uint id){
@@ -116,6 +116,10 @@ void Controller::eliminaConsumabile(uint id){
   risorseSalvate = false;
   //non serve aggiornamento della vista (effettuato dallo slot di tabellaComposita)
   //vista->visualizzaInventario();
+}
+
+void Controller::eliminaArticolo(uint){
+
 }
 
 void Controller::creaNuovoArticolo(pacchetto* pA){
