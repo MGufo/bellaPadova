@@ -10,7 +10,6 @@ Contatto::Contatto(const Contatto& c)
     throw new std::invalid_argument("Errore: indirizzo non valido.");
 }
 
-// TODO: Add exception type
 void Contatto::setNome(const string& n) { nome = n; }
 void Contatto::setIndirizzo(const string& ind) {
   if (ind.empty())

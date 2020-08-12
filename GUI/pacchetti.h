@@ -6,8 +6,6 @@
 #include <sstream>
 #include <unordered_map>
 
-//TODO: dividere in file header e cpp
-
 template <typename T>
 std::string to_string_with_precision(const T a_value, const int n = 2)
 {

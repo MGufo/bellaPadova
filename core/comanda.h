@@ -14,10 +14,6 @@ class Pizzeria;
 
 using std::unordered_map;
 
-// TODO: sostituire la mappa di [articolo* => quantita] con una mappa
-// di [oggetto(nome,prezzo) => quantità] per evitare problemi di riferimento
-// ad articoli rimossi su comande vecchie
-
 class Comanda {
  private:
   unsigned int ID;
