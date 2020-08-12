@@ -43,7 +43,9 @@ SOURCES += \
     GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.cpp \
     GUI/pushbuttonwithid.cpp \
     GUI/inputValidator.cpp \
-    GUI/paginaComanda.cpp
+    GUI/paginaComanda.cpp \
+    GUI/wizardNuovaComanda/nuovacomanda_dettagli.cpp
+
     #test/testgui.cpp
 
 HEADERS += \
@@ -85,8 +87,8 @@ HEADERS += \
     GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.h \
     GUI/pacchetti.h \
     GUI/pushbuttonwithid.h \
-    GUI/inputValidator.h \
-    GUI/paginaComanda.h
+    GUI/paginaComanda.h \
+    GUI/wizardNuovaComanda/nuovacomanda_dettagli.h
     #test/testgui.h \
 
 RESOURCES += \

@@ -6,6 +6,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QFormLayout>
+#include <QLineEdit>
 
 #include "tabellacomposita.h"
 
