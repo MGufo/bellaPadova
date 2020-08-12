@@ -77,10 +77,6 @@ void GestoreRisorse::rimuoviArticolo(Articolo* daRimuovere) {
   }
 }
 
-//TODO:
-//ATTENZIONE all'inserimento di un consumabile gia presente nell'inventario!
-//implementare funzione privata che controlla campo dati per campo dati
-//se daInserire == consumabileGiaPresenteNellInventario
 void GestoreRisorse::inserisciConsumabile(Consumabile* daInserire) {
   if (daInserire) {
     inventario.push_back(daInserire);
@@ -121,8 +117,8 @@ void GestoreRisorse::modificaArticolo(Articolo* daModificare,
   const Lista<Consumabile*>* lista = daModificare->getComposizione();
   for (auto it = lista->const_begin(); it != lista->const_end(); ++it)
     if (!controlloConsumabile(&inventario, *it))
-      throw new std::logic_error("Errore: Uno o più ingredienti selezionati"
-                                 "non sono disponibili.");
+      throw new std::logic_error("Errore: Uno o più elementi selezionati"
+                                 " non sono disponibili.");
   daModificare->setDisponibilita(controlloDisponibilita(lista));
   delete lista;
 }

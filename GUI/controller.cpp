@@ -86,10 +86,8 @@ void Controller::modificaConsumabile(pacchetto * pC){
       modello->modificaConsumabile(vecchioConsumabile,pConsumabile);
   }
   risorseSalvate = false;
-  //non serve aggiornamento della vista
-  //vista->visualizzaInventario();
 }
-// TODO: Terminare
+
 void Controller::modificaArticolo(pacchetto* p){
   Articolo* modificato= nullptr;
   if(dynamic_cast<pacchettoPizza*>(p)){
@@ -98,7 +96,12 @@ void Controller::modificaArticolo(pacchetto* p){
   }
   // le bevande sono modificabili solo nell'inventario
   Articolo* daModificare = dynamic_cast<Articolo*>(modello->trovaRisorsa(p->ID));
-  modello->modificaArticolo(daModificare, modificato);
+  try{
+    modello->modificaArticolo(daModificare, modificato);
+  }
+  catch (std::logic_error* ecc){
+      vista->mostraErrore(QString(ecc->what()));
+  }
   risorseSalvate = false;
 }
 
@@ -106,8 +109,6 @@ void Controller::eliminaConsumabile(uint id){
   Risorsa* daEliminare = modello->trovaRisorsa(id);
   modello->rimuoviConsumabile(dynamic_cast<Consumabile*>(daEliminare));
   risorseSalvate = false;
-  //non serve aggiornamento della vista (effettuato dallo slot di tabellaComposita)
-  //vista->visualizzaInventario();
 }
 
 void Controller::eliminaArticolo(uint id){
@@ -117,7 +118,6 @@ void Controller::eliminaArticolo(uint id){
 }
 
 void Controller::creaNuovoArticolo(pacchetto* pA){
-    //TODO: gestire eccezioni con un blocco try-catch
     Articolo* pArticolo = nullptr;
     if(dynamic_cast<pacchettoBevanda*>(pA)){
       //recupero la bevanda che voglio inserire nel menu dall'inventario
@@ -148,14 +148,19 @@ void Controller::creaNuovoArticolo(pacchetto* pA){
           else
               ingrePizza.push_back(dynamic_cast<Ingrediente*>(r));
       }
-      pPizza->aggiungiIngredienti(ingrePizza);
+      try{
+        pPizza->aggiungiIngredienti(ingrePizza);
+      }
+      catch (std::domain_error* ecc){
+          vista->mostraErrore(QString(ecc->what()));
+      }
     }
     try{
         modello->inserisciArticolo(pArticolo);
         risorseSalvate = false;
         vista->aggiornaMenu(pA);
     } catch (std::domain_error* ecc){
-        vista->mostraErrore(ecc->what());
+        vista->mostraErrore(QString(ecc->what()));
     }
 }
 
