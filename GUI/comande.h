@@ -17,6 +17,8 @@ public:
 
 private:
   QVBoxLayout* comandeLayout;
+  QHBoxLayout* layout_inEsecuzione;
+  QHBoxLayout* layout_eseguite;
   void setStyleComande();
 
 signals:

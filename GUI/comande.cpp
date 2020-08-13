@@ -24,7 +24,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   comanda4->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 
-  QHBoxLayout* layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
+  layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
   wrapper_inEsecuzione->setLayout(layout_inEsecuzione);
   //layout_inEsecuzione->addWidget(comanda1);
   //layout_inEsecuzione->addWidget(comanda2);
@@ -50,7 +50,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   //aggiungere roba al widget
 
 
-  QHBoxLayout* layout_eseguite = new QHBoxLayout(wrapper_eseguite);
+  layout_eseguite = new QHBoxLayout(wrapper_eseguite);
   wrapper_eseguite->setLayout(layout_eseguite);
   scroll_eseguite->setWidget(wrapper_eseguite);
   scroll_eseguite->setMinimumSize(580, 100);
@@ -74,9 +74,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
 void Comande::aggiungiComanda(pacchettoComanda* pC){
   ComandaGUI* comanda = new ComandaGUI(this, pC);
-    (pC->eseguita) ?
-        layout_InEsecuzione->addWidget(comanda) :
-        layout_eseguite->addWidget(comanda);
+    (pC->eseguita) ? layout_inEsecuzione->addWidget(comanda) :
+                     layout_eseguite->addWidget(comanda);
 }
 
 void Comande::setStyleComande(){
