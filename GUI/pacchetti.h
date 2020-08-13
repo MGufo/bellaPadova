@@ -79,11 +79,13 @@ struct pacchettoComanda {
   string telefono;
   string oraConsegna; //discutere se string o QTime
   // ID articolo - qta articolo
-  std::unordered_map<uint, uint> ordinazione;
   double totale;
+  bool eseguita;
+  std::unordered_map<uint, uint> ordinazione;
 
-  pacchettoComanda(uint _ID, string _n, string _i, string _t, string _oC):
-    ID(_ID), nome(_n), indirizzo(_i), telefono(_t), oraConsegna(_oC),
-    ordinazione(std::unordered_map<uint, uint>()){}
+  pacchettoComanda(uint _ID, string _n, string _i, string _t, string _oC,
+                   double _tot, double _e): ID(_ID), nome(_n), indirizzo(_i),
+                   telefono(_t), oraConsegna(_oC), totale(_tot), eseguita(_e),
+                   ordinazione(std::unordered_map<uint, uint>()){}
 };
 #endif // PACCHETTI_H

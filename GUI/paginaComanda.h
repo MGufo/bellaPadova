@@ -19,20 +19,19 @@ public:
   ~PaginaComanda();
 
 private:
-  QVBoxLayout* layoutPaginaComande;
-  QGridLayout* layoutContenuto;
-  QHBoxLayout* layoutPulsanti;
+  QGridLayout* layoutPaginaComanda;
+  QHBoxLayout* layoutInfoComanda;
   TabellaComposita* Pizze;
   TabellaComposita* Bevande;
-  QWidget* wrapperInfoComanda;
-  QWidget* wrapperContenuto;
-  QWidget* wrapperPulsanti;
+  QWidget* infoComanda;
   QPushButton* newArticolo;
   QPushButton* modificaDati;
 
   void inizializzaPizze(QWidget*);
   void inizializzaBevande(QWidget*);
-  void inizializzaWrapperInfoComanda(QWidget*);
+  void inizializzaPulsanti(QWidget*);
+  void inizializzaInfoComanda(QWidget*);
+  void setStylePaginaComanda();
 };
 
 #endif // PAGINACOMANDA_H
