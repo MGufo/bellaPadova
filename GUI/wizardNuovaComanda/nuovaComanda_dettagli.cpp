@@ -37,14 +37,32 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     pizze->setHorizontalHeader(headerPizze);
     pizze->verticalHeader()->setVisible(false);
 
+    bevande = new QTableWidget(0,3,wrapper);
+    //bevande->setMinimumWidth(850);
+    //bevande->setMaximumWidth(2100);
+    //bevande->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    sizePolicy2.setHorizontalStretch(0);
+    sizePolicy2.setVerticalStretch(0);
+    sizePolicy2.setHeightForWidth(pizze->sizePolicy().hasHeightForWidth());
+    bevande->setSizePolicy(sizePolicy2);
+    QHeaderView* headerBevande = new QHeaderView(Qt::Horizontal,bevande);
+    headerBevande->setSectionResizeMode(headerBevande->ResizeToContents);
+    bevande->setHorizontalHeaderLabels(*labels);
+    bevande->setHorizontalHeader(headerPizze);
+    bevande->verticalHeader()->setVisible(false);
+
     layoutWrapper->addWidget(infoWrapper);
+    layoutWrapper->addWidget(pizze);
+    layoutWrapper->addWidget(bevande);
+
     setLayout(layoutWrapper);
 }
-/*
+
 int NuovaComanda_dettagli::nextId() const{
     return WizardNuovaComanda::PAGE_End;
 }
-*/
+
 void NuovaComanda_dettagli::initializePage(){
     QWizardPage::initializePage();
     if(!previouslyInizialized){

@@ -16,7 +16,7 @@ class NuovaComanda_dettagli : public QWizardPage{
     Q_OBJECT
 public:
     NuovaComanda_dettagli(QWidget* parent = nullptr);
-    //int nextId() const override;
+    int nextId() const override;
 private:
     QTimeEdit* orario = nullptr;
     QLineEdit* nome = nullptr;
