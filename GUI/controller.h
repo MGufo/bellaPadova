@@ -29,8 +29,8 @@ class Controller : public QObject {
   void creaNuovoArticolo(pacchetto*);
   void modificaArticolo(pacchetto*);
   void eliminaArticolo(uint);
-  void creaNuovaComanda(pacchetto*);
-  void modificaComanda(pacchetto*);
+  void creaNuovaComanda(pacchettoComanda*);
+  void modificaComanda(pacchettoComanda*);
   void eliminaComanda(uint);
   QList<pacchetto*>* recuperaInventario() const;
   QList<pacchetto*>* recuperaMenu() const;

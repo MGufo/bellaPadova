@@ -119,16 +119,19 @@ void Controller::eliminaArticolo(uint id){
   risorseSalvate = false;
 }
 
-void Controller::creaNuovaComanda(pacchetto *pCom){
-
+void Controller::creaNuovaComanda(pacchettoComanda *pC){
+  // TODO: fare cose
+  vista->visualizzaComande();
 }
 
-void Controller::modificaComanda(pacchetto *pCom){
-
+void Controller::modificaComanda(pacchettoComanda *pC){
+  // TODO: Fare cose
+  vista->visualizzaComande();
 }
 
 void Controller::eliminaComanda(uint id){
-
+  // TODO: fare cose
+  vista->visualizzaComande();
 }
 
 void Controller::creaNuovoArticolo(pacchetto* pA){
