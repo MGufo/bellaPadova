@@ -56,11 +56,15 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   scroll_eseguite->setMinimumSize(580, 100);
   scroll_eseguite->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
+  QPushButton* newComanda = new QPushButton(this);
+  newComanda->setText("Nuova Comanda");
+
   comandeLayout = new QVBoxLayout(this);
   comandeLayout->addWidget(label_inEsecuzione);
   comandeLayout->addWidget(scroll_inEsecuzione);
   comandeLayout->addWidget(label_concluse);
   comandeLayout->addWidget(scroll_eseguite);
+  comandeLayout->addWidget(newComanda);
   comandeLayout->setContentsMargins(0,0,0,0);
 
   setStyleComande();
