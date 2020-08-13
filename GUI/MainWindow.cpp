@@ -301,7 +301,7 @@ void MainWindow::pulisciComande(){
 void MainWindow::visualizzaComande(){
   pulisciComande();
   QList<pacchettoComanda*>* comande = controller->recuperaComande();
-  QWidget* widgetComande = findChild<QWidget*>("widgetComande");
+  Comande* widgetComande = findChild<Comande*>("widgetComande");
   for(auto it = comande->constBegin(); it != comande->constEnd(); ++it){
     widgetComande->aggiungiComanda(*it);
   }
