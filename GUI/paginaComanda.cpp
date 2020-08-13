@@ -15,7 +15,9 @@ PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
   // Creazione wrapper pulsanti e relativi pulsanti
   wrapperPulsanti = new QWidget(this);
   newArticolo = new QPushButton(wrapperPulsanti);
+  newArticolo->setText("Nuovo Articolo");
   modificaDati = new QPushButton(wrapperPulsanti);
+  modificaDati->setText("Modifica");
   // Creazione layout wrapper pulsanti e aggiunta dei subwidget
   layoutPulsanti = new QHBoxLayout(wrapperPulsanti);
   layoutPulsanti->addWidget(newArticolo);
