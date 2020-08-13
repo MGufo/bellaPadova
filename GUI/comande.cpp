@@ -10,8 +10,6 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   label_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   label_inEsecuzione->setObjectName("inEsecuzione");
   QScrollArea* scroll_inEsecuzione = new QScrollArea(this);
-  scroll_inEsecuzione->setContentsMargins(0, 1, 0, 1);
-
   QWidget* wrapper_inEsecuzione = new QWidget(scroll_inEsecuzione);
   wrapper_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   wrapper_inEsecuzione->setObjectName("wrapperInEsecuzione");
@@ -31,7 +29,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   layout_inEsecuzione->addWidget(comanda3);
   layout_inEsecuzione->addWidget(comanda4);
   scroll_inEsecuzione->setWidget(wrapper_inEsecuzione);
-  scroll_inEsecuzione->setMinimumSize(580, 180);
+  scroll_inEsecuzione->setMinimumSize(580, 265);
   scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   scroll_inEsecuzione->setWidgetResizable(true);
 

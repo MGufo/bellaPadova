@@ -28,7 +28,8 @@ ComandaGUI::ComandaGUI(QWidget *parent) : QWidget(parent){
     rimuovi->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     completata->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    wrapperComanda->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    wrapperComanda->setMinimumHeight(200);
+    wrapperComanda->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     connect(wrapperComanda, SIGNAL(pressed()), this, SLOT(showDetails()));
 }
 
