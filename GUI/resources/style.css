@@ -124,6 +124,16 @@ QPushButton#Modifica {
     background-color: #2b78e4;
 }
 
+QPushButton#modificaDati {
+    background-color: #2b78e4;
+    height: 75;
+}
+
+QPushButton#newArticolo {
+    background-color: #2b78e4;
+    height: 75;
+}
+
 QPushButton#Rimuovi {
     background-color: #AB0000;
 }
@@ -172,6 +182,10 @@ QTabWidget::tab-bar{
 
 QWidget#checkboxWrapper {
     background-color: #FFFFFF;
+}
+
+QWidget#paginaComanda {
+    background-color: #FF9900;
 }
 
 QWidget#Pizzeria {
