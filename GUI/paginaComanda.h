@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QTableWidget>
 #include <QHBoxLayout>
+#include <QGridLayout>
 #include <QPushButton>
 #include <QFormLayout>
 #include <QLineEdit>
@@ -19,11 +20,11 @@ public:
 
 private:
   QVBoxLayout* layoutPaginaComande;
-  QHBoxLayout* layoutContenuto;
+  QGridLayout* layoutContenuto;
   QHBoxLayout* layoutPulsanti;
   TabellaComposita* Pizze;
   TabellaComposita* Bevande;
-  QWidget* wrapperInfo;
+  QWidget* wrapperInfoComanda;
   QWidget* wrapperContenuto;
   QWidget* wrapperPulsanti;
   QPushButton* newArticolo;
@@ -31,7 +32,7 @@ private:
 
   void inizializzaPizze(QWidget*);
   void inizializzaBevande(QWidget*);
-  void inizializzaWrapperInfo(QWidget*);
+  void inizializzaWrapperInfoComanda(QWidget*);
 };
 
 #endif // PAGINACOMANDA_H

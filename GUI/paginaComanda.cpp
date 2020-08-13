@@ -1,23 +1,27 @@
 #include "paginaComanda.h"
 
 PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
-  // Creazione widget
+  // Creazione wrapper contenuto e relativi subwidget
   wrapperContenuto = new QWidget(this);
   inizializzaPizze(wrapperContenuto);
   inizializzaBevande(wrapperContenuto);
-  inizializzaWrapperInfo(wrapperContenuto);
-  layoutContenuto = new QHBoxLayout(wrapperContenuto);
-  layoutContenuto->addWidget(wrapperInfo);
-  layoutContenuto->addWidget(Pizze);
-  layoutContenuto->addWidget(Bevande);
+  inizializzaWrapperInfoComanda(wrapperContenuto);
+  // Creazione layout wrapper contenuto e aggiunta dei subwidget
+  layoutContenuto = new QGridLayout(wrapperContenuto);
+  layoutContenuto->addWidget(wrapperInfoComanda, 0, 0, 5, 5, Qt::AlignLeft);
+  layoutContenuto->addWidget(Pizze, 0, 6, 5, 5);
+  layoutContenuto->addWidget(Bevande, 6, 6, 5, 5);
   wrapperContenuto->setLayout(layoutContenuto);
+  // Creazione wrapper pulsanti e relativi pulsanti
   wrapperPulsanti = new QWidget(this);
   newArticolo = new QPushButton(wrapperPulsanti);
   modificaDati = new QPushButton(wrapperPulsanti);
+  // Creazione layout wrapper pulsanti e aggiunta dei subwidget
   layoutPulsanti = new QHBoxLayout(wrapperPulsanti);
   layoutPulsanti->addWidget(newArticolo);
   layoutPulsanti->addWidget(modificaDati);
   wrapperPulsanti->setLayout(layoutPulsanti);
+  // Creazione layout principale e aggiunta dei due wrapper
   layoutPaginaComande = new QVBoxLayout(this);
   layoutPaginaComande->addWidget(wrapperContenuto);
   layoutPaginaComande->addWidget(wrapperPulsanti);
@@ -44,18 +48,18 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
   Bevande->setObjectName("tabBevandeComanda");
 }
 
-void PaginaComanda::inizializzaWrapperInfo(QWidget* _parent){
-  wrapperInfo = new QWidget(_parent);
-  QLineEdit* orario = new QLineEdit(wrapperInfo);
-  QLineEdit* nome = new QLineEdit(wrapperInfo);
-  QLineEdit* indirizzo = new QLineEdit(wrapperInfo);
-  QLineEdit* telefono = new QLineEdit(wrapperInfo);
-  QFormLayout* info = new QFormLayout(wrapperInfo);
+void PaginaComanda::inizializzaWrapperInfoComanda(QWidget* _parent){
+  wrapperInfoComanda = new QWidget(_parent);
+  QLineEdit* orario = new QLineEdit(wrapperInfoComanda);
+  QLineEdit* nome = new QLineEdit(wrapperInfoComanda);
+  QLineEdit* indirizzo = new QLineEdit(wrapperInfoComanda);
+  QLineEdit* telefono = new QLineEdit(wrapperInfoComanda);
+  QFormLayout* info = new QFormLayout(wrapperInfoComanda);
   info->addRow("Orario: ", orario);
   info->addRow("Nome: ", nome);
   info->addRow("Indirizzo: ", indirizzo);
   info->addRow("Telefono: ", telefono);
-  QLabel* totale = new QLabel(wrapperInfo);
+  QLabel* totale = new QLabel(wrapperInfoComanda);
   info->addRow("Totale: ", totale);
-  wrapperInfo->setLayout(info);
+  wrapperInfoComanda->setLayout(info);
 }
