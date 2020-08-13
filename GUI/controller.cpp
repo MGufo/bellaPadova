@@ -286,7 +286,6 @@ void Controller::caricaComande(){
   } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
-  vista->visualizzaComande();
 }
 
 void Controller::caricaRisorse(){

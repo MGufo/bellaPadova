@@ -14,7 +14,7 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   QHBoxLayout* layoutButtons = new QHBoxLayout();
   QLabel* orario = new QLabel("Orario", wrapperComanda);
   orario->setObjectName("Orario");
-  QLabel* comandaId = new QLabel("Comanda " + ID, wrapperComanda);
+  QLabel* comandaId = new QLabel("Comanda ", wrapperComanda);
   comandaId->setObjectName("ComandaId");
   rimuovi = new QPushButton("Rimuovi", wrapperComanda);
   rimuovi->setObjectName("Rimuovi");
