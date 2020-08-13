@@ -12,7 +12,7 @@
 class ComandaGUI : public QWidget{
   Q_OBJECT
 public:
-  explicit ComandaGUI(QWidget *parent = nullptr);
+  explicit ComandaGUI(QWidget *parent = nullptr, pacchettoComanda* = nullptr);
 
 signals:
 
@@ -20,8 +20,14 @@ public slots:
   void showDetails();
 
 private:
-    QVBoxLayout* layoutComanda;
-    PaginaComanda* dettagli;
+  uint ID;
+  QTime oraConsegna;
+  std::string nomeCliente;
+  QVBoxLayout* layoutComanda;
+  QPushButton* wrapperComanda;
+  QPushButton* rimuovi;
+  QPushButton* completata;
+  PaginaComanda* dettagli;
 };
 
 #endif // COMANDAGUI_H
