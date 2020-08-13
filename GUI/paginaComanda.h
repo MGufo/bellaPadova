@@ -31,6 +31,7 @@ private:
   void inizializzaBevande(QWidget*);
   void inizializzaPulsanti(QWidget*);
   void inizializzaInfoComanda(QWidget*);
+  void setStylePaginaComanda();
 };
 
 #endif // PAGINACOMANDA_H

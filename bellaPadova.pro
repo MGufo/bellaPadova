@@ -44,7 +44,8 @@ SOURCES += \
     GUI/pushbuttonwithid.cpp \
     GUI/inputValidator.cpp \
     GUI/paginaComanda.cpp \
-    GUI/wizardNuovaComanda/nuovacomanda_dettagli.cpp
+    GUI/wizardNuovaComanda/wizard_nuovaComanda.cpp \
+    GUI/wizardNuovaComanda/nuovaComanda_dettagli.cpp
 
     #test/testgui.cpp
 
@@ -88,7 +89,8 @@ HEADERS += \
     GUI/pacchetti.h \
     GUI/pushbuttonwithid.h \
     GUI/paginaComanda.h \
-    GUI/wizardNuovaComanda/nuovacomanda_dettagli.h
+    GUI/wizardNuovaComanda/wizard_nuovaComanda.h \
+    GUI/wizardNuovaComanda/nuovaComanda_dettagli.h
     #test/testgui.h \
 
 RESOURCES += \

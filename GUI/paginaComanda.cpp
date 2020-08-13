@@ -12,8 +12,9 @@ PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
   layoutPaginaComanda->addWidget(infoComanda, 1, 0, 5, 5, Qt::AlignLeft);
   layoutPaginaComanda->addWidget(Pizze, 0, 6, 5, 5);
   layoutPaginaComanda->addWidget(Bevande, 6, 6, 5, 5);
-  layoutPaginaComanda->addWidget(newArticolo, 7, 0, 1, 5);
+  layoutPaginaComanda->addWidget(newArticolo, 8, 0, 1, 5);
   layoutPaginaComanda->addWidget(modificaDati, 9, 0, 1, 5);
+  setStylePaginaComanda();
   setLayout(layoutPaginaComanda);
 }
 
@@ -47,9 +48,13 @@ void PaginaComanda::inizializzaPulsanti(QWidget* _parent){
 void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
   infoComanda = new QWidget(_parent);
   QLineEdit* orario = new QLineEdit(infoComanda);
+  orario->setEnabled(false);
   QLineEdit* nome = new QLineEdit(infoComanda);
+  nome->setEnabled(false);
   QLineEdit* indirizzo = new QLineEdit(infoComanda);
+  indirizzo->setEnabled(false);
   QLineEdit* telefono = new QLineEdit(infoComanda);
+  telefono->setEnabled(false);
   QFormLayout* info = new QFormLayout(infoComanda);
   info->addRow("Orario: ", orario);
   info->addRow("Nome: ", nome);
@@ -58,4 +63,12 @@ void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
   QLabel* totale = new QLabel(infoComanda);
   info->addRow("Totale: ", totale);
   infoComanda->setLayout(info);
+}
+
+void PaginaComanda::setStylePaginaComanda(){
+  setMinimumSize(1200, 600);
+  setMaximumSize(1200, 600);
+  setObjectName("paginaComanda");
+  newArticolo->setObjectName("newArticolo");
+  modificaDati->setObjectName("modificaDati");
 }

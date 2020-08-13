@@ -5,6 +5,7 @@
 #include <QWizard>
 
 #include "../pacchetti.h"
+#include "nuovaComanda_dettagli.h"
 
 class WizardNuovaComanda : public QWizard{
   Q_OBJECT
@@ -12,7 +13,7 @@ public:
   enum { PAGE_Dettagli, PAGE_End};
   explicit WizardNuovaComanda(QWidget *parent = nullptr);
 
-  void accept() override;
+  //void accept() override;
 signals:
 
 public slots:
