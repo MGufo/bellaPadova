@@ -72,6 +72,13 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   setObjectName("widgetComande");
 }
 
+void Comande::aggiungiComanda(pacchettoComanda* pC){
+  ComandaGUI* comanda = new ComandaGUI(this, pC);
+    (pC->eseguita) ?
+        layout_InEsecuzione->addWidget(comanda) :
+        layout_eseguite->addWidget(comanda);
+}
+
 void Comande::setStyleComande(){
   comandeLayout->setSpacing(0);
   comandeLayout->setMargin(0);

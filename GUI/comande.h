@@ -13,6 +13,7 @@ class Comande : public QWidget{
   Q_OBJECT
 public:
   explicit Comande(QWidget *parent = nullptr);
+  void aggiungiComanda(pacchettoComanda*);
 
 private:
   QVBoxLayout* comandeLayout;
