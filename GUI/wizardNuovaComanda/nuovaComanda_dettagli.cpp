@@ -17,10 +17,14 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     infoWrapperLayout->addRow("Indirizzo:",indirizzo);
     infoWrapperLayout->addRow("Telefono:",telefono);
 
-    QStringList* labels = new QStringList();
-    labels->push_back("");
-    labels->push_back("Nome");
-    labels->push_back("Quantità");
+    QStringList* labelsPizze = new QStringList();
+    labelsPizze->push_back("");
+    labelsPizze->push_back("Nome");
+    labelsPizze->push_back("Quantità");
+    QStringList* labelsBevande = new QStringList();
+    labelsBevande->push_back("");
+    labelsBevande->push_back("Nome");
+    labelsBevande->push_back("Quantità");
 
     pizze = new QTableWidget(0,3,wrapper);
     //pizze->setMinimumWidth(850);
@@ -33,7 +37,7 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     pizze->setSizePolicy(sizePolicy);
     QHeaderView* headerPizze = new QHeaderView(Qt::Horizontal,pizze);
     headerPizze->setSectionResizeMode(headerPizze->ResizeToContents);
-    pizze->setHorizontalHeaderLabels(*labels);
+    pizze->setHorizontalHeaderLabels(*labelsPizze);
     pizze->setHorizontalHeader(headerPizze);
     pizze->verticalHeader()->setVisible(false);
 
@@ -48,8 +52,8 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     bevande->setSizePolicy(sizePolicy2);
     QHeaderView* headerBevande = new QHeaderView(Qt::Horizontal,bevande);
     headerBevande->setSectionResizeMode(headerBevande->ResizeToContents);
-    bevande->setHorizontalHeaderLabels(*labels);
-    bevande->setHorizontalHeader(headerPizze);
+    bevande->setHorizontalHeaderLabels(*labelsBevande);
+    bevande->setHorizontalHeader(headerBevande);
     bevande->verticalHeader()->setVisible(false);
 
     layoutWrapper->addWidget(infoWrapper);

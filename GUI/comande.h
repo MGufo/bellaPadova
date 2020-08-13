@@ -6,8 +6,10 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
+
 #include "dettaglioComanda.h"
 #include "comandagui.h"
+#include "wizardNuovaComanda/wizard_nuovaComanda.h"
 
 class Comande : public QWidget{
   Q_OBJECT
@@ -15,13 +17,15 @@ public:
   explicit Comande(QWidget *parent = nullptr);
 
 private:
+  QPushButton* newComanda;
   QVBoxLayout* comandeLayout;
   void setStyleComande();
+  WizardNuovaComanda* nuovaComanda;
 
 signals:
 
-public slots:
-
+private slots:
+    void drawWizard();
 };
 
 #endif // COMANDE_H
