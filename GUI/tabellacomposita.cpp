@@ -492,7 +492,9 @@ void TabellaComposita::emitDataOnCellChanged(int x, int y){
         QDate _da(y,m,d);
         bool _l = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,6))->isChecked() ? true : false);
         string _t = tabella->item(x,7)->text().toStdString();
+
         p = new pacchettoFarina(_ID,_n,_d,_q,_c,_da,_l,_t);
+        type = true;
       }
     }
     else if(objectName() == "tabPizzeMenu"){

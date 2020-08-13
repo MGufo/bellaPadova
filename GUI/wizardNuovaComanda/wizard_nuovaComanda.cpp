@@ -2,8 +2,8 @@
 
 WizardNuovaComanda::WizardNuovaComanda(QWidget *parent) : QWizard(parent){
     setPage(PAGE_Dettagli, new NuovaComanda_dettagli(this));
-    setPage(PAGE_End, new NuovaComanda_end(this));
-    setStartId(PAGE_Intro);
+    //setPage(PAGE_End, new NuovaComanda_end(this));
+    setStartId(PAGE_Dettagli);
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Aggiunta nuova comanda"));
 
@@ -17,8 +17,8 @@ WizardNuovaComanda::WizardNuovaComanda(QWidget *parent) : QWizard(parent){
 }
 
 void WizardNuovaComanda::assegnaBottoni(int id){
-    if(id == WizardNuovoArticolo::PAGE_Intro)
-       button(QWizard::BackButton)->hide();
+    //if(id == WizardNuovaComanda::PAGE_Dettagli)
+       //button(QWizard::BackButton)->hide();
 }
 
 void WizardNuovaComanda::handlerBottoni(){
