@@ -85,7 +85,7 @@ struct pacchettoComanda {
 
   pacchettoComanda(uint _ID, string _n, string _i, string _t, string _oC,
                    double _tot, double _e): ID(_ID), nome(_n), indirizzo(_i),
-                   telefono(_t), oraConsegna(_oC), totale(_tot), eseguita(e),
+                   telefono(_t), oraConsegna(_oC), totale(_tot), eseguita(_e),
                    ordinazione(std::unordered_map<uint, uint>()){}
 };
 #endif // PACCHETTI_H
