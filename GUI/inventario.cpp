@@ -39,11 +39,8 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   layoutPulsanti->addWidget(modificaDati);
   layoutInventario->addLayout(layoutPulsanti);
 
-  setStyleInventario();
   setLayout(layoutInventario);
 }
-
-void Inventario::setStyleInventario(){}
 
 // SLOT
 void Inventario::drawWizard(){
