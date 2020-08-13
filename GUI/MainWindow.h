@@ -29,6 +29,7 @@ class MainWindow : public QWidget {
   void visualizzaInventario();
   void aggiornaMenu(pacchetto*);
   void visualizzaMenu();
+  void pulisciComande();
   void visualizzaComande();
 
 signals:

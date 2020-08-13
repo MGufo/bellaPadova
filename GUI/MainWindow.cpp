@@ -235,9 +235,11 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
 }
 
 void MainWindow::pulisciInventario(){
-    TabellaComposita* tabBevande = findChild<TabellaComposita*>("tabBevandeInventario");
+    TabellaComposita* tabBevande =
+      findChild<TabellaComposita*>("tabBevandeInventario");
     tabBevande->pulisciTabella();
-    TabellaComposita* tabIngredienti = findChild<TabellaComposita*>("tabIngredientiInventario");
+    TabellaComposita* tabIngredienti =
+      findChild<TabellaComposita*>("tabIngredientiInventario");
     tabIngredienti->pulisciTabella();
 }
 
@@ -281,10 +283,27 @@ void MainWindow::visualizzaMenu(){
   delete menu;
 }
 
+void MainWindow::pulisciComande(){
+  QWidget* wrapperInExec = findChild<QWidget*>("wrapperInEsecuzione");
+  QList<ComandaGUI*> comandeInExec = wrapperInExec->findChildren<ComandaGUI*>();
+  for(auto it = comandeInExec.begin(); it != comandeInExec.end(); ++it){
+    wrapperInExec->layout()->removeWidget(*it);
+    delete *it;
+  }
+  QWidget* wrapperExec = findChild<QWidget*>("wrapperInEsecuzione");
+  QList<ComandaGUI*> comandeExec = wrapperExec->findChildren<ComandaGUI*>();
+  for(auto it = comandeExec.begin(); it != comandeExec.end(); ++it){
+    wrapperExec->layout()->removeWidget(*it);
+    delete *it;
+  }
+
+}
+
 void MainWindow::visualizzaComande(){
+  pulisciComande();
   QList<pacchettoComanda*>* comande = controller->recuperaComande();
   for(auto it = comande->constBegin(); it != comande->constEnd(); ++it){
-    (*it);
+    // cose
   }
   delete comande;
 }
