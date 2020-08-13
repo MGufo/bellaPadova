@@ -282,7 +282,7 @@ void MainWindow::visualizzaMenu(){
 }
 
 void MainWindow::visualizzaComande(){
-  QList<pacchetto*>* comande = controller->recuperaComande();
+  QList<pacchettoComanda*>* comande = controller->recuperaComande();
   for(auto it = comande->constBegin(); it != comande->constEnd(); ++it){
     (*it);
   }

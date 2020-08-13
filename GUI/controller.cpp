@@ -256,7 +256,7 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
   return pacchetti;
 }
 
-QList<pacchetto *> *Controller::recuperaComande() const{
+QList<pacchettoComanda*> *Controller::recuperaComande() const{
   QList<pacchettoComanda*>* pacchetti = new QList<pacchettoComanda*>();
   auto comande = modello->getComande();
   for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
@@ -266,8 +266,11 @@ QList<pacchetto *> *Controller::recuperaComande() const{
                              c->getCliente().getIndirizzo(),
                              c->getCliente().getTelefono(),
                              c->getOraConsegna().toString().toStdString());
-    // TODO : Riempire mappa ordinazione del pacchetto
+    auto ordine = c->getOrdinazione();
+    for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
+      pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
     pacchetti->push_back(pC);
+    return pacchetti;
   }
 }
 

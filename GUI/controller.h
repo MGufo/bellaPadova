@@ -34,7 +34,7 @@ class Controller : public QObject {
   void eliminaComanda(uint);
   QList<pacchetto*>* recuperaInventario() const;
   QList<pacchetto*>* recuperaMenu() const;
-  QList<pacchetto*>* recuperaComande() const;
+  QList<pacchettoComanda*>* recuperaComande() const;
   bool canQuit() const;
 
  public slots:
