@@ -269,8 +269,7 @@ QList<pacchettoComanda*> *Controller::recuperaComande() const{
       new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
                            c->getCliente().getIndirizzo(),
                            c->getCliente().getTelefono(),
-                           c->getOraConsegna().toString().toStdString(),
-                           c->getTotale(), eseguita);
+                           c->getOraConsegna(), c->getTotale(), eseguita);
     auto ordine = c->getOrdinazione();
     for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
       pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
