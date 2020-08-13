@@ -69,6 +69,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
   setStyleComande();
   setLayout(comandeLayout);
+  setObjectName("widgetComande");
 }
 
 void Comande::setStyleComande(){
