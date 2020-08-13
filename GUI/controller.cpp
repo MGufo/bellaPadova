@@ -265,13 +265,14 @@ QList<pacchettoComanda*> *Controller::recuperaComande() const{
         new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
                              c->getCliente().getIndirizzo(),
                              c->getCliente().getTelefono(),
-                             c->getOraConsegna().toString().toStdString());
+                             c->getOraConsegna().toString().toStdString(),
+                             c->getTotale());
     auto ordine = c->getOrdinazione();
     for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
       pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
     pacchetti->push_back(pC);
-    return pacchetti;
   }
+  return pacchetti;
 }
 
 bool Controller::canQuit() const { return (comandeSalvate && risorseSalvate); }
