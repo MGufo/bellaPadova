@@ -44,6 +44,7 @@ signals:
   void creaNuovoArticolo(pacchetto*);
   //true = pizza
   //false = bevanda
+  void creaNuovaComanda(pacchettoComanda*);
   void visualizzaElementiInWizard(bool) const;
   void visualizzaElementiCheckatiInWizard(bool) const;
 
