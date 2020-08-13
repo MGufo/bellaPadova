@@ -296,14 +296,14 @@ void MainWindow::pulisciComande(){
     wrapperExec->layout()->removeWidget(*it);
     delete *it;
   }
-
 }
 
 void MainWindow::visualizzaComande(){
   pulisciComande();
   QList<pacchettoComanda*>* comande = controller->recuperaComande();
+  QWidget* widgetComande = findChild<QWidget*>("widgetComande");
   for(auto it = comande->constBegin(); it != comande->constEnd(); ++it){
-    // cose
+    widgetComande->aggiungiComanda(*it);
   }
   delete comande;
 }
