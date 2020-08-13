@@ -2,10 +2,11 @@
 
 ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   // Info comanda
-  ID = pC->ID;
-  oraConsegna = pC->oraConsegna;
-  nomeCliente = pC->nome;
-
+  if(pC){
+    ID = pC->ID;
+    oraConsegna = pC->oraConsegna;
+    nomeCliente = pC->nome;
+  }
   layoutComanda = new QVBoxLayout(this);
   wrapperComanda = new QPushButton(this);
   wrapperComanda->setObjectName("wrapperComanda");
