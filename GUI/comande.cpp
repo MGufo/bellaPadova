@@ -10,8 +10,6 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   label_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   label_inEsecuzione->setObjectName("inEsecuzione");
   QScrollArea* scroll_inEsecuzione = new QScrollArea(this);
-  scroll_inEsecuzione->setContentsMargins(0, 1, 0, 1);
-
   QWidget* wrapper_inEsecuzione = new QWidget(scroll_inEsecuzione);
   wrapper_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   wrapper_inEsecuzione->setObjectName("wrapperInEsecuzione");
@@ -31,7 +29,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   layout_inEsecuzione->addWidget(comanda3);
   layout_inEsecuzione->addWidget(comanda4);
   scroll_inEsecuzione->setWidget(wrapper_inEsecuzione);
-  scroll_inEsecuzione->setMinimumSize(580, 180);
+  scroll_inEsecuzione->setMinimumSize(580, 265);
   scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   scroll_inEsecuzione->setWidgetResizable(true);
 
@@ -56,16 +54,21 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   scroll_eseguite->setMinimumSize(580, 100);
   scroll_eseguite->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
-  QPushButton* newComanda = new QPushButton(this);
+  newComanda = new QPushButton(this);
   newComanda->setText("Nuova Comanda");
+  newComanda->setObjectName("newComanda");
+  newComanda->setMinimumWidth(300);
+  newComanda->setMaximumHeight(90);
 
   comandeLayout = new QVBoxLayout(this);
   comandeLayout->addWidget(label_inEsecuzione);
   comandeLayout->addWidget(scroll_inEsecuzione);
   comandeLayout->addWidget(label_concluse);
   comandeLayout->addWidget(scroll_eseguite);
-  comandeLayout->addWidget(newComanda);
+  comandeLayout->addWidget(newComanda, 0, Qt::AlignHCenter);
   comandeLayout->setContentsMargins(0,0,0,0);
+
+  connect(newComanda, SIGNAL(clicked()), this, SLOT(drawWizard()));
 
   setStyleComande();
   setLayout(comandeLayout);
@@ -79,7 +82,12 @@ void Comande::aggiungiComanda(pacchettoComanda* pC){
 }
 
 void Comande::setStyleComande(){
-  comandeLayout->setSpacing(0);
+  comandeLayout->setSpacing(10);
   comandeLayout->setMargin(0);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+}
+
+void Comande::drawWizard(){
+  nuovaComanda = new WizardNuovaComanda(this);
+  nuovaComanda->show();
 }

@@ -134,6 +134,10 @@ QPushButton#newArticolo {
     height: 75;
 }
 
+QPushButton#newComanda {
+    background-color: #2b78e4;
+}
+
 QPushButton#Rimuovi {
     background-color: #AB0000;
 }
@@ -141,7 +145,6 @@ QPushButton#Rimuovi {
 QPushButton#wrapperComanda {
     background-color: #008000;
     width: 240;
-    height: 200;
 
 }
 
