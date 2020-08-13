@@ -24,7 +24,6 @@ private:
   TabellaComposita* tabIngredienti;
   TabellaComposita* tabBevande;
   QVBoxLayout* layoutInventario;
-  void setStyleInventario();
   WizardNuovoConsumabile* nuovoConsumabile;
 
 private slots:

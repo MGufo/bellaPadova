@@ -58,13 +58,16 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
   newComanda = new QPushButton(this);
   newComanda->setText("Nuova Comanda");
+  newComanda->setObjectName("newComanda");
+  newComanda->setMinimumWidth(300);
+  newComanda->setMaximumHeight(90);
 
   comandeLayout = new QVBoxLayout(this);
   comandeLayout->addWidget(label_inEsecuzione);
   comandeLayout->addWidget(scroll_inEsecuzione);
   comandeLayout->addWidget(label_concluse);
   comandeLayout->addWidget(scroll_eseguite);
-  comandeLayout->addWidget(newComanda);
+  comandeLayout->addWidget(newComanda, 0, Qt::AlignHCenter);
   comandeLayout->setContentsMargins(0,0,0,0);
 
   connect(newComanda, SIGNAL(clicked()), this, SLOT(drawWizard()));
@@ -74,7 +77,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 }
 
 void Comande::setStyleComande(){
-  comandeLayout->setSpacing(0);
+  comandeLayout->setSpacing(10);
   comandeLayout->setMargin(0);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 }
