@@ -259,15 +259,18 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
 QList<pacchettoComanda*> *Controller::recuperaComande() const{
   QList<pacchettoComanda*>* pacchetti = new QList<pacchettoComanda*>();
   auto comande = modello->getComande();
+  auto current = modello->getComandaCorrente();
+
   for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
     Comanda* c = *it;
+    bool eseguita = (c < current) ? true : false;
+
     pacchettoComanda* pC =
       new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
                            c->getCliente().getIndirizzo(),
                            c->getCliente().getTelefono(),
                            c->getOraConsegna().toString().toStdString(),
-                           c->getTotale(), false);
-    // TODO: Assegnare il bool in modo corretto invece che false arbitrario
+                           c->getTotale(), eseguita);
     auto ordine = c->getOrdinazione();
     for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
       pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
