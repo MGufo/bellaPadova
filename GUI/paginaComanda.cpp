@@ -1,33 +1,20 @@
 #include "paginaComanda.h"
 
 PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
-  // Creazione wrapper contenuto e relativi subwidget
-  wrapperContenuto = new QWidget(this);
-  inizializzaPizze(wrapperContenuto);
-  inizializzaBevande(wrapperContenuto);
-  inizializzaWrapperInfoComanda(wrapperContenuto);
-  // Creazione layout wrapper contenuto e aggiunta dei subwidget
-  layoutContenuto = new QGridLayout(wrapperContenuto);
-  layoutContenuto->addWidget(wrapperInfoComanda, 0, 0, 5, 5, Qt::AlignLeft);
-  layoutContenuto->addWidget(Pizze, 0, 6, 5, 5);
-  layoutContenuto->addWidget(Bevande, 6, 6, 5, 5);
-  wrapperContenuto->setLayout(layoutContenuto);
-  // Creazione wrapper pulsanti e relativi pulsanti
-  wrapperPulsanti = new QWidget(this);
-  newArticolo = new QPushButton(wrapperPulsanti);
-  newArticolo->setText("Nuovo Articolo");
-  modificaDati = new QPushButton(wrapperPulsanti);
-  modificaDati->setText("Modifica");
-  // Creazione layout wrapper pulsanti e aggiunta dei subwidget
-  layoutPulsanti = new QHBoxLayout(wrapperPulsanti);
-  layoutPulsanti->addWidget(newArticolo);
-  layoutPulsanti->addWidget(modificaDati);
-  wrapperPulsanti->setLayout(layoutPulsanti);
-  // Creazione layout principale e aggiunta dei due wrapper
-  layoutPaginaComande = new QVBoxLayout(this);
-  layoutPaginaComande->addWidget(wrapperContenuto);
-  layoutPaginaComande->addWidget(wrapperPulsanti);
-  setLayout(layoutPaginaComande);
+  // Creazione subwidget infoComanda e tabelle
+  inizializzaPizze(this);
+  inizializzaBevande(this);
+  inizializzaInfoComanda(this);
+  // Creazione pulsanti
+  inizializzaPulsanti(this);
+  // Creazione layout paginaComanda e aggiunta dei subwidget
+  layoutPaginaComanda = new QGridLayout(this);
+  layoutPaginaComanda->addWidget(infoComanda, 1, 0, 5, 5, Qt::AlignLeft);
+  layoutPaginaComanda->addWidget(Pizze, 0, 6, 5, 5);
+  layoutPaginaComanda->addWidget(Bevande, 6, 6, 5, 5);
+  layoutPaginaComanda->addWidget(newArticolo, 7, 0, 1, 5);
+  layoutPaginaComanda->addWidget(modificaDati, 9, 0, 1, 5);
+  setLayout(layoutPaginaComanda);
 }
 
 PaginaComanda::~PaginaComanda() {}
@@ -50,18 +37,25 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
   Bevande->setObjectName("tabBevandeComanda");
 }
 
-void PaginaComanda::inizializzaWrapperInfoComanda(QWidget* _parent){
-  wrapperInfoComanda = new QWidget(_parent);
-  QLineEdit* orario = new QLineEdit(wrapperInfoComanda);
-  QLineEdit* nome = new QLineEdit(wrapperInfoComanda);
-  QLineEdit* indirizzo = new QLineEdit(wrapperInfoComanda);
-  QLineEdit* telefono = new QLineEdit(wrapperInfoComanda);
-  QFormLayout* info = new QFormLayout(wrapperInfoComanda);
+void PaginaComanda::inizializzaPulsanti(QWidget* _parent){
+  newArticolo = new QPushButton(_parent);
+  newArticolo->setText("Nuovo Articolo");
+  modificaDati = new QPushButton(_parent);
+  modificaDati->setText("Modifica");
+}
+
+void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
+  infoComanda = new QWidget(_parent);
+  QLineEdit* orario = new QLineEdit(infoComanda);
+  QLineEdit* nome = new QLineEdit(infoComanda);
+  QLineEdit* indirizzo = new QLineEdit(infoComanda);
+  QLineEdit* telefono = new QLineEdit(infoComanda);
+  QFormLayout* info = new QFormLayout(infoComanda);
   info->addRow("Orario: ", orario);
   info->addRow("Nome: ", nome);
   info->addRow("Indirizzo: ", indirizzo);
   info->addRow("Telefono: ", telefono);
-  QLabel* totale = new QLabel(wrapperInfoComanda);
+  QLabel* totale = new QLabel(infoComanda);
   info->addRow("Totale: ", totale);
-  wrapperInfoComanda->setLayout(info);
+  infoComanda->setLayout(info);
 }
