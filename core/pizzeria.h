@@ -50,6 +50,7 @@ class Pizzeria {
   const Lista<Consumabile*>& getInventario() const;
   const Lista<Articolo*>& getMenu() const;
   const Lista<Comanda*>& getComande() const;
+  const Comanda* getComandaCorrente() const;
 
   double contabilizzazione(const QDate&, const QDate&) const;
   Risorsa* trovaRisorsa(unsigned int ID) const;
@@ -71,6 +72,7 @@ class Pizzeria {
   void modificaComanda(Comanda*, Comanda*);
   void eseguiComanda();
   void rimuoviComanda(Comanda*);
+
 
   const Lista<string>& getContatto() const;
 

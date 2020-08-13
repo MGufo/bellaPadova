@@ -60,6 +60,10 @@ const Lista<Comanda *> &Pizzeria::getComande() const {
   return gestoreComande.getBacheca();
 }
 
+const Comanda* Pizzeria::getComandaCorrente() const{
+  return gestoreComande.getComandaCorrente();
+}
+
 double Pizzeria::contabilizzazione(const QDate & inizio, const QDate & fine) const{
   double guadagni = calcoloGuadagno(caricaComande(), inizio, fine);;
   double costi = 0;
