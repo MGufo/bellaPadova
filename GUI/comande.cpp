@@ -70,8 +70,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
 void Comande::aggiungiComanda(pacchettoComanda* pC){
   ComandaGUI* comanda = new ComandaGUI(this, pC);
-    (pC->eseguita) ? layout_inEsecuzione->addWidget(comanda) :
-                     layout_eseguite->addWidget(comanda);
+    (pC->eseguita) ? layout_eseguite->addWidget(comanda) :
+                     layout_inEsecuzione->addWidget(comanda);
 }
 
 void Comande::setStyleComande(){
