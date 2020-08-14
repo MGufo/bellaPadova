@@ -1,6 +1,9 @@
 #include "nuovaComanda_dettagli.h"
 
 NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(parent), previouslyInizialized(false){
+    setTitle("Aggiunta di una nuova Comanda");
+    setSubTitle("Fornisci un  orario, nome, indirizzo e numero telefonico da inserire nella comanda e successivamente "
+                "scegli gli articoli da inserirci con le rispettive quantità");
     QWidget* wrapper = new QWidget(this);
     QHBoxLayout* layoutWrapper = new QHBoxLayout(wrapper);
 
@@ -71,7 +74,7 @@ void NuovaComanda_dettagli::initializePage(){
     QWizardPage::initializePage();
     if(!previouslyInizialized){
         //registerField
-        registerField("orario*", orario);
+        registerField("orario", orario);
         registerField("nome*", nome);
         registerField("indirizzo*", indirizzo);
         registerField("telefono*", telefono);

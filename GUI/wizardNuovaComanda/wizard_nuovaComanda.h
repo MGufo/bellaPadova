@@ -3,9 +3,11 @@
 
 #include <QWidget>
 #include <QWizard>
+#include <QAbstractButton>
 
 #include "../pacchetti.h"
 #include "nuovaComanda_dettagli.h"
+#include "nuovaComanda_end.h"
 
 class WizardNuovaComanda : public QWizard{
   Q_OBJECT
