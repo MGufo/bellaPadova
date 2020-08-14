@@ -26,6 +26,8 @@ private:
     QTableWidget* bevande = nullptr;
     bool previouslyInizialized;
     void initializePage() override;
+signals:
+    void riempiWizardConElementiComanda();
 };
 
 #endif // NUOVACOMANDA_DETTAGLI_H

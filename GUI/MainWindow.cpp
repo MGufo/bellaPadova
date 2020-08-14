@@ -91,7 +91,7 @@ void MainWindow::eliminaRisorsa(uint id, bool b){
   else controller->eliminaArticolo(id);
 }
 
-void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
+void MainWindow::visualizzaElementiInWizardArticolo(bool option_pizza) const{
   QList<pacchetto*>* inventario = controller->recuperaInventario();
   if(option_pizza){
 
@@ -159,11 +159,12 @@ void MainWindow::visualizzaElementiInWizard(bool option_pizza) const{
       }
     }
     dynamic_cast<QRadioButton*>(wrapperBevande->cellWidget(0,1))->setChecked(true);
+    wrapperBevande->setEditTriggers(QAbstractItemView::NoEditTriggers);
   }
   delete inventario;
 }
 
-void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
+void MainWindow::visualizzaElementiCheckatiInWizardArticolo(bool option_pizza) const{
 
   if(option_pizza){
     //inserisco la farina selezionata nella pagina finale del wizard
@@ -200,6 +201,46 @@ void MainWindow::visualizzaElementiCheckatiInWizard(bool option_pizza) const{
           }
       }
   }
+}
+
+void MainWindow::visualizzaElementiInWizardComanda() const{
+    QList<pacchetto*>* menu = controller->recuperaMenu();
+
+    QTableWidget* wrapperPizze = findChild<QTableWidget*>("pizzeWrapper");
+    QTableWidget* wrapperBevande = findChild<QTableWidget*>("bevandeWrapper");
+    for(auto it = menu->constBegin(); it != menu->constEnd(); ++it){
+        if(dynamic_cast<pacchettoPizza*>(*it)){
+            pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(*it);
+            wrapperPizze->insertRow(wrapperPizze->rowCount());
+            QTableWidgetItem* item = nullptr;
+
+            QCheckBox* c = new QCheckBox(wrapperPizze);
+            wrapperPizze->setCellWidget(wrapperPizze->rowCount()-1, 0, c);
+            item = new QTableWidgetItem(QString::fromStdString(pP->nome));
+            wrapperPizze->setItem(wrapperPizze->rowCount()-1, 1, item);
+            QSpinBox* s = new QSpinBox(wrapperPizze);
+            wrapperPizze->setCellWidget(wrapperPizze->rowCount()-1, 2, s);
+        }
+
+        else if(dynamic_cast<pacchettoBevanda*>(*it)){
+            pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(*it);
+            wrapperBevande->insertRow(wrapperBevande->rowCount());
+            QTableWidgetItem* item = nullptr;
+
+            QCheckBox* c = new QCheckBox(wrapperBevande);
+            wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 0, c);
+            item = new QTableWidgetItem(QString::fromStdString(pB->nome));
+            wrapperBevande->setItem(wrapperBevande->rowCount()-1, 1, item);
+            QSpinBox* s = new QSpinBox(wrapperBevande);
+            wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 2, s);
+        }
+        wrapperPizze->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        wrapperBevande->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    }
+}
+
+void MainWindow::visualizzaElementiCheckatiInWizardComanda() const{
+
 }
 	
 void MainWindow::closeEvent(QCloseEvent *event){

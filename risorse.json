@@ -8,7 +8,7 @@
             "Disponibilità": false,
             "ID": 12,
             "Nome": "Coca Cola",
-            "Prezzo": 4.666666666666666,
+            "Prezzo": 4.999999999999999,
             "Quantita": 10,
             "tipo": "bottiglia"
         },
@@ -110,6 +110,28 @@
             "Nome": "Boscaiola",
             "Prezzo": 4,
             "tipo": "pizza"
+        },
+        "Coca Cola": {
+            "Capacita": 1.5,
+            "Costo": 8,
+            "Data Acquisto": "lun ago 3 2020",
+            "Disponibilità": false,
+            "ID": 12,
+            "Nome": "Coca Cola",
+            "Prezzo": 4.999999999999999,
+            "Quantita": 10,
+            "tipo": "bottiglia"
+        },
+        "Fanta": {
+            "Capacita": 0.33000001311302185,
+            "Costo": 6,
+            "Data Acquisto": "lun ago 3 2020",
+            "Disponibilità": false,
+            "ID": 11,
+            "Nome": "Fanta",
+            "Prezzo": 2,
+            "Quantita": 10,
+            "tipo": "lattina"
         },
         "Margherita": {
             "Disponibilita": true,

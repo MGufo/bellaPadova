@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QTabWidget>
 #include <QList>
+#include <QSpinBox>
 
 #include "GUI/comande.h"
 #include "GUI/menu.h"
@@ -45,8 +46,10 @@ signals:
   //true = pizza
   //false = bevanda
   void creaNuovaComanda(pacchettoComanda*);
-  void visualizzaElementiInWizard(bool) const;
-  void visualizzaElementiCheckatiInWizard(bool) const;
+  void visualizzaElementiInWizardArticolo(bool) const;
+  void visualizzaElementiCheckatiInWizardArticolo(bool) const;
+  void visualizzaElementiInWizardComanda() const;
+  void visualizzaElementiCheckatiInWizardComanda() const;
 
 protected:
   void closeEvent(QCloseEvent *event);

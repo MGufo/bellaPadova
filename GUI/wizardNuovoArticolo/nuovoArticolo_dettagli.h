@@ -25,7 +25,7 @@ private:
 signals:
     //true = pizza
     //false = bevanda
-    void riempiWizardConElementi(bool);
+    void riempiWizardConElementiArticolo(bool);
 };
 
 #endif // NUOVOARTICOLO_DETTAGLI_H
