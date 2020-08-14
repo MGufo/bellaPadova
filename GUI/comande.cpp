@@ -9,25 +9,20 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   QLabel* label_inEsecuzione = new QLabel("In Esecuzione:", this);
   label_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   label_inEsecuzione->setObjectName("inEsecuzione");
-  QScrollArea* scroll_inEsecuzione = new QScrollArea(this);
-  QWidget* wrapper_inEsecuzione = new QWidget(scroll_inEsecuzione);
+  scroll_inEsecuzione = new QScrollArea(this);
+  wrapper_inEsecuzione = new QWidget(scroll_inEsecuzione);
   wrapper_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   wrapper_inEsecuzione->setObjectName("wrapperInEsecuzione");
   wrapper_inEsecuzione->setContentsMargins(0, 1, 0, 1);
-  //dettaglioComanda* comanda1 = new dettaglioComanda(wrapper_inEsecuzione);
-  //dettaglioComanda* comanda2 = new dettaglioComanda(wrapper_inEsecuzione);
-  ComandaGUI* comanda3 = new ComandaGUI(wrapper_inEsecuzione);
-  comanda3->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  ComandaGUI* comanda4 = new ComandaGUI(wrapper_inEsecuzione);
-  comanda4->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
+//  ComandaGUI* comanda3 = new ComandaGUI(wrapper_inEsecuzione);
+//  comanda3->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+//  ComandaGUI* comanda4 = new ComandaGUI(wrapper_inEsecuzione);
+//  comanda4->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
   layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
   wrapper_inEsecuzione->setLayout(layout_inEsecuzione);
   //layout_inEsecuzione->addWidget(comanda1);
-  //layout_inEsecuzione->addWidget(comanda2);
-  layout_inEsecuzione->addWidget(comanda3);
-  layout_inEsecuzione->addWidget(comanda4);
+  //layout_inEsecuzione->addWidget(comanda2);+
   scroll_inEsecuzione->setWidget(wrapper_inEsecuzione);
   scroll_inEsecuzione->setMinimumSize(580, 265);
   scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -40,13 +35,11 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   QLabel* label_concluse = new QLabel("Concluse:", this);
   label_concluse->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   label_concluse->setObjectName("concluse");
-  QScrollArea* scroll_eseguite = new QScrollArea(this);
+  scroll_eseguite = new QScrollArea(this);
   scroll_eseguite->setContentsMargins(0, 1, 0, 1);
 
-  QWidget* wrapper_eseguite = new QWidget(scroll_eseguite);
+  wrapper_eseguite = new QWidget(scroll_eseguite);
   wrapper_eseguite->setObjectName("wrapperEseguite");
-  //aggiungere roba al widget
-
 
   layout_eseguite = new QHBoxLayout(wrapper_eseguite);
   wrapper_eseguite->setLayout(layout_eseguite);
@@ -77,8 +70,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
 void Comande::aggiungiComanda(pacchettoComanda* pC){
   ComandaGUI* comanda = new ComandaGUI(this, pC);
-    (pC->eseguita) ? layout_inEsecuzione->addWidget(comanda) :
-                     layout_eseguite->addWidget(comanda);
+    (pC->eseguita) ? layout_eseguite->addWidget(comanda) :
+                     layout_inEsecuzione->addWidget(comanda);
 }
 
 void Comande::setStyleComande(){

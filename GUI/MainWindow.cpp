@@ -335,7 +335,7 @@ void MainWindow::pulisciComande(){
     wrapperInExec->layout()->removeWidget(*it);
     delete *it;
   }
-  QWidget* wrapperExec = findChild<QWidget*>("wrapperInEsecuzione");
+  QWidget* wrapperExec = findChild<QWidget*>("wrapperEseguite");
   QList<ComandaGUI*> comandeExec = wrapperExec->findChildren<ComandaGUI*>();
   for(auto it = comandeExec.begin(); it != comandeExec.end(); ++it){
     wrapperExec->layout()->removeWidget(*it);

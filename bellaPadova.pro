@@ -34,7 +34,6 @@ SOURCES += \
     GUI/wizardNuovoArticolo/nuovoArticolo_pizza.cpp \
     GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.cpp \
     GUI/wizardNuovoArticolo/nuovoArticolo_end.cpp \
-    GUI/dettaglioComanda.cpp \
     GUI/comandagui.cpp \
     GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.cpp \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.cpp \
@@ -80,7 +79,6 @@ HEADERS += \
     GUI/wizardNuovoArticolo/nuovoArticolo_pizza.h \
     GUI/wizardNuovoArticolo/nuovoArticolo_bevanda.h \
     GUI/wizardNuovoArticolo/nuovoArticolo_end.h \
-    GUI/dettaglioComanda.h \
     GUI/comandagui.h \ 
     GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_intro.h \

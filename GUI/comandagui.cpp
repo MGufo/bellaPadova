@@ -2,19 +2,19 @@
 
 ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   // Info comanda
-  if(pC){
-    ID = pC->ID;
-    oraConsegna = pC->oraConsegna;
-    nomeCliente = pC->nome;
-  }
+  ID = pC->ID;
+  eseguita = pC->eseguita;
+  oraConsegna = pC->oraConsegna;
+  nomeCliente = QString::fromStdString(pC->nome);
   layoutComanda = new QVBoxLayout(this);
   wrapperComanda = new QPushButton(this);
   wrapperComanda->setObjectName("wrapperComanda");
   QVBoxLayout* layoutWrapper = new QVBoxLayout(wrapperComanda);
   QHBoxLayout* layoutButtons = new QHBoxLayout();
-  QLabel* orario = new QLabel("Orario", wrapperComanda);
+  QLabel* orario = new QLabel(oraConsegna.toString("hh:mm"), wrapperComanda);
   orario->setObjectName("Orario");
-  QLabel* comandaId = new QLabel("Comanda ", wrapperComanda);
+  QString contenutoID = "Comanda " + QString::fromStdString(std::to_string(ID));
+  QLabel* comandaId = new QLabel(contenutoID, wrapperComanda);
   comandaId->setObjectName("ComandaId");
   rimuovi = new QPushButton("Rimuovi", wrapperComanda);
   rimuovi->setObjectName("Rimuovi");
@@ -36,7 +36,7 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
 
   wrapperComanda->setMinimumHeight(200);
   wrapperComanda->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-  connect(wrapperComanda, SIGNAL(pressed()), this, SLOT(showDetails()));
+  connect(wrapperComanda, SIGNAL(clicked()), this, SLOT(showDetails()));
 }
 
 void ComandaGUI::showDetails(){

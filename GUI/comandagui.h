@@ -20,9 +20,10 @@ public slots:
   void showDetails();
 
 private:
+  bool eseguita;
   uint ID;
   QTime oraConsegna;
-  std::string nomeCliente;
+  QString nomeCliente;
   QVBoxLayout* layoutComanda;
   QPushButton* wrapperComanda;
   QPushButton* rimuovi;
