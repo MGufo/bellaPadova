@@ -7,7 +7,6 @@
 #include <QLabel>
 #include <QScrollArea>
 
-#include "dettaglioComanda.h"
 #include "comandagui.h"
 #include "wizardNuovaComanda/wizard_nuovaComanda.h"
 
@@ -18,12 +17,16 @@ public:
   void aggiungiComanda(pacchettoComanda*);
 
 private:
-  QPushButton* newComanda;
-  QVBoxLayout* comandeLayout;
-  QHBoxLayout* layout_inEsecuzione;
   QHBoxLayout* layout_eseguite;
-  void setStyleComande();
+  QHBoxLayout* layout_inEsecuzione;
+  QPushButton* newComanda;
+  QScrollArea* scroll_eseguite;
+  QScrollArea* scroll_inEsecuzione;
+  QVBoxLayout* comandeLayout;
+  QWidget* wrapper_eseguite;
+  QWidget* wrapper_inEsecuzione;
   WizardNuovaComanda* nuovaComanda;
+  void setStyleComande();
 
 signals:
 
