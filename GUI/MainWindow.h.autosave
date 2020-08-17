@@ -49,7 +49,7 @@ signals:
   void visualizzaElementiCheckatiInWizard(bool) const;
 
 protected:
-  void closeEvent(QCloseEvent *);
+  void closeEvent(QCloseEvent*);
 private:
   Controller* controller;
   QVBoxLayout* mainLayout;
