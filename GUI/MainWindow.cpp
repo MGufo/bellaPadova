@@ -145,7 +145,7 @@ void MainWindow::visualizzaElementiInWizardArticolo(bool option_pizza) const{
     wrapperIngredienti->setEditTriggers(QAbstractItemView::NoEditTriggers);
   }
   else{
-    QTableWidget* wrapperBevande = findChild<QTableWidget*>("bevandeWrapper");
+    QTableWidget* wrapperBevande = findChild<QTableWidget*>("bevandeWrapper_articoli");
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
       pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(*it);
       if(pB){
@@ -199,11 +199,11 @@ void MainWindow::visualizzaElementiCheckatiInWizardArticolo(bool option_pizza) c
   }
   else{
     //inserisco le bevande selezionate nella pagina finale del wizard
-      QTableWidget* bevandeTabellaWrapper = findChild<QTableWidget*>("bevandeWrapper");
+      QTableWidget* bevandeTabellaWrapper = findChild<QTableWidget*>("bevandeWrapper_articoli");
       for(int i=0; i<bevandeTabellaWrapper->rowCount() ; i++){
           QRadioButton* radioBevanda = dynamic_cast<QRadioButton*>(bevandeTabellaWrapper->cellWidget(i,1));
           if(radioBevanda->isChecked()){
-              QWidget* bevandeVisualWrapper = findChild<QWidget*>("bevandeVisualizationWrapper");
+              QWidget* bevandeVisualWrapper = findChild<QWidget*>("bevandeVisualizationWrapper_articoli");
               QLabel* label = new QLabel(bevandeTabellaWrapper->item(i,2)->text());
               dynamic_cast<QVBoxLayout*>(bevandeVisualWrapper->layout())->addWidget(label);
           }
@@ -215,7 +215,7 @@ void MainWindow::visualizzaElementiInWizardComanda() const{
     QList<pacchetto*>* menu = controller->recuperaMenu();
 
     QTableWidget* wrapperPizze = findChild<QTableWidget*>("pizzeWrapper");
-    QTableWidget* wrapperBevande = findChild<QTableWidget*>("bevandeWrapper");
+    QTableWidget* wrapperBevande = findChild<QTableWidget*>("bevandeWrapper_comande");
     for(auto it = menu->constBegin(); it != menu->constEnd(); ++it){
         if(dynamic_cast<pacchettoPizza*>(*it)){
             pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(*it);

@@ -46,7 +46,7 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     pizze->verticalHeader()->setVisible(false);
 
     bevande = new QTableWidget(0,3,wrapper);
-    bevande->setObjectName("bevandeWrapper");
+    bevande->setObjectName("bevandeWrapper_comande");
     //bevande->setMinimumWidth(850);
     //bevande->setMaximumWidth(2100);
     //bevande->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -83,10 +83,8 @@ void NuovaComanda_dettagli::initializePage(){
         registerField("indirizzo*", indirizzo);
         registerField("telefono*", telefono);
     }
+
     previouslyInizialized = true;
-    if(previouslyInizialized){
-        pizze->clearContents();
-        bevande->clearContents();
-    }
+
     emit riempiWizardConElementiComanda();
 }
