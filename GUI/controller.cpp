@@ -274,13 +274,13 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
 QList<pacchettoComanda*> *Controller::recuperaComande() const{
   QList<pacchettoComanda*>* pacchetti = new QList<pacchettoComanda*>();
   auto comande = modello->getComande();
-  auto current = modello->getComandaCorrente();
+  const Comanda* current = modello->getComandaCorrente();
 
   for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
-    Comanda* c = *it;
+    const Comanda* c = *it;
     bool eseguita;
     if(current)
-      eseguita = (c < current) ? true : false;
+      eseguita = ((*c) < (*current)) ? true : false;
     else
       eseguita = false;
     pacchettoComanda* pC =
