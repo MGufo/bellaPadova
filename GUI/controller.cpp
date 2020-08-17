@@ -145,12 +145,8 @@ void Controller::eliminaComanda(uint ID){
 }
 
 void Controller::eseguiComanda(){
-  // fai cose
-  /* TODO:
-   * - Togliere il pulsante "completata" dalle singole comandeGUI e metterne uno
-   * "globale" con label "esegui comanda corrente"
-   */
-vista->visualizzaComande();
+  modello->eseguiComanda();
+  vista->visualizzaComande();
 }
 
 void Controller::creaNuovoArticolo(pacchetto* pA){
