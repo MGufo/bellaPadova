@@ -16,20 +16,21 @@ public:
   explicit Comande(QWidget *parent = nullptr);
   void aggiungiComanda(pacchettoComanda*);
 
-public slots:
+signals:
   void eseguiComanda(uint);
 
 private:
   QHBoxLayout* layout_eseguite;
   QHBoxLayout* layout_inEsecuzione;
   QPushButton* newComanda;
-  QPushButton* eseguiComanda;
+  QPushButton* prossimaComanda;
   QScrollArea* scroll_eseguite;
   QScrollArea* scroll_inEsecuzione;
   QVBoxLayout* comandeLayout;
   QWidget* wrapper_eseguite;
   QWidget* wrapper_inEsecuzione;
   WizardNuovaComanda* nuovaComanda;
+  uint getPrimaComanda(const QList<ComandaGUI*>&) const;
   void setStyleComande();
 
 signals:

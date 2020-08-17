@@ -53,7 +53,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   newComanda->setMinimumWidth(300);
   newComanda->setMaximumHeight(90);
 
-  eseguiComanda = new QPushButton(this);
+  prossimaComanda = new QPushButton(this);
   newComanda->setText("Esegui Comanda Corrente");
   newComanda->setObjectName("eseguiComanda");
 
@@ -63,11 +63,11 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   comandeLayout->addWidget(label_concluse);
   comandeLayout->addWidget(scroll_eseguite);
   comandeLayout->addWidget(newComanda, 0, Qt::AlignHCenter);
-  comandeLayout->addWidget(eseguiComanda, 0, Qt::AlignHCenter);
+  comandeLayout->addWidget(prossimaComanda, 0, Qt::AlignHCenter);
   comandeLayout->setContentsMargins(0,0,0,0);
 
   connect(newComanda, SIGNAL(clicked()), this, SLOT(drawWizard()));
-  connect(eseguiComanda, SIGNAL(clicked()), this, SLOT(eseguiComanda()));
+  connect(prossimaComanda, SIGNAL(clicked()), this, SLOT(eseguiComanda()));
 
   setStyleComande();
   setLayout(comandeLayout);
@@ -78,6 +78,14 @@ void Comande::aggiungiComanda(pacchettoComanda* pC){
   ComandaGUI* comanda = new ComandaGUI(this, pC);
     (pC->eseguita) ? layout_eseguite->addWidget(comanda) :
                      layout_inEsecuzione->addWidget(comanda);
+}
+
+uint Comande::getPrimaComanda(const QList<ComandaGUI*>& comandeGUI) const{
+  QTime t(23,59,59);
+  auto ptr = comandeGUI.cbegin();
+  for(auto it = comandeGUI.cbegin(); it != comandeGUI.cend(); ++it)
+    if(((*it)->getOraConsegna()) < t) ptr = it;
+  return (*ptr)->getID();
 }
 
 void Comande::setStyleComande(){
@@ -92,7 +100,10 @@ void Comande::drawWizard(){
 }
 
 void Comande::eseguiComanda(){
+  QList<ComandaGUI*> comandeGUI = findChildren<ComandaGUI*>();
+  emit eseguiComanda(getPrimaComanda(comandeGUI));
+}
+
   // TODO: usare findChildren per ottenere il primo figlio di tipo comandaGUI.
   // se findChildren non restituisce il primo figlio toccherà rompersi il cazzo
   // con una funzione findMin che confronti gli orari di consegna (QTime )
-  emit eseguiComanda(); }
