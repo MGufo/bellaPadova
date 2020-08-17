@@ -16,7 +16,7 @@ public:
 
 signals:
   void eliminaComanda(uint);
-  void segnaComeEseguita(uint);
+
 
 public slots:
   void showDetails();

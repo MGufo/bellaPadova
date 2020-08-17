@@ -18,10 +18,7 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   comandaId->setObjectName("ComandaId");
   rimuovi = new QPushButton("Rimuovi", wrapperComanda);
   rimuovi->setObjectName("Rimuovi");
-  completata = new QPushButton("Completata", wrapperComanda);
-  completata->setObjectName("Completata");
   layoutButtons->addWidget(rimuovi);
-  layoutButtons->addWidget(completata);
 
   layoutWrapper->addWidget(orario);
   layoutWrapper->addWidget(comandaId);
@@ -41,9 +38,6 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   connect(this, SIGNAL(eliminaComanda(uint)),
           parentWidget()->parentWidget()->parentWidget()->parentWidget(),
           SLOT(eliminaComanda(uint)));
-  connect(this, SIGNAL(segnaComeEseguita(uint)),
-          parentWidget()->parentWidget()->parentWidget()->parentWidget(),
-          SLOT(segnaComeEseguita(uint)));
 
   setWindowTitle(contenutoID);
 }
