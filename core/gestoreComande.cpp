@@ -149,8 +149,8 @@ Comanda *GestoreComande::trovaComanda(unsigned int _ID) const {
   if(current.isValid()){
     for(auto it = current; it != bacheca.end(); ++it)
       if((*it)->getIdComanda() == _ID) c = *it;
-    return c;
   }
+  return c;
 }
 
 void GestoreComande::salvaComande(QJsonObject *fileComandeJSON) const{
