@@ -26,7 +26,7 @@ void PaginaComanda::inizializzaPizze(QWidget* _parent){
   headerLabels->push_back("Nome");
   headerLabels->push_back("Quantità");
 
-  Pizze = new TabellaComposita(_parent, "Pizze", headerLabels);
+  Pizze = new TabellaComande(_parent, "Pizze", headerLabels);
   Pizze->setObjectName("tabPizzeComanda");
 }
 
@@ -35,7 +35,7 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
   headerLabels->push_back("Nome");
   headerLabels->push_back("Quantità");
 
-  Bevande = new TabellaComposita(_parent, "Bevande", headerLabels);
+  Bevande = new TabellaComande(_parent, "Bevande", headerLabels);
   Bevande->setObjectName("tabBevandeComanda");
 }
 

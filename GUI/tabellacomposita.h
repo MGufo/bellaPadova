@@ -42,7 +42,7 @@ private slots:
   void checkBoxToggled(bool);
   void forwardIdToModel(uint);
 
-private:
+protected:
   bool editabile;
   QHeaderView* header = nullptr;
   QTableWidget* tabella = nullptr;

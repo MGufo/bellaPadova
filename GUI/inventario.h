@@ -7,7 +7,7 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QStringList>
-#include "GUI/tabellacomposita.h"
+#include "GUI/tabellarisorse.h"
 #include "GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h"
 #include "MainWindow.h"
 
@@ -21,8 +21,8 @@ signals:
 private:
   QPushButton* newConsumabile;
   QPushButton* modificaDati;
-  TabellaComposita* tabIngredienti;
-  TabellaComposita* tabBevande;
+  TabellaRisorse* tabIngredienti;
+  TabellaRisorse* tabBevande;
   QVBoxLayout* layoutInventario;
   WizardNuovoConsumabile* nuovoConsumabile;
 

@@ -10,7 +10,7 @@
 #include <QLineEdit>
 #include <QCloseEvent>
 
-#include "tabellacomposita.h"
+#include "tabellacomande.h"
 
 class PaginaComanda : public QWidget {
   Q_OBJECT
@@ -25,8 +25,8 @@ signals:
 private:
   QGridLayout* layoutPaginaComanda;
   QHBoxLayout* layoutInfoComanda;
-  TabellaComposita* Pizze;
-  TabellaComposita* Bevande;
+  TabellaComande* Pizze;
+  TabellaComande* Bevande;
   QWidget* infoComanda;
   QPushButton* newArticolo;
   QPushButton* modificaDati;

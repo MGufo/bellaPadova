@@ -288,23 +288,23 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
 }
 
 void MainWindow::pulisciInventario(){
-    TabellaComposita* tabBevande =
-      findChild<TabellaComposita*>("tabBevandeInventario");
+    TabellaRisorse* tabBevande =
+      findChild<TabellaRisorse*>("tabBevandeInventario");
     tabBevande->pulisciTabella();
-    TabellaComposita* tabIngredienti =
-      findChild<TabellaComposita*>("tabIngredientiInventario");
+    TabellaRisorse* tabIngredienti =
+      findChild<TabellaRisorse*>("tabIngredientiInventario");
     tabIngredienti->pulisciTabella();
 }
 
 void MainWindow::aggiornaInventario(pacchetto * p){
   if(dynamic_cast<pacchettoBevanda*>(p)){
-    TabellaComposita* tabBevande =
-        findChild<TabellaComposita*>("tabBevandeInventario");
+    TabellaRisorse* tabBevande =
+        findChild<TabellaRisorse*>("tabBevandeInventario");
     tabBevande->inserisciElemento(p);
   }
   else{
-    TabellaComposita* tabIngredienti =
-        findChild<TabellaComposita*>("tabIngredientiInventario");
+    TabellaRisorse* tabIngredienti =
+        findChild<TabellaRisorse*>("tabIngredientiInventario");
     tabIngredienti->inserisciElemento(p);
   }
 }
@@ -319,11 +319,11 @@ void MainWindow::visualizzaInventario(){
 }
 
 void MainWindow::aggiornaMenu(pacchetto* p){
-  TabellaComposita* tab;
+  TabellaRisorse* tab;
   if(dynamic_cast<pacchettoPizza*>(p))
-    tab = findChild<TabellaComposita*>("tabPizzeMenu");
+    tab = findChild<TabellaRisorse*>("tabPizzeMenu");
   else
-    tab = findChild<TabellaComposita*>("tabBevandeMenu");
+    tab = findChild<TabellaRisorse*>("tabBevandeMenu");
 
   tab->inserisciElemento(p);
 }

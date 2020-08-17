@@ -45,7 +45,9 @@ SOURCES += \
     GUI/paginaComanda.cpp \
     GUI/wizardNuovaComanda/wizard_nuovaComanda.cpp \
     GUI/wizardNuovaComanda/nuovaComanda_dettagli.cpp \
-    GUI/wizardNuovaComanda/nuovaComanda_end.cpp
+    GUI/wizardNuovaComanda/nuovaComanda_end.cpp \
+    GUI/tabellarisorse.cpp \
+    GUI/tabellacomande.cpp
 
     #test/testgui.cpp
 
@@ -90,7 +92,9 @@ HEADERS += \
     GUI/paginaComanda.h \
     GUI/wizardNuovaComanda/wizard_nuovaComanda.h \
     GUI/wizardNuovaComanda/nuovaComanda_dettagli.h \
-    GUI/wizardNuovaComanda/nuovaComanda_end.h
+    GUI/wizardNuovaComanda/nuovaComanda_end.h \
+    GUI/tabellarisorse.h \
+    GUI/tabellacomande.h
     #test/testgui.h \
 
 RESOURCES += \

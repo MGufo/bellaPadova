@@ -12,16 +12,16 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   headerLabels->push_back("Data Acquisto");
   headerLabels->push_back("Locale");
   headerLabels->push_back("Tipo Farina");
-  tabIngredienti = new TabellaComposita(this, "Ingredienti", headerLabels);
-  tabIngredienti->setHeaderDimension(TabellaComposita::inventario);
+  tabIngredienti = new TabellaRisorse(this, "Ingredienti", headerLabels);
+  tabIngredienti->setHeaderDimension(TabellaRisorse::inventario);
   tabIngredienti->setObjectName("tabIngredientiInventario");
   headerLabels->pop_back();
   headerLabels->pop_back();
   headerLabels->push_back("Capacità");
   headerLabels->push_back("Prezzo Vendita");
   headerLabels->push_back("Tipologia");
-  tabBevande = new TabellaComposita(this, "Bevande", headerLabels);
-  tabBevande->setHeaderDimension(TabellaComposita::bevandeI);
+  tabBevande = new TabellaRisorse(this, "Bevande", headerLabels);
+  tabBevande->setHeaderDimension(TabellaRisorse::bevandeI);
   tabBevande->setObjectName("tabBevandeInventario");
 
   layoutInventario->addWidget(tabIngredienti);

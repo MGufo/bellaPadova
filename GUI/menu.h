@@ -6,7 +6,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QScrollArea>
-#include "GUI/tabellacomposita.h"
+#include "GUI/tabellarisorse.h"
 #include "wizardNuovoArticolo/wizard_nuovoArticolo.h"
 class WizardNuovoArticolo;
 
@@ -15,8 +15,8 @@ class Menu : public QWidget
   Q_OBJECT
 
 private:
-  TabellaComposita* tabPizze;
-  TabellaComposita* tabBevande;
+  TabellaRisorse* tabPizze;
+  TabellaRisorse* tabBevande;
   QPushButton* newArticolo;
   QPushButton* modificaDati;
   QVBoxLayout* layoutMenu;
