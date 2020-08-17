@@ -278,8 +278,11 @@ QList<pacchettoComanda*> *Controller::recuperaComande() const{
 
   for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
     Comanda* c = *it;
-    bool eseguita = (c < current) ? true : false;
-
+    bool eseguita;
+    if(current)
+      eseguita = (c < current) ? true : false;
+    else
+      eseguita = false;
     pacchettoComanda* pC =
       new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
                            c->getCliente().getIndirizzo(),
