@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QFormLayout>
 #include <QLineEdit>
+#include <QCloseEvent>
 
 #include "tabellacomposita.h"
 
@@ -17,6 +18,9 @@ class PaginaComanda : public QWidget {
 public:
   PaginaComanda(QWidget* parent = nullptr);
   ~PaginaComanda();
+
+signals:
+  void enableButton();
 
 private:
   QGridLayout* layoutPaginaComanda;
@@ -32,6 +36,7 @@ private:
   void inizializzaPulsanti(QWidget*);
   void inizializzaInfoComanda(QWidget*);
   void setStylePaginaComanda();
+  void closeEvent(QCloseEvent*) override;
 };
 
 #endif // PAGINACOMANDA_H

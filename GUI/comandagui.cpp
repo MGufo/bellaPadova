@@ -37,10 +37,17 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   wrapperComanda->setMinimumHeight(200);
   wrapperComanda->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
   connect(wrapperComanda, SIGNAL(clicked()), this, SLOT(showDetails()));
+
+  setWindowTitle(contenutoID);
 }
 
 void ComandaGUI::showDetails(){
   dettagli = new PaginaComanda(this);
   dettagli->setWindowFlags(Qt::Window);
+  wrapperComanda->setEnabled(false);
   dettagli->show();
+}
+
+void ComandaGUI::enableButton(){
+  wrapperComanda->setEnabled(true);
 }

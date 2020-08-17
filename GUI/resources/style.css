@@ -145,7 +145,12 @@ QPushButton#Rimuovi {
 QPushButton#wrapperComanda {
     background-color: #008000;
     width: 240;
+}
 
+QPushButton::disabled #wrapperComanda {
+  color: black;
+  background-color: gray;
+  width: 240;
 }
 
 QScrollArea {

@@ -16,6 +16,7 @@ PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
   layoutPaginaComanda->addWidget(modificaDati, 9, 0, 1, 5);
   setStylePaginaComanda();
   setLayout(layoutPaginaComanda);
+  connect(this, SIGNAL(enableButton()), parentWidget(), SLOT(enableButton()));
 }
 
 PaginaComanda::~PaginaComanda() {}
@@ -71,4 +72,9 @@ void PaginaComanda::setStylePaginaComanda(){
   setObjectName("paginaComanda");
   newArticolo->setObjectName("newArticolo");
   modificaDati->setObjectName("modificaDati");
+}
+
+void PaginaComanda::closeEvent(QCloseEvent* event){
+  emit enableButton();
+  event->accept();
 }

@@ -18,6 +18,7 @@ signals:
 
 public slots:
   void showDetails();
+  void enableButton();
 
 private:
   bool eseguita;
