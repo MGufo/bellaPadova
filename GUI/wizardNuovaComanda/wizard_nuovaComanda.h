@@ -17,7 +17,7 @@ public:
 
   //void accept() override;
 signals:
-
+  void nuovaComanda(pacchettoComanda*);
 public slots:
   void assegnaBottoni(int);
   void handlerBottoni();
