@@ -134,12 +134,13 @@ void Controller::creaNuovaComanda(pacchettoComanda *pC){
 }
 
 void Controller::modificaComanda(pacchettoComanda *pC){
-  // TODO: Fare cose
+  // TODO: Ask Gabriel se modificare tabellaComposita in più sottoclassi, se implementarla in dettaglioComanda così com'è o cosa fare
+  // TODO: Rivedere implementazione delle funzioni modificaComanda() e rimuoviComanda()
   vista->visualizzaComande();
 }
 
-void Controller::eliminaComanda(uint id){
-  // TODO: fare cose
+void Controller::eliminaComanda(uint ID){
+  modello->rimuoviComanda(modello->trovaComanda(ID));
   vista->visualizzaComande();
 }
 

@@ -37,6 +37,10 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   wrapperComanda->setMinimumHeight(200);
   wrapperComanda->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
   connect(wrapperComanda, SIGNAL(clicked()), this, SLOT(showDetails()));
+  connect(rimuovi, SIGNAL(clicked()), this, SLOT(removeClicked()));
+  connect(this, SIGNAL(eliminaComanda(uint)),
+          parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+          SLOT(eliminaComanda(uint)));
 
   setWindowTitle(contenutoID);
 }
@@ -48,6 +52,6 @@ void ComandaGUI::showDetails(){
   dettagli->show();
 }
 
-void ComandaGUI::enableButton(){
-  wrapperComanda->setEnabled(true);
-}
+void ComandaGUI::enableButton(){ wrapperComanda->setEnabled(true); }
+
+void ComandaGUI::removeClicked(){ emit eliminaComanda(ID); }

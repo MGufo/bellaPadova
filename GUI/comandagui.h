@@ -15,10 +15,12 @@ public:
   explicit ComandaGUI(QWidget *parent = nullptr, pacchettoComanda* = nullptr);
 
 signals:
+  void eliminaComanda(uint);
 
 public slots:
   void showDetails();
   void enableButton();
+  void removeClicked();
 
 private:
   bool eseguita;

@@ -86,6 +86,10 @@ void MainWindow::creaNuovaComanda(pacchettoComanda* pC){
   controller->creaNuovaComanda(pC);
 }
 
+void MainWindow::eliminaComanda(uint ID){
+  controller->eliminaComanda(ID);
+}
+
 void MainWindow::eliminaRisorsa(uint id, bool b){
   if(b) controller->eliminaConsumabile(id);
   else controller->eliminaArticolo(id);
