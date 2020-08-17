@@ -16,10 +16,14 @@ public:
   explicit Comande(QWidget *parent = nullptr);
   void aggiungiComanda(pacchettoComanda*);
 
+public slots:
+  void eseguiComanda(uint);
+
 private:
   QHBoxLayout* layout_eseguite;
   QHBoxLayout* layout_inEsecuzione;
   QPushButton* newComanda;
+  QPushButton* eseguiComanda;
   QScrollArea* scroll_eseguite;
   QScrollArea* scroll_inEsecuzione;
   QVBoxLayout* comandeLayout;
@@ -32,6 +36,7 @@ signals:
 
 private slots:
     void drawWizard();
+    void eseguiComanda();
 };
 
 #endif // COMANDE_H

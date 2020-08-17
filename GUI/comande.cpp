@@ -53,15 +53,21 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   newComanda->setMinimumWidth(300);
   newComanda->setMaximumHeight(90);
 
+  eseguiComanda = new QPushButton(this);
+  newComanda->setText("Esegui Comanda Corrente");
+  newComanda->setObjectName("eseguiComanda");
+
   comandeLayout = new QVBoxLayout(this);
   comandeLayout->addWidget(label_inEsecuzione);
   comandeLayout->addWidget(scroll_inEsecuzione);
   comandeLayout->addWidget(label_concluse);
   comandeLayout->addWidget(scroll_eseguite);
   comandeLayout->addWidget(newComanda, 0, Qt::AlignHCenter);
+  comandeLayout->addWidget(eseguiComanda, 0, Qt::AlignHCenter);
   comandeLayout->setContentsMargins(0,0,0,0);
 
   connect(newComanda, SIGNAL(clicked()), this, SLOT(drawWizard()));
+  connect(eseguiComanda, SIGNAL(clicked()), this, SLOT(eseguiComanda()));
 
   setStyleComande();
   setLayout(comandeLayout);
@@ -84,3 +90,9 @@ void Comande::drawWizard(){
   nuovaComanda = new WizardNuovaComanda(this);
   nuovaComanda->show();
 }
+
+void Comande::eseguiComanda(){
+  // TODO: usare findChildren per ottenere il primo figlio di tipo comandaGUI.
+  // se findChildren non restituisce il primo figlio toccherà rompersi il cazzo
+  // con una funzione findMin che confronti gli orari di consegna (QTime )
+  emit eseguiComanda(); }
