@@ -144,6 +144,21 @@ void Controller::eliminaComanda(uint ID){
   vista->visualizzaComande();
 }
 
+void Controller::eseguiComanda(){
+  // fai cose
+  /* TODO:
+   * Decidere se tenere o rimuovere i pulsanti "completata" da ogni comandaGUI
+   * - Tenerli vuol dire rompere la logica del modello perché posso segnare come
+   * completata una comanda che non è la prima da fare (current).
+   * - Lasciarlo solo a quella marcata da current (magari segnandola di colore
+   * diverso) potrebbe essere uan soluzione ma bisogna gestire la presenza o
+   * meno del pulsante.
+   * - Togliere il pulsante "completata" dalle singole comandeGUI e metterne uno
+   * "globale" che faccia avanzare current e aggiorni la vista delle comande (this)
+   */
+vista->visualizzaComande();
+}
+
 void Controller::creaNuovoArticolo(pacchetto* pA){
     Articolo* pArticolo = nullptr;
     if(dynamic_cast<pacchettoBevanda*>(pA)){

@@ -90,6 +90,10 @@ void MainWindow::eliminaComanda(uint ID){
   controller->eliminaComanda(ID);
 }
 
+void MainWindow::segnaComeEseguita(uint){
+  controller->eseguiComanda();
+}
+
 void MainWindow::eliminaRisorsa(uint id, bool b){
   if(b) controller->eliminaConsumabile(id);
   else controller->eliminaArticolo(id);

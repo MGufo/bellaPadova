@@ -41,6 +41,9 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   connect(this, SIGNAL(eliminaComanda(uint)),
           parentWidget()->parentWidget()->parentWidget()->parentWidget(),
           SLOT(eliminaComanda(uint)));
+  connect(this, SIGNAL(segnaComeEseguita(uint)),
+          parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+          SLOT(segnaComeEseguita(uint)));
 
   setWindowTitle(contenutoID);
 }
@@ -55,3 +58,5 @@ void ComandaGUI::showDetails(){
 void ComandaGUI::enableButton(){ wrapperComanda->setEnabled(true); }
 
 void ComandaGUI::removeClicked(){ emit eliminaComanda(ID); }
+
+void ComandaGUI::completedClicked() { emit segnaComeEseguita(ID); }

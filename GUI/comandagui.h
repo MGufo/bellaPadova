@@ -16,11 +16,13 @@ public:
 
 signals:
   void eliminaComanda(uint);
+  void segnaComeEseguita(uint);
 
 public slots:
   void showDetails();
   void enableButton();
   void removeClicked();
+  void completedClicked();
 
 private:
   bool eseguita;
