@@ -29,7 +29,6 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   setLayout(layoutComanda);
 
   rimuovi->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-  completata->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
   wrapperComanda->setMinimumHeight(200);
   wrapperComanda->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
@@ -53,6 +52,6 @@ void ComandaGUI::enableButton(){ wrapperComanda->setEnabled(true); }
 
 void ComandaGUI::removeClicked(){ emit eliminaComanda(ID); }
 
-void ComandaGUI::completedClicked() { emit segnaComeEseguita(ID); }
-
 uint ComandaGUI::getID() const { return ID; }
+
+QTime ComandaGUI::getOraConsegna() const { return oraConsegna; }

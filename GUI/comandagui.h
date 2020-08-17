@@ -16,6 +16,8 @@ public:
 
   uint getID() const;
 
+  QTime getOraConsegna() const;
+
 signals:
   void eliminaComanda(uint);
 
@@ -24,7 +26,6 @@ public slots:
   void showDetails();
   void enableButton();
   void removeClicked();
-  void completedClicked();
 
 private:
   bool eseguita;
