@@ -54,3 +54,5 @@ void ComandaGUI::enableButton(){ wrapperComanda->setEnabled(true); }
 void ComandaGUI::removeClicked(){ emit eliminaComanda(ID); }
 
 void ComandaGUI::completedClicked() { emit segnaComeEseguita(ID); }
+
+uint ComandaGUI::getID() const { return ID; }

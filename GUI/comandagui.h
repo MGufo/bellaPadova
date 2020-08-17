@@ -14,6 +14,8 @@ class ComandaGUI : public QWidget{
 public:
   explicit ComandaGUI(QWidget *parent = nullptr, pacchettoComanda* = nullptr);
 
+  uint getID() const;
+
 signals:
   void eliminaComanda(uint);
 
