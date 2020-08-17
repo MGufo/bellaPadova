@@ -68,7 +68,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
   connect(newComanda, SIGNAL(clicked()), this, SLOT(drawWizard()));
   connect(prossimaComanda, SIGNAL(clicked()), this, SLOT(eseguiComanda()));
-
+  connect(this, SIGNAL(eseguiComanda(uint)), parentWidget()->parentWidget(), SLOT(segnaComeEseguita(uint)));
   setStyleComande();
   setLayout(comandeLayout);
   setObjectName("widgetComande");
