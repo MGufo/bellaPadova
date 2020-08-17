@@ -20,7 +20,7 @@ void NuovoArticolo_end::setActualPage(){
     if(ptr1) layoutEnd->removeRow(ptr1);
     ptr1 = findChild<QWidget*>("farinaVisualizationWrapper");
     if(ptr1) layoutEnd->removeRow(ptr1);
-    ptr1 = findChild<QWidget*>("bevandeVisualizationWrapper");
+    ptr1 = findChild<QWidget*>("bevandeVisualizationWrapper_articoli");
     if(ptr1) layoutEnd->removeRow(ptr1);
 
 

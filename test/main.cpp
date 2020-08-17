@@ -92,7 +92,7 @@ int main(int argc, char* argv[]) {
   bellaPadova.inserisciComanda(comanda1);
   bellaPadova.inserisciComanda(comanda2);
   bellaPadova.eseguiComanda();
-//  bellaPadova.eseguiComanda();
+  bellaPadova.eseguiComanda();
   view.visualizzaComande();
   return app.exec();
 }

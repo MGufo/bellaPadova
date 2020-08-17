@@ -11,7 +11,7 @@ NuovoArticolo_bevanda::NuovoArticolo_bevanda(QWidget* parent) : QWidget(parent){
     labelsBevande->push_back("Capacità");
     labelsBevande->push_back("Tipologia");
     bevandeWrapper = new QTableWidget(0,6,this);
-    bevandeWrapper->setObjectName("bevandeWrapper");
+    bevandeWrapper->setObjectName("bevandeWrapper_articoli");
     bevandeWrapper->verticalHeader()->setVisible(false);
     bevandeWrapper->setMinimumWidth(500);
     // bevandeWrapper->setMaximumWidth(2100);
