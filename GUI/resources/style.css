@@ -33,6 +33,11 @@ QLabel#ComandaId {
     background-color: #008000;
 }
 
+QLabel#ComandaId:disabled {
+    background-color: gray;
+    color: black;
+}
+
 QLabel#concluse {
     qproperty-alignment: AlignCenter;
     margin-top: 2;
@@ -59,6 +64,11 @@ QLabel#labelsMenu {
 
 QLabel#Orario {
     background-color: #008000;
+}
+
+QLabel#Orario:disabled {
+    background-color: gray;
+    color: black;
 }
 
 QLabel#scegliPeriodo {
@@ -106,6 +116,10 @@ QPushButton#Completata {
     background-color: #2b78e4;
 }
 
+QPushButton#Completata:disabled {
+    background-color: gray;
+}
+
 QPushButton#Consumabile {
     height: 75;
     margin: 10 10 10 10;
@@ -142,13 +156,16 @@ QPushButton#Rimuovi {
     background-color: #AB0000;
 }
 
+QPushButton#Rimuovi:disabled {
+    background-color: gray;
+}
+
 QPushButton#wrapperComanda {
     background-color: #008000;
     width: 240;
 }
 
-QPushButton::disabled #wrapperComanda {
-  color: black;
+QPushButton#wrapperComanda:disabled {
   background-color: gray;
   width: 240;
 }
