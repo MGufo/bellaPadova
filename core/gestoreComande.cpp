@@ -126,8 +126,7 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
   if (daRimuovere) {
     Lista<Comanda*>::Iterator it;
     for (it = bacheca.begin(); it != bacheca.end() && (*it) != daRimuovere;
-         ++it) {
-    }
+         ++it) {}
     if (it != bacheca.end()) {
       if (*it >= *current) {
         if (it == current) ++current;
@@ -137,13 +136,17 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
   }
 }
 
-const Comanda* GestoreComande::getComandaCorrente() const { return *current; }
+const Comanda* GestoreComande::getComandaCorrente() const {
+  if(current.isValid())
+     return *current;
+  else return nullptr;
+}
 
 const Lista<Comanda*>& GestoreComande::getBacheca() const { return bacheca; }
 
 Comanda *GestoreComande::trovaComanda(unsigned int _ID) const {
   Comanda* c = nullptr;
-  for(auto it = current; it != bacheca.const_end(); ++it)
+  for(auto it = current; it != bacheca.end(); ++it)
     if((*it)->getIdComanda() == _ID) c = *it;
   return c;
 }
