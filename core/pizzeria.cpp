@@ -80,6 +80,10 @@ Risorsa *Pizzeria::trovaRisorsa(unsigned int ID) const{
   return gestoreRisorse.trovaRisorsa(ID);
 }
 
+Comanda *Pizzeria::trovaComanda(unsigned int ID) const{
+  return gestoreComande.trovaComanda(ID);
+}
+
 void Pizzeria::inserisciArticolo(Articolo* daInserire) {
   gestoreRisorse.inserisciArticolo(daInserire);
 }

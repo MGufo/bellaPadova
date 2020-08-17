@@ -46,6 +46,8 @@ const QDate &Comanda::getDataConsegna() const{ return dataConsegna; }
 
 double Comanda::getTotale() const { return totale; }
 
+void Comanda::setOraConsegna(QTime _oraConsegna) { oraConsegna = _oraConsegna; }
+
 void Comanda::inserisciArticolo(Articolo* _daInserire, unsigned int _qtaDI) {
   if (_daInserire) {
     if(ordinazione.find(_daInserire) == ordinazione.end())

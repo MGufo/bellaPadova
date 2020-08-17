@@ -78,6 +78,13 @@ class GestoreComande {
    */
   const Lista<Comanda*>& getBacheca() const;
 
+  /**
+   * @brief: Ritorna il puntatore alla comanda avente come ID l'ID ricevuto
+   *         come param se esiste ed è da eseguire, altrimenti ritorna nullptr
+   * @param: ID della comanda da cercare
+  */
+  Comanda* trovaComanda(unsigned int) const;
+
   void salvaComande(QJsonObject*) const;
 
   void salvaIdComande(QJsonObject*) const;

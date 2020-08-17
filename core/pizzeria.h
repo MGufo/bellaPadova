@@ -54,6 +54,7 @@ class Pizzeria {
 
   double contabilizzazione(const QDate&, const QDate&) const;
   Risorsa* trovaRisorsa(unsigned int ID) const;
+  Comanda* trovaComanda(unsigned int ID) const;
 
   // funzione che inserisce un articolo in menu, l'articolo da inserire viene
   // costruito da un'altra funzione che richiama inserisciArticoloInMenu. se

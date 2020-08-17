@@ -141,6 +141,13 @@ const Comanda* GestoreComande::getComandaCorrente() const { return *current; }
 
 const Lista<Comanda*>& GestoreComande::getBacheca() const { return bacheca; }
 
+Comanda *GestoreComande::trovaComanda(unsigned int _ID) const {
+  Comanda* c = nullptr;
+  for(auto it = current; it != bacheca.const_end(); ++it)
+    if((*it)->getIdComanda() == _ID) c = *it;
+  return c;
+}
+
 void GestoreComande::salvaComande(QJsonObject *fileComandeJSON) const{
   QJsonObject* comandeJSON = new QJsonObject();
   for(auto it = bacheca.begin(); it != current; ++it){
