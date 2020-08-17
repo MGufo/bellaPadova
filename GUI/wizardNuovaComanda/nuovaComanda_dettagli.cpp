@@ -30,6 +30,7 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     labelsBevande->push_back("Quantità");
 
     pizze = new QTableWidget(0,3,wrapper);
+    pizze->setObjectName("pizzeWrapper");
     //pizze->setMinimumWidth(850);
     //pizze->setMaximumWidth(2100);
     //pizze->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -45,6 +46,7 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     pizze->verticalHeader()->setVisible(false);
 
     bevande = new QTableWidget(0,3,wrapper);
+    bevande->setObjectName("bevandeWrapper");
     //bevande->setMinimumWidth(850);
     //bevande->setMaximumWidth(2100);
     //bevande->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -63,6 +65,8 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     layoutWrapper->addWidget(pizze);
     layoutWrapper->addWidget(bevande);
 
+    connect(this,SIGNAL(riempiWizardConElementiComanda()),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiInWizardComanda()));
+
     setLayout(layoutWrapper);
 }
 
@@ -80,4 +84,9 @@ void NuovaComanda_dettagli::initializePage(){
         registerField("telefono*", telefono);
     }
     previouslyInizialized = true;
+    if(previouslyInizialized){
+        pizze->clearContents();
+        bevande->clearContents();
+    }
+    emit riempiWizardConElementiComanda();
 }

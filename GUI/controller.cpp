@@ -178,6 +178,8 @@ void Controller::creaNuovoArticolo(pacchetto* pA){
         vista->aggiornaMenu(pA);
     } catch (std::domain_error* ecc){
         vista->mostraErrore(QString(ecc->what()));
+    } catch (std::logic_error* ecc){
+        vista->mostraErrore(QString(ecc->what()));
     }
 }
 

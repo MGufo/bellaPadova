@@ -5,7 +5,7 @@ NuovoArticolo_end::NuovoArticolo_end(QWidget* parent) : QWizardPage(parent) {
     setTitle("Riepilogo");
     setSubTitle("Controlla di aver inserito i dati correttamente e premi \"Finish\" per concludere l'operazione");
     layoutEnd = new QFormLayout(this);
-    connect(this,SIGNAL(riempiWizardConElementiCheckati(bool)),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiCheckatiInWizard(bool)));
+    connect(this,SIGNAL(riempiWizardConElementiCheckati(bool)),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiCheckatiInWizardArticolo(bool)));
     setLayout(layoutEnd);
 }
 

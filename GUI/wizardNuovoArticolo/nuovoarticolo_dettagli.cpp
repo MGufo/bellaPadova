@@ -3,7 +3,7 @@
 NuovoArticolo_dettagli::NuovoArticolo_dettagli(QWidget* parent) :
   QWizardPage(parent), content(nullptr){
     layoutDettagli = new QVBoxLayout(this);
-    connect(this,SIGNAL(riempiWizardConElementi(bool)),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiInWizard(bool)));
+    connect(this,SIGNAL(riempiWizardConElementiArticolo(bool)),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiInWizardArticolo(bool)));
     setLayout(layoutDettagli);
 }
 
@@ -22,14 +22,14 @@ void NuovoArticolo_dettagli::setActualPage(){
         setSubTitle("Fornisci un nome e un prezzo alla pizza da inserire, poi "
                     "aggiungi gli ingredienti che la compongono");
         content = new NuovoArticolo_pizza(this);
-        emit riempiWizardConElementi(true);
+        emit riempiWizardConElementiArticolo(true);
     }
     else{
         //costruzione wizard bevanda
         setTitle("Aggiunta di una nuova bevanda al Menù");
         setSubTitle("Seleziona una bevanda presente nell'inventario per inserirla nel menù");
         content = new NuovoArticolo_bevanda(this);
-        emit riempiWizardConElementi(false);
+        emit riempiWizardConElementiArticolo(false);
     }
     layoutDettagli->addWidget(content);
 }
