@@ -78,9 +78,9 @@ struct pacchettoComanda {
   string indirizzo;
   string telefono;
   QTime oraConsegna; //discutere se string o QTime
-  // ID articolo - qta articolo
   double totale;
   bool eseguita;
+  // ID articolo - qta articolo
   std::unordered_map<uint, uint> ordinazione;
 
   pacchettoComanda(uint _ID, string _n, string _i, string _t, QTime _oC,
