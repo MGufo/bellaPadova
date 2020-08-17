@@ -9,6 +9,9 @@ WizardNuovaComanda::WizardNuovaComanda(QWidget *parent) : QWizard(parent){
 
     connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
     connect(page(PAGE_Dettagli), SIGNAL(completeChanged()), this, SLOT(handlerBottoni()));
+    connect(this, SIGNAL(nuovaComanda(pacchettoComanda*)),
+            this->parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+            SLOT(creaNuovaComanda(pacchettoComanda*)));
 
     // Stile wizard (tranne MacOS)
     #ifndef Q_OS_MAC
