@@ -120,12 +120,9 @@ void Controller::eliminaArticolo(uint id){
 }
 
 void Controller::creaNuovaComanda(pacchettoComanda *pC){
-  Comanda* c = new Comanda();
-  c->setIdComanda(++idComande);
-  c->setCliente(Contatto(pC->nome, pC->indirizzo, pC->telefono));
-  c->setOraConsegna(pC->oraConsegna);
-  c->setDataConsegna(QDate::currentDate());
-  c->setTotale(pC->totale);
+  Comanda* c = new Comanda(++idComande,
+                           Contatto(pC->nome, pC->indirizzo, pC->telefono),
+                           pC->oraConsegna, QDate::currentDate());
   auto ord = pC->ordinazione;
   for(auto it = ord.cbegin(); it!= ord.cend(); ++it){
     c->inserisciArticolo(
