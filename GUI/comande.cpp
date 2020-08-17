@@ -54,8 +54,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   newComanda->setMaximumHeight(90);
 
   prossimaComanda = new QPushButton(this);
-  newComanda->setText("Esegui Comanda Corrente");
-  newComanda->setObjectName("eseguiComanda");
+  prossimaComanda->setText("Esegui Comanda Corrente");
+  prossimaComanda->setObjectName("eseguiComanda");
 
   comandeLayout = new QVBoxLayout(this);
   comandeLayout->addWidget(label_inEsecuzione);
