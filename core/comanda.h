@@ -67,11 +67,20 @@ class Comanda {
   const QDate& getDataConsegna() const;
 
   double getTotale() const;
+
+  void setIdComanda(unsigned int);
+
+  void setCliente(const Contatto&);
+
   /**
    * @brief: Modifica l'orario di consegna di una comanda
    * @param: QTime (Nuovo orario di consegna)
    */
   void setOraConsegna(QTime);
+
+  void setDataConsegna(const QDate&);
+
+  void setTotale(double);
 
   /**
    * @brief: Aggiunge un articolo alla comanda o aumenta la sua quantità

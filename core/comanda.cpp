@@ -46,7 +46,15 @@ const QDate &Comanda::getDataConsegna() const{ return dataConsegna; }
 
 double Comanda::getTotale() const { return totale; }
 
+void Comanda::setIdComanda(unsigned int _ID){ ID = _ID; }
+
+void Comanda::setCliente(const Contatto& _contatto){ cliente = _contatto; }
+
 void Comanda::setOraConsegna(QTime _oraConsegna) { oraConsegna = _oraConsegna; }
+
+void Comanda::setDataConsegna(const QDate& _data){ dataConsegna = _data; }
+
+void Comanda::setTotale(double _totale){ totale = _totale; }
 
 void Comanda::inserisciArticolo(Articolo* _daInserire, unsigned int _qtaDI) {
   if (_daInserire) {
