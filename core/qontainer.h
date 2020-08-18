@@ -94,7 +94,8 @@ class Lista {
     }
 
     Iterator& operator--() {
-      itrCurrent = itrCurrent->nodoPrev;
+      if(itrPrevious) itrCurrent = itrPrevious;
+      else itrCurrent = itrCurrent->nodoPrev;
       if (itrCurrent) {
         itrPrevious = itrCurrent->nodoPrev;
       } else
