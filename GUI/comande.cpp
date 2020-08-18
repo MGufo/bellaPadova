@@ -14,10 +14,6 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   wrapper_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   wrapper_inEsecuzione->setObjectName("wrapperInEsecuzione");
   wrapper_inEsecuzione->setContentsMargins(0, 1, 0, 1);
-//  ComandaGUI* comanda3 = new ComandaGUI(wrapper_inEsecuzione);
-//  comanda3->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-//  ComandaGUI* comanda4 = new ComandaGUI(wrapper_inEsecuzione);
-//  comanda4->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
   layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
   wrapper_inEsecuzione->setLayout(layout_inEsecuzione);
@@ -111,6 +107,7 @@ void Comande::setStyleComande(){
 }
 
 void Comande::drawWizard(){
+  if(nuovaComanda) delete nuovaComanda;
   nuovaComanda = new WizardNuovaComanda(this);
   nuovaComanda->show();
 }
