@@ -81,11 +81,12 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
 void Comande::aggiungiComanda(pacchettoComanda* pC){
   ComandaGUI* comanda = new ComandaGUI(this, pC);
-    if(pC->eseguita){
+    if(pC->eseguita)
       layout_eseguite->addWidget(comanda);
+    else{
+      layout_inEsecuzione->addWidget(comanda);
       emit setStyleNextOrderButton(true);
     }
-    else layout_inEsecuzione->addWidget(comanda);
 }
 
 uint Comande::getPrimaComanda(const QList<ComandaGUI*>& comandeGUI) const{
