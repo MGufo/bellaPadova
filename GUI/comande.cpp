@@ -25,7 +25,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   //layout_inEsecuzione->addWidget(comanda2);+
   scroll_inEsecuzione->setWidget(wrapper_inEsecuzione);
   scroll_inEsecuzione->setMinimumSize(580, 265);
-  scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  scroll_inEsecuzione->setMaximumHeight(340);
+  scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   scroll_inEsecuzione->setWidgetResizable(true);
 
   //////////////////////////////
@@ -45,25 +46,36 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   wrapper_eseguite->setLayout(layout_eseguite);
   scroll_eseguite->setWidget(wrapper_eseguite);
   scroll_eseguite->setMinimumSize(580, 100);
-  scroll_eseguite->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  scroll_eseguite->setMaximumHeight(200);
+  scroll_eseguite->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+  //////////////////////////////
+  // Sezione bottoni in fondo //
+  //////////////////////////////
 
   newComanda = new QPushButton(this);
   newComanda->setText("Nuova Comanda");
   newComanda->setObjectName("newComanda");
-  newComanda->setMinimumWidth(300);
   newComanda->setMaximumHeight(90);
 
   prossimaComanda = new QPushButton(this);
   prossimaComanda->setText("Esegui Comanda Corrente");
   prossimaComanda->setObjectName("eseguiComanda");
+  prossimaComanda->setMaximumHeight(90);
+
+  wrapper_bottoniComande = new QWidget(this);
+  wrapper_bottoniComande->setObjectName("wrapperBottoni");
+  layout_bottoni = new QHBoxLayout(wrapper_bottoniComande);
+  layout_bottoni->addWidget(newComanda);
+  layout_bottoni->addWidget(prossimaComanda);
+  wrapper_bottoniComande->setLayout(layout_bottoni);
 
   comandeLayout = new QVBoxLayout(this);
   comandeLayout->addWidget(label_inEsecuzione);
   comandeLayout->addWidget(scroll_inEsecuzione);
   comandeLayout->addWidget(label_concluse);
   comandeLayout->addWidget(scroll_eseguite);
-  comandeLayout->addWidget(newComanda, 0, Qt::AlignHCenter);
-  comandeLayout->addWidget(prossimaComanda, 0, Qt::AlignHCenter);
+  comandeLayout->addWidget(wrapper_bottoniComande);
   comandeLayout->setContentsMargins(0,0,0,0);
 
   connect(newComanda, SIGNAL(clicked()), this, SLOT(drawWizard()));
