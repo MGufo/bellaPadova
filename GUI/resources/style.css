@@ -130,6 +130,10 @@ QPushButton#eseguiComanda {
     background-color: #2b78e4;
 }
 
+QPushButton#eseguiComanda:disabled {
+    background-color: gray;
+}
+
 QPushButton#FineModifica {
     height: 75;
     margin: 10 10 10 10;
