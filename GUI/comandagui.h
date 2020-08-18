@@ -31,6 +31,7 @@ private:
   bool eseguita;
   uint ID;
   QTime oraConsegna;
+  QString contenutoID;
   QString nomeCliente;
   QVBoxLayout* layoutComanda;
   QPushButton* wrapperComanda;

@@ -13,7 +13,7 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   QHBoxLayout* layoutButtons = new QHBoxLayout();
   QLabel* orario = new QLabel(oraConsegna.toString("hh:mm"), wrapperComanda);
   orario->setObjectName("Orario");
-  QString contenutoID = "Comanda " + QString::fromStdString(std::to_string(ID));
+  contenutoID = "Comanda " + QString::fromStdString(std::to_string(ID));
   QLabel* comandaId = new QLabel(contenutoID, wrapperComanda);
   comandaId->setObjectName("ComandaId");
   rimuovi = new QPushButton("Rimuovi", wrapperComanda);
@@ -37,14 +37,13 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   connect(this, SIGNAL(eliminaComanda(uint)),
           parentWidget()->parentWidget()->parentWidget()->parentWidget(),
           SLOT(eliminaComanda(uint)));
-
-  setWindowTitle(contenutoID);
 }
 
 void ComandaGUI::showDetails(){
   dettagli = new PaginaComanda(this);
   dettagli->setWindowFlags(Qt::Window);
   wrapperComanda->setEnabled(false);
+  dettagli->setWindowTitle(contenutoID);
   dettagli->show();
 }
 
