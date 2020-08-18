@@ -33,12 +33,12 @@ private:
   uint getPrimaComanda(const QList<ComandaGUI*>&) const;
 
 signals:
-  void eseguiComanda(uint);
+  void eseguiComanda();
   void checkNextOrderButtonStatus(bool);
   void mostraErrore(const QString&);
 private slots:
   void drawWizard();
-  void eseguiComanda();
+  void eseguiComandaHandler();
   void setStyleNextOrderButton(bool);
 };
 
