@@ -31,15 +31,14 @@ private:
   QWidget* wrapper_bottoniComande;
   WizardNuovaComanda* nuovaComanda;
   uint getPrimaComanda(const QList<ComandaGUI*>&) const;
+  void setStyleNextOrderButton(bool);
 
 signals:
   void eseguiComanda();
-  void checkNextOrderButtonStatus(bool);
   void mostraErrore(const QString&);
 private slots:
   void drawWizard();
   void eseguiComandaHandler();
-  void setStyleNextOrderButton(bool);
 };
 
 #endif // COMANDE_H

@@ -86,9 +86,6 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   connect(this, SIGNAL(eseguiComanda()),
           parentWidget()->parentWidget(), SLOT(aumentaCurrent()));
 
-  connect(this, SIGNAL(checkNextOrderButtonStatus(bool)),
-          this, SLOT(setStyleNextOrderButton(bool)));
-
   setStyleComande();
   setLayout(comandeLayout);
   setObjectName("widgetComande");
@@ -100,7 +97,7 @@ void Comande::aggiungiComanda(pacchettoComanda* pC){
       layout_eseguite->addWidget(comanda);
     else{
       layout_inEsecuzione->addWidget(comanda);
-      emit setStyleNextOrderButton(true);
+      setStyleNextOrderButton(true);
     }
 }
 
@@ -124,12 +121,12 @@ void Comande::drawWizard(){
 }
 
 void Comande::eseguiComandaHandler(){
-  QList<ComandaGUI*> comandeGUI = findChildren<ComandaGUI*>();
+  QList<ComandaGUI*> comandeGUI =
+      wrapper_inEsecuzione->findChildren<ComandaGUI*>();
   if(!comandeGUI.isEmpty())
-    //getPrimaComanda(comandeGUI)
     emit eseguiComanda();
   else
-    emit checkNextOrderButtonStatus(false);
+    setStyleNextOrderButton(false);
 }
 
 void Comande::setStyleNextOrderButton(bool status){
