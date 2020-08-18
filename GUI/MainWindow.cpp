@@ -358,6 +358,7 @@ void MainWindow::visualizzaComande(){
   for(auto it = comande->constBegin(); it != comande->constEnd(); ++it){
     widgetComande->aggiungiComanda(*it);
   }
+  widgetComande->setStyleNextOrderButton();
   delete comande;
 }
 

@@ -81,9 +81,6 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   connect(newComanda, SIGNAL(clicked()), this, SLOT(drawWizard()));
 
   connect(prossimaComanda, SIGNAL(clicked()),
-          this, SLOT(eseguiComandaHandler()));
-
-  connect(this, SIGNAL(eseguiComanda()),
           parentWidget()->parentWidget(), SLOT(aumentaCurrent()));
 
   setStyleComande();
@@ -95,10 +92,8 @@ void Comande::aggiungiComanda(pacchettoComanda* pC){
   ComandaGUI* comanda = new ComandaGUI(this, pC);
     if(pC->eseguita)
       layout_eseguite->addWidget(comanda);
-    else{
+    else
       layout_inEsecuzione->addWidget(comanda);
-      setStyleNextOrderButton(true);
-    }
 }
 
 uint Comande::getPrimaComanda(const QList<ComandaGUI*>& comandeGUI) const{
@@ -120,17 +115,13 @@ void Comande::drawWizard(){
   nuovaComanda->show();
 }
 
-void Comande::eseguiComandaHandler(){
+void Comande::setStyleNextOrderButton(){
   QList<ComandaGUI*> comandeGUI =
       wrapper_inEsecuzione->findChildren<ComandaGUI*>();
   if(!comandeGUI.isEmpty())
-    emit eseguiComanda();
+    prossimaComanda->setEnabled(true);
   else
-    setStyleNextOrderButton(false);
-}
-
-void Comande::setStyleNextOrderButton(bool status){
-    prossimaComanda->setEnabled(status);
+    prossimaComanda->setEnabled(false);
 }
 
   // TODO: usare findChildren per ottenere il primo figlio di tipo comandaGUI.
