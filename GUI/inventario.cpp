@@ -15,6 +15,8 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   tabIngredienti = new TabellaRisorse(this, "Ingredienti", headerLabels);
   tabIngredienti->setHeaderDimension(TabellaRisorse::inventario);
   tabIngredienti->setObjectName("tabIngredientiInventario");
+  tabIngredienti->setMaximumHeight(300);
+  tabIngredienti->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   headerLabels->pop_back();
   headerLabels->pop_back();
   headerLabels->push_back("Capacità");
@@ -23,6 +25,8 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   tabBevande = new TabellaRisorse(this, "Bevande", headerLabels);
   tabBevande->setHeaderDimension(TabellaRisorse::bevandeI);
   tabBevande->setObjectName("tabBevandeInventario");
+  tabBevande->setMaximumHeight(300);
+  tabBevande->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
   layoutInventario->addWidget(tabIngredienti);
   layoutInventario->addWidget(tabBevande);

@@ -12,12 +12,16 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
   tabPizze = new TabellaRisorse(this, "Pizze", headerLabels);
   tabPizze->setHeaderDimension(TabellaRisorse::pizze);
   tabPizze->setObjectName("tabPizzeMenu");
+  tabPizze->setMaximumHeight(300);
+  tabPizze->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   headerLabels->erase(--(headerLabels->end()));
   headerLabels->push_back("Capacità");
   headerLabels->push_back("Tipologia");
   tabBevande = new TabellaRisorse(this, "Bevande", headerLabels);
   tabBevande->setObjectName("tabBevandeMenu");
   tabBevande->setHeaderDimension(TabellaRisorse::bevandeM);
+  tabBevande->setMaximumHeight(300);
+  tabBevande->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   layoutMenu->addWidget(tabPizze);
   layoutMenu->addWidget(tabBevande);
   QHBoxLayout* layoutPulsanti = new QHBoxLayout();
