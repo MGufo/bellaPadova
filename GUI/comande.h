@@ -20,6 +20,7 @@ public:
 private:
   QHBoxLayout* layout_eseguite;
   QHBoxLayout* layout_inEsecuzione;
+  QHBoxLayout* layout_bottoni;
   QPushButton* newComanda;
   QPushButton* prossimaComanda;
   QScrollArea* scroll_eseguite;
@@ -27,6 +28,7 @@ private:
   QVBoxLayout* comandeLayout;
   QWidget* wrapper_eseguite;
   QWidget* wrapper_inEsecuzione;
+  QWidget* wrapper_bottoniComande;
   WizardNuovaComanda* nuovaComanda;
   uint getPrimaComanda(const QList<ComandaGUI*>&) const;
 
