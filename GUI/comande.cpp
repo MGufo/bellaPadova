@@ -14,10 +14,6 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   wrapper_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   wrapper_inEsecuzione->setObjectName("wrapperInEsecuzione");
   wrapper_inEsecuzione->setContentsMargins(0, 1, 0, 1);
-//  ComandaGUI* comanda3 = new ComandaGUI(wrapper_inEsecuzione);
-//  comanda3->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-//  ComandaGUI* comanda4 = new ComandaGUI(wrapper_inEsecuzione);
-//  comanda4->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
   layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
   wrapper_inEsecuzione->setLayout(layout_inEsecuzione);
@@ -81,13 +77,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   connect(newComanda, SIGNAL(clicked()), this, SLOT(drawWizard()));
 
   connect(prossimaComanda, SIGNAL(clicked()),
-          this, SLOT(eseguiComandaHandler()));
-
-  connect(this, SIGNAL(eseguiComanda()),
           parentWidget()->parentWidget(), SLOT(aumentaCurrent()));
-
-  connect(this, SIGNAL(checkNextOrderButtonStatus(bool)),
-          this, SLOT(setStyleNextOrderButton(bool)));
 
   setStyleComande();
   setLayout(comandeLayout);
@@ -98,10 +88,8 @@ void Comande::aggiungiComanda(pacchettoComanda* pC){
   ComandaGUI* comanda = new ComandaGUI(this, pC);
     if(pC->eseguita)
       layout_eseguite->addWidget(comanda);
-    else{
+    else
       layout_inEsecuzione->addWidget(comanda);
-      emit setStyleNextOrderButton(true);
-    }
 }
 
 uint Comande::getPrimaComanda(const QList<ComandaGUI*>& comandeGUI) const{
@@ -119,21 +107,18 @@ void Comande::setStyleComande(){
 }
 
 void Comande::drawWizard(){
+  if(nuovaComanda) delete nuovaComanda;
   nuovaComanda = new WizardNuovaComanda(this);
   nuovaComanda->show();
 }
 
-void Comande::eseguiComandaHandler(){
-  QList<ComandaGUI*> comandeGUI = findChildren<ComandaGUI*>();
+void Comande::setStyleNextOrderButton(){
+  QList<ComandaGUI*> comandeGUI =
+      wrapper_inEsecuzione->findChildren<ComandaGUI*>();
   if(!comandeGUI.isEmpty())
-    //getPrimaComanda(comandeGUI)
-    emit eseguiComanda();
+    prossimaComanda->setEnabled(true);
   else
-    emit checkNextOrderButtonStatus(false);
-}
-
-void Comande::setStyleNextOrderButton(bool status){
-    prossimaComanda->setEnabled(status);
+    prossimaComanda->setEnabled(false);
 }
 
   // TODO: usare findChildren per ottenere il primo figlio di tipo comandaGUI.

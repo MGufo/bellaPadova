@@ -16,6 +16,7 @@ public:
   explicit Comande(QWidget *parent = nullptr);
   void aggiungiComanda(pacchettoComanda*);
   void setStyleComande();
+  void setStyleNextOrderButton();
 
 private:
   QHBoxLayout* layout_eseguite;
@@ -33,13 +34,9 @@ private:
   uint getPrimaComanda(const QList<ComandaGUI*>&) const;
 
 signals:
-  void eseguiComanda();
-  void checkNextOrderButtonStatus(bool);
   void mostraErrore(const QString&);
 private slots:
   void drawWizard();
-  void eseguiComandaHandler();
-  void setStyleNextOrderButton(bool);
 };
 
 #endif // COMANDE_H
