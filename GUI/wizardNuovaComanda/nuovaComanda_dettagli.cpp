@@ -4,8 +4,9 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     setTitle("Aggiunta di una nuova Comanda");
     setSubTitle("Fornisci un  orario, nome, indirizzo e numero telefonico da inserire nella comanda e successivamente "
                 "scegli gli articoli da inserirci con le rispettive quantità");
-    QWidget* wrapper = new QWidget(this);
-    QHBoxLayout* layoutWrapper = new QHBoxLayout(wrapper);
+    QVBoxLayout* layoutNuovaComanda = new QVBoxLayout(this);
+    wrapper = new QWidget(this);
+    layoutWrapper = new QHBoxLayout(wrapper);
 
     QWidget* infoWrapper = new QWidget(wrapper);
     QFormLayout* infoWrapperLayout = new QFormLayout(infoWrapper);
@@ -20,14 +21,48 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     infoWrapperLayout->addRow("Indirizzo:",indirizzo);
     infoWrapperLayout->addRow("Telefono:",telefono);
 
+    setNewPizzeWidget();
+    setNewBevandeWidget();
+
+    layoutWrapper->addWidget(infoWrapper);
+
+    connect(this,SIGNAL(riempiWizardConElementiComanda()),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiInWizardComanda()));
+
+    layoutNuovaComanda->addWidget(wrapper);
+    setLayout(layoutNuovaComanda);
+}
+
+int NuovaComanda_dettagli::nextId() const{
+    return WizardNuovaComanda::PAGE_End;
+}
+
+void NuovaComanda_dettagli::initializePage(){
+    QWizardPage::initializePage();
+    if(!previouslyInizialized){
+        //registerField
+        registerField("orario", orario);
+        registerField("nome*", nome);
+        registerField("indirizzo*", indirizzo);
+        registerField("telefono*", telefono);
+
+        layoutWrapper->removeWidget(pizze);
+        layoutWrapper->removeWidget(bevande);
+        delete pizze;
+        delete bevande;
+        setNewPizzeWidget();
+        setNewBevandeWidget();
+    }
+
+    previouslyInizialized = true;
+
+    emit riempiWizardConElementiComanda();
+}
+
+void NuovaComanda_dettagli::setNewPizzeWidget(){
     QStringList* labelsPizze = new QStringList();
     labelsPizze->push_back("");
     labelsPizze->push_back("Nome");
     labelsPizze->push_back("Quantità");
-    QStringList* labelsBevande = new QStringList();
-    labelsBevande->push_back("");
-    labelsBevande->push_back("Nome");
-    labelsBevande->push_back("Quantità");
 
     pizze = new QTableWidget(0,3,wrapper);
     pizze->setObjectName("pizzeWrapper");
@@ -45,6 +80,15 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     pizze->setHorizontalHeader(headerPizze);
     pizze->verticalHeader()->setVisible(false);
 
+    layoutWrapper->addWidget(pizze);
+}
+
+void NuovaComanda_dettagli::setNewBevandeWidget(){
+    QStringList* labelsBevande = new QStringList();
+    labelsBevande->push_back("");
+    labelsBevande->push_back("Nome");
+    labelsBevande->push_back("Quantità");
+
     bevande = new QTableWidget(0,3,wrapper);
     bevande->setObjectName("bevandeWrapper_comande");
     //bevande->setMinimumWidth(850);
@@ -61,30 +105,5 @@ NuovaComanda_dettagli::NuovaComanda_dettagli(QWidget* parent) : QWizardPage(pare
     bevande->setHorizontalHeader(headerBevande);
     bevande->verticalHeader()->setVisible(false);
 
-    layoutWrapper->addWidget(infoWrapper);
-    layoutWrapper->addWidget(pizze);
-    layoutWrapper->addWidget(bevande);
-
-    connect(this,SIGNAL(riempiWizardConElementiComanda()),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiInWizardComanda()));
-
-    setLayout(layoutWrapper);
-}
-
-int NuovaComanda_dettagli::nextId() const{
-    return WizardNuovaComanda::PAGE_End;
-}
-
-void NuovaComanda_dettagli::initializePage(){
-    QWizardPage::initializePage();
-    if(!previouslyInizialized){
-        //registerField
-        registerField("orario", orario);
-        registerField("nome*", nome);
-        registerField("indirizzo*", indirizzo);
-        registerField("telefono*", telefono);
-    }
-
-    previouslyInizialized = true;
-
-    emit riempiWizardConElementiComanda();
+     layoutWrapper->addWidget(bevande);
 }

@@ -18,6 +18,8 @@ public:
     NuovaComanda_dettagli(QWidget* parent = nullptr);
     int nextId() const override;
 private:
+    QWidget* wrapper = nullptr;
+    QHBoxLayout* layoutWrapper = nullptr;
     QTimeEdit* orario = nullptr;
     QLineEdit* nome = nullptr;
     QLineEdit* indirizzo = nullptr;
@@ -26,6 +28,9 @@ private:
     QTableWidget* bevande = nullptr;
     bool previouslyInizialized;
     void initializePage() override;
+
+    void setNewPizzeWidget();
+    void setNewBevandeWidget();
 signals:
     void riempiWizardConElementiComanda();
 };
