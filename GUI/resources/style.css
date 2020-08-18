@@ -40,6 +40,8 @@ QLabel#ComandaId:disabled {
 
 QLabel#concluse {
     qproperty-alignment: AlignCenter;
+    margin-top: 2;
+    margin-bottom: 2;
 }
 
 QLabel#guadagnoPerdita {
@@ -50,8 +52,8 @@ QLabel#guadagnoPerdita {
 
 QLabel#inEsecuzione {
     qproperty-alignment: AlignCenter;
-    margin-top: -2;
-    margin-bottom: -2;
+    margin-top: 2;
+    margin-bottom: 2;
 }
 
 QLabel#labelsMenu {
