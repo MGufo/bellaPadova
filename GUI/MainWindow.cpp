@@ -242,9 +242,9 @@ void MainWindow::visualizzaElementiInWizardComanda() const{
             QSpinBox* s = new QSpinBox(wrapperBevande);
             wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 2, s);
         }
-        wrapperPizze->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        wrapperBevande->setEditTriggers(QAbstractItemView::NoEditTriggers);
     }
+    wrapperPizze->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    wrapperBevande->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 void MainWindow::visualizzaElementiCheckatiInWizardComanda() const{
