@@ -30,7 +30,7 @@ private:
   QWidget* wrapper_eseguite;
   QWidget* wrapper_inEsecuzione;
   QWidget* wrapper_bottoniComande;
-  WizardNuovaComanda* nuovaComanda;
+  WizardNuovaComanda* nuovaComanda = nullptr;
   uint getPrimaComanda(const QList<ComandaGUI*>&) const;
 
 signals:
