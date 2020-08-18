@@ -90,7 +90,7 @@ void MainWindow::eliminaComanda(uint ID){
   controller->eliminaComanda(ID);
 }
 
-void MainWindow::segnaComeEseguita(uint){
+void MainWindow::aumentaCurrent(){
   controller->eseguiComanda();
 }
 
