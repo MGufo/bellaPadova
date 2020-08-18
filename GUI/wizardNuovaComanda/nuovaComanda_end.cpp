@@ -4,7 +4,7 @@ NuovaComanda_end::NuovaComanda_end(QWidget* parent) : QWizardPage(parent){
     setTitle("Riepilogo");
     setSubTitle("Controlla di aver inserito i dati correttamente e premi \"Finish\" per concludere l'operazione");
     layoutEnd = new QFormLayout(this);
-    //connect(this,SIGNAL(riempiWizardConElementiCheckati(bool)),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiCheckatiInWizard(bool)));
+    connect(this,SIGNAL(riempiWizardConElementiCheckati()),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiCheckatiInWizardComanda()));
     setLayout(layoutEnd);
 }
 
@@ -25,7 +25,7 @@ void NuovaComanda_end::setActualPage(){
     if(ptr1) layoutEnd->removeRow(ptr1);
 
     //creazione dei nuovi campi
-    QLabel* orarioComanda = new QLabel(field("orario").toString(), this);
+    QLabel* orarioComanda = new QLabel(field("orario").toTime().toString("hh:mm:ss"), this);
     orarioComanda->setObjectName("orarioComanda");
     layoutEnd->addRow("Orario:", orarioComanda);
 
@@ -48,12 +48,12 @@ void NuovaComanda_end::setActualPage(){
     layoutEnd->addRow("Pizze:", wrapperPizze);
 
     QWidget* wrapperBevande = new QWidget(this);
-    wrapperBevande->setObjectName("bevandeVisualizationWrapper");
+    wrapperBevande->setObjectName("bevandeVisualizationWrapper_comande");
     QVBoxLayout* bevandeLayout = new QVBoxLayout(wrapperBevande);
     wrapperBevande->setLayout(bevandeLayout);
     layoutEnd->addRow("Bevande:", wrapperBevande);
 
-    //emit riempiWizardConElementiCheckati(false);
+    emit riempiWizardConElementiCheckati();
 }
 
 void NuovaComanda_end::initializePage(){

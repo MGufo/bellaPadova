@@ -225,8 +225,10 @@ void MainWindow::visualizzaElementiInWizardComanda() const{
             QCheckBox* c = new QCheckBox(wrapperPizze);
             wrapperPizze->setCellWidget(wrapperPizze->rowCount()-1, 0, c);
             item = new QTableWidgetItem(QString::fromStdString(pP->nome));
+            item->setData(Qt::UserRole,pP->ID);
             wrapperPizze->setItem(wrapperPizze->rowCount()-1, 1, item);
             QSpinBox* s = new QSpinBox(wrapperPizze);
+            s->setValue(1);
             wrapperPizze->setCellWidget(wrapperPizze->rowCount()-1, 2, s);
         }
 
@@ -238,8 +240,10 @@ void MainWindow::visualizzaElementiInWizardComanda() const{
             QCheckBox* c = new QCheckBox(wrapperBevande);
             wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 0, c);
             item = new QTableWidgetItem(QString::fromStdString(pB->nome));
+            item->setData(Qt::UserRole,pB->ID);
             wrapperBevande->setItem(wrapperBevande->rowCount()-1, 1, item);
             QSpinBox* s = new QSpinBox(wrapperBevande);
+            s->setValue(1);
             wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 2, s);
         }
     }
@@ -248,7 +252,36 @@ void MainWindow::visualizzaElementiInWizardComanda() const{
 }
 
 void MainWindow::visualizzaElementiCheckatiInWizardComanda() const{
-
+    //inserisco le pizze selezionate nella pagina finale del wizard
+    QTableWidget* pizzeTabellaWrapper = findChild<QTableWidget*>("pizzeWrapper");
+    for(int i=0; i<pizzeTabellaWrapper->rowCount() ; i++){
+        QCheckBox* checkPizza = dynamic_cast<QCheckBox*>(pizzeTabellaWrapper->cellWidget(i,0));
+        if(checkPizza->isChecked()){
+            QWidget* pizzeVisualWrapper = findChild<QWidget*>("pizzeVisualizationWrapper");
+            QString testo("[");
+            int qta = dynamic_cast<QSpinBox*>(pizzeTabellaWrapper->cellWidget(i,2))->value();
+            testo.append(QString::fromStdString(std::to_string(qta)));
+            testo.append("] ");
+            testo.append(pizzeTabellaWrapper->item(i,1)->text());
+            QLabel* label = new QLabel(testo);
+            dynamic_cast<QVBoxLayout*>(pizzeVisualWrapper->layout())->addWidget(label);
+        }
+    }
+    //inserisco le bevande selezionate nella pagina finale del wizard
+    QTableWidget* bevandeTabellaWrapper = findChild<QTableWidget*>("bevandeWrapper_comande");
+    for(int i=0; i<bevandeTabellaWrapper->rowCount() ; i++){
+        QCheckBox* checkBevanda = dynamic_cast<QCheckBox*>(bevandeTabellaWrapper->cellWidget(i,0));
+        if(checkBevanda->isChecked()){
+            QWidget* bevandeVisualWrapper = findChild<QWidget*>("bevandeVisualizationWrapper_comande");
+            QString testo("[");
+            int qta = dynamic_cast<QSpinBox*>(bevandeTabellaWrapper->cellWidget(i,2))->value();
+            testo.append(QString::fromStdString(std::to_string(qta)));
+            testo.append("] ");
+            testo.append(bevandeTabellaWrapper->item(i,1)->text());
+            QLabel* label = new QLabel(testo);
+            dynamic_cast<QVBoxLayout*>(bevandeVisualWrapper->layout())->addWidget(label);
+        }
+    }
 }
 	
 void MainWindow::closeEvent(QCloseEvent *event){

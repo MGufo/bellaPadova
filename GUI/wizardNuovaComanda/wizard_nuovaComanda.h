@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QWizard>
 #include <QAbstractButton>
+#include <QCheckBox>
+#include <QSpinBox>
 
 #include "../pacchetti.h"
 #include "nuovaComanda_dettagli.h"
@@ -15,7 +17,7 @@ public:
   enum { PAGE_Dettagli, PAGE_End};
   explicit WizardNuovaComanda(QWidget *parent = nullptr);
 
-  //void accept() override;
+  void accept() override;
 signals:
   void nuovaComanda(pacchettoComanda*);
 public slots:

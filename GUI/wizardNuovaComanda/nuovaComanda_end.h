@@ -15,6 +15,8 @@ private:
     QFormLayout* layoutEnd;
     void setActualPage();
     void initializePage() override;
+signals:
+    void riempiWizardConElementiCheckati();
 };
 
 #endif // NUOVACOMANDA_END_H
