@@ -20,7 +20,7 @@ public:
 
 signals:
   void eliminaComanda(uint);
-  void mostraDettagliComanda(uint);
+  void getInfoComanda(uint);
 
 public slots:
   void showDetails();

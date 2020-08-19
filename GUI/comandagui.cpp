@@ -37,7 +37,7 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   connect(this, SIGNAL(eliminaComanda(uint)),
           parentWidget()->parentWidget()->parentWidget()->parentWidget(),
           SLOT(eliminaComanda(uint)));
-  connect(this, SIGNAL(mostraDettagliComanda(uint)),
+  connect(this, SIGNAL(getInfoComanda(uint)),
           parentWidget()->parentWidget()->parentWidget()->parentWidget(),
           SLOT(richiediDettagliComanda(uint)));
 }
@@ -51,11 +51,11 @@ void ComandaGUI::rendiEseguita(){
 }
 
 void ComandaGUI::showDetails(){
-  emit mostraDettagliComanda(ID);
   dettagli = new PaginaComanda(this);
   dettagli->setWindowFlags(Qt::Window);
   wrapperComanda->setEnabled(false);
   dettagli->setWindowTitle(contenutoID);
+  emit getInfoComanda(ID);
   dettagli->show();
 }
 
