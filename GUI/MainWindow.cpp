@@ -69,17 +69,20 @@ void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
   controller->calcoloFatturato(inizio, fine);
 }
 
-void MainWindow::creaNuovoConsumabile(pacchetto* pC){
+void MainWindow::creaNuovoArticolo(pacchettoArticolo* p){
+  controller->creaNuovoArticolo(p);
+}
+
+void MainWindow::creaNuovoConsumabile(pacchettoConsumabile* pC){
   controller->creaNuovoConsumabile(pC);
 }
 
-void MainWindow::modificaRisorsa(pacchetto* p, bool b){
-  if(b) controller->modificaConsumabile(p);
-  else  controller->modificaArticolo(p);
+void MainWindow::modificaArticolo(pacchettoArticolo* p){
+  controller->modificaArticolo(p);
 }
 
-void MainWindow::creaNuovoArticolo(pacchetto* p){
-  controller->creaNuovoArticolo(p);
+void MainWindow::modificaConsumabile(pacchettoConsumabile* p){
+    controller->modificaConsumabile(p);
 }
 
 void MainWindow::creaNuovaComanda(pacchettoComanda* pC){
@@ -94,9 +97,12 @@ void MainWindow::aumentaCurrent(){
   controller->eseguiComanda();
 }
 
-void MainWindow::eliminaRisorsa(uint id, bool b){
-  if(b) controller->eliminaConsumabile(id);
-  else controller->eliminaArticolo(id);
+void MainWindow::eliminaArticolo(uint id){
+  controller->eliminaArticolo(id);
+}
+
+void MainWindow::eliminaConsumabile(uint id){
+  controller->eliminaConsumabile(id);
 }
 
 void MainWindow::visualizzaElementiInWizardArticolo(bool option_pizza) const{
