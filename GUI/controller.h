@@ -23,11 +23,11 @@ class Controller : public QObject {
   explicit Controller(Pizzeria*,  uint, uint, QObject* parent = nullptr);
   void setView(MainWindow*);
   void calcoloFatturato(const QDate&, const QDate&);
-  void creaNuovoConsumabile(pacchetto*);
-  void modificaConsumabile(pacchetto*);
+  void creaNuovoArticolo(pacchettoArticolo*);
+  void creaNuovoConsumabile(pacchettoConsumabile*);
+  void modificaConsumabile(pacchettoConsumabile*);
   void eliminaConsumabile(uint);
-  void creaNuovoArticolo(pacchetto*);
-  void modificaArticolo(pacchetto*);
+  void modificaArticolo(pacchettoArticolo*);
   void eliminaArticolo(uint);
   void creaNuovaComanda(pacchettoComanda*);
   void modificaComanda(pacchettoComanda*);
@@ -36,6 +36,7 @@ class Controller : public QObject {
   QList<pacchetto*>* recuperaInventario() const;
   QList<pacchetto*>* recuperaMenu() const;
   QList<pacchettoComanda*>* recuperaComande() const;
+  const pacchettoComanda* recuperaInfoComanda(uint) const;
   bool canQuit() const;
 
  public slots:

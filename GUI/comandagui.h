@@ -19,7 +19,8 @@ public:
 
 signals:
   void eliminaComanda(uint);
-
+  void mostraDettagliComanda(uint);
+  void richiediDettagliComanda();
 
 public slots:
   void showDetails();
@@ -32,6 +33,8 @@ private:
   QTime oraConsegna;
   QString contenutoID;
   QString nomeCliente;
+  QLabel* orario;
+  QLabel* comandaId;
   QVBoxLayout* layoutComanda;
   QPushButton* wrapperComanda;
   QHBoxLayout* layoutButtons;

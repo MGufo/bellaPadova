@@ -39,14 +39,17 @@ signals:
  public slots:
   void mostraErrore(const QString&);
   void calcoloFatturato(const QDate&, const QDate&);
-  void creaNuovoConsumabile(pacchetto*);
-  void modificaRisorsa(pacchetto*, bool);
-  void eliminaRisorsa(uint, bool);
-  void creaNuovoArticolo(pacchetto*);
+  void creaNuovoArticolo(pacchettoArticolo*);
+  void creaNuovoConsumabile(pacchettoConsumabile*);
+  void modificaArticolo(pacchettoArticolo*);
+  void modificaConsumabile(pacchettoConsumabile*);
+  void eliminaArticolo(uint);
+  void eliminaConsumabile(uint);
   //true = pizza
   //false = bevanda
   void creaNuovaComanda(pacchettoComanda*);
   void eliminaComanda(uint);
+  void richiediDettagliComanda(uint);
   void aumentaCurrent();
   void visualizzaElementiInWizardArticolo(bool) const;
   void visualizzaElementiCheckatiInWizardArticolo(bool) const;
