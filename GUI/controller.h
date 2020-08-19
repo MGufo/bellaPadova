@@ -18,6 +18,7 @@ class Controller : public QObject {
   unsigned int idComande;
   unsigned int idRisorse;
   bool comandeSalvate = true, risorseSalvate = true;
+  pacchettoComanda* impacchettaComanda(const Comanda*, const Comanda*) const;
 
  public:
   explicit Controller(Pizzeria*,  uint, uint, QObject* parent = nullptr);

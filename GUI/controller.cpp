@@ -94,8 +94,6 @@ void Controller::creaNuovoConsumabile(pacchettoConsumabile* pC){
   vista->aggiornaInventario(pC);
 }
 
-
-
 void Controller::modificaConsumabile(pacchettoConsumabile * pC){
   Consumabile* pConsumabile = nullptr;
   if(dynamic_cast<pacchettoBevanda*>(pC)){
@@ -280,44 +278,57 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
   return pacchetti;
 }
 
+pacchettoComanda* Controller::impacchettaComanda(const Comanda* c,
+                                                 const Comanda* current) const{
+  bool eseguita = true;
+  if(current)
+    eseguita = ((*c) < (*current)) ? true : false;
+  pacchettoComanda* pC =
+      new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
+                           c->getCliente().getIndirizzo(),
+                           c->getCliente().getTelefono(),
+                           c->getOraConsegna(), c->getTotale(), eseguita);
+  auto ordine = c->getOrdinazione();
+  for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
+    pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
+  return pC;
+}
+
 QList<pacchettoComanda*>* Controller::recuperaComande() const{
-  QList<pacchettoComanda*>* pacchetti = new QList<pacchettoComanda*>();
+  QList<pacchettoComanda*>* pacchetti =
+      new QList<pacchettoComanda*>();
   if(!modello->getComande().isEmpty()){
     auto comande = modello->getComande();
     const Comanda* current = modello->getComandaCorrente();
 
     for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
+      // impacchetta singola comanda
       const Comanda* c = *it;
-      bool eseguita = false;
-      if(current)
-        eseguita = ((*c) < (*current)) ? true : false;
-      else
-        eseguita = true;
-      pacchettoComanda* pC =
-          new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
-                               c->getCliente().getIndirizzo(),
-                               c->getCliente().getTelefono(),
-                               c->getOraConsegna(), c->getTotale(), eseguita);
-      auto ordine = c->getOrdinazione();
-      for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
-        pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
-      pacchetti->push_back(pC);
+//      bool eseguita = false;
+//      if(current)
+//        eseguita = ((*c) < (*current)) ? true : false;
+//      else
+//        eseguita = true;
+//      pacchettoComanda* pC =
+//          new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
+//                               c->getCliente().getIndirizzo(),
+//                               c->getCliente().getTelefono(),
+//                               c->getOraConsegna(), c->getTotale(), eseguita);
+//      auto ordine = c->getOrdinazione();
+//      for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
+//        pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
+      //pacchettoComanda* pC = impacchettaComanda(c, current);
+      pacchetti->push_back(impacchettaComanda(c, current));
     }
   }
   return pacchetti;
 }
 
 const pacchettoComanda *Controller::recuperaInfoComanda(uint ID) const {
-  pacchettoComanda* pC = nullptr;
+  const pacchettoComanda* pC = nullptr;
   if(!modello->getComande().isEmpty()){
-    Comanda* c = modello->trovaComanda(ID);
-    pC = new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
-                              c->getCliente().getIndirizzo(),
-                              c->getCliente().getTelefono(),
-                              c->getOraConsegna(), c->getTotale(), true);
-    auto ordine = c->getOrdinazione();
-    for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
-      pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
+    const Comanda* current = modello->getComandaCorrente();
+    pC = impacchettaComanda(modello->trovaComanda(ID), current);
   }
   return pC;
 }
