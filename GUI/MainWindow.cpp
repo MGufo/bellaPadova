@@ -101,8 +101,8 @@ void MainWindow::richiediDettagliComanda(uint ID){
     auto it = comandeGUI.begin();
     while(it != comandeGUI.end()){
       if((*it)->getID() == ID)
-        (*it)->
-          ++it;
+        ((*it)->findChild<PaginaComanda*>())->setInfoComanda(comanda);
+      ++it;
     }
   }
 }
