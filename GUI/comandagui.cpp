@@ -10,7 +10,7 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
   wrapperComanda = new QPushButton(this);
   wrapperComanda->setObjectName("wrapperComanda");
   layoutWrapper = new QVBoxLayout(wrapperComanda);
-  layoutButtons = new QHBoxLayout(wrapperComanda);
+  layoutButtons = new QHBoxLayout();
   QLabel* orario = new QLabel(oraConsegna.toString("hh:mm"), wrapperComanda);
   orario->setObjectName("Orario");
   contenutoID = "Comanda " + QString::fromStdString(std::to_string(ID));
