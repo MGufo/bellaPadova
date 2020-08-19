@@ -21,7 +21,7 @@ void NuovaComanda_end::setActualPage(){
     if(ptr) layoutEnd->removeRow(ptr);
     QWidget* ptr1 = findChild<QWidget*>("pizzeVisualizationWrapper");
     if(ptr1) layoutEnd->removeRow(ptr1);
-    ptr1 = findChild<QWidget*>("bevandeVisualizationWrapper");
+    ptr1 = findChild<QWidget*>("bevandeVisualizationWrapper_comande");
     if(ptr1) layoutEnd->removeRow(ptr1);
 
     //creazione dei nuovi campi

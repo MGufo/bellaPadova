@@ -50,8 +50,7 @@ unsigned int GestoreComande::getMaxId() const {
 }
 
 
-// HACK: La comanda può contenere sia pizze di copia dal menù che pizze
-// "temporanee", cioè create appositamente per la comanda
+// HACK: La comanda può contenere solo pizze del menu
 void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capForno) {
   int tempoPreparazione = daInserire->getTempoPreparazione(capForno)*60;
   if (daInserire) {

@@ -117,10 +117,16 @@ void Pizzeria::rimuoviConsumabile(Consumabile* daRimuovere) {
 
 void Pizzeria::inserisciComanda(Comanda* daInserire) {
   if(daInserire){
+    bool inseribile = true;
+    const unordered_map<Articolo*,unsigned int>* ordinazione = &daInserire->getOrdinazione();
+    //controllo che ci sia almeno un articolo nella comanda
+    if(ordinazione->empty()){
+        std::stringstream errorMsg;
+        errorMsg << "Errore: La comanda deve contenere almeno un articolo";
+        throw new std::logic_error(errorMsg.str());
+    }
     //controllo che per ogni elemento dell'ordinazione tutti gli elementi
     //della sua composizione siano presenti nell'inventario
-    bool inseribile = true;
-    const unordered_map<Articolo*,unsigned int> *ordinazione = &daInserire->getOrdinazione();
     unordered_map<Articolo*, unsigned int>::const_iterator it;
     for(it = ordinazione->cbegin(); (it != ordinazione->cend()) && inseribile; ++it){
       inseribile = gestoreRisorse.controlloInInventario((*it).first);
