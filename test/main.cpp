@@ -74,7 +74,6 @@ int main(int argc, char* argv[]) {
       new Lattina(11, "Fanta", true, 2, 10, 6, QDate::currentDate(), 0.33);
   Bottiglia* CocaCola =
       new Bottiglia(12, "Coca Cola", true, 4, 10, 8, QDate::currentDate(), 1.5);
-  */
   Comanda* comanda1 =
       new Comanda(1, Contatto("AndyM", "Via Prova 123","123456789"),
                   QTime(20,00), QDate(2020,06,17));
@@ -94,5 +93,6 @@ int main(int argc, char* argv[]) {
   //bellaPadova.eseguiComanda();
   //bellaPadova.eseguiComanda();
   view.visualizzaComande();
+  */
   return app.exec();
 }
