@@ -280,27 +280,29 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
   return pacchetti;
 }
 
-QList<pacchettoComanda*> *Controller::recuperaComande() const{
+QList<pacchettoComanda*>* Controller::recuperaComande() const{
   QList<pacchettoComanda*>* pacchetti = new QList<pacchettoComanda*>();
-  auto comande = modello->getComande();
-  const Comanda* current = modello->getComandaCorrente();
+  if(!modello->getComande().isEmpty()){
+    auto comande = modello->getComande();
+    const Comanda* current = modello->getComandaCorrente();
 
-  for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
-    const Comanda* c = *it;
-    bool eseguita = false;
-    if(current)
-      eseguita = ((*c) < (*current)) ? true : false;
-    else
-      eseguita = true;
-    pacchettoComanda* pC =
-      new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
-                           c->getCliente().getIndirizzo(),
-                           c->getCliente().getTelefono(),
-                           c->getOraConsegna(), c->getTotale(), eseguita);
-    auto ordine = c->getOrdinazione();
-    for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
-      pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
-    pacchetti->push_back(pC);
+    for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
+      const Comanda* c = *it;
+      bool eseguita = false;
+      if(current)
+        eseguita = ((*c) < (*current)) ? true : false;
+      else
+        eseguita = true;
+      pacchettoComanda* pC =
+          new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
+                               c->getCliente().getIndirizzo(),
+                               c->getCliente().getTelefono(),
+                               c->getOraConsegna(), c->getTotale(), eseguita);
+      auto ordine = c->getOrdinazione();
+      for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
+        pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
+      pacchetti->push_back(pC);
+    }
   }
   return pacchetti;
 }
