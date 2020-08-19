@@ -16,11 +16,11 @@ public:
   void rendiEseguita();
   uint getID() const;
   QTime getOraConsegna() const;
+  const pacchettoComanda* richiediDettagliComanda(const pacchettoComanda*);
 
 signals:
   void eliminaComanda(uint);
   void mostraDettagliComanda(uint);
-  void richiediDettagliComanda();
 
 public slots:
   void showDetails();
