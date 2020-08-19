@@ -42,6 +42,9 @@ private:
   void inizializzaInfoComanda(QWidget*);
   void setStylePaginaComanda();
   void closeEvent(QCloseEvent*) override;
+
+private slots:
+  void modificaTabelle();
 };
 
 #endif // PAGINACOMANDA_H
