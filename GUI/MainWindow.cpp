@@ -90,6 +90,20 @@ void MainWindow::eliminaComanda(uint ID){
   controller->eliminaComanda(ID);
 }
 
+void MainWindow::richiediDettagliComanda(uint ID){
+  const pacchettoComanda* comanda = controller->recuperaInfoComanda(ID);
+  if(comanda != nullptr){
+    Comande* widgetComande = findChild<Comande*>("widgetComande");
+    QList<ComandaGUI*> comandeGUI = widgetComande->findChildren<ComandaGUI*>();
+    auto it = comandeGUI.begin();
+    while(it != comandeGUI.end()){
+      if((*it)->getID() == ID)
+        (*it)->
+          ++it;
+    }
+  }
+}
+
 void MainWindow::aumentaCurrent(){
   controller->eseguiComanda();
 }

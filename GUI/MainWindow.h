@@ -47,6 +47,7 @@ signals:
   //false = bevanda
   void creaNuovaComanda(pacchettoComanda*);
   void eliminaComanda(uint);
+  void richiediDettagliComanda(uint);
   void aumentaCurrent();
   void visualizzaElementiInWizardArticolo(bool) const;
   void visualizzaElementiCheckatiInWizardArticolo(bool) const;
