@@ -310,11 +310,11 @@ QList<pacchettoComanda*>* Controller::recuperaComande() const{
 const pacchettoComanda *Controller::recuperaInfoComanda(uint ID) const {
   pacchettoComanda* pC = nullptr;
   if(!modello->getComande().isEmpty()){
-    comanda* c = modello->trovaComanda(ID);
+    Comanda* c = modello->trovaComanda(ID);
     pC = new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
                               c->getCliente().getIndirizzo(),
                               c->getCliente().getTelefono(),
-                              c->getOraConsegna(), c->getTotale(), eseguita);
+                              c->getOraConsegna(), c->getTotale(), true);
     auto ordine = c->getOrdinazione();
     for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
       pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
