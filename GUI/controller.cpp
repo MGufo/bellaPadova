@@ -12,7 +12,56 @@ void Controller::calcoloFatturato(const QDate& inizio, const QDate& fine){
   vista->aggiornaContabilizzazione(modello->contabilizzazione(inizio, fine));
 }
 
-void Controller::creaNuovoConsumabile(pacchetto* pC){
+void Controller::creaNuovoArticolo(pacchettoArticolo* pA){
+    Articolo* pArticolo = nullptr;
+    if(dynamic_cast<pacchettoBevanda*>(pA)){
+      //recupero la bevanda che voglio inserire nel menu dall'inventario
+      Risorsa* r = modello->trovaRisorsa(pA->ID);
+      pArticolo = dynamic_cast<Articolo*>(r);
+      //creo pacchetto per aggiornare la vista
+      Bevanda* pBevanda = dynamic_cast<Bevanda*>(r);
+      pA->nome = pBevanda->getNome();
+      pA->disponibilita = pBevanda->getDisponibilita();
+      dynamic_cast<pacchettoBevanda*>(pA)->prezzo = pBevanda->getPrezzoBase();
+      dynamic_cast<pacchettoBevanda*>(pA)->quantita = pBevanda->getQuantita();
+      dynamic_cast<pacchettoBevanda*>(pA)->costo = pBevanda->getCosto();
+      dynamic_cast<pacchettoBevanda*>(pA)->dataAcquisto = pBevanda->getDataAcquisto();
+      dynamic_cast<pacchettoBevanda*>(pA)->capacita = pBevanda->getCapacita();
+      dynamic_cast<pacchettoBevanda*>(pA)->tipo = (dynamic_cast<Lattina*>(pBevanda) ? true : false);
+    }
+    else if(dynamic_cast<pacchettoPizza*>(pA)){
+      pA->ID = ++idRisorse;
+      pacchettoPizza* ptr = dynamic_cast<pacchettoPizza*>(pA);
+      pArticolo = new Pizza(ptr->ID,ptr->nome,ptr->disponibilita,ptr->prezzo);
+      //inserisco gli ingredienti e setto la farina
+      Pizza* pPizza = dynamic_cast<Pizza*>(pArticolo);
+      Lista<Ingrediente*> ingrePizza;
+      for(auto it = ptr->ingredienti.cbegin() ; it != ptr->ingredienti.cend() ; ++it){
+          Risorsa* r = modello->trovaRisorsa((*it).first);
+          if(dynamic_cast<Farina*>(r))
+              pPizza->setFarina(dynamic_cast<Farina*>(r));
+          else
+              ingrePizza.push_back(dynamic_cast<Ingrediente*>(r));
+      }
+      try{
+        pPizza->aggiungiIngredienti(ingrePizza);
+      }
+      catch (std::domain_error* ecc){
+          vista->mostraErrore(QString(ecc->what()));
+      }
+    }
+    try{
+        modello->inserisciArticolo(pArticolo);
+        risorseSalvate = false;
+        vista->aggiornaMenu(pA);
+    } catch (std::domain_error* ecc){
+        vista->mostraErrore(QString(ecc->what()));
+    } catch (std::logic_error* ecc){
+        vista->mostraErrore(QString(ecc->what()));
+    }
+}
+
+void Controller::creaNuovoConsumabile(pacchettoConsumabile* pC){
   Consumabile* pConsumabile = nullptr;
   pC->ID = ++idRisorse;
   if(dynamic_cast<pacchettoBevanda*>(pC)){
@@ -47,7 +96,7 @@ void Controller::creaNuovoConsumabile(pacchetto* pC){
 
 
 
-void Controller::modificaConsumabile(pacchetto * pC){
+void Controller::modificaConsumabile(pacchettoConsumabile * pC){
   Consumabile* pConsumabile = nullptr;
   if(dynamic_cast<pacchettoBevanda*>(pC)){
     pacchettoBevanda* ptr = dynamic_cast<pacchettoBevanda*>(pC);
@@ -90,7 +139,7 @@ void Controller::modificaConsumabile(pacchetto * pC){
   risorseSalvate = false;
 }
 
-void Controller::modificaArticolo(pacchetto* p){
+void Controller::modificaArticolo(pacchettoArticolo* p){
   Articolo* modificato= nullptr;
   if(dynamic_cast<pacchettoPizza*>(p)){
     pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
@@ -151,55 +200,6 @@ void Controller::eliminaComanda(uint ID){
 void Controller::eseguiComanda(){
   modello->eseguiComanda();
   vista->visualizzaComande();
-}
-
-void Controller::creaNuovoArticolo(pacchetto* pA){
-    Articolo* pArticolo = nullptr;
-    if(dynamic_cast<pacchettoBevanda*>(pA)){
-      //recupero la bevanda che voglio inserire nel menu dall'inventario
-      Risorsa* r = modello->trovaRisorsa(pA->ID);
-      pArticolo = dynamic_cast<Articolo*>(r);
-      //creo pacchetto per aggiornare la vista
-      Bevanda* pBevanda = dynamic_cast<Bevanda*>(r);
-      pA->nome = pBevanda->getNome();
-      pA->disponibilita = pBevanda->getDisponibilita();
-      dynamic_cast<pacchettoBevanda*>(pA)->prezzo = pBevanda->getPrezzoBase();
-      dynamic_cast<pacchettoBevanda*>(pA)->quantita = pBevanda->getQuantita();
-      dynamic_cast<pacchettoBevanda*>(pA)->costo = pBevanda->getCosto();
-      dynamic_cast<pacchettoBevanda*>(pA)->dataAcquisto = pBevanda->getDataAcquisto();
-      dynamic_cast<pacchettoBevanda*>(pA)->capacita = pBevanda->getCapacita();
-      dynamic_cast<pacchettoBevanda*>(pA)->tipo = (dynamic_cast<Lattina*>(pBevanda) ? true : false);
-    }
-    else if(dynamic_cast<pacchettoPizza*>(pA)){
-      pA->ID = ++idRisorse;
-      pacchettoPizza* ptr = dynamic_cast<pacchettoPizza*>(pA);
-      pArticolo = new Pizza(ptr->ID,ptr->nome,ptr->disponibilita,ptr->prezzo);
-      //inserisco gli ingredienti e setto la farina
-      Pizza* pPizza = dynamic_cast<Pizza*>(pArticolo);
-      Lista<Ingrediente*> ingrePizza;
-      for(auto it = ptr->ingredienti.cbegin() ; it != ptr->ingredienti.cend() ; ++it){
-          Risorsa* r = modello->trovaRisorsa((*it).first);
-          if(dynamic_cast<Farina*>(r))
-              pPizza->setFarina(dynamic_cast<Farina*>(r));
-          else
-              ingrePizza.push_back(dynamic_cast<Ingrediente*>(r));
-      }
-      try{
-        pPizza->aggiungiIngredienti(ingrePizza);
-      }
-      catch (std::domain_error* ecc){
-          vista->mostraErrore(QString(ecc->what()));
-      }
-    }
-    try{
-        modello->inserisciArticolo(pArticolo);
-        risorseSalvate = false;
-        vista->aggiornaMenu(pA);
-    } catch (std::domain_error* ecc){
-        vista->mostraErrore(QString(ecc->what()));
-    } catch (std::logic_error* ecc){
-        vista->mostraErrore(QString(ecc->what()));
-    }
 }
 
 QList<pacchetto*>* Controller::recuperaInventario() const{

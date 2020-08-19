@@ -1,25 +1,52 @@
 #include "tabellacomande.h"
 
 TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
-                               const QStringList* labels) :
-  TabellaComposita(parent, etichetta, labels){
-  connect(tabella,SIGNAL(cellChanged(int,int)),
-          this,SLOT(emitDataOnCellChanged(int,int)));
+                               const QStringList* labels) : TabellaComposita(parent, etichetta, labels){
   connect(this,SIGNAL(validationError(const QString)),
           parentWidget()->parentWidget()->parentWidget()->
           parentWidget()->parentWidget()->parentWidget()->
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(mostraErrore(const QString)));
-  connect(this,SIGNAL(sendPacketToModel(pacchetto*, bool)),
-          parentWidget()->parentWidget()->parentWidget()->
-          parentWidget()->parentWidget()->parentWidget()->
-          parentWidget()->parentWidget()->parentWidget(),
-          SLOT(modificaRisorsa(pacchetto*, bool)));
-  connect(this,SIGNAL(sendIdToModel(uint, bool)),
-          parentWidget()->parentWidget()->parentWidget()->
-          parentWidget()->parentWidget()->parentWidget()->
-          parentWidget()->parentWidget()->parentWidget(),
-          SLOT(eliminaRisorsa(uint, bool)));
-  connect(this,SIGNAL(sendIdToModel(uint, bool)),
-          this,SLOT(eliminaElemento(uint, bool)));
+//  connect(this,SIGNAL(sendComandaPacketToModel(pacchettoComanda*)),
+//          parentWidget()->parentWidget()->parentWidget()->
+//          parentWidget()->parentWidget()->parentWidget()->
+//          parentWidget()->parentWidget()->parentWidget(),
+//          SLOT(modificaComanda(pacchetto*)));
+//  connect(this,SIGNAL(sendComandaIdToModel(uint)),
+//          parentWidget()->parentWidget()->parentWidget()->
+//          parentWidget()->parentWidget()->parentWidget()->
+//          parentWidget()->parentWidget()->parentWidget(),
+//          SLOT(eliminaComanda(uint)));
+  connect(this,SIGNAL(sendIdToModel(uint)),
+          this,SLOT(eliminaElemento(uint)));
+}
+
+void TabellaComande::inserisciElemento(pacchettoComanda* p){
+
+}
+
+void TabellaComande::rendiEditabile(bool){
+
+}
+
+void TabellaComande::emitDataOnCellChanged(int, int){
+
+}
+
+void TabellaComande::checkBoxToggled(bool){
+    QObject *cb = sender();
+    int row = cb->property("row").toInt();
+    int column = cb->property("column").toInt();
+
+    emit tabella->cellChanged(row,column);
+}
+
+void TabellaComande::forwardIdToModel(uint id){
+    /*
+    if(tabella->objectName()=="tabIngredientiInventario" ||
+            tabella->objectName()=="tabBevandeInventario")
+        emit sendIdToModel(id,true);
+    else
+        emit sendIdToModel(id,false);
+        */
 }

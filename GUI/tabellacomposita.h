@@ -11,9 +11,7 @@
 #include <QPushButton>
 #include <QCheckBox>
 
-#include "inputValidator.h"
 #include "pacchetti.h"
-#include "pushbuttonwithid.h"
 
 class TabellaComposita : public QWidget {
   Q_OBJECT
@@ -22,25 +20,18 @@ public:
                             const QString& etichetta="",
                             const QStringList* = nullptr);
   void pulisciTabella();
-  void inserisciElemento(pacchetto*);
-  void rendiEditabile(bool = true);
+  virtual void rendiEditabile(bool = true) = 0;
   void cambiaColoreBordoCella(bool = true);
   enum tipoTabella {bevandeM, bevandeI, inventario, pizze};
   enum dataType {_int, _double, _string, _data};
   void setHeaderDimension(tipoTabella);
 
 signals:
-  //0: articolo; 1:consumabile
-  void sendPacketToModel(pacchetto*, bool);
-   //0: articolo; 1:consumabile
-  void sendIdToModel(uint, bool);
   void validationError(const QString);
 
 private slots:
-  void emitDataOnCellChanged(int,int);
-  void eliminaElemento(uint, bool);
-  void checkBoxToggled(bool);
-  void forwardIdToModel(uint);
+  virtual void emitDataOnCellChanged(int,int) = 0;
+  void eliminaElemento(uint);
 
 protected:
   bool editabile;
@@ -48,7 +39,6 @@ protected:
   QTableWidget* tabella = nullptr;
   QVBoxLayout* layoutTabellaComposita;
   void setStyleTabella();
-  void validateInput(int, int);
   void setDefaultValue(int, int);
 };
 

@@ -6,14 +6,13 @@ PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
   inizializzaBevande(this);
   inizializzaInfoComanda(this);
   // Creazione pulsanti
-  inizializzaPulsanti(this);
+  inizializzaPulsante(this);
   // Creazione layout paginaComanda e aggiunta dei subwidget
   layoutPaginaComanda = new QGridLayout(this);
   layoutPaginaComanda->addWidget(infoComanda, 1, 0, 5, 5, Qt::AlignLeft);
   layoutPaginaComanda->addWidget(Pizze, 0, 6, 5, 5);
   layoutPaginaComanda->addWidget(Bevande, 6, 6, 5, 5);
-  layoutPaginaComanda->addWidget(newArticolo, 8, 0, 1, 5);
-  layoutPaginaComanda->addWidget(modificaDati, 9, 0, 1, 5);
+  layoutPaginaComanda->addWidget(modificaDati, 7, 0, 3, 5, Qt::AlignHCenter);
   setStylePaginaComanda();
   setLayout(layoutPaginaComanda);
   connect(this, SIGNAL(enableButton()), parentWidget(), SLOT(enableButton()));
@@ -43,9 +42,7 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
   Bevande->setObjectName("tabBevandeComanda");
 }
 
-void PaginaComanda::inizializzaPulsanti(QWidget* _parent){
-  newArticolo = new QPushButton(_parent);
-  newArticolo->setText("Nuovo Articolo");
+void PaginaComanda::inizializzaPulsante(QWidget* _parent){
   modificaDati = new QPushButton(_parent);
   modificaDati->setText("Modifica");
 }
@@ -74,7 +71,6 @@ void PaginaComanda::setStylePaginaComanda(){
   setMinimumSize(1200, 600);
   setMaximumSize(1200, 600);
   setObjectName("paginaComanda");
-  newArticolo->setObjectName("newArticolo");
   modificaDati->setObjectName("modificaDati");
 }
 
