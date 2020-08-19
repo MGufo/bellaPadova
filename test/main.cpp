@@ -78,14 +78,14 @@ int main(int argc, char* argv[]) {
   Comanda* comanda1 =
       new Comanda(1, Contatto("AndyM", "Via Prova 123","123456789"),
                   QTime(20,00), QDate(2020,06,17));
-//  comanda1->inserisciArticolo(marghe,2);
+  comanda1->inserisciArticolo(dynamic_cast<Articolo*>(bellaPadova.trovaRisorsa(8)),2);
 //  comanda1->inserisciArticolo(mari, 1);
 //  comanda1->inserisciArticolo(CocaCola, 1);
 
   Comanda* comanda2 =
       new Comanda(2, Contatto("gBizz", "Via Stocazzo","987654321"),
                   QTime(20,30), QDate(2020,06,17));
-//  comanda2->inserisciArticolo(boschi, 5);
+  comanda2->inserisciArticolo(dynamic_cast<Articolo*>(bellaPadova.trovaRisorsa(10)), 5);
 //  comanda2->inserisciArticolo(marghe, 1);
 //  comanda2->inserisciArticolo(Fanta, 1);
 
