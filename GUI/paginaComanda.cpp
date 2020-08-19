@@ -49,20 +49,20 @@ void PaginaComanda::inizializzaPulsante(QWidget* _parent){
 
 void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
   infoComanda = new QWidget(_parent);
-  QLineEdit* orario = new QLineEdit(infoComanda);
+  orario = new QLineEdit(infoComanda);
   orario->setEnabled(false);
-  QLineEdit* nome = new QLineEdit(infoComanda);
+  nome = new QLineEdit(infoComanda);
   nome->setEnabled(false);
-  QLineEdit* indirizzo = new QLineEdit(infoComanda);
+  indirizzo = new QLineEdit(infoComanda);
   indirizzo->setEnabled(false);
-  QLineEdit* telefono = new QLineEdit(infoComanda);
+  telefono = new QLineEdit(infoComanda);
   telefono->setEnabled(false);
   QFormLayout* info = new QFormLayout(infoComanda);
   info->addRow("Orario: ", orario);
   info->addRow("Nome: ", nome);
   info->addRow("Indirizzo: ", indirizzo);
   info->addRow("Telefono: ", telefono);
-  QLabel* totale = new QLabel(infoComanda);
+  totale = new QLabel(infoComanda);
   info->addRow("Totale: ", totale);
   infoComanda->setLayout(info);
 }

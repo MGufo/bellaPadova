@@ -29,6 +29,11 @@ private:
   TabellaComande* Pizze;
   TabellaComande* Bevande;
   QWidget* infoComanda;
+  QLineEdit* orario;
+  QLineEdit* nome;
+  QLineEdit* indirizzo;
+  QLineEdit* telefono;
+  QLabel* totale;
   QPushButton* modificaDati;
 
   void inizializzaPizze(QWidget*);
