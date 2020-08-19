@@ -129,12 +129,16 @@ void Controller::creaNuovaComanda(pacchettoComanda *pC){
           dynamic_cast<Articolo*>(modello->trovaRisorsa((*it).first)),
           (*it).second);
   }
+  try{
   modello->inserisciComanda(c);
+  }
+  catch(std::logic_error* ecc){
+    vista->mostraErrore(QString(ecc->what()));
+  }
   vista->visualizzaComande();
 }
 
 void Controller::modificaComanda(pacchettoComanda *pC){
-  // TODO: Ask Gabriel se modificare tabellaComposita in più sottoclassi, se implementarla in dettaglioComanda così com'è o cosa fare
   // TODO: Rivedere implementazione delle funzioni modificaComanda() e rimuoviComanda()
   vista->visualizzaComande();
 }
