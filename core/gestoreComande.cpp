@@ -145,8 +145,8 @@ const Lista<Comanda*>& GestoreComande::getBacheca() const { return bacheca; }
 
 Comanda *GestoreComande::trovaComanda(unsigned int _ID) const {
   Comanda* c = nullptr;
-  if(current.isValid()){
-    for(auto it = current; it != bacheca.end(); ++it)
+  if(!bacheca.isEmpty()){
+    for(auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it)
       if((*it)->getIdComanda() == _ID) c = *it;
   }
   return c;
