@@ -260,11 +260,11 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
                                pB->getDataAcquisto(),pB->getCapacita(),false);
     }
     else if(dynamic_cast<Pizza*>(*it)){
-      Pizza* pF = dynamic_cast<Pizza*>(*it);
-      p = new pacchettoPizza(pF->getIdRisorsa(), pF->getNome(),
-                             pF->getDisponibilita(), pF->getPrezzo());
-      auto listaIngr = pF->getComposizione();
-      for(auto it = listaIngr->const_begin(); it != listaIngr->const_end();
+      Pizza* pP = dynamic_cast<Pizza*>(*it);
+      p = new pacchettoPizza(pP->getIdRisorsa(), pP->getNome(),
+                             pP->getDisponibilita(), pP->getPrezzo());
+      auto listaIngr = pP->getIngredienti();
+      for(auto it = listaIngr.const_begin(); it != listaIngr.const_end();
           ++it){
         Ingrediente* i = dynamic_cast<Ingrediente*>(*it);
         pacchettoIngrediente* pI =
