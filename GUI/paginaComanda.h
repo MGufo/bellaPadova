@@ -28,12 +28,11 @@ private:
   TabellaComande* Pizze;
   TabellaComande* Bevande;
   QWidget* infoComanda;
-  QPushButton* newArticolo;
   QPushButton* modificaDati;
 
   void inizializzaPizze(QWidget*);
   void inizializzaBevande(QWidget*);
-  void inizializzaPulsanti(QWidget*);
+  void inizializzaPulsante(QWidget*);
   void inizializzaInfoComanda(QWidget*);
   void setStylePaginaComanda();
   void closeEvent(QCloseEvent*) override;
