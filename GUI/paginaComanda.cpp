@@ -21,6 +21,7 @@ PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
 PaginaComanda::~PaginaComanda() {}
 
 void PaginaComanda::setInfoComanda(const pacchettoComanda* pC){
+  orario->setText(pC->oraConsegna.toString());
   nome->setText(QString::fromStdString(pC->nome));
   indirizzo->setText(QString::fromStdString(pC->indirizzo));
   telefono->setText(QString::fromStdString(pC->telefono));
