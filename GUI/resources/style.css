@@ -38,6 +38,10 @@ QLabel#ComandaId:disabled {
     color: black;
 }
 
+QLabel#ComandaIdEseguita {
+    background-color: #cf2a27;
+}
+
 QLabel#concluse {
     qproperty-alignment: AlignCenter;
     margin-top: 2;
@@ -112,14 +116,6 @@ QPushButton#Calcola {
 
 }
 
-QPushButton#Completata {
-    background-color: #2b78e4;
-}
-
-QPushButton#Completata:disabled {
-    background-color: gray;
-}
-
 QPushButton#Consumabile {
     height: 75;
     margin: 10 10 10 10;
@@ -170,6 +166,20 @@ QPushButton#wrapperComanda {
 QPushButton#wrapperComanda:disabled {
   background-color: gray;
   width: 240;
+}
+
+QPushButton#wrapperComandaEseguita {
+    background-color: #cf2a27;
+    width: 170;
+    height: 80;
+
+}
+
+QPushButton#wrapperComandaEseguita:disabled {
+    background-color: gray;
+    width: 170;
+    height: 80;
+
 }
 
 QScrollArea {
