@@ -38,7 +38,7 @@ class Articolo : virtual public Risorsa {
    */
   virtual double getPrezzo() const = 0;
 
-  virtual const Lista<Consumabile*>* getComposizione() const = 0;
+  virtual const Lista<const Consumabile*>* getComposizione() const = 0;
 
   /**
    * @brief: Legge i dati di una risorsa da file JSON e li assegna ai campi

@@ -22,9 +22,9 @@ void Bevanda::setCapacita(float _capacita) { capacita = _capacita; }
 
 double Bevanda::plasticTax = 0.5;
 
-const Lista<Consumabile*>* Bevanda::getComposizione() const {
-  Lista<Consumabile*>* lista = new Lista<Consumabile*>();
-  lista->push_back(const_cast<Bevanda*>(this));
+const Lista<const Consumabile*>* Bevanda::getComposizione() const {
+  Lista<const Consumabile*>* lista = new Lista<const Consumabile*>();
+  lista->push_back(this);
   return lista;
 }
 

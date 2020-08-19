@@ -57,7 +57,7 @@ class Pizza : public Articolo {
    * @note: Usata nella classe GestoreRisorse per impostare correttamente la
    * disponibilità della pizza.
    */
-  virtual const Lista<Consumabile*>* getComposizione() const;
+  virtual const Lista<const Consumabile*>* getComposizione() const;
 
   virtual void modifica(Risorsa*);
 
