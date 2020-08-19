@@ -46,14 +46,12 @@ void Menu::modificaTabelle(){
     tabPizze->rendiEditabile();
     tabBevande->rendiEditabile();
     tabPizze->cambiaColoreBordoCella();
-    tabBevande->cambiaColoreBordoCella();
     modificaDati->setText("Finisci di Modificare");
     modificaDati->setObjectName("FineModifica");
   }
   else{
     newArticolo->setVisible(true);
     tabPizze->cambiaColoreBordoCella(false);
-    tabBevande->cambiaColoreBordoCella(false);
     tabPizze->rendiEditabile(false);
     tabBevande->rendiEditabile(false);
     modificaDati->setText("Modifica");

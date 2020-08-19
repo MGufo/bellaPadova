@@ -6,6 +6,7 @@ WizardNuovaComanda::WizardNuovaComanda(QWidget *parent) : QWizard(parent){
     setStartId(PAGE_Dettagli);
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Aggiunta nuova comanda"));
+    setMinimumSize(1200,800);
 
     connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
     connect(page(PAGE_Dettagli), SIGNAL(completeChanged()), this, SLOT(handlerBottoni()));
