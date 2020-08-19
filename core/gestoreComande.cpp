@@ -54,7 +54,7 @@ unsigned int GestoreComande::getMaxId() const {
 void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capForno) {
   int tempoPreparazione = daInserire->getTempoPreparazione(capForno)*60;
   if (daInserire) {
-    if (QTime::currentTime() > daInserire->getOrarioInizioPreparazione(capForno)) {
+    if (QTime::currentTime() >= daInserire->getOrarioInizioPreparazione(capForno)) {
       if (!(current.isValid()))
         daInserire->setOraConsegna(QTime::currentTime().addSecs(tempoPreparazione));
       else {
