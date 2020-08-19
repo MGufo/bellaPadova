@@ -36,6 +36,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   scroll_eseguite->setContentsMargins(0, 1, 0, 1);
 
   wrapper_eseguite = new QWidget(scroll_eseguite);
+  wrapper_eseguite->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   wrapper_eseguite->setObjectName("wrapperEseguite");
 
   layout_eseguite = new QHBoxLayout(wrapper_eseguite);
@@ -44,6 +45,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   scroll_eseguite->setMinimumSize(580, 100);
   scroll_eseguite->setMaximumHeight(200);
   scroll_eseguite->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  scroll_eseguite->setWidgetResizable(true);
 
   //////////////////////////////
   // Sezione bottoni in fondo //
@@ -86,8 +88,10 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
 void Comande::aggiungiComanda(pacchettoComanda* pC){
   ComandaGUI* comanda = new ComandaGUI(this, pC);
-    if(pC->eseguita)
+    if(pC->eseguita){
+      comanda->rendiEseguita();
       layout_eseguite->addWidget(comanda);
+    }
     else
       layout_inEsecuzione->addWidget(comanda);
 }
