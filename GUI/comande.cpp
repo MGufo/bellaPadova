@@ -88,8 +88,10 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
 void Comande::aggiungiComanda(pacchettoComanda* pC){
   ComandaGUI* comanda = new ComandaGUI(this, pC);
-    if(pC->eseguita)
+    if(pC->eseguita){
+      comanda->rendiEseguita();
       layout_eseguite->addWidget(comanda);
+    }
     else
       layout_inEsecuzione->addWidget(comanda);
 }
