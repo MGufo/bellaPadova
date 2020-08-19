@@ -148,12 +148,6 @@ QPushButton#Modifica {
 
 QPushButton#modificaDati {
     background-color: #2b78e4;
-    height: 75;
-}
-
-QPushButton#newArticolo {
-    background-color: #2b78e4;
-    height: 75;
 }
 
 QPushButton#newComanda {

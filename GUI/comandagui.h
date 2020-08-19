@@ -13,9 +13,8 @@ class ComandaGUI : public QWidget{
   Q_OBJECT
 public:
   explicit ComandaGUI(QWidget *parent = nullptr, pacchettoComanda* = nullptr);
-
+  void rendiEseguita();
   uint getID() const;
-
   QTime getOraConsegna() const;
 
 signals:
@@ -35,6 +34,8 @@ private:
   QString nomeCliente;
   QVBoxLayout* layoutComanda;
   QPushButton* wrapperComanda;
+  QHBoxLayout* layoutButtons;
+  QVBoxLayout* layoutWrapper;
   QPushButton* rimuovi;
   QPushButton* completata;
   PaginaComanda* dettagli;

@@ -66,9 +66,6 @@ void NuovaComanda_dettagli::setNewPizzeWidget(){
 
     pizze = new QTableWidget(0,3,wrapper);
     pizze->setObjectName("pizzeWrapper");
-    //pizze->setMinimumWidth(850);
-    //pizze->setMaximumWidth(2100);
-    //pizze->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     sizePolicy.setHorizontalStretch(0);
     sizePolicy.setVerticalStretch(0);
