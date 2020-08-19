@@ -18,6 +18,7 @@ class PaginaComanda : public QWidget {
 public:
   PaginaComanda(QWidget* parent = nullptr);
   ~PaginaComanda();
+  void setInfoComanda(const pacchettoComanda*);
 
 signals:
   void enableButton();

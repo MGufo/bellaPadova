@@ -21,6 +21,10 @@ PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
 
 PaginaComanda::~PaginaComanda() {}
 
+void PaginaComanda::setInfoComanda(const pacchettoComanda* pC){
+
+}
+
 void PaginaComanda::inizializzaPizze(QWidget* _parent){
   QStringList* headerLabels = new QStringList();
   headerLabels->push_back("Nome");
