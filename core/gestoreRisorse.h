@@ -22,7 +22,7 @@ class GestoreRisorse {
    * ritorna TRUE se sono tutti disp
    * ritorna FALSE se almeno uno non lo è
    */
-  bool controlloDisponibilita(const Lista<Consumabile *> *) const;
+  bool controlloDisponibilita(const Lista<const Consumabile*>*) const;
 
   /**
    * @brief: Scorre la lista alla ricerca di un consumabile
@@ -30,7 +30,7 @@ class GestoreRisorse {
    * @param: const Consumabile* (consumabile da cercare nella lista)
    * @returns: TRUE se il consumabile è presente nella lista, FALSE altrimenti.
    */
-  bool controlloConsumabile(const Lista<Consumabile *> *, Consumabile *) const;
+  bool controlloConsumabile(const Lista<const Consumabile *> *, const Consumabile*) const;
 
   unsigned int getMaxId() const;
 
