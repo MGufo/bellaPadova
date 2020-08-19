@@ -21,7 +21,10 @@ PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
 PaginaComanda::~PaginaComanda() {}
 
 void PaginaComanda::setInfoComanda(const pacchettoComanda* pC){
-
+  nome->setText(QString::fromStdString(pC->nome));
+  indirizzo->setText(QString::fromStdString(pC->indirizzo));
+  telefono->setText(QString::fromStdString(pC->telefono));
+  totale->setNum(pC->totale);
 }
 
 void PaginaComanda::inizializzaPizze(QWidget* _parent){
