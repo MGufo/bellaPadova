@@ -42,6 +42,11 @@ QLabel#ComandaIdEseguita {
     background-color: #cf2a27;
 }
 
+QLabel#ComandaIdEseguita:disabled {
+    background-color: gray;
+    color: black;
+}
+
 QLabel#concluse {
     qproperty-alignment: AlignCenter;
     margin-top: 2;
@@ -71,6 +76,15 @@ QLabel#Orario {
 }
 
 QLabel#Orario:disabled {
+    background-color: gray;
+    color: black;
+}
+
+QLabel#orarioEseguita {
+    background-color: #cf2a27;
+}
+
+QLabel#orarioEseguita:disabled {
     background-color: gray;
     color: black;
 }
