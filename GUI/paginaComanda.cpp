@@ -104,6 +104,12 @@ void PaginaComanda::toggleModifica(){
     editabile = false;
     modificaDati->setText("Modifica");
     modificaDati->setObjectName("Modifica");
+    /*
+    TODO:
+    1. Aggiungere un bool "TabellaModificata" che indichi se le tabelle (pizze o bevande) siano state modificate dall'utente dopo averle riempite con il menù
+    2. Controllare tramite una funzione lo stato del booleano dentro questo if
+    3. Se almeno un elemento tra tabelle e QLineEdit è stato modificato si crea il pacchettoComanda e lo si invia allo slot modificaComanda di mainwindow
+    */
   }
   else{
     editabile = true;
