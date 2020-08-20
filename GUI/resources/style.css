@@ -250,3 +250,7 @@ QWidget#wrapperEseguite {
 QWidget#wrapperInEsecuzione {
     background-color: #FFFFFF;
 }
+
+QWidget#wrapperScrollComanda {
+    background-color: #FFFFFF;
+}
