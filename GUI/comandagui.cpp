@@ -51,7 +51,6 @@ void ComandaGUI::rendiEseguita(){
 }
 
 void ComandaGUI::showDetails(){
-  if(dettagli) delete dettagli;
   dettagli = new PaginaComanda(this, ID);
   dettagli->setWindowFlags(Qt::Window);
   wrapperComanda->setEnabled(false);
@@ -60,7 +59,10 @@ void ComandaGUI::showDetails(){
   dettagli->show();
 }
 
-void ComandaGUI::enableButton(){ wrapperComanda->setEnabled(true); }
+void ComandaGUI::enableButton(){
+  wrapperComanda->setEnabled(true);
+  delete dettagli;
+}
 
 void ComandaGUI::removeClicked(){ emit eliminaComanda(ID); }
 
