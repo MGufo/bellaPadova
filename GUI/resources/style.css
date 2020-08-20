@@ -38,13 +38,13 @@ QLabel#ComandaId:disabled {
     color: black;
 }
 
-QLabel#ComandaIdEseguita {
+QLabel#comandaIdEseguita {
     background-color: #cf2a27;
 }
 
-QLabel#ComandaIdEseguita:disabled {
+QLabel#comandaIdEseguita:disabled {
     background-color: gray;
-    color: black;
+    color: black
 }
 
 QLabel#concluse {
