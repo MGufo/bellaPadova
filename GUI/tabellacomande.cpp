@@ -17,7 +17,7 @@ TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
 //          parentWidget()->parentWidget()->parentWidget()->
 //          parentWidget()->parentWidget()->parentWidget(),
 //          SLOT(eliminaComanda(uint)));
-  connect(this,SIGNAL(sendIdToModel(uint)),
+  connect(this,SIGNAL(sendComandaIdToModel(uint)),
           this,SLOT(eliminaElemento(uint)));
 }
 
