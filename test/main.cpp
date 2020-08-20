@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
   }
   marghe->setFarina(normale);
 
-  Pizza* mari = new Pizza(9, "marinara", true, 4);
+
   Pizza* boschi = new Pizza(10, "boscaiola", true, 4);
   mari->aggiungiIngredienti(*daRimuovere);
   mari->setFarina(farro);
@@ -70,8 +70,7 @@ int main(int argc, char* argv[]) {
 
   //string nome, bool disponibilita, double prezzo,
   //unsigned int qta, double costo, QDate dataAcquisto, double capacitaBevanda)
-  Lattina* Fanta =
-      new Lattina(11, "Fanta", true, 2, 10, 6, QDate::currentDate(), 0.33);
+
   Bottiglia* CocaCola =
       new Bottiglia(12, "Coca Cola", true, 4, 10, 8, QDate::currentDate(), 1.5);
   Comanda* comanda1 =
@@ -80,19 +79,20 @@ int main(int argc, char* argv[]) {
   comanda1->inserisciArticolo(dynamic_cast<Articolo*>(bellaPadova.trovaRisorsa(8)),2);
 //  comanda1->inserisciArticolo(mari, 1);
 //  comanda1->inserisciArticolo(CocaCola, 1);
-
+*/
+  Pizza* mari = new Pizza(9, "marinara", true, 4);
+  Lattina* Fanta =
+      new Lattina(11, "Fanta", true, 2, 10, 6, QDate::currentDate(), 0.33);
   Comanda* comanda2 =
       new Comanda(2, Contatto("gBizz", "Via Stocazzo","987654321"),
                   QTime(20,30), QDate(2020,06,17));
-  comanda2->inserisciArticolo(dynamic_cast<Articolo*>(bellaPadova.trovaRisorsa(10)), 5);
-//  comanda2->inserisciArticolo(marghe, 1);
-//  comanda2->inserisciArticolo(Fanta, 1);
+  comanda2->inserisciArticolo(mari, 1);
+  comanda2->inserisciArticolo(Fanta, 1);
 
-  bellaPadova.inserisciComanda(comanda1);
   bellaPadova.inserisciComanda(comanda2);
   //bellaPadova.eseguiComanda();
   //bellaPadova.eseguiComanda();
   view.visualizzaComande();
-  */
+
   return app.exec();
 }
