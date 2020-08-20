@@ -48,6 +48,7 @@ signals:
   //true = pizza
   //false = bevanda
   void creaNuovaComanda(pacchettoComanda*);
+  void modificaComanda(pacchettoComanda*);
   void eliminaComanda(uint);
   void richiediDettagliComanda(uint);
   void aumentaCurrent();

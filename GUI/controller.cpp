@@ -186,7 +186,16 @@ void Controller::creaNuovaComanda(pacchettoComanda *pC){
 }
 
 void Controller::modificaComanda(pacchettoComanda *pC){
-  // TODO: Rivedere implementazione delle funzioni modificaComanda() e rimuoviComanda()
+  // TODO: Rivedere implementazione delle funzioni modificaComanda() e
+  Comanda* c = modello->trovaComanda(pC->ID);
+  Comanda* newC = new Comanda(pC->ID,
+                              Contatto(pC->nome, pC->indirizzo, pC->telefono),
+                              pC->oraConsegna, c->getDataConsegna());
+  for(auto it = pC->ordinazione.cbegin(); it != pC->ordinazione.cend(); ++it)
+    newC->inserisciArticolo(
+          dynamic_cast<Articolo*>(modello->trovaRisorsa((*it).first)),
+          (*it).second);
+  modello->modificaComanda(c, newC);
   vista->visualizzaComande();
 }
 

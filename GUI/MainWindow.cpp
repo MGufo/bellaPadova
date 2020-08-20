@@ -89,6 +89,10 @@ void MainWindow::creaNuovaComanda(pacchettoComanda* pC){
   controller->creaNuovaComanda(pC);
 }
 
+void MainWindow::modificaComanda(pacchettoComanda* pC){
+  controller->modificaComanda(pC);
+}
+
 void MainWindow::eliminaComanda(uint ID){
   controller->eliminaComanda(ID);
 }
@@ -107,9 +111,6 @@ void MainWindow::richiediDettagliComanda(uint ID){
         trovato = true;
         ((*it)->findChild<PaginaComanda*>())->setInfoComanda(comanda,
                                                              contenutoComanda);
-      // Non passare la mappa nella stessa funzione di paginaComanda!
-      // Usare una funzione a parte, invocata da un segnale/slot diverso in paginaComanda
-      // e che riutilizzi il più possibile il codice già scritto
       ++it;
       }
     }
