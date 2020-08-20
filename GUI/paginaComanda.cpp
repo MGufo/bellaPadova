@@ -2,6 +2,7 @@
 
 PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   comandaID = ID;
+  editabile = false;
   // Creazione subwidget infoComanda e tabelle
   inizializzaPizze(this);
   inizializzaBevande(this);
@@ -47,6 +48,7 @@ void PaginaComanda::inizializzaPizze(QWidget* _parent){
 
   Pizze = new TabellaComande(_parent, "Pizze", headerLabels);
   Pizze->setObjectName("tabPizzeComanda");
+  Pizze->rendiEditabile(editabile);
 }
 
 void PaginaComanda::inizializzaBevande(QWidget* _parent){
@@ -57,12 +59,12 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
 
   Bevande = new TabellaComande(_parent, "Bevande", headerLabels);
   Bevande->setObjectName("tabBevandeComanda");
+  Bevande->rendiEditabile(editabile);
 }
 
 void PaginaComanda::inizializzaPulsante(QWidget* _parent){
   modificaDati = new QPushButton(_parent);
   modificaDati->setText("Modifica");
-  editabile = false;
 }
 
 void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
