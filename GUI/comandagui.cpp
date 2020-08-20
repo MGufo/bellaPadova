@@ -51,7 +51,8 @@ void ComandaGUI::rendiEseguita(){
 }
 
 void ComandaGUI::showDetails(){
-  dettagli = new PaginaComanda(this);
+  if(dettagli) delete dettagli;
+  dettagli = new PaginaComanda(this, ID);
   dettagli->setWindowFlags(Qt::Window);
   wrapperComanda->setEnabled(false);
   dettagli->setWindowTitle(contenutoID);
