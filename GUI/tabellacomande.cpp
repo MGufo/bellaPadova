@@ -21,11 +21,11 @@ TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
           this,SLOT(eliminaElemento(uint)));
 }
 
-void TabellaComande::inserisciElemento(pacchettoComanda* p){
+void TabellaComande::inserisciElemento(const pacchetto* p){
 
 }
 
-void TabellaComande::rendiEditabile(bool){
+void TabellaComande::rendiEditabile(bool b){
 
 }
 

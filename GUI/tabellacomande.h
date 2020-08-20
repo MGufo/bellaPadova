@@ -9,7 +9,7 @@ public:
   TabellaComande(QWidget *parent = nullptr,
                  const QString& etichetta="",
                  const QStringList* = nullptr);
-  void inserisciElemento(pacchettoComanda*);
+  void inserisciElemento(const pacchetto*);
   virtual void rendiEditabile(bool = true) override;
 
 signals:
