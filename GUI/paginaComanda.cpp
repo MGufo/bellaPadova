@@ -21,7 +21,8 @@ PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
 
 PaginaComanda::~PaginaComanda() {}
 
-void PaginaComanda::setInfoComanda(const pacchettoComanda* pC){
+void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
+                                   const QList<pacchetto*>* ord){
   // Info comanda
   orario->setText(pC->oraConsegna.toString());
   nome->setText(QString::fromStdString(pC->nome));
@@ -29,6 +30,7 @@ void PaginaComanda::setInfoComanda(const pacchettoComanda* pC){
   telefono->setText(QString::fromStdString(pC->telefono));
   totale->setNum(pC->totale);
   // Contenuto Ordine
+
 }
 
 void PaginaComanda::inizializzaPizze(QWidget* _parent){
