@@ -60,6 +60,7 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   prossimaComanda->setText("Esegui Comanda Corrente");
   prossimaComanda->setObjectName("eseguiComanda");
   prossimaComanda->setMaximumHeight(90);
+  prossimaComanda->setEnabled(false);
 
   wrapper_bottoniComande = new QWidget(this);
   wrapper_bottoniComande->setObjectName("wrapperBottoni");
