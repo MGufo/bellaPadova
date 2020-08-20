@@ -16,7 +16,7 @@ class PaginaComanda : public QWidget {
   Q_OBJECT
 
 public:
-  PaginaComanda(QWidget* parent = nullptr);
+  PaginaComanda(QWidget* parent = nullptr, uint = 0);
   ~PaginaComanda();
   void setInfoComanda(const pacchettoComanda*, const QList<pacchetto*>*);
 
@@ -24,6 +24,7 @@ signals:
   void enableButton();
 
 private:
+  uint comandaID;
   QGridLayout* layoutPaginaComanda;
   QHBoxLayout* layoutInfoComanda;
   TabellaComande* Pizze;

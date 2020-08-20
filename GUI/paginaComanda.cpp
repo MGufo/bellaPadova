@@ -1,6 +1,7 @@
 #include "paginaComanda.h"
 
-PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
+PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
+  comandaID = ID;
   // Creazione subwidget infoComanda e tabelle
   inizializzaPizze(this);
   inizializzaBevande(this);
@@ -28,15 +29,21 @@ void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
   nome->setText(QString::fromStdString(pC->nome));
   indirizzo->setText(QString::fromStdString(pC->indirizzo));
   telefono->setText(QString::fromStdString(pC->telefono));
-  totale->setNum(pC->totale);
+  totale->setText(QString::fromStdString(to_string_with_precision(pC->totale)));
   // Contenuto Ordine
-
+  for(auto it = ord->cbegin(); it != ord->cend(); ++it){
+    if(dynamic_cast<pacchettoPizza*>(*it))
+      Pizze->inserisciElemento(*it, pC->ordinazione.at((*it)->ID));
+    else
+      Bevande->inserisciElemento(*it, pC->ordinazione.at((*it)->ID));
+  }
 }
 
 void PaginaComanda::inizializzaPizze(QWidget* _parent){
   QStringList* headerLabels = new QStringList();
   headerLabels->push_back("Nome");
   headerLabels->push_back("Quantità");
+  headerLabels->push_back("Prezzo");
 
   Pizze = new TabellaComande(_parent, "Pizze", headerLabels);
   Pizze->setObjectName("tabPizzeComanda");
@@ -46,6 +53,7 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
   QStringList* headerLabels = new QStringList();
   headerLabels->push_back("Nome");
   headerLabels->push_back("Quantità");
+  headerLabels->push_back("Prezzo");
 
   Bevande = new TabellaComande(_parent, "Bevande", headerLabels);
   Bevande->setObjectName("tabBevandeComanda");
@@ -103,5 +111,4 @@ void PaginaComanda::modificaTabelle(){
     modificaDati->setText("Modifica");
     modificaDati->setObjectName("Modifica");
   }
-
 }
