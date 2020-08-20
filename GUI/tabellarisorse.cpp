@@ -475,14 +475,6 @@ void TabellaRisorse::emitDataOnCellChanged(int x, int y){
   }
 }
 
-void TabellaRisorse::checkBoxToggled(bool){
-    QObject *cb = sender();
-    int row = cb->property("row").toInt();
-    int column = cb->property("column").toInt();
-
-    emit tabella->cellChanged(row,column);
-}
-
 void TabellaRisorse::forwardIdToModel(uint id){
     if(tabella->objectName()=="tabIngredientiInventario" ||
             tabella->objectName()=="tabBevandeInventario")

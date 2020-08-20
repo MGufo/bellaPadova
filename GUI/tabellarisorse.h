@@ -22,8 +22,7 @@ signals:
 
 private slots:
  virtual void emitDataOnCellChanged(int,int) override;
- void checkBoxToggled(bool);
- void forwardIdToModel(uint);
+ virtual void forwardIdToModel(uint) override;
 
 private:
  void validateInput(int, int);
