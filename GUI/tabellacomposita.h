@@ -31,7 +31,9 @@ signals:
 
 private slots:
   virtual void emitDataOnCellChanged(int,int) = 0;
+  virtual void forwardIdToModel(uint) = 0;
   void eliminaElemento(uint);
+  void checkBoxToggled(bool);
 
 protected:
   bool editabile;

@@ -74,6 +74,14 @@ void TabellaComposita::eliminaElemento(uint id){
     editabile = true;
 }
 
+void TabellaComposita::checkBoxToggled(bool){
+    QObject *cb = sender();
+    int row = cb->property("row").toInt();
+    int column = cb->property("column").toInt();
+
+    emit tabella->cellChanged(row,column);
+}
+
 void TabellaComposita::setStyleTabella(){
   layoutTabellaComposita->setSpacing(0);
   layoutTabellaComposita->setMargin(0);
