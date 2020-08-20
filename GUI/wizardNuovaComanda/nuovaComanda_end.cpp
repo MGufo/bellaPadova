@@ -3,9 +3,10 @@
 NuovaComanda_end::NuovaComanda_end(QWidget* parent) : QWizardPage(parent){
     setTitle("Riepilogo");
     setSubTitle("Controlla di aver inserito i dati correttamente e premi \"Finish\" per concludere l'operazione");
-    layoutEnd = new QFormLayout(this);
+    layoutPagina = new QVBoxLayout(this);
+
     connect(this,SIGNAL(riempiWizardConElementiCheckati()),parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget(),SLOT(visualizzaElementiCheckatiInWizardComanda()));
-    setLayout(layoutEnd);
+    setLayout(layoutPagina);
 }
 
 void NuovaComanda_end::setActualPage(){
@@ -25,33 +26,43 @@ void NuovaComanda_end::setActualPage(){
     if(ptr1) layoutEnd->removeRow(ptr1);
 
     //creazione dei nuovi campi
+    QScrollArea* scrollArea = new QScrollArea(this);
+    layoutPagina->addWidget(scrollArea);
+    QWidget* wrapper = new QWidget(scrollArea);
+    wrapper->setObjectName("wrapperScrollComanda");
+    layoutEnd = new QFormLayout(wrapper);
+    wrapper->setLayout(layoutEnd);
+    wrapper->setMinimumSize(1000,400);
+
     QLabel* orarioComanda = new QLabel(field("orario").toTime().toString("hh:mm:ss"), this);
     orarioComanda->setObjectName("orarioComanda");
     layoutEnd->addRow("Orario:", orarioComanda);
 
-    QLabel* nomeComanda = new QLabel(field("nome").toString(), this);
+    QLabel* nomeComanda = new QLabel(field("nome").toString(), wrapper);
     nomeComanda->setObjectName("nomeComanda");
     layoutEnd->addRow("Nome:", nomeComanda);
 
-    QLabel* indirizzoComanda = new QLabel(field("indirizzo").toString(), this);
+    QLabel* indirizzoComanda = new QLabel(field("indirizzo").toString(), wrapper);
     indirizzoComanda->setObjectName("indirizzoComanda");
     layoutEnd->addRow("Indirizzo:", indirizzoComanda);
 
-    QLabel* telefonoComanda = new QLabel(field("telefono").toString(), this);
+    QLabel* telefonoComanda = new QLabel(field("telefono").toString(), wrapper);
     telefonoComanda->setObjectName("telefonoComanda");
     layoutEnd->addRow("Telefono:", telefonoComanda);
 
-    QWidget* wrapperPizze = new QWidget(this);
+    QWidget* wrapperPizze = new QWidget(wrapper);
     wrapperPizze->setObjectName("pizzeVisualizationWrapper");
     QVBoxLayout* pizzeLayout = new QVBoxLayout(wrapperPizze);
     wrapperPizze->setLayout(pizzeLayout);
     layoutEnd->addRow("Pizze:", wrapperPizze);
 
-    QWidget* wrapperBevande = new QWidget(this);
+    QWidget* wrapperBevande = new QWidget(wrapper);
     wrapperBevande->setObjectName("bevandeVisualizationWrapper_comande");
     QVBoxLayout* bevandeLayout = new QVBoxLayout(wrapperBevande);
     wrapperBevande->setLayout(bevandeLayout);
     layoutEnd->addRow("Bevande:", wrapperBevande);
+
+    scrollArea->setWidget(wrapper);
 
     emit riempiWizardConElementiCheckati();
 }
