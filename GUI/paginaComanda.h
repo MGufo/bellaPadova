@@ -36,6 +36,7 @@ private:
   QLineEdit* telefono;
   QLabel* totale;
   QPushButton* modificaDati;
+  bool editabile;
 
   void inizializzaPizze(QWidget*);
   void inizializzaBevande(QWidget*);
@@ -45,7 +46,9 @@ private:
   void closeEvent(QCloseEvent*) override;
 
 private slots:
-  void modificaTabelle();
+  void toggleModifica();
+  void modificaInfo(bool);
+  void modificaTabelle(bool);
 };
 
 #endif // PAGINACOMANDA_H

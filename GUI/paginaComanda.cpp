@@ -17,7 +17,7 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   setStylePaginaComanda();
   setLayout(layoutPaginaComanda);
   connect(this, SIGNAL(enableButton()), parentWidget(), SLOT(enableButton()));
-  connect(modificaDati, SIGNAL(clicked()), this, SLOT(modificaTabelle()));
+  connect(modificaDati, SIGNAL(clicked()), this, SLOT(toggleModifica()));
 }
 
 PaginaComanda::~PaginaComanda() {}
@@ -62,6 +62,7 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
 void PaginaComanda::inizializzaPulsante(QWidget* _parent){
   modificaDati = new QPushButton(_parent);
   modificaDati->setText("Modifica");
+  editabile = false;
 }
 
 void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
@@ -96,19 +97,29 @@ void PaginaComanda::closeEvent(QCloseEvent* event){
   event->accept();
 }
 
-void PaginaComanda::modificaTabelle(){
-  if(modificaDati->objectName() == "Modifica"){
-    Pizze->rendiEditabile();
-    Bevande->rendiEditabile();
-    Pizze->cambiaColoreBordoCella(true);
-    modificaDati->setText("Finisci di Modificare");
-    modificaDati->setObjectName("FineModifica");
-  }
-  else{
-    Pizze->rendiEditabile(false);
-    Bevande->rendiEditabile(false);
-    Pizze->cambiaColoreBordoCella(false);
+void PaginaComanda::toggleModifica(){
+  if(editabile){
+    editabile = false;
     modificaDati->setText("Modifica");
     modificaDati->setObjectName("Modifica");
   }
+  else{
+    editabile = true;
+    modificaDati->setText("Finisci di Modificare");
+    modificaDati->setObjectName("FineModifica");
+  }
+  modificaInfo(editabile);
+  modificaTabelle(editabile);
+}
+
+void PaginaComanda::modificaInfo(bool b){
+  QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
+  for (QLineEdit* x : info)
+    x->setEnabled(b);
+}
+
+void PaginaComanda::modificaTabelle(bool b){
+    Pizze->rendiEditabile(b);
+    Bevande->rendiEditabile(b);
+    Pizze->cambiaColoreBordoCella(b);
 }
