@@ -16,16 +16,21 @@ PaginaComanda::PaginaComanda(QWidget *parent) : QWidget(parent) {
   setStylePaginaComanda();
   setLayout(layoutPaginaComanda);
   connect(this, SIGNAL(enableButton()), parentWidget(), SLOT(enableButton()));
+  connect(modificaDati, SIGNAL(clicked()), this, SLOT(modificaTabelle()));
 }
 
 PaginaComanda::~PaginaComanda() {}
 
-void PaginaComanda::setInfoComanda(const pacchettoComanda* pC){
+void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
+                                   const QList<pacchetto*>* ord){
+  // Info comanda
   orario->setText(pC->oraConsegna.toString());
   nome->setText(QString::fromStdString(pC->nome));
   indirizzo->setText(QString::fromStdString(pC->indirizzo));
   telefono->setText(QString::fromStdString(pC->telefono));
   totale->setNum(pC->totale);
+  // Contenuto Ordine
+
 }
 
 void PaginaComanda::inizializzaPizze(QWidget* _parent){
@@ -81,4 +86,22 @@ void PaginaComanda::setStylePaginaComanda(){
 void PaginaComanda::closeEvent(QCloseEvent* event){
   emit enableButton();
   event->accept();
+}
+
+void PaginaComanda::modificaTabelle(){
+  if(modificaDati->objectName() == "Modifica"){
+    Pizze->rendiEditabile();
+    Bevande->rendiEditabile();
+    Pizze->cambiaColoreBordoCella(true);
+    modificaDati->setText("Finisci di Modificare");
+    modificaDati->setObjectName("FineModifica");
+  }
+  else{
+    Pizze->rendiEditabile(false);
+    Bevande->rendiEditabile(false);
+    Pizze->cambiaColoreBordoCella(false);
+    modificaDati->setText("Modifica");
+    modificaDati->setObjectName("Modifica");
+  }
+
 }

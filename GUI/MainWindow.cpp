@@ -98,10 +98,16 @@ void MainWindow::richiediDettagliComanda(uint ID){
   if(comanda != nullptr){
     Comande* widgetComande = findChild<Comande*>("widgetComande");
     QList<ComandaGUI*> comandeGUI = widgetComande->findChildren<ComandaGUI*>();
+    const QList<pacchetto*>* contenutoComanda =
+        controller->recuperaContenutoComanda(ID);
     auto it = comandeGUI.begin();
     while(it != comandeGUI.end()){
       if((*it)->getID() == ID)
-        ((*it)->findChild<PaginaComanda*>())->setInfoComanda(comanda);
+        ((*it)->findChild<PaginaComanda*>())->setInfoComanda(comanda,
+                                                             contenutoComanda);
+        // Non passare la mappa nella stessa funzione di paginaComanda!
+        // Usare una funzione a parte, invocata da un segnale/slot diverso in paginaComanda 
+        // e che riutilizzi il più possibile il codice già scritto
       ++it;
     }
   }

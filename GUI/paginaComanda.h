@@ -18,7 +18,7 @@ class PaginaComanda : public QWidget {
 public:
   PaginaComanda(QWidget* parent = nullptr);
   ~PaginaComanda();
-  void setInfoComanda(const pacchettoComanda*);
+  void setInfoComanda(const pacchettoComanda*, const QList<pacchetto*>*);
 
 signals:
   void enableButton();
@@ -42,6 +42,9 @@ private:
   void inizializzaInfoComanda(QWidget*);
   void setStylePaginaComanda();
   void closeEvent(QCloseEvent*) override;
+
+private slots:
+  void modificaTabelle();
 };
 
 #endif // PAGINACOMANDA_H
