@@ -7,9 +7,9 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
   setStartId(PAGE_Intro);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
   setWindowTitle(tr("Aggiunta articolo al Menù"));
-  connect(this, SIGNAL(nuovoArticolo(pacchetto*)),
+  connect(this, SIGNAL(nuovoArticolo(pacchettoArticolo*)),
           this->parentWidget()->parentWidget()->parentWidget()->parentWidget(),
-          SLOT(creaNuovoArticolo(pacchetto*)));
+          SLOT(creaNuovoArticolo(pacchettoArticolo*)));
   connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
   connect(page(PAGE_Dettagli), SIGNAL(completeChanged()), this, SLOT(handlerBottoni()));
 
@@ -21,7 +21,7 @@ WizardNuovoArticolo::WizardNuovoArticolo(QWidget *parent) : QWizard(parent){
 
 void WizardNuovoArticolo::accept(){
     QWizard::accept();
-    pacchetto* p = nullptr;
+    pacchettoArticolo* p = nullptr;
     if(field("optionPizza").toBool()){
         p = new pacchettoPizza(0,field("nomePizza").toString().toStdString(),true,field("prezzoPizza").toDouble());
         pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
