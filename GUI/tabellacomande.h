@@ -1,6 +1,8 @@
 #ifndef TABELLACOMANDE_H
 #define TABELLACOMANDE_H
 
+#include <QSpinBox>
+
 #include "tabellacomposita.h"
 
 class TabellaComande : public TabellaComposita {
@@ -9,7 +11,7 @@ public:
   TabellaComande(QWidget *parent = nullptr,
                  const QString& etichetta="",
                  const QStringList* = nullptr);
-  void inserisciElemento(const pacchetto*);
+  void inserisciElemento(pacchetto*, uint);
   virtual void rendiEditabile(bool = true) override;
 
 signals:
