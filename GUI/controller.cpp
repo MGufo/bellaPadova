@@ -294,6 +294,15 @@ pacchettoComanda* Controller::impacchettaComanda(const Comanda* c,
   return pC;
 }
 
+pacchetto* Controller::trovaPacchetto(uint ID) const{
+  QList<pacchetto*>* menu = recuperaMenu();
+  pacchetto* p = nullptr;
+  for(auto it = menu->cbegin(); it != menu->cend(); ++it)
+    if((*it)->ID == ID)
+      p = *it;
+  return p;
+}
+
 QList<pacchettoComanda*>* Controller::recuperaComande() const{
   QList<pacchettoComanda*>* pacchetti =
       new QList<pacchettoComanda*>();
@@ -331,6 +340,15 @@ const pacchettoComanda *Controller::recuperaInfoComanda(uint ID) const {
     pC = impacchettaComanda(modello->trovaComanda(ID), current);
   }
   return pC;
+}
+
+const QList<pacchetto*>* Controller::recuperaContenutoComanda(uint ID) const{
+  QList<pacchetto*>* contenuto = new QList<pacchetto*>();
+  const pacchettoComanda* pC = recuperaInfoComanda(ID);
+  for(auto it = pC->ordinazione.cbegin(); it != pC->ordinazione.cend(); ++it){
+    contenuto->push_back(trovaPacchetto((*it).first));
+  }
+  return contenuto;
 }
 
 bool Controller::canQuit() const { return (comandeSalvate && risorseSalvate); }

@@ -19,7 +19,7 @@ class Controller : public QObject {
   unsigned int idRisorse;
   bool comandeSalvate = true, risorseSalvate = true;
   pacchettoComanda* impacchettaComanda(const Comanda*, const Comanda*) const;
-
+  pacchetto* trovaPacchetto(uint) const;
  public:
   explicit Controller(Pizzeria*,  uint, uint, QObject* parent = nullptr);
   void setView(MainWindow*);
@@ -38,6 +38,7 @@ class Controller : public QObject {
   QList<pacchetto*>* recuperaMenu() const;
   QList<pacchettoComanda*>* recuperaComande() const;
   const pacchettoComanda* recuperaInfoComanda(uint) const;
+  const QList<pacchetto*>* recuperaContenutoComanda(uint) const;
   bool canQuit() const;
 
  public slots:
