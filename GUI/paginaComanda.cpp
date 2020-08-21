@@ -3,6 +3,7 @@
 PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   comandaID = ID;
   paginaEditabile = false;
+  contenutoModificato = false;
   // Creazione subwidget infoComanda e tabelle
   inizializzaPizze(this);
   inizializzaBevande(this);
@@ -98,6 +99,10 @@ void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
   totale = new QLabel(infoComanda);
   info->addRow("Totale: ", totale);
   infoComanda->setLayout(info);
+
+  QList<QLineEdit*> QLEinfo = infoComanda->findChildren<QLineEdit*>();
+  for (QLineEdit* x : QLEinfo)
+    connect(x, SIGNAL(textEdited(QString)), this, SLOT(paginaModificata()));
 }
 
 void PaginaComanda::setStylePaginaComanda(){
@@ -145,3 +150,5 @@ void PaginaComanda::modificaTabelle(bool b){
     Bevande->rendiEditabile(b);
     Pizze->cambiaColoreBordoCella(b);
 }
+
+void PaginaComanda::paginaModificata(){ contenutoModificato = true; }
