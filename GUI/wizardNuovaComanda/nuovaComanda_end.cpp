@@ -24,9 +24,17 @@ void NuovaComanda_end::setActualPage(){
     if(ptr1) layoutEnd->removeRow(ptr1);
     ptr1 = findChild<QWidget*>("bevandeVisualizationWrapper_comande");
     if(ptr1) layoutEnd->removeRow(ptr1);
+    QScrollArea* ptr2 = findChild<QScrollArea*>("scrollAreaWizardComanda");
+    if(ptr2){
+      layoutPagina->removeWidget(ptr2);
+      delete ptr2;
+    }
+    QWidget* ptr3 = findChild<QWidget*>("wrapperScrollComanda");
+    if(ptr3) delete ptr3;
 
     //creazione dei nuovi campi
     QScrollArea* scrollArea = new QScrollArea(this);
+    scrollArea->setObjectName("scrollAreaWizardComanda");
     layoutPagina->addWidget(scrollArea);
     QWidget* wrapper = new QWidget(scrollArea);
     wrapper->setObjectName("wrapperScrollComanda");
