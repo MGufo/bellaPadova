@@ -24,6 +24,7 @@ public:
 signals:
   void enableButton();
   void riempiTabelleConMenu(uint);
+  void inviaComanda(pacchettoComanda*);
 
 private:
   uint comandaID;
@@ -45,6 +46,7 @@ private:
   void inizializzaBevande(QWidget*);
   void inizializzaPulsante(QWidget*);
   void inizializzaInfoComanda(QWidget*);
+  void creaPacchettoComanda();
   void setStylePaginaComanda();
   void closeEvent(QCloseEvent*) override;
 

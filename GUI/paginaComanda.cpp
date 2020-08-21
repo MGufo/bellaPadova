@@ -24,6 +24,10 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
           parentWidget()->parentWidget()->parentWidget()->parentWidget()->
           parentWidget()->parentWidget()->parentWidget()->parentWidget(),
           SLOT(visualizzaMenuInComanda(uint)));
+  connect(this, SIGNAL(inviaComanda(pacchettoComanda*)),
+          parentWidget()->parentWidget()->parentWidget()->parentWidget()->
+          parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+          SLOT(modificaComanda(pacchettoComanda*)));
 }
 
 PaginaComanda::~PaginaComanda() {}
@@ -105,6 +109,19 @@ void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
     connect(x, SIGNAL(textEdited(QString)), this, SLOT(paginaModificata()));
 }
 
+void PaginaComanda::creaPacchettoComanda(){
+  string ora = orario->text().toStdString();
+  int hh = std::stoi(ora.substr(0,1));
+  int mm = std::stoi(ora.substr(3,4));
+  QTime QTora(hh,mm);
+  pacchettoComanda* pC =
+      new pacchettoComanda(comandaID, nome->text().toStdString(),
+                           indirizzo->text().toStdString(),
+                           telefono->text().toStdString(), QTora, 0, false);
+  // riempi pacchetto
+  //emit inviaComanda(pC);
+}
+
 void PaginaComanda::setStylePaginaComanda(){
   setMinimumSize(1200, 600);
   setMaximumSize(1200, 600);
@@ -137,6 +154,11 @@ void PaginaComanda::toggleModifica(){
   }
   modificaInfo(paginaEditabile);
   modificaTabelle(paginaEditabile);
+
+  if(contenutoModificato) {
+    creaPacchettoComanda();
+    contenutoModificato = false;
+  }
 }
 
 void PaginaComanda::modificaInfo(bool b){
