@@ -360,6 +360,19 @@ const QList<pacchetto*>* Controller::recuperaContenutoComanda(uint ID) const{
   return contenuto;
 }
 
+const QList<pacchetto *> *Controller::recuperaMenuPerComanda(uint ID) const{
+  QList<pacchetto*>* menu = recuperaMenu();
+  const QList<pacchetto*>* contenutoComanda = recuperaContenutoComanda(ID);
+  for(auto it = contenutoComanda->cbegin(); it != contenutoComanda->cend(); ++it){
+    for(auto it2 = menu->begin(); it2 != menu->end(); ++it2)
+      if((*it)->ID == (*it2)->ID){
+        it2=menu->erase(it2);
+        if(it2 == menu->end()) --it2;
+      }
+  }
+  return menu;
+}
+
 bool Controller::canQuit() const { return (comandeSalvate && risorseSalvate); }
 
 void Controller::caricaComande(){
