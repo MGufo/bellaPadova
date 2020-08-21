@@ -94,29 +94,12 @@ class Lista {
     }
 
     Iterator& operator--() {
-      if(itrCurrent){
-        if(itrCurrent->nodoPrev){
-          itrCurrent = itrCurrent->nodoPrev;
-          if(itrCurrent->nodoPrev)
-            itrPrevious = itrCurrent->nodoPrev;
-          else
-            itrPrevious = nullptr;
-        }
-        else{
-          itrCurrent = nullptr;
-          itrPrevious = nullptr;
-        }
-      }
-      else{
-        itrCurrent = itrPrevious;
+      if(itrPrevious) itrCurrent = itrPrevious;
+      else itrCurrent = itrCurrent->nodoPrev;
+      if (itrCurrent) {
         itrPrevious = itrCurrent->nodoPrev;
-      }
-//      if(itrPrevious) itrCurrent = itrPrevious;
-//      else itrCurrent = itrCurrent->nodoPrev;
-//      if (itrCurrent) {
-//        itrPrevious = itrCurrent->nodoPrev;
-//      } else
-//        itrPrevious = nullptr;
+      } else
+        itrPrevious = nullptr;
       return *this;
     }
 
