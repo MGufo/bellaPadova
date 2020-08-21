@@ -11,7 +11,7 @@ public:
   TabellaComande(QWidget *parent = nullptr,
                  const QString& etichetta="",
                  const QStringList* = nullptr);
-  void inserisciElemento(pacchetto*, uint);
+  void inserisciElemento(pacchetto*, uint = 0);
   virtual void rendiEditabile(bool = true) override;
 
 signals:
