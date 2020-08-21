@@ -95,7 +95,8 @@ void TabellaComande::riempiContenutoPacchetto(std::unordered_map
                                               <uint, uint>& ordine){
   for(int i=0; i < tabella->rowCount()-1; ++i)
     ordine.insert({tabella->item(i,0)->data(Qt::UserRole).toInt(),
-                   tabella->item(i,1)->text().toInt()});
+                   dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))
+                   ->text().toInt()});
 }
 
 
