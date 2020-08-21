@@ -20,6 +20,10 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   setLayout(layoutPaginaComanda);
   connect(this, SIGNAL(enableButton()), parentWidget(), SLOT(enableButton()));
   connect(modificaDati, SIGNAL(clicked()), this, SLOT(toggleModifica()));
+  connect(this, SIGNAL(mostraErrore(QString)),
+          parentWidget()->parentWidget()->parentWidget()->parentWidget()->
+          parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+          SLOT(mostraErrore(QString)));
   connect(this, SIGNAL(riempiTabelleConMenu(uint)),
           parentWidget()->parentWidget()->parentWidget()->parentWidget()->
           parentWidget()->parentWidget()->parentWidget()->parentWidget(),
@@ -176,4 +180,10 @@ void PaginaComanda::modificaTabelle(bool b){
     Pizze->cambiaColoreBordoCella(b);
 }
 
-void PaginaComanda::paginaModificata(){ contenutoModificato = true; }
+void PaginaComanda::paginaModificata(){
+  QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
+  for (QLineEdit* x : info){
+    if(x->isModified() && x->text() == "")
+      emit mostraErrore(QString("Errore: Il campo non può essere vuoto."));
+  contenutoModificato = true;
+}

@@ -25,6 +25,7 @@ signals:
   void enableButton();
   void riempiTabelleConMenu(uint);
   void inviaComanda(pacchettoComanda*);
+  void mostraErrore(const QString&);
 
 private:
   uint comandaID;
