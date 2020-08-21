@@ -99,6 +99,10 @@ void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
   totale = new QLabel(infoComanda);
   info->addRow("Totale: ", totale);
   infoComanda->setLayout(info);
+
+  QList<QLineEdit*> QLEinfo = infoComanda->findChildren<QLineEdit*>();
+  for (QLineEdit* x : QLEinfo)
+    connect(x, SIGNAL(textEdited(QString)), this, SLOT(paginaModificata()));
 }
 
 void PaginaComanda::setStylePaginaComanda(){
