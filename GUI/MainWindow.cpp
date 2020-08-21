@@ -313,6 +313,23 @@ void MainWindow::visualizzaElementiCheckatiInWizardComanda() const{
         }
     }
 }
+
+void MainWindow::visualizzaMenuInComanda(uint ID) const{
+  const QList<pacchetto*>* menu = controller->recuperaMenuPerComanda(ID);
+  Comande* widgetComande = findChild<Comande*>("widgetComande");
+  QList<ComandaGUI*> comandeGUI = widgetComande->findChildren<ComandaGUI*>();
+  auto it = comandeGUI.begin();
+  bool trovato = false;
+  while(!trovato && it != comandeGUI.end()){
+    if((*it)->getID() == ID){
+      trovato = true;
+      continue;
+    }
+    ++it;
+  }
+  for (auto it2 = menu->cbegin(); it2 != menu->cend(); ++it2)
+    ((*it)->findChild<PaginaComanda*>())->smistaPacchettoInTabella(*it2);
+}
 	
 void MainWindow::closeEvent(QCloseEvent *event){
   if(!controller->canQuit()){

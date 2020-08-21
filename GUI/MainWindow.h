@@ -56,6 +56,7 @@ signals:
   void visualizzaElementiCheckatiInWizardArticolo(bool) const;
   void visualizzaElementiInWizardComanda() const;
   void visualizzaElementiCheckatiInWizardComanda() const;
+  void visualizzaMenuInComanda(uint) const;
 
 protected:
   void closeEvent(QCloseEvent *);
