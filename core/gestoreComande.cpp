@@ -55,6 +55,7 @@ QTime GestoreComande::copiaQTime(const QTime &t){
     return currentTime;
 }
 
+void GestoreComande::fixCurrent(){ current = bacheca.find(*current); }
 
 // HACK: La comanda può contenere solo pizze del menu
 void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capForno) {
@@ -94,6 +95,7 @@ void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capFor
         }
         if (beforeCurrent) {
           bacheca.insert(current, daInserire);
+          fixCurrent();
           --current;
         } else {
           --it;
@@ -137,6 +139,7 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
       if (*it >= *current) {
         if (it == current) ++current;
         bacheca.erase(it);
+        fixCurrent();
       }
     }
   }

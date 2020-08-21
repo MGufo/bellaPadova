@@ -26,6 +26,8 @@ class GestoreComande {
   unsigned int getMaxId() const;
 
   QTime copiaQTime(const QTime&);
+
+  void fixCurrent();
  public:
   GestoreComande();
 
