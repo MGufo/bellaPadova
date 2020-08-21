@@ -36,7 +36,7 @@ private:
   QLineEdit* telefono;
   QLabel* totale;
   QPushButton* modificaDati;
-  bool editabile;
+  bool paginaEditabile;
 
   void inizializzaPizze(QWidget*);
   void inizializzaBevande(QWidget*);

@@ -2,7 +2,7 @@
 
 PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   comandaID = ID;
-  editabile = false;
+  paginaEditabile = false;
   // Creazione subwidget infoComanda e tabelle
   inizializzaPizze(this);
   inizializzaBevande(this);
@@ -45,10 +45,11 @@ void PaginaComanda::inizializzaPizze(QWidget* _parent){
   headerLabels->push_back("Nome");
   headerLabels->push_back("Quantità");
   headerLabels->push_back("Prezzo");
+  headerLabels->push_back("Ingredienti");
 
   Pizze = new TabellaComande(_parent, "Pizze", headerLabels);
   Pizze->setObjectName("tabPizzeComanda");
-  Pizze->rendiEditabile(editabile);
+  Pizze->rendiEditabile(paginaEditabile);
 }
 
 void PaginaComanda::inizializzaBevande(QWidget* _parent){
@@ -56,10 +57,11 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
   headerLabels->push_back("Nome");
   headerLabels->push_back("Quantità");
   headerLabels->push_back("Prezzo");
+  headerLabels->push_back("Capacità");
 
   Bevande = new TabellaComande(_parent, "Bevande", headerLabels);
   Bevande->setObjectName("tabBevandeComanda");
-  Bevande->rendiEditabile(editabile);
+  Bevande->rendiEditabile(paginaEditabile);
 }
 
 void PaginaComanda::inizializzaPulsante(QWidget* _parent){
@@ -100,8 +102,8 @@ void PaginaComanda::closeEvent(QCloseEvent* event){
 }
 
 void PaginaComanda::toggleModifica(){
-  if(editabile){
-    editabile = false;
+  if(paginaEditabile){
+    paginaEditabile = false;
     modificaDati->setText("Modifica");
     modificaDati->setObjectName("Modifica");
     /*
@@ -112,12 +114,12 @@ void PaginaComanda::toggleModifica(){
     */
   }
   else{
-    editabile = true;
+    paginaEditabile = true;
     modificaDati->setText("Finisci di Modificare");
     modificaDati->setObjectName("FineModifica");
   }
-  modificaInfo(editabile);
-  modificaTabelle(editabile);
+  modificaInfo(paginaEditabile);
+  modificaTabelle(paginaEditabile);
 }
 
 void PaginaComanda::modificaInfo(bool b){
