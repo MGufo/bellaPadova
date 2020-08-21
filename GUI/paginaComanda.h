@@ -39,6 +39,7 @@ private:
   QLabel* totale;
   QPushButton* modificaDati;
   bool paginaEditabile;
+  bool contenutoModificato;
 
   void inizializzaPizze(QWidget*);
   void inizializzaBevande(QWidget*);
@@ -51,6 +52,7 @@ private slots:
   void toggleModifica();
   void modificaInfo(bool);
   void modificaTabelle(bool);
+  void paginaModificata();
 };
 
 #endif // PAGINACOMANDA_H
