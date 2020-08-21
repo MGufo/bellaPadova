@@ -37,19 +37,34 @@ void TabellaComande::inserisciElemento(pacchetto* p, uint qta){
     item = new QTableWidgetItem(
           QString::fromStdString(to_string_with_precision(pP->prezzo)));
     tabella->setItem(tabella->rowCount()-1, 2, item);
+    std::stringstream ingr;
+    auto pIngr = pP->ingredienti;
+    auto it2 = pIngr.cbegin();
+    for(auto it = pIngr.cbegin(); it != pIngr.cend(); ++it){
+      ingr << (*it).second;
+      it2 = it;
+      if(++it2 != pIngr.cend()){
+        ingr << ", ";
+      }
+    }
+    item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
+    tabella->setItem(tabella->rowCount()-1, 3, item);
   }
   else{
-    pacchettoBevanda* pP = dynamic_cast<pacchettoBevanda*>(p);
+    pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
     QTableWidgetItem* item = nullptr;
-    item = new QTableWidgetItem(QString::fromStdString(pP->nome));
-    item->setData(Qt::UserRole, pP->ID);
+    item = new QTableWidgetItem(QString::fromStdString(pB->nome));
+    item->setData(Qt::UserRole, pB->ID);
     tabella->setItem(tabella->rowCount()-1, 0, item);
     QSpinBox* s = new QSpinBox(tabella);
     s->setValue(qta);
     tabella->setCellWidget(tabella->rowCount()-1, 1, s);
     item = new QTableWidgetItem(
-          QString::fromStdString(to_string_with_precision(pP->prezzo)));
+          QString::fromStdString(to_string_with_precision(pB->prezzo)));
     tabella->setItem(tabella->rowCount()-1, 2, item);
+    item = new QTableWidgetItem(
+          QString::fromStdString(to_string_with_precision(pB->capacita)));
+    tabella->setItem(tabella->rowCount()-1, 3, item);
   }
 }
 
