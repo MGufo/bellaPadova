@@ -7,9 +7,9 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
   setStartId(PAGE_Intro);
   setWindowTitle(tr("Aggiunta nuovo consumabile all'Inventario"));
-  connect(this, SIGNAL(nuovoConsumabile(pacchetto*)),
+  connect(this, SIGNAL(nuovoConsumabile(pacchettoConsumabile*)),
           this->parentWidget()->parentWidget()->parentWidget()->parentWidget(),
-          SLOT(creaNuovoConsumabile(pacchetto*)));
+          SLOT(creaNuovoConsumabile(pacchettoConsumabile*)));
   connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(assegnaBottoni(int)));
   connect(page(PAGE_Dettagli), SIGNAL(completeChanged()), this, SLOT(handlerBottoni()));
 
@@ -20,7 +20,7 @@ WizardNuovoConsumabile::WizardNuovoConsumabile(QWidget* parent) : QWizard(parent
 
 void WizardNuovoConsumabile::accept(){
   QWizard::accept();
-  pacchetto* p = nullptr;
+  pacchettoConsumabile* p = nullptr;
   if(field("optionIngrediente").toBool())
     p = new pacchettoIngrediente(
           0, field("nome").toString().toStdString(), field("disponibilita").toBool(),

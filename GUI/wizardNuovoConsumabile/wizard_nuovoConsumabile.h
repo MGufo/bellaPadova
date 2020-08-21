@@ -18,7 +18,7 @@ public:
   void accept() override;
 
 signals:
-  void nuovoConsumabile(pacchetto*);
+  void nuovoConsumabile(pacchettoConsumabile*);
 public slots:
   void assegnaBottoni(int);
   void handlerBottoni();
