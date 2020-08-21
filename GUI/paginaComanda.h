@@ -19,9 +19,11 @@ public:
   PaginaComanda(QWidget* parent = nullptr, uint = 0);
   ~PaginaComanda();
   void setInfoComanda(const pacchettoComanda*, const QList<pacchetto*>*);
+  void smistaPacchettoInTabella(pacchetto*);
 
 signals:
   void enableButton();
+  void riempiTabelleConMenu(uint);
 
 private:
   uint comandaID;

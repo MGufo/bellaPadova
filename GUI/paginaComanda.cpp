@@ -19,6 +19,10 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   setLayout(layoutPaginaComanda);
   connect(this, SIGNAL(enableButton()), parentWidget(), SLOT(enableButton()));
   connect(modificaDati, SIGNAL(clicked()), this, SLOT(toggleModifica()));
+  connect(this, SIGNAL(riempiTabelleConMenu(uint)),
+          parentWidget()->parentWidget()->parentWidget()->parentWidget()->
+          parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+          SLOT(visualizzaMenuInComanda(uint)));
 }
 
 PaginaComanda::~PaginaComanda() {}
@@ -38,6 +42,13 @@ void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
     else
       Bevande->inserisciElemento(*it, pC->ordinazione.at((*it)->ID));
   }
+}
+
+void PaginaComanda::smistaPacchettoInTabella(pacchetto* p){
+  if(dynamic_cast<pacchettoPizza*>(p))
+    Pizze->inserisciElemento(p);
+  else
+    Bevande->inserisciElemento(p);
 }
 
 void PaginaComanda::inizializzaPizze(QWidget* _parent){
@@ -117,6 +128,7 @@ void PaginaComanda::toggleModifica(){
     paginaEditabile = true;
     modificaDati->setText("Finisci di Modificare");
     modificaDati->setObjectName("FineModifica");
+    emit riempiTabelleConMenu(comandaID);
   }
   modificaInfo(paginaEditabile);
   modificaTabelle(paginaEditabile);
