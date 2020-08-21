@@ -118,8 +118,11 @@ void PaginaComanda::creaPacchettoComanda(){
       new pacchettoComanda(comandaID, nome->text().toStdString(),
                            indirizzo->text().toStdString(),
                            telefono->text().toStdString(), QTora, 0, false);
-  // riempi pacchetto
-  //emit inviaComanda(pC);
+  auto& contenutoOrdine = pC->ordinazione;
+  Pizze->riempiContenutoPacchetto(contenutoOrdine);
+  Bevande->riempiContenutoPacchetto(contenutoOrdine);
+
+  emit inviaComanda(pC);
 }
 
 void PaginaComanda::setStylePaginaComanda(){
