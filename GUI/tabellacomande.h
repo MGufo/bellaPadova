@@ -24,7 +24,6 @@ private slots:
  virtual void emitDataOnCellChanged(int,int) override;
  void checkBoxToggled(bool);
  void forwardIdToModel(uint);
- void eliminaElementoHandler();
  void selezionaQuantitaHandler(int);
 };
 

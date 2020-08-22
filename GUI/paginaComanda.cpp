@@ -83,7 +83,6 @@ void PaginaComanda::inizializzaPizze(QWidget* _parent){
 
   Pizze = new TabellaComande(_parent, "Pizze", headerLabels);
   Pizze->setObjectName("tabPizzeComanda");
-  Pizze->rendiEditabile(paginaEditabile);
 }
 
 void PaginaComanda::inizializzaBevande(QWidget* _parent){
@@ -95,7 +94,6 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
 
   Bevande = new TabellaComande(_parent, "Bevande", headerLabels);
   Bevande->setObjectName("tabBevandeComanda");
-  Bevande->rendiEditabile(paginaEditabile);
 }
 
 void PaginaComanda::inizializzaPulsante(QWidget* _parent){

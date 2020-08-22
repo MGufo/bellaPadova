@@ -52,6 +52,7 @@ void TabellaComande::inserisciElemento(pacchetto* p, uint qta){
     }
     item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
     tabella->setItem(tabella->rowCount()-1, 3, item);
+
   }
   else{
     pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(p);
@@ -72,27 +73,51 @@ void TabellaComande::inserisciElemento(pacchetto* p, uint qta){
   // connessione segnale emesso da SpinBox
   connect(s, SIGNAL(valueChanged(int)), this, SLOT(selezionaQuantitaHandler(int)));
   // connessione segnale emesso da CheckBox
-  //connect(.., SIGNAL(stateChanfed(int), this, SLOT(selezionaQuantitaHandler(int)));
-  // connessione segnale emesso da pulsante elimina
-  //connect(.., SIGNAL(clicked()), this, SLOT(eliminaElementoHandler()));
+  //connect(.., SIGNAL(stateChanged(int), this, SLOT(selezionaQuantitaHandler(int)));
+
+  int i = tabella->rowCount()-1;
+  for(int j=0 ; j<4 ; j++){
+      if(j==1)
+          dynamic_cast<QSpinBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+      else{
+          QTableWidgetItem* item = tabella->item(i,j);
+          item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+      }
+  }
 }
 
 void TabellaComande::rendiEditabile(bool b){
   if(b){
-      for(int i = 0; i < tabella->rowCount()-1; ++i){
-        for(int j = 0; j < tabella->columnCount()-1; ++j){
-          if(dynamic_cast<QWidget*>(tabella->cellWidget(i,j)))
-            dynamic_cast<QWidget*>(tabella->cellWidget(i,j))->setEnabled(b);
-          else{
-            QTableWidgetItem* item = tabella->item(i,j);
-            if(b) item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-            else item->setFlags(item->flags() | Qt::ItemIsEditable);
-          }
-        }
+      for(int i = 0; i < tabella->rowCount(); ++i)
+            dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->setEnabled(b);
+
+      //inserimento checkbox su ogni elemento della tabella
+      tabella->insertColumn(tabella->columnCount());
+      QTableWidgetItem* headerLabel = new QTableWidgetItem();
+      headerLabel->setText("");
+      tabella->setHorizontalHeaderItem(tabella->columnCount()-1,headerLabel);
+      for(int i = 0; i < tabella->rowCount(); ++i){
+          QCheckBox* c = new QCheckBox(tabella);
+          c->setProperty("row",tabella->rowCount()-1);
+          connect(c,SIGNAL(clicked()),this,SIGNAL(datiModificati()));
+          connect(c, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+          if(dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->value()>0)
+              c->setChecked(true);
+          tabella->setCellWidget(i, tabella->columnCount()-1, c);
       }
   }
   else{
+      for(int i = 0; i < tabella->rowCount(); ++i)
+            dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->setEnabled(b);
 
+      //rimozione di ogni riga non checkata
+      for(int i = 0; i < tabella->rowCount(); ++i){
+           if(!dynamic_cast<QCheckBox*>(tabella->cellWidget(i,tabella->columnCount()-1))->isChecked()){
+                tabella->removeRow(i);
+                i--;
+           }
+      }
+      tabella->removeColumn(tabella->columnCount()-1);
   }
 }
 
@@ -101,7 +126,7 @@ void TabellaComande::riempiContenutoPacchetto(std::unordered_map
   for(int i=0; i < tabella->rowCount()-1; ++i)
     ordine.insert({tabella->item(i,0)->data(Qt::UserRole).toInt(),
                    dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))
-                   ->text().toInt()});
+                   ->value()});
 }
 
 
@@ -109,12 +134,13 @@ void TabellaComande::emitDataOnCellChanged(int, int){
 
 }
 
-void TabellaComande::checkBoxToggled(bool){
+void TabellaComande::checkBoxToggled(bool stato){
     QObject *cb = sender();
     int row = cb->property("row").toInt();
-    int column = cb->property("column").toInt();
-
-    emit tabella->cellChanged(row,column);
+    if(stato)
+        dynamic_cast<QSpinBox*>(tabella->cellWidget(row,1))->setValue(1);
+    else
+        dynamic_cast<QSpinBox*>(tabella->cellWidget(row,1))->setValue(0);
 }
 
 void TabellaComande::forwardIdToModel(uint id){
@@ -126,7 +152,5 @@ void TabellaComande::forwardIdToModel(uint id){
         emit sendIdToModel(id,false);
         */
 }
-
-void TabellaComande::eliminaElementoHandler(){ emit datiModificati(); }
 
 void TabellaComande::selezionaQuantitaHandler(int) { emit datiModificati(); }
