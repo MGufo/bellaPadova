@@ -208,6 +208,6 @@ void PaginaComanda::orarioModificato(const QTime& newOrario){
   if(*oldOrario != newOrario) contenutoModificato = true;
 }
 
-void PaginaComanda::tabellaModificate(){
+void PaginaComanda::tabellaModificata(){
   contenutoModificato = true;
 }

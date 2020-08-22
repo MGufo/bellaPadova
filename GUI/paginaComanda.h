@@ -62,7 +62,7 @@ private slots:
   void modificaTabelle(bool);
   void infoModificate();
   void orarioModificato(const QTime&);
-  void tabellaModificate(); // da usare per segnalare una modifica alle tabelle
+  void tabellaModificata(); // da usare per segnalare una modifica alle tabelle
 };
 
 #endif // PAGINACOMANDA_H
