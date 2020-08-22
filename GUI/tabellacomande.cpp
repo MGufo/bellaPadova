@@ -78,17 +78,22 @@ void TabellaComande::inserisciElemento(pacchetto* p, uint qta){
 }
 
 void TabellaComande::rendiEditabile(bool b){
-  int k = tabella->rowCount()-1;
-  int l = tabella->columnCount()-1;
-  for(int i = 0; i < tabella->rowCount()-1; ++i)
-    for(int j = 0; j < tabella->columnCount()-1; ++j)
-      if(dynamic_cast<QWidget*>(tabella->cellWidget(i,j)))
-        dynamic_cast<QWidget*>(tabella->cellWidget(i,j))->setEnabled(b);
-      else{
-        QTableWidgetItem* item = tabella->item(i,j);
-        if(b) item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-        else item->setFlags(item->flags() | Qt::ItemIsEditable);
+  if(b){
+      for(int i = 0; i < tabella->rowCount()-1; ++i){
+        for(int j = 0; j < tabella->columnCount()-1; ++j){
+          if(dynamic_cast<QWidget*>(tabella->cellWidget(i,j)))
+            dynamic_cast<QWidget*>(tabella->cellWidget(i,j))->setEnabled(b);
+          else{
+            QTableWidgetItem* item = tabella->item(i,j);
+            if(b) item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+            else item->setFlags(item->flags() | Qt::ItemIsEditable);
+          }
+        }
       }
+  }
+  else{
+
+  }
 }
 
 void TabellaComande::riempiContenutoPacchetto(std::unordered_map
