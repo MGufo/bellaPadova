@@ -21,6 +21,7 @@ public:
 signals:
   void eliminaComanda(uint);
   void getInfoComanda(uint);
+  void disableEdit();
 
 public slots:
   void showDetails();
