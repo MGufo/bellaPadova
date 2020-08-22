@@ -7,16 +7,16 @@ TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
           parentWidget()->parentWidget()->parentWidget()->
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(mostraErrore(const QString)));
-//  connect(this,SIGNAL(sendComandaPacketToModel(pacchettoComanda*)),
-//          parentWidget()->parentWidget()->parentWidget()->
-//          parentWidget()->parentWidget()->parentWidget()->
-//          parentWidget()->parentWidget()->parentWidget(),
-//          SLOT(modificaComanda(pacchetto*)));
-//  connect(this,SIGNAL(sendComandaIdToModel(uint)),
-//          parentWidget()->parentWidget()->parentWidget()->
-//          parentWidget()->parentWidget()->parentWidget()->
-//          parentWidget()->parentWidget()->parentWidget(),
-//          SLOT(eliminaComanda(uint)));
+  //  connect(this,SIGNAL(sendComandaPacketToModel(pacchettoComanda*)),
+  //          parentWidget()->parentWidget()->parentWidget()->
+  //          parentWidget()->parentWidget()->parentWidget()->
+  //          parentWidget()->parentWidget()->parentWidget(),
+  //          SLOT(modificaComanda(pacchetto*)));
+  //  connect(this,SIGNAL(sendComandaIdToModel(uint)),
+  //          parentWidget()->parentWidget()->parentWidget()->
+  //          parentWidget()->parentWidget()->parentWidget()->
+  //          parentWidget()->parentWidget()->parentWidget(),
+  //          SLOT(eliminaComanda(uint)));
   connect(this,SIGNAL(sendComandaIdToModel(uint)),
           this,SLOT(eliminaElemento(uint)));
   connect(this, SIGNAL(datiModificati()),
@@ -77,47 +77,47 @@ void TabellaComande::inserisciElemento(pacchetto* p, uint qta){
 
   int i = tabella->rowCount()-1;
   for(int j=0 ; j<4 ; j++){
-      if(j==1)
-          dynamic_cast<QSpinBox*>(tabella->cellWidget(i,j))->setEnabled(false);
-      else{
-          QTableWidgetItem* item = tabella->item(i,j);
-          item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-      }
+    if(j==1)
+      dynamic_cast<QSpinBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+    else{
+      QTableWidgetItem* item = tabella->item(i,j);
+      item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+    }
   }
 }
 
 void TabellaComande::rendiEditabile(bool b){
   if(b){
-      for(int i = 0; i < tabella->rowCount(); ++i)
-            dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->setEnabled(b);
+    for(int i = 0; i < tabella->rowCount(); ++i)
+      dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->setEnabled(b);
 
-      //inserimento checkbox su ogni elemento della tabella
-      tabella->insertColumn(tabella->columnCount());
-      QTableWidgetItem* headerLabel = new QTableWidgetItem();
-      headerLabel->setText("");
-      tabella->setHorizontalHeaderItem(tabella->columnCount()-1,headerLabel);
-      for(int i = 0; i < tabella->rowCount(); ++i){
-          QCheckBox* c = new QCheckBox(tabella);
-          c->setProperty("row",tabella->rowCount()-1);
-          connect(c,SIGNAL(clicked()),this,SIGNAL(datiModificati()));
-          connect(c, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
-          if(dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->value()>0)
-              c->setChecked(true);
-          tabella->setCellWidget(i, tabella->columnCount()-1, c);
-      }
+    //inserimento checkbox su ogni elemento della tabella
+    tabella->insertColumn(tabella->columnCount());
+    QTableWidgetItem* headerLabel = new QTableWidgetItem();
+    headerLabel->setText("");
+    tabella->setHorizontalHeaderItem(tabella->columnCount()-1,headerLabel);
+    for(int i = 0; i < tabella->rowCount(); ++i){
+      QCheckBox* c = new QCheckBox(tabella);
+      c->setProperty("row",tabella->rowCount()-1);
+      connect(c,SIGNAL(clicked()),this,SIGNAL(datiModificati()));
+      connect(c, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+      if(dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->value()>0)
+        c->setChecked(true);
+      tabella->setCellWidget(i, tabella->columnCount()-1, c);
+    }
   }
   else{
-      for(int i = 0; i < tabella->rowCount(); ++i)
-            dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->setEnabled(b);
+    for(int i = 0; i < tabella->rowCount(); ++i)
+      dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->setEnabled(b);
 
-      //rimozione di ogni riga non checkata
-      for(int i = 0; i < tabella->rowCount(); ++i){
-           if(!dynamic_cast<QCheckBox*>(tabella->cellWidget(i,tabella->columnCount()-1))->isChecked()){
-                tabella->removeRow(i);
-                i--;
-           }
+    //rimozione di ogni riga non checkata
+    for(int i = 0; i < tabella->rowCount(); ++i){
+      if(!dynamic_cast<QCheckBox*>(tabella->cellWidget(i,tabella->columnCount()-1))->isChecked()){
+        tabella->removeRow(i);
+        i--;
       }
-      tabella->removeColumn(tabella->columnCount()-1);
+    }
+    tabella->removeColumn(tabella->columnCount()-1);
   }
 }
 
@@ -135,16 +135,16 @@ void TabellaComande::emitDataOnCellChanged(int, int){
 }
 
 void TabellaComande::checkBoxToggled(bool stato){
-    QObject *cb = sender();
-    int row = cb->property("row").toInt();
-    if(stato)
-        dynamic_cast<QSpinBox*>(tabella->cellWidget(row,1))->setValue(1);
-    else
-        dynamic_cast<QSpinBox*>(tabella->cellWidget(row,1))->setValue(0);
+  QObject *cb = sender();
+  int row = cb->property("row").toInt();
+  if(stato)
+    dynamic_cast<QSpinBox*>(tabella->cellWidget(row,1))->setValue(1);
+  else
+    dynamic_cast<QSpinBox*>(tabella->cellWidget(row,1))->setValue(0);
 }
 
 void TabellaComande::forwardIdToModel(uint id){
-    /*
+  /*
     if(tabella->objectName()=="tabIngredientiInventario" ||
             tabella->objectName()=="tabBevandeInventario")
         emit sendIdToModel(id,true);
