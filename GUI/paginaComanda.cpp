@@ -40,9 +40,13 @@ void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
                                    const QList<pacchetto*>* ord){
   // Info comanda
   orario->setText(pC->oraConsegna.toString());
+  orario->setPlaceholderText(pC->oraConsegna.toString());
   nome->setText(QString::fromStdString(pC->nome));
+  nome->setPlaceholderText(QString::fromStdString(pC->nome));
   indirizzo->setText(QString::fromStdString(pC->indirizzo));
+  indirizzo->setPlaceholderText(QString::fromStdString(pC->indirizzo));
   telefono->setText(QString::fromStdString(pC->telefono));
+  telefono->setPlaceholderText(QString::fromStdString(pC->telefono));
   totale->setText(QString::fromStdString(to_string_with_precision(pC->totale)));
   // Contenuto Ordine
   for(auto it = ord->cbegin(); it != ord->cend(); ++it){
@@ -58,6 +62,11 @@ void PaginaComanda::smistaPacchettoInTabella(pacchetto* p){
     Pizze->inserisciElemento(p);
   else
     Bevande->inserisciElemento(p);
+}
+
+void PaginaComanda::disableEdit(){
+  layoutPaginaComanda->removeWidget(modificaDati);
+  delete modificaDati;
 }
 
 void PaginaComanda::inizializzaPizze(QWidget* _parent){
@@ -181,9 +190,9 @@ void PaginaComanda::modificaTabelle(bool b){
 }
 
 void PaginaComanda::paginaModificata(){
-  QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
-  for (QLineEdit* x : info){
-    if(x->isModified() && x->text() == "")
-      emit mostraErrore(QString("Errore: Il campo non può essere vuoto."));
+//  QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
+//  for (QLineEdit* x : info){
+//    if(x->isModified() && x->text() == "")
+//      emit mostraErrore(QString("Errore: Il campo non può essere vuoto."));
   contenutoModificato = true;
 }

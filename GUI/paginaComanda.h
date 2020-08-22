@@ -27,6 +27,8 @@ signals:
   void inviaComanda(pacchettoComanda*);
   void mostraErrore(const QString&);
 
+public slots:
+  void disableEdit();
 private:
   uint comandaID;
   QGridLayout* layoutPaginaComanda;
@@ -55,7 +57,7 @@ private slots:
   void toggleModifica();
   void modificaInfo(bool);
   void modificaTabelle(bool);
-  void paginaModificata();
+  void paginaModificata(); 
 };
 
 #endif // PAGINACOMANDA_H
