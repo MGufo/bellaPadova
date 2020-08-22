@@ -111,8 +111,8 @@ void MainWindow::richiediDettagliComanda(uint ID){
         trovato = true;
         ((*it)->findChild<PaginaComanda*>())->setInfoComanda(comanda,
                                                              contenutoComanda);
-      ++it;
       }
+      ++it;
     }
   }
 }
