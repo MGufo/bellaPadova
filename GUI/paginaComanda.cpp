@@ -190,9 +190,12 @@ void PaginaComanda::modificaTabelle(bool b){
 }
 
 void PaginaComanda::paginaModificata(){
-//  QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
-//  for (QLineEdit* x : info){
-//    if(x->isModified() && x->text() == "")
-//      emit mostraErrore(QString("Errore: Il campo non può essere vuoto."));
+  QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
+  for (QLineEdit* x : info){
+    if(x->isModified() && x->text() == ""){
+      emit mostraErrore(QString("Errore: Il campo non può essere vuoto."));
+      x->setText(x->placeholderText());
+    }
+  }
   contenutoModificato = true;
 }
