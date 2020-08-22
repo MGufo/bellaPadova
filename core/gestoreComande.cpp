@@ -123,9 +123,14 @@ void GestoreComande::modificaComanda(Comanda* daModificare,
                                      const Comanda* modificata,
                                      unsigned short capForno) {
   bool daReinserire =
-      daModificare->getOraConsegna() != modificata->getOraConsegna();
+      (daModificare->getOraConsegna() != modificata->getOraConsegna()) ||
+      (daModificare->getTempoPreparazione(capForno) !=
+      modificata->getTempoPreparazione(capForno));
   *daModificare = *modificata;
-  if (daReinserire) inserisciComanda(daModificare, capForno);
+  if (daReinserire){
+    rimuoviComanda(daModificare);
+    inserisciComanda(daModificare, capForno);
+  }
 }
 
 void GestoreComande::eseguiComanda() { ++current; }
