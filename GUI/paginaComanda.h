@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QFormLayout>
 #include <QLineEdit>
+#include <QTimeEdit>
 #include <QCloseEvent>
 
 #include "tabellacomande.h"
@@ -36,7 +37,7 @@ private:
   TabellaComande* Pizze;
   TabellaComande* Bevande;
   QWidget* infoComanda;
-  QLineEdit* orario;
+  QTimeEdit* orario;
   QLineEdit* nome;
   QLineEdit* indirizzo;
   QLineEdit* telefono;

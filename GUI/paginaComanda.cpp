@@ -39,8 +39,7 @@ PaginaComanda::~PaginaComanda() {}
 void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
                                    const QList<pacchetto*>* ord){
   // Info comanda
-  orario->setText(pC->oraConsegna.toString());
-  orario->setPlaceholderText(pC->oraConsegna.toString());
+  orario->setTime(pC->oraConsegna);
   nome->setText(QString::fromStdString(pC->nome));
   nome->setPlaceholderText(QString::fromStdString(pC->nome));
   indirizzo->setText(QString::fromStdString(pC->indirizzo));
@@ -100,7 +99,7 @@ void PaginaComanda::inizializzaPulsante(QWidget* _parent){
 
 void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
   infoComanda = new QWidget(_parent);
-  orario = new QLineEdit(infoComanda);
+  orario = new QTimeEdit(infoComanda);
   orario->setEnabled(false);
   nome = new QLineEdit(infoComanda);
   nome->setEnabled(false);
@@ -123,14 +122,11 @@ void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
 }
 
 void PaginaComanda::creaPacchettoComanda(){
-  string ora = orario->text().toStdString();
-  int hh = std::stoi(ora.substr(0,1));
-  int mm = std::stoi(ora.substr(3,4));
-  QTime QTora(hh,mm);
   pacchettoComanda* pC =
       new pacchettoComanda(comandaID, nome->text().toStdString(),
                            indirizzo->text().toStdString(),
-                           telefono->text().toStdString(), QTora, 0, false);
+                           telefono->text().toStdString(), orario->time(),
+                           0, false);
   auto& contenutoOrdine = pC->ordinazione;
   Pizze->riempiContenutoPacchetto(contenutoOrdine);
   Bevande->riempiContenutoPacchetto(contenutoOrdine);
@@ -178,6 +174,7 @@ void PaginaComanda::toggleModifica(){
 }
 
 void PaginaComanda::modificaInfo(bool b){
+  orario->setEnabled(b);
   QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
   for (QLineEdit* x : info)
     x->setEnabled(b);
