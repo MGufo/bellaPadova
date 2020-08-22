@@ -207,3 +207,7 @@ void PaginaComanda::infoModificate(){
 void PaginaComanda::orarioModificato(const QTime& newOrario){
   if(*oldOrario != newOrario) contenutoModificato = true;
 }
+
+void PaginaComanda::tabellaModificate(){
+  contenutoModificato = true;
+}
