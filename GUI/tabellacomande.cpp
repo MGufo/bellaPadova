@@ -20,7 +20,7 @@ TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
   connect(this,SIGNAL(sendComandaIdToModel(uint)),
           this,SLOT(eliminaElemento(uint)));
   connect(this, SIGNAL(datiModificati()),
-          parentWidget(), SLOT(paginaModificata()));
+          parentWidget(), SLOT(tabellaModificata()));
 }
 
 // if qta == 0 (default) viene inserito QSpinBox non editabile e con qta == 0
