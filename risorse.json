@@ -8,7 +8,7 @@
             "Disponibilità": false,
             "ID": 12,
             "Nome": "Coca Cola",
-            "Prezzo": 4.999999999999999,
+            "Prezzo": 5.333333333333332,
             "Quantita": 10,
             "tipo": "bottiglia"
         },
@@ -118,7 +118,7 @@
             "Disponibilità": false,
             "ID": 12,
             "Nome": "Coca Cola",
-            "Prezzo": 4.999999999999999,
+            "Prezzo": 5.333333333333332,
             "Quantita": 10,
             "tipo": "bottiglia"
         },
