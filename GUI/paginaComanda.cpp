@@ -4,6 +4,7 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   comandaID = ID;
   paginaEditabile = false;
   contenutoModificato = false;
+  oldOrario = new QTime();
   // Creazione subwidget infoComanda e tabelle
   inizializzaPizze(this);
   inizializzaBevande(this);
@@ -40,6 +41,7 @@ void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
                                    const QList<pacchetto*>* ord){
   // Info comanda
   orario->setTime(pC->oraConsegna);
+  oldOrario = &pC->oraConsegna;
   nome->setText(QString::fromStdString(pC->nome));
   nome->setPlaceholderText(QString::fromStdString(pC->nome));
   indirizzo->setText(QString::fromStdString(pC->indirizzo));
@@ -54,6 +56,10 @@ void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
     else
       Bevande->inserisciElemento(*it, pC->ordinazione.at((*it)->ID));
   }
+  QList<QLineEdit*> QLEinfo = infoComanda->findChildren<QLineEdit*>();
+  for (QLineEdit* x : QLEinfo)
+    connect(x, SIGNAL(textEdited(QString)), this, SLOT(infoModificate()));
+  connect(orario, SIGNAL(timeChanged(QTime)), this, SLOT(orarioModificato(QTime)));
 }
 
 void PaginaComanda::smistaPacchettoInTabella(pacchetto* p){
@@ -115,10 +121,6 @@ void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
   totale = new QLabel(infoComanda);
   info->addRow("Totale: ", totale);
   infoComanda->setLayout(info);
-
-  QList<QLineEdit*> QLEinfo = infoComanda->findChildren<QLineEdit*>();
-  for (QLineEdit* x : QLEinfo)
-    connect(x, SIGNAL(textEdited(QString)), this, SLOT(paginaModificata()));
 }
 
 void PaginaComanda::creaPacchettoComanda(){
@@ -186,13 +188,22 @@ void PaginaComanda::modificaTabelle(bool b){
     Pizze->cambiaColoreBordoCella(b);
 }
 
-void PaginaComanda::paginaModificata(){
+void PaginaComanda::infoModificate(){
+  bool b = false;
   QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
   for (QLineEdit* x : info){
-    if(x->isModified() && x->text() == ""){
-      emit mostraErrore(QString("Errore: Il campo non può essere vuoto."));
-      x->setText(x->placeholderText());
+    if(x->isModified()){
+      if(x->text() == ""){
+        emit mostraErrore(QString("Errore: Il campo non può essere"
+                                  " vuoto."));
+        x->setText(x->placeholderText());
+      }
+      else b = true;
     }
   }
-  contenutoModificato = true;
+  if(b) contenutoModificato = true;
+}
+
+void PaginaComanda::orarioModificato(const QTime& newOrario){
+  if(*oldOrario != newOrario) contenutoModificato = true;
 }

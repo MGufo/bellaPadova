@@ -38,6 +38,7 @@ private:
   TabellaComande* Bevande;
   QWidget* infoComanda;
   QTimeEdit* orario;
+  const QTime* oldOrario;
   QLineEdit* nome;
   QLineEdit* indirizzo;
   QLineEdit* telefono;
@@ -53,12 +54,15 @@ private:
   void creaPacchettoComanda();
   void setStylePaginaComanda();
   void closeEvent(QCloseEvent*) override;
+  bool checkStatoInfo();
 
 private slots:
   void toggleModifica();
   void modificaInfo(bool);
   void modificaTabelle(bool);
-  void paginaModificata(); 
+  void infoModificate();
+  void orarioModificato(const QTime&);
+  //void tabellaModificate(); // da usare per segnalare una modifica alle tabelle
 };
 
 #endif // PAGINACOMANDA_H
