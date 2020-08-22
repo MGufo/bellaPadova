@@ -21,10 +21,13 @@ class GestoreComande {
    * @param: Comanda* (Comanda alla fine dello slot temporale)
    * @param: Comanda* (Comanda che si vuole inserire nello slot temporale)
    */
-  bool testInsert(const Comanda*, const Comanda*, const Comanda*, unsigned short);
+  bool testInsert(const Comanda*, const Comanda*, const Comanda*, unsigned short, const QTime&);
 
   unsigned int getMaxId() const;
 
+  QTime copiaQTime(const QTime&);
+
+  void fixCurrent();
  public:
   GestoreComande();
 

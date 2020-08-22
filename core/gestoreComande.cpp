@@ -17,7 +17,8 @@ Algoritmo posizione di inserimento:
 bool GestoreComande::testInsert(const Comanda* precedente,
                                 const Comanda* successiva,
                                 const Comanda* daInserire,
-                                unsigned short capForno) {
+                                unsigned short capForno,
+                                const QTime& currentTime) {
   // non ci sono comande da fare oppure si è arrivati all'ultima comanda
   if (!successiva) return true;
   // se la comanda da inserire "fitta" tra la precedente e la successiva
@@ -34,7 +35,7 @@ bool GestoreComande::testInsert(const Comanda* precedente,
   else {
     // se precedente esiste è stata già consegnata e il suo orario di consegna
     // era al più == currentTime
-    if (QTime::currentTime() <= daInserire->getOrarioInizioPreparazione(capForno) &&
+    if (currentTime <= daInserire->getOrarioInizioPreparazione(capForno) &&
         daInserire->getOraConsegna() <=
             successiva->getOrarioInizioPreparazione(capForno))
       return true;
@@ -49,18 +50,25 @@ unsigned int GestoreComande::getMaxId() const {
   return maxID;
 }
 
+QTime GestoreComande::copiaQTime(const QTime &t){
+    QTime currentTime = t;
+    return currentTime;
+}
+
+void GestoreComande::fixCurrent(){ current = bacheca.find(*current); }
 
 // HACK: La comanda può contenere solo pizze del menu
 void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capForno) {
+  QTime currentTime = QTime::currentTime();
   int tempoPreparazione = daInserire->getTempoPreparazione(capForno)*60;
   if (daInserire) {
-    if (QTime::currentTime() >= daInserire->getOrarioInizioPreparazione(capForno)) {
+    if (currentTime >= daInserire->getOrarioInizioPreparazione(capForno)) {
       if (!(current.isValid()))
-        daInserire->setOraConsegna(QTime::currentTime().addSecs(tempoPreparazione));
+        daInserire->setOraConsegna(copiaQTime(currentTime).addSecs(tempoPreparazione));
       else {
-        if (QTime::currentTime().addSecs(tempoPreparazione) <
+        if (copiaQTime(currentTime).addSecs(tempoPreparazione) <
             (*current)->getOrarioInizioPreparazione(capForno))
-          daInserire->setOraConsegna(QTime::currentTime().addSecs(tempoPreparazione));
+          daInserire->setOraConsegna(copiaQTime(currentTime).addSecs(tempoPreparazione));
         else
           daInserire->setOraConsegna((*current)->getOraConsegna().addSecs(
             tempoPreparazione));
@@ -73,20 +81,21 @@ void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capFor
       if (current.isValid()) {
         auto it = current;
         auto it2 = it;
-        bool beforeCurrent = testInsert(nullptr, *current, daInserire, capForno);
+        bool beforeCurrent = testInsert(nullptr, *current, daInserire, capForno, currentTime);
         if (!beforeCurrent) {
           bool flag = false;
           while (!flag) {
             ++it2;
             if (it2 != bacheca.end())
-              flag = testInsert(*it, *(it2), daInserire, capForno);
+              flag = testInsert(*it, *(it2), daInserire, capForno, currentTime);
             else
-              flag = testInsert(*it, nullptr, daInserire, capForno);
+              flag = testInsert(*it, nullptr, daInserire, capForno, currentTime);
             ++it;
           }
         }
         if (beforeCurrent) {
           bacheca.insert(current, daInserire);
+          fixCurrent();
           --current;
         } else {
           --it;
@@ -101,8 +110,8 @@ tempoPreparazione));
         }
       }
       else {
-        if (QTime::currentTime() > daInserire->getOrarioInizioPreparazione(capForno))
-          daInserire->setOraConsegna(QTime::currentTime().addSecs(tempoPreparazione));
+        if (currentTime > daInserire->getOrarioInizioPreparazione(capForno))
+          daInserire->setOraConsegna(copiaQTime(currentTime).addSecs(tempoPreparazione));
         bacheca.push_back(daInserire);
         current = --(bacheca.end());
       }
@@ -130,6 +139,7 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
       if (*it >= *current) {
         if (it == current) ++current;
         bacheca.erase(it);
+        fixCurrent();
       }
     }
   }

@@ -13,6 +13,7 @@ public:
                  const QStringList* = nullptr);
   void inserisciElemento(pacchetto*, uint = 0);
   virtual void rendiEditabile(bool = true) override;
+  void riempiContenutoPacchetto(std::unordered_map<uint,uint>&);
 
 signals:
   void sendComandaPacketToModel(pacchettoComanda*);

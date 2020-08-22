@@ -20,7 +20,7 @@ TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
   connect(this,SIGNAL(sendComandaIdToModel(uint)),
           this,SLOT(eliminaElemento(uint)));
   connect(this, SIGNAL(datiModificati()),
-          parentWidget(), SLOT(paginaModificata()));
+          parentWidget(), SLOT(tabellaModificata()));
 }
 
 // if qta == 0 (default) viene inserito QSpinBox non editabile e con qta == 0
@@ -95,6 +95,15 @@ void TabellaComande::rendiEditabile(bool b){
 
   }
 }
+
+void TabellaComande::riempiContenutoPacchetto(std::unordered_map
+                                              <uint, uint>& ordine){
+  for(int i=0; i < tabella->rowCount()-1; ++i)
+    ordine.insert({tabella->item(i,0)->data(Qt::UserRole).toInt(),
+                   dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))
+                   ->text().toInt()});
+}
+
 
 void TabellaComande::emitDataOnCellChanged(int, int){
 

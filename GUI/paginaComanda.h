@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QFormLayout>
 #include <QLineEdit>
+#include <QTimeEdit>
 #include <QCloseEvent>
 
 #include "tabellacomande.h"
@@ -24,7 +25,11 @@ public:
 signals:
   void enableButton();
   void riempiTabelleConMenu(uint);
+  void inviaComanda(pacchettoComanda*);
+  void mostraErrore(const QString&);
 
+public slots:
+  void disableEdit();
 private:
   uint comandaID;
   QGridLayout* layoutPaginaComanda;
@@ -32,7 +37,8 @@ private:
   TabellaComande* Pizze;
   TabellaComande* Bevande;
   QWidget* infoComanda;
-  QLineEdit* orario;
+  QTimeEdit* orario;
+  const QTime* oldOrario;
   QLineEdit* nome;
   QLineEdit* indirizzo;
   QLineEdit* telefono;
@@ -45,14 +51,18 @@ private:
   void inizializzaBevande(QWidget*);
   void inizializzaPulsante(QWidget*);
   void inizializzaInfoComanda(QWidget*);
+  void creaPacchettoComanda();
   void setStylePaginaComanda();
   void closeEvent(QCloseEvent*) override;
+  bool checkStatoInfo();
 
 private slots:
   void toggleModifica();
   void modificaInfo(bool);
   void modificaTabelle(bool);
-  void paginaModificata();
+  void infoModificate();
+  void orarioModificato(const QTime&);
+  void tabellaModificate(); // da usare per segnalare una modifica alle tabelle
 };
 
 #endif // PAGINACOMANDA_H

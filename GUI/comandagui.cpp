@@ -52,6 +52,8 @@ void ComandaGUI::rendiEseguita(){
 
 void ComandaGUI::showDetails(){
   dettagli = new PaginaComanda(this, ID);
+  connect(this, SIGNAL(disableEdit()), dettagli, SLOT(disableEdit()));
+  if(eseguita) emit disableEdit();
   dettagli->setWindowFlags(Qt::Window);
   wrapperComanda->setEnabled(false);
   dettagli->setWindowTitle(contenutoID);

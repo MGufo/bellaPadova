@@ -4,6 +4,7 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   comandaID = ID;
   paginaEditabile = false;
   contenutoModificato = false;
+  oldOrario = new QTime();
   // Creazione subwidget infoComanda e tabelle
   inizializzaPizze(this);
   inizializzaBevande(this);
@@ -20,10 +21,18 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   setLayout(layoutPaginaComanda);
   connect(this, SIGNAL(enableButton()), parentWidget(), SLOT(enableButton()));
   connect(modificaDati, SIGNAL(clicked()), this, SLOT(toggleModifica()));
+  connect(this, SIGNAL(mostraErrore(QString)),
+          parentWidget()->parentWidget()->parentWidget()->parentWidget()->
+          parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+          SLOT(mostraErrore(QString)));
   connect(this, SIGNAL(riempiTabelleConMenu(uint)),
           parentWidget()->parentWidget()->parentWidget()->parentWidget()->
           parentWidget()->parentWidget()->parentWidget()->parentWidget(),
           SLOT(visualizzaMenuInComanda(uint)));
+  connect(this, SIGNAL(inviaComanda(pacchettoComanda*)),
+          parentWidget()->parentWidget()->parentWidget()->parentWidget()->
+          parentWidget()->parentWidget()->parentWidget()->parentWidget(),
+          SLOT(modificaComanda(pacchettoComanda*)));
 }
 
 PaginaComanda::~PaginaComanda() {}
@@ -31,10 +40,14 @@ PaginaComanda::~PaginaComanda() {}
 void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
                                    const QList<pacchetto*>* ord){
   // Info comanda
-  orario->setText(pC->oraConsegna.toString());
+  orario->setTime(pC->oraConsegna);
+  oldOrario = &pC->oraConsegna;
   nome->setText(QString::fromStdString(pC->nome));
+  nome->setPlaceholderText(QString::fromStdString(pC->nome));
   indirizzo->setText(QString::fromStdString(pC->indirizzo));
+  indirizzo->setPlaceholderText(QString::fromStdString(pC->indirizzo));
   telefono->setText(QString::fromStdString(pC->telefono));
+  telefono->setPlaceholderText(QString::fromStdString(pC->telefono));
   totale->setText(QString::fromStdString(to_string_with_precision(pC->totale)));
   // Contenuto Ordine
   for(auto it = ord->cbegin(); it != ord->cend(); ++it){
@@ -43,6 +56,10 @@ void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
     else
       Bevande->inserisciElemento(*it, pC->ordinazione.at((*it)->ID));
   }
+  QList<QLineEdit*> QLEinfo = infoComanda->findChildren<QLineEdit*>();
+  for (QLineEdit* x : QLEinfo)
+    connect(x, SIGNAL(textEdited(QString)), this, SLOT(infoModificate()));
+  connect(orario, SIGNAL(timeChanged(QTime)), this, SLOT(orarioModificato(QTime)));
 }
 
 void PaginaComanda::smistaPacchettoInTabella(pacchetto* p){
@@ -50,6 +67,11 @@ void PaginaComanda::smistaPacchettoInTabella(pacchetto* p){
     Pizze->inserisciElemento(p);
   else
     Bevande->inserisciElemento(p);
+}
+
+void PaginaComanda::disableEdit(){
+  layoutPaginaComanda->removeWidget(modificaDati);
+  delete modificaDati;
 }
 
 void PaginaComanda::inizializzaPizze(QWidget* _parent){
@@ -83,7 +105,7 @@ void PaginaComanda::inizializzaPulsante(QWidget* _parent){
 
 void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
   infoComanda = new QWidget(_parent);
-  orario = new QLineEdit(infoComanda);
+  orario = new QTimeEdit(infoComanda);
   orario->setEnabled(false);
   nome = new QLineEdit(infoComanda);
   nome->setEnabled(false);
@@ -99,6 +121,19 @@ void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
   totale = new QLabel(infoComanda);
   info->addRow("Totale: ", totale);
   infoComanda->setLayout(info);
+}
+
+void PaginaComanda::creaPacchettoComanda(){
+  pacchettoComanda* pC =
+      new pacchettoComanda(comandaID, nome->text().toStdString(),
+                           indirizzo->text().toStdString(),
+                           telefono->text().toStdString(), orario->time(),
+                           0, false);
+  auto& contenutoOrdine = pC->ordinazione;
+  Pizze->riempiContenutoPacchetto(contenutoOrdine);
+  Bevande->riempiContenutoPacchetto(contenutoOrdine);
+
+  emit inviaComanda(pC);
 }
 
 void PaginaComanda::setStylePaginaComanda(){
@@ -133,9 +168,15 @@ void PaginaComanda::toggleModifica(){
   }
   modificaInfo(paginaEditabile);
   modificaTabelle(paginaEditabile);
+
+  if(contenutoModificato) {
+    creaPacchettoComanda();
+    contenutoModificato = false;
+  }
 }
 
 void PaginaComanda::modificaInfo(bool b){
+  orario->setEnabled(b);
   QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
   for (QLineEdit* x : info)
     x->setEnabled(b);
@@ -147,4 +188,26 @@ void PaginaComanda::modificaTabelle(bool b){
     Pizze->cambiaColoreBordoCella(b);
 }
 
-void PaginaComanda::paginaModificata(){ contenutoModificato = true; }
+void PaginaComanda::infoModificate(){
+  bool b = false;
+  QList<QLineEdit*> info = infoComanda->findChildren<QLineEdit*>();
+  for (QLineEdit* x : info){
+    if(x->isModified()){
+      if(x->text() == ""){
+        emit mostraErrore(QString("Errore: Il campo non può essere"
+                                  " vuoto."));
+        x->setText(x->placeholderText());
+      }
+      else b = true;
+    }
+  }
+  if(b) contenutoModificato = true;
+}
+
+void PaginaComanda::orarioModificato(const QTime& newOrario){
+  if(*oldOrario != newOrario) contenutoModificato = true;
+}
+
+void PaginaComanda::tabellaModificate(){
+  contenutoModificato = true;
+}

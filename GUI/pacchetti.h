@@ -77,7 +77,7 @@ struct pacchettoComanda {
   string nome;
   string indirizzo;
   string telefono;
-  QTime oraConsegna; //discutere se string o QTime
+  QTime oraConsegna;
   double totale;
   bool eseguita;
   // ID articolo - qta articolo
