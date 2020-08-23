@@ -99,6 +99,7 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
 void PaginaComanda::inizializzaPulsante(QWidget* _parent){
   modificaDati = new QPushButton(_parent);
   modificaDati->setText("Modifica");
+  modificaDati->setObjectName("Modifica");
 }
 
 void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
@@ -127,7 +128,7 @@ void PaginaComanda::creaPacchettoComanda(){
                            indirizzo->text().toStdString(),
                            telefono->text().toStdString(), orario->time(),
                            0, false);
-  auto& contenutoOrdine = pC->ordinazione;
+  std::unordered_map<uint,uint>& contenutoOrdine = pC->ordinazione;
   Pizze->riempiContenutoPacchetto(contenutoOrdine);
   Bevande->riempiContenutoPacchetto(contenutoOrdine);
 
@@ -138,7 +139,6 @@ void PaginaComanda::setStylePaginaComanda(){
   setMinimumSize(1200, 600);
   setMaximumSize(1200, 600);
   setObjectName("paginaComanda");
-  modificaDati->setObjectName("modificaDati");
 }
 
 void PaginaComanda::closeEvent(QCloseEvent* event){
@@ -168,8 +168,8 @@ void PaginaComanda::toggleModifica(){
   modificaTabelle(paginaEditabile);
 
   if(contenutoModificato) {
-    creaPacchettoComanda();
     contenutoModificato = false;
+    creaPacchettoComanda();
   }
 }
 
