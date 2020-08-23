@@ -242,43 +242,47 @@ void MainWindow::visualizzaElementiCheckatiInWizardArticolo(bool option_pizza) c
 }
 
 void MainWindow::visualizzaElementiInWizardComanda() const{
-    QList<pacchetto*>* menu = controller->recuperaMenu();
+  QList<pacchetto*>* menu = controller->recuperaMenu();
 
-    QTableWidget* wrapperPizze = findChild<QTableWidget*>("pizzeWrapper");
-    QTableWidget* wrapperBevande = findChild<QTableWidget*>("bevandeWrapper_comande");
-    for(auto it = menu->constBegin(); it != menu->constEnd(); ++it){
-        if(dynamic_cast<pacchettoPizza*>(*it)){
-            pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(*it);
-            wrapperPizze->insertRow(wrapperPizze->rowCount());
-            QTableWidgetItem* item = nullptr;
+  QTableWidget* wrapperPizze = findChild<QTableWidget*>("pizzeWrapper");
+  QTableWidget* wrapperBevande = findChild<QTableWidget*>("bevandeWrapper_comande");
+  for(auto it = menu->constBegin(); it != menu->constEnd(); ++it){
+    if(dynamic_cast<pacchettoPizza*>(*it)){
+      pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(*it);
+      if(pP->disponibilita){
+        wrapperPizze->insertRow(wrapperPizze->rowCount());
+        QTableWidgetItem* item = nullptr;
 
-            QCheckBox* c = new QCheckBox(wrapperPizze);
-            wrapperPizze->setCellWidget(wrapperPizze->rowCount()-1, 0, c);
-            item = new QTableWidgetItem(QString::fromStdString(pP->nome));
-            item->setData(Qt::UserRole,pP->ID);
-            wrapperPizze->setItem(wrapperPizze->rowCount()-1, 1, item);
-            QSpinBox* s = new QSpinBox(wrapperPizze);
-            s->setValue(1);
-            wrapperPizze->setCellWidget(wrapperPizze->rowCount()-1, 2, s);
-        }
-
-        else if(dynamic_cast<pacchettoBevanda*>(*it)){
-            pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(*it);
-            wrapperBevande->insertRow(wrapperBevande->rowCount());
-            QTableWidgetItem* item = nullptr;
-
-            QCheckBox* c = new QCheckBox(wrapperBevande);
-            wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 0, c);
-            item = new QTableWidgetItem(QString::fromStdString(pB->nome));
-            item->setData(Qt::UserRole,pB->ID);
-            wrapperBevande->setItem(wrapperBevande->rowCount()-1, 1, item);
-            QSpinBox* s = new QSpinBox(wrapperBevande);
-            s->setValue(1);
-            wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 2, s);
-        }
+        QCheckBox* c = new QCheckBox(wrapperPizze);
+        wrapperPizze->setCellWidget(wrapperPizze->rowCount()-1, 0, c);
+        item = new QTableWidgetItem(QString::fromStdString(pP->nome));
+        item->setData(Qt::UserRole,pP->ID);
+        wrapperPizze->setItem(wrapperPizze->rowCount()-1, 1, item);
+        QSpinBox* s = new QSpinBox(wrapperPizze);
+        s->setValue(1);
+        wrapperPizze->setCellWidget(wrapperPizze->rowCount()-1, 2, s);
+      }
     }
-    wrapperPizze->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    wrapperBevande->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    else if(dynamic_cast<pacchettoBevanda*>(*it)){
+      pacchettoBevanda* pB = dynamic_cast<pacchettoBevanda*>(*it);
+      if(pB->disponibilita){
+        wrapperBevande->insertRow(wrapperBevande->rowCount());
+        QTableWidgetItem* item = nullptr;
+
+        QCheckBox* c = new QCheckBox(wrapperBevande);
+        wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 0, c);
+        item = new QTableWidgetItem(QString::fromStdString(pB->nome));
+        item->setData(Qt::UserRole,pB->ID);
+        wrapperBevande->setItem(wrapperBevande->rowCount()-1, 1, item);
+        QSpinBox* s = new QSpinBox(wrapperBevande);
+        s->setValue(1);
+        wrapperBevande->setCellWidget(wrapperBevande->rowCount()-1, 2, s);
+      }
+    }
+  }
+  wrapperPizze->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  wrapperBevande->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 void MainWindow::visualizzaElementiCheckatiInWizardComanda() const{
