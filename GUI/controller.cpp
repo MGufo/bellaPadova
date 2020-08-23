@@ -197,6 +197,7 @@ void Controller::modificaComanda(pacchettoComanda *pC){
           (*it).second);
   modello->modificaComanda(c, newC);
   vista->visualizzaComande();
+  vista->riapriComanda(c->getIdComanda());
 }
 
 void Controller::eliminaComanda(uint ID){

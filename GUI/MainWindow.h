@@ -32,6 +32,7 @@ class MainWindow : public QWidget {
   void visualizzaMenu();
   void pulisciComande();
   void visualizzaComande();
+  void riapriComanda(uint);
 
 signals:
   void saveAndExit();

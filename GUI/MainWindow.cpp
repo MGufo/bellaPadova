@@ -446,6 +446,12 @@ void MainWindow::visualizzaComande(){
   delete comande;
 }
 
+void MainWindow::riapriComanda(uint ID){
+  QList<ComandaGUI*> comandeGUI = findChildren<ComandaGUI*>();
+  for(ComandaGUI* c : comandeGUI)
+    if(c->getID() == ID) c->showDetails();
+}
+
 void MainWindow::mostraErrore(const QString & messaggio){
   QErrorMessage* errorDialog = new QErrorMessage(this);
   errorDialog->showMessage(messaggio);
