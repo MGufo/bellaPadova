@@ -17,7 +17,7 @@ private:
 signals:
   //true = pizza
   //false = bevanda
-  riempiWizardConElementiCheckati(bool);
+  void riempiWizardConElementiCheckati(bool);
 };
 
 #endif // WIZARD_END_H
