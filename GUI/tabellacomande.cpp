@@ -98,12 +98,12 @@ void TabellaComande::rendiEditabile(bool b){
     tabella->setHorizontalHeaderItem(tabella->columnCount()-1,headerLabel);
     for(int i = 0; i < tabella->rowCount(); ++i){
       QCheckBox* c = new QCheckBox(tabella);
-      c->setProperty("row",tabella->rowCount()-1);
-      connect(c,SIGNAL(clicked()),this,SIGNAL(datiModificati()));
-      connect(c, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
+      c->setProperty("row",i);
       if(dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->value()>0)
         c->setChecked(true);
       tabella->setCellWidget(i, tabella->columnCount()-1, c);
+      connect(c,SIGNAL(clicked()),this,SIGNAL(datiModificati()));
+      connect(c, SIGNAL(toggled(bool)), this, SLOT(checkBoxToggled(bool)));
     }
   }
   else{
@@ -123,7 +123,7 @@ void TabellaComande::rendiEditabile(bool b){
 
 void TabellaComande::riempiContenutoPacchetto(std::unordered_map
                                               <uint, uint>& ordine){
-  for(int i=0; i < tabella->rowCount()-1; ++i)
+  for(int i=0; i < tabella->rowCount(); ++i)
     ordine.insert({tabella->item(i,0)->data(Qt::UserRole).toInt(),
                    dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))
                    ->value()});
