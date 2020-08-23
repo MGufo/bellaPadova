@@ -42,7 +42,7 @@ private:
   QVBoxLayout* layoutWrapper;
   QPushButton* rimuovi;
   QPushButton* completata;
-  PaginaComanda* dettagli;
+  PaginaComanda* dettagli = nullptr;
 };
 
 #endif // COMANDAGUI_H
