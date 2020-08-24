@@ -47,7 +47,7 @@ SOURCES += \
     GUI/wizardNuovaComanda/nuovaComanda_dettagli.cpp \
     GUI/wizardNuovaComanda/nuovaComanda_end.cpp \
     GUI/tabellarisorse.cpp \
-    GUI/tabellacomande.cpp
+    GUI/tabellacomande.cpp \
 
     #test/testgui.cpp
 
