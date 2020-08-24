@@ -38,7 +38,7 @@ class Controller : public QObject {
   QList<pacchetto*>* recuperaMenu() const;
   QList<pacchettoComanda*>* recuperaComande() const;
   const pacchettoComanda* recuperaInfoComanda(uint) const;
-  const QList<pacchetto*>* recuperaContenutoComanda(uint) const;
+  QList<pacchetto*>* recuperaContenutoComanda(uint) const;
   const QList<pacchetto*>* recuperaMenuPerComanda(uint) const;
   const QList<pacchetto *> *recuperaMenuPerWizardNuovaComanda() const;
   bool canQuit() const;

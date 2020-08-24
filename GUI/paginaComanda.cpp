@@ -38,7 +38,7 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
 PaginaComanda::~PaginaComanda() {}
 
 void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
-                                   const QList<pacchetto*>* ord){
+                                   QList<pacchetto*>* ord){
   // Info comanda
   orario->setTime(pC->oraConsegna);
   oldOrario = &pC->oraConsegna;
@@ -50,7 +50,7 @@ void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
   telefono->setPlaceholderText(QString::fromStdString(pC->telefono));
   totale->setText(QString::fromStdString(to_string_with_precision(pC->totale)));
   // Contenuto Ordine
-  for(auto it = ord->cbegin(); it != ord->cend(); ++it){
+  for(auto it = ord->begin(); it != ord->end(); ++it){
     if(dynamic_cast<pacchettoPizza*>(*it))
       Pizze->inserisciElemento(*it, pC->ordinazione.at((*it)->ID));
     else
