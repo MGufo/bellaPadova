@@ -294,7 +294,7 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
   editabile = statoPrecedenteEditabile;
 }
 
-void TabellaRisorse::sostutuisciElemento(pacchettoConsumabile* p){
+void TabellaRisorse::sostituisciElemento(pacchetto* p){
     bool statoPrecedenteEditabile = editabile;
     editabile = false;
 

@@ -146,6 +146,7 @@ void Controller::modificaArticolo(pacchettoArticolo* p){
   Articolo* daModificare = dynamic_cast<Articolo*>(modello->trovaRisorsa(p->ID));
   try{
     modello->modificaArticolo(daModificare, modificato);
+    vista->visualizzaMenu();
   }
   catch (std::logic_error* ecc){
       vista->mostraErrore(QString(ecc->what()));
