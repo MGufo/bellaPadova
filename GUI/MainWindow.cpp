@@ -112,7 +112,7 @@ void MainWindow::richiediDettagliComanda(uint ID){
   if(comanda != nullptr){
     Comande* widgetComande = findChild<Comande*>("widgetComande");
     QList<ComandaGUI*> comandeGUI = widgetComande->findChildren<ComandaGUI*>();
-    const QList<pacchetto*>* contenutoComanda =
+    QList<pacchetto*>* contenutoComanda =
         controller->recuperaContenutoComanda(ID);
     auto it = comandeGUI.begin();
     bool trovato = false;
@@ -124,7 +124,7 @@ void MainWindow::richiediDettagliComanda(uint ID){
       }
       ++it;
     }
-    delete contenutoComanda;
+    eliminaPacchettiRisorsa(contenutoComanda);
   }
   delete comanda;
 }

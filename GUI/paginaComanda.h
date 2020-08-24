@@ -19,7 +19,7 @@ class PaginaComanda : public QWidget {
 public:
   PaginaComanda(QWidget* parent = nullptr, uint = 0);
   ~PaginaComanda();
-  void setInfoComanda(const pacchettoComanda*, const QList<pacchetto*>*);
+  void setInfoComanda(const pacchettoComanda*, QList<pacchetto*>*);
   void smistaPacchettoInTabella(pacchetto*);
 
 signals:

@@ -20,7 +20,7 @@ bool GestoreComande::testInsert(const Comanda* precedente,
                                 unsigned short capForno,
                                 const QTime& currentTime) {
   QTime* orarioInizioPreparazioneDaIns = daInserire->getOrarioInizioPreparazione(capForno);
-  QTime* orarioInizioPreparazioneSucc = daInserire->getOrarioInizioPreparazione(capForno);
+  QTime* orarioInizioPreparazioneSucc = successiva->getOrarioInizioPreparazione(capForno);
   // non ci sono comande da fare oppure si è arrivati all'ultima comanda
   if (!successiva) return true;
   // se la comanda da inserire "fitta" tra la precedente e la successiva

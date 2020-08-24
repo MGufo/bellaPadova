@@ -352,7 +352,7 @@ const pacchettoComanda *Controller::recuperaInfoComanda(uint ID) const {
   return pC;
 }
 
-const QList<pacchetto*>* Controller::recuperaContenutoComanda(uint ID) const{
+QList<pacchetto*>* Controller::recuperaContenutoComanda(uint ID) const{
   QList<pacchetto*>* contenuto = new QList<pacchetto*>();
   const pacchettoComanda* pC = recuperaInfoComanda(ID);
   for(auto it = pC->ordinazione.cbegin(); it != pC->ordinazione.cend(); ++it){
