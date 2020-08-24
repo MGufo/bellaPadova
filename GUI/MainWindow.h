@@ -26,6 +26,7 @@ class MainWindow : public QWidget {
   ~MainWindow();
   void aggiornaContabilizzazione(double);
   void pulisciInventario();
+  void pulisciMenu();
   void aggiornaInventario(pacchetto*);
   void visualizzaInventario();
   void aggiornaMenu(pacchetto*);

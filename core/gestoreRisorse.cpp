@@ -123,7 +123,7 @@ void GestoreRisorse::modificaArticolo(Articolo* daModificare,
   if (!controlloInInventario(daModificare))
     throw new std::logic_error("Errore: Uno o più elementi selezionati"
                                  " non sono disponibili.");
-  daModificare->setDisponibilita(controlloDisponibilita(lista));
+  daModificare->setDisponibilita(daModificare->getDisponibilita() && controlloDisponibilita(lista));
   delete lista;
 }
 
@@ -184,8 +184,6 @@ void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){
     Risorsa* risorsa = nullptr;
 
     if(tipo == "pizza") risorsa = new Pizza();
-    else if (tipo == "bottiglia") risorsa = new Bottiglia();
-    else if (tipo == "lattina") risorsa = new Lattina();
 
     std::unordered_map<uint, Risorsa*>* keymap =
         new std::unordered_map<uint, Risorsa*>;
@@ -201,8 +199,19 @@ void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){
       TODO: Discutere cosa fare nel caso in cui un ingrediente di una pizza
       non venga mappato a un puntatore valido ma a un nullptr.
       */
-    risorsa->carica(*risorsaJSON, keymap);
-    menu.push_back(dynamic_cast<Articolo*>(risorsa));
+    if(risorsa){
+        risorsa->carica(*risorsaJSON, keymap);
+        menu.push_back(dynamic_cast<Articolo*>(risorsa));
+    }
+    else{
+        Articolo* bevandaInMenu = nullptr;
+        uint id = (*(risorsaJSON->find("ID"))).toInt();
+        for(auto it = inventario.const_begin() ; it != inventario.const_end() ; ++it){
+
+            if((*it)->getIdRisorsa() == id) bevandaInMenu = dynamic_cast<Articolo*>(static_cast<Risorsa*>(*it));
+        }
+        menu.push_back(bevandaInMenu);
+    }
     delete keymap;
     delete risorsaJSON;
   }

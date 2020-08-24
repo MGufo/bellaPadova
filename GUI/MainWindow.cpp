@@ -144,7 +144,7 @@ void MainWindow::eliminaConsumabile(uint id){
 void MainWindow::aggiornaMenuSuModificaBevanda(pacchettoConsumabile* p){
     if(dynamic_cast<pacchettoBevanda*>(p)){
         TabellaRisorse* tab = findChild<TabellaRisorse*>("tabBevandeMenu");
-        tab->sostutuisciElemento(p);
+        tab->sostituisciElemento(p);
     }
 }
 
@@ -399,6 +399,15 @@ void MainWindow::pulisciInventario(){
     tabIngredienti->pulisciTabella();
 }
 
+void MainWindow::pulisciMenu(){
+    TabellaRisorse* tabBevande =
+      findChild<TabellaRisorse*>("tabBevandeMenu");
+    tabBevande->pulisciTabella();
+    TabellaRisorse* tabPizze =
+      findChild<TabellaRisorse*>("tabPizzeMenu");
+    tabPizze->pulisciTabella();
+}
+
 void MainWindow::aggiornaInventario(pacchetto * p){
   if(dynamic_cast<pacchettoBevanda*>(p)){
     TabellaRisorse* tabBevande =
@@ -432,6 +441,7 @@ void MainWindow::aggiornaMenu(pacchetto* p){
 }
 
 void MainWindow::visualizzaMenu(){
+  pulisciMenu();
   QList<pacchetto*>* menu = controller->recuperaMenu();
   for(auto it = menu->constBegin(); it != menu->constEnd(); ++it){
       aggiornaMenu(*it);
