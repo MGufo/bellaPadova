@@ -8,7 +8,7 @@
 #include <string>
 using std::string;
 
-#include "wizard_nuovoArticolo.h"
+#include "GUI/wizardNuovoArticolo/wizard_nuovoArticolo.h"
 
 class NuovoArticolo_dettagli : public QWizardPage{
   Q_OBJECT

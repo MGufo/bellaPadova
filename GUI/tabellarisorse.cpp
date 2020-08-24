@@ -229,7 +229,8 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
         }
       }
       item = new QTableWidgetItem(QString::fromStdString(ingr.str()));
-      item->setData(1001,pIngr.size());
+      int size = pIngr.size();
+      item->setData(1001,size);
       uint var = 1;
       for(auto it = pIngr.cbegin(); it != pIngr.cend(); ++it){
         item->setData(1001+var,(*it).first);

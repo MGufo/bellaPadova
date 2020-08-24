@@ -9,7 +9,7 @@
 #include <QLineEdit>
 #include <QValidator>
 
-#include "wizard_nuovoconsumabile.h"
+#include "GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h"
 
 class NuovoConsumabile_dettagli : public QWizardPage{
   Q_OBJECT
