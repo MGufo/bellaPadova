@@ -46,8 +46,7 @@ signals:
   void modificaConsumabile(pacchettoConsumabile*);
   void eliminaArticolo(uint);
   void eliminaConsumabile(uint);
-  //true = pizza
-  //false = bevanda
+  void aggiornaMenuSuModificaBevanda(pacchettoConsumabile*);
   void creaNuovaComanda(pacchettoComanda*);
   void modificaComanda(pacchettoComanda*);
   void eliminaComanda(uint);

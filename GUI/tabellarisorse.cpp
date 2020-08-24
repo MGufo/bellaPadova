@@ -10,6 +10,9 @@ TabellaRisorse::TabellaRisorse(QWidget *parent, const QString& etichetta, const 
   connect(this,SIGNAL(sendConsumabilePacketToModel(pacchettoConsumabile*)),
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(modificaConsumabile(pacchettoConsumabile*)));
+  connect(this,SIGNAL(sendConsumabilePacketToModel(pacchettoConsumabile*)),
+          parentWidget()->parentWidget()->parentWidget(),
+          SLOT(aggiornaMenuSuModificaBevanda(pacchettoConsumabile*)));
   connect(this,SIGNAL(sendArticoloIdToModel(uint)),
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(eliminaArticolo(uint)));
@@ -288,6 +291,21 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
     }
   }
   editabile = statoPrecedenteEditabile;
+}
+
+void TabellaRisorse::sostutuisciElemento(pacchettoConsumabile* p){
+    bool statoPrecedenteEditabile = editabile;
+    editabile = false;
+
+    for(int i=0 ; i<tabella->rowCount() ; i++){
+        //controllo l'ID, presente nella prima colonna
+        if(tabella->item(i,0)->text().toInt() == p->ID){
+            tabella->removeRow(i);
+            inserisciElemento(p);
+        }
+    }
+
+    editabile = statoPrecedenteEditabile;
 }
 
 void TabellaRisorse::rendiEditabile(bool b){

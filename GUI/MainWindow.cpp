@@ -126,7 +126,14 @@ void MainWindow::eliminaArticolo(uint id){
 }
 
 void MainWindow::eliminaConsumabile(uint id){
-  controller->eliminaConsumabile(id);
+    controller->eliminaConsumabile(id);
+}
+
+void MainWindow::aggiornaMenuSuModificaBevanda(pacchettoConsumabile* p){
+    if(dynamic_cast<pacchettoBevanda*>(p)){
+        TabellaRisorse* tab = findChild<TabellaRisorse*>("tabBevandeMenu");
+        tab->sostutuisciElemento(p);
+    }
 }
 
 void MainWindow::visualizzaElementiInWizardArticolo(bool option_pizza) const{

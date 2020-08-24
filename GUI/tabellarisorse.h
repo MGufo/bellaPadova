@@ -12,6 +12,7 @@ public:
                  const QString& etichetta="",
                  const QStringList* = nullptr);
   void inserisciElemento(pacchetto*);
+  void sostutuisciElemento(pacchettoConsumabile*);
   virtual void rendiEditabile(bool = true) override;
 
 signals:
