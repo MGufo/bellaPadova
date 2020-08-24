@@ -121,12 +121,11 @@ void Controller::modificaConsumabile(pacchettoConsumabile * pC){
                                    ptr->quantita,ptr->costo,ptr->dataAcquisto,
                                    ptr->locale);
   }
-  Risorsa* temp = modello->trovaRisorsa(pC->ID);
-  Consumabile* vecchioConsumabile = dynamic_cast<Consumabile*>(temp);
+  Consumabile* vecchioConsumabile = dynamic_cast<Consumabile*>(modello->trovaRisorsa(pC->ID));
 
   //casi in cui voglio trasformare Lattina in Bottiglia o viceversa
-  bool lattToBott = dynamic_cast<Lattina*>(temp) && !dynamic_cast<pacchettoBevanda*>(pC)->tipo;
-  bool bottToLatt = dynamic_cast<Bottiglia*>(temp) && dynamic_cast<pacchettoBevanda*>(pC)->tipo;
+  bool lattToBott = dynamic_cast<Lattina*>(vecchioConsumabile) && !dynamic_cast<pacchettoBevanda*>(pC)->tipo;
+  bool bottToLatt = dynamic_cast<Bottiglia*>(vecchioConsumabile) && dynamic_cast<pacchettoBevanda*>(pC)->tipo;
   if(lattToBott || bottToLatt){
       modello->rimuoviConsumabile(vecchioConsumabile);
       modello->inserisciConsumabile(pConsumabile);
@@ -372,6 +371,17 @@ const QList<pacchetto *> *Controller::recuperaMenuPerComanda(uint ID) const{
       }
   }
   return menu;
+}
+
+const QList<pacchetto*>* Controller::recuperaMenuPerWizardNuovaComanda() const{
+    QList<pacchetto*>* menu = recuperaMenu();
+    for(auto it = menu->begin(); it != menu->end() ; ++it){
+        if(!(*it)->disponibilita){
+            it = menu->erase(it);
+            if((it == menu->end()) || (it != menu->begin())) --it;
+        }
+    }
+    return menu;
 }
 
 bool Controller::canQuit() const { return (comandeSalvate && risorseSalvate); }

@@ -249,7 +249,7 @@ void MainWindow::visualizzaElementiCheckatiInWizardArticolo(bool option_pizza) c
 }
 
 void MainWindow::visualizzaElementiInWizardComanda() const{
-  QList<pacchetto*>* menu = controller->recuperaMenu();
+  const QList<pacchetto*>* menu = controller->recuperaMenuPerWizardNuovaComanda();
 
   QTableWidget* wrapperPizze = findChild<QTableWidget*>("pizzeWrapper");
   QTableWidget* wrapperBevande = findChild<QTableWidget*>("bevandeWrapper_comande");

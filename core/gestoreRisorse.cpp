@@ -52,9 +52,7 @@ unsigned int GestoreRisorse::getMaxId() const{
   return maxID;
 }
 
-//TODO:
-//ATTENZIONE all'inserimento di un articolo gia presente nel menu!
-//implementare un controllo
+
 void GestoreRisorse::inserisciArticolo(Articolo* daInserire) {
   if (daInserire) {
     const Lista<const Consumabile*>* lista = daInserire->getComposizione();
@@ -113,9 +111,13 @@ void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
 
 void GestoreRisorse::modificaArticolo(Articolo* daModificare,
                                       Articolo* modificato) {
-  auto it = menu.find(daModificare);
-  if(it.isValid()) (*it)->modifica(modificato);
-  //*daModificare = *modificato;
+  //auto it = menu.find(daModificare);
+  //if(it.isValid()) (*it)->modifica(modificato);
+  for(auto it = menu.begin() ; it != menu.end() ; ++it){
+      if(daModificare->getIdRisorsa() == (*it)->getIdRisorsa())
+          (*it)->modifica(modificato);
+  }
+
   const Lista<const Consumabile*>* lista = daModificare->getComposizione();
   if (!controlloInInventario(daModificare))
     throw new std::logic_error("Errore: Uno o più elementi selezionati"
@@ -126,8 +128,12 @@ void GestoreRisorse::modificaArticolo(Articolo* daModificare,
 
 void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
                                          Consumabile* modificato) {
-  auto it = inventario.find(daModificare);
-  if(it.isValid())  (*it)->modifica(modificato);
+  //auto it = inventario.find(daModificare);
+  //if(it.isValid())  (*it)->modifica(modificato);
+  for(auto it = inventario.begin() ; it != inventario.end() ; ++it){
+      if(daModificare->getIdRisorsa() == (*it)->getIdRisorsa())
+          (*it)->modifica(modificato);
+  }
 
   for (auto it = menu.begin(); it != menu.end(); ++it) {
     const Lista<const Consumabile*>* lista = (*it)->getComposizione();
