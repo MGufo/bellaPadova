@@ -79,7 +79,6 @@ int main(int argc, char* argv[]) {
   comanda1->inserisciArticolo(dynamic_cast<Articolo*>(bellaPadova.trovaRisorsa(8)),2);
 //  comanda1->inserisciArticolo(mari, 1);
 //  comanda1->inserisciArticolo(CocaCola, 1);
-*/
   Pizza* mari = new Pizza(9, "marinara", true, 4);
   Lattina* Fanta =
       new Lattina(11, "Fanta", true, 2, 10, 6, QDate::currentDate(), 0.33);
@@ -93,6 +92,6 @@ int main(int argc, char* argv[]) {
   //bellaPadova.eseguiComanda();
   //bellaPadova.eseguiComanda();
   view.visualizzaComande();
-
+*/
   return app.exec();
 }
