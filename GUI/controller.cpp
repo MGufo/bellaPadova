@@ -289,6 +289,8 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
   return pacchetti;
 }
 
+// Cambiare segnatura in (const comanda*, bool);
+// Eliminare ighe 296 - 298
 pacchettoComanda* Controller::impacchettaComanda(const Comanda* c,
                                                  const Comanda* current) const{
   bool eseguita = true;
@@ -323,6 +325,13 @@ QList<pacchettoComanda*>* Controller::recuperaComande() const{
     for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
       // impacchetta singola comanda
       const Comanda* c = *it;
+      /*
+      * - Calcolo se comanda eseguita o meno usando indexOf
+      * bool eseguita = (indexOf(c) < indexOf(current)) ? false : true;
+      * Cambio segnatura impacchettaComanda: deve ricevere solo la comanda da
+      * impacchettare e il bool per sapere se la comanda è eseguita o no
+      * pacchetti->push_back(impacchettaComanda(c, eseguita));
+      */
       pacchetti->push_back(impacchettaComanda(c, current));
     }
   }
