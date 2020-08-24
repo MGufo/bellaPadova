@@ -44,7 +44,7 @@ ComandaGUI::ComandaGUI(QWidget *parent, pacchettoComanda* pC) : QWidget(parent){
 
 void ComandaGUI::rendiEseguita(){
   wrapperComanda->setObjectName("wrapperComandaEseguita");
-  wrapperComanda->setMinimumHeight(80);
+  wrapperComanda->setMinimumHeight(70);
   orario->setObjectName("orarioEseguita");
   comandaId->setObjectName("comandaIdEseguita");
   delete rimuovi;
