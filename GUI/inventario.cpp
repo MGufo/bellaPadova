@@ -3,7 +3,7 @@
 Inventario::Inventario(QWidget *parent) : QWidget(parent){
   layoutInventario = new QVBoxLayout(this);
 
-  QStringList* headerLabels = new QStringList();
+  headerLabels = new QStringList();
   headerLabels->push_back("ID");
   headerLabels->push_back("Nome");
   headerLabels->push_back("Disponibilità");

@@ -23,6 +23,7 @@ private:
   QPushButton* modificaDati;
   TabellaRisorse* tabIngredienti;
   TabellaRisorse* tabBevande;
+  QStringList* headerLabels;
   QVBoxLayout* layoutInventario;
   WizardNuovoConsumabile* nuovoConsumabile;
 

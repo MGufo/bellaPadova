@@ -65,6 +65,16 @@ QMenuBar* MainWindow::drawMenubar() const{
   return menuBar;
 }
 
+void MainWindow::eliminaPacchettiRisorsa(QList<pacchetto*>* lista){
+  for(auto it = lista->begin(); it != lista->end(); ++it) delete (*it);
+  delete lista;
+}
+
+void MainWindow::eliminaPacchettiComanda(QList<pacchettoComanda*>* lista){
+  for(auto it = lista->begin(); it != lista->end(); ++it) delete (*it);
+    delete lista;
+}
+
 void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
   controller->calcoloFatturato(inizio, fine);
 }
@@ -114,7 +124,9 @@ void MainWindow::richiediDettagliComanda(uint ID){
       }
       ++it;
     }
+    delete contenutoComanda;
   }
+  delete comanda;
 }
 
 void MainWindow::aumentaCurrent(){
@@ -374,8 +386,8 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkgreen;");
   else
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkred;");
-    findChild<QLineEdit*>("mGuadagno")->clear();
-    findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
+  findChild<QLineEdit*>("mGuadagno")->clear();
+  findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
 }
 
 void MainWindow::pulisciInventario(){
@@ -406,7 +418,7 @@ void MainWindow::visualizzaInventario(){
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
         aggiornaInventario(*it);
     }
-    delete inventario;
+    eliminaPacchettiRisorsa(inventario);
 }
 
 void MainWindow::aggiornaMenu(pacchetto* p){
@@ -424,7 +436,7 @@ void MainWindow::visualizzaMenu(){
   for(auto it = menu->constBegin(); it != menu->constEnd(); ++it){
       aggiornaMenu(*it);
   }
-  delete menu;
+  eliminaPacchettiRisorsa(menu);
 }
 
 void MainWindow::pulisciComande(){
@@ -450,7 +462,7 @@ void MainWindow::visualizzaComande(){
     widgetComande->aggiungiComanda(*it);
   }
   widgetComande->setStyleNextOrderButton();
-  delete comande;
+  eliminaPacchettiComanda(comande);
 }
 
 void MainWindow::riapriComanda(uint ID){

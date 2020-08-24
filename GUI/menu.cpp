@@ -3,7 +3,7 @@
 Menu::Menu(QWidget *parent) : QWidget(parent){
   layoutMenu = new QVBoxLayout(this);
 
-  QStringList* headerLabels = new QStringList();
+  headerLabels = new QStringList();
   headerLabels->push_back("ID");
   headerLabels->push_back("Nome");
   headerLabels->push_back("Disponibilità");

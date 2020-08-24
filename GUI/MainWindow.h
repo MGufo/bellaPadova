@@ -65,6 +65,8 @@ private:
   QVBoxLayout* mainLayout;
   void setStylePizzeria();
   QMenuBar* drawMenubar() const;
+  void eliminaPacchettiRisorsa(QList<pacchetto*>*);
+  void eliminaPacchettiComanda(QList<pacchettoComanda*>*);
 
 };
 

@@ -19,14 +19,16 @@ bool GestoreComande::testInsert(const Comanda* precedente,
                                 const Comanda* daInserire,
                                 unsigned short capForno,
                                 const QTime& currentTime) {
+  QTime* orarioInizioPreparazioneDaIns = daInserire->getOrarioInizioPreparazione(capForno);
+  QTime* orarioInizioPreparazioneSucc = daInserire->getOrarioInizioPreparazione(capForno);
   // non ci sono comande da fare oppure si è arrivati all'ultima comanda
   if (!successiva) return true;
   // se la comanda da inserire "fitta" tra la precedente e la successiva
   if (successiva != *current) {
     if (precedente->getOraConsegna() <=
-            daInserire->getOrarioInizioPreparazione(capForno) &&
+            *orarioInizioPreparazioneDaIns &&
         daInserire->getOraConsegna() <=
-            successiva->getOrarioInizioPreparazione(capForno))
+            *orarioInizioPreparazioneSucc)
       return true;
     else
       return false;
@@ -35,12 +37,13 @@ bool GestoreComande::testInsert(const Comanda* precedente,
   else {
     // se precedente esiste è stata già consegnata e il suo orario di consegna
     // era al più == currentTime
-    if (currentTime <= daInserire->getOrarioInizioPreparazione(capForno) &&
-        daInserire->getOraConsegna() <=
-            successiva->getOrarioInizioPreparazione(capForno))
+    if (currentTime <= *orarioInizioPreparazioneDaIns &&
+        daInserire->getOraConsegna() <= *orarioInizioPreparazioneSucc)
       return true;
     return false;
   }
+  delete orarioInizioPreparazioneDaIns;
+  delete orarioInizioPreparazioneSucc;
 }
 
 unsigned int GestoreComande::getMaxId() const {
@@ -50,28 +53,27 @@ unsigned int GestoreComande::getMaxId() const {
   return maxID;
 }
 
-QTime GestoreComande::copiaQTime(const QTime &t){
-    QTime currentTime = t;
-    return currentTime;
-}
-
 void GestoreComande::fixCurrent(){ current = bacheca.find(*current); }
 
 // HACK: La comanda può contenere solo pizze del menu
 void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capForno) {
-  QTime currentTime = QTime::currentTime();
-  int tempoPreparazione = daInserire->getTempoPreparazione(capForno)*60;
   if (daInserire) {
-    if (currentTime >= daInserire->getOrarioInizioPreparazione(capForno)) {
+    QTime currentTime = QTime::currentTime();
+    QTime* orarioInizioPreparazioneDaIns = daInserire->getOrarioInizioPreparazione(capForno);
+    int tempoPreparazione = daInserire->getTempoPreparazione(capForno)*60;
+
+    if (currentTime >= *orarioInizioPreparazioneDaIns) {
       if (!(current.isValid()))
-        daInserire->setOraConsegna(copiaQTime(currentTime).addSecs(tempoPreparazione));
+        daInserire->setOraConsegna(QTime(currentTime).addSecs(tempoPreparazione));
       else {
-        if (copiaQTime(currentTime).addSecs(tempoPreparazione) <
-            (*current)->getOrarioInizioPreparazione(capForno))
-          daInserire->setOraConsegna(copiaQTime(currentTime).addSecs(tempoPreparazione));
+        QTime* orarioInizioPreparazioneCurrent = (*current)->getOrarioInizioPreparazione(capForno);
+        if (QTime(currentTime).addSecs(tempoPreparazione) <
+            *orarioInizioPreparazioneCurrent)
+          daInserire->setOraConsegna(QTime(currentTime).addSecs(tempoPreparazione));
         else
           daInserire->setOraConsegna((*current)->getOraConsegna().addSecs(
             tempoPreparazione));
+        delete orarioInizioPreparazioneCurrent;
       }
     }
     if (bacheca.isEmpty()) {
@@ -99,7 +101,7 @@ void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capFor
           --current;
         } else {
           --it;
-          if (daInserire->getOrarioInizioPreparazione(capForno) <
+          if (*orarioInizioPreparazioneDaIns <
               (*(it))->getOraConsegna())
             daInserire->setOraConsegna((*it)->getOraConsegna().addSecs(
 tempoPreparazione));
@@ -110,12 +112,13 @@ tempoPreparazione));
         }
       }
       else {
-        if (currentTime > daInserire->getOrarioInizioPreparazione(capForno))
-          daInserire->setOraConsegna(copiaQTime(currentTime).addSecs(tempoPreparazione));
+        if (currentTime > *orarioInizioPreparazioneDaIns)
+          daInserire->setOraConsegna(QTime(currentTime).addSecs(tempoPreparazione));
         bacheca.push_back(daInserire);
         current = --(bacheca.end());
       }
     }
+  delete orarioInizioPreparazioneDaIns;
   }
 }
 

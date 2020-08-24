@@ -10,6 +10,7 @@ bool GestoreRisorse::controlloInInventario(Articolo * daControllare) const{
       for(auto it = inventario.const_begin(); it != inventario.const_end() && !presente; ++it)
         if((*it)->getIdRisorsa() == daControllare->getIdRisorsa()) presente = true;
     }
+    delete consumabili;
     return presente;
 }
 
@@ -194,6 +195,7 @@ void GestoreRisorse::caricaMenu(const QJsonObject& menuJSON){
       for(auto it = ingrJSON->constBegin(); it!=ingrJSON->constEnd(); ++it)
         (*keymap)[(*it).toInt()] =
               trovaRisorsa((*it).toInt());
+      delete ingrJSON;
     }
       /**
       TODO: Discutere cosa fare nel caso in cui un ingrediente di una pizza
@@ -219,7 +221,8 @@ void GestoreRisorse::caricaInventario(const QJsonObject & risorseJSON){
     else if (tipo == "farina") risorsa = new Farina();
 
     risorsa->carica(*risorsaJSON, nullptr);
-    inventario.push_back(dynamic_cast<Consumabile*>(risorsa));
+    Consumabile* newP = dynamic_cast<Consumabile*>(risorsa);
+    inventario.push_back(newP);
     delete risorsaJSON;
   }
 }

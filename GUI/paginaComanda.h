@@ -34,7 +34,9 @@ private:
   uint comandaID;
   QGridLayout* layoutPaginaComanda;
   QHBoxLayout* layoutInfoComanda;
+  QStringList* headerLabelsPizze;
   TabellaComande* Pizze;
+  QStringList* headerLabelsBevande;
   TabellaComande* Bevande;
   QWidget* infoComanda;
   QTimeEdit* orario;

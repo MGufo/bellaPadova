@@ -19,6 +19,7 @@ private:
   TabellaRisorse* tabBevande;
   QPushButton* newArticolo;
   QPushButton* modificaDati;
+  QStringList* headerLabels;
   QVBoxLayout* layoutMenu;
   WizardNuovoArticolo* nuovoArticolo = nullptr;
   void setStyleMenu();

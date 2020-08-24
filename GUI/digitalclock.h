@@ -9,7 +9,10 @@ class DigitalClock : public QLCDNumber
     Q_OBJECT
 
 public:
-    DigitalClock(QWidget *parent = 0);
+  DigitalClock(QWidget *parent = 0);
+
+private:
+  QPalette* paletteLCD;
 
 private slots:
     void showTime();

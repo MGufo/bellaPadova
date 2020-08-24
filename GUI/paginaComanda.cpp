@@ -75,24 +75,24 @@ void PaginaComanda::disableEdit(){
 }
 
 void PaginaComanda::inizializzaPizze(QWidget* _parent){
-  QStringList* headerLabels = new QStringList();
-  headerLabels->push_back("Nome");
-  headerLabels->push_back("Quantità");
-  headerLabels->push_back("Prezzo");
-  headerLabels->push_back("Ingredienti");
+  headerLabelsPizze = new QStringList();
+  headerLabelsPizze->push_back("Nome");
+  headerLabelsPizze->push_back("Quantità");
+  headerLabelsPizze->push_back("Prezzo");
+  headerLabelsPizze->push_back("Ingredienti");
 
-  Pizze = new TabellaComande(_parent, "Pizze", headerLabels);
+  Pizze = new TabellaComande(_parent, "Pizze", headerLabelsPizze);
   Pizze->setObjectName("tabPizzeComanda");
 }
 
 void PaginaComanda::inizializzaBevande(QWidget* _parent){
-  QStringList* headerLabels = new QStringList();
-  headerLabels->push_back("Nome");
-  headerLabels->push_back("Quantità");
-  headerLabels->push_back("Prezzo");
-  headerLabels->push_back("Capacità");
+  headerLabelsBevande = new QStringList();
+  headerLabelsBevande->push_back("Nome");
+  headerLabelsBevande->push_back("Quantità");
+  headerLabelsBevande->push_back("Prezzo");
+  headerLabelsBevande->push_back("Capacità");
 
-  Bevande = new TabellaComande(_parent, "Bevande", headerLabels);
+  Bevande = new TabellaComande(_parent, "Bevande", headerLabelsBevande);
   Bevande->setObjectName("tabBevandeComanda");
 }
 

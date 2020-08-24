@@ -21,7 +21,7 @@ void DigitalClock::showTime(){
 }
 
 void DigitalClock::setStyleLCD(){
-  QPalette* paletteLCD = new QPalette;
+  paletteLCD = new QPalette;
   paletteLCD->setColor(QPalette::Window, QColor(0,0,0));
   paletteLCD->setColor(QPalette::WindowText, QColor(255,0,0));
   setPalette(*paletteLCD);

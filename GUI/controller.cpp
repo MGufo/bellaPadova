@@ -182,6 +182,7 @@ void Controller::creaNuovaComanda(pacchettoComanda *pC){
     vista->mostraErrore(QString(ecc->what()));
   }
   vista->visualizzaComande();
+  comandeSalvate = false;
 }
 
 void Controller::modificaComanda(pacchettoComanda *pC){
@@ -194,19 +195,23 @@ void Controller::modificaComanda(pacchettoComanda *pC){
     newC->inserisciArticolo(
           dynamic_cast<Articolo*>(modello->trovaRisorsa((*it).first)),
           (*it).second);
+  // TODO: gestire eccezione lanciata da modello->modificaComanda
   modello->modificaComanda(c, newC);
   vista->visualizzaComande();
   vista->riapriComanda(c->getIdComanda());
+  comandeSalvate = false;
 }
 
 void Controller::eliminaComanda(uint ID){
   modello->rimuoviComanda(modello->trovaComanda(ID));
   vista->visualizzaComande();
+  comandeSalvate = false;
 }
 
 void Controller::eseguiComanda(){
   modello->eseguiComanda();
   vista->visualizzaComande();
+  comandeSalvate = false;
 }
 
 QList<pacchetto*>* Controller::recuperaInventario() const{
@@ -274,12 +279,7 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
       for(auto it = listaIngr.const_begin(); it != listaIngr.const_end();
           ++it){
         Ingrediente* i = dynamic_cast<Ingrediente*>(*it);
-        pacchettoIngrediente* pI =
-            new pacchettoIngrediente(i->getIdRisorsa(),i->getNome(),
-                                     i->getDisponibilita(),i->getQuantita(),
-                                     i->getCosto(),i->getDataAcquisto(),
-                                     i->isLocal());
-        (dynamic_cast<pacchettoPizza*>(p))->ingredienti[pI->ID] = pI->nome;
+        (dynamic_cast<pacchettoPizza*>(p))->ingredienti[i->getIdRisorsa()] = i->getNome();
       }
     }
     pacchetti->push_back(p);
