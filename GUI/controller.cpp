@@ -210,6 +210,7 @@ void Controller::eliminaComanda(uint ID){
 }
 
 void Controller::eseguiComanda(){
+  //if(modello->getComandaCorrente()->getOraConsegna() >= QTime::currentTime())
   modello->eseguiComanda();
   vista->visualizzaComande();
   comandeSalvate = false;
@@ -319,24 +320,9 @@ QList<pacchettoComanda*>* Controller::recuperaComande() const{
   if(!modello->getComande().isEmpty()){
     auto comande = modello->getComande();
     const Comanda* current = modello->getComandaCorrente();
-
     for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
       // impacchetta singola comanda
       const Comanda* c = *it;
-//      bool eseguita = false;
-//      if(current)
-//        eseguita = ((*c) < (*current)) ? true : false;
-//      else
-//        eseguita = true;
-//      pacchettoComanda* pC =
-//          new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
-//                               c->getCliente().getIndirizzo(),
-//                               c->getCliente().getTelefono(),
-//                               c->getOraConsegna(), c->getTotale(), eseguita);
-//      auto ordine = c->getOrdinazione();
-//      for(auto it = ordine.cbegin(); it!= ordine.cend(); ++it)
-//        pC->ordinazione[((*it).first)->getIdRisorsa()] = (*it).second;
-      //pacchettoComanda* pC = impacchettaComanda(c, current);
       pacchetti->push_back(impacchettaComanda(c, current));
     }
   }
