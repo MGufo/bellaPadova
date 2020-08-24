@@ -1,4 +1,4 @@
-#include "nuovoConsumabile_dettagli.h"
+#include "GUI/wizardNuovoConsumabile/nuovoConsumabile_dettagli.h"
 #include <iostream>
 
 NuovoConsumabile_dettagli::NuovoConsumabile_dettagli(QWidget*parent) : QWizardPage(parent), previouslyInizialized(false){

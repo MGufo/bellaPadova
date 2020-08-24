@@ -7,7 +7,7 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 
-#include "wizard_nuovoconsumabile.h"
+#include "GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h"
 
 class NuovoConsumabile_intro : public QWizardPage{
   Q_OBJECT
