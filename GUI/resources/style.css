@@ -209,12 +209,12 @@ QTableWidget{
 }
 
 QTabBar::tab {
-    margin-top: 5px;
+    margin-top: 2;
     background-color: #2b78e4;
     border: 1 solid black;
-    height: 50px;
-    width: 40ex;
-    margin-bottom: 10px;
+    height: 50;
+    width: 250;
+    margin-bottom: 7;
     font: 20px Roboto;
 }
 
