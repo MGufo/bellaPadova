@@ -59,7 +59,7 @@ void Bevanda::salva(QJsonObject & bevandaJSON) const{
   // Disponibilita
   bevandaJSON.insert("Disponibilita", getDisponibilita());
   // Prezzo
-  bevandaJSON.insert("Prezzo", getPrezzo());
+  bevandaJSON.insert("Prezzo", getPrezzoBase());
   // Quantità
   bevandaJSON.insert("Quantita", static_cast<int>(getQuantita()));
   // Costo
