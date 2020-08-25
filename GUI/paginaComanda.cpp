@@ -99,7 +99,7 @@ void PaginaComanda::inizializzaBevande(QWidget* _parent){
 void PaginaComanda::inizializzaPulsante(QWidget* _parent){
   modificaDati = new QPushButton(_parent);
   modificaDati->setText("Modifica");
-  modificaDati->setObjectName("Modifica");
+  modificaDati->setObjectName("modificaDati");
 }
 
 void PaginaComanda::inizializzaInfoComanda(QWidget* _parent){
@@ -150,7 +150,7 @@ void PaginaComanda::toggleModifica(){
   if(paginaEditabile){
     paginaEditabile = false;
     modificaDati->setText("Modifica");
-    modificaDati->setObjectName("Modifica");
+    modificaDati->setObjectName("modificaDati");
     /*
     TODO:
     1. Aggiungere un bool "TabellaModificata" che indichi se le tabelle (pizze o bevande) siano state modificate dall'utente dopo averle riempite con il menù
@@ -161,7 +161,7 @@ void PaginaComanda::toggleModifica(){
   else{
     paginaEditabile = true;
     modificaDati->setText("Finisci di Modificare");
-    modificaDati->setObjectName("FineModifica");
+    modificaDati->setObjectName("modificaDati");
     emit riempiTabelleConMenu(comandaID);
   }
   modificaInfo(paginaEditabile);
