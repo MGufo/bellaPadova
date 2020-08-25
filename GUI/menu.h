@@ -32,12 +32,6 @@ public:
   explicit Menu(QWidget *parent = nullptr);
   bool getPaginaEditabile() const;
 
-signals:
-  //
-  void invioDatiPizza();
-  //id della bevanda contenuta nell'inventario da inserire nel menu
-  void invioDatiBevanda(unsigned int);
-
 public slots:
   void modificaTabelle();
 };

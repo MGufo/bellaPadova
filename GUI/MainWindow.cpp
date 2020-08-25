@@ -141,13 +141,20 @@ void MainWindow::eliminaConsumabile(uint id){
     controller->eliminaConsumabile(id);
 }
 
-void MainWindow::aggiornaMenuSuModificaBevanda(pacchettoConsumabile* p){
-    if(dynamic_cast<pacchettoBevanda*>(p)){
-        TabellaRisorse* tab = findChild<TabellaRisorse*>("tabBevandeMenu");
-        tab->sostituisciElemento(p);
+void MainWindow::aggiornaMenuSuModificaConsumabile(pacchettoConsumabile* p){
+    if(dynamic_cast<pacchettoBevanda*>(p) || dynamic_cast<pacchettoIngrediente*>(p)){
+        //TabellaRisorse* tab = findChild<TabellaRisorse*>("tabBevandeMenu");
+        //tab->sostituisciElemento(p);
+        visualizzaMenu();
     }
 }
-
+/*
+void MainWindow::aggiornaMenuSuModificaIngrediente(pacchettoConsumabile* p){
+    if(dynamic_cast<pacchettoIngrediente*>(p)){
+        visualizzaMenu();
+    }
+}
+*/
 void MainWindow::visualizzaElementiInWizardArticolo(bool option_pizza) const{
   QList<pacchetto*>* inventario = controller->recuperaInventario();
   if(option_pizza){

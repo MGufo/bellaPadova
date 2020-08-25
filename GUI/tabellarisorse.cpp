@@ -12,7 +12,7 @@ TabellaRisorse::TabellaRisorse(QWidget *parent, const QString& etichetta, const 
           SLOT(modificaConsumabile(pacchettoConsumabile*)));
   connect(this,SIGNAL(sendConsumabilePacketToModel(pacchettoConsumabile*)),
           parentWidget()->parentWidget()->parentWidget(),
-          SLOT(aggiornaMenuSuModificaBevanda(pacchettoConsumabile*)));
+          SLOT(aggiornaMenuSuModificaConsumabile(pacchettoConsumabile*)));
   connect(this,SIGNAL(sendArticoloIdToModel(uint)),
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(eliminaArticolo(uint)));

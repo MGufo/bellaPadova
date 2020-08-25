@@ -138,21 +138,21 @@ void Controller::modificaConsumabile(pacchettoConsumabile * pC){
 }
 
 void Controller::modificaArticolo(pacchettoArticolo* p){
-  Articolo* modificato= nullptr;
+  // le bevande sono modificabili solo nell'inventario
   if(dynamic_cast<pacchettoPizza*>(p)){
+    Articolo* modificato= nullptr;
     pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
     modificato = new Pizza(pP->ID, pP->nome, pP->disponibilita, pP->prezzo);
+    Articolo* daModificare = dynamic_cast<Articolo*>(modello->trovaRisorsa(p->ID));
+    try{
+      modello->modificaArticolo(daModificare, modificato);
+      vista->visualizzaMenu();
+    }
+    catch (std::logic_error* ecc){
+        vista->mostraErrore(QString(ecc->what()));
+    }
+    risorseSalvate = false;
   }
-  // le bevande sono modificabili solo nell'inventario
-  Articolo* daModificare = dynamic_cast<Articolo*>(modello->trovaRisorsa(p->ID));
-  try{
-    modello->modificaArticolo(daModificare, modificato);
-    vista->visualizzaMenu();
-  }
-  catch (std::logic_error* ecc){
-      vista->mostraErrore(QString(ecc->what()));
-  }
-  risorseSalvate = false;
 }
 
 void Controller::eliminaConsumabile(uint id){
