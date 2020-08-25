@@ -35,8 +35,6 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
           SLOT(modificaComanda(pacchettoComanda*)));
 }
 
-PaginaComanda::~PaginaComanda() {}
-
 void PaginaComanda::setInfoComanda(const pacchettoComanda* pC,
                                    QList<pacchetto*>* ord){
   // Info comanda
