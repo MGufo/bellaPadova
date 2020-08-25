@@ -411,8 +411,8 @@ void TabellaRisorse::emitDataOnCellChanged(int x, int y){
       //dataAcquisto
       //recupero giorno, mese e anno tra i separatori
       string da = tabella->item(x,5)->text().toStdString();
-      int d = std::stoi(da.substr(0,1));
-      int m = std::stoi(da.substr(3,4));
+      int d = std::stoi(da.substr(0,2));
+      int m = std::stoi(da.substr(3,5));
       int y = std::stoi(da.substr(6,9));
       QDate _da(y,m,d);
       float _cap = tabella->item(x,6)->text().toFloat();
@@ -435,8 +435,8 @@ void TabellaRisorse::emitDataOnCellChanged(int x, int y){
         //dataAcquisto
         //recupero giorno, mese e anno tra i separatori
         string da = tabella->item(x,5)->text().toStdString();
-        int d = std::stoi(da.substr(0,1));
-        int m = std::stoi(da.substr(3,4));
+        int d = std::stoi(da.substr(0,2));
+        int m = std::stoi(da.substr(3,5));
         int y = std::stoi(da.substr(6,9));
         QDate _da(y,m,d);
         bool _l = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,6))->isChecked() ? true : false);
@@ -454,8 +454,8 @@ void TabellaRisorse::emitDataOnCellChanged(int x, int y){
         //dataAcquisto
         //recupero giorno, mese e anno tra i separatori
         string da = tabella->item(x,5)->text().toStdString();
-        int d = std::stoi(da.substr(0,1));
-        int m = std::stoi(da.substr(3,4));
+        int d = std::stoi(da.substr(0,2));
+        int m = std::stoi(da.substr(3,5));
         int y = std::stoi(da.substr(6,9));
         QDate _da(y,m,d);
         bool _l = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,6))->isChecked() ? true : false);
