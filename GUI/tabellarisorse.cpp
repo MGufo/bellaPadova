@@ -370,8 +370,9 @@ void TabellaRisorse::rendiEditabile(bool b){
           else if((objectName() == "tabPizzeMenu") && (j == 2)){
               dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
           }
-          else if((objectName() == "tabBevandeMenu") && (j == 2)){
-              dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+          else if((objectName() == "tabBevandeMenu") /*&& (j == 2)*/){
+              //dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
+              continue;
           }
           else{
               //casi in cui ci sono item nelle celle
