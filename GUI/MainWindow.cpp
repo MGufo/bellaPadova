@@ -441,6 +441,8 @@ void MainWindow::aggiornaMenu(pacchetto* p){
 }
 
 void MainWindow::visualizzaMenu(){
+  Menu* tabMenu = findChild<Menu*>();
+  if(tabMenu->getPaginaEditabile()) tabMenu->modificaTabelle();
   pulisciMenu();
   QList<pacchetto*>* menu = controller->recuperaMenu();
   for(auto it = menu->constBegin(); it != menu->constEnd(); ++it){

@@ -15,6 +15,7 @@ class Menu : public QWidget
   Q_OBJECT
 
 private:
+  bool paginaEditabile;
   TabellaRisorse* tabPizze;
   TabellaRisorse* tabBevande;
   QPushButton* newArticolo;
@@ -29,6 +30,7 @@ private slots:
   void invioDatiArticolo();
 public:
   explicit Menu(QWidget *parent = nullptr);
+  bool getPaginaEditabile() const;
 
 signals:
   //
@@ -36,7 +38,7 @@ signals:
   //id della bevanda contenuta nell'inventario da inserire nel menu
   void invioDatiBevanda(unsigned int);
 
-private slots:
+public slots:
   void modificaTabelle();
 };
 

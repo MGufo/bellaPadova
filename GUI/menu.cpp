@@ -1,6 +1,6 @@
 #include "menu.h"
 
-Menu::Menu(QWidget *parent) : QWidget(parent){
+Menu::Menu(QWidget *parent) : QWidget(parent), paginaEditabile(false){
   layoutMenu = new QVBoxLayout(this);
 
   headerLabels = new QStringList();
@@ -40,11 +40,16 @@ Menu::Menu(QWidget *parent) : QWidget(parent){
   setLayout(layoutMenu);
 }
 
+bool Menu::getPaginaEditabile() const{
+    return paginaEditabile;
+}
+
 void Menu::modificaTabelle(){
   if(modificaDati->objectName()=="Modifica"){
     newArticolo->setVisible(false);
     tabPizze->rendiEditabile();
     tabBevande->rendiEditabile();
+    paginaEditabile = true;
     tabPizze->cambiaColoreBordoCella();
     modificaDati->setText("Finisci di Modificare");
     modificaDati->setObjectName("FineModifica");
@@ -54,6 +59,7 @@ void Menu::modificaTabelle(){
     tabPizze->cambiaColoreBordoCella(false);
     tabPizze->rendiEditabile(false);
     tabBevande->rendiEditabile(false);
+    paginaEditabile = false;
     modificaDati->setText("Modifica");
     modificaDati->setObjectName("Modifica");
   }
