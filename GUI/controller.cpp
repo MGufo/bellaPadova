@@ -292,11 +292,19 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
 
 // Cambiare segnatura in (const comanda*, bool);
 // Eliminare ighe 296 - 298
+uint Controller::getIndexOf(const Lista<Comanda*>& menu, const uint ID) const{
+  uint index = 0;
+  bool trovato = false;
+  for(auto it = menu.const_begin(); it != menu.const_end() && !trovato; ++it){
+    if((*it)->getIdComanda() == ID) trovato = true;
+    else ++index;
+  }
+  if(!trovato) index = -1;
+  return index;
+}
+
 pacchettoComanda* Controller::impacchettaComanda(const Comanda* c,
-                                                 const Comanda* current) const{
-  bool eseguita = true;
-  if(current)
-    eseguita = ((*c) < (*current)) ? true : false;
+                                                 bool eseguita) const{
   pacchettoComanda* pC =
       new pacchettoComanda(c->getIdComanda(), c->getCliente().getNome(),
                            c->getCliente().getIndirizzo(),
@@ -324,16 +332,12 @@ QList<pacchettoComanda*>* Controller::recuperaComande() const{
     auto comande = modello->getComande();
     const Comanda* current = modello->getComandaCorrente();
     for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
-      // impacchetta singola comanda
-      const Comanda* c = *it;
-      /*
-      * - Calcolo se comanda eseguita o meno usando indexOf
-      * bool eseguita = (indexOf(c) < indexOf(current)) ? false : true;
-      * Cambio segnatura impacchettaComanda: deve ricevere solo la comanda da
-      * impacchettare e il bool per sapere se la comanda è eseguita o no
-      * pacchetti->push_back(impacchettaComanda(c, eseguita));
-      */
-      pacchetti->push_back(impacchettaComanda(c, current));
+      bool eseguita;
+      if(current)
+        eseguita = (getIndexOf(comande, (*it)->getIdComanda()) <
+                    getIndexOf(comande, current->getIdComanda())) ? false : true;
+      else eseguita = false;
+      pacchetti->push_back(impacchettaComanda((*it), eseguita));
     }
   }
   return pacchetti;
