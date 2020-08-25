@@ -57,7 +57,7 @@ void Bevanda::salva(QJsonObject & bevandaJSON) const{
   // Nome
   bevandaJSON.insert("Nome", QString::fromStdString(getNome()));
   // Disponibilita
-  bevandaJSON.insert("Disponibilità", getDisponibilita());
+  bevandaJSON.insert("Disponibilita", getDisponibilita());
   // Prezzo
   bevandaJSON.insert("Prezzo", getPrezzo());
   // Quantità
