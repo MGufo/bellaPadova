@@ -11,7 +11,7 @@ Bottiglia::Bottiglia(unsigned int id, string nome, bool disponibilita, double pr
 Bottiglia* Bottiglia::clone() const { return new Bottiglia(*this); }
 
 double Bottiglia::getPrezzo() const {
-  return getPrezzoBase() + getPlasticTax() * (1 / getCapacita());
+  return getPrezzoBase() + (getPlasticTax() / getCapacita());
 }
 
 void Bottiglia::salva(QJsonObject& bevandaJSON) const{

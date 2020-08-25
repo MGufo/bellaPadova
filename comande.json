@@ -1,27 +1,16 @@
 {
     "Comande": {
-        "1": {
-            "ID": 1,
+        "21": {
+            "ID": 21,
             "cliente": {
-                "indirizzo": "Via Prova 123",
-                "nome": "AndyM",
-                "telefono": "123456789"
+                "indirizzo": "bnm,",
+                "nome": "kbk",
+                "telefono": " , ,"
             },
-            "dataConsegna": "mer giu 17 2020",
-            "oraConsegna": "20:00:00",
-            "totale": 16.333333333333332
-        },
-        "2": {
-            "ID": 2,
-            "cliente": {
-                "indirizzo": "Via Stocazzo",
-                "nome": "gBizz",
-                "telefono": "987654321"
-            },
-            "dataConsegna": "mer giu 17 2020",
-            "oraConsegna": "20:30:00",
-            "totale": 26
+            "dataConsegna": "mar ago 25 2020",
+            "oraConsegna": "17:43:34",
+            "totale": 12.00666666666667
         }
     },
-    "ID": 2
+    "ID": 21
 }

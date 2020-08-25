@@ -8,7 +8,7 @@
             "Disponibilita": true,
             "ID": 12,
             "Nome": "Coca Cola",
-            "Prezzo": 7.006666666666666,
+            "Prezzo": 10.00666666666667,
             "Quantita": 10,
             "tipo": "bottiglia"
         },
@@ -16,7 +16,7 @@
             "Capacita": 0.33000001311302185,
             "Costo": 6,
             "Data Acquisto": "lun ago 3 2020",
-            "Disponibilita": false,
+            "Disponibilita": true,
             "ID": 11,
             "Nome": "Fanta",
             "Prezzo": 2,
@@ -118,7 +118,7 @@
             "Disponibilita": true,
             "ID": 12,
             "Nome": "Coca Cola",
-            "Prezzo": 7.006666666666666,
+            "Prezzo": 10.00666666666667,
             "Quantita": 10,
             "tipo": "bottiglia"
         },
@@ -126,7 +126,7 @@
             "Capacita": 0.33000001311302185,
             "Costo": 6,
             "Data Acquisto": "lun ago 3 2020",
-            "Disponibilita": false,
+            "Disponibilita": true,
             "ID": 11,
             "Nome": "Fanta",
             "Prezzo": 2,
@@ -134,7 +134,7 @@
             "tipo": "lattina"
         },
         "Margherita": {
-            "Disponibilita": false,
+            "Disponibilita": true,
             "Extra": 0.5,
             "ID": 8,
             "Ingredienti": [
