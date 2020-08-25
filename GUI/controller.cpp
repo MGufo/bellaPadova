@@ -332,10 +332,13 @@ QList<pacchettoComanda*>* Controller::recuperaComande() const{
     const Comanda* current = modello->getComandaCorrente();
     for(auto it = comande.const_begin(); it != comande.const_end(); ++it){
       bool eseguita;
-      if(current)
+      if(current){
+        // caso particolare: esiste una sola comanda
+        if(comande.count() == 1) eseguita = false;
         eseguita = (getIndexOf(comande, (*it)->getIdComanda()) <
-                    getIndexOf(comande, current->getIdComanda())) ? false : true;
-      else eseguita = false;
+                    getIndexOf(comande, current->getIdComanda())) ? true : false;
+      }
+      else eseguita = true;
       pacchetti->push_back(impacchettaComanda((*it), eseguita));
     }
   }
