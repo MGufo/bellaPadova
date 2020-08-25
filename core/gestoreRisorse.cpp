@@ -112,19 +112,24 @@ void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
 
 void GestoreRisorse::modificaArticolo(Articolo* daModificare,
                                       Articolo* modificato) {
-  //auto it = menu.find(daModificare);
-  //if(it.isValid()) (*it)->modifica(modificato);
+  //TODO: sistemo le funzioni per far funzionare il controllo
+  /*
+  const Lista<const Consumabile*>* lista = modificato->getComposizione();
+  if (!controlloInInventario(modificato))
+    throw new std::logic_error("Errore: Uno o più elementi selezionati non sono presenti nell'inventario.");
+  if(modificato->getDisponibilita() && !controlloDisponibilita(lista))
+     throw new std::logic_error("Errore: Impossibile modificare l'elemento in quanto uno o più elementi selezionati non sono disponibili.");
+  */
+  //TODO: implemento controllo sul fatto che se utente prova a mettere disponibile una pizza che ha un ingrediente non disponibile
+  //la modifica non venga fatta e venga segnalato il problema tramite eccezione
+  const Lista<const Consumabile*>* listaDaModificare = daModificare->getComposizione();
   for(auto it = menu.begin() ; it != menu.end() ; ++it){
       if(daModificare->getIdRisorsa() == (*it)->getIdRisorsa())
           (*it)->modifica(modificato);
   }
-
-  const Lista<const Consumabile*>* lista = daModificare->getComposizione();
-  if (!controlloInInventario(daModificare))
-    throw new std::logic_error("Errore: Uno o più elementi selezionati"
-                                 " non sono disponibili.");
-  daModificare->setDisponibilita(daModificare->getDisponibilita() && controlloDisponibilita(lista));
-  delete lista;
+  daModificare->setDisponibilita(daModificare->getDisponibilita() && controlloDisponibilita(listaDaModificare));
+  delete listaDaModificare;
+  //delete lista;
 }
 
 void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
@@ -138,7 +143,7 @@ void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
 
   for (auto it = menu.begin(); it != menu.end(); ++it) {
     const Lista<const Consumabile*>* lista = (*it)->getComposizione();
-    (*it)->setDisponibilita(controlloDisponibilita(lista));
+    (*it)->setDisponibilita((*it)->getDisponibilita() && controlloDisponibilita(lista));
     delete lista;
   }
 }
