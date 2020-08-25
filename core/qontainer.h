@@ -281,6 +281,11 @@ class Lista {
       while (it != end()) it = erase(it);
     }
   }
+  int count() const{
+    int count = 0;
+    for(auto it = const_begin(); it != const_end(); ++it) ++count;
+    return count;
+  }
 };
 
 template <class T>
