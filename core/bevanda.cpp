@@ -59,13 +59,16 @@ void Bevanda::salva(QJsonObject & bevandaJSON) const{
   // Disponibilita
   bevandaJSON.insert("Disponibilita", getDisponibilita());
   // Prezzo
-  bevandaJSON.insert("Prezzo", getPrezzoBase());
+  bevandaJSON.insert("Prezzo", QString::fromStdString(
+                       to_string_with_precision(getPrezzoBase())));
   // Quantità
   bevandaJSON.insert("Quantita", static_cast<int>(getQuantita()));
   // Costo
-  bevandaJSON.insert("Costo", getCosto());
+  bevandaJSON.insert("Costo",QString::fromStdString(
+                       to_string_with_precision(getCosto())));
   // Data Acquisto
   bevandaJSON.insert("Data Acquisto", getDataAcquisto().toString());
   // Capacità
-  bevandaJSON.insert("Capacita", capacita);
+  bevandaJSON.insert("Capacita", QString::fromStdString(
+                       to_string_with_precision(capacita)));
 }
