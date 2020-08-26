@@ -13,7 +13,6 @@ class Pizza : public Articolo {
   bool checkIngrediente(const Ingrediente*) const;
   void addIngrediente(Ingrediente*);
   void removeIngrediente(Ingrediente*);
-  void modificaComposizione(Consumabile*, Consumabile*);
 
  public:
   Pizza();
