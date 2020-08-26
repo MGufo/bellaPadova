@@ -496,8 +496,7 @@ void TabellaRisorse::emitDataOnCellChanged(int x, int y){
 }
 
 void TabellaRisorse::forwardIdToModel(uint id){
-    if(tabella->objectName()=="tabIngredientiInventario" ||
-            tabella->objectName()=="tabBevandeInventario")
+    if((objectName()=="tabIngredientiInventario") || (objectName()=="tabBevandeInventario"))
         emit sendConsumabileIdToModel(id);
     else
         emit sendArticoloIdToModel(id);

@@ -86,7 +86,7 @@ void GestoreRisorse::inserisciConsumabile(Consumabile* daInserire) {
 
 void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
   if (daRimuovere) {
-      auto it = menu.begin();
+    auto it = menu.begin();
     bool controlloPrimoElemento = false;
     while(it != menu.end()) {
       controlloPrimoElemento = false;
@@ -107,6 +107,17 @@ void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
       }
     }
     inventario.erase(inventario.find(daRimuovere));
+    //casi particolari in cui daRimuovere è sia Consumabile che Articolo, es:Bevanda
+    Articolo* temp = dynamic_cast<Articolo*>(static_cast<Risorsa*>(daRimuovere));
+    if(temp){
+        bool trovato = false;
+        for(auto it2 = menu.begin(); !trovato && it2 != menu.end(); ++it2){
+            if((*it2)->getIdRisorsa() == temp->getIdRisorsa()){
+                menu.erase(it2);
+                trovato = true;
+            }
+        }
+    }
   }
 }
 
