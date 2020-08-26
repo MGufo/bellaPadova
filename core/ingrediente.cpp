@@ -51,7 +51,8 @@ void Ingrediente::salva(QJsonObject& ingredienteJSON) const{
   // Quantita
   ingredienteJSON.insert("Quantita", static_cast<int>(getQuantita()));
   // Costo
-  ingredienteJSON.insert("Costo", getCosto());
+  ingredienteJSON.insert("Costo", QString::fromStdString(
+                           to_string_with_precision(getCosto())));
   // Data Acquisto
   ingredienteJSON.insert("dataAcquisto", getDataAcquisto().toString());
   // Locale
