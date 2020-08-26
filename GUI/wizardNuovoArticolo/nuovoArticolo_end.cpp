@@ -49,7 +49,7 @@ void NuovoArticolo_end::setActualPage(){
     }
     else{
         QWidget* wrapperBevande = new QWidget(this);
-        wrapperBevande->setObjectName("bevandeVisualizationWrapper");
+        wrapperBevande->setObjectName("bevandeVisualizationWrapper_articoli");
         QVBoxLayout* bevandeLayout = new QVBoxLayout(wrapperBevande);
         wrapperBevande->setLayout(bevandeLayout);
         layoutEnd->addRow("Bevande:", wrapperBevande);
