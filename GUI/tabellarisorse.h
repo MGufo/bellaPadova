@@ -1,6 +1,5 @@
 #ifndef TABELLARISORSE_H
 #define TABELLARISORSE_H
-
 #include "tabellacomposita.h"
 #include "inputValidator.h"
 #include "pushbuttonwithid.h"
@@ -22,8 +21,8 @@ signals:
   void sendConsumabileIdToModel(uint);
 
 private slots:
- virtual void emitDataOnCellChanged(int,int) override;
- virtual void forwardIdToModel(uint) override;
+ void emitDataOnCellChanged(int,int);
+ void forwardIdToModel(uint);
 
 private:
  void validateInput(int, int);

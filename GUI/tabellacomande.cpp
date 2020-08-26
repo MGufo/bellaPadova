@@ -129,11 +129,6 @@ void TabellaComande::riempiContenutoPacchetto(std::unordered_map
                    ->value()});
 }
 
-
-void TabellaComande::emitDataOnCellChanged(int, int){
-
-}
-
 void TabellaComande::checkBoxToggled(bool stato){
   QObject *cb = sender();
   int row = cb->property("row").toInt();
@@ -141,16 +136,6 @@ void TabellaComande::checkBoxToggled(bool stato){
     dynamic_cast<QSpinBox*>(tabella->cellWidget(row,1))->setValue(1);
   else
     dynamic_cast<QSpinBox*>(tabella->cellWidget(row,1))->setValue(0);
-}
-
-void TabellaComande::forwardIdToModel(uint id){
-  /*
-    if(tabella->objectName()=="tabIngredientiInventario" ||
-            tabella->objectName()=="tabBevandeInventario")
-        emit sendIdToModel(id,true);
-    else
-        emit sendIdToModel(id,false);
-        */
 }
 
 void TabellaComande::selezionaQuantitaHandler(int) { emit datiModificati(); }
