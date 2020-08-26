@@ -34,21 +34,6 @@ void Farina::carica(const QJsonObject & farinaJSON,
 
 void Farina::salva(QJsonObject& farinaJSON) const{
   Ingrediente::salva(farinaJSON);
-  // ID
-  //farinaJSON.insert("ID", static_cast<int>(getIdRisorsa()));
-  // Nome
-  //farinaJSON.insert("Nome", QString::fromStdString(getNome()));
-  // Disponibilita
-  //farinaJSON.insert("Disponibilità", getDisponibilita());
-  // Quantita
-  //farinaJSON.insert("Quantità", static_cast<int>(getQuantita()));
-  // Costo
-  //farinaJSON.insert("Costo", getCosto());
-  // Data Acquisto
-  //farinaJSON.insert("dataAcquisto", getDataAcquisto().toString());
-  // Locale
-  //farinaJSON.insert("Locale", isLocal());
-  // Tipo farina
   farinaJSON.insert("tFarina", QString::fromStdString(tipoFarina));
   // Tipo
   farinaJSON.insert("tipo", "farina");
