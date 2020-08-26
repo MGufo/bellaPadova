@@ -94,7 +94,8 @@ HEADERS += \
     GUI/wizardNuovaComanda/nuovaComanda_dettagli.h \
     GUI/wizardNuovaComanda/nuovaComanda_end.h \
     GUI/tabellarisorse.h \
-    GUI/tabellacomande.h
+    GUI/tabellacomande.h \
+    core/utils.h
     #test/testgui.h \
 
 RESOURCES += \
