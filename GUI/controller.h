@@ -5,6 +5,7 @@
 #include <QList>
 
 #include "../core/pizzeria.h"
+#include "../core/utils.h"
 #include "MainWindow.h"
 #include "pacchetti.h"
 
@@ -42,13 +43,6 @@ class Controller : public QObject {
   QList<pacchetto*>* recuperaContenutoComanda(uint) const;
   const QList<pacchetto*>* recuperaMenuPerComanda(uint) const;
   const QList<pacchetto *> *recuperaMenuPerWizardNuovaComanda() const;
-  template <typename T>
-  std::string to_string_with_precision(const T a_value, const int n = 2){
-    std::ostringstream out;
-    out.precision(n);
-    out << std::fixed << a_value;
-    return out.str();
-  }
   bool canQuit() const;
 
  public slots:
