@@ -53,13 +53,14 @@ void Controller::creaNuovoArticolo(pacchettoArticolo* pA){
     }
     try{
         modello->inserisciArticolo(pArticolo);
-        risorseSalvate = false;
         vista->aggiornaMenu(pA);
+        vista->mostraEsitoOperazione(QString("Articolo inserito con successo!"));
     } catch (std::domain_error* ecc){
         vista->mostraErrore(QString(ecc->what()));
     } catch (std::logic_error* ecc){
         vista->mostraErrore(QString(ecc->what()));
     }
+    risorseSalvate = false;
 }
 
 void Controller::creaNuovoConsumabile(pacchettoConsumabile* pC){
@@ -91,8 +92,9 @@ void Controller::creaNuovoConsumabile(pacchettoConsumabile* pC){
                                    ptr->locale);
   }
   modello->inserisciConsumabile(pConsumabile);
-  risorseSalvate = false;
+  vista->mostraEsitoOperazione(QString("Elemento inserito con successo!"));
   vista->aggiornaInventario(pC);
+  risorseSalvate = false;
 }
 
 void Controller::modificaConsumabile(pacchettoConsumabile * pC){
@@ -149,6 +151,9 @@ void Controller::modificaArticolo(pacchettoArticolo* p){
       vista->visualizzaMenu();
     }
     catch (std::logic_error* ecc){
+        modificato->setDisponibilita(false);
+        modello->modificaArticolo(daModificare, modificato);
+        vista->visualizzaMenu();
         vista->mostraErrore(QString(ecc->what()));
     }
     risorseSalvate = false;
@@ -158,12 +163,14 @@ void Controller::modificaArticolo(pacchettoArticolo* p){
 void Controller::eliminaConsumabile(uint id){
   Risorsa* daEliminare = modello->trovaRisorsa(id);
   modello->rimuoviConsumabile(dynamic_cast<Consumabile*>(daEliminare));
+  vista->mostraEsitoOperazione(QString("Elemento rimosso con successo!"));
   risorseSalvate = false;
 }
 
 void Controller::eliminaArticolo(uint id){
   Risorsa* daEliminare = modello->trovaRisorsa(id);
   modello->rimuoviArticolo(dynamic_cast<Articolo*>(daEliminare));
+  vista->mostraEsitoOperazione(QString("Articolo rimosso con successo!"));
   risorseSalvate = false;
 }
 
@@ -179,6 +186,7 @@ void Controller::creaNuovaComanda(pacchettoComanda *pC){
   }
   try{
   modello->inserisciComanda(c);
+  vista->mostraEsitoOperazione(QString("Comanda inserita con successo!"));
   }
   catch(std::logic_error* ecc){
     vista->mostraErrore(QString(ecc->what()));
@@ -188,7 +196,6 @@ void Controller::creaNuovaComanda(pacchettoComanda *pC){
 }
 
 void Controller::modificaComanda(pacchettoComanda *pC){
-  // TODO: Rivedere implementazione delle funzioni modificaComanda() e
   Comanda* c = modello->trovaComanda(pC->ID);
   Comanda* newC = new Comanda(pC->ID,
                               Contatto(pC->nome, pC->indirizzo, pC->telefono),
@@ -197,8 +204,15 @@ void Controller::modificaComanda(pacchettoComanda *pC){
     newC->inserisciArticolo(
           dynamic_cast<Articolo*>(modello->trovaRisorsa((*it).first)),
           (*it).second);
-  // TODO: gestire eccezione lanciata da modello->modificaComanda
-  modello->modificaComanda(c, newC);
+  try{
+    modello->modificaComanda(c, newC);
+  }
+  catch(std::domain_error* ecc){
+      vista->mostraErrore(QString(ecc->what()));
+  }
+  catch(std::logic_error* ecc){
+      vista->mostraErrore(QString(ecc->what()));
+  }
   vista->visualizzaComande();
   vista->riapriComanda(c->getIdComanda());
   comandeSalvate = false;
@@ -206,13 +220,14 @@ void Controller::modificaComanda(pacchettoComanda *pC){
 
 void Controller::eliminaComanda(uint ID){
   modello->rimuoviComanda(modello->trovaComanda(ID));
+  vista->mostraEsitoOperazione(QString("Comanda rimossa con successo!"));
   vista->visualizzaComande();
   comandeSalvate = false;
 }
 
 void Controller::eseguiComanda(){
-  //if(modello->getComandaCorrente()->getOraConsegna() >= QTime::currentTime())
   modello->eseguiComanda();
+  vista->mostraEsitoOperazione(QString("Comanda eseguita con successo!"));
   vista->visualizzaComande();
   comandeSalvate = false;
 }
@@ -290,8 +305,6 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
   return pacchetti;
 }
 
-// Cambiare segnatura in (const comanda*, bool);
-// Eliminare ighe 296 - 298
 uint Controller::getIndexOf(const Lista<Comanda*>& menu, const uint ID) const{
   uint index = 0;
   bool trovato = false;
@@ -367,12 +380,19 @@ QList<pacchetto*>* Controller::recuperaContenutoComanda(uint ID) const{
 const QList<pacchetto *> *Controller::recuperaMenuPerComanda(uint ID) const{
   QList<pacchetto*>* menu = recuperaMenu();
   const QList<pacchetto*>* contenutoComanda = recuperaContenutoComanda(ID);
+  bool controlloPrimoElemento = false;
   for(auto it = contenutoComanda->cbegin(); it != contenutoComanda->cend(); ++it){
-    for(auto it2 = menu->begin(); it2 != menu->end() && !menu->empty(); ++it2){
+    auto it2 = menu->begin();
+    while(it2 != menu->end() && !menu->empty()){
+      controlloPrimoElemento = false;
       if((*it)->ID == (*it2)->ID || !(*it2)->disponibilita){
         it2=menu->erase(it2);
-        if(it2 != menu->begin()) --it2;
+        if(it2 != menu->begin())
+            --it2;
+        else
+            controlloPrimoElemento = true;
       }
+      if(!controlloPrimoElemento)  ++it2;
     }
   }
   return menu;
@@ -412,6 +432,7 @@ void Controller::caricaRisorse(){
 void Controller::salvaComande(){
   try{
     modello->salvaComande();
+    vista->mostraEsitoOperazione(QString("Comande salvate con successo!"));
   } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
@@ -421,25 +442,11 @@ void Controller::salvaComande(){
 void Controller::salvaRisorse(){
   try{
     modello->salvaRisorse();
+    vista->mostraEsitoOperazione(QString("Risorse salvate con successo!"));
   } catch (std::logic_error *ecc) {
     vista->mostraErrore(QString(ecc->what()));
   }
   risorseSalvate = true;
-}
-
-void Controller::modificaComande(){
-  //modello->modificaComanda();
-  comandeSalvate = false;
-}
-
-void Controller::modificaRisorse(){
-  //modello->modificaArticolo();
-  try{
-    modello->salvaRisorse();
-  } catch (std::logic_error *ecc) {
-    vista->mostraErrore(QString(ecc->what()));
-  }
-  risorseSalvate = false;
 }
 
 void Controller::saveAndExit(){

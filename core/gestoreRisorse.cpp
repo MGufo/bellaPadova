@@ -59,11 +59,11 @@ void GestoreRisorse::inserisciArticolo(Articolo* daInserire) {
     const Lista<const Consumabile*>* lista = daInserire->getComposizione();
     if (!controlloInInventario(daInserire))
       throw new std::logic_error("Errore: uno o più elementi della composizione di questo articolo non sono attualmente disponibili.");
-    daInserire->setDisponibilita(controlloDisponibilita(lista));
     for (auto it = menu.const_begin(); it != menu.const_end(); ++it){
       if(daInserire->getIdRisorsa() == (*it)->getIdRisorsa())
         throw new std::domain_error("Errore: l'articolo è già presente nel menù.");
     }
+    daInserire->setDisponibilita(controlloDisponibilita(lista));
     menu.push_back(daInserire);
     delete lista;
   }
@@ -112,24 +112,15 @@ void GestoreRisorse::rimuoviConsumabile(Consumabile* daRimuovere) {
 
 void GestoreRisorse::modificaArticolo(Articolo* daModificare,
                                       Articolo* modificato) {
-  //TODO: sistemo le funzioni per far funzionare il controllo
-  /*
-  const Lista<const Consumabile*>* lista = modificato->getComposizione();
-  if (!controlloInInventario(modificato))
-    throw new std::logic_error("Errore: Uno o più elementi selezionati non sono presenti nell'inventario.");
-  if(modificato->getDisponibilita() && !controlloDisponibilita(lista))
-     throw new std::logic_error("Errore: Impossibile modificare l'elemento in quanto uno o più elementi selezionati non sono disponibili.");
-  */
-  //TODO: implemento controllo sul fatto che se utente prova a mettere disponibile una pizza che ha un ingrediente non disponibile
-  //la modifica non venga fatta e venga segnalato il problema tramite eccezione
-  const Lista<const Consumabile*>* listaDaModificare = daModificare->getComposizione();
+  const Lista<const Consumabile*>* composizioneDaModificare = daModificare->getComposizione();
+  if (modificato->getDisponibilita() && !controlloDisponibilita(composizioneDaModificare))
+    throw new std::logic_error("Errore: Impossibile modificare l'elemento in quanto uno o più elementi della sua composizione non sono disponibili.");
   for(auto it = menu.begin() ; it != menu.end() ; ++it){
       if(daModificare->getIdRisorsa() == (*it)->getIdRisorsa())
           (*it)->modifica(modificato);
   }
-  daModificare->setDisponibilita(daModificare->getDisponibilita() && controlloDisponibilita(listaDaModificare));
-  delete listaDaModificare;
-  //delete lista;
+  daModificare->setDisponibilita(daModificare->getDisponibilita() && controlloDisponibilita(composizioneDaModificare));
+  delete composizioneDaModificare;
 }
 
 void GestoreRisorse::modificaConsumabile(Consumabile* daModificare,
