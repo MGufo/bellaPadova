@@ -1,5 +1,4 @@
 #include "MainWindow.h"
-#include <iostream>
 
 MainWindow::MainWindow(Controller* c, QWidget* parent): QWidget(parent), controller(c){
   mainLayout = new QVBoxLayout(this);
