@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QErrorMessage>
+#include <QMessageBox>
 #include <QMenuBar>
 #include <QFile>
 #include <QTabWidget>
@@ -40,6 +41,7 @@ signals:
 
  public slots:
   void mostraErrore(const QString&);
+  void mostraEsitoOperazione(const QString&);
   void calcoloFatturato(const QDate&, const QDate&);
   void creaNuovoArticolo(pacchettoArticolo*);
   void creaNuovoConsumabile(pacchettoConsumabile*);

@@ -48,7 +48,7 @@ void WizardNuovoArticolo::accept(){
         }
     }
     else if(field("optionBevanda").toBool()){
-        QTableWidget* bevandeTabellaWrapper = findChild<QTableWidget*>("bevandeWrapper");
+        QTableWidget* bevandeTabellaWrapper = findChild<QTableWidget*>("bevandeWrapper_articoli");
         for(int i=0; i<bevandeTabellaWrapper->rowCount() ; i++){
             QRadioButton* radioBevanda = dynamic_cast<QRadioButton*>(bevandeTabellaWrapper->cellWidget(i,1));
             if(radioBevanda->isChecked()){

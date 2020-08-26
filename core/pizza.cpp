@@ -11,18 +11,6 @@ void Pizza::removeIngrediente(Ingrediente* i) {
   if (it.isValid()) ingredienti.erase(it);
 }
 
-void Pizza::modificaComposizione(Consumabile* daModificare, Consumabile* modificato){
-    auto it = ingredienti.find(dynamic_cast<Ingrediente*>(daModificare));
-    if(it.isValid()){
-        (*it)->setNome(modificato->getNome());
-        (*it)->setDisponibilita(modificato->getDisponibilita());
-        (*it)->setQuantita(modificato->getQuantita());
-        (*it)->setCosto(modificato->getCosto());
-        (*it)->setDataAcquisto(modificato->getDataAcquisto());
-        (*it)->setLocal(dynamic_cast<Ingrediente*>(modificato)->isLocal());
-    }
-}
-
 Pizza::Pizza() {}
 
 // costruisce una pizza la cui lista di ingredienti contiene solo la farina
@@ -114,6 +102,7 @@ const Lista<const Consumabile*>* Pizza::getComposizione() const {
   return lista;
 }
 
+//non è disponibile la modifica degli ingredienti
 void Pizza::modifica(Risorsa* modificato){
     setNome(modificato->getNome());
     setDisponibilita(modificato->getDisponibilita());
