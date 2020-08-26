@@ -12,6 +12,7 @@
 #include <QCloseEvent>
 
 #include "tabellacomande.h"
+#include "core/utils.h"
 
 class PaginaComanda : public QWidget {
   Q_OBJECT

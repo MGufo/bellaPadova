@@ -5,6 +5,7 @@
 #include <QList>
 
 #include "../core/pizzeria.h"
+#include "../core/utils.h"
 #include "MainWindow.h"
 #include "pacchetti.h"
 
