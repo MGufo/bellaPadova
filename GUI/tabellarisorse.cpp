@@ -300,12 +300,11 @@ void TabellaRisorse::sostituisciElemento(pacchetto* p){
 
     for(int i=0 ; i<tabella->rowCount() ; i++){
         //controllo l'ID, presente nella prima colonna
-        if(tabella->item(i,0)->text().toInt() == p->ID){
+        if(tabella->item(i,0)->text().toInt() == static_cast<int>(p->ID)){
             tabella->removeRow(i);
             inserisciElemento(p);
         }
     }
-
     editabile = statoPrecedenteEditabile;
 }
 

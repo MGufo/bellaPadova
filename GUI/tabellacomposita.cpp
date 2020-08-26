@@ -27,10 +27,6 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   // Aggiunta widget figli al layout
   layoutTabellaComposita->addWidget(label);
   layoutTabellaComposita->addWidget(tabella);
-
-  connect(tabella,SIGNAL(cellChanged(int,int)),
-          this,SLOT(emitDataOnCellChanged(int,int)));
-
   // Applicazione stile widget
   setStyleTabella();
   // Impostazione del layout

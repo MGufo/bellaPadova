@@ -21,9 +21,7 @@ signals:
   void datiModificati();
 
 private slots:
- virtual void emitDataOnCellChanged(int,int) override;
  void checkBoxToggled(bool);
- void forwardIdToModel(uint);
  void selezionaQuantitaHandler(int);
 };
 
