@@ -146,14 +146,18 @@ void Pizzeria::inserisciComanda(Comanda* daInserire) {
 
 void Pizzeria::modificaComanda(Comanda* daModificare, Comanda* modificata) {
   bool inseribile = true;
+  std::stringstream errorMsg;
   const unordered_map<Articolo*, unsigned int>* ordinazione = &modificata->getOrdinazione();
+  if(ordinazione->empty()){
+      errorMsg << "Errore: La comanda deve contenere almeno un articolo";
+      throw new std::domain_error(errorMsg.str());
+  }
   unordered_map<Articolo*, unsigned int>::const_iterator it;
   for(it = ordinazione->cbegin(); (it != ordinazione->cend()) && inseribile; ++it){
     inseribile = gestoreRisorse.controlloInInventario((*it).first);
   }
   if(inseribile) gestoreComande.modificaComanda(daModificare, modificata, capacitaForno);
   else{
-    std::stringstream errorMsg;
     errorMsg << "Errore: Non è possibile modificare la comanda perché uno o più ingredienti necessari per creare l'articolo " << ((*it).first)->getNome()
              << " non sono disponibili";
     throw new std::logic_error(errorMsg.str());

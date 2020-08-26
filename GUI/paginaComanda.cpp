@@ -181,8 +181,6 @@ void PaginaComanda::modificaInfo(bool b){
 void PaginaComanda::modificaTabelle(bool b){
     Pizze->rendiEditabile(b);
     Bevande->rendiEditabile(b);
-    Pizze->cambiaColoreBordoCella(b);
-    Bevande->cambiaColoreBordoCella(b);
 }
 
 void PaginaComanda::infoModificate(){

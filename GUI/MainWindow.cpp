@@ -493,3 +493,9 @@ void MainWindow::mostraErrore(const QString & messaggio){
   QErrorMessage* errorDialog = new QErrorMessage(this);
   errorDialog->showMessage(messaggio);
 }
+
+void MainWindow::mostraEsitoOperazione(const QString & messaggio){
+    QMessageBox messageDialog;
+    messageDialog.setText(messaggio);
+    messageDialog.exec();
+}

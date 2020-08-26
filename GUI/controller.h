@@ -50,8 +50,6 @@ class Controller : public QObject {
   void caricaRisorse();
   void salvaComande();
   void salvaRisorse();
-  void modificaComande();
-  void modificaRisorse();
   void saveAndExit();
 };
 
