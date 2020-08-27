@@ -8,6 +8,8 @@ date: Relazione di Rosin Marco
 
 # Abstract e Funzionalità
 
+Lo scopo del progetto è realizzare una 
+
 # Descrizione delle gerarchie utilizzate
 
 # Chiamate Polimorfe
@@ -15,6 +17,14 @@ date: Relazione di Rosin Marco
 # I/O
 
 # Istruzioni di compilazione
+
+Il progetto è stato sviluppato utilizzando alcune funzionalità introdotte da C++11 (`auto`, `nullptr` e `to_string`). Per questo motivo è stato necessario modificare il file .pro aggiungendo la direttiva "`CONFIG += c+11`".
+
+Per compilare ed eseguire il programma sono quindi necessari i seguenti comandi (si suppone che il terminale sia aperto nella cartella del progetto):
+
+1. `qmake bellaPadova.pro`
+2. `make`
+3. `./bellaPadova`
 
 # Suddivisione dei compiti - Ore di sviluppo 
 
