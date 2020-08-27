@@ -2,62 +2,62 @@
     "ID": 18,
     "Inventario": {
         "Acqua Frizzante": {
-            "Capacita": "1.00",
-            "Costo": "0.50",
+            "Capacita": 1.00,
+            "Costo": 0.50,
             "Data Acquisto": "lun ago 3 2020",
             "Disponibilita": true,
             "ID": 6,
             "Nome": "Acqua Frizzante",
-            "Prezzo": "1.00",
+            "Prezzo": 1.00,
             "Quantita": 200,
             "tipo": "bottiglia"
         },
         "Acqua Naturale": {
-            "Capacita": "1.00",
-            "Costo": "0.50",
+            "Capacita": 1.00,
+            "Costo": 0.50,
             "Data Acquisto": "lun ago 3 2020",
             "Disponibilita": true,
             "ID": 5,
             "Nome": "Acqua Naturale",
-            "Prezzo": "1.00",
+            "Prezzo": 1.00,
             "Quantita": 200,
             "tipo": "bottiglia"
         },
         "Coca Cola": {
-            "Capacita": "1.00",
-            "Costo": "1.00",
+            "Capacita": 1.00,
+            "Costo": 1.00,
             "Data Acquisto": "lun ago 3 2020",
             "Disponibilita": true,
             "ID": 1,
             "Nome": "Coca Cola",
-            "Prezzo": "4.50",
+            "Prezzo": 4.50,
             "Quantita": 100,
             "tipo": "bottiglia"
         },
         "Fanta": {
-            "Capacita": "0.33",
-            "Costo": "1.00",
+            "Capacita": 0.33,
+            "Costo": 1.00,
             "Data Acquisto": "lun ago 3 2020",
             "Disponibilita": true,
             "ID": 2,
             "Nome": "Fanta",
-            "Prezzo": "2.50",
+            "Prezzo": 2.50,
             "Quantita": 100,
             "tipo": "lattina"
         },
         "Sprite": {
-            "Capacita": "0.33",
-            "Costo": "1.00",
+            "Capacita": 0.33,
+            "Costo": 1.00,
             "Data Acquisto": "mar ago 4 2020",
             "Disponibilita": true,
             "ID": 3,
             "Nome": "Sprite",
-            "Prezzo": "2.50",
+            "Prezzo": 2.50,
             "Quantita": 100,
             "tipo": "lattina"
         },
         "cipolla": {
-            "Costo": "0.50",
+            "Costo": 0.50,
             "Disponibilita": true,
             "ID": 18,
             "Locale": true,
@@ -67,7 +67,7 @@
             "tipo": "ingrediente"
         },
         "farina 1kg": {
-            "Costo": "0.40",
+            "Costo": 0.40,
             "Disponibilita": true,
             "ID": 7,
             "Locale": true,
@@ -78,7 +78,7 @@
             "tipo": "farina"
         },
         "farina di tipo farro 1kg": {
-            "Costo": "0.20",
+            "Costo": 0.20,
             "Disponibilita": true,
             "ID": 8,
             "Locale": false,
@@ -89,7 +89,7 @@
             "tipo": "farina"
         },
         "farina di tipo integrale 1kg": {
-            "Costo": "0.20",
+            "Costo": 0.20,
             "Disponibilita": true,
             "ID": 9,
             "Locale": false,
@@ -100,7 +100,7 @@
             "tipo": "farina"
         },
         "funghi": {
-            "Costo": "0.30",
+            "Costo": 0.30,
             "Disponibilita": true,
             "ID": 13,
             "Locale": false,
@@ -110,7 +110,7 @@
             "tipo": "ingrediente"
         },
         "mozzarella": {
-            "Costo": "0.30",
+            "Costo": 0.30,
             "Disponibilita": true,
             "ID": 10,
             "Locale": false,
@@ -120,7 +120,7 @@
             "tipo": "ingrediente"
         },
         "patate": {
-            "Costo": "0.20",
+            "Costo": 0.20,
             "Disponibilita": true,
             "ID": 16,
             "Locale": false,
@@ -130,7 +130,7 @@
             "tipo": "ingrediente"
         },
         "pomodoro": {
-            "Costo": "0.20",
+            "Costo": 0.20,
             "Disponibilita": true,
             "ID": 11,
             "Locale": true,
@@ -140,7 +140,7 @@
             "tipo": "ingrediente"
         },
         "prosciutto cotto": {
-            "Costo": "0.40",
+            "Costo": 0.40,
             "Disponibilita": true,
             "ID": 14,
             "Locale": true,
@@ -150,7 +150,7 @@
             "tipo": "ingrediente"
         },
         "speck": {
-            "Costo": "0.30",
+            "Costo": 0.30,
             "Disponibilita": true,
             "ID": 15,
             "Locale": false,
@@ -160,7 +160,7 @@
             "tipo": "ingrediente"
         },
         "tonno": {
-            "Costo": "0.20",
+            "Costo": 0.20,
             "Disponibilita": true,
             "ID": 17,
             "Locale": false,
@@ -170,7 +170,7 @@
             "tipo": "ingrediente"
         },
         "wustel": {
-            "Costo": "0.20",
+            "Costo": 0.20,
             "Disponibilita": true,
             "ID": 12,
             "Locale": false,
@@ -183,7 +183,7 @@
     "Menu": {
         "Margherita": {
             "Disponibilita": true,
-            "Extra": "0.50",
+            "Extra": 0.50,
             "ID": 10,
             "Ingredienti": [
                 7,
@@ -191,7 +191,7 @@
                 11
             ],
             "Nome": "Margherita",
-            "Prezzo": "0.00",
+            "Prezzo": 4.00,
             "tipo": "pizza"
         }
     }
