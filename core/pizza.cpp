@@ -133,8 +133,7 @@ void Pizza::salva(QJsonObject& pizzaJSON) const{
   // Disponibilita
   pizzaJSON.insert("Disponibilita", getDisponibilita());
   // Prezzo
-  pizzaJSON.insert("Prezzo", QString::fromStdString(
-                     to_string_with_precision(getPrezzoBase())));
+  pizzaJSON.insert("Prezzo", getPrezzoBase());
   // Ingredienti
   QJsonArray* ingredientiJSON = new QJsonArray();
   for(auto it = ingredienti.const_begin(); it != ingredienti.const_end(); ++it)
@@ -142,8 +141,7 @@ void Pizza::salva(QJsonObject& pizzaJSON) const{
   pizzaJSON.insert("Ingredienti", *ingredientiJSON);
   delete ingredientiJSON;
   // Extra
-  pizzaJSON.insert("Extra", QString::fromStdString(
-                     to_string_with_precision(extra)));
+  pizzaJSON.insert("Extra", extra);
   //
   pizzaJSON.insert("tipo", "pizza");
 }
