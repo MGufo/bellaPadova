@@ -1,63 +1,63 @@
 {
-    "ID": 18,
+    "ID": 28,
     "Inventario": {
         "Acqua Frizzante": {
-            "Capacita": 1.00,
-            "Costo": 0.50,
+            "Capacita": 1,
+            "Costo": 0.5,
             "Data Acquisto": "lun ago 3 2020",
             "Disponibilita": true,
             "ID": 6,
             "Nome": "Acqua Frizzante",
-            "Prezzo": 1.00,
+            "Prezzo": 1,
             "Quantita": 200,
             "tipo": "bottiglia"
         },
         "Acqua Naturale": {
-            "Capacita": 1.00,
-            "Costo": 0.50,
+            "Capacita": 1,
+            "Costo": 0.5,
             "Data Acquisto": "lun ago 3 2020",
             "Disponibilita": true,
             "ID": 5,
             "Nome": "Acqua Naturale",
-            "Prezzo": 1.00,
+            "Prezzo": 1,
             "Quantita": 200,
             "tipo": "bottiglia"
         },
         "Coca Cola": {
-            "Capacita": 1.00,
-            "Costo": 1.00,
+            "Capacita": 1,
+            "Costo": 1,
             "Data Acquisto": "lun ago 3 2020",
             "Disponibilita": true,
             "ID": 1,
             "Nome": "Coca Cola",
-            "Prezzo": 4.50,
+            "Prezzo": 4.5,
             "Quantita": 100,
             "tipo": "bottiglia"
         },
         "Fanta": {
-            "Capacita": 0.33,
-            "Costo": 1.00,
+            "Capacita": 0.33000001311302185,
+            "Costo": 1,
             "Data Acquisto": "lun ago 3 2020",
             "Disponibilita": true,
             "ID": 2,
             "Nome": "Fanta",
-            "Prezzo": 2.50,
+            "Prezzo": 2.5,
             "Quantita": 100,
             "tipo": "lattina"
         },
         "Sprite": {
-            "Capacita": 0.33,
-            "Costo": 1.00,
+            "Capacita": 0.33000001311302185,
+            "Costo": 1,
             "Data Acquisto": "mar ago 4 2020",
             "Disponibilita": true,
             "ID": 3,
             "Nome": "Sprite",
-            "Prezzo": 2.50,
+            "Prezzo": 2.5,
             "Quantita": 100,
             "tipo": "lattina"
         },
         "cipolla": {
-            "Costo": 0.50,
+            "Costo": 0.5,
             "Disponibilita": true,
             "ID": 18,
             "Locale": true,
@@ -67,7 +67,7 @@
             "tipo": "ingrediente"
         },
         "farina 1kg": {
-            "Costo": 0.40,
+            "Costo": 0.4,
             "Disponibilita": true,
             "ID": 7,
             "Locale": true,
@@ -78,7 +78,7 @@
             "tipo": "farina"
         },
         "farina di tipo farro 1kg": {
-            "Costo": 0.20,
+            "Costo": 0.2,
             "Disponibilita": true,
             "ID": 8,
             "Locale": false,
@@ -89,7 +89,7 @@
             "tipo": "farina"
         },
         "farina di tipo integrale 1kg": {
-            "Costo": 0.20,
+            "Costo": 0.2,
             "Disponibilita": true,
             "ID": 9,
             "Locale": false,
@@ -100,7 +100,7 @@
             "tipo": "farina"
         },
         "funghi": {
-            "Costo": 0.30,
+            "Costo": 0.3,
             "Disponibilita": true,
             "ID": 13,
             "Locale": false,
@@ -110,7 +110,7 @@
             "tipo": "ingrediente"
         },
         "mozzarella": {
-            "Costo": 0.30,
+            "Costo": 0.3,
             "Disponibilita": true,
             "ID": 10,
             "Locale": false,
@@ -120,7 +120,7 @@
             "tipo": "ingrediente"
         },
         "patate": {
-            "Costo": 0.20,
+            "Costo": 0.2,
             "Disponibilita": true,
             "ID": 16,
             "Locale": false,
@@ -130,7 +130,7 @@
             "tipo": "ingrediente"
         },
         "pomodoro": {
-            "Costo": 0.20,
+            "Costo": 0.2,
             "Disponibilita": true,
             "ID": 11,
             "Locale": true,
@@ -140,7 +140,7 @@
             "tipo": "ingrediente"
         },
         "prosciutto cotto": {
-            "Costo": 0.40,
+            "Costo": 0.4,
             "Disponibilita": true,
             "ID": 14,
             "Locale": true,
@@ -149,8 +149,18 @@
             "dataAcquisto": "lun ago 3 2020",
             "tipo": "ingrediente"
         },
+        "salsiccia": {
+            "Costo": 0.8,
+            "Disponibilita": true,
+            "ID": 27,
+            "Locale": false,
+            "Nome": "salsiccia",
+            "Quantita": 100,
+            "dataAcquisto": "lun ago 3 2020",
+            "tipo": "ingrediente"
+        },
         "speck": {
-            "Costo": 0.30,
+            "Costo": 0.3,
             "Disponibilita": true,
             "ID": 15,
             "Locale": false,
@@ -160,7 +170,7 @@
             "tipo": "ingrediente"
         },
         "tonno": {
-            "Costo": 0.20,
+            "Costo": 0.2,
             "Disponibilita": true,
             "ID": 17,
             "Locale": false,
@@ -170,7 +180,7 @@
             "tipo": "ingrediente"
         },
         "wustel": {
-            "Costo": 0.20,
+            "Costo": 0.2,
             "Disponibilita": true,
             "ID": 12,
             "Locale": false,
@@ -181,17 +191,192 @@
         }
     },
     "Menu": {
+        "Acqua Frizzante": {
+            "Capacita": 1,
+            "Costo": 0.5,
+            "Data Acquisto": "lun ago 3 2020",
+            "Disponibilita": true,
+            "ID": 6,
+            "Nome": "Acqua Frizzante",
+            "Prezzo": 1,
+            "Quantita": 200,
+            "tipo": "bottiglia"
+        },
+        "Acqua Naturale": {
+            "Capacita": 1,
+            "Costo": 0.5,
+            "Data Acquisto": "lun ago 3 2020",
+            "Disponibilita": true,
+            "ID": 5,
+            "Nome": "Acqua Naturale",
+            "Prezzo": 1,
+            "Quantita": 200,
+            "tipo": "bottiglia"
+        },
+        "Boscaiola": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 25,
+            "Ingredienti": [
+                9,
+                15,
+                13,
+                10,
+                11
+            ],
+            "Nome": "Boscaiola",
+            "Prezzo": 7,
+            "tipo": "pizza"
+        },
+        "Coca Cola": {
+            "Capacita": 1,
+            "Costo": 1,
+            "Data Acquisto": "lun ago 3 2020",
+            "Disponibilita": true,
+            "ID": 1,
+            "Nome": "Coca Cola",
+            "Prezzo": 4.5,
+            "Quantita": 100,
+            "tipo": "bottiglia"
+        },
+        "Fanta": {
+            "Capacita": 0.33000001311302185,
+            "Costo": 1,
+            "Data Acquisto": "lun ago 3 2020",
+            "Disponibilita": true,
+            "ID": 2,
+            "Nome": "Fanta",
+            "Prezzo": 2.5,
+            "Quantita": 100,
+            "tipo": "lattina"
+        },
         "Margherita": {
             "Disponibilita": true,
-            "Extra": 0.50,
-            "ID": 10,
+            "Extra": 0.5,
+            "ID": 19,
             "Ingredienti": [
                 7,
                 10,
                 11
             ],
             "Nome": "Margherita",
-            "Prezzo": 4.00,
+            "Prezzo": 4,
+            "tipo": "pizza"
+        },
+        "Ortolana": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 26,
+            "Ingredienti": [
+                8,
+                11,
+                16,
+                18,
+                13,
+                10
+            ],
+            "Nome": "Ortolana",
+            "Prezzo": 8,
+            "tipo": "pizza"
+        },
+        "Patate e speck": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 23,
+            "Ingredienti": [
+                7,
+                15,
+                10,
+                16,
+                11
+            ],
+            "Nome": "Patate e speck",
+            "Prezzo": 6,
+            "tipo": "pizza"
+        },
+        "Proscitto e Funghi": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 24,
+            "Ingredienti": [
+                7,
+                14,
+                13,
+                10,
+                11
+            ],
+            "Nome": "Proscitto e Funghi",
+            "Prezzo": 7,
+            "tipo": "pizza"
+        },
+        "Salsiccia e Patate": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 28,
+            "Ingredienti": [
+                7,
+                10,
+                27,
+                16,
+                11
+            ],
+            "Nome": "Salsiccia e Patate",
+            "Prezzo": 7,
+            "tipo": "pizza"
+        },
+        "Sprite": {
+            "Capacita": 0.33000001311302185,
+            "Costo": 1,
+            "Data Acquisto": "mar ago 4 2020",
+            "Disponibilita": true,
+            "ID": 3,
+            "Nome": "Sprite",
+            "Prezzo": 2.5,
+            "Quantita": 100,
+            "tipo": "lattina"
+        },
+        "Tonno e Cipolla": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 22,
+            "Ingredienti": [
+                7,
+                17,
+                18,
+                10,
+                11
+            ],
+            "Nome": "Tonno e Cipolla",
+            "Prezzo": 6,
+            "tipo": "pizza"
+        },
+        "Viennese": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 21,
+            "Ingredienti": [
+                8,
+                12,
+                10,
+                11,
+                14
+            ],
+            "Nome": "Viennese",
+            "Prezzo": 5.5,
+            "tipo": "pizza"
+        },
+        "Wustel": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 20,
+            "Ingredienti": [
+                7,
+                11,
+                10,
+                12
+            ],
+            "Nome": "Wustel",
+            "Prezzo": 5,
             "tipo": "pizza"
         }
     }
