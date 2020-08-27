@@ -147,13 +147,7 @@ void MainWindow::aggiornaMenuSuModificaConsumabile(pacchettoConsumabile* p){
         visualizzaMenu();
     }
 }
-/*
-void MainWindow::aggiornaMenuSuModificaIngrediente(pacchettoConsumabile* p){
-    if(dynamic_cast<pacchettoIngrediente*>(p)){
-        visualizzaMenu();
-    }
-}
-*/
+
 void MainWindow::visualizzaElementiInWizardArticolo(bool option_pizza) const{
   QList<pacchetto*>* inventario = controller->recuperaInventario();
   if(option_pizza){

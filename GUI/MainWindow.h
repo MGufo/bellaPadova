@@ -50,7 +50,6 @@ signals:
   void eliminaArticolo(uint);
   void eliminaConsumabile(uint);
   void aggiornaMenuSuModificaConsumabile(pacchettoConsumabile*);
-  //void aggiornaMenuSuModificaIngrediente(pacchettoConsumabile*);
   void creaNuovaComanda(pacchettoComanda*);
   void modificaComanda(pacchettoComanda*);
   void eliminaComanda(uint);
