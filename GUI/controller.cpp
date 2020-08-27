@@ -162,7 +162,11 @@ void Controller::modificaArticolo(pacchettoArticolo* p){
 
 void Controller::eliminaConsumabile(uint id){
   Risorsa* daEliminare = modello->trovaRisorsa(id);
+  bool isBevanda = false;
+  if(dynamic_cast<Bevanda*>(daEliminare))   isBevanda = true;
   modello->rimuoviConsumabile(dynamic_cast<Consumabile*>(daEliminare));
+  if(isBevanda)
+      vista->visualizzaMenu();
   vista->mostraEsitoOperazione(QString("Elemento rimosso con successo!"));
   risorseSalvate = false;
 }
