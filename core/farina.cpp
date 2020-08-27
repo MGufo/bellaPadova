@@ -27,7 +27,7 @@ void Farina::modifica(Risorsa* modificato){
 Farina* Farina::clone() const { return new Farina(*this); }
 
 void Farina::carica(const QJsonObject & farinaJSON,
-                    const std::unordered_map<uint, Risorsa*>* keymap){
+                    const std::unordered_map<uint, Risorsa*>*){
   Ingrediente::carica(farinaJSON);
   setTipoFarina((*(farinaJSON.constFind("tFarina"))).toString().toStdString());
 }

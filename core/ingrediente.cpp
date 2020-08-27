@@ -30,7 +30,7 @@ void Ingrediente::modifica(Risorsa* modificato){
 }
 
 void Ingrediente::carica(const QJsonObject & ingredienteJSON,
-                         const std::unordered_map<uint, Risorsa*>* keymap){
+                         const std::unordered_map<uint, Risorsa*>*){
   setID((*(ingredienteJSON.constFind("ID"))).toInt());
   setNome((*(ingredienteJSON.constFind("Nome"))).toString().toStdString());
   setDisponibilita((*(ingredienteJSON.constFind("Disponibilita"))).toBool());
@@ -51,8 +51,7 @@ void Ingrediente::salva(QJsonObject& ingredienteJSON) const{
   // Quantita
   ingredienteJSON.insert("Quantita", static_cast<int>(getQuantita()));
   // Costo
-  ingredienteJSON.insert("Costo", QString::fromStdString(
-                           to_string_with_precision(getCosto())));
+  ingredienteJSON.insert("Costo", getCosto());
   // Data Acquisto
   ingredienteJSON.insert("dataAcquisto", getDataAcquisto().toString());
   // Locale

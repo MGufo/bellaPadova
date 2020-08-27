@@ -39,7 +39,7 @@ void Bevanda::modifica(Risorsa* modificato){
 }
 
 void Bevanda::carica(const QJsonObject& bevandaJSON,
-                     const std::unordered_map<uint, Risorsa*>* keymap){
+                     const std::unordered_map<uint, Risorsa*>*){
   setID((*(bevandaJSON.constFind("ID"))).toInt());
   setNome((*(bevandaJSON.constFind("Nome"))).toString().toStdString());
   setDisponibilita((*(bevandaJSON.constFind("Disponibilita"))).toBool());
@@ -59,16 +59,13 @@ void Bevanda::salva(QJsonObject & bevandaJSON) const{
   // Disponibilita
   bevandaJSON.insert("Disponibilita", getDisponibilita());
   // Prezzo
-  bevandaJSON.insert("Prezzo", QString::fromStdString(
-                       to_string_with_precision(getPrezzoBase())));
+  bevandaJSON.insert("Prezzo", getPrezzoBase());
   // Quantità
   bevandaJSON.insert("Quantita", static_cast<int>(getQuantita()));
   // Costo
-  bevandaJSON.insert("Costo",QString::fromStdString(
-                       to_string_with_precision(getCosto())));
+  bevandaJSON.insert("Costo", getCosto());
   // Data Acquisto
   bevandaJSON.insert("Data Acquisto", getDataAcquisto().toString());
   // Capacità
-  bevandaJSON.insert("Capacita", QString::fromStdString(
-                       to_string_with_precision(capacita)));
+  bevandaJSON.insert("Capacita", capacita);
 }
