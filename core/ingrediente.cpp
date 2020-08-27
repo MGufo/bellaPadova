@@ -30,7 +30,7 @@ void Ingrediente::modifica(Risorsa* modificato){
 }
 
 void Ingrediente::carica(const QJsonObject & ingredienteJSON,
-                         const std::unordered_map<uint, Risorsa*>* keymap){
+                         const std::unordered_map<uint, Risorsa*>*){
   setID((*(ingredienteJSON.constFind("ID"))).toInt());
   setNome((*(ingredienteJSON.constFind("Nome"))).toString().toStdString());
   setDisponibilita((*(ingredienteJSON.constFind("Disponibilita"))).toBool());

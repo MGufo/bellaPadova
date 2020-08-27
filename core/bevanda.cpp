@@ -39,7 +39,7 @@ void Bevanda::modifica(Risorsa* modificato){
 }
 
 void Bevanda::carica(const QJsonObject& bevandaJSON,
-                     const std::unordered_map<uint, Risorsa*>* keymap){
+                     const std::unordered_map<uint, Risorsa*>*){
   setID((*(bevandaJSON.constFind("ID"))).toInt());
   setNome((*(bevandaJSON.constFind("Nome"))).toString().toStdString());
   setDisponibilita((*(bevandaJSON.constFind("Disponibilita"))).toBool());
