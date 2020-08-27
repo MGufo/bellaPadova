@@ -4,6 +4,8 @@ TabellaRisorse::TabellaRisorse(QWidget *parent, const QString& etichetta, const 
   connect(this,SIGNAL(validationError(const QString)),
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(mostraErrore(const QString)));
+  connect(tabella,SIGNAL(cellChanged(int,int)),
+            this,SLOT(emitDataOnCellChanged(int,int)));
   connect(this,SIGNAL(sendArticoloPacketToModel(pacchettoArticolo*)),
           parentWidget()->parentWidget()->parentWidget(),
           SLOT(modificaArticolo(pacchettoArticolo*)));
