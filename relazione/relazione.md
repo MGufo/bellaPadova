@@ -16,6 +16,13 @@ Lo scopo del progetto è realizzare una
 
 # I/O
 
+Il programma permette caricamento e salvataggio dei dati su file in formato JSON. È stato scelto il formato JSON in quanto presenta una sintassi semplice e leggibile e perché è meno verboso rispetto al formato XML. Per implementare tali funzionalità sono state usate le classi fornite dalla libreria Qt. 
+
+Ogni classe significativa del modello possiede i metodi `carica()` e `salva()` che vengono invocati su ogni oggetti.  
+
+Il caricamento delle risorse avviene in automatico ad ogni apertura del programma attraverso il metodo `caricaRisorse()`.
+Il salvataggio è manuale e a discrezione dell'utente; tuttavia per prevenire accidentali perdite di dati non salvati alla chiusura del programma viene visualizzata una finestra di dialogo in cui è possibile scegliere se uscire senza salvare, salvare e uscire oppure annullare l'uscita. È inoltre possibile salvare manualmente i dati del programma selezionando l'opzione "Inventario e Menu" all'interno della sezione "Salva" nella barra dei menu.
+
 # Istruzioni di compilazione
 
 Il progetto è stato sviluppato utilizzando alcune funzionalità introdotte da C++11 (`auto`, `nullptr` e `to_string`). Per questo motivo è stato necessario modificare il file .pro aggiungendo la direttiva "`CONFIG += c+11`".
