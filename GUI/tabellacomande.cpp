@@ -2,6 +2,7 @@
 
 TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
                                const QStringList* labels) : TabellaComposita(parent, etichetta, labels){
+  setMinimumWidth(1100);
   connect(this,SIGNAL(validationError(const QString)),
           parentWidget()->parentWidget()->parentWidget()->
           parentWidget()->parentWidget()->parentWidget()->

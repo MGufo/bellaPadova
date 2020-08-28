@@ -14,8 +14,8 @@ PaginaComanda::PaginaComanda(QWidget *parent, uint ID) : QWidget(parent) {
   // Creazione layout paginaComanda e aggiunta dei subwidget
   layoutPaginaComanda = new QGridLayout(this);
   layoutPaginaComanda->addWidget(infoComanda, 1, 0, 5, 5, Qt::AlignLeft);
-  layoutPaginaComanda->addWidget(Pizze, 0, 6, 5, 5);
-  layoutPaginaComanda->addWidget(Bevande, 6, 6, 5, 5);
+  layoutPaginaComanda->addWidget(Pizze, 0, 6, 5, 10);
+  layoutPaginaComanda->addWidget(Bevande, 6, 6, 5, 10);
   layoutPaginaComanda->addWidget(modificaDati, 7, 0, 3, 5, Qt::AlignHCenter);
   setStylePaginaComanda();
   setLayout(layoutPaginaComanda);
@@ -134,8 +134,8 @@ void PaginaComanda::creaPacchettoComanda(){
 }
 
 void PaginaComanda::setStylePaginaComanda(){
-  setMinimumSize(1200, 600);
-  setMaximumSize(1200, 600);
+  setMinimumSize(1500, 600);
+  setMaximumSize(1500, 600);
   setObjectName("paginaComanda");
 }
 
@@ -181,6 +181,8 @@ void PaginaComanda::modificaInfo(bool b){
 void PaginaComanda::modificaTabelle(bool b){
     Pizze->rendiEditabile(b);
     Bevande->rendiEditabile(b);
+    Pizze->cambiaColoreBordoCella(b);
+    Bevande->cambiaColoreBordoCella(b);
 }
 
 void PaginaComanda::infoModificate(){
