@@ -1,16 +1,6 @@
 {
     "Comande": {
-        "22": {
-            "ID": 22,
-            "cliente": {
-                "indirizzo": "vh",
-                "nome": "vhk",
-                "telefono": "kv"
-            },
-            "dataConsegna": "mar ago 25 2020",
-            "oraConsegna": "18:02:45",
-            "totale": 7.340000000000003
-        }
+        
     },
-    "ID": 22
+    "ID": 0
 }
