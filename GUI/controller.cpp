@@ -296,7 +296,7 @@ QList<pacchetto *>* Controller::recuperaMenu() const{
     else if(dynamic_cast<Pizza*>(*it)){
       Pizza* pP = dynamic_cast<Pizza*>(*it);
       p = new pacchettoPizza(pP->getIdRisorsa(), pP->getNome(),
-                             pP->getDisponibilita(), pP->getPrezzo());
+                             pP->getDisponibilita(), pP->getPrezzoBase());
       auto listaIngr = pP->getIngredienti();
       for(auto it = listaIngr.const_begin(); it != listaIngr.const_end();
           ++it){
@@ -336,10 +336,13 @@ pacchettoComanda* Controller::impacchettaComanda(const Comanda* c,
 pacchetto* Controller::trovaPacchetto(uint ID) const{
   QList<pacchetto*>* menu = recuperaMenu();
   pacchetto* p = nullptr;
+  pacchetto* ritorno = nullptr;
   for(auto it = menu->cbegin(); it != menu->cend(); ++it)
     if((*it)->ID == ID)
       p = *it;
-  return p;
+  ritorno = p->clone();
+  eliminaPacchettiRisorsa(menu);
+  return ritorno;
 }
 
 QList<pacchettoComanda*>* Controller::recuperaComande() const{
@@ -376,7 +379,10 @@ QList<pacchetto*>* Controller::recuperaContenutoComanda(uint ID) const{
   QList<pacchetto*>* contenuto = new QList<pacchetto*>();
   const pacchettoComanda* pC = recuperaInfoComanda(ID);
   for(auto it = pC->ordinazione.cbegin(); it != pC->ordinazione.cend(); ++it){
-    contenuto->push_back(trovaPacchetto((*it).first));
+      pacchetto* p = trovaPacchetto((*it).first);
+      dynamic_cast<pacchettoArticolo*>(p)->prezzo =
+              dynamic_cast<Articolo*>(modello->trovaRisorsa(p->ID))->getPrezzo();
+    contenuto->push_back(p);
   }
   return contenuto;
 }
@@ -396,6 +402,8 @@ const QList<pacchetto *> *Controller::recuperaMenuPerComanda(uint ID) const{
         else
             controlloPrimoElemento = true;
       }
+      dynamic_cast<pacchettoArticolo*>(*it2)->prezzo =
+              dynamic_cast<Articolo*>(modello->trovaRisorsa((*it2)->ID))->getPrezzo();
       if(!controlloPrimoElemento)  ++it2;
     }
   }
@@ -414,6 +422,16 @@ const QList<pacchetto*>* Controller::recuperaMenuPerWizardNuovaComanda() const{
 }
 
 bool Controller::canQuit() const { return (comandeSalvate && risorseSalvate); }
+
+void Controller::eliminaPacchettiRisorsa(QList<pacchetto*>* lista) const{
+  for(auto it = lista->begin(); it != lista->end(); ++it) delete (*it);
+  delete lista;
+}
+
+void Controller::eliminaPacchettiComanda(QList<pacchettoComanda*>* lista) const{
+  for(auto it = lista->begin(); it != lista->end(); ++it) delete (*it);
+    delete lista;
+}
 
 void Controller::caricaComande(){
   try{
