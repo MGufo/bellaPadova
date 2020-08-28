@@ -10,9 +10,19 @@ date: Relazione di Rosin Marco
 
 Lo scopo del progetto è realizzare una 
 
-# Descrizione delle gerarchie utilizzate
+# Progettezione e descrizione delle gerarchie utilizzate
 
 # Chiamate Polimorfe
+
+- getPrezzo (solo articolo)
+- `carica` 
+- `salva`
+- `getComposizione` (solo articolo)
+- `clone`
+- `modifica`
+- `getSpesa` (solo consumabile)
+- `rendiEditabile()`: Metodo virtuale puro appartenente alla classe `tabellacomposita` 
+
 
 # I/O
 
@@ -42,6 +52,26 @@ Per compilare ed eseguire il programma sono quindi necessari i seguenti comandi 
 3. `./bellaPadova`
 
 # Suddivisione dei compiti - Ore di sviluppo 
+
+
+GUI: wizard, widget, controller 
+Andrea: modello
+Gufo: Codifica del modello, parte del controller, parte della GUI
+
+Tutto lo sviluppo 
+Per la realizzazione ..
+
+- Gabriel (modello[gerarchia,qontainer,I/O(poco)], GUI[cotroller, widget principali vista, wizard])
+- Andrea (modello[gerarchia,qontainer], GUI[controller, widget secondari, CSS])
+- Gufo (modello[gerarchia,qontainer,I/O], GUI[controller, widget principali/secondari])
+
+- Progettazione modello: 2 ore
+- Progettazione GUI: 3 ore 
+- Apprendimento libreria Qt: 3 ore + 7 ore tutorato
+- Codifica modello: 10 ore
+- Codifica GUI: 20 ore
+- Debugging e testing: 10 ore
+- Stesura relazione: 2 ore
 
 # Ambiente di sviluppo
 
