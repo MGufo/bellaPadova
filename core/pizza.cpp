@@ -85,12 +85,11 @@ Pizza* Pizza::clone() const { return new Pizza(*this); }
 
 // Ritorna il prezzo di vendita della pizza di invocazione.
 double Pizza::getPrezzo() const {
-  int somma = 0;
-  for (Lista<Ingrediente*>::const_Iterator it = ingredienti.const_begin();
-       it != ingredienti.const_end(); ++it) {
+  double somma = 0;
+  for (Lista<Ingrediente*>::const_Iterator it = ingredienti.const_begin(); it != ingredienti.const_end(); ++it) {
     if ((*it)->isLocal()) somma += extra;
   }
-  return getPrezzoBase() + somma;
+  return (getPrezzoBase() + somma);
 }
 
 const Lista<const Consumabile*>* Pizza::getComposizione() const {
