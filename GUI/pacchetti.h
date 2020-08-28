@@ -16,6 +16,7 @@ struct pacchetto {
     ID(_ID), nome(_n), disponibilita(_d) {}
 
   virtual ~pacchetto() = default;
+  virtual pacchetto* clone() const = 0;
 };
 
 struct pacchettoArticolo : virtual public pacchetto {
@@ -37,11 +38,13 @@ struct pacchettoConsumabile : virtual public pacchetto {
 struct pacchettoIngrediente : pacchettoConsumabile {
   bool locale;
   pacchettoIngrediente(uint _ID, string _n, bool _d, uint _q, double _c, QDate _da, bool _l) : pacchetto(_ID, _n, _d), pacchettoConsumabile(_ID, _n, _d, _q, _c, _da), locale(_l) {}
+  virtual pacchettoIngrediente* clone() const{ return new pacchettoIngrediente(*this);}
 };
 
 struct pacchettoFarina : pacchettoIngrediente{
   string tipologia;
   pacchettoFarina(uint _ID, string _n, bool _d, uint _q, double _c, QDate _da, bool _l, string _t) : pacchetto(_ID, _n, _d), pacchettoIngrediente(_ID, _n, _d, _q, _c, _da, _l), tipologia(_t) {}
+  virtual pacchettoFarina* clone() const{ return new pacchettoFarina(*this);}
 };
 
 struct pacchettoBevanda : pacchettoArticolo, pacchettoConsumabile{
@@ -53,6 +56,7 @@ struct pacchettoBevanda : pacchettoArticolo, pacchettoConsumabile{
 
   pacchettoBevanda(uint _ID, string _n, bool _d, double _p, uint _q, double _c, QDate _da, float _ca, bool _t)
     : pacchetto(_ID, _n, _d), pacchettoArticolo(_ID, _n, _d, _p),  pacchettoConsumabile(_ID,_n,_d,_q,_c,_da), capacita(_ca), tipo(_t) {}
+  virtual pacchettoBevanda* clone() const{ return new pacchettoBevanda(*this);}
 };
 
 struct pacchettoPizza : pacchettoArticolo{
@@ -61,6 +65,7 @@ struct pacchettoPizza : pacchettoArticolo{
   pacchettoPizza(uint _ID, string _n, bool _d, double _p) :
     pacchetto(_ID,_n,_d), pacchettoArticolo(_ID, _n, _d, _p),
     ingredienti(std::unordered_map<uint, string>()) {}
+  virtual pacchettoPizza* clone() const{ return new pacchettoPizza(*this);}
 };
 
 struct pacchettoComanda {
