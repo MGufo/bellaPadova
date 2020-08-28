@@ -29,7 +29,7 @@ Al fine di aumentare l'estensibilità del codice invece di implementare un'unica
 Il caricamento delle risorse avviene in automatico ad ogni apertura del programma attraverso il metodo `caricaRisorse()`.
 Il salvataggio è manuale e a discrezione dell'utente; tuttavia per prevenire accidentali perdite di dati non salvati alla chiusura del programma viene visualizzata una finestra di dialogo in cui è possibile scegliere se salvare i dati modificati prima di uscire o meno. È inoltre possibile salvare manualmente i dati del programma selezionando l'opzione "Inventario e Menu" all'interno della sezione "Salva" nella barra dei menu.
 
-È inoltre possibile modificare manualmente il contenuto dei file JSON: questo metodo è fortemente sconsigliato in quanto un errore di sintassi nel documento provocherebbe un errato caricamento dei dati.
+È inoltre possibile modificare manualmente il contenuto dei file JSON: tuttavia questo metodo è fortemente sconsigliato in quanto un errore di sintassi nel file provocherebbe un errato caricamento dei dati.
 
 # Istruzioni di compilazione
 
