@@ -64,16 +64,6 @@ QMenuBar* MainWindow::drawMenubar() const{
   return menuBar;
 }
 
-void MainWindow::eliminaPacchettiRisorsa(QList<pacchetto*>* lista){
-  for(auto it = lista->begin(); it != lista->end(); ++it) delete (*it);
-  delete lista;
-}
-
-void MainWindow::eliminaPacchettiComanda(QList<pacchettoComanda*>* lista){
-  for(auto it = lista->begin(); it != lista->end(); ++it) delete (*it);
-    delete lista;
-}
-
 void MainWindow::calcoloFatturato(const QDate& inizio, const QDate& fine){
   controller->calcoloFatturato(inizio, fine);
 }
@@ -123,7 +113,7 @@ void MainWindow::richiediDettagliComanda(uint ID){
       }
       ++it;
     }
-    eliminaPacchettiRisorsa(contenutoComanda);
+    controller->eliminaPacchettiRisorsa(contenutoComanda);
   }
   delete comanda;
 }
@@ -387,7 +377,8 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
   else
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkred;");
   findChild<QLineEdit*>("mGuadagno")->clear();
-  findChild<QLineEdit*>("mGuadagno")->insert(QString::number(guadagno));
+  QString numberGuadagno(QString::number(guadagno)+" €");
+  findChild<QLineEdit*>("mGuadagno")->insert(numberGuadagno);
 }
 
 void MainWindow::pulisciInventario(){
@@ -427,7 +418,7 @@ void MainWindow::visualizzaInventario(){
     for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
         aggiornaInventario(*it);
     }
-    eliminaPacchettiRisorsa(inventario);
+    controller->eliminaPacchettiRisorsa(inventario);
 }
 
 void MainWindow::aggiornaMenu(pacchetto* p){
@@ -448,7 +439,7 @@ void MainWindow::visualizzaMenu(){
   for(auto it = menu->constBegin(); it != menu->constEnd(); ++it){
       aggiornaMenu(*it);
   }
-  eliminaPacchettiRisorsa(menu);
+  controller->eliminaPacchettiRisorsa(menu);
 }
 
 void MainWindow::pulisciComande(){
@@ -474,7 +465,7 @@ void MainWindow::visualizzaComande(){
     widgetComande->aggiungiComanda(*it);
   }
   widgetComande->setStyleNextOrderButton();
-  eliminaPacchettiComanda(comande);
+  controller->eliminaPacchettiComanda(comande);
 }
 
 void MainWindow::riapriComanda(uint ID){
