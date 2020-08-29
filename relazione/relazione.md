@@ -29,7 +29,7 @@ L'applicativo fornisce all'utente le seguenti funzionalità:
 - `getComposizione()`: Metodo virtuale puro della classe `Articolo`; restituisce una lista di oggetti di tipo `Consumabile` che rappresentano  gli ingredienti presenti nell'articolo di invocazione. 
 - `getPrezzo()`: Metodo virtuale puro della classe `Articolo`; restituisce il prezzo di vendita di un articolo (calcolato in modo differente per ogni sottotipo di `Articolo`).
 - `getSpesa()`: Metodo virtuale puro della classe `Consumabile`; restituisce la spesa sostenuta dalla pizzeria per l'acquisto dell'oggetto di invocazione (calcolato in modo differente per ogni sottotipo di `Consumabile`).
-- `rendiEditabile()`: Metodo virtuale puro appartenente alla classe `tabellacomposita` 
+- `rendiEditabile()`: Metodo virtuale puro appartenente alla classe `TabellaComposita`; abilita/disabilita la modifica dei dati contenuti nelle tabelle usate nel programma e aggiunge i _widget_ opportuni (diversi per ogni sottotipo di `TabellaComposita`) per permettere la modifica/eliminazione dei dati presenti nella tabella.
 
 
 # I/O
