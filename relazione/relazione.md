@@ -8,19 +8,27 @@ date: Relazione di Rosin Marco
 
 # Abstract e Funzionalità
 
-Lo scopo del progetto è realizzare una .. informatizzare la gestione di una pizzeria  da asporto
+Lo scopo del progetto è fornire un applicativo per informatizzare una pizzeria da asporto, implementando una gestione efficiente di inventario, menu e comande.
+
+L'applicativo fornisce all'utente le seguenti funzionalità:
+
+- Inserimento, rimozione e modifica di un articolo dal menù
+- Inserimento, rimozione e modifica (in modo _smart_) di un ingrediente dall'inventario.
+- Inserimento, rimozione e modifica (in modo _smart_) di una comanda da una bacheca apposita.
+- Una funzionalità di _contabilizzazione_ per calcolare il guadagno/perdita della pizzeria in un determinato periodo di tempo.
+- Una funzionalità di salvataggio e caricamento di tutti i dati del programma.
 
 # Progettezione e descrizione delle gerarchie utilizzate
 
 # Chiamate Polimorfe
 
-- getPrezzo (solo articolo)
-- `carica` 
-- `salva`
-- `getComposizione` (solo articolo)
-- `clone`
-- `modifica`
-- `getSpesa` (solo consumabile)
+- `clone()`: Metodo virtuale puro della classe `Risorsa`; effettua una copia dell'oggetto di invocazione e ritorna un puntatore al nuovo oggetto creato.
+- `salva()`: Metodo virtuale puro della classe `Risorsa`; effettua la _serializzazione_ dell'oggetto di invocazione in un oggetto JSON, ricevuto come parametro, che verrà salvato su file.
+- `carica()`: Metodo virtuale puro della classe `Risorsa`; effettua la _deserializzazione_ dell'oggetto di invocazione, assegnando ai campi dati propri dell'oggetto i corrispondenti valori dell'oggetto JSON, ricevuto come parametro, proveniente da file.
+- `modifica()`: Metodo virtuale puro della classe `Risorsa`; effettua la modifica dei campi dati dell'oggetto di invocazione in modo polimorfo, estraendo i nuovi valori dall'oggetto ricevuto come parametro.
+- `getComposizione()`: Metodo virtuale puro della classe `Articolo`; restituisce una lista di oggetti di tipo `Consumabile` che rappresentano  gli ingredienti presenti nell'articolo di invocazione. 
+- `getPrezzo()`: Metodo virtuale puro della classe `Articolo`; restituisce il prezzo di vendita di un articolo (calcolato in modo differente per ogni sottotipo di `Articolo`).
+- `getSpesa()`: Metodo virtuale puro della classe `Consumabile`; restituisce la spesa sostenuta dalla pizzeria per l'acquisto dell'oggetto di invocazione (calcolato in modo differente per ogni sottotipo di `Consumabile`).
 - `rendiEditabile()`: Metodo virtuale puro appartenente alla classe `tabellacomposita` 
 
 
@@ -57,7 +65,7 @@ Mi sono occupato dell'implementazione dell'intera funzionalità di I/O e di alcu
 Gabriel si è occupato dell'implementazione di tutti i Wizard e di alcune parti di modello, controller e dei widget principali della vista.
 Andrea si è occupato della progettazione e realizzazione dell'aspetto grafico della vista (incluso il foglio CSS) e di alcune parti di modello, controller e dei widget secondari della vista.
 
-È doveroso precisare che la suddivisione dei compiti appena esposta è approssimativa, in quanto la fase di sviluppo è stata integrata da _meeting_ Zoom giornalieri in cui si è discusso l'andamento della codifica di ogni componente e la risoluzione di eventuali criticità riscontrate. Sebbene questa metodologia di sviluppo sia risultata più lenta rispetto a una strategia _divide-et-impera_ ci ha permesso di completare più velocemente le singole componenti, riducendo così la necessita di effettuare test di integrazione e focalizzando la ricerca in itinere di eventuali bug al solo componente in sviluppo.  
+È doveroso precisare che la suddivisione dei compiti appena esposta è approssimativa, in quanto la fase di sviluppo è stata integrata da _meeting_ Zoom giornalieri in cui si è discusso l'andamento della codifica di ogni componente e la risoluzione di eventuali criticità riscontrate. Sebbene questa metodologia di sviluppo sia risultata più lenta rispetto a una strategia _divide-et-impera_, ci ha permesso di completare più velocemente le singole componenti, riducendo così la necessita di effettuare test di integrazione e focalizzando la ricerca in itinere di eventuali bug al singolo componente in sviluppo.  
 
 Lo sviluppo del progetto ha richiesto approssimativamente 60 ore di lavoro individuale così suddivise:
 
