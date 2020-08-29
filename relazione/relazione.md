@@ -8,7 +8,7 @@ date: Relazione di Rosin Marco
 
 # Abstract e Funzionalità
 
-Lo scopo del progetto è realizzare una 
+Lo scopo del progetto è realizzare una .. informatizzare la gestione di una pizzeria  da asporto
 
 # Progettezione e descrizione delle gerarchie utilizzate
 
@@ -53,25 +53,24 @@ Per compilare ed eseguire il programma sono quindi necessari i seguenti comandi 
 
 # Suddivisione dei compiti - Ore di sviluppo 
 
+Mi sono occupato dell'implementazione dell'intera funzionalità di I/O e di alcune parti di modello, controller e _backend_ tra i widget (sia principali che secondari) e il controller.
+Gabriel si è occupato dell'implementazione di tutti i Wizard e di alcune parti di modello, controller e dei widget principali della vista.
+Andrea si è occupato della progettazione e realizzazione dell'aspetto grafico della vista (incluso il foglio CSS) e di alcune parti di modello, controller e dei widget secondari della vista.
 
-GUI: wizard, widget, controller 
-Andrea: modello
-Gufo: Codifica del modello, parte del controller, parte della GUI
+È doveroso precisare che la suddivisione dei compiti appena esposta è approssimativa, in quanto la fase di sviluppo è stata integrata da _meeting_ Zoom giornalieri in cui si è discusso l'andamento della codifica di ogni componente e la risoluzione di eventuali criticità riscontrate. Sebbene questa metodologia di sviluppo sia risultata più lenta rispetto a una strategia _divide-et-impera_ ci ha permesso di completare più velocemente le singole componenti, riducendo così la necessita di effettuare test di integrazione e focalizzando la ricerca in itinere di eventuali bug al solo componente in sviluppo.  
 
-Tutto lo sviluppo 
-Per la realizzazione ..
+Lo sviluppo del progetto ha richiesto approssimativamente 60 ore di lavoro individuale così suddivise:
 
-- Gabriel (modello[gerarchia,qontainer,I/O(poco)], GUI[cotroller, widget principali vista, wizard])
-- Andrea (modello[gerarchia,qontainer], GUI[controller, widget secondari, CSS])
-- Gufo (modello[gerarchia,qontainer,I/O], GUI[controller, widget principali/secondari])
-
+- Analisi preliminare dei requisiti: 2 ore
 - Progettazione modello: 2 ore
 - Progettazione GUI: 3 ore 
-- Apprendimento libreria Qt: 3 ore + 7 ore tutorato
+- Apprendimento libreria Qt: 4 ore + 7 ore tutorato
 - Codifica modello: 10 ore
 - Codifica GUI: 20 ore
 - Debugging e testing: 10 ore
 - Stesura relazione: 2 ore
+
+Il superamento del monte ore individuale è stato causato dall'apprendimento della libreria Qt e dalla risoluzione di alcuni bug difficili da identificare all'interno del _qontainer_. 
 
 # Ambiente di sviluppo
 
