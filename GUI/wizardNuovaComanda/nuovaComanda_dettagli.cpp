@@ -88,9 +88,6 @@ void NuovaComanda_dettagli::setNewBevandeWidget(){
 
     bevande = new QTableWidget(0,3,wrapper);
     bevande->setObjectName("bevandeWrapper_comande");
-    //bevande->setMinimumWidth(850);
-    //bevande->setMaximumWidth(2100);
-    //bevande->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     sizePolicy2.setHorizontalStretch(0);
     sizePolicy2.setVerticalStretch(0);

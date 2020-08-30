@@ -27,7 +27,5 @@ void DigitalClock::setStyleLCD(){
   setPalette(*paletteLCD);
   setAutoFillBackground(true);
   resize(100, 100);
-  //setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   setMaximumSize(250, 100);
-  //setContentsMargins(0,0,0,0);
 }

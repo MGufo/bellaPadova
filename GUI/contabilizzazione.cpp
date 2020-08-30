@@ -10,6 +10,7 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   QWidget* wrapper_Date = new QWidget(this);
   QLabel* labelInizio = new QLabel("Data Inizio: ", wrapper_Date);
   QLabel* labelFine = new QLabel("Data Fine: ", wrapper_Date);
+
   // Selezione periodo e pulsante "calcola"
   QDateEdit *dataInizio= new QDateEdit(wrapper_Date);
   dataInizio->setObjectName("dataInizio");
@@ -29,6 +30,7 @@ Contabilizzazione::Contabilizzazione(QWidget *parent) : QWidget(parent){
   mostraGuadagno->setObjectName("mGuadagno");
   mostraGuadagno->setFixedWidth(500);
   mostraGuadagno->setAlignment(Qt::AlignCenter);
+
   // "Assemblaggio" widget figli nel main layout
   layoutContabilizzazione = new QVBoxLayout(this);
   layoutDate = new QHBoxLayout(wrapper_Date);

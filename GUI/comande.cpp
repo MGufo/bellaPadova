@@ -17,8 +17,6 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
 
   layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
   wrapper_inEsecuzione->setLayout(layout_inEsecuzione);
-  //layout_inEsecuzione->addWidget(comanda1);
-  //layout_inEsecuzione->addWidget(comanda2);+
   scroll_inEsecuzione->setWidget(wrapper_inEsecuzione);
   scroll_inEsecuzione->setMinimumSize(580, 265);
   scroll_inEsecuzione->setMaximumHeight(340);

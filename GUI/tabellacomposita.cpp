@@ -9,7 +9,6 @@ TabellaComposita::TabellaComposita(QWidget *parent, const QString& etichetta, co
   tabella = new QTableWidget(0, (labels != nullptr ? labels->count() : 0), this);
   tabella->setMinimumWidth(850);
   tabella->setMaximumWidth(2100);
-  //tabella->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
   sizePolicy.setHorizontalStretch(0);
   sizePolicy.setVerticalStretch(0);

@@ -14,7 +14,6 @@ NuovoArticolo_bevanda::NuovoArticolo_bevanda(QWidget* parent) : QWidget(parent){
     bevandeWrapper->setObjectName("bevandeWrapper_articoli");
     bevandeWrapper->verticalHeader()->setVisible(false);
     bevandeWrapper->setMinimumWidth(500);
-    // bevandeWrapper->setMaximumWidth(2100);
     QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     sizePolicy.setHorizontalStretch(0);
     sizePolicy.setVerticalStretch(0);

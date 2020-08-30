@@ -18,7 +18,6 @@ Header::Header(QWidget *parent) : QWidget(parent){
   layoutHeader->addWidget(bellaPadova, 0, Qt::AlignLeft);
   layoutHeader->addWidget(indirizzo);
   layoutHeader->addWidget(telefono);
-  //analogClock* orologio = new analogClock(this);
   DigitalClock* orologio = new DigitalClock(this);
   orologio->setObjectName("orologio");
   layoutHeader->addWidget(orologio, 0, Qt::AlignCenter);

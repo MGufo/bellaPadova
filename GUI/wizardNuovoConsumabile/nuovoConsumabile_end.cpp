@@ -74,3 +74,4 @@ void NuovoConsumabile_end::setActualPage(){
     layoutEnd->addRow("Tipologia:", tipologia);
   }
 }
+

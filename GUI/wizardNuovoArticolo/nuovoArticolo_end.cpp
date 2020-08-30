@@ -62,3 +62,4 @@ void NuovoArticolo_end::initializePage(){
     QWizardPage::initializePage();
     setActualPage();
 }
+
