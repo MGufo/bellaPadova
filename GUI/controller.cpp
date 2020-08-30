@@ -130,13 +130,19 @@ void Controller::modificaConsumabile(pacchettoConsumabile * pC){
   bool lattToBott = dynamic_cast<Lattina*>(vecchioConsumabile) && !dynamic_cast<pacchettoBevanda*>(pC)->tipo;
   bool bottToLatt = dynamic_cast<Bottiglia*>(vecchioConsumabile) && dynamic_cast<pacchettoBevanda*>(pC)->tipo;
   if(lattToBott || bottToLatt){
-      modello->rimuoviConsumabile(vecchioConsumabile);
-      modello->inserisciConsumabile(pConsumabile);
+    modello->rimuoviConsumabile(vecchioConsumabile);
+    modello->inserisciConsumabile(pConsumabile);
   }
   else{
+    try{
       modello->modificaConsumabile(vecchioConsumabile,pConsumabile);
+      risorseSalvate = false;
+    }
+    catch (std::logic_error* ecc){
+      vista->mostraErrore(QString(ecc->what()));
+      risorseSalvate = false;
+    }
   }
-  risorseSalvate = false;
 }
 
 void Controller::modificaArticolo(pacchettoArticolo* p){
@@ -149,14 +155,17 @@ void Controller::modificaArticolo(pacchettoArticolo* p){
     try{
       modello->modificaArticolo(daModificare, modificato);
       vista->visualizzaMenu();
+      risorseSalvate = false;
     }
     catch (std::logic_error* ecc){
+      // TODO: Modificare l'invocazione alla riga 156 altrimenti si entra in un
+      // ciclo infinito di try-catch
         modificato->setDisponibilita(false);
         modello->modificaArticolo(daModificare, modificato);
+        risorseSalvate = false;
         vista->visualizzaMenu();
         vista->mostraErrore(QString(ecc->what()));
     }
-    risorseSalvate = false;
   }
 }
 
