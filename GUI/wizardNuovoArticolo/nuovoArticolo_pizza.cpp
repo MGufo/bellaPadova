@@ -22,7 +22,6 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   farineWrapper->setObjectName("farineWrapper");
   farineWrapper->verticalHeader()->setVisible(false);
   farineWrapper->setMinimumWidth(520);
-  // farineWrapper->setMaximumWidth(2100);
   QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
   sizePolicy.setHorizontalStretch(0);
   sizePolicy.setVerticalStretch(0);
