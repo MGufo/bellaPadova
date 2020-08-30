@@ -21,6 +21,7 @@ private:
     QWidget* content;
     void setActualPage();
     void initializePage() override;
+    bool validatePage() override;
 
 signals:
     //true = pizza

@@ -44,3 +44,19 @@ void NuovoArticolo_dettagli::initializePage(){
         registerField("prezzoPizza*", ptr->getPrezzoPizza());
     }
 }
+
+bool NuovoArticolo_dettagli::validatePage(){
+  if(field("optionPizza").toBool()){
+    auto ptr = static_cast<NuovoArticolo_pizza*>(content);
+    if(ptr){
+      if(ptr->getPrezzoPizza()->text().toDouble() <= 0){
+        QMessageBox messageDialog;
+        messageDialog.setText(QString("Errore: Il prezzo dev'essere un numero"
+                                    " maggiore di 0."));
+        messageDialog.exec();
+        return false;
+      }
+      return true;
+    }
+  }
+}
