@@ -1,7 +1,6 @@
 #include "comande.h"
 
-Comande::Comande(QWidget *parent) : QWidget(parent){
-
+Comande::Comande(QWidget* parent) : QWidget(parent) {
   /////////////////////////////////
   // Sezione comande da eseguire //
   /////////////////////////////////
@@ -11,18 +10,20 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   label_inEsecuzione->setObjectName("inEsecuzione");
   scroll_inEsecuzione = new QScrollArea(this);
   wrapper_inEsecuzione = new QWidget(scroll_inEsecuzione);
-  wrapper_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  wrapper_inEsecuzione->setSizePolicy(QSizePolicy::Expanding,
+                                      QSizePolicy::Expanding);
   wrapper_inEsecuzione->setObjectName("wrapperInEsecuzione");
   wrapper_inEsecuzione->setContentsMargins(0, 1, 0, 1);
 
   layout_inEsecuzione = new QHBoxLayout(scroll_inEsecuzione);
   wrapper_inEsecuzione->setLayout(layout_inEsecuzione);
-  //layout_inEsecuzione->addWidget(comanda1);
-  //layout_inEsecuzione->addWidget(comanda2);+
+  // layout_inEsecuzione->addWidget(comanda1);
+  // layout_inEsecuzione->addWidget(comanda2);+
   scroll_inEsecuzione->setWidget(wrapper_inEsecuzione);
   scroll_inEsecuzione->setMinimumSize(580, 265);
   scroll_inEsecuzione->setMaximumHeight(340);
-  scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  scroll_inEsecuzione->setSizePolicy(QSizePolicy::Expanding,
+                                     QSizePolicy::Expanding);
   scroll_inEsecuzione->setWidgetResizable(true);
 
   //////////////////////////////
@@ -36,7 +37,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   scroll_eseguite->setContentsMargins(0, 1, 0, 1);
 
   wrapper_eseguite = new QWidget(scroll_eseguite);
-  wrapper_eseguite->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  wrapper_eseguite->setSizePolicy(QSizePolicy::Expanding,
+                                  QSizePolicy::Expanding);
   wrapper_eseguite->setObjectName("wrapperEseguite");
 
   layout_eseguite = new QHBoxLayout(wrapper_eseguite);
@@ -44,7 +46,8 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   scroll_eseguite->setWidget(wrapper_eseguite);
   scroll_eseguite->setMinimumSize(580, 100);
   scroll_eseguite->setMaximumHeight(200);
-  scroll_eseguite->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  scroll_eseguite->setSizePolicy(QSizePolicy::Expanding,
+                                 QSizePolicy::Expanding);
   scroll_eseguite->setWidgetResizable(true);
 
   //////////////////////////////
@@ -75,57 +78,52 @@ Comande::Comande(QWidget *parent) : QWidget(parent){
   comandeLayout->addWidget(label_concluse);
   comandeLayout->addWidget(scroll_eseguite);
   comandeLayout->addWidget(wrapper_bottoniComande);
-  comandeLayout->setContentsMargins(0,0,0,0);
+  comandeLayout->setContentsMargins(0, 0, 0, 0);
 
   connect(newComanda, SIGNAL(clicked()), this, SLOT(drawWizard()));
 
-  connect(prossimaComanda, SIGNAL(clicked()),
-          parentWidget()->parentWidget(), SLOT(aumentaCurrent()));
+  connect(prossimaComanda, SIGNAL(clicked()), parentWidget()->parentWidget(),
+          SLOT(aumentaCurrent()));
 
   setStyleComande();
   setLayout(comandeLayout);
   setObjectName("widgetComande");
 }
 
-void Comande::aggiungiComanda(pacchettoComanda* pC){
+void Comande::aggiungiComanda(pacchettoComanda* pC) {
   ComandaGUI* comanda = new ComandaGUI(this, pC);
-    if(pC->eseguita){
-      comanda->rendiEseguita();
-      layout_eseguite->addWidget(comanda);
-    }
-    else
-      layout_inEsecuzione->addWidget(comanda);
+  if (pC->eseguita) {
+    comanda->rendiEseguita();
+    layout_eseguite->addWidget(comanda);
+  } else
+    layout_inEsecuzione->addWidget(comanda);
 }
 
-uint Comande::getPrimaComanda(const QList<ComandaGUI*>& comandeGUI) const{
-  QTime t(23,59,59);
+uint Comande::getPrimaComanda(const QList<ComandaGUI*>& comandeGUI) const {
+  QTime t(23, 59, 59);
   auto ptr = comandeGUI.cbegin();
-  for(auto it = comandeGUI.cbegin(); it != comandeGUI.cend(); ++it)
-    if(((*it)->getOraConsegna()) < t) ptr = it;
+  for (auto it = comandeGUI.cbegin(); it != comandeGUI.cend(); ++it)
+    if (((*it)->getOraConsegna()) < t) ptr = it;
   return (*ptr)->getID();
 }
 
-void Comande::setStyleComande(){
+void Comande::setStyleComande() {
   comandeLayout->setSpacing(10);
   comandeLayout->setMargin(0);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 }
 
-void Comande::drawWizard(){
-  if(nuovaComanda) delete nuovaComanda;
+void Comande::drawWizard() {
+  if (nuovaComanda) delete nuovaComanda;
   nuovaComanda = new WizardNuovaComanda(this);
   nuovaComanda->show();
 }
 
-void Comande::setStyleNextOrderButton(){
+void Comande::setStyleNextOrderButton() {
   QList<ComandaGUI*> comandeGUI =
       wrapper_inEsecuzione->findChildren<ComandaGUI*>();
-  if(!comandeGUI.isEmpty())
+  if (!comandeGUI.isEmpty())
     prossimaComanda->setEnabled(true);
   else
     prossimaComanda->setEnabled(false);
 }
-
-  // TODO: usare findChildren per ottenere il primo figlio di tipo comandaGUI.
-  // se findChildren non restituisce il primo figlio toccherà rompersi il cazzo
-  // con una funzione findMin che confronti gli orari di consegna (QTime )
