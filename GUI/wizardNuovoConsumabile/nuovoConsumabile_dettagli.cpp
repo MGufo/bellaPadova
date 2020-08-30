@@ -97,3 +97,22 @@ void NuovoConsumabile_dettagli::initializePage(){
   setActualPage();
   previouslyInizialized = true;
 }
+
+bool NuovoConsumabile_dettagli::validatePage(){
+  bool flag = true;
+  if(quantitaConsumabile->text().toInt() <= 0){
+    QMessageBox messageDialog;
+    messageDialog.setText(QString("Errore: La quantità dev'essere un numero"
+                                  " maggiore di 0."));
+    messageDialog.exec();
+    flag = false;
+  }
+  if(costoConsumabile->text().toDouble() <= 0){
+    QMessageBox messageDialog;
+    messageDialog.setText(QString("Errore: Il prezzo dev'essere un numero"
+                                  " maggiore di 0."));
+    messageDialog.exec();
+    flag = false;
+  }
+return flag;
+}

@@ -7,6 +7,7 @@
 #include <QDateEdit>
 #include <QFormLayout>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QValidator>
 
 #include "GUI/wizardNuovoConsumabile/wizard_nuovoConsumabile.h"
@@ -27,6 +28,7 @@ private:
   bool previouslyInizialized;
   void setActualPage();
   void initializePage() override;
+  bool validatePage() override;
 };
 
 #endif // NUOVOCONSUMABILE_INGREDIENTE_H
