@@ -20,6 +20,15 @@ L'applicativo fornisce all'utente le seguenti funzionalità:
 
 # Progettezione e descrizione delle gerarchie utilizzate
 
+## Scelte Progettuali
+
+L'applicazione è stata realizzata usando il pattern MVC (Model-View-Controller) in modo da separare la parte logica dalla GUI e rendere il modello quanto più possibile indipendente.
+Il modello non è tuttavia indipendente dal framework, in quanto si è scelto di usare alcune classi della libreria Qt (`QTime`, `QDate`, `QJson..`) per praticità e per evitare di impiegare ore di sviluppo per implementare delle classi equivalenti per la gestione di date e orari.
+
+## Gerarchia G
+
+![gerarchia G](./gerarchiaG.png){ width=50% }
+
 # Chiamate Polimorfe
 
 - `clone()`: Metodo virtuale puro della classe `Risorsa`; effettua una copia dell'oggetto di invocazione e ritorna un puntatore al nuovo oggetto creato.
