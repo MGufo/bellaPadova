@@ -1,28 +1,28 @@
 #ifndef CONTABILIZZAZIONE_H
 #define CONTABILIZZAZIONE_H
 
-#include <QtWidgets>
-#include <QVBoxLayout>
+#include <QDateEdit>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
-#include <QDateEdit>
 #include <QPushButton>
+#include <QVBoxLayout>
+#include <QtWidgets>
 
-class Contabilizzazione : public QWidget{
+class Contabilizzazione : public QWidget {
   Q_OBJECT
-public:
-  explicit Contabilizzazione(QWidget *parent = nullptr);
+ public:
+  explicit Contabilizzazione(QWidget* parent = nullptr);
 
-signals:
+ signals:
   void con_calcoloFatturato(const QDate&, const QDate&);
-// TODO: Verificare se aggiungere i const a segnali/slot
-public slots:
+ public slots:
   void calcoloFatturato();
-private:
+
+ private:
   QHBoxLayout* layoutDate;
   QVBoxLayout* layoutContabilizzazione;
   void setStyleContabilizzazione();
 };
 
-#endif // CONTABILIZZAZIONE_H
+#endif  // CONTABILIZZAZIONE_H
