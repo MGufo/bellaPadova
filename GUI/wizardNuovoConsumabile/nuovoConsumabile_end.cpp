@@ -74,6 +74,3 @@ void NuovoConsumabile_end::setActualPage(){
     layoutEnd->addRow("Tipologia:", tipologia);
   }
 }
-/*  messaggio da inserire nel QDialog
-setTitle("Il nuovo consumabile è stato inserito con successo nell'Inventario!");
-*/

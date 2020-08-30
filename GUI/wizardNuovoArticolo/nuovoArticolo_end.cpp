@@ -62,7 +62,3 @@ void NuovoArticolo_end::initializePage(){
     QWizardPage::initializePage();
     setActualPage();
 }
-
-/* QDialog
- * "Il nuovo articolo è stato inserito con successo nel Menù!"
-*/
