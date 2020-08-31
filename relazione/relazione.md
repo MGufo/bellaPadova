@@ -23,15 +23,6 @@ L'applicativo fornisce all'utente le seguenti funzionalità:
 
 # Progettezione e descrizione delle gerarchie utilizzate
 
-## Scelte Progettuali
-
-L'applicazione è stata realizzata usando il pattern MVC (Model-View-Controller) in modo da separare la parte logica dalla GUI e rendere il modello quanto più possibile indipendente.
-Il modello non è tuttavia indipendente dal framework, in quanto si è scelto di usare alcune classi della libreria Qt (`QTime`, `QDate`, `QJson..`) per praticità e per evitare di impiegare ore di sviluppo per implementare delle classi equivalenti per la gestione di date e orari.
-
-Il contenitore è stato implementanto come lista doppiamente linkata (con relativi iteratori doppi) perché nei casi d'uso dell'applicazione si è ritenuto più vantaggioso l'inserimento in una posizione arbitraria in tempo costante rispetto all'accesso agli elementi in tempo costante (ottenibile tramite un vettore). 
-
-Per permettere invio e ricezione di dati tra vista e modello senza esporre pubblicamente elementi di quest'ultimo vengono fornite delle apposite `struct`, che rispecchiano la struttura della gerarchia _G_.
-
 ## Gerarchia G
 
 ![gerarchia G](./gerarchiaG.png){ width=60% }
@@ -67,6 +58,22 @@ Oltre alla gerarchia _G_ sono state sviluppate delle classi di supporto, il cui 
 - `GestoreRisorse`: Classe che modella la gestione di menù e inventario tramite due _contenitori_ istanziati rispettivamente a `Articolo*` e `Consumabile*`. Fornisce metodi di ricerca, inserimento, rimozione e modifica _smart_, ovvero che mantengono la coerenza tra gli oggetti memorizzati (es: rimuovendo un ingrediente dall'inventario tutti gli articoli che usano quell'ingrediente diventano non disponibili).
 
 - `Pizzeria`: Interfaccia pubblica del modello, usata per rendere disponibili le funzionalità del progetto a componenti esterni (es: controller) nascondendone l'implementazione.
+
+## Contenitore 
+
+Il contenitore di oggetti polimorfi è stato implementanto come _double linked-list_ templatizzata, con relativi iteratori bidirezionali, metodi di inserimento e rimozione, operatori di confronto e funzioni di ricerca e conteggio. Si è scelto di implementare una lista perché nei casi d'uso dell'applicazione si è ritenuto più vantaggioso l'inserimento in una posizione arbitraria in tempo costante rispetto all'accesso agli elementi in tempo costante (ottenibile tramite un vettore). 
+
+## GUI
+
+L'interfaccia grafica dell'applicazione è composta dalla finestra principale (classe `MainWindow`) che funge da contenitore per un header con logo e orologio (classe `header`) e per i quattro widget principali (_menu_, _comande_, _inventario_, _contabilizzazione_), ognuno dei quali adibito a una funzionalità prevista dall'applicazione.
+
+La comunicazione da e verso il modello è gestita tramite il meccanismo di _segnali/slot_ del framework Qt: i segnali provenienti dai vari widget sono inviati ai relativi slot del _Controller_ (classe `Controller`), che si occuperà di invocare le adeguate funzioni del modello per modificare i dati e successivamente della vista per aggiornarne lo stato.
+Dato il quantitativo e la complessità dei dati da inviare/ricevere si è implementata una gerarchia di `struct` (file `pacchetti.h`), che rispecchia la struttura della gerarchia _G_ e permette la comunicazione tra componenti dell'architettura senza rivelare l'implementazione del modello.
+
+## Indipendenza e riusabilità del modello
+
+L'applicazione è stata realizzata usando il pattern MVC (Model-View-Controller) in modo da separare la parte logica dalla GUI e rendere il modello quanto più possibile indipendente dalla GUI sviluppata.
+Il modello non è tuttavia indipendente dal framework, in quanto si è scelto di usare alcune classi della libreria Qt (`QTime`, `QDate`, `QJson..`) per praticità e per evitare di impiegare ore di sviluppo per implementare delle classi equivalenti per la gestione di date, orari e I/O.
 
 # Chiamate Polimorfe
 
