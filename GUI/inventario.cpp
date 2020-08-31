@@ -1,6 +1,6 @@
 #include "inventario.h"
 
-Inventario::Inventario(QWidget *parent) : QWidget(parent){
+Inventario::Inventario(QWidget *parent) : QWidget(parent), paginaEditabile(false){
   layoutInventario = new QVBoxLayout(this);
 
   headerLabels = new QStringList();
@@ -46,6 +46,8 @@ Inventario::Inventario(QWidget *parent) : QWidget(parent){
   setLayout(layoutInventario);
 }
 
+bool Inventario::getPaginaEditabile() const { return paginaEditabile; }
+
 // SLOT
 void Inventario::drawWizard(){
   nuovoConsumabile = new WizardNuovoConsumabile(this);
@@ -57,6 +59,7 @@ void Inventario::modificaTabelle(){
     newConsumabile->setVisible(false);
     tabIngredienti->rendiEditabile();
     tabBevande->rendiEditabile();
+    paginaEditabile = true;
     tabIngredienti->cambiaColoreBordoCella();
     tabBevande->cambiaColoreBordoCella();
     modificaDati->setText("Finisci di Modificare");
@@ -68,6 +71,7 @@ void Inventario::modificaTabelle(){
     tabBevande->cambiaColoreBordoCella(false);
     tabIngredienti->rendiEditabile(false);
     tabBevande->rendiEditabile(false);
+    paginaEditabile = false;
     modificaDati->setText("Modifica");
     modificaDati->setObjectName("Modifica");
   }

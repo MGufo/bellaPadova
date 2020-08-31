@@ -1,11 +1,12 @@
 #ifndef RISORSA_H
 #define RISORSA_H
 
-#include <QJsonObject>
 #include <QJsonArray>
+#include <QJsonObject>
 #include <iostream>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
+
 #include "utils.h"
 
 using std::string;
@@ -34,7 +35,6 @@ class Risorsa {
    */
   bool getDisponibilita() const;
 
-  // TODO: Add exception se stringa vuota
   /**
    * @brief: Modifica il nome dell'oggetto
    * @param: const string& (nuovo nome)
@@ -50,7 +50,7 @@ class Risorsa {
   /**
    * @brief: Modifica l'ID dell'oggetto
    * @param: unsigned int (nuovo ID)
-  */
+   */
   void setID(unsigned int);
   /**
    * @brief: Legge i dati di una risorsa da file JSON e li assegna ai campi
@@ -66,11 +66,10 @@ class Risorsa {
    */
   virtual void salva(QJsonObject&) const = 0;
 
-  //TODO: verificare dove ha senso usare questo metodo tra il codice e usarlo
   // metodo di clonazione virtuale puro
   virtual Risorsa* clone() const = 0;
 
-  //metodo che consente la modifica delle risorse in modo polimorfo
+  // metodo che consente la modifica delle risorse in modo polimorfo
   virtual void modifica(Risorsa*) = 0;
 };
 

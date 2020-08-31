@@ -18,7 +18,12 @@ double Bevanda::getPlasticTax() const { return plasticTax; }
 
 void Bevanda::setPlasticTax(double pt) { plasticTax = pt; }
 
-void Bevanda::setCapacita(float _capacita) { capacita = _capacita; }
+void Bevanda::setCapacita(float _capacita) {
+  if(_capacita <= 0)
+    throw new std::domain_error("Errore: Il prezzo non può essere inferiore a 0.");
+  else
+  capacita = _capacita;
+}
 
 double Bevanda::plasticTax = 0.5;
 

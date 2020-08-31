@@ -19,18 +19,18 @@ bool GestoreComande::testInsert(const Comanda* precedente,
                                 const Comanda* daInserire,
                                 unsigned short capForno,
                                 const QTime& currentTime) {
-  QTime* orarioInizioPreparazioneDaIns = daInserire->getOrarioInizioPreparazione(capForno);
+  QTime* orarioInizioPreparazioneDaIns =
+      daInserire->getOrarioInizioPreparazione(capForno);
   QTime* orarioInizioPreparazioneSucc;
-  if(successiva)
-    orarioInizioPreparazioneSucc= successiva->getOrarioInizioPreparazione(capForno);
+  if (successiva)
+    orarioInizioPreparazioneSucc =
+        successiva->getOrarioInizioPreparazione(capForno);
   // non ci sono comande da fare oppure si è arrivati all'ultima comanda
   if (!successiva) return true;
   // se la comanda da inserire "fitta" tra la precedente e la successiva
   if (successiva != *current) {
-    if (precedente->getOraConsegna() <=
-            *orarioInizioPreparazioneDaIns &&
-        daInserire->getOraConsegna() <=
-            *orarioInizioPreparazioneSucc)
+    if (precedente->getOraConsegna() <= *orarioInizioPreparazioneDaIns &&
+        daInserire->getOraConsegna() <= *orarioInizioPreparazioneSucc)
       return true;
     else
       return false;
@@ -50,31 +50,35 @@ bool GestoreComande::testInsert(const Comanda* precedente,
 
 unsigned int GestoreComande::getMaxId() const {
   unsigned int maxID = 0;
-  for(auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it)
-    if((*it)->getIdComanda() > maxID) maxID = (*it)->getIdComanda();
+  for (auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it)
+    if ((*it)->getIdComanda() > maxID) maxID = (*it)->getIdComanda();
   return maxID;
 }
 
-void GestoreComande::fixCurrent(){ current = bacheca.find(*current); }
+void GestoreComande::fixCurrent() { current = bacheca.find(*current); }
 
-// HACK: La comanda può contenere solo pizze del menu
-void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capForno) {
+void GestoreComande::inserisciComanda(Comanda* daInserire,
+                                      unsigned short capForno) {
   if (daInserire) {
     QTime currentTime = QTime::currentTime();
-    QTime* orarioInizioPreparazioneDaIns = daInserire->getOrarioInizioPreparazione(capForno);
-    int tempoPreparazione = daInserire->getTempoPreparazione(capForno)*60;
+    QTime* orarioInizioPreparazioneDaIns =
+        daInserire->getOrarioInizioPreparazione(capForno);
+    int tempoPreparazione = daInserire->getTempoPreparazione(capForno) * 60;
 
     if (currentTime >= *orarioInizioPreparazioneDaIns) {
       if (!(current.isValid()))
-        daInserire->setOraConsegna(QTime(currentTime).addSecs(tempoPreparazione));
+        daInserire->setOraConsegna(
+            QTime(currentTime).addSecs(tempoPreparazione));
       else {
-        QTime* orarioInizioPreparazioneCurrent = (*current)->getOrarioInizioPreparazione(capForno);
+        QTime* orarioInizioPreparazioneCurrent =
+            (*current)->getOrarioInizioPreparazione(capForno);
         if (QTime(currentTime).addSecs(tempoPreparazione) <
             *orarioInizioPreparazioneCurrent)
-          daInserire->setOraConsegna(QTime(currentTime).addSecs(tempoPreparazione));
+          daInserire->setOraConsegna(
+              QTime(currentTime).addSecs(tempoPreparazione));
         else
-          daInserire->setOraConsegna((*current)->getOraConsegna().addSecs(
-            tempoPreparazione));
+          daInserire->setOraConsegna(
+              (*current)->getOraConsegna().addSecs(tempoPreparazione));
         delete orarioInizioPreparazioneCurrent;
       }
     }
@@ -85,7 +89,8 @@ void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capFor
       if (current.isValid()) {
         auto it = current;
         auto it2 = it;
-        bool beforeCurrent = testInsert(nullptr, *current, daInserire, capForno, currentTime);
+        bool beforeCurrent =
+            testInsert(nullptr, *current, daInserire, capForno, currentTime);
         if (!beforeCurrent) {
           bool flag = false;
           while (!flag) {
@@ -93,7 +98,8 @@ void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capFor
             if (it2 != bacheca.end())
               flag = testInsert(*it, *(it2), daInserire, capForno, currentTime);
             else
-              flag = testInsert(*it, nullptr, daInserire, capForno, currentTime);
+              flag =
+                  testInsert(*it, nullptr, daInserire, capForno, currentTime);
             ++it;
           }
         }
@@ -103,24 +109,23 @@ void GestoreComande::inserisciComanda(Comanda* daInserire, unsigned short capFor
           --current;
         } else {
           --it;
-          if (*orarioInizioPreparazioneDaIns <
-              (*(it))->getOraConsegna())
-            daInserire->setOraConsegna((*it)->getOraConsegna().addSecs(
-tempoPreparazione));
+          if (*orarioInizioPreparazioneDaIns < (*(it))->getOraConsegna())
+            daInserire->setOraConsegna(
+                (*it)->getOraConsegna().addSecs(tempoPreparazione));
           if (it2 != bacheca.end())
             bacheca.insert(it2, daInserire);
           else
             bacheca.push_back(daInserire);
         }
-      }
-      else {
+      } else {
         if (currentTime > *orarioInizioPreparazioneDaIns)
-          daInserire->setOraConsegna(QTime(currentTime).addSecs(tempoPreparazione));
+          daInserire->setOraConsegna(
+              QTime(currentTime).addSecs(tempoPreparazione));
         bacheca.push_back(daInserire);
         current = --(bacheca.end());
       }
     }
-  delete orarioInizioPreparazioneDaIns;
+    delete orarioInizioPreparazioneDaIns;
   }
 }
 
@@ -130,9 +135,9 @@ void GestoreComande::modificaComanda(Comanda* daModificare,
   bool daReinserire =
       (daModificare->getOraConsegna() != modificata->getOraConsegna()) ||
       (daModificare->getTempoPreparazione(capForno) !=
-      modificata->getTempoPreparazione(capForno));
+       modificata->getTempoPreparazione(capForno));
   *daModificare = *modificata;
-  if (daReinserire){
+  if (daReinserire) {
     rimuoviComanda(daModificare);
     inserisciComanda(daModificare, capForno);
   }
@@ -144,7 +149,8 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
   if (daRimuovere) {
     Lista<Comanda*>::Iterator it;
     for (it = bacheca.begin(); it != bacheca.end() && (*it) != daRimuovere;
-         ++it) {}
+         ++it) {
+    }
     if (it != bacheca.end()) {
       if (*it >= *current) {
         if (it == current) ++current;
@@ -156,36 +162,37 @@ void GestoreComande::rimuoviComanda(Comanda* daRimuovere) {
 }
 
 const Comanda* GestoreComande::getComandaCorrente() const {
-  if(current.isValid())
-     return *current;
-  else return nullptr;
+  if (current.isValid())
+    return *current;
+  else
+    return nullptr;
 }
 
 const Lista<Comanda*>& GestoreComande::getBacheca() const { return bacheca; }
 
-Comanda *GestoreComande::trovaComanda(unsigned int _ID) const {
+Comanda* GestoreComande::trovaComanda(unsigned int _ID) const {
   Comanda* c = nullptr;
-  if(!bacheca.isEmpty()){
-    for(auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it)
-      if((*it)->getIdComanda() == _ID) c = *it;
+  if (!bacheca.isEmpty()) {
+    for (auto it = bacheca.const_begin(); it != bacheca.const_end(); ++it)
+      if ((*it)->getIdComanda() == _ID) c = *it;
   }
   return c;
 }
 
-void GestoreComande::salvaComande(QJsonObject *fileComandeJSON) const{
+void GestoreComande::salvaComande(QJsonObject* fileComandeJSON) const {
   QJsonObject* comandeJSON = new QJsonObject();
-  for(auto it = bacheca.begin(); it != current; ++it){
+  for (auto it = bacheca.begin(); it != current; ++it) {
     QJsonObject* comandaJSON = new QJsonObject();
     (*it)->salva(comandaJSON);
     comandeJSON->insert(
-          QString::fromStdString(std::to_string((*it)->getIdComanda())),
-          *comandaJSON);
+        QString::fromStdString(std::to_string((*it)->getIdComanda())),
+        *comandaJSON);
     delete comandaJSON;
   }
   fileComandeJSON->insert("Comande", *comandeJSON);
   delete comandeJSON;
 }
 
-void GestoreComande::salvaIdComande(QJsonObject* fileComandeJSON) const{
+void GestoreComande::salvaIdComande(QJsonObject* fileComandeJSON) const {
   fileComandeJSON->insert("ID", static_cast<double>(getMaxId()));
 }

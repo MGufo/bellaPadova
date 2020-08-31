@@ -33,14 +33,12 @@ class Consumabile : virtual public Risorsa {
    */
   const QDate& getDataAcquisto() const;
 
-  // TODO: Add exception se quantità <= 0
   /**
    * @brief: Modifica la quantità acquistata di un consumabile.
    * @param: unsigned int (quantità acquistata)
    */
   void setQuantita(const unsigned int);
 
-  // TODO: Add exception se costo <= 0
   /**
    * @brief: Modifica il costo d'acquisto di un consumabile.
    * @param: double (costo d'acquisto)

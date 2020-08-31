@@ -1,12 +1,13 @@
 #ifndef GESTORERISORSE_H
 #define GESTORERISORSE_H
 
+#include <unordered_map>
+
 #include "bottiglia.h"
 #include "farina.h"
 #include "lattina.h"
 #include "pizza.h"
 #include "qontainer.h"
-#include <unordered_map>
 
 // Idea da implementare: la classe gestore deve gestire le liste di Articoli
 // (menu) e consumabili (inventario), permettendo inserimento, modifica,
@@ -22,7 +23,7 @@ class GestoreRisorse {
    * ritorna TRUE se sono tutti disp
    * ritorna FALSE se almeno uno non lo è
    */
-  bool controlloDisponibilita(const Lista<const Consumabile*>*) const;
+  bool controlloDisponibilita(const Lista<const Consumabile *> *) const;
 
   /**
    * @brief: Scorre la lista alla ricerca di un consumabile
@@ -30,18 +31,19 @@ class GestoreRisorse {
    * @param: const Consumabile* (consumabile da cercare nella lista)
    * @returns: TRUE se il consumabile è presente nella lista, FALSE altrimenti.
    */
-  bool controlloConsumabile(const Lista<const Consumabile *> *, const Consumabile*) const;
+  bool controlloConsumabile(const Lista<const Consumabile *> *,
+                            const Consumabile *) const;
 
   unsigned int getMaxId() const;
 
  public:
   GestoreRisorse();
 
-  //controlla che siano presenti tutti i consumabili della lista di composizione di un articolo
-  //nell'inventario
+  // controlla che siano presenti tutti i consumabili della lista di
+  // composizione di un articolo nell'inventario
   bool controlloInInventario(Articolo *) const;
 
-  Risorsa* trovaRisorsa(unsigned int ID) const;
+  Risorsa *trovaRisorsa(unsigned int ID) const;
 
   /**
    * @brief: Inserisce un consumabile nella lista di consumabili (inventario).
@@ -71,8 +73,6 @@ class GestoreRisorse {
 
   void modificaConsumabile(Consumabile *, Consumabile *);
 
-  // FIXME: Ricordarsi di cancellare l'oggetto tramite delete dopo aver invocato
-  // il metodo.
   /**
    * @brief: Rimuove un consumabile dalla lista di consumabili (inventario).
    * @param: Consumabile* (oggetto da rimuovere)
@@ -88,11 +88,11 @@ class GestoreRisorse {
 
   const Lista<Consumabile *> &getInventario() const;
 
-  void salvaRisorse(QJsonObject*) const;
+  void salvaRisorse(QJsonObject *) const;
 
-  void salvaIdRisorse(QJsonObject*) const;
+  void salvaIdRisorse(QJsonObject *) const;
 
-  void caricaMenu(const QJsonObject&);
-  void caricaInventario(const QJsonObject&);
+  void caricaMenu(const QJsonObject &);
+  void caricaInventario(const QJsonObject &);
 };
 #endif

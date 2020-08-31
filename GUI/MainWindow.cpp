@@ -347,6 +347,7 @@ void MainWindow::visualizzaMenuInComanda(uint ID) const{
 void MainWindow::closeEvent(QCloseEvent *event){
   if(!controller->canQuit()){
     QMessageBox* savePrompt = new QMessageBox(this);
+    savePrompt->setMinimumSize(400, 200);
     savePrompt->setText("Sono presenti modifiche non salvate.");
     savePrompt->setInformativeText("Vuoi salvare le modifiche?");
     savePrompt->setStandardButtons(
@@ -413,12 +414,14 @@ void MainWindow::aggiornaInventario(pacchetto * p){
 }
 
 void MainWindow::visualizzaInventario(){
-    pulisciInventario();
-    QList<pacchetto*>* inventario = controller->recuperaInventario();
-    for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
-        aggiornaInventario(*it);
-    }
-    controller->eliminaPacchettiRisorsa(inventario);
+  Inventario* tabInventario = findChild<Inventario*>();
+  if(tabInventario->getPaginaEditabile()) tabInventario->modificaTabelle();
+  pulisciInventario();
+  QList<pacchetto*>* inventario = controller->recuperaInventario();
+  for(auto it = inventario->constBegin(); it != inventario->constEnd(); ++it){
+    aggiornaInventario(*it);
+  }
+  controller->eliminaPacchettiRisorsa(inventario);
 }
 
 void MainWindow::aggiornaMenu(pacchetto* p){
@@ -476,11 +479,13 @@ void MainWindow::riapriComanda(uint ID){
 
 void MainWindow::mostraErrore(const QString & messaggio){
   QErrorMessage* errorDialog = new QErrorMessage(this);
+  errorDialog->setMinimumSize(400, 200);
   errorDialog->showMessage(messaggio);
 }
 
 void MainWindow::mostraEsitoOperazione(const QString & messaggio){
-    QMessageBox messageDialog;
-    messageDialog.setText(messaggio);
-    messageDialog.exec();
+  QMessageBox messageDialog;
+  messageDialog.setText(messaggio);
+  messageDialog.setMinimumSize(400, 200);
+  messageDialog.exec();
 }

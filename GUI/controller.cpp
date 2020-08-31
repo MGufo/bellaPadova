@@ -125,6 +125,8 @@ void Controller::modificaConsumabile(pacchettoConsumabile * pC){
                                    ptr->locale);
   }
   Consumabile* vecchioConsumabile = dynamic_cast<Consumabile*>(modello->trovaRisorsa(pC->ID));
+  Consumabile* copiaVecchioConsumabile =
+      dynamic_cast<Consumabile*>(vecchioConsumabile->clone());
 
   //casi in cui voglio trasformare Lattina in Bottiglia o viceversa
   bool lattToBott = dynamic_cast<Lattina*>(vecchioConsumabile) && !dynamic_cast<pacchettoBevanda*>(pC)->tipo;
@@ -136,11 +138,13 @@ void Controller::modificaConsumabile(pacchettoConsumabile * pC){
   else{
     try{
       modello->modificaConsumabile(vecchioConsumabile,pConsumabile);
+      vista->visualizzaInventario();
       risorseSalvate = false;
     }
     catch (std::logic_error* ecc){
+      modello->modificaConsumabile(vecchioConsumabile,copiaVecchioConsumabile);
+      vista->visualizzaInventario();
       vista->mostraErrore(QString(ecc->what()));
-      risorseSalvate = false;
     }
   }
 }
@@ -152,19 +156,24 @@ void Controller::modificaArticolo(pacchettoArticolo* p){
     pacchettoPizza* pP = dynamic_cast<pacchettoPizza*>(p);
     modificato = new Pizza(pP->ID, pP->nome, pP->disponibilita, pP->prezzo);
     Articolo* daModificare = dynamic_cast<Articolo*>(modello->trovaRisorsa(p->ID));
+    Articolo* copiaDaModificare = dynamic_cast<Articolo*>(daModificare->clone());
     try{
       modello->modificaArticolo(daModificare, modificato);
       vista->visualizzaMenu();
       risorseSalvate = false;
     }
+    // validazione input fallita
+    catch (std::domain_error* ecc){
+      modello->modificaArticolo(daModificare, copiaDaModificare);
+      vista->visualizzaMenu();
+      vista->mostraErrore(QString(ecc->what()));
+    }
+    // tentativo set errato disponibilità
     catch (std::logic_error* ecc){
-      // TODO: Modificare l'invocazione alla riga 156 altrimenti si entra in un
-      // ciclo infinito di try-catch
-        modificato->setDisponibilita(false);
-        modello->modificaArticolo(daModificare, modificato);
-        risorseSalvate = false;
-        vista->visualizzaMenu();
-        vista->mostraErrore(QString(ecc->what()));
+      modificato->setDisponibilita(false);
+      modello->modificaArticolo(daModificare, modificato);
+      vista->visualizzaMenu();
+      vista->mostraErrore(QString(ecc->what()));
     }
   }
 }

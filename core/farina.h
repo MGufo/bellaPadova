@@ -14,10 +14,10 @@ class Farina : public Ingrediente {
 
  public:
   Farina();
-  Farina(unsigned int, string = "farina 1kg", bool = true, unsigned int = 1, double = 3,
-         QDate = QDate::currentDate(), bool = true, string = "tipo 00");
+  Farina(unsigned int, string = "farina 1kg", bool = true, unsigned int = 1,
+         double = 3, QDate = QDate::currentDate(), bool = true,
+         string = "tipo 00");
 
-  // TODO: Add exception se stringa vuota
   /**
    * @brief: Ritorna il tipo di una farina (00, integrale, ecc)
    * @return: string& (tipo di farina)
@@ -37,7 +37,7 @@ class Farina : public Ingrediente {
   virtual void carica(const QJsonObject&,
                       const std::unordered_map<uint, Risorsa*>*);
 
-  virtual void salva(QJsonObject &) const;
+  virtual void salva(QJsonObject&) const;
 };
 
 #endif

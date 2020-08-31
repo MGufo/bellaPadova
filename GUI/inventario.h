@@ -13,12 +13,18 @@
 
 class Inventario : public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    explicit Inventario(QWidget *parent = nullptr);
+  explicit Inventario(QWidget *parent = nullptr);
+  bool getPaginaEditabile() const;
+
+public slots:
+  void modificaTabelle();
+
 signals:
 
 private:
+  bool paginaEditabile;
   QPushButton* newConsumabile;
   QPushButton* modificaDati;
   TabellaRisorse* tabIngredienti;
@@ -29,7 +35,6 @@ private:
 
 private slots:
   void drawWizard();
-  void modificaTabelle();
 };
 
 #endif // INVENTARIO_H

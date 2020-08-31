@@ -12,7 +12,12 @@ string Risorsa::getNome() const { return nome; }
 
 bool Risorsa::getDisponibilita() const { return disponibilita; }
 
-void Risorsa::setNome(const string& n) { nome = n; }
+void Risorsa::setNome(const string& n) {
+  if(n == "")
+    throw new std::domain_error("Errore: Il nome non può essere vuoto.");
+  else
+  nome = n;
+}
 
 void Risorsa::setDisponibilita(bool d) { disponibilita = d; }
 

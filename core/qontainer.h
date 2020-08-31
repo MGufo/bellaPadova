@@ -17,11 +17,8 @@ class Lista {
  private:
   class Nodo {
    public:
-    // campo dati
     T info;
-    // puntatore al nodo successivo
     Nodo* nodoNext;
-    // puntatore al nodo precedente
     Nodo* nodoPrev;
     Nodo(const T& i, Nodo* n, Nodo* p) : info(i), nodoNext(n), nodoPrev(p) {}
   };
@@ -59,9 +56,7 @@ class Lista {
     friend class Lista;
 
    private:
-    // puntatore al nodo interesssato
     Lista::Nodo* itrCurrent;
-    // puntatore al nodo precedente
     Lista::Nodo* itrPrevious;
 
    public:
@@ -110,9 +105,7 @@ class Lista {
     friend class Lista;
 
    private:
-    // puntatore al nodo interesssato
     const Lista::Nodo* itrCurrent;
-    // puntatore al nodo precedente
     const Lista::Nodo* itrPrevious;
 
    public:
@@ -165,7 +158,6 @@ class Lista {
     return *this;
   }
 
-  // HACK: la & dev'essere adiacente a p!
   Lista<T>::Iterator find(const T &valore) const {
     Lista<T>::Iterator it;
     for (it = begin(); it != end(); ++it)
@@ -200,7 +192,7 @@ class Lista {
     }
     return it;
   }
-  // HACK: la & dev'essere adiacente a p!
+
   Iterator insert(Iterator it, const T &p) {
     Nodo* temp = nullptr;
     // controllo validita iteratore
@@ -266,11 +258,11 @@ class Lista {
     }
     return Iterator();
   }
-  // HACK: la & dev'essere adiacente a p!
+
   void push_back(const T &p) { insert(end(), p); }
 
   void pop_back() { erase(--end()); }
-  // HACK: la & dev'essere adiacente a p!
+
   void push_front(const T &p) { insert(begin(), p); }
 
   void pop_front() { erase(begin()); }
