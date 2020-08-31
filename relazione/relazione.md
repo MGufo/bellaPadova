@@ -36,9 +36,20 @@ Per permettere invio e ricezione di dati tra vista e modello senza esporre pubbl
 
 - `Risorsa`: Base astratta della gerarchia, rappresenta ad alto livello ogni elemento gestito dalla pizzeria. Contiene informazioni generiche di ogni oggetto (ID, nome, disponibilità) e definisce dei metodi virtuali puri da implementare nelle sottoclassi concrete.
 
-- `Articolo`: Sottotipo astratto derivante da `Risorsa`, rappresenta gli elementi che la pizzeria può vendere. Aggiunge l'informazione relativa al prezzo iniziale di ogni articolo venduto e un metodo virtuale che ritorna la composizione di ogni articolo.
+- `Articolo`: Sottotipo astratto derivante da `Risorsa`, le cui istanze rappresentano i prodotti venduti dalla pizzeria. Aggiunge l'informazione relativa al prezzo iniziale di ogni articolo venduto e due metodi virtuali puri che ritornano rispettivamente il prezzo e la composizione di ogni articolo.
 
-- `Consumabile`: Sottotipo astratto derivante da `Risorsa`, rappresenta gli elementi usati dalla pizzeria per 
+- `Consumabile`: Sottotipo astratto derivante da `Risorsa`, rappresenta gli oggetti di consumo usati dalla pizzeria per preparare gli articoli da vendere. Aggiunge i campi dati quantità acquistata, costo e data d'acquisto necessari per il calcolo della contabilizzazione e un metodo virtuale puro che ritorna la spesa sostenuta dalla pizzeria per acquistare un consumabile
+
+- `Pizza`: Sottotipo concreto derivante da `Articolo`, le cui istanze rappresentano le pizze presenti nel menu della pizzeria. Implementa i metodi virtuali ereditati da `Articolo` per calcolare il prezzo d'acquisto e la lista di ingredienti usati nella pizza. 
+
+- `Bevanda`: Sottotipo concreto derivante da `Articolo` e `Consumabile`, che implementa i metodi virtuali puri di entrambe le superclassi.
+
+- `Ingrediente`: Sottotipo concreto derivante da `Consumabile`, le cui istanze rappresentano gli ingredienti usati dalla pizzeria per creare le pizze. Aggiunge il booleano _locale_, che indica la provenienza dell'ingrediente (gli ingredienti locali hanno un costo maggiore). Implementa il metodo virtuale ereditato da `Consumabile` per calcolare il costo d'acquisto.
+
+- `Bottiglia`, `Lattina`: Sottotipi concreti derivanti da `Bevanda`, le cui istanze rappresentano un tipo particolare di bevanda (indicato dal nome della classe). Si è scelto di differenziare in questo modo i diversi tipi di bevanda per aumentare l'estensibilità del modello, in quanto per aggiungere nuove tipologie di bevanda è sufficiente estendere la classe `Bevanda`.
+
+- `Farina`: Sottotipo concreto derivante da `Ingrediente`, le cui istanze rappresentano le diverse farine usate dalla pizzeria per preparare le pizze. In quanto particolare tipo di ingrediente non implementa i metodi virtuali ereditati da `Consumabile` ma sfrutta le implementazioni della superclasse. Si è scelto di differenziare in questo modo i diversi tipi di farina per aumentare l'estensibilità del modello, in quanto per aggiungere nuove farine è sufficiente creare nuove istanze di questa classe.
+
 
 
 # Chiamate Polimorfe
