@@ -97,6 +97,8 @@ Il salvataggio è manuale e a discrezione dell'utente; tuttavia per prevenire ac
 
 È inoltre possibile modificare manualmente il contenuto dei file JSON: tuttavia questo metodo è fortemente sconsigliato in quanto un errore di sintassi nel file provocherebbe un errato caricamento dei dati.
 
+Nel file `risorse.json` vengono salvati gli oggetti della gerarchia _G_ opportunamente divisi tra menù e inventario, mentre nel file `comande.json` vengono progressivamente salvate le ordinazioni effettuate dai clienti della pizzeria.
+
 # Istruzioni di compilazione
 
 Il progetto è stato sviluppato utilizzando alcune funzionalità presenti in C++11 (`auto`, `nullptr` e `to_string`). Per questo motivo è stato necessario modificare il file .pro aggiungendo la direttiva "`CONFIG += c+11`".
