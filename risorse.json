@@ -1,5 +1,5 @@
 {
-    "ID": 28,
+    "ID": 30,
     "Inventario": {
         "Acqua Frizzante": {
             "Capacita": 1,
@@ -249,6 +249,17 @@
             "Prezzo": 2.5,
             "Quantita": 100,
             "tipo": "lattina"
+        },
+        "Focaccia al farro": {
+            "Disponibilita": true,
+            "Extra": 0.5,
+            "ID": 30,
+            "Ingredienti": [
+                8
+            ],
+            "Nome": "Focaccia al farro",
+            "Prezzo": 2.5,
+            "tipo": "pizza"
         },
         "Margherita": {
             "Disponibilita": true,
