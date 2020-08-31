@@ -1,4 +1,5 @@
 ---
+fontsize: 10pt
 title: Relazione progetto Programmazione a Oggetti A.A. 2019/20
 author: Gabriel Bizzo - 1170734, Marco Rosin - 1120673, Andrea Moscon - 1121217
 date: Relazione di Rosin Marco
@@ -25,9 +26,20 @@ L'applicativo fornisce all'utente le seguenti funzionalità:
 L'applicazione è stata realizzata usando il pattern MVC (Model-View-Controller) in modo da separare la parte logica dalla GUI e rendere il modello quanto più possibile indipendente.
 Il modello non è tuttavia indipendente dal framework, in quanto si è scelto di usare alcune classi della libreria Qt (`QTime`, `QDate`, `QJson..`) per praticità e per evitare di impiegare ore di sviluppo per implementare delle classi equivalenti per la gestione di date e orari.
 
+Il contenitore è stato implementanto come lista doppiamente linkata (con relativi iteratori doppi) perché nei casi d'uso dell'applicazione si è ritenuto più vantaggioso l'inserimento in una posizione arbitraria in tempo costante rispetto all'accesso agli elementi in tempo costante (ottenibile tramite un vettore). 
+
+Per permettere invio e ricezione di dati tra vista e modello senza esporre pubblicamente elementi di quest'ultimo vengono fornite delle apposite `struct`, che rispecchiano la struttura della gerarchia _G_.
+
 ## Gerarchia G
 
 ![gerarchia G](./gerarchiaG.png){ width=50% }
+
+- `Risorsa`: Base astratta della gerarchia, rappresenta ad alto livello ogni elemento gestito dalla pizzeria. Contiene informazioni generiche di ogni oggetto (ID, nome, disponibilità) e definisce dei metodi virtuali puri da implementare nelle sottoclassi concrete.
+
+- `Articolo`: Sottotipo astratto derivante da `Risorsa`, rappresenta gli elementi che la pizzeria può vendere. Aggiunge l'informazione relativa al prezzo iniziale di ogni articolo venduto e un metodo virtuale che ritorna la composizione di ogni articolo.
+
+- `Consumabile`: Sottotipo astratto derivante da `Risorsa`, rappresenta gli elementi usati dalla pizzeria per 
+
 
 # Chiamate Polimorfe
 
