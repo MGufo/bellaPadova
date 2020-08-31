@@ -109,10 +109,26 @@ bool NuovoConsumabile_dettagli::validatePage(){
   }
   if(costoConsumabile->text().toDouble() <= 0){
     QMessageBox messageDialog;
-    messageDialog.setText(QString("Errore: Il prezzo dev'essere un numero"
-                                  " maggiore di 0."));
+    messageDialog.setText(QString("Errore: Il costo d'acquisto dev'essere un"
+                                  " numero maggiore di 0."));
     messageDialog.exec();
     flag = false;
+  }
+  if(field("optionBevanda").toBool()){
+    if(field("capacita").toFloat() <= 0){
+      QMessageBox messageDialog;
+      messageDialog.setText(QString("Errore: La capacità dev'essere un numero"
+                                    " maggiore di 0."));
+      messageDialog.exec();
+      flag = false;
+    }
+    if(field("prezzo").toDouble() <= 0){
+      QMessageBox messageDialog;
+      messageDialog.setText(QString("Errore: Il prezzo di vendita dev'essere "
+                                    " un numero maggiore di 0."));
+      messageDialog.exec();
+      flag = false;
+    }
   }
 return flag;
 }

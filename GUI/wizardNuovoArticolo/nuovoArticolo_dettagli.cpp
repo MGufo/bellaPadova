@@ -56,7 +56,7 @@ bool NuovoArticolo_dettagli::validatePage(){
         messageDialog.exec();
         return false;
       }
-      return true;
     }
   }
+  return true;
 }
