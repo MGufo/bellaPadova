@@ -24,11 +24,7 @@ public:
   virtual void rendiEditabile(bool = true) = 0;
   void cambiaColoreBordoCella(bool = true);
   enum tipoTabella {bevandeM, bevandeI, inventario, pizze};
-  enum dataType {_int, _double, _string, _data};
   void setHeaderDimension(tipoTabella);
-
-signals:
-  void validationError(const QString);
 
 private slots:
   void eliminaElemento(uint);
@@ -40,7 +36,6 @@ protected:
   QTableWidget* tabella = nullptr;
   QVBoxLayout* layoutTabellaComposita;
   void setStyleTabella();
-  void setDefaultValue(int, int);
 };
 
 #endif // TABELLACOMPOSITA_H

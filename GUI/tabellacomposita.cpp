@@ -82,9 +82,3 @@ void TabellaComposita::setStyleTabella(){
   layoutTabellaComposita->setMargin(0);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 }
-
-void TabellaComposita::setDefaultValue(int row, int col){
-  editabile = false;
-  tabella->item(row, col)->setText("");
-  editabile = true;
-}

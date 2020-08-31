@@ -1,9 +1,6 @@
 #include "tabellarisorse.h"
 
 TabellaRisorse::TabellaRisorse(QWidget *parent, const QString& etichetta, const QStringList* labels) : TabellaComposita(parent, etichetta, labels){
-  connect(this,SIGNAL(validationError(const QString)),
-          parentWidget()->parentWidget()->parentWidget(),
-          SLOT(mostraErrore(const QString)));
   connect(tabella,SIGNAL(cellChanged(int,int)),
             this,SLOT(emitDataOnCellChanged(int,int)));
   connect(this,SIGNAL(sendArticoloPacketToModel(pacchettoArticolo*)),
@@ -40,10 +37,8 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
     QTableWidgetItem* item = nullptr;
 
     item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->ID)));
-    item->setData(Qt::UserRole, _int);
     tabella->setItem(tabella->rowCount()-1, 0, item);
     item = new QTableWidgetItem(QString::fromStdString(pB->nome));
-    item->setData(Qt::UserRole, _string);
     tabella->setItem(tabella->rowCount()-1, 1, item);
 
     QCheckBox* toggle = new QCheckBox(tabella);
@@ -58,25 +53,19 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
 
     item = new QTableWidgetItem(QString::fromStdString(
                                   std::to_string(pB->quantita)));
-    item->setData(Qt::UserRole, _double);
     tabella->setItem(tabella->rowCount()-1, 3, item);
     item = new QTableWidgetItem(QString::fromStdString(
                                   to_string_with_precision(pB->costo)));
-    item->setData(Qt::UserRole, _double);
     tabella->setItem(tabella->rowCount()-1, 4, item);
-    item = new QTableWidgetItem(pB->dataAcquisto.toString("dd/MM/yyyy"));
-    item->setData(Qt::UserRole, _data);
+    item = new QTableWidgetItem(pB->dataAcquisto.toString("dd/MM/yyyy"));    
     tabella->setItem(tabella->rowCount()-1, 5, item);
     item = new QTableWidgetItem(QString::fromStdString(
                                   to_string_with_precision(pB->capacita)));
-    item->setData(Qt::UserRole, _double);
     tabella->setItem(tabella->rowCount()-1, 6, item);
     item = new QTableWidgetItem(QString::fromStdString(
                                   to_string_with_precision(pB->prezzo)));
-    item->setData(Qt::UserRole, _double);
     tabella->setItem(tabella->rowCount()-1, 7, item);
     item = new QTableWidgetItem((pB->tipo ? "Lattina" : "Bottiglia"));
-    item->setData(Qt::UserRole, _string);
     tabella->setItem(tabella->rowCount()-1, 8, item);
 
     int i = tabella->rowCount()-1;
@@ -97,10 +86,8 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
       QTableWidgetItem* item = nullptr;
 
       item = new QTableWidgetItem(QString::fromStdString(std::to_string(pF->ID)));
-      item->setData(Qt::UserRole, _int);
       tabella->setItem(tabella->rowCount()-1, 0, item);
       item = new QTableWidgetItem(QString::fromStdString(pF->nome));
-      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
 
       QCheckBox* toggle = new QCheckBox(tabella);
@@ -111,14 +98,11 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
       tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
       item = new QTableWidgetItem(QString::fromStdString(
                                     std::to_string(pF->quantita)));
-      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pF->costo)));
-      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 4, item);
       item = new QTableWidgetItem(pF->dataAcquisto.toString("dd/MM/yyyy"));
-      item->setData(Qt::UserRole, _data);
       tabella->setItem(tabella->rowCount()-1, 5, item);
 
       toggle = new QCheckBox(tabella);
@@ -149,10 +133,8 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
       QTableWidgetItem* item = nullptr;
 
       item = new QTableWidgetItem(QString::fromStdString(std::to_string(pI->ID)));
-      item->setData(Qt::UserRole, _int);
       tabella->setItem(tabella->rowCount()-1, 0, item);
       item = new QTableWidgetItem(QString::fromStdString(pI->nome));
-      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
 
       QCheckBox* toggle = new QCheckBox(tabella);
@@ -163,14 +145,11 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
       tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
       item = new QTableWidgetItem(QString::fromStdString(
                                     std::to_string(pI->quantita)));
-      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pI->costo)));
-      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 4, item);
       item = new QTableWidgetItem(pI->dataAcquisto.toString("dd/MM/yyyy"));
-      item->setData(Qt::UserRole, _data);
       tabella->setItem(tabella->rowCount()-1, 5, item);
 
       toggle = new QCheckBox(tabella);
@@ -203,10 +182,8 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
       QTableWidgetItem* item = nullptr;
 
       item = new QTableWidgetItem(QString::fromStdString(std::to_string(pP->ID)));
-      item->setData(Qt::UserRole, _int);
       tabella->setItem(tabella->rowCount()-1, 0, item);
       item = new QTableWidgetItem(QString::fromStdString(pP->nome));
-      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
 
       QCheckBox* toggle = new QCheckBox(tabella);
@@ -217,7 +194,6 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
       tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pP->prezzo)));
-      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
       //non è possibile modificare la lista di ingredienti
       std::stringstream ingr;
@@ -259,10 +235,8 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
       QTableWidgetItem* item = nullptr;
 
       item = new QTableWidgetItem(QString::fromStdString(std::to_string(pB->ID)));
-      item->setData(Qt::UserRole, _int);
       tabella->setItem(tabella->rowCount()-1, 0, item);
       item = new QTableWidgetItem(QString::fromStdString(pB->nome));
-      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 1, item);
 
       QCheckBox* toggle = new QCheckBox(tabella);
@@ -273,13 +247,10 @@ void TabellaRisorse::inserisciElemento(pacchetto* p){
       tabella->setCellWidget(tabella->rowCount()-1, 2, toggle);
       item = new QTableWidgetItem(QString::fromStdString(
                                     to_string_with_precision(pB->prezzo)));
-      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 3, item);
       item = new QTableWidgetItem(QString::fromStdString(to_string_with_precision(pB->capacita)));
-      item->setData(Qt::UserRole, _double);
       tabella->setItem(tabella->rowCount()-1, 4, item);
       item = new QTableWidgetItem((pB->tipo? "Lattina" : "Bottiglia"));
-      item->setData(Qt::UserRole, _string);
       tabella->setItem(tabella->rowCount()-1, 5, item);
 
       int i = tabella->rowCount()-1;
@@ -391,17 +362,8 @@ void TabellaRisorse::rendiEditabile(bool b){
   }
 }
 
-void TabellaRisorse::emitDataOnCellChanged(int x, int y){
+void TabellaRisorse::emitDataOnCellChanged(int x, int){
   if(editabile){
-    try{
-      validateInput(x, y);
-    }
-    catch (std::exception* e){
-      emit validationError(QString::fromStdString(e->what()));
-      setDefaultValue(x, y); // valore default
-      return;
-    }
-
     if(objectName()=="tabBevandeInventario"){
       pacchettoConsumabile* p = nullptr;
       uint _ID = tabella->item(x,0)->text().toInt();
@@ -501,12 +463,4 @@ void TabellaRisorse::forwardIdToModel(uint id){
         emit sendConsumabileIdToModel(id);
     else
         emit sendArticoloIdToModel(id);
-}
-
-void TabellaRisorse::validateInput(int row, int col){
-  auto value = dynamic_cast<QTableWidgetItem*>(tabella->item(row, col));
-  if(value){
-    InputValidator* validator = new InputValidator();
-    validator->validate(value->text(),value->data(Qt::UserRole));
-  }
 }

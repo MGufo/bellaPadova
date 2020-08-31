@@ -1,7 +1,6 @@
 #ifndef TABELLARISORSE_H
 #define TABELLARISORSE_H
 #include "tabellacomposita.h"
-#include "inputValidator.h"
 #include "pushbuttonwithid.h"
 
 class TabellaRisorse : public TabellaComposita {
@@ -23,9 +22,6 @@ signals:
 private slots:
  void emitDataOnCellChanged(int,int);
  void forwardIdToModel(uint);
-
-private:
- void validateInput(int, int);
 };
 
 #endif // TABELLARISORSE_H

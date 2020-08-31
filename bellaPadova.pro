@@ -41,7 +41,6 @@ SOURCES += \
     GUI/wizardNuovoConsumabile/nuovoConsumabile_end.cpp \
     GUI/wizardNuovoArticolo/nuovoArticolo_dettagli.cpp \
     GUI/pushbuttonwithid.cpp \
-    GUI/inputValidator.cpp \
     GUI/paginaComanda.cpp \
     GUI/wizardNuovaComanda/wizard_nuovaComanda.cpp \
     GUI/wizardNuovaComanda/nuovaComanda_dettagli.cpp \
