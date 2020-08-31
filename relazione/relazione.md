@@ -54,9 +54,19 @@ Per permettere invio e ricezione di dati tra vista e modello senza esporre pubbl
 
 ## Ulteriori classi del modello
 
-Oltre alla gerarchia _G_, Per implementare le funzionalità dall'applicazione mantenendo modularità e estensibilità si è deciso di creare delle classi apposite da includere nell'interfaccia pubblica del modello, in modo 
+Oltre alla gerarchia _G_ sono state sviluppate delle classi di supporto, il cui scopo è implementare delle funzionalità necessarie per realizzare la _business logic_ del programma, mantenendo modularità e estensibilità.
 
 ![Classi di supporto](./classiSupporto.png){ width=50% }
+
+- `Contatto`: Classe che modella le informazioni di un cliente che effettua un'ordinazione. Contiene i dati relativi a nome, indirizzo di consegna e numero di telefono.
+
+- `Comanda`: Classe che modella una comanda effettuata dal cliente della pizzeria. Ogni comanda contiene un'istanza di `Contatto`, ora e data di consegna, il contenuto dell'ordinazione (modellato tramite una `std::unordered_map`) e il costo totale dell'ordinazione.
+
+- `GestoreComande`: Classe che modella la gestione delle comande all'interno della pizzeria. Contiene un _contenitore_ di `Comande` ordinate temporalmente in base all'ora di consegna delle stesse. Fornisce metodi di rimozione, modifica, ricerca e un metodo di inserimento che calcola il primo slot temporale in cui sia possibile effettuare la comanda da inserire, e ne modifica l'ora di consegna se quella indicata nella comanda non sia valida o soddisfacibile.
+
+- `GestoreRisorse`: Classe che modella la gestione di menù e inventario tramite due _contenitori_ istanziati rispettivamente a `Articolo*` e `Consumabile*`. Fornisce metodi di ricerca, inserimento, rimozione e modifica _smart_, ovvero che mantengono la coerenza tra gli oggetti memorizzati (es: rimuovendo un ingrediente dall'inventario tutti gli articoli che usano quell'ingrediente diventano non disponibili).
+
+- `Pizzeria`: Interfaccia pubblica del modello, usata per rendere disponibili le funzionalità del progetto a componenti esterni (es: controller) nascondendone l'implementazione.
 
 # Chiamate Polimorfe
 
