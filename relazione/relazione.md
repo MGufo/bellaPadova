@@ -34,7 +34,7 @@ Per permettere invio e ricezione di dati tra vista e modello senza esporre pubbl
 
 ## Gerarchia G
 
-![gerarchia G](./gerarchiaG.png){ width=50% }
+![gerarchia G](./gerarchiaG.png){ width=60% }
 
 - `Risorsa`: Base astratta della gerarchia, rappresenta ad alto livello ogni elemento gestito dalla pizzeria. Contiene informazioni generiche di ogni oggetto (ID, nome, disponibilità) e definisce dei metodi virtuali puri da implementare nelle sottoclassi concrete.
 
@@ -52,7 +52,11 @@ Per permettere invio e ricezione di dati tra vista e modello senza esporre pubbl
 
 - `Farina`: Sottotipo concreto derivante da `Ingrediente`, le cui istanze rappresentano le diverse farine usate dalla pizzeria per preparare le pizze. In quanto particolare tipo di ingrediente non implementa i metodi virtuali ereditati da `Consumabile` ma sfrutta le implementazioni della superclasse. Si è scelto di differenziare in questo modo i diversi tipi di farina per aumentare l'estensibilità del modello, in quanto per aggiungere nuove farine è sufficiente creare nuove istanze di questa classe.
 
+## Ulteriori classi del modello
 
+Oltre alla gerarchia _G_, Per implementare le funzionalità dall'applicazione mantenendo modularità e estensibilità si è deciso di creare delle classi apposite da includere nell'interfaccia pubblica del modello, in modo 
+
+![Classi di supporto](./classiSupporto.png){ width=50% }
 
 # Chiamate Polimorfe
 
