@@ -7,6 +7,8 @@ date: Relazione di Rosin Marco
 ![bellaPadova](./logo.png){ width=50% }
  \newline \newline ![Università degli Studi di Padova | Dipartimento di Matematica](./uniPD_DM.jpg){ width=75% }
 
+\newpage
+
 # Abstract e Funzionalità
 
 Lo scopo del progetto è fornire un applicativo per informatizzare una pizzeria da asporto, implementando una gestione efficiente di inventario, menu e comande.
