@@ -180,17 +180,19 @@ Comanda* GestoreComande::trovaComanda(unsigned int _ID) const {
 }
 
 void GestoreComande::salvaComande(QJsonObject* fileComandeJSON) const {
-  QJsonObject* comandeJSON = new QJsonObject();
+  QJsonObject comandeJSON =
+      (*(fileComandeJSON->constFind("Comande"))).toObject();
   for (auto it = bacheca.begin(); it != current; ++it) {
     QJsonObject* comandaJSON = new QJsonObject();
     (*it)->salva(comandaJSON);
-    comandeJSON->insert(
+    comandeJSON.insert(
         QString::fromStdString(std::to_string((*it)->getIdComanda())),
         *comandaJSON);
     delete comandaJSON;
   }
-  fileComandeJSON->insert("Comande", *comandeJSON);
-  delete comandeJSON;
+  fileComandeJSON->erase(fileComandeJSON->find("Comande"));
+  fileComandeJSON->insert("Comande", comandeJSON);
+  //delete comandeJSON;
 }
 
 void GestoreComande::salvaIdComande(QJsonObject* fileComandeJSON) const {

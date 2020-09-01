@@ -20,7 +20,8 @@ QFile* Pizzeria::openFile(const string& path, char mode) const {
   QFile* file = new QFile(QString::fromStdString(path));
   if (!file->exists()) throw new std::domain_error("Errore: File Inesistente");
   if ((mode == 'w' && !file->open(QIODevice::WriteOnly | QIODevice::Text)) ||
-      (mode == 'r' && !file->open(QIODevice::ReadOnly | QIODevice::Text)))
+      (mode == 'r' && !file->open(QIODevice::ReadOnly | QIODevice::Text)) ||
+      (mode == 'a' && !file->open(QIODevice::Append | QIODevice::Text)))
     throw new std::invalid_argument("Errore: Impossibile aprire il file");
   return file;
 }
@@ -192,13 +193,15 @@ void Pizzeria::setCapacitaForno(unsigned short _forno) {
 }
 
 void Pizzeria::salvaComande() const {
-  QFile* fileComande = openFile(pathComande, 'w');
   QJsonObject* comandeJSON = new QJsonObject();
+  comandeJSON->insert("Comande", caricaComande());
   gestoreComande.salvaComande(comandeJSON);
   gestoreComande.salvaIdComande(comandeJSON);
+  QFile* fileComande = openFile(pathComande, 'w');
   QJsonDocument* fileComandeJSON = new QJsonDocument(*comandeJSON);
   fileComande->write(fileComandeJSON->toJson());
   fileComande->close();
+  delete comandeJSON;
   delete fileComandeJSON;
   delete fileComande;
 }
@@ -215,9 +218,9 @@ void Pizzeria::salvaRisorse() const {
   delete fileRisorse;
 }
 
-const QJsonObject& Pizzeria::caricaComande() const {
+QJsonObject &Pizzeria::caricaComande() const {
   QFile* fileComande = openFile(pathComande, 'r');
-  const QJsonObject* comandeJSON = new QJsonObject(
+  QJsonObject* comandeJSON = new QJsonObject(
       (*(parseFile(fileComande)->constFind("Comande"))).toObject());
   delete fileComande;
   return *comandeJSON;

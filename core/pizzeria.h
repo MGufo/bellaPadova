@@ -104,7 +104,7 @@ class Pizzeria {
    * @brief: Legge da file JSON una lista di comande e le aggiunge al modello
    * @returns:
    */
-  const QJsonObject& caricaComande() const;
+  QJsonObject& caricaComande() const;
 
   /**
    * @brief: Legge da file JSON una lista di articoli e li aggiunge
