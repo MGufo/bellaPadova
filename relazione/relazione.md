@@ -133,6 +133,10 @@ Lo sviluppo del progetto ha richiesto approssimativamente 60 ore di lavoro indiv
 
 Il superamento del monte ore individuale è stato causato dall'apprendimento della libreria Qt e dalla risoluzione di alcuni bug difficili da identificare all'interno del _qontainer_. 
 
+# Manuale Utente
+
+L'applicazione fornisce una GUI intuitiva e completa
+
 # Istruzioni di compilazione
 
 Il progetto è stato sviluppato utilizzando alcune funzionalità di C++11 (`auto`, `nullptr` e `to_string`). Per questo motivo è stato necessario modificare il file .pro aggiungendo la direttiva "`CONFIG += c+11`".
