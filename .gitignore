@@ -7,3 +7,9 @@ css/
 bellaPadova.pro
 bellaPadova.pro.user
 bellaPadova.pro.user.e3a5788
+__latexindent_temp.tex
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.gz
