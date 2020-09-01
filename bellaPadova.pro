@@ -48,8 +48,6 @@ SOURCES += \
     GUI/tabellarisorse.cpp \
     GUI/tabellacomande.cpp \
 
-    #test/testgui.cpp
-
 HEADERS += \
     core/articolo.h \
     core/bevanda.h \
@@ -95,7 +93,6 @@ HEADERS += \
     GUI/tabellarisorse.h \
     GUI/tabellacomande.h \
     core/utils.h
-    #test/testgui.h \
 
 RESOURCES += \
     GUI/resources.qrc
