@@ -14,7 +14,8 @@ class Bevanda : public Articolo, public Consumabile {
  public:
   Bevanda();
 
-  Bevanda(unsigned int, string, bool, double, unsigned int, double, QDate, float);
+  Bevanda(unsigned int, string, bool, double, unsigned int, double, QDate,
+          float);
 
   /**
    * @brief: Ritorna la spesa sostenuta dalla pizzeria per l'acquisto di una
@@ -54,11 +55,24 @@ class Bevanda : public Articolo, public Consumabile {
    */
   virtual const Lista<const Consumabile*>* getComposizione() const;
 
+  /**
+   * @brief: Metodo polimorfo di clonazione dell'oggetto
+   * @returns: Farina* (puntatore a un nuovo oggetto creato di copia a partire
+   * dall'oggetto di invocazione)
+   */
   virtual void modifica(Risorsa*);
 
+  /**
+   * @brief: Effettua la deserializzazione dell'oggetto, assegnando ai campi
+   * privati i valori corrispondenti contenuti nell'oggetto JSON.
+   */
   virtual void carica(const QJsonObject&,
                       const std::unordered_map<uint, Risorsa*>* = nullptr);
 
-  virtual void salva(QJsonObject &) const;
+  /**
+   * @brief: Effettua la serializzazione dell'oggetto, salvando il contenuto dei
+   * campi privati nell'oggetto JSON ricevuto come parametro.
+   */
+  virtual void salva(QJsonObject&) const;
 };
 #endif

@@ -1,7 +1,8 @@
 #ifndef CONTATTO_H
 #define CONTATTO_H
-#include <string>
 #include <QJsonObject>
+#include <string>
+
 #include "qontainer.h"
 using std::string;
 
@@ -59,8 +60,16 @@ class Contatto {
    */
   void setTelefono(const string&);
 
+  /**
+   * @brief: Effettua la serializzazione dell'oggetto, salvando il contenuto dei
+   * campi privati nell'oggetto JSON ricevuto come parametro.
+   */
   void salva(QJsonObject*) const;
 
+  /**
+   * @brief: Effettua la deserializzazione dell'oggetto, assegnando ai campi
+   * privati i valori corrispondenti contenuti nell'oggetto JSON.
+   */
   void carica(QJsonObject);
 };
 

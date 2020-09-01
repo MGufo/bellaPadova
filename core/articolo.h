@@ -36,7 +36,10 @@ class Articolo : virtual public Risorsa {
    * @return: double prezzo
    */
   virtual double getPrezzo() const = 0;
-
+  /**
+   * @brief: Restituisce la lista di ingredienti presenti nell'articolo di
+   * invocazione.
+   */
   virtual const Lista<const Consumabile*>* getComposizione() const = 0;
 };
 #endif

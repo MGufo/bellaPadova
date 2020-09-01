@@ -1,8 +1,8 @@
 #ifndef COMANDA_H
 #define COMANDA_H
 
-#include <QTime>
 #include <QDate>
+#include <QTime>
 #include <unordered_map>
 
 #include "bevanda.h"
@@ -27,7 +27,8 @@ class Comanda {
   Comanda();
   Comanda(unsigned int, Contatto, QTime, QDate,
           unordered_map<Articolo*, unsigned int> =
-              unordered_map<Articolo*, unsigned int>(), double = 0);
+              unordered_map<Articolo*, unsigned int>(),
+          double = 0);
 
   unsigned int getIdComanda() const;
 
@@ -64,6 +65,10 @@ class Comanda {
    */
   const QTime& getOraConsegna() const;
 
+  /**
+   * @brief: Ritorna la data di consegna di una comanda
+   * @return: QDate& (giorno di consegna)
+   */
   const QDate& getDataConsegna() const;
 
   double getTotale() const;

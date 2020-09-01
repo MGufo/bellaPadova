@@ -6,7 +6,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonParseError>
-
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -75,7 +74,6 @@ class Pizzeria {
   void eseguiComanda();
   void rimuoviComanda(Comanda*);
 
-
   const Lista<string>& getContatto() const;
 
   void setContatto(const Contatto*);
@@ -102,7 +100,8 @@ class Pizzeria {
 
   /**
    * @brief: Legge da file JSON una lista di comande e le aggiunge al modello
-   * @returns:
+   * @returns: QJsonObject& (oggetto JSON contenente oggetti JSON rappresentanti
+   * le comande eseguite dalla pizzeria)
    */
   QJsonObject& caricaComande() const;
 
@@ -112,8 +111,16 @@ class Pizzeria {
    */
   void caricaRisorse();
 
+  /**
+   * @brief: Legge da file JSON l'ultimo ID assegnato ad una comanda e lo
+   * ritorna
+   */
   unsigned int getIdComande() const;
 
+  /**
+   * @brief: Legge da file JSON l'ultimo ID assegnato ad una risorsa e lo
+   * ritorna
+   */
   unsigned int getIdRisorse() const;
 
   bool getDaSalvare() const;

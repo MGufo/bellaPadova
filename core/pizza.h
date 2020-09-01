@@ -36,17 +36,21 @@ class Pizza : public Articolo {
   /**
    * @brief: Aggiunge uno o più ingredienti alla pizza di invocazione.
    * @param: const Lista<Ingrediente*>& (lista di ingredienti da aggiungere)
-   * @note: PRE: La lista non deve contenere oggetti con tipo 'Farina'
+   * @throw: std::domain_error se l'ingrediente è già presente o è una Farina
+   * @note: La lista non deve contenere oggetti con tipo 'Farina'
    */
   void aggiungiIngredienti(const Lista<Ingrediente*>&);
 
+  /**
+   * @brief: Rimuove uno o più ingredienti dalla pizza di invocazione.
+   * @param: const Lista<Ingrediente*>& (lista di ingredienti da rimuovere)
+   * @throw: std::domain_error se l'ingrediente non è presente o è una Farina
+   * @note: La lista non deve contenere oggetti con tipo 'Farina'
+   */
   void rimuoviIngredienti(const Lista<Ingrediente*>&);
 
   void setExtra(double);
 
-  // implementazione metodo di clonazione (classe diventa concreta)
-  // metodo da utilizzare per aggiungere una pizza del menu tra gli articoli di
-  // una comanda
   Pizza* clone() const;
 
   virtual double getPrezzo() const;
@@ -58,11 +62,24 @@ class Pizza : public Articolo {
    */
   virtual const Lista<const Consumabile*>* getComposizione() const;
 
+  /**
+   * @brief: Metodo polimorfo di modifica dell'oggetto
+   * @param: Risorsa* (copia temporanea dell'oggetto da modificare contenente i
+   * nuovi valori dei campi dati)
+   */
   virtual void modifica(Risorsa*);
 
+  /**
+   * @brief: Effettua la deserializzazione dell'oggetto, assegnando ai campi
+   * privati i valori corrispondenti contenuti nell'oggetto JSON.
+   */
   virtual void carica(const QJsonObject&,
                       const std::unordered_map<uint, Risorsa*>*);
 
-  virtual void salva(QJsonObject &) const;
+  /**
+   * @brief: Effettua la serializzazione dell'oggetto, salvando il contenuto dei
+   * campi privati nell'oggetto JSON ricevuto come parametro.
+   */
+  virtual void salva(QJsonObject&) const;
 };
 #endif

@@ -51,6 +51,10 @@ class Consumabile : virtual public Risorsa {
    */
   void setDataAcquisto(const QDate&);
 
+  /**
+   * @brief: Restituisce la spesa sostenuta dalla pizzeria per l'acquisto di un
+   * ingrediente presente nell'inventario.
+   */
   virtual double getSpesa() const = 0;
 };
 

@@ -41,8 +41,18 @@ class GestoreRisorse {
 
   // controlla che siano presenti tutti i consumabili della lista di
   // composizione di un articolo nell'inventario
+  /**
+   * @brief: Controlla che ogni ingrediente nella lista di ingredienti
+   * dell'articolo d'invocazione sia disponibile
+   * @returns: True se tutti gli ingredienti sono disponibili, falsi altrimenti.
+   */
   bool controlloInInventario(Articolo *) const;
 
+  /**
+   * @brief: Metodo di ricerca per ID
+   * @returns: Risorsa* (puntatore all'oggetto che ha come ID l'ID ricevuto come
+   * parametro, nullptr altrimenti)
+   */
   Risorsa *trovaRisorsa(unsigned int ID) const;
 
   /**
@@ -54,6 +64,7 @@ class GestoreRisorse {
   void inserisciArticolo(Articolo *);
 
   void modificaArticolo(Articolo *, Articolo *);
+
   /**
    * @brief: Rimuove un articolo dalla lista di articoli (menu).
    * @param: Articolo* (oggetto da rimuovere)
@@ -76,8 +87,8 @@ class GestoreRisorse {
   /**
    * @brief: Rimuove un consumabile dalla lista di consumabili (inventario).
    * @param: Consumabile* (oggetto da rimuovere)
-   * @note: La rimozione di un ingrediente provoca la rimozione dal menu delle
-   * pizze che contenevano l'ingrediente.
+   * @note: La rimozione di un ingrediente rende non disponibili nel menu le
+   * pizze che contenevano l'ingrediente rimosso.
    * @note: La rimozione di una bevanda provoca la rimozione
    * della stessa anche nella lista di articoli (menu).
    * @note: La rimozione della farina di default non è consentita.

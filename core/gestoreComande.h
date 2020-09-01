@@ -2,12 +2,14 @@
 #define GESTORECOMANDE_H
 #include <QJsonArray>
 #include <QJsonValue>
+
 #include "comanda.h"
 #include "qontainer.h"
 
 class GestoreComande {
  private:
   Lista<Comanda*> bacheca;
+
   /**
    * @param: iteratore alla prima comanda da preparare.
    * @brief: tutte le comande che precedono 'current' sono state già preparate.
@@ -21,11 +23,22 @@ class GestoreComande {
    * @param: Comanda* (Comanda alla fine dello slot temporale)
    * @param: Comanda* (Comanda che si vuole inserire nello slot temporale)
    */
-  bool testInsert(const Comanda*, const Comanda*, const Comanda*, unsigned short, const QTime&);
+  bool testInsert(const Comanda*, const Comanda*, const Comanda*,
+                  unsigned short, const QTime&);
 
+  /**
+   * @brief: Restituisce l'ID corrispondente al sup dell'insieme degli ID
+   * assegnati alle comande.
+   */
   unsigned int getMaxId() const;
 
+  /**
+   * @brief: Corregge i puntatori dell'iteratore "current", che risultano
+   * invalidi dopo un inserimento/rimozione che implica un cambio di posizione
+   * dell'oggetto puntato da "current".
+   */
   void fixCurrent();
+
  public:
   GestoreComande();
 
@@ -83,7 +96,7 @@ class GestoreComande {
    * @brief: Ritorna il puntatore alla comanda avente come ID l'ID ricevuto
    *         come param se esiste ed è da eseguire, altrimenti ritorna nullptr
    * @param: ID della comanda da cercare
-  */
+   */
   Comanda* trovaComanda(unsigned int) const;
 
   void salvaComande(QJsonObject*) const;

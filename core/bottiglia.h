@@ -4,8 +4,9 @@
 
 class Bottiglia : public Bevanda {
  public:
-  Bottiglia ();
-  Bottiglia(unsigned int, string, bool, double, unsigned int, double, QDate, float);
+  Bottiglia();
+  Bottiglia(unsigned int, string, bool, double, unsigned int, double, QDate,
+            float);
   Bottiglia* clone() const;
 
   /**
@@ -14,7 +15,11 @@ class Bottiglia : public Bevanda {
    */
   double getPrezzo() const;
 
-  virtual void salva(QJsonObject &) const;
+  /**
+   * @brief: Effettua la serializzazione dell'oggetto, salvando il contenuto dei
+   * campi privati nell'oggetto JSON ricevuto come parametro.
+   */
+  virtual void salva(QJsonObject&) const;
 };
 
 #endif

@@ -22,7 +22,12 @@ class Risorsa {
   Risorsa(unsigned int, string, bool);
   virtual ~Risorsa() = default;
 
+  /**
+   * @brief: Ritorna l'ID (univoco) della risorsa di invocazione
+   * @returns: unsigned int (ID dell'oggetto)
+   */
   unsigned int getIdRisorsa() const;
+
   /**
    * @brief: Ritorna il nome dell'oggetto
    * @return: string (nome dell'oggetto)
