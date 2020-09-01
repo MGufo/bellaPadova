@@ -1,0 +1,12 @@
+\contentsline {section}{Abstract e Funzionalità}{3}{section*.2}%
+\contentsline {section}{Progettazione e descrizione delle gerarchie utilizzate}{3}{section*.3}%
+\contentsline {subsection}{Gerarchia G}{3}{section*.4}%
+\contentsline {subsection}{Ulteriori classi del modello}{4}{section*.5}%
+\contentsline {subsection}{Contenitore}{5}{section*.6}%
+\contentsline {subsection}{GUI}{5}{section*.7}%
+\contentsline {subsection}{Indipendenza e riusabilità del modello}{6}{section*.8}%
+\contentsline {section}{Chiamate Polimorfe}{6}{section*.9}%
+\contentsline {section}{I/O}{7}{section*.10}%
+\contentsline {section}{Suddivisione dei compiti - Ore di sviluppo}{7}{section*.11}%
+\contentsline {section}{Istruzioni di compilazione}{8}{section*.12}%
+\contentsline {section}{Ambiente di sviluppo}{8}{section*.13}%

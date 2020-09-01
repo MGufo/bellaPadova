@@ -21,7 +21,7 @@ L'applicativo fornisce all'utente le seguenti funzionalità:
 - Una funzionalità di _contabilizzazione_ per calcolare il guadagno/perdita della pizzeria in un determinato periodo di tempo.
 - Una funzionalità di salvataggio e caricamento di tutti i dati del programma.
 
-# Progettezione e descrizione delle gerarchie utilizzate
+# Progettazione e descrizione delle gerarchie utilizzate
 
 ## Gerarchia G
 
@@ -47,8 +47,6 @@ L'applicativo fornisce all'utente le seguenti funzionalità:
 
 Oltre alla gerarchia _G_ sono state sviluppate delle classi di supporto, il cui scopo è implementare delle funzionalità necessarie per realizzare la _business logic_ del programma, mantenendo modularità e estensibilità.
 
-![Classi di supporto](./classiSupporto.png){ width=50% }
-
 - `Contatto`: Classe che modella le informazioni di un cliente che effettua un'ordinazione. Contiene i dati relativi a nome, indirizzo di consegna e numero di telefono.
 
 - `Comanda`: Classe che modella una comanda effettuata dal cliente della pizzeria. Ogni comanda contiene un'istanza di `Contatto`, ora e data di consegna, il contenuto dell'ordinazione (modellato tramite una `std::unordered_map`) e il costo totale dell'ordinazione.
@@ -65,7 +63,8 @@ Il contenitore di oggetti polimorfi è stato implementanto come _double linked-l
 
 ## GUI
 
-L'interfaccia grafica dell'applicazione è composta dalla finestra principale (classe `MainWindow`) che funge da contenitore per un header con logo e orologio (classe `header`) e per i quattro widget principali (_menu_, _comande_, _inventario_, _contabilizzazione_), ognuno dei quali adibito a una funzionalità prevista dall'applicazione.
+L'interfaccia grafica dell'applicazione è composta dalla finestra principale (classe `MainWindow`) che funge da contenitore per un header con logo e orologio (classe `header`) e per i quattro widget principali (_menu_, _comande_, _inventario_, _contabilizzazione_), visualizzabili selezionando l'etichetta corrispondente.
+Da ogni widget è possibile visualizzare, modificare, inserire e rimuovere i corrispondenti oggetti del modello. 
 
 La comunicazione da e verso il modello è gestita tramite il meccanismo di _segnali/slot_ del framework Qt: i segnali provenienti dai vari widget sono inviati ai relativi slot del _Controller_ (classe `Controller`), che si occuperà di invocare le adeguate funzioni del modello per modificare i dati e successivamente della vista per aggiornarne lo stato.
 Dato il quantitativo e la complessità dei dati da inviare/ricevere si è implementata una gerarchia di `struct` (file `pacchetti.h`), che rispecchia la struttura della gerarchia _G_ e permette la comunicazione tra componenti dell'architettura senza rivelare l'implementazione del modello.
@@ -77,13 +76,20 @@ Il modello non è tuttavia indipendente dal framework, in quanto si è scelto di
 
 # Chiamate Polimorfe
 
-- `clone()`: Metodo virtuale puro della classe `Risorsa`; effettua una copia dell'oggetto di invocazione e ritorna un puntatore al nuovo oggetto creato.
+- `clone()`: Metodo virtuale puro della classe `Risorsa`; effettua una copia dell'oggetto di invocazione e ritorna un puntatore al nuovo oggetto creato.'
+
 - `salva()`: Metodo virtuale puro della classe `Risorsa`; effettua la _serializzazione_ dell'oggetto di invocazione in un oggetto JSON, ricevuto come parametro, che verrà salvato su file.
+
 - `carica()`: Metodo virtuale puro della classe `Risorsa`; effettua la _deserializzazione_ dell'oggetto di invocazione, assegnando ai campi dati propri dell'oggetto i corrispondenti valori dell'oggetto JSON, ricevuto come parametro, proveniente da file.
+
 - `modifica()`: Metodo virtuale puro della classe `Risorsa`; effettua la modifica dei campi dati dell'oggetto di invocazione in modo polimorfo, estraendo i nuovi valori dall'oggetto ricevuto come parametro.
+
 - `getComposizione()`: Metodo virtuale puro della classe `Articolo`; restituisce una lista di oggetti di tipo `Consumabile` che rappresentano  gli ingredienti presenti nell'articolo di invocazione. 
+
 - `getPrezzo()`: Metodo virtuale puro della classe `Articolo`; restituisce il prezzo di vendita di un articolo (calcolato in modo differente per ogni sottotipo di `Articolo`).
+
 - `getSpesa()`: Metodo virtuale puro della classe `Consumabile`; restituisce la spesa sostenuta dalla pizzeria per l'acquisto dell'oggetto di invocazione (calcolato in modo differente per ogni sottotipo di `Consumabile`).
+
 - `rendiEditabile()`: Metodo virtuale puro appartenente alla classe `TabellaComposita`; abilita/disabilita la modifica dei dati contenuti nelle tabelle usate nel programma e aggiunge i _widget_ opportuni (diversi per ogni sottotipo di `TabellaComposita`) per permettere la modifica/eliminazione dei dati presenti nella tabella.
 
 
@@ -100,21 +106,11 @@ Per implementare tali funzionalità sono state usate le apposite classi della li
 Al fine di aumentare l'estensibilità del codice invece di implementare un'unica funzione di salvataggio/caricamento nell'interfaccia pubblica del modello si è deciso di fornire a ogni classe i metodi `carica()` e `salva()`, che hanno rispettivamente il compito di inizializzare i campi dati dell'oggetto di invocazione con i valori presenti nel file (_deserializzazione_) e di salvare i valori dei campi dati dell'oggetto di invocazione su file (serializzazione). Con questa implementazione il progettista che vorrà estendere la gerarchia dovrà solamente fornire l'implementazione di questi metodi per fornire la funzionalità di I/O alle classi da lui aggiunte. 
 
 Il caricamento delle risorse avviene in automatico ad ogni apertura del programma attraverso il metodo `caricaRisorse()`.
-Il salvataggio è manuale e a discrezione dell'utente; tuttavia per prevenire accidentali perdite di dati non salvati alla chiusura del programma viene visualizzata una finestra di dialogo in cui è possibile scegliere se salvare i dati modificati prima di uscire o meno. È inoltre possibile salvare manualmente i dati del programma selezionando l'opzione "Inventario e Menu" all'interno della sezione "Salva" nella barra dei menu.
+Il salvataggio è manuale e a discrezione dell'utente; tuttavia se si tentasse di chiudere l'applicazione e delle informazioni non fossero salvate, verrà chiesto all'utente se si desidera procedere al salvataggio prima della chiusura. È inoltre possibile salvare manualmente i dati del programma selezionando l'opzione "Inventario e Menu" all'interno della sezione "Salva" nella barra dei menu.
 
 È inoltre possibile modificare manualmente il contenuto dei file JSON: tuttavia questo metodo è fortemente sconsigliato in quanto un errore di sintassi nel file provocherebbe un errato caricamento dei dati.
 
 Nel file `risorse.json` vengono salvati gli oggetti della gerarchia _G_ opportunamente divisi tra menù e inventario, mentre nel file `comande.json` vengono progressivamente salvate le ordinazioni effettuate dai clienti della pizzeria.
-
-# Istruzioni di compilazione
-
-Il progetto è stato sviluppato utilizzando alcune funzionalità presenti in C++11 (`auto`, `nullptr` e `to_string`). Per questo motivo è stato necessario modificare il file .pro aggiungendo la direttiva "`CONFIG += c+11`".
-
-Per compilare ed eseguire il programma sono quindi necessari i seguenti comandi (si suppone che il terminale sia aperto nella cartella del progetto):
-
-1. `qmake bellaPadova.pro`
-2. `make`
-3. `./bellaPadova`
 
 # Suddivisione dei compiti - Ore di sviluppo 
 
@@ -136,6 +132,16 @@ Lo sviluppo del progetto ha richiesto approssimativamente 60 ore di lavoro indiv
 - Stesura relazione: 2 ore
 
 Il superamento del monte ore individuale è stato causato dall'apprendimento della libreria Qt e dalla risoluzione di alcuni bug difficili da identificare all'interno del _qontainer_. 
+
+# Istruzioni di compilazione
+
+Il progetto è stato sviluppato utilizzando alcune funzionalità di C++11 (`auto`, `nullptr` e `to_string`). Per questo motivo è stato necessario modificare il file .pro aggiungendo la direttiva "`CONFIG += c+11`".
+
+Per compilare ed eseguire il programma sono quindi necessari i seguenti comandi (si suppone che il terminale sia aperto nella cartella del progetto):
+
+1. `qmake bellaPadova.pro`
+2. `make`
+3. `./bellaPadova`
 
 # Ambiente di sviluppo
 
