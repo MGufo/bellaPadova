@@ -132,9 +132,7 @@ void MainWindow::eliminaConsumabile(uint id){
 
 void MainWindow::aggiornaMenuSuModificaConsumabile(pacchettoConsumabile* p){
     if(dynamic_cast<pacchettoBevanda*>(p) || dynamic_cast<pacchettoIngrediente*>(p)){
-        //TabellaRisorse* tab = findChild<TabellaRisorse*>("tabBevandeMenu");
-        //tab->sostituisciElemento(p);
-        visualizzaMenu();
+      visualizzaMenu();
     }
 }
 

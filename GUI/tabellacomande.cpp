@@ -3,21 +3,6 @@
 TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
                                const QStringList* labels) : TabellaComposita(parent, etichetta, labels){
   setMinimumWidth(1100);
-  connect(this,SIGNAL(validationError(const QString)),
-          parentWidget()->parentWidget()->parentWidget()->
-          parentWidget()->parentWidget()->parentWidget()->
-          parentWidget()->parentWidget()->parentWidget(),
-          SLOT(mostraErrore(const QString)));
-  //  connect(this,SIGNAL(sendComandaPacketToModel(pacchettoComanda*)),
-  //          parentWidget()->parentWidget()->parentWidget()->
-  //          parentWidget()->parentWidget()->parentWidget()->
-  //          parentWidget()->parentWidget()->parentWidget(),
-  //          SLOT(modificaComanda(pacchetto*)));
-  //  connect(this,SIGNAL(sendComandaIdToModel(uint)),
-  //          parentWidget()->parentWidget()->parentWidget()->
-  //          parentWidget()->parentWidget()->parentWidget()->
-  //          parentWidget()->parentWidget()->parentWidget(),
-  //          SLOT(eliminaComanda(uint)));
   connect(this,SIGNAL(sendComandaIdToModel(uint)),
           this,SLOT(eliminaElemento(uint)));
   connect(this, SIGNAL(datiModificati()),
@@ -73,8 +58,6 @@ void TabellaComande::inserisciElemento(pacchetto* p, uint qta){
   }
   // connessione segnale emesso da SpinBox
   connect(s, SIGNAL(valueChanged(int)), this, SLOT(selezionaQuantitaHandler(int)));
-  // connessione segnale emesso da CheckBox
-  //connect(.., SIGNAL(stateChanged(int), this, SLOT(selezionaQuantitaHandler(int)));
 
   int i = tabella->rowCount()-1;
   for(int j=0 ; j<4 ; j++){

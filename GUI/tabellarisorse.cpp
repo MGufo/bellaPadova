@@ -26,8 +26,6 @@ TabellaRisorse::TabellaRisorse(QWidget *parent, const QString& etichetta, const 
 
 void TabellaRisorse::inserisciElemento(pacchetto* p){
   //scorro righe e colonne della tabella e rendo ogni item non editabile
-  //item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-  //setEditTriggers(QAbstractItemView::NoEditTriggers);
   bool statoPrecedenteEditabile = editabile;
   editabile = false;
   if(objectName()=="tabBevandeInventario"){
