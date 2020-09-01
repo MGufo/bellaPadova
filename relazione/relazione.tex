@@ -74,19 +74,17 @@
   \includegraphics[width=0.5\textwidth,height=\textheight]{./logo.png}
 \end{center}
 \begin{center}
-  \includegraphics[width=0.75\textwidth,height=\textheight]{./uniPD_DM.jpg}
+  \includegraphics[width=0.75\textwidth,height=\textheight]{./Logo-DM.png}
 \end{center}
 
-\newpage
-\tableofcontents
 \newpage
 
 \hypertarget{abstract-e-funzionalituxe0}{%
 \section{Abstract e Funzionalità}\label{abstract-e-funzionalituxe0}}
 
 Lo scopo del progetto è fornire un applicativo per informatizzare una
-pizzeria da asporto, implementando una gestione efficiente di
-inventario, menu e comande.
+pizzeria da asporto ecologica e orientata ai prodotti locali,
+implementando una gestione efficiente di inventario, menu e comande.
 
 L'applicativo fornisce all'utente le seguenti funzionalità:
 
@@ -120,7 +118,7 @@ utilizzate}\label{progettazione-e-descrizione-delle-gerarchie-utilizzate}}
 \includegraphics[width=0.6\textwidth,height=\textheight]{./gerarchiaG.png}
 \caption{gerarchia G}
 \end{figure}
-
+\newpage
 \begin{itemize}
 \item
   \texttt{Risorsa}: Base astratta della gerarchia, rappresenta ad alto
@@ -155,9 +153,10 @@ utilizzate}\label{progettazione-e-descrizione-delle-gerarchie-utilizzate}}
   \texttt{Consumabile}, le cui istanze rappresentano gli ingredienti
   usati dalla pizzeria per creare le pizze. Aggiunge il booleano
   \emph{locale}, che indica la provenienza dell'ingrediente (gli
-  ingredienti locali hanno un costo maggiore). Implementa il metodo
-  virtuale ereditato da \texttt{Consumabile} per calcolare il costo
-  d'acquisto.
+  ingredienti locali hanno un costo d'acquisto maggiore, che si riflette
+  in un prezzo più alto per gli articoli che lo usano). Implementa il
+  metodo virtuale ereditato da \texttt{Consumabile} per calcolare il
+  costo d'acquisto.
 \item
   \texttt{Bottiglia}, \texttt{Lattina}: Sottotipi concreti derivanti da
   \texttt{Bevanda}, le cui istanze rappresentano un tipo particolare di
@@ -175,7 +174,7 @@ utilizzate}\label{progettazione-e-descrizione-delle-gerarchie-utilizzate}}
   l'estensibilità del modello, in quanto per aggiungere nuove farine è
   sufficiente creare nuove istanze di questa classe.
 \end{itemize}
-
+\newpage
 \hypertarget{ulteriori-classi-del-modello}{%
 \subsection{Ulteriori classi del
 modello}\label{ulteriori-classi-del-modello}}
@@ -412,6 +411,23 @@ lavoro individuale così suddivise:
 Il superamento del monte ore individuale è stato causato
 dall'apprendimento della libreria Qt e dalla risoluzione di alcuni bug
 difficili da identificare all'interno del \emph{qontainer}.
+
+\hypertarget{manuale-utente}{%
+\section{Manuale Utente}\label{manuale-utente}}
+
+L'applicazione fornisce una GUI intuitiva e completa che non necessita
+di un manuale d'uso. L'aggiunta di un nuovo articolo/comanda/consumabile
+è gestita attraverso appositi wizard, spiegano pagina per pagina quali
+informazioni sono richieste e avvertono l'utente in caso di valori non
+validi. \newline La modifica/rimozione degli elementi è gestita tramite i pulsanti
+``\emph{Modifica}'' dei widget di menù e inventario, la cui pressione
+rende editabili le tabelle dei rispettivi widget permettendo la modifica
+delle celle. Al termine della modifica sarà sufficiente premere il
+pulsante ``\emph{Finisci di modificare}''. \newpage \textbf{NB:} Per mantenere il
+modello in uno stato consistente l'aggiunta/modifica/rimozione delle
+bevande è consentita solo attraverso il widget ``\emph{Inventario}''.
+Tramite il widget menù è possibile modificare la disponibilità delle
+bevande.
 
 \hypertarget{istruzioni-di-compilazione}{%
 \section{Istruzioni di compilazione}\label{istruzioni-di-compilazione}}

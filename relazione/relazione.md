@@ -5,13 +5,13 @@ author: Gabriel Bizzo - 1170734, Marco Rosin - 1120673, Andrea Moscon - 1121217
 date: Relazione di Rosin Marco
 ---
 ![bellaPadova](./logo.png){ width=50% }
- \newline \newline ![Università degli Studi di Padova | Dipartimento di Matematica](./uniPD_DM.jpg){ width=75% }
+ \newline \newline ![Dipartimento di Matematica](./Logo-DM.png){ width=75% }
 
 \newpage
 
 # Abstract e Funzionalità
 
-Lo scopo del progetto è fornire un applicativo per informatizzare una pizzeria da asporto, implementando una gestione efficiente di inventario, menu e comande.
+Lo scopo del progetto è fornire un applicativo per informatizzare una pizzeria da asporto ecologica e orientata ai prodotti locali, implementando una gestione efficiente di inventario, menu e comande.
 
 L'applicativo fornisce all'utente le seguenti funzionalità:
 
@@ -37,7 +37,7 @@ L'applicativo fornisce all'utente le seguenti funzionalità:
 
 - `Bevanda`: Sottotipo concreto derivante da `Articolo` e `Consumabile`, che implementa i metodi virtuali puri di entrambe le superclassi.
 
-- `Ingrediente`: Sottotipo concreto derivante da `Consumabile`, le cui istanze rappresentano gli ingredienti usati dalla pizzeria per creare le pizze. Aggiunge il booleano _locale_, che indica la provenienza dell'ingrediente (gli ingredienti locali hanno un costo maggiore). Implementa il metodo virtuale ereditato da `Consumabile` per calcolare il costo d'acquisto.
+- `Ingrediente`: Sottotipo concreto derivante da `Consumabile`, le cui istanze rappresentano gli ingredienti usati dalla pizzeria per creare le pizze. Aggiunge il booleano _locale_, che indica la provenienza dell'ingrediente (gli ingredienti locali hanno un costo d'acquisto maggiore, che si riflette in un prezzo più alto per gli articoli che lo usano). Implementa il metodo virtuale ereditato da `Consumabile` per calcolare il costo d'acquisto.
 
 - `Bottiglia`, `Lattina`: Sottotipi concreti derivanti da `Bevanda`, le cui istanze rappresentano un tipo particolare di bevanda (indicato dal nome della classe). Si è scelto di differenziare in questo modo i diversi tipi di bevanda per aumentare l'estensibilità del modello, in quanto per aggiungere nuove tipologie di bevanda è sufficiente estendere la classe `Bevanda`.
 
@@ -135,7 +135,10 @@ Il superamento del monte ore individuale è stato causato dall'apprendimento del
 
 # Manuale Utente
 
-L'applicazione fornisce una GUI intuitiva e completa
+L'applicazione fornisce una GUI intuitiva e completa che non necessita di un manuale d'uso.
+L'aggiunta di un nuovo articolo/comanda/consumabile è gestita attraverso appositi wizard, spiegano pagina per pagina quali informazioni sono richieste e avvertono l'utente in caso di valori non validi.
+Modifica e rimozione sono gestiti tramite i pulsanti "_Modifica_" dei widget di menù e inventario, la cui pressione rende editabili le tabelle dei rispettivi widget permettendo la modifica delle celle. Al termine della modifica sarà sufficiente premere il pulsante "_Finisci di modificare_".
+**NB:** Per mantenere il modello in uno stato consistente l'aggiunta/modifica/rimozione delle bevande è consentita solo attraverso il widget "_Inventario_". Tramite il widget menù è possibile modificare la disponibilità delle bevande. 
 
 # Istruzioni di compilazione
 
