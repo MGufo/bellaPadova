@@ -96,7 +96,8 @@ void TabellaComande::rendiEditabile(bool b){
 
     //rimozione di ogni riga non checkata
     for(int i = 0; i < tabella->rowCount(); ++i){
-      if(!dynamic_cast<QCheckBox*>(tabella->cellWidget(i,tabella->columnCount()-1))->isChecked()){
+      if(!dynamic_cast<QCheckBox*>(tabella->cellWidget(i,tabella->columnCount()-1))->isChecked() ||
+              dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->value()==0){
         tabella->removeRow(i);
         i--;
       }
