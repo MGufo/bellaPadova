@@ -376,7 +376,7 @@ void MainWindow::aggiornaContabilizzazione(double guadagno){
   else
     findChild<QLineEdit*>("mGuadagno")->setStyleSheet("color: darkred;");
   findChild<QLineEdit*>("mGuadagno")->clear();
-  QString numberGuadagno(QString::number(guadagno)+" €");
+  QString numberGuadagno(QString::fromStdString(to_string_with_precision(guadagno))+" €");
   findChild<QLineEdit*>("mGuadagno")->insert(numberGuadagno);
 }
 

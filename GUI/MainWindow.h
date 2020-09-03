@@ -17,6 +17,7 @@
 #include "GUI/header.h"
 #include "GUI/controller.h"
 #include "GUI/pacchetti.h"
+#include "core/utils.h"
 
 class Controller;
 class MainWindow : public QWidget {
