@@ -4,8 +4,7 @@
 #include "articolo.h"
 #include "consumabile.h"
 #include "qontainer.h"
-// 0 bottiglia
-// 1 lattina
+
 class Bevanda : public Articolo, public Consumabile {
  private:
   static double plasticTax;

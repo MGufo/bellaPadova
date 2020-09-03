@@ -19,9 +19,6 @@ class Pizza : public Articolo {
 
   Pizza(unsigned int, string nome, bool disponibilita, double prezzo);
 
-  // Costruttore di copia,
-  Pizza(const Pizza&);
-
   // getter
   const Lista<Ingrediente*>& getIngredienti() const;
   Farina* getFarina() const;

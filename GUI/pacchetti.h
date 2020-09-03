@@ -76,7 +76,7 @@ struct pacchettoComanda {
   QTime oraConsegna;
   double totale;
   bool eseguita;
-  // ID articolo - qta articolo
+  // uint = ID articolo - uint = qta articolo
   std::unordered_map<uint, uint> ordinazione;
 
   pacchettoComanda(uint _ID, string _n, string _i, string _t, QTime _oC,

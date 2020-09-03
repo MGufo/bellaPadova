@@ -32,8 +32,6 @@ QJsonObject* Pizzeria::parseFile(QFile* file) const {
   QJsonParseError* pE = new QJsonParseError();
   QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonData, pE);
 
-  //  if(fileRisorseJSON.isNull())
-  //    throw new std::invalid_argument(pE->errorString().toStdString());
   delete pE;
   QJsonObject* jsonContent = new QJsonObject(jsonDocument.object());
   return jsonContent;

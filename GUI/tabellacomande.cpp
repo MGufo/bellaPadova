@@ -9,8 +9,6 @@ TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
           parentWidget(), SLOT(tabellaModificata()));
 }
 
-// if qta == 0 (default) viene inserito QSpinBox non editabile e con qta == 0
-// Altrimenti viene inserito QSpinBox non editabile e con valore == qta
 void TabellaComande::inserisciElemento(pacchetto* p, uint qta){
   tabella->insertRow(tabella->rowCount());
   QSpinBox* s = nullptr;

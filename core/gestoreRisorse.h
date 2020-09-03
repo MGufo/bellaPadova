@@ -9,10 +9,6 @@
 #include "pizza.h"
 #include "qontainer.h"
 
-// Idea da implementare: la classe gestore deve gestire le liste di Articoli
-// (menu) e consumabili (inventario), permettendo inserimento, modifica,
-// rimozione e ricerca all'interno delle liste
-
 class GestoreRisorse {
  private:
   Lista<Articolo *> menu;

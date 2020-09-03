@@ -341,7 +341,6 @@ void TabellaRisorse::rendiEditabile(bool b){
               dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
           }
           else if((objectName() == "tabBevandeMenu") /*&& (j == 2)*/){
-              //dynamic_cast<QCheckBox*>(tabella->cellWidget(i,j))->setEnabled(false);
               continue;
           }
           else{
@@ -370,14 +369,7 @@ void TabellaRisorse::emitDataOnCellChanged(int x, int){
       uint _q = tabella->item(x,3)->text().toInt();
       double _c = tabella->item(x,4)->text().toDouble();
       //dataAcquisto
-      //recupero giorno, mese e anno tra i separatori
       QString da = tabella->item(x,5)->text();
-      /*
-      int d = std::stoi(da.substr(0,2));
-      int m = std::stoi(da.substr(3,5));
-      int y = std::stoi(da.substr(6,9));
-      */
-      //QDate _da(y,m,d);
       QDate _da = QDate::fromString(da,"dd'/'MM'/'yyyy");
       float _cap = tabella->item(x,6)->text().toFloat();
       double _p = tabella->item(x,7)->text().toDouble();
@@ -397,14 +389,7 @@ void TabellaRisorse::emitDataOnCellChanged(int x, int){
         uint _q = tabella->item(x,3)->text().toInt();
         double _c = tabella->item(x,4)->text().toDouble();
         //dataAcquisto
-        //recupero giorno, mese e anno tra i separatori
         QString da = tabella->item(x,5)->text();
-        /*
-        int d = std::stoi(da.substr(0,2));
-        int m = std::stoi(da.substr(3,5));
-        int y = std::stoi(da.substr(6,9));
-        QDate _da(y,m,d);
-        */
         QDate _da = QDate::fromString(da,"dd'/'MM'/'yyyy");
         bool _l = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,6))->isChecked() ? true : false);
 
@@ -419,14 +404,7 @@ void TabellaRisorse::emitDataOnCellChanged(int x, int){
         uint _q = tabella->item(x,3)->text().toInt();
         double _c = tabella->item(x,4)->text().toDouble();
         //dataAcquisto
-        //recupero giorno, mese e anno tra i separatori
         QString da = tabella->item(x,5)->text();
-        /*
-        int d = std::stoi(da.substr(0,2));
-        int m = std::stoi(da.substr(3,5));
-        int y = std::stoi(da.substr(6,9));
-        QDate _da(y,m,d);
-        */
         QDate _da = QDate::fromString(da,"dd'/'MM'/'yyyy");
         bool _l = (dynamic_cast<QCheckBox*>(tabella->cellWidget(x,6))->isChecked() ? true : false);
         string _t = tabella->item(x,7)->text().toStdString();
