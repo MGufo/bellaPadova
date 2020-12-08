@@ -84,13 +84,6 @@ void Comanda::salva(QJsonObject* comandaJSON) const {
   comandaJSON->insert("cliente", *contattoJSON);
   comandaJSON->insert("oraConsegna", oraConsegna.toString());
   comandaJSON->insert("dataConsegna", dataConsegna.toString());
-  //  QJsonObject* ordinazioneJSON = new QJsonObject();
-  //  for(auto it = ordinazione.cbegin(); it != ordinazione.cend(); ++it)
-  //    ordinazioneJSON->insert(
-  //          QString::fromStdString(std::to_string((*it).first->getIdRisorsa())),
-  //          static_cast<int>((*it).second));
-  //  comandaJSON->insert("ordinazione", *ordinazioneJSON);
-  //  delete ordinazioneJSON;
   comandaJSON->insert("totale", totale);
   delete contattoJSON;
 }

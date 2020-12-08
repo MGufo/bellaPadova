@@ -43,7 +43,6 @@ NuovoArticolo_pizza::NuovoArticolo_pizza(QWidget *parent) : QWidget(parent){
   ingredientiWrapper->setObjectName("ingredientiWrapper");
   ingredientiWrapper->verticalHeader()->setVisible(false);
   ingredientiWrapper->setMinimumWidth(350);
-  // ingredientiWrapper->setMaximumWidth(2100);
   QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
   sizePolicy2.setHorizontalStretch(0);
   sizePolicy2.setVerticalStretch(0);

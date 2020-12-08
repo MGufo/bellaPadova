@@ -9,8 +9,6 @@ TabellaComande::TabellaComande(QWidget *parent, const QString& etichetta,
           parentWidget(), SLOT(tabellaModificata()));
 }
 
-// if qta == 0 (default) viene inserito QSpinBox non editabile e con qta == 0
-// Altrimenti viene inserito QSpinBox non editabile e con valore == qta
 void TabellaComande::inserisciElemento(pacchetto* p, uint qta){
   tabella->insertRow(tabella->rowCount());
   QSpinBox* s = nullptr;
@@ -96,7 +94,8 @@ void TabellaComande::rendiEditabile(bool b){
 
     //rimozione di ogni riga non checkata
     for(int i = 0; i < tabella->rowCount(); ++i){
-      if(!dynamic_cast<QCheckBox*>(tabella->cellWidget(i,tabella->columnCount()-1))->isChecked()){
+      if(!dynamic_cast<QCheckBox*>(tabella->cellWidget(i,tabella->columnCount()-1))->isChecked() ||
+              dynamic_cast<QSpinBox*>(tabella->cellWidget(i,1))->value()==0){
         tabella->removeRow(i);
         i--;
       }

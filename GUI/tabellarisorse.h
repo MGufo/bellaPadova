@@ -1,5 +1,6 @@
 #ifndef TABELLARISORSE_H
 #define TABELLARISORSE_H
+
 #include "tabellacomposita.h"
 #include "pushbuttonwithid.h"
 

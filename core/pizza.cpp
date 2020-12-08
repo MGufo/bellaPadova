@@ -13,15 +13,10 @@ void Pizza::removeIngrediente(Ingrediente* i) {
 
 Pizza::Pizza() {}
 
-// costruisce una pizza la cui lista di ingredienti contiene solo la farina
 Pizza::Pizza(unsigned int id, string nome, bool disponibilita, double prezzo)
     : Risorsa(id, nome, disponibilita),
       Articolo(id, nome, disponibilita, prezzo),
       ingredienti(Lista<Ingrediente*>()) {}
-
-// Copia profonda implementata tramite metodo copy del container
-Pizza::Pizza(const Pizza& p)
-    : Risorsa(p), Articolo(p), ingredienti(p.getIngredienti()) {}
 
 bool Pizza::checkIngrediente(const Ingrediente* daCercare) const {
   Lista<Ingrediente*>::const_Iterator it;

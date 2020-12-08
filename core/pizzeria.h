@@ -56,11 +56,6 @@ class Pizzeria {
   Risorsa* trovaRisorsa(unsigned int ID) const;
   Comanda* trovaComanda(unsigned int ID) const;
 
-  // funzione che inserisce un articolo in menu, l'articolo da inserire viene
-  // costruito da un'altra funzione che richiama inserisciArticoloInMenu. se
-  // tutti gli ingredienti dell'articolo sono disponibili e presenti
-  // nell'inventario, la disponibilita dell'articolo viene messa a true;
-  // altrimenti false
   void inserisciArticolo(Articolo*);
   void modificaArticolo(Articolo*, Articolo*);
   void rimuoviArticolo(Articolo*);
